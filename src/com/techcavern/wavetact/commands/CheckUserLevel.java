@@ -8,9 +8,9 @@ import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.PermUtils;
 
 public class CheckUserLevel extends ListenerAdapter<PircBotX> {
-	public CheckUserLevel(MessageEvent<PircBotX> event) throws Exception{
-		if (event.getMessage().equalsIgnoreCase((GeneralRegistry.CommandChar + "CheckUserLevel"))){
-			if(PermUtils.isController(event)){
+	public void CheckPermLevel(MessageEvent<PircBotX> event) throws Exception{
+		if (event.getMessage().equalsIgnoreCase((GeneralRegistry.CommandChar + "level"))){
+			if(PermUtils.isController(event.getBot(),event.getUser())){
             	event.getChannel().send().message("You are my Master");
 			} else if(event.getUser().getChannelsOpIn().contains(event.getChannel()) ){
             	event.getChannel().send().message("You are Channel Op!");
