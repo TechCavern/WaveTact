@@ -5,7 +5,6 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 import org.pircbotx.hooks.WaitForQueue;
 import org.pircbotx.hooks.events.WhoisEvent;
-import org.apache.commons.lang3.ArrayUtils;
 public class PermUtils {
 	@SuppressWarnings("unchecked")
 	public static String getAccount(PircBotX bot,User u)
@@ -30,8 +29,13 @@ public class PermUtils {
     }
 	public static boolean isController (PircBotX bot,User u){
 		String v= getAccount(bot, u);
-		boolean y = ArrayUtils.contains(GeneralRegistry.Controllers,v.toLowerCase());
-		return y;
+		if (v != null){
+			boolean y = GeneralRegistry.Controllers.contains(v.toLowerCase());
+			return y;
+		} else {
+			return false;
+		}
+
 
 		}
 	}

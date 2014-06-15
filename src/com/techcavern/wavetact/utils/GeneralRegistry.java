@@ -1,8 +1,11 @@
 package com.techcavern.wavetact.utils;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class GeneralRegistry {
 		public static String CommandChar= ".";
-		public static String[] Controllers = {"jztech101","NickServ"};
+		public static List<String> Controllers = Arrays.asList(new String[]{"jztech101"});	
 		public static String OvdServer = "irc.overdrive.pw";
 		public static String OvdChannel = "#techcavern";
 		public static String OvdChannel2 = "#dev";
