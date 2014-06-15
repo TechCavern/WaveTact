@@ -10,4 +10,8 @@ public class GeneralRegistry {
 		public static String EsperServer = "irc.esper.net";
 		public static String EsperChannel = "#techcavern";
 		public static String EsperNick = "Wavetact";
+		public static String ECodeServer = "irc.electrocode.net";
+		public static String ECodeChannel = "#techcavern";
+		public static String ECodeChannel2 = "#bots";
+		public static String ECodeNick = "WaveTact";
 }
