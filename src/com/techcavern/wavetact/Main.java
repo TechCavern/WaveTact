@@ -14,7 +14,7 @@ public class Main {
 	            .buildConfiguration();
 	    PircBotX wavetactbot = new PircBotX(wavetactconfig);
 	    try {
-	            wavetactbot.connect();
+	            wavetactbot.startBot();
 	    } catch (Exception ex) {
 	             ex.printStackTrace();
 	    }
