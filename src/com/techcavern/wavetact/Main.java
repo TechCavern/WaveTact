@@ -3,10 +3,14 @@ package com.techcavern.wavetact;
 import java.beans.EventHandler;
 import java.nio.charset.Charset;
 
-import org.apache.commons.lang3.ArrayUtils;
+import com.techcavern.wavetact.commands.*;
+
 import org.pircbotx.Configuration;
 import org.pircbotx.PircBotX;
+import org.pircbotx.hooks.managers.ListenerManager;
+import org.pircbotx.hooks.managers.ThreadedListenerManager;
 import org.slf4j.impl.SimpleLogger;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -27,24 +31,21 @@ import com.google.gson.GsonBuilder;
 	
 	        // create base commands
 	        System.out.println("Creating commands...");
+            ListenerManager WaveTactListener = new ThreadedListenerManager();
+            WaveTactListener.addListener(new CheckPermLevel());
 		        System.out.println("Commands created.");
 	
 	
 	        System.out.println("Configuring bot...");
-	        Configuration.Builder<PircBotX> WaveTactConfig = new Configuration.Builder<PircBotX>();
-	        WaveTactConfig.setName("WaveTact");
-	        WaveTactConfig.setLogin("WaveTact");
-	        WaveTactConfig.setEncoding(Charset.isSupported("UTF-8") ? Charset.forName("UTF-8") : Charset.defaultCharset());
-	        WaveTactConfig.setServer("irc.overdrive.pw", 6667);
-	        WaveTactConfig.addAutoJoinChannel("#techcavern");
-		
-	        for (String s : args)
-	        {
-	            WaveTactConfig.addAutoJoinChannel(s.startsWith("#") ? s : "#" + s);
-	        }
+	        Configuration.Builder<PircBotX> ovd = new Configuration.Builder<PircBotX>();
+	        ovd.setName("WaveTact");
+	        ovd.setLogin("WaveTact");
+	        ovd.setEncoding(Charset.isSupported("UTF-8") ? Charset.forName("UTF-8") : Charset.defaultCharset());
+	        ovd.setServer("irc.overdrive.pw", 6667);
+	        ovd.addAutoJoinChannel("#techcavern");
 	
-	
-	        WaveTact = new PircBotX(WaveTactConfig.buildConfiguration());
+	        
+	        WaveTact = new PircBotX(ovd.buildConfiguration());
 	        System.out.println("Configured.");
 	
 	        System.out.println("Creating threads...");	        
