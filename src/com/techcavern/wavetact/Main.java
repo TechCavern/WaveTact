@@ -1,11 +1,11 @@
 package com.techcavern.wavetact;
 
-import java.beans.EventHandler;
 import java.nio.charset.Charset;
 
 import com.techcavern.wavetact.commands.*;
 
 import org.pircbotx.Configuration;
+import org.pircbotx.Configuration.Builder;
 import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.managers.ListenerManager;
 import org.pircbotx.hooks.managers.ThreadedListenerManager;
@@ -31,18 +31,19 @@ import com.google.gson.GsonBuilder;
 	
 	        // create base commands
 	        System.out.println("Creating commands...");
-            ListenerManager WaveTactListener = new ThreadedListenerManager();
+            ListenerManager<PircBotX> WaveTactListener = new ThreadedListenerManager<PircBotX>();
             WaveTactListener.addListener(new CheckPermLevel());
 		        System.out.println("Commands created.");
 	
 	
 	        System.out.println("Configuring bot...");
-	        Configuration.Builder<PircBotX> ovd = new Configuration.Builder<PircBotX>();
+	        Builder<PircBotX> ovd = new Configuration.Builder<PircBotX>();
 	        ovd.setName("WaveTact");
 	        ovd.setLogin("WaveTact");
 	        ovd.setEncoding(Charset.isSupported("UTF-8") ? Charset.forName("UTF-8") : Charset.defaultCharset());
 	        ovd.setServer("irc.overdrive.pw", 6667);
 	        ovd.addAutoJoinChannel("#techcavern");
+//	        ovd.addAutoJoinChannel("#dev");
 	
 	        
 	        WaveTact = new PircBotX(ovd.buildConfiguration());

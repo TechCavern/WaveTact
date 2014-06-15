@@ -5,12 +5,12 @@ import java.util.List;
 
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
-import org.pircbotx.hooks.WaitForQueue;
 import org.pircbotx.hooks.events.WhoisEvent;
 
 import com.techcavern.wavetact.Main;
 
 public class PermUtils {
+	@SuppressWarnings("null")
 	public static String getAccount(User x)
     {
         String u = "";
