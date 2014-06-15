@@ -6,9 +6,8 @@ import java.util.List;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 import org.pircbotx.hooks.WaitForQueue;
-import org.pircbotx.hooks.events.MessageEvent;
 import org.pircbotx.hooks.events.WhoisEvent;
-
+import org.apache.commons.lang3.ArrayUtils;
 public class PermUtils {
 	public static String getAccount(PircBotX bot,User u)
     {
@@ -32,9 +31,10 @@ public class PermUtils {
     }
 	public static boolean isController (PircBotX bot,User u){
 		String v= getAccount(bot, u);
-		List <String> Controllerlist = Arrays.asList(GeneralRegistry.Controllers);
-		boolean y = Controllerlist.contains(v.toLowerCase());
+		boolean y = ArrayUtils.contains(GeneralRegistry.Controllers,v.toLowerCase());
 		return y;
+
+		}
 	}
 	
-}
+
