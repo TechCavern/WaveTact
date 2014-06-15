@@ -24,16 +24,14 @@ import com.google.gson.GsonBuilder;
 	    {
 	        System.out.println("Starting...");
 	        System.setProperty(SimpleLogger.SHOW_DATE_TIME_KEY, "true");
-	        System.setProperty(SimpleLogger.DATE_TIME_FORMAT_KEY, "[MM/dd HH:mm:ss]");
-	        System.setProperty(SimpleLogger.SHOW_THREAD_NAME_KEY, "false");
+	        System.setProperty(SimpleLogger.DATE_TIME_FORMAT_KEY, "[yyyy/MM/dd HH:mm:ss]");
 	        System.setProperty(SimpleLogger.LEVEL_IN_BRACKETS_KEY, "true");
-	        System.setProperty(SimpleLogger.SHOW_LOG_NAME_KEY, "false");
 	
 	        // create base commands
 	        System.out.println("Creating commands...");
             ListenerManager<PircBotX> WaveTactListener = new ThreadedListenerManager<PircBotX>();
             WaveTactListener.addListener(new CheckPermLevel());
-		        System.out.println("Commands created.");
+		    System.out.println("Commands created.");
 	
 	
 	        System.out.println("Configuring bot...");
@@ -52,7 +50,7 @@ import com.google.gson.GsonBuilder;
 	        System.out.println("Creating threads...");	        
 	        try
 	        {
-	        	System.out.println("Connecting bot...");
+	        	System.out.println("Connecting...");
 	            WaveTact.startBot();
 	        }
 	        catch (Exception e)
