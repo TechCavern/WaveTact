@@ -1,7 +1,5 @@
 package com.techcavern.wavetact.utils;
 
-import java.util.Arrays;
-import java.util.List;
 
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -9,6 +7,7 @@ import org.pircbotx.hooks.WaitForQueue;
 import org.pircbotx.hooks.events.WhoisEvent;
 import org.apache.commons.lang3.ArrayUtils;
 public class PermUtils {
+	@SuppressWarnings("unchecked")
 	public static String getAccount(PircBotX bot,User u)
     {
 		        String user = "";
