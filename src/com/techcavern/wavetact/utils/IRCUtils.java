@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.techcavern.wavetact.commands.BasicCommands;
 import com.techcavern.wavetact.commands.CheckUserLevel;
+//import com.techcavern.wavetact.commands.TestCommand;
 
 public class IRCUtils{
     public static final Gson gson = new GsonBuilder().setPrettyPrinting().create(); 
@@ -25,6 +26,7 @@ public class IRCUtils{
     Net.addAutoJoinChannel(Channel);
     Net.getListenerManager().addListener(new BasicCommands());
     Net.getListenerManager().addListener(new CheckUserLevel());
+  //  Net.getListenerManager().addListener(new TestCommand());
     PircBotX Bot = new PircBotX(Net.buildConfiguration());
     return Bot;
 	}
