@@ -21,7 +21,7 @@ public class PermUtils {
     }
 	public boolean isController (User x){
 		String v= getAccount(x);
-		List <String> Controllerlist = Arrays.asList(GeneralRegistry.getControllers());
+		List <String> Controllerlist = Arrays.asList(GeneralRegistry.Controllers);
 		boolean y = Controllerlist.contains(v.toLowerCase());
 		return y;
 	}
