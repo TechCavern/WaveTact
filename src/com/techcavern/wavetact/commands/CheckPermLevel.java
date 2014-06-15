@@ -7,7 +7,7 @@ import com.techcavern.wavetact.utils.*;
 public class CheckPermLevel extends ListenerAdapter<PircBotX> {
 	        public void onMessage(MessageEvent<PircBotX> event) {
 	                if (event.getMessage().equalsIgnoreCase((GeneralRegistry.getCommandChar()+"cperm"))){
-	                	event.respond("hi");
+	                	event.respond("hey");
 	                	}
 	             
 	}
