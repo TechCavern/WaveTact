@@ -16,14 +16,15 @@ import com.techcavern.wavetact.commands.CheckUserLevel;
 
 public class IRCUtils{
     public static final Gson gson = new GsonBuilder().setPrettyPrinting().create(); 
-	public static PircBotX createbot(String Name, String Channel,String Nick, String Server) throws Exception{
-    System.out.println("Configuring"+Name);
+	public static PircBotX createbot(String Name, String Channel,String Channel2,String Nick, String Server) throws Exception{
+    System.out.println("Configuring "+Name);
     Builder<PircBotX> Net = new Configuration.Builder<PircBotX>();
     Net.setName(Nick);
     Net.setLogin("WaveTact");
     Net.setEncoding(Charset.isSupported("UTF-8") ? Charset.forName("UTF-8") : Charset.defaultCharset());
     Net.setServer(Server, 6667);
     Net.addAutoJoinChannel(Channel);
+    Net.addAutoJoinChannel(Channel2);
     Net.getListenerManager().addListener(new BasicCommands());
     Net.getListenerManager().addListener(new CheckUserLevel());
   //  Net.getListenerManager().addListener(new TestCommand());
