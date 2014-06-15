@@ -10,7 +10,7 @@ import org.pircbotx.hooks.events.WhoisEvent;
 
 import com.techcavern.wavetact.Main;
 
-public class PermRegistry {
+public class PermUtils {
 	public static String getAccount(User x)
     {
         String u = "";
@@ -21,9 +21,8 @@ public class PermRegistry {
     }
 	public boolean isController (User x){
 		String v= getAccount(x);
-		String[] Controllers = new String[]{"jztech101"};
-		List <String> Controllerlist = Arrays.asList(Controllers);
-		boolean y = Controllerlist.contains(v);
+		List <String> Controllerlist = Arrays.asList(GeneralRegistry.getControllers());
+		boolean y = Controllerlist.contains(v.toLowerCase());
 		return y;
 	}
 	

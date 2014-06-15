@@ -5,7 +5,6 @@ import com.techcavern.wavetact.utils.*;
 public class CheckPermLevel extends ListenerAdapter {
 	        public void onMessage(MessageEvent event) {
 	                if ((GeneralRegistry.getCommandChar()+"cperm").equalsIgnoreCase(event.getMessage().toString())){
-	                	event.respond(event.getUser().toString());
 	                	event.respond("hi");}
 	             
 	}
