@@ -14,7 +14,7 @@ public class PermUtils {
 	public static String getAccount(User x)
     {
         String u = "";
-        Main.WaveTact.sendRaw().rawLineNow("WHOIS " + x.getNick());
+        Main.Ovd.sendRaw().rawLineNow("WHOIS " + x.getNick());
         WhoisEvent<PircBotX> whois = null;
         u = whois.getRegisteredAs();
         return u;
