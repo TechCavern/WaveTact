@@ -21,9 +21,9 @@ import com.techcavern.wavetact.utils.IRCUtils;
 	        
 
 	        
-	        PircBotX Ovd = IRCUtils.createbot("Ovd", GeneralRegistry.OvdChannel,GeneralRegistry.OvdChannel2,GeneralRegistry.OvdNick, GeneralRegistry.OvdServer);
-	        PircBotX Esper = IRCUtils.createbot("Esper", GeneralRegistry.EsperChannel,GeneralRegistry.EsperChannel,GeneralRegistry.EsperNick, GeneralRegistry.EsperServer);
-	        PircBotX ECode = IRCUtils.createbot("ECode", GeneralRegistry.ECodeChannel,GeneralRegistry.ECodeChannel,GeneralRegistry.ECodeNick, GeneralRegistry.ECodeServer);
+	        PircBotX Ovd = IRCUtils.createbot("Ovd", GeneralRegistry.OvdChannels, GeneralRegistry.OvdNick, GeneralRegistry.OvdServer);
+	        PircBotX Esper = IRCUtils.createbot("Esper", GeneralRegistry.EsperChannels, GeneralRegistry.EsperNick, GeneralRegistry.EsperServer);
+	        PircBotX ECode = IRCUtils.createbot("ECode", GeneralRegistry.ECodeChannels, GeneralRegistry.ECodeNick, GeneralRegistry.ECodeServer);
 
 	        MultiBotManager<PircBotX> WaveTact = new MultiBotManager<PircBotX>();
 //	        WaveTact.addBot(Esper);
