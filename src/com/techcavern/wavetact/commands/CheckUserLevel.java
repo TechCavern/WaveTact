@@ -12,20 +12,16 @@ public class CheckUserLevel extends ListenerAdapter<PircBotX> {
 		if (event.getMessage().equalsIgnoreCase((GeneralRegistry.CommandChar + "level"))){
 			if(PermUtils.isController(event.getBot(),event.getUser())){
             	event.getChannel().send().message("You are my Master");
-			} else if(event.getUser().getChannelsOpIn().contains(event.getChannel()) ){
-            	event.getChannel().send().message("You are Channel Op!");
-
-			} else if(event.getChannel().toString() == "#techcavern"){ 
-				if(event.getUser().getChannelsVoiceIn().contains(event.getChannel())){
-				event.getChannel().send().message("You are a Regular User!");
-			} else {
-            	event.getChannel().send().message("You have been a Naughty User!");
-
-			}} else {
+			} else if(event.getUser().getChannelsOpIn().contains(event.getChannel()) || event.getUser().getChannelsSuperOpIn().contains(event.getChannel())||event.getUser().getChannelsOwnerIn().contains(event.getChannel())){
+            	event.getChannel().send().message("You are a Channel Op!");
+			}else if(event.getUser().getChannelsHalfOpIn().contains(event.getChannel()) || event.getUser().getChannelsVoiceIn().contains(event.getChannel())){
+				event.getChannel().send().message("You are a Trusted User!");
+				} else {
             	event.getChannel().send().message("You are a Regular User!");
 
 			}
 		}
 
 }
-}
+	}
+
