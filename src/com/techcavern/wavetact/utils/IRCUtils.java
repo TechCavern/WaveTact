@@ -1,6 +1,7 @@
 package com.techcavern.wavetact.utils;
 
 import java.nio.charset.Charset;
+import java.util.List;
 
 import org.pircbotx.Channel;
 import org.pircbotx.Configuration;
@@ -16,7 +17,7 @@ import com.techcavern.wavetact.commands.CheckUserLevel;
 
 public class IRCUtils{
     public static final Gson gson = new GsonBuilder().setPrettyPrinting().create(); 
-	public static PircBotX createbot(String Name, ArrayList<String> channels,String Nick, String Server) throws Exception{
+	public static PircBotX createbot(String Name, List<String> channels,String Nick, String Server) throws Exception{
     System.out.println("Configuring "+Name);
     Builder<PircBotX> Net = new Configuration.Builder<PircBotX>();
     Net.setName(Nick);
@@ -36,7 +37,7 @@ public class IRCUtils{
         if (message.equalsIgnoreCase((GeneralRegistry.CommandChar + command))){
         	
         	if (level <= PermUtils.getPermLevel(bot, u, c)){
-        		c.send().message(message);
+        		c.send().message(result);
         	} else {
             	c.send().message("Permission Denied");
 

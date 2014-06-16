@@ -35,7 +35,8 @@ public class PermUtils {
 			boolean y = GeneralRegistry.Controllers.contains(v.toLowerCase());
 			return y;
 		} else {
-			return false;
+			boolean y = GeneralRegistry.ControllerHostmasks.contains(u.getHostmask());
+			return y;
 		}
 
 			
