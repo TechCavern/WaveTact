@@ -1,6 +1,8 @@
 package com.techcavern.wavetact.utils;
 
 
+
+import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 import org.pircbotx.hooks.WaitForQueue;
@@ -36,8 +38,21 @@ public class PermUtils {
 			return false;
 		}
 
-
+			
+		}
+	public static int getPermLevel(PircBotX bot, User u, Channel z){
+		if (PermUtils.isController(bot, u)){
+			return 9001;
+		}
+		else if(z.isOp(u)|| z.isSuperOp(u) || z.isOwner(u)){
+			return 10;
+		} else if (z.isHalfOp(u) || z.hasVoice(u)){
+			return 5;
+		} else {
+			return 0;
 		}
 	}
+}
+
 	
 
