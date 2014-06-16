@@ -34,7 +34,7 @@ public class IRCUtils{
 	public static void onMessage(String command, String result, Channel c, User u, PircBotX bot, String message, int level) throws Exception {
         if (message.equalsIgnoreCase((GeneralRegistry.CommandChar + command))){
         	
-        	if (level == PermUtils.getPermLevel(bot, u, c)){
+        	if (level <= PermUtils.getPermLevel(bot, u, c)){
         		c.send().message(message);
         	} else {
             	c.send().message("Permission Denied");

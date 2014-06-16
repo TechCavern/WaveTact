@@ -6,7 +6,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 
 import com.techcavern.wavetact.utils.GeneralRegistry;
 
-public class TestCommand extends ListenerAdapter<PircBotX> {
+public class ExampleCommand extends ListenerAdapter<PircBotX> {
 		public void onMessage(MessageEvent<PircBotX> event) throws Exception{
 			 if (event.getMessage().equalsIgnoreCase((GeneralRegistry.CommandChar + "test"))){
 	            	event.getChannel().send().message("test");
@@ -16,3 +16,4 @@ public class TestCommand extends ListenerAdapter<PircBotX> {
 	
 }
 
+//Purely here for future reference
