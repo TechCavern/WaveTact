@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class GeneralRegistry {
-		public static String CommandChar= ".";
+		public static String CommandChar= "@";
 		public static List<String> Controllers = Arrays.asList(new String[]{"jztech101"});	
 		public static List<String> ControllerHostmasks = Arrays.asList(new String[]{"*!jztech101@crabhost.org"});	
 		public static String OvdServer = "irc.overdrive.pw";

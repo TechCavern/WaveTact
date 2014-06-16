@@ -14,10 +14,11 @@ import com.google.gson.GsonBuilder;
 import com.techcavern.wavetact.commands.BasicCommands;
 import com.techcavern.wavetact.commands.CheckUserLevel;
 //import com.techcavern.wavetact.commands.TestCommand;
+import com.techcavern.wavetact.commands.Quiet;
 
 public class IRCUtils{
     public static final Gson gson = new GsonBuilder().setPrettyPrinting().create(); 
-	public static PircBotX createbot(String Name, List<String> channels,String Nick, String Server) throws Exception{
+	public static PircBotX createbot(String g, String Name, List<String> channels,String Nick, String Server) throws Exception{
     System.out.println("Configuring "+Name);
     Builder<PircBotX> Net = new Configuration.Builder<PircBotX>();
     Net.setName(Nick);
@@ -29,6 +30,8 @@ public class IRCUtils{
 	}			
     Net.getListenerManager().addListener(new BasicCommands());
     Net.getListenerManager().addListener(new CheckUserLevel());
+    Net.getListenerManager().addListener(new Quiet());
+    Net.setNickservPassword(g);
   //  Net.getListenerManager().addListener(new TestCommand());
     PircBotX Bot = new PircBotX(Net.buildConfiguration());
     return Bot;
@@ -43,10 +46,17 @@ public class IRCUtils{
 
         	}
         }
-
 }
 
-
+	public static User getUserByNick(Channel c, String n)
+    {
+        for (User u : c.getUsers())
+        {
+            if (u.getNick().equalsIgnoreCase(n))
+                return u;
+        }
+        return null;
+    }
 	
 }
 

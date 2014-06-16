@@ -19,17 +19,17 @@ import com.techcavern.wavetact.utils.IRCUtils;
 	        System.setProperty(SimpleLogger.LEVEL_IN_BRACKETS_KEY, "true");
 
 	        
-
-	        
-	        PircBotX Ovd = IRCUtils.createbot("Ovd", GeneralRegistry.OvdChannels, GeneralRegistry.OvdNick, GeneralRegistry.OvdServer);
-	        PircBotX Esper = IRCUtils.createbot("Esper", GeneralRegistry.EsperChannels, GeneralRegistry.EsperNick, GeneralRegistry.EsperServer);
-	        PircBotX ECode = IRCUtils.createbot("ECode", GeneralRegistry.ECodeChannels, GeneralRegistry.ECodeNick, GeneralRegistry.ECodeServer);
-	        PircBotX Xertion = IRCUtils.createbot("Xertion", GeneralRegistry.XertionChannels, GeneralRegistry.XertionNick, GeneralRegistry.XertionServer);
+	        String x = "";
+	        String g = args[0];
+	        PircBotX Ovd = IRCUtils.createbot(x,"Ovd", GeneralRegistry.OvdChannels, GeneralRegistry.OvdNick, GeneralRegistry.OvdServer);
+	        PircBotX Esper = IRCUtils.createbot(g,"Esper", GeneralRegistry.EsperChannels, GeneralRegistry.EsperNick, GeneralRegistry.EsperServer);
+	        PircBotX ECode = IRCUtils.createbot(x,"ECode", GeneralRegistry.ECodeChannels, GeneralRegistry.ECodeNick, GeneralRegistry.ECodeServer);
+	        PircBotX Xertion = IRCUtils.createbot(x,"Xertion", GeneralRegistry.XertionChannels, GeneralRegistry.XertionNick, GeneralRegistry.XertionServer);
 
 	        MultiBotManager<PircBotX> WaveTact = new MultiBotManager<PircBotX>();
 	        WaveTact.addBot(Esper);
 //	        WaveTact.addBot(Ovd);
-	        WaveTact.addBot(Xertion);
+//	        WaveTact.addBot(Xertion);
 //	        WaveTact.addBot(ECode);
 	        WaveTact.start();
 	    }

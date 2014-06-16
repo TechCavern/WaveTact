@@ -7,6 +7,6 @@
 	<classpathentry kind="lib" path="/media/DATA/Kali/Libraries/slf4j-api-1.7.7.jar"/>
 	<classpathentry kind="lib" path="/media/DATA/Kali/Libraries/slf4j-simple-1.7.7.jar"/>
 	<classpathentry kind="lib" path="/media/DATA/Kali/Libraries/gson-2.2.4.jar"/>
-	<classpathentry kind="lib" path="/media/DATA/Kali/Libraries/pircbotx-2.1-20140605.144952-42.jar"/>
+	<classpathentry kind="lib" path="/media/DATA/Kali/Libraries/pircbotx-2.0.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
