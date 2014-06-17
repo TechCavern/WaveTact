@@ -11,23 +11,33 @@ import org.pircbotx.output.OutputChannel;
 
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.PermUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
+
 
 public class Quiet extends ListenerAdapter<PircBotX> {
 	public void onMessage(MessageEvent<PircBotX> event) throws Exception{
 		String[] messageParts = event.getMessage().toString().split(" ");
 			if (messageParts[0].equalsIgnoreCase((GeneralRegistry.CommandChar + "quiet"))){
 			if(10 <= PermUtils.getPermLevel(event.getBot(), event.getUser(), event.getChannel())){
+				if(messageParts[1].equalsIgnoreCase("c")||messageParts[1].equalsIgnoreCase("u")||messageParts[1].equalsIgnoreCase("i")){
 				if (messageParts[3] != null && messageParts[2].startsWith("-") == false){
 					quiettime time = new quiettime();
 					time.run(Integer.parseInt(messageParts[3]), messageParts[1],event.getUser(), event.getChannel(), event.getBot());
-				}else if(messageParts[3] == null){
-					quiet(event.getUser(), messageParts[1], event.getChannel(), event.getBot());
+				}else if(messageParts[3] == null && messageParts[2].startsWith("-") == false){
+					quiet(IRCUtils.getUserByNick(event.getChannel(), messageParts[2]), messageParts[1], event.getChannel(), event.getBot());
 				}else if(messageParts[2].startsWith("-")){
-					unquiet(event.getUser(), messageParts[1], event.getChannel(), event.getBot());
+					unquiet(IRCUtils.getUserByNick(event.getChannel(), messageParts[2]), messageParts[1], event.getChannel(), event.getBot());
 
 				}
+				else{
+				IRCUtils.SendNotice(event.getBot(), event.getUser(), "Syntax: @quiet [ircd code] (-)[User to Quiet] (time in seconds)");
+				}
+				}
+				else{
+				IRCUtils.SendNotice(event.getBot(), event.getUser(), "Ensure you have specified the IRCd as the first Argument - i = Inspircd, u = unreal and c = Charybdis or IRCdSeven");
+				}
 			}else {
-            	event.getChannel().send().message("Permission Denied"); 
+            			event.getChannel().send().message("Permission Denied"); 
 
 			}
 			}
@@ -42,28 +52,22 @@ public class Quiet extends ListenerAdapter<PircBotX> {
 		
 		public void quiet(User u, String i, Channel c, PircBotX b){
 			if(i == "c"){
-				OutputChannel o = new OutputChannel(b, c);
-				o.setMode("+q ", u.getHostmask());
+				IRCUtils.setMode(c, b, "+q", u);
 			}else if(i == "u"){
-				OutputChannel o = new OutputChannel(b, c);
-				o.setMode("+b ~q:", u.getHostmask());
+				IRCUtils.setMode(c, b, "+b ~q:", u);
 			}else if(i == "i"){
-				OutputChannel o = new OutputChannel(b, c);
-				o.setMode("+b m:", u.getHostmask());
+				IRCUtils.setMode(c, b, "+b m:", u);
 			}
 			
 	
 }
 		public void unquiet(User u, String i, Channel c, PircBotX b){
 			if(i == "c"){
-				OutputChannel o = new OutputChannel(b, c);
-				o.setMode("-q ", u.getHostmask());
+				IRCUtils.setMode(c, b, "-q", u);
 			}else if(i == "u"){
-				OutputChannel o = new OutputChannel(b, c);
-				o.setMode("-b ~q:", u.getHostmask());
+				IRCUtils.setMode(c, b, "-b ~q:", u);
 			}else if(i == "i"){
-				OutputChannel o = new OutputChannel(b, c);
-				o.setMode("-b m:", u.getHostmask());
+				IRCUtils.setMode(c, b, "-b m:", u);
 			}
 }
 }
