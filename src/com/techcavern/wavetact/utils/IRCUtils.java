@@ -15,6 +15,8 @@ import com.techcavern.wavetact.commands.BasicCommands;
 import com.techcavern.wavetact.commands.CheckUserLevel;
 //import com.techcavern.wavetact.commands.TestCommand;
 import com.techcavern.wavetact.commands.Quiet;
+import org.pircbotx.output.OutputChannel;
+import org.pircbotx.output.OutputUser;
 
 public class IRCUtils{
     public static final Gson gson = new GsonBuilder().setPrettyPrinting().create(); 
@@ -59,7 +61,7 @@ public class IRCUtils{
         }
         return null;
     }
-    	public static void setMode (Channel c, PircBotx b, String d, User u){
+    	public static void setMode (Channel c, PircBotX b, String d, User u){
     		OutputChannel o = new OutputChannel(b, c);
 		if (u != null){
 		o.setMode(d, u.getHostmask());
@@ -67,11 +69,12 @@ public class IRCUtils{
 		o.setMode(d);	
 		}
     	}
-    	public static void SendNotice (PircBotx b, User u, String s){
-    		OutputUser u = new OutputUser(b, u);
-		u.notice(s);
+    	public static void SendNotice (PircBotX b, User u, String s){
+    		OutputUser x = new OutputUser(b, u);
+		x.notice(s);
 		}
     	}
 	
-}
+
+
 
