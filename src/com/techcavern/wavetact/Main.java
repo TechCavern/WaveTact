@@ -19,7 +19,7 @@ import com.techcavern.wavetact.utils.IRCUtils;
 	        System.setProperty(SimpleLogger.LEVEL_IN_BRACKETS_KEY, "true");
 
 	        
-	        String x = "";
+	        String x = null;
 	        String g = args[0];
 	        PircBotX Ovd = IRCUtils.createbot(x,"Ovd", GeneralRegistry.OvdChannels, GeneralRegistry.OvdNick, GeneralRegistry.OvdServer);
 	        PircBotX Esper = IRCUtils.createbot(g,"Esper", GeneralRegistry.EsperChannels, GeneralRegistry.EsperNick, GeneralRegistry.EsperServer);

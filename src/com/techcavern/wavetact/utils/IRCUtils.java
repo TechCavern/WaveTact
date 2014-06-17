@@ -31,7 +31,9 @@ public class IRCUtils{
     Net.getListenerManager().addListener(new BasicCommands());
     Net.getListenerManager().addListener(new CheckUserLevel());
     Net.getListenerManager().addListener(new Quiet());
+    if(g != null){
     Net.setNickservPassword(g);
+    }
   //  Net.getListenerManager().addListener(new TestCommand());
     PircBotX Bot = new PircBotX(Net.buildConfiguration());
     return Bot;
