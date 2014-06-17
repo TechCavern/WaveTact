@@ -10,7 +10,6 @@ import org.pircbotx.hooks.events.MessageEvent;
 import org.pircbotx.output.OutputChannel;
 
 import com.techcavern.wavetact.utils.GeneralRegistry;
-import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.PermUtils;
 
 public class Quiet extends ListenerAdapter<PircBotX> {
@@ -21,6 +20,11 @@ public class Quiet extends ListenerAdapter<PircBotX> {
 				if (messageParts[3] != null && messageParts[2].startsWith("-") == false){
 					quiettime time = new quiettime();
 					time.run(Integer.parseInt(messageParts[3]), messageParts[1],event.getUser(), event.getChannel(), event.getBot());
+				}else if(messageParts[3] == null){
+					quiet(event.getUser(), messageParts[1], event.getChannel(), event.getBot());
+				}else if(messageParts[2].startsWith("-")){
+					unquiet(event.getUser(), messageParts[1], event.getChannel(), event.getBot());
+
 				}
 			}else {
             	event.getChannel().send().message("Permission Denied"); 
