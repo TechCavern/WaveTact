@@ -67,6 +67,11 @@ public class IRCUtils{
 		o.setMode(d);	
 		}
     	}
+    	public static void SendNotice (PircBotx b, User u, String s){
+    		OutputUser u = new OutputUser(b, u);
+		u.notice(s);
+		}
+    	}
 	
 }
 
