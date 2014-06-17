@@ -18,17 +18,9 @@ public class Quiet extends ListenerAdapter<PircBotX> {
 		String[] messageParts = event.getMessage().toString().split(" ");
 			if (messageParts[0].equalsIgnoreCase((GeneralRegistry.CommandChar + "quiet"))){
 			if(10 <= PermUtils.getPermLevel(event.getBot(), event.getUser(), event.getChannel())){
-				if(messageParts[1].equalsIgnoreCase("c") ){
-					System.out.println(messageParts[1]);
-
-				quietchary qc = new quietchary();
-				qc.run(Integer.parseInt(messageParts[3]), IRCUtils.getUserByNick(event.getChannel(), messageParts[2]),event.getChannel(),event.getBot());
-				}else if (messageParts[1].equalsIgnoreCase("u")){
-					quietunreal qu = new quietunreal();
-					qu.run(Integer.parseInt(messageParts[3]), IRCUtils.getUserByNick(event.getChannel(), messageParts[2]),event.getChannel(),event.getBot());
-				}else if (messageParts[1].equalsIgnoreCase("i")){
-					quietinspi qi = new quietinspi();
-					qi.run(Integer.parseInt(messageParts[3]), IRCUtils.getUserByNick(event.getChannel(), messageParts[2]),event.getChannel(),event.getBot());
+				if (messageParts[3] != null && messageParts[2].startsWith("-") == false){
+					quiettime time = new quiettime();
+					time.run(Integer.parseInt(messageParts[3]), messageParts[1],event.getUser(), event.getChannel(), event.getBot());
 				}
 			}else {
             	event.getChannel().send().message("Permission Denied"); 
@@ -36,30 +28,38 @@ public class Quiet extends ListenerAdapter<PircBotX> {
 			}
 			}
 	}
-		public class quietchary extends Thread{
-			public void run(int s, User u, Channel c, PircBotX b) throws InterruptedException{
+		public class quiettime extends Thread{
+			public void run(int s, String i, User u, Channel c, PircBotX b) throws InterruptedException{
+				quiet(u,i,c,b);
+				TimeUnit.SECONDS.sleep(s);
+				unquiet(u,i,c,b);
+		}
+		}
+		
+		public void quiet(User u, String i, Channel c, PircBotX b){
+			if(i == "c"){
 				OutputChannel o = new OutputChannel(b, c);
 				o.setMode("+q ", u.getHostmask());
-				TimeUnit.SECONDS.sleep(s);
-				o.setMode("-q ", u.getHostmask());
-		}
-		}
-			public class quietunreal extends Thread{
-				public void run(int s, User u, Channel c, PircBotX b) throws InterruptedException{
-					OutputChannel o = new OutputChannel(b, c);
-					o.setMode("+b ~q:", u.getHostmask());
-					TimeUnit.SECONDS.sleep(s);
-					o.setMode("-b ~q:", u.getHostmask());
+			}else if(i == "u"){
+				OutputChannel o = new OutputChannel(b, c);
+				o.setMode("+b ~q:", u.getHostmask());
+			}else if(i == "i"){
+				OutputChannel o = new OutputChannel(b, c);
+				o.setMode("+b m:", u.getHostmask());
 			}
+			
 	
 }
-			public class quietinspi extends Thread{
-				public void run(int s, User u, Channel c, PircBotX b) throws InterruptedException{
-					OutputChannel o = new OutputChannel(b, c);
-					o.setMode("+b m:", u.getHostmask());
-					TimeUnit.SECONDS.sleep(s);
-					o.setMode("-b m:", u.getHostmask());
+		public void unquiet(User u, String i, Channel c, PircBotX b){
+			if(i == "c"){
+				OutputChannel o = new OutputChannel(b, c);
+				o.setMode("-q ", u.getHostmask());
+			}else if(i == "u"){
+				OutputChannel o = new OutputChannel(b, c);
+				o.setMode("-b ~q:", u.getHostmask());
+			}else if(i == "i"){
+				OutputChannel o = new OutputChannel(b, c);
+				o.setMode("-b m:", u.getHostmask());
 			}
-	
 }
 }
