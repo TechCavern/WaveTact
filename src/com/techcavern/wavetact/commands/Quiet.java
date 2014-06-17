@@ -19,13 +19,13 @@ public class Quiet extends ListenerAdapter<PircBotX> {
 			if (messageParts[0].equalsIgnoreCase((GeneralRegistry.CommandChar + "quiet"))){
 			if(10 <= PermUtils.getPermLevel(event.getBot(), event.getUser(), event.getChannel())){
 				if(messageParts[1].equalsIgnoreCase("c")||messageParts[1].equalsIgnoreCase("u")||messageParts[1].equalsIgnoreCase("i")){
-				if (messageParts[3] != null && messageParts[2].startsWith("-") == false){
+				if (messageParts.length == 4 && messageParts[2].startsWith("-") == false){
 					quiettime time = new quiettime();
 					time.run(Integer.parseInt(messageParts[3]), messageParts[1],IRCUtils.getUserByNick(event.getChannel(), messageParts[2]), event.getChannel(), event.getBot());
-				}else if(messageParts[3] == null && messageParts[2].startsWith("-") == false){
+				}else if(messageParts.length < 4 && messageParts[2].startsWith("-") == false){                                        
 					quiet(IRCUtils.getUserByNick(event.getChannel(), messageParts[2]), messageParts[1], event.getChannel(), event.getBot());
 				}else if(messageParts[2].startsWith("-")){
-					unquiet(IRCUtils.getUserByNick(event.getChannel(), messageParts[2]), messageParts[1], event.getChannel(), event.getBot());
+					unquiet(IRCUtils.getUserByNick(event.getChannel(), messageParts[2].replace("-", "")), messageParts[1], event.getChannel(), event.getBot());
 
 				}
 				else{
