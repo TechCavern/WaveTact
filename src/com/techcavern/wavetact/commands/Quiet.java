@@ -7,7 +7,6 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.MessageEvent;
-import org.pircbotx.output.OutputChannel;
 
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.PermUtils;
@@ -16,13 +15,13 @@ import com.techcavern.wavetact.utils.IRCUtils;
 
 public class Quiet extends ListenerAdapter<PircBotX> {
 	public void onMessage(MessageEvent<PircBotX> event) throws Exception{
-		String[] messageParts = event.getMessage().toString().split(" ");
+		String[] messageParts = event.getMessage().split(" ");
 			if (messageParts[0].equalsIgnoreCase((GeneralRegistry.CommandChar + "quiet"))){
 			if(10 <= PermUtils.getPermLevel(event.getBot(), event.getUser(), event.getChannel())){
 				if(messageParts[1].equalsIgnoreCase("c")||messageParts[1].equalsIgnoreCase("u")||messageParts[1].equalsIgnoreCase("i")){
 				if (messageParts[3] != null && messageParts[2].startsWith("-") == false){
 					quiettime time = new quiettime();
-					time.run(Integer.parseInt(messageParts[3]), messageParts[1],event.getUser(), event.getChannel(), event.getBot());
+					time.run(Integer.parseInt(messageParts[3]), messageParts[1],IRCUtils.getUserByNick(event.getChannel(), messageParts[2]), event.getChannel(), event.getBot());
 				}else if(messageParts[3] == null && messageParts[2].startsWith("-") == false){
 					quiet(IRCUtils.getUserByNick(event.getChannel(), messageParts[2]), messageParts[1], event.getChannel(), event.getBot());
 				}else if(messageParts[2].startsWith("-")){
@@ -51,22 +50,22 @@ public class Quiet extends ListenerAdapter<PircBotX> {
 		}
 		
 		public void quiet(User u, String i, Channel c, PircBotX b){
-			if(i == "c"){
-				IRCUtils.setMode(c, b, "+q", u);
-			}else if(i == "u"){
+			if(i.equalsIgnoreCase("c")){
+				IRCUtils.setMode(c, b, "+q ", u);
+			}else if(i.equalsIgnoreCase("u")){
 				IRCUtils.setMode(c, b, "+b ~q:", u);
-			}else if(i == "i"){
+			}else if(i.equalsIgnoreCase("i")){
 				IRCUtils.setMode(c, b, "+b m:", u);
 			}
 			
 	
 }
 		public void unquiet(User u, String i, Channel c, PircBotX b){
-			if(i == "c"){
-				IRCUtils.setMode(c, b, "-q", u);
-			}else if(i == "u"){
+			if(i.equalsIgnoreCase("c")){
+				IRCUtils.setMode(c, b, "-q ", u);
+			}else if(i.equalsIgnoreCase("u")){
 				IRCUtils.setMode(c, b, "-b ~q:", u);
-			}else if(i == "i"){
+			}else if(i.equalsIgnoreCase("i")){
 				IRCUtils.setMode(c, b, "-b m:", u);
 			}
 }
