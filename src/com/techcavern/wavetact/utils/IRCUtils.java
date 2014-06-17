@@ -59,6 +59,14 @@ public class IRCUtils{
         }
         return null;
     }
+    	public static void setMode (Channel c, PircBotx b, String d, User u){
+    		OutputChannel o = new OutputChannel(b, c);
+		if (u != null){
+		o.setMode(d, u.getHostmask());
+		} else {
+		o.setMode(d);	
+		}
+    	}
 	
 }
 
