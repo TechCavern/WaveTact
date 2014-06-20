@@ -25,4 +25,5 @@ public class BasicChanOp extends ListenerAdapter<PircBotX> {
                          
                          
 	} 
+}
 	
