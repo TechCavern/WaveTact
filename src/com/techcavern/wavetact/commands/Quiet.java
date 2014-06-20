@@ -46,7 +46,7 @@ public class Quiet extends ListenerAdapter<PircBotX> {
 			}
 	}
 		public class quiettime extends Thread{
-			public void run(String s, String i, User u, Channel c, PircBotX b) throws InterruptedException{
+			public void run(String i, String s, User u, Channel c, PircBotX b) throws InterruptedException{
 				quiet(u,s,c,b);
                                 if(i.endsWith("s")){
                                     int e = Integer.parseInt(i.replace("s", ""));
