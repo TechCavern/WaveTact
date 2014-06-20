@@ -20,8 +20,12 @@ public class Quiet extends ListenerAdapter<PircBotX> {
 			if(10 <= PermUtils.getPermLevel(event.getBot(), event.getUser(), event.getChannel())){
 				if(messageParts[1].equalsIgnoreCase("c")||messageParts[1].equalsIgnoreCase("u")||messageParts[1].equalsIgnoreCase("i")){
 				if (messageParts.length == 4 && messageParts[2].startsWith("-") == false){
-					quiettime time = new quiettime();
-					time.run(Integer.parseInt(messageParts[3]), messageParts[1],IRCUtils.getUserByNick(event.getChannel(), messageParts[2]), event.getChannel(), event.getBot());
+					if(messageParts[3].endsWith("s") || messageParts[3].endsWith("h") || messageParts[3].endsWith("m") || messageParts[3].endsWith("d")){
+                                        quiettime time = new quiettime();
+					time.run(messageParts[3], messageParts[1],IRCUtils.getUserByNick(event.getChannel(), messageParts[2]), event.getChannel(), event.getBot());
+                                        } else {
+                                            IRCUtils.SendNotice(event.getBot(), event.getUser(), " Ensure you have specified a valid time (30s = 30 Seconds, 30m = 30 minutes, up to days)");
+                                        }
 				}else if(messageParts.length < 4 && messageParts[2].startsWith("-") == false){                                        
 					quiet(IRCUtils.getUserByNick(event.getChannel(), messageParts[2]), messageParts[1], event.getChannel(), event.getBot());
 				}else if(messageParts[2].startsWith("-")){
@@ -42,10 +46,24 @@ public class Quiet extends ListenerAdapter<PircBotX> {
 			}
 	}
 		public class quiettime extends Thread{
-			public void run(int s, String i, User u, Channel c, PircBotX b) throws InterruptedException{
-				quiet(u,i,c,b);
-				TimeUnit.SECONDS.sleep(s);
-				unquiet(u,i,c,b);
+			public void run(String s, String i, User u, Channel c, PircBotX b) throws InterruptedException{
+				quiet(u,s,c,b);
+                                if(i.endsWith("s")){
+                                    int e = Integer.parseInt(i.replace("s", ""));
+                                    TimeUnit.SECONDS.sleep(e);
+                                } else if(i.endsWith("m")){
+                                    int e = Integer.parseInt(i.replace("m", ""));
+                                    TimeUnit.MINUTES.sleep(e);
+                                }else  if(i.endsWith("h")){
+                                    int e = Integer.parseInt(i.replace("h", ""));
+                                    TimeUnit.HOURS.sleep(e);
+                                }else  if(i.endsWith("d")){
+                                    int e = Integer.parseInt(i.replace("d", ""));
+                                    TimeUnit.DAYS.sleep(e);
+                                }
+                                    
+
+				unquiet(u,s,c,b);
 		}
 		}
 		
