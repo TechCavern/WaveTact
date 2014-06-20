@@ -12,6 +12,7 @@ import org.pircbotx.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.techcavern.wavetact.commands.Ban;
+import com.techcavern.wavetact.commands.BasicChanOp;
 import com.techcavern.wavetact.commands.BasicCommands;
 import com.techcavern.wavetact.commands.CheckUserLevel;
 import com.techcavern.wavetact.commands.HighFive;
@@ -37,6 +38,7 @@ public class IRCUtils{
     Net.getListenerManager().addListener(new Quiet());
     Net.getListenerManager().addListener(new Ban());
     Net.getListenerManager().addListener(new HighFive());
+    Net.getListenerManager().addListener(new BasicChanOp());
     if(g != null){
     Net.setNickservPassword(g);
     }
