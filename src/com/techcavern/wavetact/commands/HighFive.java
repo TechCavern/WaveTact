@@ -11,7 +11,8 @@ import org.pircbotx.Channel;
 public class HighFive extends ListenerAdapter<PircBotX> {
     public List<String> HighFives = new ArrayList();
 		public void onMessage(MessageEvent<PircBotX> event) throws Exception{
-			 if (event.getMessage().equalsIgnoreCase(("o/"))||event.getMessage().equalsIgnoreCase(("\\o"))||event.getMessage().equalsIgnoreCase(("0/")) || event.getMessage().equalsIgnoreCase(("\\0"))){
+			 if (event.getMessage().toLowerCase().startsWith("o/")||event.getMessage().toLowerCase().startsWith("\\o")||event.getMessage().toLowerCase().startsWith("0/") || event.getMessage().toLowerCase().startsWith("\\0")||event.getMessage().toLowerCase().endsWith("o/")||event.getMessage().toLowerCase().endsWith("\\o")||event.getMessage().toLowerCase().endsWith("0/") || event.getMessage().toLowerCase().endsWith("\\0")){
+                             
                               HighFives.add(event.getUser().getNick());
                               CheckIfTwoHighFives(event.getChannel());
 			 }
