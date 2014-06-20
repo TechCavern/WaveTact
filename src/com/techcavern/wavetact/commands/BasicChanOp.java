@@ -19,8 +19,15 @@ public class BasicChanOp extends ListenerAdapter<PircBotX> {
 			 } else 
                              if (messageParts[0].equalsIgnoreCase((GeneralRegistry.CommandChar + "mode"))){
 	            	event.getChannel().send().setMode(messageParts[1]);
-			 } else if (messageParts[0].equalsIgnoreCase((GeneralRegistry.CommandChar + "somethingawesome2"))){
-	            	event.getChannel().send().kick(event.getUser(),"This is Awesome!");
+			 } else if (messageParts[0].equalsIgnoreCase((GeneralRegistry.CommandChar + "somethingawesome"))){
+                            if(event.getChannel().isOp(IRCUtils.getUserByNick(event.getChannel(), event.getBot().getNick())) && event.getChannel().isOwner(event.getUser()) == false && event.getChannel().isSuperOp(event.getUser()) == false){
+                             event.getChannel().send().kick(event.getUser(),"http://bit.ly/1c9vo1S");
+                            } else if(event.getChannel().isOwner(IRCUtils.getUserByNick(event.getChannel(), event.getBot().getNick()))){
+                             event.getChannel().send().kick(event.getUser(),"http://bit.ly/1c9vo1S");
+                            }else {
+                                event.getChannel().send().message("http://bit.ly/1c9vo1S");
+
+                            }
 			 }
                          
                          
