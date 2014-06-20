@@ -20,7 +20,7 @@ public class BasicChanOp extends ListenerAdapter<PircBotX> {
                              if (messageParts[0].equalsIgnoreCase((GeneralRegistry.CommandChar + "mode"))){
 	            	event.getChannel().send().setMode(messageParts[1]);
 			 } else if (messageParts[0].equalsIgnoreCase((GeneralRegistry.CommandChar + "somethingawesome2"))){
-	            	event.getChannel().send().kick(event.getUser());
+	            	event.getChannel().send().kick(event.getUser(),"This is Awesome!");
 			 }
                          
                          
