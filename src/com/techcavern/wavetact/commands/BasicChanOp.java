@@ -61,7 +61,7 @@ public class BasicChanOp {
                        public void onCommand(MessageEvent<?> event) throws Exception{
                     String[] messageParts = event.getMessage().split(" ");
  if(messageParts[1].startsWith("-"))
-	            	event.getChannel().send().deVoice(IRCUtils.getUserByNick(event.getChannel(), messageParts[1].replace("-", "")));
+	            	event.getChannel().send().deVoice(IRCUtils.getUserByNick(event.getChannel(), messageParts[1].replaceFirst("-","")));
                              else{
                                event.getChannel().send().voice(IRCUtils.getUserByNick(event.getChannel(), messageParts[1]));
 
@@ -75,9 +75,9 @@ public class BasicChanOp {
                        @Override
                        public void onCommand(MessageEvent<?> event) throws Exception{
                        String[] messageParts = event.getMessage().split(" ");
-                           if(messageParts[1].startsWith("-"))
-	            	event.getChannel().send().deOp(IRCUtils.getUserByNick(event.getChannel(), messageParts[1].replace("-", "")));
-                             else{
+                           if(messageParts[1].startsWith("-")){
+	            	event.getChannel().send().deOp(IRCUtils.getUserByNick(event.getChannel(), messageParts[1].replaceFirst("-","")));
+                           }else{
                                event.getChannel().send().op(IRCUtils.getUserByNick(event.getChannel(), messageParts[1]));
 
                              }	
@@ -93,7 +93,7 @@ public class BasicChanOp {
                     String[] messageParts = event.getMessage().split(" ");
                     
                 if(messageParts[1].startsWith("-"))
-	            	event.getChannel().send().deOwner(IRCUtils.getUserByNick(event.getChannel(), messageParts[1].replace("-", "")));
+	            	event.getChannel().send().deOwner(IRCUtils.getUserByNick(event.getChannel(), messageParts[1].replaceFirst("-","")));
                              else{
                                event.getChannel().send().owner(IRCUtils.getUserByNick(event.getChannel(), messageParts[1]));
 
@@ -108,7 +108,7 @@ public class BasicChanOp {
                        public void onCommand(MessageEvent<?> event) throws Exception{
                     String[] messageParts = event.getMessage().split(" ");
                 if(messageParts[1].startsWith("-"))
-	            	event.getChannel().send().deSuperOp(IRCUtils.getUserByNick(event.getChannel(), messageParts[1].replace("-", "")));
+	            	event.getChannel().send().deSuperOp(IRCUtils.getUserByNick(event.getChannel(), messageParts[1].replaceFirst("-","")));
                              else{
                                event.getChannel().send().superOp(IRCUtils.getUserByNick(event.getChannel(), messageParts[1]));
 
