@@ -16,6 +16,7 @@ import com.google.gson.reflect.TypeToken;
 import com.techcavern.wavetact.commands.chanop.Ban;
 import com.techcavern.wavetact.commands.chanop.Quiet;
 import com.techcavern.wavetact.commands.Act;
+import com.techcavern.wavetact.commands.BasicCommands;
 import com.techcavern.wavetact.commands.CheckUserLevel;
 import com.techcavern.wavetact.commands.CustomCMD;
 import com.techcavern.wavetact.commands.chanop.Kick;
@@ -101,6 +102,7 @@ public class IRCUtils {
         new Join();
         new CustomCMD();
         new CheckUserLevel();
+        new BasicCommands();
 
     }
 
@@ -120,7 +122,7 @@ public class IRCUtils {
     }
 
     public static void RegisterExistingSimpleActions() {
-        Config config = new Config("SimpleMessage.json");
+        Config config = new Config("SimpleAction.json");
 
         GeneralRegistry.SimpleAction = new Gson().fromJson(config.getText(), new TypeToken<Set<SimpleMessage>>() {
         }.getType());
