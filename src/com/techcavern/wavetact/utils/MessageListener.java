@@ -32,15 +32,18 @@ public class MessageListener extends ListenerAdapter<PircBotX> {
                     }else if(Command.getPermLevel() == 15){
                         
                 if(event.getChannel().isOwner(event.getBot().getUserBot()) ){
-                        Command.onCommand(event);
+                        Command.onCommand(event, ArrayUtils.remove(messageParts, 0));
                             }else{
                                 event.getChannel().send().message("Error: I must be Ownered to perform the operation requested");
-                    }                    }
+                    }                    }else{
+                        Command.onCommand(event, ArrayUtils.remove(messageParts, 0));
+
+            }
                     
                 }else{
                 event.getChannel().send().message("Permission Denied");
-
-                }
+                        
+              }
             }
         }
     }
