@@ -16,6 +16,7 @@ import com.google.gson.reflect.TypeToken;
 import com.techcavern.wavetact.commands.chanop.Ban;
 import com.techcavern.wavetact.commands.chanop.Quiet;
 import com.techcavern.wavetact.commands.Act;
+import com.techcavern.wavetact.commands.CheckUserLevel;
 import com.techcavern.wavetact.commands.CustomCMD;
 import com.techcavern.wavetact.commands.chanop.Kick;
 import com.techcavern.wavetact.commands.chanop.Mode;
@@ -99,6 +100,7 @@ public class IRCUtils {
         new Voice();
         new Join();
         new CustomCMD();
+        new CheckUserLevel();
 
     }
 

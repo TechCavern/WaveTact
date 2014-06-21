@@ -10,6 +10,8 @@ import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.PermUtils;
 import com.techcavern.wavetact.utils.SimpleMessage;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.hooks.events.MessageEvent;
 
 /**
@@ -24,6 +26,11 @@ public class CustomCMD extends Command {
 
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
+        String[] s = ArrayUtils.remove(args, 0);
+        s = ArrayUtils.remove(s, 0);
+        s = ArrayUtils.remove(s, 0);
+
+        String sj = StringUtils.join(s, ' ');
         if (args[0].equalsIgnoreCase("m")) {
             if (args[1].startsWith("-")) {
                 if (IRCUtils.getCommand(args[1].replaceFirst("-", "")).getPermLevel() <= PermUtils.getPermLevel(event.getBot(), event.getUser(), event.getChannel())) {
@@ -34,7 +41,7 @@ public class CustomCMD extends Command {
                     event.getChannel().send().message("Permission Denied");
                 }
             } else {
-                SimpleMessage c = new SimpleMessage(args[1], Integer.parseInt(args[2]), args[3], false);
+                SimpleMessage c = new SimpleMessage(args[1], Integer.parseInt(args[2]), sj, false);
                 GeneralRegistry.SimpleMessage.add(c);
                 GeneralRegistry.Commands.add(c);
                 event.getChannel().send().message("Command Added");
@@ -52,7 +59,7 @@ public class CustomCMD extends Command {
                     event.getChannel().send().message("Permission Denied");
                 }
             } else {
-                SimpleMessage c = new SimpleMessage(args[1], Integer.parseInt(args[2]), args[3], false);
+                SimpleMessage c = new SimpleMessage(args[1], Integer.parseInt(args[2]), sj, false);
                 GeneralRegistry.SimpleMessage.add(c);
                 GeneralRegistry.Commands.add(c);
                 event.getChannel().send().message("Command Added");
