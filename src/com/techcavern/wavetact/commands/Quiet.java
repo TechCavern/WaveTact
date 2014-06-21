@@ -58,9 +58,7 @@ public class Quiet extends Command {
                                 }else  if(i.endsWith("d")){
                                     int e = Integer.parseInt(i.replace("d", ""));
                                     TimeUnit.DAYS.sleep(e);
-                                }
-                                    
-
+                                }                                  
 				unquiet(u,s,c,b);
 		}
 		}

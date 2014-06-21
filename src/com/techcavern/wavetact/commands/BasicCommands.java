@@ -34,8 +34,8 @@ public class BasicCommands{
 				
     }
 }    
-          public class ExampleCommand extends Command{
-    public ExampleCommand(){
+          public class SomethingAwesome extends Command{
+    public SomethingAwesome(){
         super("somethingawesome", 0);
     }
     @Override
