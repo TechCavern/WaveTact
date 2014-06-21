@@ -23,7 +23,7 @@ public class Topic extends Command{
     public void onCommand(MessageEvent<?> event, String... args) throws Exception{
 
             if(args.length == 4){
-                                        List<String> t = Arrays.asList(event.getChannel().getTopic().split(args[0]));
+                List<String> t = Arrays.asList(event.getChannel().getTopic().split(args[0]));
 
             if(args[1].equalsIgnoreCase("switchpart")){
                

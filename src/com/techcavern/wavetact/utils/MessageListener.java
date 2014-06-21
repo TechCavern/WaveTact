@@ -5,6 +5,7 @@
  */
 package com.techcavern.wavetact.utils;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.MessageEvent;
@@ -17,14 +18,14 @@ public class MessageListener extends ListenerAdapter<PircBotX> {
     
     @Override
     public void onMessage(MessageEvent<PircBotX> event) throws Exception{
-        String[] messageParts = event.getMessage().split(" ");
+         String[] messageParts = event.getMessage().split(" ");
          String m=messageParts[0].toLowerCase(); 
         for (Command Command : GeneralRegistry.Commands) {
             if(m.equalsIgnoreCase(GeneralRegistry.CommandChar + Command.getcomid())){
                 if(PermUtils.getPermLevel(event.getBot(), event.getUser(), event.getChannel()) >= Command.getPermLevel()){
                     if(Command.getPermLevel() == 10){
                             if(event.getChannel().isOp(event.getBot().getUserBot())||event.getChannel().isOwner(event.getBot().getUserBot()) ){
-                        Command.onCommand(event);
+                        Command.onCommand(event, ArrayUtils.remove(messageParts, 0));
                             }else{
                                 event.getChannel().send().message("Error: I must be Opped to perform the operation requested");
                     }

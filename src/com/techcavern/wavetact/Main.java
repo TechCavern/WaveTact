@@ -29,8 +29,8 @@ import com.techcavern.wavetact.utils.IRCUtils;
 	        
 	        WaveTact.addBot(Esper);
 //	        WaveTact.addBot(Ovd);
-	        WaveTact.addBot(Xertion);
-	        WaveTact.addBot(ECode);
+//	        WaveTact.addBot(Xertion);
+//	        WaveTact.addBot(ECode);
 	        WaveTact.start();
 	    }
 	}
