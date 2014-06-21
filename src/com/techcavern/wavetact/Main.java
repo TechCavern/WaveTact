@@ -11,6 +11,7 @@ import com.techcavern.wavetact.utils.IRCUtils;
 
 	public class Main
 	{	    
+            public static MultiBotManager<PircBotX> WaveTact = new MultiBotManager<>();
 	    public static void main(String[] args) throws Exception 
 	    {
 	        System.out.println("Starting...");
@@ -25,12 +26,11 @@ import com.techcavern.wavetact.utils.IRCUtils;
 	        PircBotX Esper = IRCUtils.createbot(g,"Esper", GeneralRegistry.EsperChannels, GeneralRegistry.EsperNick, GeneralRegistry.EsperServer);
 	        PircBotX ECode = IRCUtils.createbot(pwd,"ECode", GeneralRegistry.ECodeChannels, GeneralRegistry.ECodeNick, GeneralRegistry.ECodeServer);
 	        PircBotX Xertion = IRCUtils.createbot(pwd,"Xertion", GeneralRegistry.XertionChannels, GeneralRegistry.XertionNick, GeneralRegistry.XertionServer);
-
-	        MultiBotManager<PircBotX> WaveTact = new MultiBotManager<>();
+	        
 	        WaveTact.addBot(Esper);
 //	        WaveTact.addBot(Ovd);
-//	        WaveTact.addBot(Xertion);
-//	        WaveTact.addBot(ECode);
+	        WaveTact.addBot(Xertion);
+	        WaveTact.addBot(ECode);
 	        WaveTact.start();
 	    }
 	}

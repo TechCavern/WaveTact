@@ -5,6 +5,7 @@
  */
 package com.techcavern.wavetact.commands;
 
+import com.techcavern.wavetact.Main;
 import com.techcavern.wavetact.utils.Command;
 import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.ListenerAdapter;
