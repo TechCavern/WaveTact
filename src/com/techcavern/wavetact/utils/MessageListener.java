@@ -21,10 +21,11 @@ public class MessageListener extends ListenerAdapter<PircBotX> {
          String m=messageParts[0].toLowerCase(); 
         for (Command Command : GeneralRegistry.Commands) {
             if(m.equalsIgnoreCase(GeneralRegistry.CommandChar + Command.getcomid())){
-                if(PermUtils.getPermLevel(event.getBot(), event.getUser(), event.getChannel()) <= Command.getPermLevel()){
+                if(PermUtils.getPermLevel(event.getBot(), event.getUser(), event.getChannel()) >= Command.getPermLevel()){
                     Command.onCommand(event);
                 }else{
                 event.getChannel().send().message("Permission Denied");
+
                 }
             }
         }
