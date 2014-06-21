@@ -33,7 +33,7 @@ public class MessageListener extends ListenerAdapter<PircBotX> {
                 if(event.getChannel().isOwner(event.getBot().getUserBot()) ){
                         Command.onCommand(event);
                             }else{
-                                event.getChannel().send().message("Error: I must be Opped to perform the operation requested");
+                                event.getChannel().send().message("Error: I must be Ownered to perform the operation requested");
                     }                    }
                     
                 }else{
