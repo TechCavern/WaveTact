@@ -45,10 +45,10 @@ public class BasicChanOp extends ListenerAdapter<PircBotX> {
                                event.getChannel().send().op(IRCUtils.getUserByNick(event.getChannel(), messageParts[1]));
 
                              }			 } 
-			 }}else{
+			 }else{
                      event.getChannel().send().message("Error: I must be opped in the channel to perform the operation");
                             
-                            }
+                            }}
                             else {
                      event.getChannel().send().message("Permission Denied");
                  }
@@ -69,10 +69,10 @@ public class BasicChanOp extends ListenerAdapter<PircBotX> {
                                event.getChannel().send().superOp(IRCUtils.getUserByNick(event.getChannel(), messageParts[1]));
 
                              }			 } 
-			 }}else{
+			 }else{
                      event.getChannel().send().message("Error: I must be ownered in the channel to perform the operation");
                             
-                            }
+                            }}
                             else {
                      event.getChannel().send().message("Permission Denied");
                  }
