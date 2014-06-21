@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.commands;
+package com.techcavern.wavetact.commands.chanop;
 
 import com.techcavern.wavetact.utils.Command;
 import java.util.concurrent.TimeUnit;

@@ -12,12 +12,18 @@ import org.pircbotx.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.techcavern.wavetact.commands.Ban;
-import com.techcavern.wavetact.commands.BasicChanOp;
-import com.techcavern.wavetact.commands.BasicCommands;
-import com.techcavern.wavetact.commands.CheckUserLevel;
-import com.techcavern.wavetact.commands.ControllerCommands;
 import com.techcavern.wavetact.commands.Quiet;
-import com.techcavern.wavetact.commands.Topic;
+import com.techcavern.wavetact.commands.act;
+import com.techcavern.wavetact.commands.chanop.kick;
+import com.techcavern.wavetact.commands.chanop.mode;
+import com.techcavern.wavetact.commands.chanop.op;
+import com.techcavern.wavetact.commands.chanop.owner;
+import com.techcavern.wavetact.commands.chanop.part;
+import com.techcavern.wavetact.commands.chanop.protect;
+import com.techcavern.wavetact.commands.chanop.voice;
+import com.techcavern.wavetact.commands.controller.join;
+import com.techcavern.wavetact.commands.say;
+import com.techcavern.wavetact.commands.somethingawesome;
 import com.techcavern.wavetact.events.HighFive;
 //import com.techcavern.wavetact.commands.TestCommand;
 import com.techcavern.wavetact.events.kickrejoin;
@@ -57,6 +63,7 @@ public class IRCUtils{
     }
     	public static void setMode (Channel c, PircBotX b, String d, User u){
     		OutputChannel o = new OutputChannel(b, c);
+             
 		if (u != null){
 		o.setMode(d, u.getHostmask());
 		} else {
@@ -70,28 +77,21 @@ public class IRCUtils{
         
         public static void RegisterCommands(){
              System.out.println("Registering Commands");
+                new act();
+                new say();
+                new somethingawesome();
                 new Ban();
-                BasicChanOp x = new BasicChanOp();
-                x.new kick();
-                x.new mode();
-                x.new owner();
-                x.new op();
-                x.new part();
-                x.new protect();
-                x.new voice();
-                BasicCommands y = new BasicCommands();
-                y.new ping();
-                y.new pong();
-                y.new say();
-                y.new act();
-                y.new potato();
-                y.new SomethingAwesome();
-                y.new Source();
-                new Topic();
-                new CheckUserLevel();
-                ControllerCommands z = new ControllerCommands();
-                z.new join();
                 new Quiet();
+                new kick();
+                new mode();
+                new op();
+                new owner();
+                new part();
+                new protect();
+                new voice();
+                new join();
+                
+                
         }
     	}
 
