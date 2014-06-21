@@ -21,7 +21,7 @@ public class BasicChanOp extends ListenerAdapter<PircBotX> {
                             if(10 <= PermUtils.getPermLevel(event.getBot(), event.getUser(), event.getChannel())){
                                   if(event.getChannel().isOp(event.getBot().getUserBot())){
                         if (m.equalsIgnoreCase((GeneralRegistry.CommandChar + "somethingawesome"))){
-                            if(event.getChannel().getUserLevels(event.getBot().getUserBot()).contains(UserLevel.OP) && event.getChannel().isOwner(event.getUser()) == false && event.getChannel().isSuperOp(event.getUser()) == false){
+                            if(event.getChannel().getUserLevels(event.getBot().getUserBot()).contains(UserLevel.OP) && event.getChannel().isOwner(IRCUtils.getUserByNick(event.getChannel(), messageParts[1])) == false && event.getChannel().isSuperOp(IRCUtils.getUserByNick(event.getChannel(), messageParts[1])) == false){
                              event.getChannel().send().kick(IRCUtils.getUserByNick(event.getChannel(), messageParts[1]));
                             } else if(event.getChannel().getUserLevels(event.getBot().getUserBot()).contains(UserLevel.OWNER)){
                              event.getChannel().send().kick(IRCUtils.getUserByNick(event.getChannel(), messageParts[1]));
