@@ -19,10 +19,10 @@ public class BasicChanOp {
                 
                 @Override
 		public void onCommand(MessageEvent<?> event, String... args) throws Exception{
-                    if(event.getChannel().getUserLevels(event.getBot().getUserBot()).contains(UserLevel.OP) && event.getChannel().isOwner(IRCUtils.getUserByNick(event.getChannel(), args[1])) == false && event.getChannel().isSuperOp(IRCUtils.getUserByNick(event.getChannel(), args[1])) == false){
-                             event.getChannel().send().kick(IRCUtils.getUserByNick(event.getChannel(), args[1]));
+                    if(event.getChannel().getUserLevels(event.getBot().getUserBot()).contains(UserLevel.OP) && event.getChannel().isOwner(IRCUtils.getUserByNick(event.getChannel(), args[0])) == false && event.getChannel().isSuperOp(IRCUtils.getUserByNick(event.getChannel(), args[0])) == false){
+                             event.getChannel().send().kick(IRCUtils.getUserByNick(event.getChannel(), args[0]));
                             } else if(event.getChannel().getUserLevels(event.getBot().getUserBot()).contains(UserLevel.OWNER)){
-                             event.getChannel().send().kick(IRCUtils.getUserByNick(event.getChannel(), args[1]));
+                             event.getChannel().send().kick(IRCUtils.getUserByNick(event.getChannel(), args[0]));
                             } else {
                                 event.getChannel().send().message("Error: I must be ownered in the channel to kick someone that is protected or ownered");
                             }
@@ -36,7 +36,7 @@ public class BasicChanOp {
                    }
                        @Override
                        public void onCommand(MessageEvent<?> event, String... args) throws Exception{
-                           	            	event.getChannel().send().setMode(args[1]);
+                           	            	event.getChannel().send().setMode(args[0]);
                        }
                    }
                         
@@ -57,10 +57,10 @@ public class BasicChanOp {
                    }
                        @Override
                        public void onCommand(MessageEvent<?> event, String... args) throws Exception{
- if(args[1].startsWith("-"))
-	            	event.getChannel().send().deVoice(IRCUtils.getUserByNick(event.getChannel(), args[1].replaceFirst("-","")));
+ if(args[0].startsWith("-"))
+	            	event.getChannel().send().deVoice(IRCUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-","")));
                              else{
-                               event.getChannel().send().voice(IRCUtils.getUserByNick(event.getChannel(), args[1]));
+                               event.getChannel().send().voice(IRCUtils.getUserByNick(event.getChannel(), args[0]));
 
                              }                       }
                    }
@@ -71,10 +71,10 @@ public class BasicChanOp {
                    }
                        @Override
                        public void onCommand(MessageEvent<?> event, String... args) throws Exception{
-                           if(args[1].startsWith("-")){
-	            	event.getChannel().send().deOp(IRCUtils.getUserByNick(event.getChannel(), args[1].replaceFirst("-","")));
+                           if(args[0].startsWith("-")){
+	            	event.getChannel().send().deOp(IRCUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-","")));
                            }else{
-                               event.getChannel().send().op(IRCUtils.getUserByNick(event.getChannel(), args[1]));
+                               event.getChannel().send().op(IRCUtils.getUserByNick(event.getChannel(), args[0]));
 
                              }	
                        }
@@ -86,10 +86,10 @@ public class BasicChanOp {
                    }
                        @Override
                        public void onCommand(MessageEvent<?> event, String... args) throws Exception{
-                if(args[1].startsWith("-"))
-	            	event.getChannel().send().deOwner(IRCUtils.getUserByNick(event.getChannel(), args[1].replaceFirst("-","")));
+                if(args[0].startsWith("-"))
+	            	event.getChannel().send().deOwner(IRCUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-","")));
                              else{
-                               event.getChannel().send().owner(IRCUtils.getUserByNick(event.getChannel(), args[1]));
+                               event.getChannel().send().owner(IRCUtils.getUserByNick(event.getChannel(), args[0]));
 
                              }                       }
                    }
@@ -100,10 +100,10 @@ public class BasicChanOp {
                    }
                        @Override
                        public void onCommand(MessageEvent<?> event, String... args)  throws Exception{
-                if(args[1].startsWith("-"))
-	            	event.getChannel().send().deSuperOp(IRCUtils.getUserByNick(event.getChannel(), args[1].replaceFirst("-","")));
+                if(args[0].startsWith("-"))
+	            	event.getChannel().send().deSuperOp(IRCUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-","")));
                              else{
-                               event.getChannel().send().superOp(IRCUtils.getUserByNick(event.getChannel(), args[1]));
+                               event.getChannel().send().superOp(IRCUtils.getUserByNick(event.getChannel(), args[0]));
 
                              }                       }
                    }

@@ -18,17 +18,17 @@ public class Ban extends Command{
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception{
 
-				if (args.length == 3 && args[1].startsWith("-") == false){
-					if(args[2].endsWith("s") || args[2].endsWith("h") || args[2].endsWith("m") || args[2].endsWith("d")){
+				if (args.length == 3 && args[0].startsWith("-") == false){
+					if(args[1].endsWith("s") || args[1].endsWith("h") || args[1].endsWith("m") || args[1].endsWith("d")){
                                         bantime time = new bantime();
-					time.run(args[2],IRCUtils.getUserByNick(event.getChannel(), args[1]), event.getChannel(), event.getBot());
+					time.run(args[1],IRCUtils.getUserByNick(event.getChannel(), args[0]), event.getChannel(), event.getBot());
                                         } else {
                                             IRCUtils.SendNotice(event.getBot(), event.getUser(), " Ensure you have specified a valid time (30s = 30 Seconds, 30m = 30 minutes, up to days)");
                                         }
-				}else if(args.length < 3 && args[1].startsWith("-") == false){                                        
-					ban(IRCUtils.getUserByNick(event.getChannel(), args[1]), event.getChannel(), event.getBot());
-				}else if(args[1].startsWith("-")){
-					unban(IRCUtils.getUserByNick(event.getChannel(), args[1].replaceFirst("-", "")), event.getChannel(), event.getBot());
+				}else if(args.length < 3 && args[0].startsWith("-") == false){                                        
+					ban(IRCUtils.getUserByNick(event.getChannel(), args[0]), event.getChannel(), event.getBot());
+				}else if(args[0].startsWith("-")){
+					unban(IRCUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", "")), event.getChannel(), event.getBot());
 
 				}
 				else{

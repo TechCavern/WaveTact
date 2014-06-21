@@ -22,7 +22,7 @@ public class ControllerCommands extends ListenerAdapter<PircBotX> {
     }
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception{
-		event.getBot().sendIRC().joinChannel(args[1]);
+		event.getBot().sendIRC().joinChannel(args[0]);
 				
     }
 }
