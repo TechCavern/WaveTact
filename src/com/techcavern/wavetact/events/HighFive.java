@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.commands;
+package com.techcavern.wavetact.events;
 
 import java.util.ArrayList;
 import org.pircbotx.PircBotX;

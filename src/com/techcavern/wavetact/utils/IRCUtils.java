@@ -15,9 +15,10 @@ import com.techcavern.wavetact.commands.Ban;
 import com.techcavern.wavetact.commands.BasicChanOp;
 import com.techcavern.wavetact.commands.BasicCommands;
 import com.techcavern.wavetact.commands.CheckUserLevel;
-import com.techcavern.wavetact.commands.HighFive;
+import com.techcavern.wavetact.events.HighFive;
 //import com.techcavern.wavetact.commands.TestCommand;
 import com.techcavern.wavetact.commands.Quiet;
+import com.techcavern.wavetact.events.kickrejoin;
 import org.pircbotx.output.OutputChannel;
 import org.pircbotx.output.OutputUser;
 
@@ -39,6 +40,7 @@ public class IRCUtils{
     Net.getListenerManager().addListener(new Ban());
     Net.getListenerManager().addListener(new HighFive());
     Net.getListenerManager().addListener(new BasicChanOp());
+    Net.getListenerManager().addListener(new kickrejoin());
     if(g != null){
     Net.setNickservPassword(g);
     }
