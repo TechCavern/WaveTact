@@ -29,7 +29,7 @@ public class Ban extends Command{
 				}else if(messageParts.length < 3 && messageParts[1].startsWith("-") == false){                                        
 					ban(IRCUtils.getUserByNick(event.getChannel(), messageParts[1]), event.getChannel(), event.getBot());
 				}else if(messageParts[1].startsWith("-")){
-					unban(IRCUtils.getUserByNick(event.getChannel(), messageParts[1].replace("-", "")), event.getChannel(), event.getBot());
+					unban(IRCUtils.getUserByNick(event.getChannel(), messageParts[1].replaceFirst("-", "")), event.getChannel(), event.getBot());
 
 				}
 				else{

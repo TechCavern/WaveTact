@@ -30,7 +30,7 @@ public class Quiet extends Command {
 				}else if(messageParts.length < 4 && messageParts[2].startsWith("-") == false){                                        
 					quiet(IRCUtils.getUserByNick(event.getChannel(), messageParts[2]), messageParts[1], event.getChannel(), event.getBot());
 				}else if(messageParts[2].startsWith("-")){
-					unquiet(IRCUtils.getUserByNick(event.getChannel(), messageParts[2].replace("-", "")), messageParts[1], event.getChannel(), event.getBot());
+					unquiet(IRCUtils.getUserByNick(event.getChannel(), messageParts[2].replaceFirst("-", "")), messageParts[1], event.getChannel(), event.getBot());
 
 				}
 				else{
