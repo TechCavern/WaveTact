@@ -9,7 +9,7 @@ public class ExampleCommand extends Command{
         super("blah", 10);
     }
     @Override
-    public void onCommand(MessageEvent<?> event) throws Exception{
+    public void onCommand(MessageEvent<?> event, String... args) throws Exception{
 		event.getChannel().send().message("hi");
 				
     }

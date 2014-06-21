@@ -25,7 +25,7 @@ public abstract class Command implements ICommand {
         return this;
     }
     
-    public abstract void onCommand(MessageEvent<?> event) throws Exception;
+    public abstract void onCommand(MessageEvent<?> event, String... args) throws Exception;
     @Override
     public int getPermLevel(){
         return PermLevel;

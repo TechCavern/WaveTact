@@ -9,7 +9,7 @@ public class BasicCommands{
         super("ping", 0);
     }
     @Override
-    public void onCommand(MessageEvent<?> event) throws Exception{
+    public void onCommand(MessageEvent<?> event, String... args) throws Exception{
 		event.getChannel().send().message("pong");
 				
     }
@@ -19,7 +19,7 @@ public class BasicCommands{
         super("pong", 0);
     }
     @Override
-    public void onCommand(MessageEvent<?> event) throws Exception{
+    public void onCommand(MessageEvent<?> event, String... args) throws Exception{
 		event.getChannel().send().message("ping");
 				
     }
@@ -29,7 +29,7 @@ public class BasicCommands{
         super("source", 0);
     }
     @Override
-    public void onCommand(MessageEvent<?> event) throws Exception{
+    public void onCommand(MessageEvent<?> event, String... args) throws Exception{
 		event.getChannel().send().message("http://github.com/TechCavern/WaveTact");
 				
     }
@@ -39,7 +39,7 @@ public class BasicCommands{
         super("somethingawesome", 0);
     }
     @Override
-    public void onCommand(MessageEvent<?> event) throws Exception{
+    public void onCommand(MessageEvent<?> event, String... args) throws Exception{
 if(event.getChannel().getUserLevels(event.getBot().getUserBot()).contains(UserLevel.OP) && event.getChannel().isOwner(event.getUser()) == false && event.getChannel().isSuperOp(event.getUser()) == false){
                              event.getChannel().send().kick(event.getUser(),"http://bit.ly/1c9vo1S");
                             } else if(event.getChannel().getUserLevels(event.getBot().getUserBot()).contains(UserLevel.OWNER)){
@@ -55,7 +55,7 @@ public class say extends Command{
         super("say", 5);
     }
     @Override
-    public void onCommand(MessageEvent<?> event) throws Exception{
+    public void onCommand(MessageEvent<?> event, String... args) throws Exception{
                     event.getChannel().send().message(event.getMessage().replace(GeneralRegistry.CommandChar+"say ",""));
 				
     }
@@ -66,7 +66,7 @@ public class say extends Command{
         super("act", 5);
     }
     @Override
-    public void onCommand(MessageEvent<?> event) throws Exception{
+    public void onCommand(MessageEvent<?> event, String... args) throws Exception{
                     event.getChannel().send().action(event.getMessage().replace(GeneralRegistry.CommandChar+"act ",""));
 				
     }

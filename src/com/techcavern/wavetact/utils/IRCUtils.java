@@ -17,6 +17,7 @@ import com.techcavern.wavetact.commands.BasicCommands;
 import com.techcavern.wavetact.commands.CheckUserLevel;
 import com.techcavern.wavetact.commands.ControllerCommands;
 import com.techcavern.wavetact.commands.Quiet;
+import com.techcavern.wavetact.commands.Topic;
 import com.techcavern.wavetact.events.HighFive;
 //import com.techcavern.wavetact.commands.TestCommand;
 import com.techcavern.wavetact.events.kickrejoin;
@@ -45,10 +46,6 @@ public class IRCUtils{
     PircBotX Bot = new PircBotX(Net.buildConfiguration());
     return Bot;
 	}
-	
-
-
-
 	public static User getUserByNick(Channel c, String n)
     {
         for (User u : c.getUsers())
@@ -89,7 +86,7 @@ public class IRCUtils{
                 y.new act();
                 y.new SomethingAwesome();
                 y.new Source();
-                
+                new Topic();
                 new CheckUserLevel();
                 ControllerCommands z = new ControllerCommands();
                 z.new join();

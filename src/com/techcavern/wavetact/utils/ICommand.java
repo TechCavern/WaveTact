@@ -13,7 +13,7 @@ import org.pircbotx.hooks.events.MessageEvent;
  */
 public interface ICommand {
     public ICommand create();
-    public void onCommand(MessageEvent<?> event) throws Exception;
+    public void onCommand(MessageEvent<?> event, String... args) throws Exception;
     public int getPermLevel();
     public String getcomid();
 }

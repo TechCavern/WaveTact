@@ -12,7 +12,7 @@ import com.techcavern.wavetact.utils.PermUtils;
         super("checkuserlevel", 10);
     }
     @Override
-    public void onCommand(MessageEvent<?> event) throws Exception{
+    public void onCommand(MessageEvent<?> event, String... args) throws Exception{
 		if (event.getMessage().equalsIgnoreCase((GeneralRegistry.CommandChar + "level"))){
 			int i = PermUtils.getPermLevel(event.getBot(), event.getUser(), event.getChannel());
 			if(i == 9001){

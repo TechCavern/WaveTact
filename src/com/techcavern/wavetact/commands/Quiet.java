@@ -16,21 +16,20 @@ public class Quiet extends Command {
     super("Quiet", 10);
 }
     @Override   
-    public void onCommand(MessageEvent<?> event) throws Exception{
-		String[] messageParts = event.getMessage().split(" ");
+    public void onCommand(MessageEvent<?> event, String... args) throws Exception{
 			
-				if(messageParts[1].equalsIgnoreCase("c")||messageParts[1].equalsIgnoreCase("u")||messageParts[1].equalsIgnoreCase("i")){
-				if (messageParts.length == 4 && messageParts[2].startsWith("-") == false){
-					if(messageParts[3].endsWith("s") || messageParts[3].endsWith("h") || messageParts[3].endsWith("m") || messageParts[3].endsWith("d")){
+				if(args[1].equalsIgnoreCase("c")||args[1].equalsIgnoreCase("u")||args[1].equalsIgnoreCase("i")){
+				if (args.length == 4 && args[2].startsWith("-") == false){
+					if(args[3].endsWith("s") || args[3].endsWith("h") || args[3].endsWith("m") || args[3].endsWith("d")){
                                         quiettime time = new quiettime();
-					time.run(messageParts[3], messageParts[1],IRCUtils.getUserByNick(event.getChannel(), messageParts[2]), event.getChannel(), event.getBot());
+					time.run(args[3], args[1],IRCUtils.getUserByNick(event.getChannel(), args[2]), event.getChannel(), event.getBot());
                                         } else {
                                             IRCUtils.SendNotice(event.getBot(), event.getUser(), " Ensure you have specified a valid time (30s = 30 Seconds, 30m = 30 minutes, up to days)");
                                         }
-				}else if(messageParts.length < 4 && messageParts[2].startsWith("-") == false){                                        
-					quiet(IRCUtils.getUserByNick(event.getChannel(), messageParts[2]), messageParts[1], event.getChannel(), event.getBot());
-				}else if(messageParts[2].startsWith("-")){
-					unquiet(IRCUtils.getUserByNick(event.getChannel(), messageParts[2].replaceFirst("-", "")), messageParts[1], event.getChannel(), event.getBot());
+				}else if(args.length < 4 && args[2].startsWith("-") == false){                                        
+					quiet(IRCUtils.getUserByNick(event.getChannel(), args[2]), args[1], event.getChannel(), event.getBot());
+				}else if(args[2].startsWith("-")){
+					unquiet(IRCUtils.getUserByNick(event.getChannel(), args[2].replaceFirst("-", "")), args[1], event.getChannel(), event.getBot());
 
 				}
 				else{

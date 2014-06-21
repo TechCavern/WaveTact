@@ -16,20 +16,19 @@ public class Ban extends Command{
         super("Ban", 10);
     }
     @Override
-    public void onCommand(MessageEvent<?> event) throws Exception{
-		String[] messageParts = event.getMessage().split(" ");
+    public void onCommand(MessageEvent<?> event, String... args) throws Exception{
 
-				if (messageParts.length == 3 && messageParts[1].startsWith("-") == false){
-					if(messageParts[2].endsWith("s") || messageParts[2].endsWith("h") || messageParts[2].endsWith("m") || messageParts[2].endsWith("d")){
+				if (args.length == 3 && args[1].startsWith("-") == false){
+					if(args[2].endsWith("s") || args[2].endsWith("h") || args[2].endsWith("m") || args[2].endsWith("d")){
                                         bantime time = new bantime();
-					time.run(messageParts[2],IRCUtils.getUserByNick(event.getChannel(), messageParts[1]), event.getChannel(), event.getBot());
+					time.run(args[2],IRCUtils.getUserByNick(event.getChannel(), args[1]), event.getChannel(), event.getBot());
                                         } else {
                                             IRCUtils.SendNotice(event.getBot(), event.getUser(), " Ensure you have specified a valid time (30s = 30 Seconds, 30m = 30 minutes, up to days)");
                                         }
-				}else if(messageParts.length < 3 && messageParts[1].startsWith("-") == false){                                        
-					ban(IRCUtils.getUserByNick(event.getChannel(), messageParts[1]), event.getChannel(), event.getBot());
-				}else if(messageParts[1].startsWith("-")){
-					unban(IRCUtils.getUserByNick(event.getChannel(), messageParts[1].replaceFirst("-", "")), event.getChannel(), event.getBot());
+				}else if(args.length < 3 && args[1].startsWith("-") == false){                                        
+					ban(IRCUtils.getUserByNick(event.getChannel(), args[1]), event.getChannel(), event.getBot());
+				}else if(args[1].startsWith("-")){
+					unban(IRCUtils.getUserByNick(event.getChannel(), args[1].replaceFirst("-", "")), event.getChannel(), event.getBot());
 
 				}
 				else{
