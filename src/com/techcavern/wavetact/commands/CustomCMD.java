@@ -27,6 +27,7 @@ public class CustomCMD extends Command{
                 if(IRCUtils.getCommand(args[1].replaceFirst("-", "")).getPermLevel() <= PermUtils.getPermLevel(event.getBot(), event.getUser(), event.getChannel())){
                 GeneralRegistry.Commands.remove(IRCUtils.getCommand(args[1].replaceFirst("-", "")));
                 GeneralRegistry.SimpleMessage.remove(IRCUtils.getCommand(args[1].replaceFirst("-", "")));
+                event.getChannel().send().message("Command Removed");
                 }else{
                     event.getChannel().send().message("Permission Denied");
                 }
@@ -34,6 +35,8 @@ public class CustomCMD extends Command{
                 SimpleMessage c = new SimpleMessage(args[1], Integer.parseInt(args[2]), args[3], false);
                 GeneralRegistry.SimpleMessage.add(c);
                 GeneralRegistry.Commands.add(c);
+                                event.getChannel().send().message("Command Added");
+
             }
             }
         else if(args[0].equalsIgnoreCase("a")){
@@ -42,6 +45,8 @@ public class CustomCMD extends Command{
 
                 GeneralRegistry.Commands.remove(IRCUtils.getCommand(args[1].replaceFirst("-", "")));
                 GeneralRegistry.SimpleMessage.remove(IRCUtils.getCommand(args[1].replaceFirst("-", "")));
+                                event.getChannel().send().message("Command Removed");
+
                 }else{
                     event.getChannel().send().message("Permission Denied");
                 }
@@ -49,6 +54,8 @@ public class CustomCMD extends Command{
                 SimpleMessage c = new SimpleMessage(args[1], Integer.parseInt(args[2]), args[3], false);
                 GeneralRegistry.SimpleMessage.add(c);
                 GeneralRegistry.Commands.add(c);
+                                                event.getChannel().send().message("Command Added");
+
             }
             }
         }
