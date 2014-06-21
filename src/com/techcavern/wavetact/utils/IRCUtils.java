@@ -84,6 +84,7 @@ public class IRCUtils{
                 y.new pong();
                 y.new say();
                 y.new act();
+                y.new potato();
                 y.new SomethingAwesome();
                 y.new Source();
                 new Topic();
