@@ -46,7 +46,8 @@ public class PermUtils {
 			return 9001;
 		}
 		else if(z.isOp(u)|| z.isSuperOp(u) || z.isOwner(u)){
-			return 10;
+                       return 10;
+                    
 		} else if (z.isHalfOp(u) || z.hasVoice(u)){
 			return 5;
 		} else {

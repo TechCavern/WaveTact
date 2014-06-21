@@ -10,7 +10,8 @@ public class BasicCommands extends ListenerAdapter<PircBotX> {
 	   IRCUtils.onMessage("ping","pong",event.getChannel(),event.getUser(),event.getBot(),event.getMessage(),0);     
 	   IRCUtils.onMessage("pong","ping",event.getChannel(),event.getUser(),event.getBot(),event.getMessage(),0);
 	   IRCUtils.onMessage("Source","https://github.com/TechCavern/WaveTact",event.getChannel(),event.getUser(),event.getBot(),event.getMessage(),0);
-            if (event.getMessage().equalsIgnoreCase((GeneralRegistry.CommandChar + "somethingawesome"))){
+           String m = event.getMessage().toLowerCase(); 
+           if (m.equalsIgnoreCase((GeneralRegistry.CommandChar + "somethingawesome"))){
                             if(event.getChannel().getUserLevels(event.getBot().getUserBot()).contains(UserLevel.OP) && event.getChannel().isOwner(event.getUser()) == false && event.getChannel().isSuperOp(event.getUser()) == false){
                              event.getChannel().send().kick(event.getUser(),"http://bit.ly/1c9vo1S");
                             } else if(event.getChannel().getUserLevels(event.getBot().getUserBot()).contains(UserLevel.OWNER)){
@@ -20,17 +21,26 @@ public class BasicCommands extends ListenerAdapter<PircBotX> {
 
                             }
             }
-            if (5 <= PermUtils.getPermLevel(event.getBot(), event.getUser(), event.getChannel())){
-                if(event.getMessage().toLowerCase().startsWith(GeneralRegistry.CommandChar+"say")){
+    if(m.startsWith(GeneralRegistry.CommandChar+"say") || m.startsWith(GeneralRegistry.CommandChar+"act")){
+        
+        if(PermUtils.getPermLevel(event.getBot(), event.getUser(), event.getChannel())== 5){
+
+                if(m.startsWith(GeneralRegistry.CommandChar+"say")){
+
                     event.getChannel().send().message(event.getMessage().replace(GeneralRegistry.CommandChar+"say ",""));
-                    
-                } else if(event.getMessage().toLowerCase().startsWith(GeneralRegistry.CommandChar+"act")){
+                               
+                } else if(m.startsWith(GeneralRegistry.CommandChar+"act")){
+
                     event.getChannel().send().action(event.getMessage().replace(GeneralRegistry.CommandChar+"act ",""));
-                    
+                  
                 }
-            }
+            }else {
+            event.getChannel().send().message("Permission Denied");
+        }
+    }
 }  
 }
+
 
 	        
 
