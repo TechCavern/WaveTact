@@ -12,6 +12,7 @@ import org.pircbotx.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.techcavern.wavetact.commands.Ban;
+import com.techcavern.wavetact.commands.BasicCommands;
 import com.techcavern.wavetact.commands.Quiet;
 import com.techcavern.wavetact.commands.act;
 import com.techcavern.wavetact.commands.chanop.kick;
@@ -90,7 +91,7 @@ public class IRCUtils{
                 new protect();
                 new voice();
                 new join();
-                
+                new BasicCommands();
                 
         }
     	}
