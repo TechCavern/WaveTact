@@ -1,5 +1,6 @@
 package com.techcavern.wavetact.utils;
 
+import com.google.common.collect.Sets;
 import java.nio.charset.Charset;
 import java.util.List;
 
@@ -11,23 +12,25 @@ import org.pircbotx.User;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.techcavern.wavetact.commands.Ban;
 import com.techcavern.wavetact.commands.BasicCommands;
 import com.techcavern.wavetact.commands.Quiet;
-import com.techcavern.wavetact.commands.act;
-import com.techcavern.wavetact.commands.chanop.kick;
-import com.techcavern.wavetact.commands.chanop.mode;
-import com.techcavern.wavetact.commands.chanop.op;
-import com.techcavern.wavetact.commands.chanop.owner;
-import com.techcavern.wavetact.commands.chanop.part;
-import com.techcavern.wavetact.commands.chanop.protect;
-import com.techcavern.wavetact.commands.chanop.voice;
-import com.techcavern.wavetact.commands.controller.join;
-import com.techcavern.wavetact.commands.say;
-import com.techcavern.wavetact.commands.somethingawesome;
+import com.techcavern.wavetact.commands.Act;
+import com.techcavern.wavetact.commands.chanop.Kick;
+import com.techcavern.wavetact.commands.chanop.Mode;
+import com.techcavern.wavetact.commands.chanop.Op;
+import com.techcavern.wavetact.commands.chanop.Owner;
+import com.techcavern.wavetact.commands.chanop.Part;
+import com.techcavern.wavetact.commands.chanop.Protect;
+import com.techcavern.wavetact.commands.chanop.Voice;
+import com.techcavern.wavetact.commands.controller.Join;
+import com.techcavern.wavetact.commands.Say;
+import com.techcavern.wavetact.commands.SomethingAwesome;
 import com.techcavern.wavetact.events.HighFive;
 //import com.techcavern.wavetact.commands.TestCommand;
-import com.techcavern.wavetact.events.kickrejoin;
+import com.techcavern.wavetact.events.KickRejoin;
+import java.util.Set;
 import org.pircbotx.output.OutputChannel;
 import org.pircbotx.output.OutputUser;
 
@@ -45,7 +48,7 @@ public class IRCUtils{
 	}			
     Net.getListenerManager().addListener(new MessageListener());
     Net.getListenerManager().addListener(new HighFive());
-    Net.getListenerManager().addListener(new kickrejoin());
+    Net.getListenerManager().addListener(new KickRejoin());
     if(g != null){
     Net.setNickservPassword(g);
     }
@@ -78,21 +81,34 @@ public class IRCUtils{
         
         public static void RegisterCommands(){
              System.out.println("Registering Commands");
-                new act();
-                new say();
-                new somethingawesome();
+                new Act();
+                new Say();
+                new SomethingAwesome();
                 new Ban();
                 new Quiet();
-                new kick();
-                new mode();
-                new op();
-                new owner();
-                new part();
-                new protect();
-                new voice();
-                new join();
+                new Kick();
+                new Mode();
+                new Op();
+                new Owner();
+                new Part();
+                new Protect();
+                new Voice();
+                new Join();
                 new BasicCommands();
                 
+        }
+        public void RegisterExistingCommands(){
+            Config config = new Config("customCommands.json");
+             Set<Command> customcommands = Sets.newConcurrentHashSet();
+            customcommands = new Gson().fromJson(config.getText(), new TypeToken<Set<Command>>(){}.getType());
+
+        if (customcommands == null)
+            customcommands = Sets.newConcurrentHashSet();
+
+        for (Command Command : customcommands)
+        {
+            GeneralRegistry.Commands.add(Command);
+        }
         }
     	}
 

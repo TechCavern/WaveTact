@@ -3,22 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.techcavern.wavetact.commands.controller;
+package com.techcavern.wavetact.commands;
 
 import com.techcavern.wavetact.utils.Command;
+import com.techcavern.wavetact.utils.GeneralRegistry;
 import org.pircbotx.hooks.events.MessageEvent;
 
 /**
  *
  * @author jztech101
  */
-public class join extends Command{
-    public join(){
-        super("join", 10);
+public class Say extends Command{
+    public Say(){
+        super("say", 5);
     }
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception{
-		event.getBot().sendIRC().joinChannel(args[0]);
+                    event.getChannel().send().message(event.getMessage().replace(GeneralRegistry.CommandChar+"say ",""));
 				
     }
 }

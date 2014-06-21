@@ -13,8 +13,8 @@ import org.pircbotx.hooks.events.MessageEvent;
  *
  * @author jztech101
  */
- public class somethingawesome extends Command{
-    public somethingawesome(){
+ public class SomethingAwesome extends Command{
+    public SomethingAwesome(){
         super("somethingawesome", 0);
     }
     @Override

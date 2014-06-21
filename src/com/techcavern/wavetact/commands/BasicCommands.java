@@ -6,8 +6,6 @@ public class BasicCommands{
         SimpleMessage ping = new SimpleMessage("ping", 0 , "pong");
         SimpleMessage pong = new SimpleMessage("pong", 0 , "ping");
         SimpleMessage source = new SimpleMessage("source", 0 , "http://github.com/TechCavern/WaveTact"); 
-
-
    
 }
 

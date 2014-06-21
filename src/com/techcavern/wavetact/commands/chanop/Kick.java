@@ -14,8 +14,8 @@ import org.pircbotx.hooks.events.MessageEvent;
  *
  * @author jztech101
  */
-public class kick extends Command {
-            public kick(){
+public class Kick extends Command {
+            public Kick(){
                         super("kick", 10);
               }
                 

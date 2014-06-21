@@ -33,5 +33,6 @@ import com.techcavern.wavetact.utils.IRCUtils;
 	        WaveTact.addBot(ECode);
 	        WaveTact.start();
 	    }
+  
 	}
 

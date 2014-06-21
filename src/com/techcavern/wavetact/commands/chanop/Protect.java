@@ -13,9 +13,9 @@ import org.pircbotx.hooks.events.MessageEvent;
  *
  * @author jztech101
  */
-public class protect extends Command{
+public class Protect extends Command{
 
-                    public protect(){
+                    public Protect(){
                         super("protect", 15);
                    }
                        @Override

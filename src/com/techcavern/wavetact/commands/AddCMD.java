@@ -9,7 +9,7 @@ package com.techcavern.wavetact.commands;
  *
  * @author jztech101
  */
-public class addcmd {
+public class AddCMD {
     
     
 }

@@ -6,19 +6,25 @@
 package com.techcavern.wavetact.commands.chanop;
 
 import com.techcavern.wavetact.utils.Command;
+import com.techcavern.wavetact.utils.IRCUtils;
 import org.pircbotx.hooks.events.MessageEvent;
 
 /**
  *
  * @author jztech101
  */
-  public class mode extends Command{
+public class Op extends Command{
 
-                    public mode(){
-                        super("mode", 10);
+                    public Op(){
+                        super("op", 10);
                    }
                        @Override
                        public void onCommand(MessageEvent<?> event, String... args) throws Exception{
-                           	            	event.getChannel().send().setMode(args[0]);
+                           if(args[0].startsWith("-")){
+	            	event.getChannel().send().deOp(IRCUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-","")));
+                           }else{
+                               event.getChannel().send().op(IRCUtils.getUserByNick(event.getChannel(), args[0]));
+
+                             }	
                        }
                    }
