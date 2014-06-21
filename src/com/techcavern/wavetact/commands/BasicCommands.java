@@ -14,6 +14,16 @@ public class BasicCommands{
 				
     }
 }
+        public class potato extends Command{
+    public potato(){
+        super("potato", 0);
+    }
+    @Override
+    public void onCommand(MessageEvent<?> event, String... args) throws Exception{
+		event.getChannel().send().action("is a potato");
+				
+    }
+}
         public class pong extends Command{
     public pong(){
         super("pong", 0);
