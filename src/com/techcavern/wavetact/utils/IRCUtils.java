@@ -48,17 +48,9 @@ public class IRCUtils{
     PircBotX Bot = new PircBotX(Net.buildConfiguration());
     return Bot;
 	}
-	public static void onMessage(String command, String result, Channel c, User u, PircBotX bot, String message, int level) throws Exception {
-        if (message.equalsIgnoreCase((GeneralRegistry.CommandChar + command))){
-        	
-        	if (level <= PermUtils.getPermLevel(bot, u, c)){
-        		c.send().message(result);
-        	} else {
-            	c.send().message("Permission Denied");
+	
 
-        	}
-        }
-}
+
 
 	public static User getUserByNick(Channel c, String n)
     {

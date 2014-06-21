@@ -45,7 +45,10 @@ public class PermUtils {
 		if (PermUtils.isController(bot, u)){
 			return 9001;
 		}
-		else if(z.isOp(u)|| z.isSuperOp(u) || z.isOwner(u)){
+                else if(z.isSuperOp(u) || z.isOwner(u)){
+                    return 15;
+                }
+		else if(z.isOp(u)){
                        return 10;
                     
 		} else if (z.isHalfOp(u) || z.hasVoice(u)){

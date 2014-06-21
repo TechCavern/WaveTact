@@ -1,19 +1,18 @@
 package com.techcavern.wavetact.commands;
 
-import org.pircbotx.PircBotX;
-import org.pircbotx.hooks.ListenerAdapter;
+import com.techcavern.wavetact.utils.Command;
 import org.pircbotx.hooks.events.MessageEvent;
 
-import com.techcavern.wavetact.utils.GeneralRegistry;
 
-public class ExampleCommand extends ListenerAdapter<PircBotX> {
-		public void onMessage(MessageEvent<PircBotX> event) throws Exception{
-			 if (event.getMessage().equalsIgnoreCase((GeneralRegistry.CommandChar + "test"))){
-	            	event.getChannel().send().message("test");
-
-			 }
-	} 
-	
+public class ExampleCommand extends Command{
+    public ExampleCommand(){
+        super("blah", 10);
+    }
+    @Override
+    public void onCommand(MessageEvent<?> event) throws Exception{
+		event.getChannel().send().message("hi");
+				
+    }
 }
 
 //Purely here for future reference

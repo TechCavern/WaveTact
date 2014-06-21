@@ -1,5 +1,6 @@
 package com.techcavern.wavetact.utils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,4 +20,7 @@ public class GeneralRegistry {
 		public static String XertionServer = "irc.xertion.org";
 		public static List<String> XertionChannels = Arrays.asList(new String[]{"#techcavern"});
 		public static String XertionNick = "WaveTact";
-		}
+                public static List<Command> Commands = new ArrayList();
+                public static List<String> HighFives = new ArrayList();
+
+}

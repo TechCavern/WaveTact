@@ -1,23 +1,24 @@
 package com.techcavern.wavetact.commands;
 
+import com.techcavern.wavetact.utils.Command;
 import java.util.concurrent.TimeUnit;
 
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
-import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.MessageEvent;
 
-import com.techcavern.wavetact.utils.GeneralRegistry;
-import com.techcavern.wavetact.utils.PermUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 
 
-public class Quiet extends ListenerAdapter<PircBotX> {
-	public void onMessage(MessageEvent<PircBotX> event) throws Exception{
+public class Quiet extends Command {
+    public Quiet(){
+    super("Quiet", 10);
+}
+    @Override   
+    public void onCommand(MessageEvent<?> event) throws Exception{
 		String[] messageParts = event.getMessage().split(" ");
-			if (messageParts[0].equalsIgnoreCase((GeneralRegistry.CommandChar + "quiet"))){
-			if(10 <= PermUtils.getPermLevel(event.getBot(), event.getUser(), event.getChannel())){
+			
 				if(messageParts[1].equalsIgnoreCase("c")||messageParts[1].equalsIgnoreCase("u")||messageParts[1].equalsIgnoreCase("i")){
 				if (messageParts.length == 4 && messageParts[2].startsWith("-") == false){
 					if(messageParts[3].endsWith("s") || messageParts[3].endsWith("h") || messageParts[3].endsWith("m") || messageParts[3].endsWith("d")){
@@ -39,12 +40,9 @@ public class Quiet extends ListenerAdapter<PircBotX> {
 				else{
 				IRCUtils.SendNotice(event.getBot(), event.getUser(), "Ensure you have specified the IRCd as the first Argument - i = Inspircd, u = unreal and c = Charybdis or IRCdSeven");
 				}
-			}else {
-            			event.getChannel().send().message("Permission Denied"); 
 
 			}
-			}
-	}
+	
 		public class quiettime extends Thread{
 			public void run(String i, String s, User u, Channel c, PircBotX b) throws InterruptedException{
 				quiet(u,s,c,b);

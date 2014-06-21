@@ -5,8 +5,7 @@
  */
 package com.techcavern.wavetact.commands;
 
-import com.techcavern.wavetact.utils.GeneralRegistry;
-import com.techcavern.wavetact.utils.PermUtils;
+import com.techcavern.wavetact.utils.Command;
 import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.MessageEvent;
@@ -16,17 +15,14 @@ import org.pircbotx.hooks.events.MessageEvent;
  * @author jztech101
  */
 public class ControllerCommands extends ListenerAdapter<PircBotX> {
-		public void onMessage(MessageEvent<PircBotX> event) throws Exception{
-                             String[] messageParts = event.getMessage().split(" ");
-                 String m=messageParts[0].toLowerCase();
-                    if(m.equalsIgnoreCase((GeneralRegistry.CommandChar + "join"))){
-                        
-                    
-                            if(9001 <= PermUtils.getPermLevel(event.getBot(), event.getUser(),  event.getChannel())){
-                            if(m.equalsIgnoreCase((GeneralRegistry.CommandChar+"join"))){
-                                event.getBot().sendIRC().joinChannel(messageParts[1]);
-                            }  
-                            }
+		public class join extends Command{
+    public join(){
+        super("join", 10);
+    }
+    @Override
+    public void onCommand(MessageEvent<?> event) throws Exception{
+		event.getBot().sendIRC().joinChannel(messageParts[1]);
+				
+    }
 }
-                }
 }
