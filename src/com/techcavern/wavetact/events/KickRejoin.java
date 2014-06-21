@@ -6,18 +6,19 @@
 package com.techcavern.wavetact.events;
 
 import org.pircbotx.PircBotX;
+
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.KickEvent;
+
 
 /**
  *
  * @author jztech101
  */
 public class KickRejoin extends ListenerAdapter<PircBotX> {
-		public void onKick(KickEvent<PircBotX> event) throws Exception{
-			 if (event.getRecipient() == event.getBot().getUserBot()){
-                             event.getBot().sendIRC().joinChannel(event.getChannel().getName());
-			 }
-	} 
-	
+    public void onKick(KickEvent<PircBotX> event) throws Exception {
+        if (event.getRecipient() == event.getBot().getUserBot()) {
+            event.getBot().sendIRC().joinChannel(event.getChannel().getName());
+        }
+    }
 }

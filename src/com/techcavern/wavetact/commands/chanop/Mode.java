@@ -12,13 +12,14 @@ import org.pircbotx.hooks.events.MessageEvent;
  *
  * @author jztech101
  */
-  public class Mode extends Command{
+public class Mode extends Command {
 
-                    public Mode(){
-                        super("mode", 10);
-                   }
-                       @Override
-                       public void onCommand(MessageEvent<?> event, String... args) throws Exception{
-                           	            	event.getChannel().send().setMode(args[0]);
-                       }
-                   }
+    public Mode() {
+        super("mode", 10);
+    }
+
+    @Override
+    public void onCommand(MessageEvent<?> event, String... args) throws Exception {
+        event.getChannel().send().setMode(args[0]);
+    }
+}

@@ -13,13 +13,15 @@ import org.pircbotx.hooks.events.MessageEvent;
  *
  * @author jztech101
  */
-public class Say extends Command{
-    public Say(){
+public class Say extends Command {
+
+    public Say() {
         super("say", 5);
     }
+
     @Override
-    public void onCommand(MessageEvent<?> event, String... args) throws Exception{
-                    event.getChannel().send().message(event.getMessage().replace(GeneralRegistry.CommandChar+"say ",""));
-				
+    public void onCommand(MessageEvent<?> event, String... args) throws Exception {
+        event.getChannel().send().message(event.getMessage().replace(GeneralRegistry.CommandChar + "say ", ""));
+
     }
 }

@@ -13,17 +13,19 @@ import org.pircbotx.hooks.events.MessageEvent;
  *
  * @author jztech101
  */
-public class Owner extends Command{
+public class Owner extends Command {
 
-                    public Owner(){
-                        super("owner", 15);
-                   }
-                       @Override
-                       public void onCommand(MessageEvent<?> event, String... args) throws Exception{
-                if(args[0].startsWith("-"))
-	            	event.getChannel().send().deOwner(IRCUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-","")));
-                             else{
-                               event.getChannel().send().owner(IRCUtils.getUserByNick(event.getChannel(), args[0]));
+    public Owner() {
+        super("owner", 15);
+    }
 
-                             }                       }
-                   }
+    @Override
+    public void onCommand(MessageEvent<?> event, String... args) throws Exception {
+        if (args[0].startsWith("-")) {
+            event.getChannel().send().deOwner(IRCUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", "")));
+        } else {
+            event.getChannel().send().owner(IRCUtils.getUserByNick(event.getChannel(), args[0]));
+
+        }
+    }
+}

@@ -16,8 +16,7 @@ public class SimpleAction extends Command {
     private String action;
     private boolean locked;
 
-    public SimpleAction(String i, int p, String a, boolean b)
-    {
+    public SimpleAction(String i, int p, String a, boolean b)    {
         super(i, p);
         this.action = a;
         this.locked = b;

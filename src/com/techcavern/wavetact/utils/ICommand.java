@@ -12,8 +12,12 @@ import org.pircbotx.hooks.events.MessageEvent;
  * @author jztech101
  */
 public interface ICommand {
+
     public ICommand create();
+
     public void onCommand(MessageEvent<?> event, String... args) throws Exception;
+
     public int getPermLevel();
+
     public String getcomid();
 }

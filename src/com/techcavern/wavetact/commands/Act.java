@@ -13,13 +13,15 @@ import org.pircbotx.hooks.events.MessageEvent;
  *
  * @author jztech101
  */
-public class Act extends Command{
-    public Act(){
+public class Act extends Command {
+
+    public Act() {
         super("act", 5);
     }
+
     @Override
-    public void onCommand(MessageEvent<?> event, String... args) throws Exception{
-                    event.getChannel().send().action(event.getMessage().replace(GeneralRegistry.CommandChar+"act ",""));
-				
+    public void onCommand(MessageEvent<?> event, String... args) throws Exception {
+        event.getChannel().send().action(event.getMessage().replace(GeneralRegistry.CommandChar + "act ", ""));
+
     }
 }

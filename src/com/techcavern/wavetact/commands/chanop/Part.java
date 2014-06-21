@@ -12,13 +12,14 @@ import org.pircbotx.hooks.events.MessageEvent;
  *
  * @author jztech101
  */
-public class Part extends Command{
+public class Part extends Command {
 
-                    public Part(){
-                        super("part", 5);
-                   }
-                       @Override
-                       public void onCommand(MessageEvent<?> event, String... args) throws Exception{
-                           	            	event.getChannel().send().part();
-                       }
-                   }
+    public Part() {
+        super("part", 5);
+    }
+
+    @Override
+    public void onCommand(MessageEvent<?> event, String... args) throws Exception {
+        event.getChannel().send().part();
+    }
+}
