@@ -1,9 +1,10 @@
 package com.techcavern.wavetact.utils;
 
+import com.google.common.collect.Sets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Properties;
+import java.util.Set;
 
 public class GeneralRegistry {
 		public static String CommandChar= "@";
@@ -23,5 +24,7 @@ public class GeneralRegistry {
 		public static String XertionNick = "WaveTact";
                 public static List<Command> Commands = new ArrayList();
                 public static List<String> HighFives = new ArrayList();
+                public static Set<SimpleMessage> SimpleMessage = Sets.newConcurrentHashSet();
+                public static Set<SimpleAction> SimpleAction = Sets.newConcurrentHashSet();
 
 }

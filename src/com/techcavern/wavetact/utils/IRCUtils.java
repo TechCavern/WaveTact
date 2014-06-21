@@ -14,7 +14,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.techcavern.wavetact.commands.Ban;
-import com.techcavern.wavetact.commands.BasicCommands;
 import com.techcavern.wavetact.commands.Quiet;
 import com.techcavern.wavetact.commands.Act;
 import com.techcavern.wavetact.commands.chanop.Kick;
@@ -94,21 +93,42 @@ public class IRCUtils{
                 new Protect();
                 new Voice();
                 new Join();
-                new BasicCommands();
                 
         }
-        public void RegisterExistingCommands(){
-            Config config = new Config("customCommands.json");
-             Set<Command> customcommands = Sets.newConcurrentHashSet();
-            customcommands = new Gson().fromJson(config.getText(), new TypeToken<Set<Command>>(){}.getType());
+        public static void RegisterExistingSimpleMessages(){
+            Config config = new Config("SimpleMessage.json");
+            
+            GeneralRegistry.SimpleMessage = new Gson().fromJson(config.getText(), new TypeToken<Set<SimpleMessage>>(){}.getType());
 
-        if (customcommands == null)
-            customcommands = Sets.newConcurrentHashSet();
+        if (GeneralRegistry.SimpleMessage == null)
+            GeneralRegistry.SimpleMessage = Sets.newConcurrentHashSet();
 
-        for (Command Command : customcommands)
+        for (Command Command: GeneralRegistry.SimpleMessage)
         {
             GeneralRegistry.Commands.add(Command);
         }
+        }
+        public static void RegisterExistingSimpleActions(){
+            Config config = new Config("SimpleMessage.json");
+            
+            GeneralRegistry.SimpleAction = new Gson().fromJson(config.getText(), new TypeToken<Set<SimpleMessage>>(){}.getType());
+
+        if (GeneralRegistry.SimpleAction == null)
+            GeneralRegistry.SimpleAction = Sets.newConcurrentHashSet();
+
+        for (Command Command: GeneralRegistry.SimpleAction)
+        {
+            GeneralRegistry.Commands.add(Command);
+        }
+        }
+        public static Command getCommand(String Command){
+            for(Command g : GeneralRegistry.Commands){
+                if(g.getcomid().equalsIgnoreCase(Command)){
+                    return g;
+                }
+            }
+            return null;
+
         }
     	}
 

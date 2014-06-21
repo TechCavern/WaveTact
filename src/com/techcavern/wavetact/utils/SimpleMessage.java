@@ -14,17 +14,23 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class SimpleMessage extends Command {
 
     private String message;
+    private boolean locked;
 
-    public SimpleMessage(String i, int p, String m)
+    public SimpleMessage(String i, int p, String m, boolean b)
     {
         super(i, p);
         this.message = m;
+        this.locked=b;
     }
 
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception{
-    {
-        event.getChannel().send().message(message);
+    
+        event.getChannel().send().message(message);  
+}public String getMessage(){
+        return this.message;
     }
-}
+public boolean getLockedStatus(){
+     return locked;
+ }
 }
