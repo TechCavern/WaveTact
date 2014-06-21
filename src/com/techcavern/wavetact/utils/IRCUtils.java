@@ -16,6 +16,7 @@ import com.google.gson.reflect.TypeToken;
 import com.techcavern.wavetact.commands.chanop.Ban;
 import com.techcavern.wavetact.commands.chanop.Quiet;
 import com.techcavern.wavetact.commands.Act;
+import com.techcavern.wavetact.commands.CustomCMD;
 import com.techcavern.wavetact.commands.chanop.Kick;
 import com.techcavern.wavetact.commands.chanop.Mode;
 import com.techcavern.wavetact.commands.chanop.Op;
@@ -93,6 +94,7 @@ public class IRCUtils{
                 new Protect();
                 new Voice();
                 new Join();
+                new CustomCMD();
                 
         }
         public static void RegisterExistingSimpleMessages(){

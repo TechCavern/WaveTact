@@ -19,7 +19,8 @@ import com.techcavern.wavetact.utils.IRCUtils;
 	        System.setProperty(SimpleLogger.DATE_TIME_FORMAT_KEY, "[yyyy/MM/dd HH:mm:ss]");
 	        System.setProperty(SimpleLogger.LEVEL_IN_BRACKETS_KEY, "true");
                 IRCUtils.RegisterCommands();
-	        
+	        IRCUtils.RegisterExistingSimpleActions();
+                IRCUtils.RegisterExistingSimpleMessages();
 	        String pwd = null;
 	        String g = args[0];
 	        PircBotX Ovd = IRCUtils.createbot(pwd,"Ovd", GeneralRegistry.OvdChannels, GeneralRegistry.OvdNick, GeneralRegistry.OvdServer);
