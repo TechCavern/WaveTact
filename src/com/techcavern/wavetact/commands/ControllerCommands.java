@@ -21,6 +21,7 @@ public class ControllerCommands extends ListenerAdapter<PircBotX> {
     }
     @Override
     public void onCommand(MessageEvent<?> event) throws Exception{
+        String[] messageParts = event.getMessage().split(" ");
 		event.getBot().sendIRC().joinChannel(messageParts[1]);
 				
     }

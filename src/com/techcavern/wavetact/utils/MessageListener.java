@@ -5,7 +5,6 @@
  */
 package com.techcavern.wavetact.utils;
 
-import com.techcavern.wavetact.utils.GeneralRegistry.Commands;
 import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.MessageEvent;
@@ -20,10 +19,15 @@ public class MessageListener extends ListenerAdapter<PircBotX> {
     public void onMessage(MessageEvent<PircBotX> event) throws Exception{
         String[] messageParts = event.getMessage().split(" ");
          String m=messageParts[0].toLowerCase(); 
-        for(int i = 0; i < GeneralRegistry.Commands.size(); i++){
-            
-        
-    }
+        for (Command Command : GeneralRegistry.Commands) {
+            if(m.equalsIgnoreCase(Command.getcomid())){
+                if(PermUtils.getPermLevel(event.getBot(), event.getUser(), event.getChannel()) == Command.getPermLevel()){
+                    Command.onCommand(event);
+                }else{
+                event.getChannel().send().message("Permission Denied");
+                }
+            }
+        }
     }
     
     

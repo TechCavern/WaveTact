@@ -11,13 +11,8 @@ import org.pircbotx.User;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.techcavern.wavetact.commands.Ban;
-import com.techcavern.wavetact.commands.BasicChanOp;
-import com.techcavern.wavetact.commands.BasicCommands;
-import com.techcavern.wavetact.commands.CheckUserLevel;
 import com.techcavern.wavetact.events.HighFive;
 //import com.techcavern.wavetact.commands.TestCommand;
-import com.techcavern.wavetact.commands.Quiet;
 import com.techcavern.wavetact.events.kickrejoin;
 import org.pircbotx.output.OutputChannel;
 import org.pircbotx.output.OutputUser;
@@ -34,12 +29,8 @@ public class IRCUtils{
 	for (int i = 0; i < channels.size(); i++){
  		Net.addAutoJoinChannel(channels.get(i));
 	}			
-    Net.getListenerManager().addListener(new BasicCommands());
-    Net.getListenerManager().addListener(new CheckUserLevel());
-    Net.getListenerManager().addListener(new Quiet());
-    Net.getListenerManager().addListener(new Ban());
+    Net.getListenerManager().addListener(new MessageListener());
     Net.getListenerManager().addListener(new HighFive());
-    Net.getListenerManager().addListener(new BasicChanOp());
     Net.getListenerManager().addListener(new kickrejoin());
     if(g != null){
     Net.setNickservPassword(g);
