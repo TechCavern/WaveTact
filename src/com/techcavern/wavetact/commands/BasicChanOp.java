@@ -17,7 +17,7 @@ public class BasicChanOp extends ListenerAdapter<PircBotX> {
 		public void onMessage(MessageEvent<PircBotX> event) throws Exception{
                     String[] messageParts = event.getMessage().split(" ");
                  String m=messageParts[0].toLowerCase();
-                        if(m.equalsIgnoreCase((GeneralRegistry.CommandChar + "kick"))|| m.equalsIgnoreCase((GeneralRegistry.CommandChar + "mode")) || m.equalsIgnoreCase((GeneralRegistry.CommandChar + "voice")) || m.equalsIgnoreCase((GeneralRegistry.CommandChar + "op")))
+                        if(m.equalsIgnoreCase((GeneralRegistry.CommandChar + "kick"))|| m.equalsIgnoreCase((GeneralRegistry.CommandChar + "mode")) || m.equalsIgnoreCase((GeneralRegistry.CommandChar + "voice")) || m.equalsIgnoreCase((GeneralRegistry.CommandChar + "op"))|| m.equalsIgnoreCase((GeneralRegistry.CommandChar + "part")))
                             if(10 <= PermUtils.getPermLevel(event.getBot(), event.getUser(), event.getChannel())){
                                   if(event.getChannel().isOp(event.getBot().getUserBot())){
                         if (m.equalsIgnoreCase((GeneralRegistry.CommandChar + "somethingawesome"))){
@@ -31,6 +31,8 @@ public class BasicChanOp extends ListenerAdapter<PircBotX> {
             }                else 
                              if (m.equalsIgnoreCase((GeneralRegistry.CommandChar + "mode"))){
 	            	event.getChannel().send().setMode(messageParts[1]);
+			 } else if (m.equalsIgnoreCase((GeneralRegistry.CommandChar + "part"))){
+	            	event.getChannel().send().part();
 			 } else  if (m.equalsIgnoreCase((GeneralRegistry.CommandChar + "voice"))){
                              if(messageParts[1].startsWith("-"))
 	            	event.getChannel().send().deVoice(IRCUtils.getUserByNick(event.getChannel(), messageParts[1].replace("-", "")));
