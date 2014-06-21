@@ -28,9 +28,9 @@ import com.techcavern.wavetact.utils.IRCUtils;
 	        PircBotX Xertion = IRCUtils.createbot(pwd,"Xertion", GeneralRegistry.XertionChannels, GeneralRegistry.XertionNick, GeneralRegistry.XertionServer);
 	        
 	        WaveTact.addBot(Esper);
-//	        WaveTact.addBot(Ovd);
-//	        WaveTact.addBot(Xertion);
-//	        WaveTact.addBot(ECode);
+                WaveTact.addBot(Ovd);
+	        WaveTact.addBot(Xertion);
+	        WaveTact.addBot(ECode);
 	        WaveTact.start();
 	    }
 	}
