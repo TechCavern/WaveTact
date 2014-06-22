@@ -10,3 +10,4 @@ readme.md
 *.iml
 .idea/
 libs/
+out/
