@@ -1,5 +1,6 @@
 package com.techcavern.wavetact.utils;
 
+import com.techcavern.wavetact.objects.JSONFile;
 import com.techcavern.wavetact.objects.Command;
 import java.util.ArrayList;
 import java.util.Arrays;
