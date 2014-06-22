@@ -45,7 +45,6 @@ public class CustomCMD extends AbstractCommand {
                     IRCUtils.RegisterExistingSimpleMessages();
                     event.getChannel().send().message("Command Changed");
                 }
-
             } else {
                 String[] s = ArrayUtils.remove(args, 0);
                 s = ArrayUtils.remove(s, 0);
@@ -100,6 +99,7 @@ public class CustomCMD extends AbstractCommand {
                 event.getChannel().send().message("Command Added");
 
             }
+
         }
     }
 }

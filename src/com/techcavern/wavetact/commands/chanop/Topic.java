@@ -52,8 +52,6 @@ public class Topic extends AbstractCommand {
                                     sj));
         } else if (args[1].equalsIgnoreCase("addpart")) {
             String[] s = ArrayUtils.remove(args, 0);
-            s = ArrayUtils.remove(args, 0);
-            s = ArrayUtils.remove(args, 0);
 
             String sj = StringUtils.join(s, ' ');
             event.getChannel().send()

@@ -105,7 +105,6 @@ public class IRCUtils {
         new CustomCMD();
         new CheckUserLevel();
         new BasicCommands();
-
     }
 
     public static void RegisterExistingSimpleMessages() {

@@ -17,6 +17,7 @@ public class SimpleAction extends AbstractCommand {
 
     public SimpleAction(String i, int p, String a, boolean b) {
         super(i, p);
+        System.out.println("Created Simple Action: " + i);
         this.action = a;
         this.locked = b;
     }
