@@ -10,19 +10,18 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 
 public class JSONFile {
-    private File file;
+    private final Charset charset = Charset.forName("UTF-8");
+    private final File file;
 
     public JSONFile(String a) {
-        File b = new File(a);
-        this.file = b;
+        file = new File(a);
     }
 
     public void write(Object obj, boolean pretty) throws IOException {
-        if (!file.exists()) {
+        if (!exists())
             Files.touch(file);
-        }
         Gson gson = pretty ? Constants.GSON_PRETTY_PRINT : Constants.GSON;
-        Files.write(gson.toJson(obj), file, Charset.forName("UTF-8"));
+        Files.write(gson.toJson(obj), file, charset);
     }
 
     public void write(Object obj) throws IOException {
@@ -34,6 +33,6 @@ public class JSONFile {
     }
 
     public <T> T read(Class<T> clazz) throws FileNotFoundException {
-        return Constants.GSON.fromJson(Files.newReader(file, Charset.forName("UTF-8")), clazz);
+        return Constants.GSON.fromJson(Files.newReader(file, charset), clazz);
     }
 }
