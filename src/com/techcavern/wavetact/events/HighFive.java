@@ -1,10 +1,8 @@
 package com.techcavern.wavetact.events;
 
 import com.techcavern.wavetact.utils.GeneralRegistry;
-
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
-
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.MessageEvent;
 

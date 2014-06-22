@@ -7,7 +7,6 @@ package com.techcavern.wavetact.commands.chanop;
 
 import com.techcavern.wavetact.objects.Command;
 import com.techcavern.wavetact.utils.IRCUtils;
-
 import org.pircbotx.hooks.events.MessageEvent;
 
 
@@ -18,20 +17,20 @@ public class Protect extends Command {
     public Protect() {
         super("protect", 15);
     }
+
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
-       if (args[0] != null){
-           if(args[0].equalsIgnoreCase("-")){
+        if (args[0] != null) {
+            if (args[0].equalsIgnoreCase("-")) {
                 event.getChannel().send().deSuperOp(event.getUser());
-           }else
-        if (args[0].startsWith("-")) {
-            event.getChannel().send().deSuperOp(IRCUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", "")));
-        }else {
-            event.getChannel().send().superOp(IRCUtils.getUserByNick(event.getChannel(), args[0]));
-                
-      }
-       }else{
-           event.getChannel().send().superOp(event.getUser());
-       }
+            } else if (args[0].startsWith("-")) {
+                event.getChannel().send().deSuperOp(IRCUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", "")));
+            } else {
+                event.getChannel().send().superOp(IRCUtils.getUserByNick(event.getChannel(), args[0]));
+
+            }
+        } else {
+            event.getChannel().send().superOp(event.getUser());
+        }
     }
 }

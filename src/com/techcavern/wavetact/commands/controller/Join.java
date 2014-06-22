@@ -6,7 +6,6 @@
 package com.techcavern.wavetact.commands.controller;
 
 import com.techcavern.wavetact.objects.Command;
-
 import org.pircbotx.hooks.events.MessageEvent;
 
 

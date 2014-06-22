@@ -1,15 +1,13 @@
 package com.techcavern.wavetact.commands.chanop;
 
 import com.techcavern.wavetact.objects.Command;
-
-import java.util.concurrent.TimeUnit;
-
+import com.techcavern.wavetact.utils.IRCUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 import org.pircbotx.hooks.events.MessageEvent;
 
-import com.techcavern.wavetact.utils.IRCUtils;
+import java.util.concurrent.TimeUnit;
 
 public class Ban extends Command {
 

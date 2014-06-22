@@ -1,41 +1,32 @@
 package com.techcavern.wavetact.utils;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.techcavern.wavetact.commands.BasicCommands;
+import com.techcavern.wavetact.commands.CheckUserLevel;
+import com.techcavern.wavetact.commands.SomethingAwesome;
+import com.techcavern.wavetact.commands.chanop.*;
+import com.techcavern.wavetact.commands.controller.Join;
+import com.techcavern.wavetact.commands.trusted.Act;
+import com.techcavern.wavetact.commands.trusted.CustomCMD;
+import com.techcavern.wavetact.commands.trusted.Say;
+import com.techcavern.wavetact.events.HighFive;
+import com.techcavern.wavetact.events.KickRejoin;
 import com.techcavern.wavetact.objects.Command;
+import com.techcavern.wavetact.objects.SimpleAction;
+import com.techcavern.wavetact.objects.SimpleMessage;
+import org.pircbotx.Channel;
+import org.pircbotx.Configuration;
+import org.pircbotx.Configuration.Builder;
+import org.pircbotx.PircBotX;
+import org.pircbotx.User;
+import org.pircbotx.output.OutputChannel;
+import org.pircbotx.output.OutputUser;
+
 import java.nio.charset.Charset;
 import java.util.List;
 
-import org.pircbotx.Channel;
-import org.pircbotx.Configuration;
-import org.pircbotx.PircBotX;
-import org.pircbotx.Configuration.Builder;
-import org.pircbotx.User;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.techcavern.wavetact.commands.chanop.Ban;
-import com.techcavern.wavetact.commands.chanop.Quiet;
-import com.techcavern.wavetact.commands.trusted.Act;
-import com.techcavern.wavetact.commands.BasicCommands;
-import com.techcavern.wavetact.commands.CheckUserLevel;
-import com.techcavern.wavetact.commands.trusted.CustomCMD;
-import com.techcavern.wavetact.commands.chanop.Kick;
-import com.techcavern.wavetact.commands.chanop.Mode;
-import com.techcavern.wavetact.commands.chanop.Op;
-import com.techcavern.wavetact.commands.chanop.Owner;
-import com.techcavern.wavetact.commands.chanop.Part;
-import com.techcavern.wavetact.commands.chanop.Protect;
-import com.techcavern.wavetact.commands.chanop.Voice;
-import com.techcavern.wavetact.commands.controller.Join;
-import com.techcavern.wavetact.commands.trusted.Say;
-import com.techcavern.wavetact.commands.SomethingAwesome;
-import com.techcavern.wavetact.commands.chanop.Topic;
-import com.techcavern.wavetact.events.HighFive;
 //import com.techcavern.wavetact.commands.TestCommand;
-import com.techcavern.wavetact.events.KickRejoin;
-import com.techcavern.wavetact.objects.SimpleAction;
-import com.techcavern.wavetact.objects.SimpleMessage;
-import org.pircbotx.output.OutputChannel;
-import org.pircbotx.output.OutputUser;
 
 public class IRCUtils {
 
@@ -107,31 +98,32 @@ public class IRCUtils {
         new Topic();
 
     }
-/*
-    public static void RegisterExistingSimpleMessages() {
 
-       
+    /*
+        public static void RegisterExistingSimpleMessages() {
 
-        for (Command Command : GeneralRegistry.SimpleMessage.) {
-            GeneralRegistry.Commands.add(Command);
-        }
-    }
 
-    public static void RegisterExistingSimpleActions() {
-        Config config = new Config("SimpleAction.json");
 
-        GeneralRegistry.SimpleAction = new Gson().fromJson(config.getText(), new TypeToken<Set<SimpleMessage>>() {
-        }.getType());
-
-        if (GeneralRegistry.SimpleAction == null) {
-            GeneralRegistry.SimpleAction = Sets.newConcurrentHashSet();
+            for (Command Command : GeneralRegistry.SimpleMessage.) {
+                GeneralRegistry.Commands.add(Command);
+            }
         }
 
-        for (Command Command : GeneralRegistry.SimpleAction) {
-            GeneralRegistry.Commands.add(Command);
+        public static void RegisterExistingSimpleActions() {
+            Config config = new Config("SimpleAction.json");
+
+            GeneralRegistry.SimpleAction = new Gson().fromJson(config.getText(), new TypeToken<Set<SimpleMessage>>() {
+            }.getType());
+
+            if (GeneralRegistry.SimpleAction == null) {
+                GeneralRegistry.SimpleAction = Sets.newConcurrentHashSet();
+            }
+
+            for (Command Command : GeneralRegistry.SimpleAction) {
+                GeneralRegistry.Commands.add(Command);
+            }
         }
-    }
-*/
+    */
     public static Command getCommand(String Command) {
         for (Command g : GeneralRegistry.Commands) {
             if (g.getCommandID().equalsIgnoreCase(Command)) {
@@ -141,6 +133,7 @@ public class IRCUtils {
         return null;
 
     }
+
     public static SimpleMessage getSimpleMessage(String SimpleAction) {
         for (SimpleMessage g : GeneralRegistry.SimpleMessages) {
             if (g.getCommandID().equalsIgnoreCase(SimpleAction)) {
@@ -150,6 +143,7 @@ public class IRCUtils {
         return null;
 
     }
+
     public static SimpleAction getSimpleAction(String SimpleAction) {
         for (SimpleAction g : GeneralRegistry.SimpleActions) {
             if (g.getCommandID().equalsIgnoreCase(SimpleAction)) {

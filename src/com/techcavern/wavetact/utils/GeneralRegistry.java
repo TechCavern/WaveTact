@@ -3,6 +3,7 @@ package com.techcavern.wavetact.utils;
 import com.techcavern.wavetact.objects.Command;
 import com.techcavern.wavetact.objects.SimpleAction;
 import com.techcavern.wavetact.objects.SimpleMessage;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,8 +32,6 @@ public class GeneralRegistry {
     public static List<SimpleMessage> SimpleMessages = new ArrayList();
     public static List<SimpleAction> SimpleActions = new ArrayList();
     public static List<String> HighFives = new ArrayList();
-    
 
-   
 
 }

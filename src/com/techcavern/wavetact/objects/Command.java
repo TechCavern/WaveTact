@@ -37,5 +37,5 @@ public abstract class Command {
     public String getCommandID() {
         return comid;
     }
-    
+
 }

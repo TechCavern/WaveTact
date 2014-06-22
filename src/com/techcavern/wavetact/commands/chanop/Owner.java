@@ -19,18 +19,17 @@ public class Owner extends Command {
     }
 
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
-       if (args[0] != null){
-           if(args[0].equalsIgnoreCase("-")){
+        if (args[0] != null) {
+            if (args[0].equalsIgnoreCase("-")) {
                 event.getChannel().send().deOwner(event.getUser());
-           }else
-        if (args[0].startsWith("-")) {
-            event.getChannel().send().deOwner(IRCUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", "")));
-        }else {
-            event.getChannel().send().owner(IRCUtils.getUserByNick(event.getChannel(), args[0]));
-                
-      }
-       }else{
-           event.getChannel().send().owner(event.getUser());
-       }
+            } else if (args[0].startsWith("-")) {
+                event.getChannel().send().deOwner(IRCUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", "")));
+            } else {
+                event.getChannel().send().owner(IRCUtils.getUserByNick(event.getChannel(), args[0]));
+
+            }
+        } else {
+            event.getChannel().send().owner(event.getUser());
+        }
     }
 }

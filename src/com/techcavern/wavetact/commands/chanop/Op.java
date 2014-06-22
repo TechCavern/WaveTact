@@ -20,18 +20,17 @@ public class Op extends Command {
 
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
-       if (args[0] != null){
-           if(args[0].equalsIgnoreCase("-")){
+        if (args[0] != null) {
+            if (args[0].equalsIgnoreCase("-")) {
                 event.getChannel().send().deOp(event.getUser());
-           }else
-        if (args[0].startsWith("-")) {
-            event.getChannel().send().deOp(IRCUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", "")));
-        }else {
-            event.getChannel().send().op(IRCUtils.getUserByNick(event.getChannel(), args[0]));
-                
-      }
-       }else{
-           event.getChannel().send().op(event.getUser());
-       }
+            } else if (args[0].startsWith("-")) {
+                event.getChannel().send().deOp(IRCUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", "")));
+            } else {
+                event.getChannel().send().op(IRCUtils.getUserByNick(event.getChannel(), args[0]));
+
+            }
+        } else {
+            event.getChannel().send().op(event.getUser());
+        }
     }
 }
