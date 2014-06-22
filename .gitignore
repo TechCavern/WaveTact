@@ -1,12 +1,12 @@
 bin/
-<<<<<<< HEAD
-=======
 .project
 .classpath
->>>>>>> d03a0d48f0edc22a61386b354de331ff3dceb2bb
 nbproject/
 build.xml
 manifest.mf
 readme.md
 /build/
 /dist/
+*.iml
+.idea/
+libs/
