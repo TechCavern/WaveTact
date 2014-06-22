@@ -11,8 +11,9 @@ import java.nio.charset.Charset;
 public class JSONFile {
     private File file;
 
-    public JSONFile(File file) {
-        this.file = file;
+    public JSONFile(String a) {
+        File b = new File(a);
+        this.file = b;
     }
 
     public void write(Object obj, boolean pretty) throws IOException {

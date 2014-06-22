@@ -110,16 +110,10 @@ public class IRCUtils {
     }
 /*
     public static void RegisterExistingSimpleMessages() {
-        Config config = new Config("SimpleMessage.json");
 
-        GeneralRegistry.SimpleMessage = new Gson().fromJson(config.getText(), new TypeToken<Set<SimpleMessage>>() {
-        }.getType());
+       
 
-        if (GeneralRegistry.SimpleMessage == null) {
-            GeneralRegistry.SimpleMessage = Sets.newConcurrentHashSet();
-        }
-
-        for (Command Command : GeneralRegistry.SimpleMessage) {
+        for (Command Command : GeneralRegistry.SimpleMessage.) {
             GeneralRegistry.Commands.add(Command);
         }
     }
