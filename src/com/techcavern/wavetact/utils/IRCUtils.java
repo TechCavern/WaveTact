@@ -13,6 +13,7 @@ import com.techcavern.wavetact.commands.trusted.Say;
 import com.techcavern.wavetact.events.HighFive;
 import com.techcavern.wavetact.events.KickRejoin;
 import com.techcavern.wavetact.objects.Command;
+import com.techcavern.wavetact.objects.JSONFile;
 import com.techcavern.wavetact.objects.SimpleAction;
 import com.techcavern.wavetact.objects.SimpleMessage;
 import org.pircbotx.Channel;
@@ -23,6 +24,8 @@ import org.pircbotx.User;
 import org.pircbotx.output.OutputChannel;
 import org.pircbotx.output.OutputUser;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.List;
 
@@ -150,6 +153,28 @@ public class IRCUtils {
             }
         }
         return null;
+    }
 
+    public static void saveSimpleActions() {
+        JSONFile file = new JSONFile("SimpleActions.json");
+        try {
+            file.write(GeneralRegistry.SimpleActions);
+        } catch (IOException e) {
+            ErrorUtils.handleException(e);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public static void loadSimpleActions() {
+        JSONFile file = new JSONFile("SimpleActions.json");
+        if (file.exists()) {
+            try {
+                List<SimpleAction> actions = file.read(List.class);
+                GeneralRegistry.SimpleActions.clear();
+                GeneralRegistry.SimpleActions.addAll(actions);
+            } catch (FileNotFoundException e) {
+                ErrorUtils.handleException(e);
+            }
+        }
     }
 }
