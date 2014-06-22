@@ -28,8 +28,8 @@ public class Main {
         PircBotX Xertion = IRCUtils.createbot(pwd, "Xertion", GeneralRegistry.XertionChannels, GeneralRegistry.XertionNick, GeneralRegistry.XertionServer);
         PircBotX Obsidian = IRCUtils.createbot(pwd, "Obsidian", GeneralRegistry.ObsidianChannels, GeneralRegistry.ObsidianNick, GeneralRegistry.ObsidianServer);
 
-        WaveTact.addBot(Obsidian);
-    //    WaveTact.addBot(Esper);
+  //      WaveTact.addBot(Obsidian);
+        WaveTact.addBot(Esper);
   //      WaveTact.addBot(Ovd);
     //    WaveTact.addBot(Xertion);
      //   WaveTact.addBot(ECode);

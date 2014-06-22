@@ -41,10 +41,10 @@ public class CustomCMD extends Command {
                 }
                         }
             } else if (args[1].startsWith("+")) {
-                if(IRCUtils.getCommand(args[1].replaceFirst("-", "")) == null){
+                if(IRCUtils.getCommand(args[1].replaceFirst("\\+", "")) == null){
                                     event.getChannel().send().message("Command Does Not Exist");
                 }else {
-                if (IRCUtils.getCommand(args[1].replaceFirst("-", "")).getPermLevel() <= PermUtils.getPermLevel(event.getBot(), event.getUser(), event.getChannel())) {
+                if (IRCUtils.getCommand(args[1].replaceFirst("\\+", "")).getPermLevel() <= PermUtils.getPermLevel(event.getBot(), event.getUser(), event.getChannel())) {
                     if(IRCUtils.getSimpleMessage(args[1].replaceFirst("-", "")).getLockedStatus()){
                         event.getChannel().send().message("Command Locked");
                     } else{
@@ -89,10 +89,10 @@ public class CustomCMD extends Command {
                 }
                         }
             } else if (args[1].startsWith("+")) {
-                if(IRCUtils.getCommand(args[1].replaceFirst("-", "")) == null){
+                if(IRCUtils.getCommand(args[1].replaceFirst("\\+", "")) == null){
                                     event.getChannel().send().message("Command Does Not Exist");
                 }else {
-                if (IRCUtils.getCommand(args[1].replaceFirst("-", "")).getPermLevel() <= PermUtils.getPermLevel(event.getBot(), event.getUser(), event.getChannel())) {
+                if (IRCUtils.getCommand(args[1].replaceFirst("\\+", "")).getPermLevel() <= PermUtils.getPermLevel(event.getBot(), event.getUser(), event.getChannel())) {
                     if(IRCUtils.getSimpleAction(args[1].replaceFirst("-", "")).getLockedStatus()){
                         event.getChannel().send().message("Command Locked");
                     } else{
