@@ -50,7 +50,7 @@ public class CustomCMD extends Command {
                         if (IRCUtils.getSimpleMessage(args[1].replaceFirst("-", "")).getLockedStatus()) {
                             event.getChannel().send().message("Command Locked");
                         } else {
-                            GeneralRegistry.SimpleMessages.remove(IRCUtils.getCommand(args[1].replaceFirst("\\+", "")));
+                            GeneralRegistry.SimpleMessages.remove(IRCUtils.getSimpleMessage(args[1].replaceFirst("\\+", "")));
                             String[] s = ArrayUtils.remove(args, 0);
                             s = ArrayUtils.remove(s, 0);
                             s = ArrayUtils.remove(s, 0);
@@ -97,7 +97,7 @@ public class CustomCMD extends Command {
                         if (IRCUtils.getSimpleAction(args[1].replaceFirst("-", "")).getLockedStatus()) {
                             event.getChannel().send().message("Command Locked");
                         } else {
-                            GeneralRegistry.SimpleActions.remove(IRCUtils.getCommand(args[1].replaceFirst("\\+", "")));
+                            GeneralRegistry.SimpleActions.remove(IRCUtils.getSimpleAction(args[1].replaceFirst("\\+", "")));
                             String[] s = ArrayUtils.remove(args, 0);
                             s = ArrayUtils.remove(s, 0);
                             s = ArrayUtils.remove(s, 0);
