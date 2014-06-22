@@ -10,10 +10,10 @@ public class PermUtils {
 
     @SuppressWarnings("unchecked")
     public static String getAccount(PircBotX bot, User u) {
-        String user = "";
+        String user;
         bot.sendRaw().rawLineNow("WHOIS " + u.getNick());
         WaitForQueue waitForQueue = new WaitForQueue(bot);
-        WhoisEvent<PircBotX> test = null;
+        WhoisEvent<PircBotX> test;
         try {
             test = waitForQueue.waitFor(WhoisEvent.class);
             waitForQueue.close();

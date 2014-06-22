@@ -75,7 +75,6 @@ public class CustomCMD extends Command {
                 GeneralRegistry.SimpleMessages.add(c);
                 GeneralRegistry.Commands.add(c);
                 event.getChannel().send().message("Command Added");
-
             }
         } else if (args[0].equalsIgnoreCase("a")) {
             if (args[1].startsWith("-") && IRCUtils.getCommand(args[1].replaceFirst("-", "")) != null) {

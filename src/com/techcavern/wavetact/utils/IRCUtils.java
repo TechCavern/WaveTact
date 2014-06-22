@@ -39,8 +39,8 @@ public class IRCUtils {
         Net.setLogin("WaveTact");
         Net.setEncoding(Charset.isSupported("UTF-8") ? Charset.forName("UTF-8") : Charset.defaultCharset());
         Net.setServer(Server, 6667);
-        for (int i = 0; i < channels.size(); i++) {
-            Net.addAutoJoinChannel(channels.get(i));
+        for (String channel : channels) {
+            Net.addAutoJoinChannel(channel);
         }
         Net.getListenerManager().addListener(new MessageListener());
         Net.getListenerManager().addListener(new HighFive());
@@ -49,8 +49,7 @@ public class IRCUtils {
             Net.setNickservPassword(g);
         }
         //  Net.getListenerManager().addListener(new TestCommand());
-        PircBotX Bot = new PircBotX(Net.buildConfiguration());
-        return Bot;
+        return new PircBotX(Net.buildConfiguration());
     }
 
     public static User getUserByNick(Channel c, String n) {
