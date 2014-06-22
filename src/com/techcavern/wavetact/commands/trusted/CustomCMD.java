@@ -37,6 +37,7 @@ public class CustomCMD extends Command {
                         } else {
                             GeneralRegistry.SimpleMessages.remove(IRCUtils.getSimpleMessage(args[1].replaceFirst("-", "")));
                             GeneralRegistry.Commands.remove(IRCUtils.getCommand(args[1].replaceFirst("-", "")));
+                            IRCUtils.saveSimpleMessages();
                             event.getChannel().send().message("Command Removed");
                         }
                     } else {
@@ -59,6 +60,7 @@ public class CustomCMD extends Command {
                             s = ArrayUtils.remove(s, 0);
                             String sj = StringUtils.join(s, ' ');
                             SimpleMessage c = new SimpleMessage(args[1].replaceFirst("\\+", ""), Integer.parseInt(args[2]), sj, false);
+                            IRCUtils.saveSimpleMessages();
                             GeneralRegistry.SimpleMessages.add(c);
                             event.getChannel().send().message("Command Changed");
                         }
@@ -67,14 +69,19 @@ public class CustomCMD extends Command {
                     }
                 }
             } else {
-                String[] s = ArrayUtils.remove(args, 0);
-                s = ArrayUtils.remove(s, 0);
-                s = ArrayUtils.remove(s, 0);
+                if (IRCUtils.getSimpleMessage(args[1].replaceFirst("-", "")) == null && IRCUtils.getSimpleAction(args[1].replaceFirst("-", "")) == null ) {
+                    String[] s = ArrayUtils.remove(args, 0);
+                    s = ArrayUtils.remove(s, 0);
+                    s = ArrayUtils.remove(s, 0);
 
-                String sj = StringUtils.join(s, ' ');
-                SimpleMessage c = new SimpleMessage(args[1], Integer.parseInt(args[2]), sj, false);
-                GeneralRegistry.SimpleMessages.add(c);
-                event.getChannel().send().message("Command Added");
+                    String sj = StringUtils.join(s, ' ');
+                    SimpleMessage c = new SimpleMessage(args[1], Integer.parseInt(args[2]), sj, false);
+                    GeneralRegistry.SimpleMessages.add(c);
+                    IRCUtils.saveSimpleMessages();
+                    event.getChannel().send().message("Command Added");
+                }else{
+                    event.getChannel().send().message("Command Already Exists");
+                }
             }
         } else if (args[0].equalsIgnoreCase("a")) {
             if (args[1].startsWith("-")) {
@@ -87,7 +94,7 @@ public class CustomCMD extends Command {
                         } else {
                             GeneralRegistry.SimpleActions.remove(IRCUtils.getSimpleAction(args[1].replaceFirst("-", "")));
                             GeneralRegistry.Commands.remove(IRCUtils.getCommand(args[1].replaceFirst("-", "")));
-
+                            IRCUtils.saveSimpleActions();
                             event.getChannel().send().message("Command Removed");
                         }
                     } else {
@@ -111,6 +118,7 @@ public class CustomCMD extends Command {
                             String sj = StringUtils.join(s, ' ');
                             SimpleAction c = new SimpleAction(args[1].replaceFirst("\\+", ""), Integer.parseInt(args[2]), sj, false);
                             GeneralRegistry.SimpleActions.add(c);
+                            IRCUtils.saveSimpleActions();
                             event.getChannel().send().message("Command Changed");
                         }
                     } else {
@@ -118,15 +126,20 @@ public class CustomCMD extends Command {
                     }
                 }
             } else {
-                String[] s = ArrayUtils.remove(args, 0);
+                if (IRCUtils.getSimpleMessage(args[1].replaceFirst("-", "")) == null && IRCUtils.getSimpleAction(args[1].replaceFirst("-", "")) == null ) {
+
+                    String[] s = ArrayUtils.remove(args, 0);
                 s = ArrayUtils.remove(s, 0);
                 s = ArrayUtils.remove(s, 0);
 
                 String sj = StringUtils.join(s, ' ');
                 SimpleAction c = new SimpleAction(args[1], Integer.parseInt(args[2]), sj, false);
                 GeneralRegistry.SimpleActions.add(c);
+                IRCUtils.saveSimpleActions();
                 event.getChannel().send().message("Command Added");
-
+                }else{
+                    event.getChannel().send().message("Command Already Exists");
+                }
             }
         }
     }

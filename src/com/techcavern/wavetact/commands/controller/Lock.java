@@ -23,19 +23,23 @@ public class Lock extends Command {
         if (args[0].equalsIgnoreCase("a")) {
             if (args[1].startsWith("-")) {
                 IRCUtils.getSimpleAction(args[1].replaceFirst("-", "")).unlock();
+                IRCUtils.saveSimpleActions();
                 event.getChannel().send().message("Command Unlocked");
             } else {
                 IRCUtils.getSimpleAction(args[1].replaceFirst("-", "")).lock();
+                IRCUtils.saveSimpleActions();
                 event.getChannel().send().message("Command locked");
 
             }
         } else if (args[0].equalsIgnoreCase("m")) {
             if (args[1].startsWith("-")) {
                 IRCUtils.getSimpleMessage(args[1].replaceFirst("-", "")).unlock();
+                IRCUtils.saveSimpleMessages();
                 event.getChannel().send().message("Command Unlocked");
 
             } else {
                 IRCUtils.getSimpleMessage(args[1].replaceFirst("-", "")).lock();
+                IRCUtils.saveSimpleMessages();
                 event.getChannel().send().message("Command locked");
 
             }

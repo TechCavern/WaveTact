@@ -2,7 +2,7 @@ package com.techcavern.wavetact.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.techcavern.wavetact.commands.BasicCommands;
+import com.techcavern.wavetact.commands.controller.BasicCommands;
 import com.techcavern.wavetact.commands.CheckUserLevel;
 import com.techcavern.wavetact.commands.SomethingAwesome;
 import com.techcavern.wavetact.commands.chanop.*;
