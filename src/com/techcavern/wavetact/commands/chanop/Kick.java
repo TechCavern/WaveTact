@@ -21,11 +21,21 @@ public class Kick extends Command {
 
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
+
         if (event.getChannel().getUserLevels(event.getBot().getUserBot()).contains(UserLevel.OP) && !event.getChannel().isOwner(IRCUtils.getUserByNick(event.getChannel(), args[0])) && !event.getChannel().isSuperOp(IRCUtils.getUserByNick(event.getChannel(), args[0]))) {
-            event.getChannel().send().kick(IRCUtils.getUserByNick(event.getChannel(), args[0]));
+            if(args.length>1) {
+                event.getChannel().send().kick(IRCUtils.getUserByNick(event.getChannel(), args[1]));
+            }else{
+                event.getChannel().send().kick(IRCUtils.getUserByNick(event.getChannel(), args[0]));
+
+            }
         } else if (event.getChannel().getUserLevels(event.getBot().getUserBot()).contains(UserLevel.OWNER)) {
-            event.getChannel().send().kick(IRCUtils.getUserByNick(event.getChannel(), args[0]));
-        } else {
+            if(args.length>1) {
+                event.getChannel().send().kick(IRCUtils.getUserByNick(event.getChannel(), args[1]));
+            }else{
+                event.getChannel().send().kick(IRCUtils.getUserByNick(event.getChannel(), args[0]));
+
+            }        } else {
             event.getChannel().send().message("Error: I must be ownered in the channel to kick someone that is protected or ownered");
         }
     }
