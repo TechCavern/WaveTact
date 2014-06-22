@@ -21,6 +21,8 @@ public class Main {
         // IRCUtils.RegisterExistingSimpleMessages();
         String pwd = null;
         String g = args[0];
+        IRCUtils.loadSimpleActions();
+        IRCUtils.loadSimpleMessages();
         PircBotX Ovd = IRCUtils.createbot(pwd, "Ovd", GeneralRegistry.OvdChannels, GeneralRegistry.OvdNick, GeneralRegistry.OvdServer);
         PircBotX Esper = IRCUtils.createbot(g, "Esper", GeneralRegistry.EsperChannels, GeneralRegistry.EsperNick, GeneralRegistry.EsperServer);
         PircBotX ECode = IRCUtils.createbot(pwd, "ECode", GeneralRegistry.ECodeChannels, GeneralRegistry.ECodeNick, GeneralRegistry.ECodeServer);

@@ -13,9 +13,9 @@ public class BasicCommands {
             "http://github.com/TechCavern/WaveTact", true);
 
     public void basicCommands() {
-        GeneralRegistry.Commands.add(potato);
-        GeneralRegistry.Commands.add(ping);
-        GeneralRegistry.Commands.add(pong);
-        GeneralRegistry.Commands.add(source);
+        GeneralRegistry.SimpleActions.add(potato);
+        GeneralRegistry.SimpleMessages.add(ping);
+        GeneralRegistry.SimpleMessages.add(pong);
+        GeneralRegistry.SimpleMessages.add(source);
     }
 }

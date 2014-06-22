@@ -177,4 +177,26 @@ public class IRCUtils {
             }
         }
     }
+    public static void saveSimpleMessages() {
+        JSONFile file = new JSONFile("SimpleMessages.json");
+        try {
+            file.write(GeneralRegistry.SimpleActions);
+        } catch (IOException e) {
+            ErrorUtils.handleException(e);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public static void loadSimpleMessages() {
+        JSONFile file = new JSONFile("SimpleMessages.json");
+        if (file.exists()) {
+            try {
+                List<SimpleAction> actions = file.read(List.class);
+                GeneralRegistry.SimpleActions.clear();
+                GeneralRegistry.SimpleActions.addAll(actions);
+            } catch (FileNotFoundException e) {
+                ErrorUtils.handleException(e);
+            }
+        }
+    }
 }
