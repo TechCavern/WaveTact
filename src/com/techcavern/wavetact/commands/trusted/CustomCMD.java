@@ -25,83 +25,101 @@ public class CustomCMD extends Command {
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
         if (args[0].equalsIgnoreCase("m")) {
-            if (args[1].startsWith("-")) {
+            if (args[1].startsWith("-") && IRCUtils.getCommand(args[1].replaceFirst("-", "")) != null) {
+                if(IRCUtils.getCommand(args[1].replaceFirst("-", "")) == null){
+                                    event.getChannel().send().message("Command Does Not Exist");
+                }else {
                 if (IRCUtils.getCommand(args[1].replaceFirst("-", "")).getPermLevel() <= PermUtils.getPermLevel(event.getBot(), event.getUser(), event.getChannel())) {
+                    if(IRCUtils.getSimpleMessage(args[1].replaceFirst("-", "")).getLockedStatus()){
+                        event.getChannel().send().message("Command Locked");
+                    } else{
                     GeneralRegistry.Commands.remove(IRCUtils.getCommand(args[1].replaceFirst("-", "")));
-                    //       GeneralRegistry.SimpleMessage.remove(IRCUtils.getCommand(args[1].replaceFirst("-", "")));
+                    GeneralRegistry.SimpleMessages.remove(IRCUtils.getSimpleMessage(args[1].replaceFirst("-", "")));
                     event.getChannel().send().message("Command Removed");
-                } else {
+                }} else {
                     event.getChannel().send().message("Permission Denied");
                 }
+                        }
             } else if (args[1].startsWith("+")) {
+                if(IRCUtils.getCommand(args[1].replaceFirst("-", "")) == null){
+                                    event.getChannel().send().message("Command Does Not Exist");
+                }else {
                 if (IRCUtils.getCommand(args[1].replaceFirst("-", "")).getPermLevel() <= PermUtils.getPermLevel(event.getBot(), event.getUser(), event.getChannel())) {
-
+                    if(IRCUtils.getSimpleMessage(args[1].replaceFirst("-", "")).getLockedStatus()){
+                        event.getChannel().send().message("Command Locked");
+                    } else{
                     GeneralRegistry.Commands.remove(IRCUtils.getCommand(args[1].replaceFirst("\\+", "")));
                     String[] s = ArrayUtils.remove(args, 0);
                     s = ArrayUtils.remove(s, 0);
                     s = ArrayUtils.remove(s, 0);
                     String sj = StringUtils.join(s, ' ');
                     SimpleMessage c = new SimpleMessage(args[1].replaceFirst("\\+", ""), Integer.parseInt(args[2]), sj, false);
-           //         GeneralRegistry.SimpleMessage.add(c);
-                    //        GeneralRegistry.Commands.add(c);
-          //          IRCUtils.RegisterExistingSimpleMessages();
+                    GeneralRegistry.SimpleMessages.add(c);
+                    GeneralRegistry.Commands.add(c);
                     event.getChannel().send().message("Command Changed");
-                }
-            } else {
+                }}else {
+                    event.getChannel().send().message("Permission Denied");
+                }}
+            }else{
                 String[] s = ArrayUtils.remove(args, 0);
                 s = ArrayUtils.remove(s, 0);
                 s = ArrayUtils.remove(s, 0);
 
                 String sj = StringUtils.join(s, ' ');
                 SimpleMessage c = new SimpleMessage(args[1], Integer.parseInt(args[2]), sj, false);
-           //     GeneralRegistry.SimpleMessage.add(c);
-                //          GeneralRegistry.Commands.add(c);
-            //    IRCUtils.RegisterExistingSimpleMessages();
+                GeneralRegistry.SimpleMessages.add(c);
+                GeneralRegistry.Commands.add(c);
                 event.getChannel().send().message("Command Added");
 
             }
         } else if (args[0].equalsIgnoreCase("a")) {
-            if (args[1].startsWith("-")) {
+            if (args[1].startsWith("-") && IRCUtils.getCommand(args[1].replaceFirst("-", "")) != null) {
+                if(IRCUtils.getCommand(args[1].replaceFirst("-", "")) == null){
+                                    event.getChannel().send().message("Command Does Not Exist");
+                }else {
                 if (IRCUtils.getCommand(args[1].replaceFirst("-", "")).getPermLevel() <= PermUtils.getPermLevel(event.getBot(), event.getUser(), event.getChannel())) {
-
+                    if(IRCUtils.getSimpleAction(args[1].replaceFirst("-", "")).getLockedStatus()){
+                        event.getChannel().send().message("Command Locked");
+                    } else{
                     GeneralRegistry.Commands.remove(IRCUtils.getCommand(args[1].replaceFirst("-", "")));
-                    //    GeneralRegistry.SimpleMessage.remove(IRCUtils.getCommand(args[1].replaceFirst("-", "")));
+                    GeneralRegistry.SimpleActions.remove(IRCUtils.getSimpleAction(args[1].replaceFirst("-", "")));
                     event.getChannel().send().message("Command Removed");
-
-                } else {
+                }} else {
                     event.getChannel().send().message("Permission Denied");
                 }
+                        }
             } else if (args[1].startsWith("+")) {
+                if(IRCUtils.getCommand(args[1].replaceFirst("-", "")) == null){
+                                    event.getChannel().send().message("Command Does Not Exist");
+                }else {
                 if (IRCUtils.getCommand(args[1].replaceFirst("-", "")).getPermLevel() <= PermUtils.getPermLevel(event.getBot(), event.getUser(), event.getChannel())) {
-
+                    if(IRCUtils.getSimpleAction(args[1].replaceFirst("-", "")).getLockedStatus()){
+                        event.getChannel().send().message("Command Locked");
+                    } else{
                     GeneralRegistry.Commands.remove(IRCUtils.getCommand(args[1].replaceFirst("\\+", "")));
                     String[] s = ArrayUtils.remove(args, 0);
                     s = ArrayUtils.remove(s, 0);
                     s = ArrayUtils.remove(s, 0);
                     String sj = StringUtils.join(s, ' ');
                     SimpleAction c = new SimpleAction(args[1].replaceFirst("\\+", ""), Integer.parseInt(args[2]), sj, false);
-          //          GeneralRegistry.SimpleAction.add(c);
-                    //        GeneralRegistry.Commands.add(c);
-                //    IRCUtils.RegisterExistingSimpleActions();
+                    GeneralRegistry.SimpleActions.add(c);
+                    GeneralRegistry.Commands.add(c);
                     event.getChannel().send().message("Command Changed");
-
-                } else {
+                }}else {
                     event.getChannel().send().message("Permission Denied");
-                }
-            } else {
+                }}
+            }else{
                 String[] s = ArrayUtils.remove(args, 0);
                 s = ArrayUtils.remove(s, 0);
                 s = ArrayUtils.remove(s, 0);
 
                 String sj = StringUtils.join(s, ' ');
                 SimpleAction c = new SimpleAction(args[1], Integer.parseInt(args[2]), sj, false);
-     //           GeneralRegistry.SimpleAction.add(c);
-                //        GeneralRegistry.Commands.add(c);
-            //    IRCUtils.RegisterExistingSimpleActions();
+                GeneralRegistry.SimpleActions.add(c);
+                GeneralRegistry.Commands.add(c);
                 event.getChannel().send().message("Command Added");
 
             }
-
-        }
+}
     }
 }

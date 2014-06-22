@@ -32,6 +32,8 @@ import com.techcavern.wavetact.commands.chanop.Topic;
 import com.techcavern.wavetact.events.HighFive;
 //import com.techcavern.wavetact.commands.TestCommand;
 import com.techcavern.wavetact.events.KickRejoin;
+import com.techcavern.wavetact.objects.SimpleAction;
+import com.techcavern.wavetact.objects.SimpleMessage;
 import org.pircbotx.output.OutputChannel;
 import org.pircbotx.output.OutputUser;
 
@@ -133,6 +135,24 @@ public class IRCUtils {
     public static Command getCommand(String Command) {
         for (Command g : GeneralRegistry.Commands) {
             if (g.getCommandID().equalsIgnoreCase(Command)) {
+                return g;
+            }
+        }
+        return null;
+
+    }
+    public static SimpleMessage getSimpleMessage(String SimpleAction) {
+        for (SimpleMessage g : GeneralRegistry.SimpleMessages) {
+            if (g.getCommandID().equalsIgnoreCase(SimpleAction)) {
+                return g;
+            }
+        }
+        return null;
+
+    }
+    public static SimpleAction getSimpleAction(String SimpleAction) {
+        for (SimpleAction g : GeneralRegistry.SimpleActions) {
+            if (g.getCommandID().equalsIgnoreCase(SimpleAction)) {
                 return g;
             }
         }

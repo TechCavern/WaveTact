@@ -36,4 +36,10 @@ public class SimpleAction extends Command {
     public boolean getLockedStatus() {
         return locked;
     }
+    public void lock(){
+        this.locked = true;
+    }
+    public void unlock(){
+        this.locked = false;
+    }
 }
