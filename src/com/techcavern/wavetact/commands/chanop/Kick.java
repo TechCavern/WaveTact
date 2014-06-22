@@ -24,14 +24,14 @@ public class Kick extends Command {
 
         if (event.getChannel().getUserLevels(event.getBot().getUserBot()).contains(UserLevel.OP) && !event.getChannel().isOwner(IRCUtils.getUserByNick(event.getChannel(), args[0])) && !event.getChannel().isSuperOp(IRCUtils.getUserByNick(event.getChannel(), args[0]))) {
             if(args.length>1) {
-                event.getChannel().send().kick(IRCUtils.getUserByNick(event.getChannel(), args[1]));
+                event.getChannel().send().kick(IRCUtils.getUserByNick(event.getChannel(), args[0]), args[1]);
             }else{
                 event.getChannel().send().kick(IRCUtils.getUserByNick(event.getChannel(), args[0]));
 
             }
         } else if (event.getChannel().getUserLevels(event.getBot().getUserBot()).contains(UserLevel.OWNER)) {
             if(args.length>1) {
-                event.getChannel().send().kick(IRCUtils.getUserByNick(event.getChannel(), args[1]));
+                event.getChannel().send().kick(IRCUtils.getUserByNick(event.getChannel(), args[0]), args[1]);
             }else{
                 event.getChannel().send().kick(IRCUtils.getUserByNick(event.getChannel(), args[0]));
 
