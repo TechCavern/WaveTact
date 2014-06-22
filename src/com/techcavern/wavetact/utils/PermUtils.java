@@ -29,13 +29,10 @@ public class PermUtils {
     public static boolean isController(PircBotX bot, User u) {
         String v = getAccount(bot, u);
         if (v != null) {
-            boolean y = GeneralRegistry.Controllers.contains(v.toLowerCase());
-            return y;
+            return GeneralRegistry.Controllers.contains(v.toLowerCase());
         } else {
-            boolean y = GeneralRegistry.ControllerHostmasks.contains(u.getHostmask());
-            return y;
+            return GeneralRegistry.ControllerHostmasks.contains(u.getHostmask());
         }
-
     }
 
     public static int getPermLevel(PircBotX bot, User u, Channel z) {
@@ -45,7 +42,6 @@ public class PermUtils {
             return 15;
         } else if (z.isOp(u) || z.isSuperOp(u)) {
             return 10;
-
         } else if (z.isHalfOp(u) || z.hasVoice(u)) {
             return 5;
         } else {

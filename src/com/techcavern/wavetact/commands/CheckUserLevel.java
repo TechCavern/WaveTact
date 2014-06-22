@@ -26,7 +26,5 @@ public class CheckUserLevel extends Command {
         } else {
             event.getChannel().send().message("You are a Regular User!");
         }
-
     }
-
 }

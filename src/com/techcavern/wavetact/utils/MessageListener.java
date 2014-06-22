@@ -11,7 +11,6 @@ import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.MessageEvent;
 
 /**
- *
  * @author jztech101
  */
 public class MessageListener extends ListenerAdapter<PircBotX> {

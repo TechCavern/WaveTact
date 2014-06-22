@@ -10,7 +10,6 @@ import com.techcavern.wavetact.utils.IRCUtils;
 import org.pircbotx.hooks.events.MessageEvent;
 
 /**
- *
  * @author jztech101
  */
 public class Op extends Command {
@@ -25,7 +24,6 @@ public class Op extends Command {
             event.getChannel().send().deOp(IRCUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", "")));
         } else {
             event.getChannel().send().op(IRCUtils.getUserByNick(event.getChannel(), args[0]));
-
         }
     }
 }

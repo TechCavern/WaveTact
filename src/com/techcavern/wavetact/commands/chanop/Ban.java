@@ -1,6 +1,7 @@
 package com.techcavern.wavetact.commands.chanop;
 
 import com.techcavern.wavetact.utils.Command;
+
 import java.util.concurrent.TimeUnit;
 
 import org.pircbotx.Channel;
@@ -19,14 +20,14 @@ public class Ban extends Command {
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
 
-        if (args.length == 2 && args[0].startsWith("-") == false) {
+        if (args.length == 2 && !args[0].startsWith("-")) {
             if (args[1].endsWith("s") || args[1].endsWith("h") || args[1].endsWith("m") || args[1].endsWith("d")) {
                 bantime time = new bantime();
                 time.run(args[1], IRCUtils.getUserByNick(event.getChannel(), args[0]), event.getChannel(), event.getBot());
             } else {
                 IRCUtils.SendNotice(event.getBot(), event.getUser(), " Ensure you have specified a valid time (30s = 30 Seconds, 30m = 30 minutes, up to days)");
             }
-        } else if (args.length < 2 && args[0].startsWith("-") == false) {
+        } else if (args.length < 2 && !args[0].startsWith("-")) {
             ban(IRCUtils.getUserByNick(event.getChannel(), args[0]), event.getChannel(), event.getBot());
         } else if (args[0].startsWith("-")) {
             unban(IRCUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", "")), event.getChannel(), event.getBot());

@@ -16,7 +16,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.hooks.events.MessageEvent;
 
 /**
- *
  * @author jztech101
  */
 public class CustomCMD extends Command {
@@ -27,7 +26,6 @@ public class CustomCMD extends Command {
 
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
-
         if (args[0].equalsIgnoreCase("m")) {
             if (args[1].startsWith("-")) {
                 if (IRCUtils.getCommand(args[1].replaceFirst("-", "")).getPermLevel() <= PermUtils.getPermLevel(event.getBot(), event.getUser(), event.getChannel())) {
@@ -40,12 +38,12 @@ public class CustomCMD extends Command {
             } else if (args[1].startsWith("+")) {
                 if (IRCUtils.getCommand(args[1].replaceFirst("-", "")).getPermLevel() <= PermUtils.getPermLevel(event.getBot(), event.getUser(), event.getChannel())) {
 
-                    GeneralRegistry.Commands.remove(IRCUtils.getCommand(args[1].replaceFirst("+", "")));
+                    GeneralRegistry.Commands.remove(IRCUtils.getCommand(args[1].replaceFirst("\\+", "")));
                     String[] s = ArrayUtils.remove(args, 0);
                     s = ArrayUtils.remove(s, 0);
                     s = ArrayUtils.remove(s, 0);
                     String sj = StringUtils.join(s, ' ');
-                    SimpleMessage c = new SimpleMessage(args[1].replaceFirst("+", ""), Integer.parseInt(args[2]), sj, false);
+                    SimpleMessage c = new SimpleMessage(args[1].replaceFirst("\\+", ""), Integer.parseInt(args[2]), sj, false);
                     GeneralRegistry.SimpleMessage.add(c);
                     //        GeneralRegistry.Commands.add(c);
                     IRCUtils.RegisterExistingSimpleMessages();
@@ -79,12 +77,12 @@ public class CustomCMD extends Command {
             } else if (args[1].startsWith("+")) {
                 if (IRCUtils.getCommand(args[1].replaceFirst("-", "")).getPermLevel() <= PermUtils.getPermLevel(event.getBot(), event.getUser(), event.getChannel())) {
 
-                    GeneralRegistry.Commands.remove(IRCUtils.getCommand(args[1].replaceFirst("+", "")));
+                    GeneralRegistry.Commands.remove(IRCUtils.getCommand(args[1].replaceFirst("\\+", "")));
                     String[] s = ArrayUtils.remove(args, 0);
                     s = ArrayUtils.remove(s, 0);
                     s = ArrayUtils.remove(s, 0);
                     String sj = StringUtils.join(s, ' ');
-                    SimpleAction c = new SimpleAction(args[1].replaceFirst("+", ""), Integer.parseInt(args[2]), sj, false);
+                    SimpleAction c = new SimpleAction(args[1].replaceFirst("\\+", ""), Integer.parseInt(args[2]), sj, false);
                     GeneralRegistry.SimpleAction.add(c);
                     //        GeneralRegistry.Commands.add(c);
                     IRCUtils.RegisterExistingSimpleActions();

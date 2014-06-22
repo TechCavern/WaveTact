@@ -12,7 +12,6 @@ import org.pircbotx.hooks.events.KickEvent;
 
 
 /**
- *
  * @author jztech101
  */
 public class KickRejoin extends ListenerAdapter<PircBotX> {

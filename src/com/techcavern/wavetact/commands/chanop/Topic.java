@@ -11,13 +11,14 @@ import org.pircbotx.hooks.events.MessageEvent;
 
 import java.util.Arrays;
 import java.util.List;
+
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- *
  * @author jztech101
  */
+@SuppressWarnings("UnusedDeclaration")
 public class Topic extends Command {
 
     public Topic() {

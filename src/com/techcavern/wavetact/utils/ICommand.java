@@ -8,7 +8,6 @@ package com.techcavern.wavetact.utils;
 import org.pircbotx.hooks.events.MessageEvent;
 
 /**
- *
  * @author jztech101
  */
 public interface ICommand {

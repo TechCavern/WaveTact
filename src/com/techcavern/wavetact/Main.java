@@ -7,9 +7,10 @@ import org.slf4j.impl.SimpleLogger;
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.IRCUtils;
 
+@SuppressWarnings("ConstantConditions")
 public class Main {
 
-    public static MultiBotManager<PircBotX> WaveTact = new MultiBotManager<>();
+    public static MultiBotManager<PircBotX> WaveTact = new MultiBotManager<PircBotX>();
 
     public static void main(String[] args) throws Exception {
         System.out.println("Starting...");

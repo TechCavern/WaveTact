@@ -11,7 +11,6 @@ import org.pircbotx.hooks.events.MessageEvent;
 
 
 /**
- *
  * @author jztech101
  */
 public class Join extends Command {
@@ -21,7 +20,7 @@ public class Join extends Command {
 
     @Override
     public void onCommand(MessageEvent<?> event, String... args)
-        throws Exception {
+            throws Exception {
         event.getBot().sendIRC().joinChannel(args[0]);
     }
 }

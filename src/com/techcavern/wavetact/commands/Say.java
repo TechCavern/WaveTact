@@ -10,7 +10,6 @@ import com.techcavern.wavetact.utils.GeneralRegistry;
 import org.pircbotx.hooks.events.MessageEvent;
 
 /**
- *
  * @author jztech101
  */
 public class Say extends Command {
