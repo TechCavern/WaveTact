@@ -15,7 +15,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class Act extends Command {
 
     public Act() {
-        super("act", 5);
+        super("do", 5);
     }
 
     @Override
