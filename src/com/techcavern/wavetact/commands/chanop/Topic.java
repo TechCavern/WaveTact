@@ -70,9 +70,9 @@ public class Topic extends Command {
             s = ArrayUtils.remove(args, 0);
             String sj = StringUtils.join(s, ' ');
             event.getChannel().send().setTopic(sj);
-        } else if (args[0].equalsIgnoreCase("replace")) {
+        } else if (args[1].equalsIgnoreCase("replace")) {
             event.getChannel().getTopic().replace(args[2], args[3]);
-        } else if (args[0].equalsIgnoreCase("remove")) {
+        } else if (args[1].equalsIgnoreCase("remove")) {
             String[] s = ArrayUtils.remove(args, 0);
             s = ArrayUtils.remove(args, 0);
             String sj = StringUtils.join(s, ' ');
