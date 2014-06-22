@@ -26,8 +26,10 @@ public class Main {
         PircBotX Esper = IRCUtils.createbot(g, "Esper", GeneralRegistry.EsperChannels, GeneralRegistry.EsperNick, GeneralRegistry.EsperServer);
         PircBotX ECode = IRCUtils.createbot(pwd, "ECode", GeneralRegistry.ECodeChannels, GeneralRegistry.ECodeNick, GeneralRegistry.ECodeServer);
         PircBotX Xertion = IRCUtils.createbot(pwd, "Xertion", GeneralRegistry.XertionChannels, GeneralRegistry.XertionNick, GeneralRegistry.XertionServer);
+        PircBotX Obsidian = IRCUtils.createbot(pwd, "Obsidian", GeneralRegistry.ObsidianChannels, GeneralRegistry.ObsidianNick, GeneralRegistry.ObsidianServer);
 
-        WaveTact.addBot(Esper);
+        WaveTact.addBot(Obsidian);
+    //    WaveTact.addBot(Esper);
   //      WaveTact.addBot(Ovd);
     //    WaveTact.addBot(Xertion);
      //   WaveTact.addBot(ECode);

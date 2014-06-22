@@ -24,6 +24,9 @@ public class GeneralRegistry {
     public static String XertionServer = "irc.xertion.org";
     public static List<String> XertionChannels = Arrays.asList(new String[]{"#techcavern"});
     public static String XertionNick = "WaveTact";
+    public static String ObsidianServer = "irc.obsidianirc.net";
+    public static List<String> ObsidianChannels = Arrays.asList(new String[]{"#techcavern", "#szsocial"});
+    public static String ObsidianNick = "WaveTact";
     public static List<Command> Commands = new ArrayList();
     public static List<SimpleMessage> SimpleMessages = new ArrayList();
     public static List<SimpleAction> SimpleActions = new ArrayList();
