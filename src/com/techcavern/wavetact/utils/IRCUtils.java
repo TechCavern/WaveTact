@@ -29,6 +29,7 @@ import com.techcavern.wavetact.commands.chanop.Voice;
 import com.techcavern.wavetact.commands.controller.Join;
 import com.techcavern.wavetact.commands.Say;
 import com.techcavern.wavetact.commands.SomethingAwesome;
+import com.techcavern.wavetact.commands.chanop.Topic;
 import com.techcavern.wavetact.events.HighFive;
 //import com.techcavern.wavetact.commands.TestCommand;
 import com.techcavern.wavetact.events.KickRejoin;
@@ -103,6 +104,7 @@ public class IRCUtils {
         new CustomCMD();
         new CheckUserLevel();
         new BasicCommands();
+        new Topic();
 
     }
 

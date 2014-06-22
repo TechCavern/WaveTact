@@ -16,7 +16,7 @@ public class GeneralRegistry {
     public static String OvdNick = "WaveTact";
     public static String EsperServer = "irc.esper.net";
     public static String EsperNick = "Wavetact";
-    public static List<String> EsperChannels = Arrays.asList(new String[]{"#techcavern"});
+    public static List<String> EsperChannels = Arrays.asList(new String[]{"#techcavern", "#directcode"});
     public static String ECodeServer = "irc.electrocode.net";
     public static List<String> ECodeChannels = Arrays.asList(new String[]{"#techcavern", "#bots"});
     public static String ECodeNick = "WaveTact";
