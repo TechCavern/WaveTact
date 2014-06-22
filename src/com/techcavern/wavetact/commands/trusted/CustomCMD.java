@@ -27,15 +27,16 @@ public class CustomCMD extends Command {
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
         if (args[0].equalsIgnoreCase("m")) {
-            if (args[1].startsWith("-") && IRCUtils.getSimpleAction(args[1].replaceFirst("-", "")) != null) {
-                if (IRCUtils.getSimpleAction(args[1].replaceFirst("-", "")) == null) {
+            if (args[1].startsWith("-")) {
+                if (IRCUtils.getSimpleMessage(args[1].replaceFirst("-", "")) == null) {
                     event.getChannel().send().message("Command Does Not Exist");
                 } else {
-                    if (IRCUtils.getSimpleAction(args[1].replaceFirst("-", "")).getPermLevel() <= PermUtils.getPermLevel(event.getBot(), event.getUser(), event.getChannel())) {
+                    if (IRCUtils.getSimpleMessage(args[1].replaceFirst("-", "")).getPermLevel() <= PermUtils.getPermLevel(event.getBot(), event.getUser(), event.getChannel())) {
                         if (IRCUtils.getSimpleMessage(args[1].replaceFirst("-", "")).getLockedStatus()) {
                             event.getChannel().send().message("Command Locked");
                         } else {
                             GeneralRegistry.SimpleMessages.remove(IRCUtils.getSimpleMessage(args[1].replaceFirst("-", "")));
+                            GeneralRegistry.Commands.remove(IRCUtils.getCommand(args[1].replaceFirst("-", "")));
                             event.getChannel().send().message("Command Removed");
                         }
                     } else {
@@ -51,6 +52,8 @@ public class CustomCMD extends Command {
                             event.getChannel().send().message("Command Locked");
                         } else {
                             GeneralRegistry.SimpleMessages.remove(IRCUtils.getSimpleMessage(args[1].replaceFirst("\\+", "")));
+                            GeneralRegistry.Commands.remove(IRCUtils.getCommand(args[1].replaceFirst("\\+", "")));
+
                             String[] s = ArrayUtils.remove(args, 0);
                             s = ArrayUtils.remove(s, 0);
                             s = ArrayUtils.remove(s, 0);
@@ -74,7 +77,7 @@ public class CustomCMD extends Command {
                 event.getChannel().send().message("Command Added");
             }
         } else if (args[0].equalsIgnoreCase("a")) {
-            if (args[1].startsWith("-") && IRCUtils.getSimpleAction(args[1].replaceFirst("-", "")) != null) {
+            if (args[1].startsWith("-")) {
                 if (IRCUtils.getSimpleAction(args[1].replaceFirst("-", "")) == null) {
                     event.getChannel().send().message("Command Does Not Exist");
                 } else {
@@ -83,6 +86,8 @@ public class CustomCMD extends Command {
                             event.getChannel().send().message("Command Locked");
                         } else {
                             GeneralRegistry.SimpleActions.remove(IRCUtils.getSimpleAction(args[1].replaceFirst("-", "")));
+                            GeneralRegistry.Commands.remove(IRCUtils.getCommand(args[1].replaceFirst("-", "")));
+
                             event.getChannel().send().message("Command Removed");
                         }
                     } else {
@@ -98,6 +103,8 @@ public class CustomCMD extends Command {
                             event.getChannel().send().message("Command Locked");
                         } else {
                             GeneralRegistry.SimpleActions.remove(IRCUtils.getSimpleAction(args[1].replaceFirst("\\+", "")));
+                            GeneralRegistry.Commands.remove(IRCUtils.getCommand(args[1].replaceFirst("\\+", "")));
+
                             String[] s = ArrayUtils.remove(args, 0);
                             s = ArrayUtils.remove(s, 0);
                             s = ArrayUtils.remove(s, 0);

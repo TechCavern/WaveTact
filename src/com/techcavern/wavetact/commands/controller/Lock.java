@@ -21,16 +21,23 @@ public class Lock extends Command {
     public void onCommand(MessageEvent<?> event, String... args)
             throws Exception {
         if (args[0].equalsIgnoreCase("a")) {
-            if (args[0].startsWith("-")) {
+            if (args[1].startsWith("-")) {
                 IRCUtils.getSimpleAction(args[1].replaceFirst("-", "")).unlock();
+                event.getChannel().send().message("Command Unlocked");
             } else {
                 IRCUtils.getSimpleAction(args[1].replaceFirst("-", "")).lock();
+                event.getChannel().send().message("Command locked");
+
             }
         } else if (args[0].equalsIgnoreCase("m")) {
-            if (args[0].startsWith("-")) {
+            if (args[1].startsWith("-")) {
                 IRCUtils.getSimpleMessage(args[1].replaceFirst("-", "")).unlock();
+                event.getChannel().send().message("Command Unlocked");
+
             } else {
                 IRCUtils.getSimpleMessage(args[1].replaceFirst("-", "")).lock();
+                event.getChannel().send().message("Command locked");
+
             }
         }
     }

@@ -7,6 +7,7 @@ import com.techcavern.wavetact.commands.CheckUserLevel;
 import com.techcavern.wavetact.commands.SomethingAwesome;
 import com.techcavern.wavetact.commands.chanop.*;
 import com.techcavern.wavetact.commands.controller.Join;
+import com.techcavern.wavetact.commands.controller.Lock;
 import com.techcavern.wavetact.commands.trusted.Act;
 import com.techcavern.wavetact.commands.trusted.CustomCMD;
 import com.techcavern.wavetact.commands.trusted.Say;
@@ -98,6 +99,7 @@ public class IRCUtils {
         new CheckUserLevel();
         new BasicCommands();
         new Topic();
+        new Lock();
 
     }
 
