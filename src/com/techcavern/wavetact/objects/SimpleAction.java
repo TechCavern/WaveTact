@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.techcavern.wavetact.utils;
+package com.techcavern.wavetact.objects;
 
 import org.pircbotx.hooks.events.MessageEvent;
 
 /**
  * @author jztech101
  */
-public class SimpleAction extends AbstractCommand {
+public class SimpleAction extends Command {
 
     private String action;
     private boolean locked;

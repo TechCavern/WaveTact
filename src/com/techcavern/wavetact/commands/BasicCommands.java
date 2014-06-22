@@ -1,5 +1,7 @@
 package com.techcavern.wavetact.commands;
 
+import com.techcavern.wavetact.objects.SimpleMessage;
+import com.techcavern.wavetact.objects.SimpleAction;
 import com.techcavern.wavetact.utils.*;
 
 

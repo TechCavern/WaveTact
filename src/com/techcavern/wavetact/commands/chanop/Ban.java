@@ -1,6 +1,6 @@
 package com.techcavern.wavetact.commands.chanop;
 
-import com.techcavern.wavetact.utils.AbstractCommand;
+import com.techcavern.wavetact.objects.Command;
 
 import java.util.concurrent.TimeUnit;
 
@@ -11,7 +11,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 
 import com.techcavern.wavetact.utils.IRCUtils;
 
-public class Ban extends AbstractCommand {
+public class Ban extends Command {
 
     public Ban() {
         super("Ban", 10);

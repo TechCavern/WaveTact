@@ -5,7 +5,7 @@
  */
 package com.techcavern.wavetact.commands.chanop;
 
-import com.techcavern.wavetact.utils.AbstractCommand;
+import com.techcavern.wavetact.objects.Command;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.pircbotx.UserLevel;
 import org.pircbotx.hooks.events.MessageEvent;
@@ -13,7 +13,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 /**
  * @author jztech101
  */
-public class Kick extends AbstractCommand {
+public class Kick extends Command {
 
     public Kick() {
         super("kick", 10);

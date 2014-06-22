@@ -5,28 +5,27 @@
  */
 package com.techcavern.wavetact.commands.chanop;
 
-import com.techcavern.wavetact.utils.AbstractCommand;
-
-import org.pircbotx.hooks.events.MessageEvent;
+import com.techcavern.wavetact.objects.Command;
 
 import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.pircbotx.hooks.events.MessageEvent;
 
 /**
  * @author jztech101
  */
 @SuppressWarnings("UnusedDeclaration")
-public class Topic extends AbstractCommand {
-
-    public Topic() {
+public class Topic extends Command{
+   
+    public Topic (){
         super("topic", 10);
     }
 
     @Override
-    public void onCommand(MessageEvent<?> event, String... args) {
+    public void onCommand(MessageEvent<?> event, String... args) throws Exception{
 
         List<String> t = Arrays.asList(event.getChannel().getTopic()
                 .split(args[0]));

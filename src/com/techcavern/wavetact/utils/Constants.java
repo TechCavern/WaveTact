@@ -1,4 +1,4 @@
-package com.techcavern.wavetact;
+package com.techcavern.wavetact.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

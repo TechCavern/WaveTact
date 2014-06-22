@@ -5,6 +5,7 @@
  */
 package com.techcavern.wavetact.utils;
 
+import com.techcavern.wavetact.objects.Command;
 import org.apache.commons.lang3.ArrayUtils;
 import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.ListenerAdapter;
@@ -20,7 +21,7 @@ public class MessageListener extends ListenerAdapter<PircBotX> {
         String[] messageParts = event.getMessage().split(" ");
         String m = messageParts[0].toLowerCase();
         for (int c = 0; c < GeneralRegistry.Commands.size(); c++) {
-            AbstractCommand Command = GeneralRegistry.Commands.get(c);
+            Command Command = GeneralRegistry.Commands.get(c);
             if (m.equalsIgnoreCase(GeneralRegistry.CommandChar + Command.getCommandID())) {
                 if (PermUtils.getPermLevel(event.getBot(), event.getUser(), event.getChannel()) >= Command.getPermLevel()) {
                     if (Command.getPermLevel() == 10) {

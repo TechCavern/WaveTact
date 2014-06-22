@@ -3,19 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.techcavern.wavetact.utils;
+package com.techcavern.wavetact.objects;
 
+import com.techcavern.wavetact.utils.GeneralRegistry;
+import com.techcavern.wavetact.utils.GeneralRegistry;
 import org.pircbotx.hooks.events.MessageEvent;
 
 /**
  * @author jztech101
  */
-public abstract class AbstractCommand implements Command {
+public abstract class Command {
 
     private String comid;
     private int PermLevel;
 
-    protected AbstractCommand(String comid, int PermLevel) {
+    protected Command(String comid, int PermLevel) {
         this.comid = comid.toLowerCase();
         this.PermLevel = PermLevel;
         create();
@@ -29,12 +31,10 @@ public abstract class AbstractCommand implements Command {
 
     public abstract void onCommand(MessageEvent<?> event, String... args) throws Exception;
 
-    @Override
     public int getPermLevel() {
         return PermLevel;
     }
 
-    @Override
     public String getCommandID() {
         return comid;
     }

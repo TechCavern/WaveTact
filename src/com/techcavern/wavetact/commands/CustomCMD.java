@@ -5,8 +5,10 @@
  */
 package com.techcavern.wavetact.commands;
 
+import com.techcavern.wavetact.objects.SimpleMessage;
+import com.techcavern.wavetact.objects.SimpleAction;
 import com.techcavern.wavetact.utils.*;
-import com.techcavern.wavetact.utils.AbstractCommand;
+import com.techcavern.wavetact.objects.Command;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.hooks.events.MessageEvent;
@@ -14,7 +16,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 /**
  * @author jztech101
  */
-public class CustomCMD extends AbstractCommand {
+public class CustomCMD extends Command {
 
     public CustomCMD() {
         super("customcmd", 0);
@@ -40,9 +42,9 @@ public class CustomCMD extends AbstractCommand {
                     s = ArrayUtils.remove(s, 0);
                     String sj = StringUtils.join(s, ' ');
                     SimpleMessage c = new SimpleMessage(args[1].replaceFirst("\\+", ""), Integer.parseInt(args[2]), sj, false);
-                    GeneralRegistry.SimpleMessage.add(c);
+           //         GeneralRegistry.SimpleMessage.add(c);
                     //        GeneralRegistry.Commands.add(c);
-                    IRCUtils.RegisterExistingSimpleMessages();
+          //          IRCUtils.RegisterExistingSimpleMessages();
                     event.getChannel().send().message("Command Changed");
                 }
             } else {
@@ -52,9 +54,9 @@ public class CustomCMD extends AbstractCommand {
 
                 String sj = StringUtils.join(s, ' ');
                 SimpleMessage c = new SimpleMessage(args[1], Integer.parseInt(args[2]), sj, false);
-                GeneralRegistry.SimpleMessage.add(c);
+           //     GeneralRegistry.SimpleMessage.add(c);
                 //          GeneralRegistry.Commands.add(c);
-                IRCUtils.RegisterExistingSimpleMessages();
+            //    IRCUtils.RegisterExistingSimpleMessages();
                 event.getChannel().send().message("Command Added");
 
             }
@@ -78,9 +80,9 @@ public class CustomCMD extends AbstractCommand {
                     s = ArrayUtils.remove(s, 0);
                     String sj = StringUtils.join(s, ' ');
                     SimpleAction c = new SimpleAction(args[1].replaceFirst("\\+", ""), Integer.parseInt(args[2]), sj, false);
-                    GeneralRegistry.SimpleAction.add(c);
+          //          GeneralRegistry.SimpleAction.add(c);
                     //        GeneralRegistry.Commands.add(c);
-                    IRCUtils.RegisterExistingSimpleActions();
+                //    IRCUtils.RegisterExistingSimpleActions();
                     event.getChannel().send().message("Command Changed");
 
                 } else {
@@ -93,9 +95,9 @@ public class CustomCMD extends AbstractCommand {
 
                 String sj = StringUtils.join(s, ' ');
                 SimpleAction c = new SimpleAction(args[1], Integer.parseInt(args[2]), sj, false);
-                GeneralRegistry.SimpleAction.add(c);
+     //           GeneralRegistry.SimpleAction.add(c);
                 //        GeneralRegistry.Commands.add(c);
-                IRCUtils.RegisterExistingSimpleActions();
+            //    IRCUtils.RegisterExistingSimpleActions();
                 event.getChannel().send().message("Command Added");
 
             }

@@ -5,14 +5,14 @@
  */
 package com.techcavern.wavetact.commands.chanop;
 
-import com.techcavern.wavetact.utils.AbstractCommand;
+import com.techcavern.wavetact.objects.Command;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.pircbotx.hooks.events.MessageEvent;
 
 /**
  * @author jztech101
  */
-public class Owner extends AbstractCommand {
+public class Owner extends Command {
 
     public Owner() {
         super("owner", 15);

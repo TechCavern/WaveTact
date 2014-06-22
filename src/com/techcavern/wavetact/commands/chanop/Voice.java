@@ -5,7 +5,7 @@
  */
 package com.techcavern.wavetact.commands.chanop;
 
-import com.techcavern.wavetact.utils.AbstractCommand;
+import com.techcavern.wavetact.objects.Command;
 import com.techcavern.wavetact.utils.IRCUtils;
 
 import org.pircbotx.hooks.events.MessageEvent;
@@ -14,7 +14,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 /**
  * @author jztech101
  */
-public class Voice extends AbstractCommand {
+public class Voice extends Command {
     public Voice() {
         super("voice", 10);
     }

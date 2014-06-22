@@ -5,7 +5,7 @@
  */
 package com.techcavern.wavetact.commands.controller;
 
-import com.techcavern.wavetact.utils.AbstractCommand;
+import com.techcavern.wavetact.objects.Command;
 
 import org.pircbotx.hooks.events.MessageEvent;
 
@@ -13,7 +13,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 /**
  * @author jztech101
  */
-public class Join extends AbstractCommand {
+public class Join extends Command {
     public Join() {
         super("join", 10);
     }

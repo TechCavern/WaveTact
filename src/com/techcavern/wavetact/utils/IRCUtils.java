@@ -1,5 +1,6 @@
 package com.techcavern.wavetact.utils;
 
+import com.techcavern.wavetact.objects.Command;
 import com.google.common.collect.Sets;
 import java.nio.charset.Charset;
 import java.util.List;
@@ -107,7 +108,7 @@ public class IRCUtils {
         new Topic();
 
     }
-
+/*
     public static void RegisterExistingSimpleMessages() {
         Config config = new Config("SimpleMessage.json");
 
@@ -137,10 +138,10 @@ public class IRCUtils {
             GeneralRegistry.Commands.add(Command);
         }
     }
-
+*/
     public static Command getCommand(String Command) {
         for (Command g : GeneralRegistry.Commands) {
-            if (g.getcomid().equalsIgnoreCase(Command)) {
+            if (g.getCommandID().equalsIgnoreCase(Command)) {
                 return g;
             }
         }
