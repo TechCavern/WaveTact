@@ -28,8 +28,8 @@ public class GeneralRegistry {
     public static String ObsidianServer = "irc.obsidianirc.net";
     public static List<String> ObsidianChannels = Arrays.asList("#techcavern", "#szsocial");
     public static String ObsidianNick = "WaveTact";
-    public static List<Command> Commands = new DebuggingArrayList<>("Commands");
-    public static List<SimpleMessage> SimpleMessages = new DebuggingArrayList<>("SimpleMessages");
-    public static List<SimpleAction> SimpleActions = new DebuggingArrayList<>("SimpleActions");
+    public static List<Command> Commands = new ArrayList<>();
+    public static List<SimpleMessage> SimpleMessages = new ArrayList<>();
+    public static List<SimpleAction> SimpleActions = new ArrayList<>();
     public static List<String> HighFives = new ArrayList<>();
 }

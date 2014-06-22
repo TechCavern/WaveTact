@@ -170,7 +170,7 @@ public class IRCUtils {
         JSONFile file = new JSONFile("SimpleActions.json");
         if (file.exists()) {
             try {
-                List<SimpleAction> actions = file.read(List.class);
+                List<SimpleAction> actions = file.read();
                 GeneralRegistry.SimpleActions.clear();
                 GeneralRegistry.SimpleActions.addAll(actions);
             } catch (FileNotFoundException e) {
