@@ -9,10 +9,12 @@ package com.techcavern.wavetact.utils;
  *
  * @author jztech101
  */
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -82,9 +84,7 @@ public class SaveUtils {
                 lines.add(scan.nextLine());
             }
 
-            for (String s : strings) {
-                lines.add(s);
-            }
+            Collections.addAll(lines, strings);
 
             scan.close();
 

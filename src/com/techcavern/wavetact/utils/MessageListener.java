@@ -11,7 +11,6 @@ import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.MessageEvent;
 
 /**
- *
  * @author jztech101
  */
 public class MessageListener extends ListenerAdapter<PircBotX> {
@@ -21,8 +20,8 @@ public class MessageListener extends ListenerAdapter<PircBotX> {
         String[] messageParts = event.getMessage().split(" ");
         String m = messageParts[0].toLowerCase();
         for (int c = 0; c < GeneralRegistry.Commands.size(); c++) {
-            Command Command = GeneralRegistry.Commands.get(c);
-            if (m.equalsIgnoreCase(GeneralRegistry.CommandChar + Command.getcomid())) {
+            AbstractCommand Command = GeneralRegistry.Commands.get(c);
+            if (m.equalsIgnoreCase(GeneralRegistry.CommandChar + Command.getCommandID())) {
                 if (PermUtils.getPermLevel(event.getBot(), event.getUser(), event.getChannel()) >= Command.getPermLevel()) {
                     if (Command.getPermLevel() == 10) {
                         if (event.getChannel().isOp(event.getBot().getUserBot()) || event.getChannel().isOwner(event.getBot().getUserBot())) {

@@ -10,7 +10,7 @@ public class BasicCommands {
     SimpleMessage source = new SimpleMessage("source", 0,
             "http://github.com/TechCavern/WaveTact", true);
 
-    public void BasicCommands() {
+    public void basicCommands() {
         GeneralRegistry.Commands.add(potato);
         GeneralRegistry.Commands.add(ping);
         GeneralRegistry.Commands.add(pong);

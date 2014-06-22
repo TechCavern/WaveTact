@@ -5,20 +5,21 @@
  */
 package com.techcavern.wavetact.commands.chanop;
 
-import com.techcavern.wavetact.utils.Command;
+import com.techcavern.wavetact.utils.AbstractCommand;
 
 import org.pircbotx.hooks.events.MessageEvent;
 
 import java.util.Arrays;
 import java.util.List;
+
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- *
  * @author jztech101
  */
-public class Topic extends Command {
+@SuppressWarnings("UnusedDeclaration")
+public class Topic extends AbstractCommand {
 
     public Topic() {
         super("topic", 10);
@@ -51,8 +52,6 @@ public class Topic extends Command {
                                     sj));
         } else if (args[1].equalsIgnoreCase("addpart")) {
             String[] s = ArrayUtils.remove(args, 0);
-            s = ArrayUtils.remove(args, 0);
-            s = ArrayUtils.remove(args, 0);
 
             String sj = StringUtils.join(s, ' ');
             event.getChannel().send()

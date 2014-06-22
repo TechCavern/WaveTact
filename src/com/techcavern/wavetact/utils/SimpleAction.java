@@ -8,29 +8,32 @@ package com.techcavern.wavetact.utils;
 import org.pircbotx.hooks.events.MessageEvent;
 
 /**
- *
  * @author jztech101
  */
-public class SimpleAction extends Command {
+public class SimpleAction extends AbstractCommand {
 
     private String action;
     private boolean locked;
 
-    public SimpleAction(String i, int p, String a, boolean b)    {
+    public SimpleAction(String i, int p, String a, boolean b) {
         super(i, p);
+        System.out.println("Created Simple Action: " + i);
         this.action = a;
         this.locked = b;
     }
 
     @Override
-    public void onCommand(MessageEvent<?> event, String... args) throws Exception{
+    public void onCommand(MessageEvent<?> event, String... args) throws Exception {
 
         event.getChannel().send().action(action);
 
-}public String getAction(){
+    }
+
+    public String getAction() {
         return this.action;
     }
- public boolean getLockedStatus(){
-     return locked;
- }
+
+    public boolean getLockedStatus() {
+        return locked;
+    }
 }

@@ -5,23 +5,22 @@
  */
 package com.techcavern.wavetact.commands.controller;
 
-import com.techcavern.wavetact.utils.Command;
+import com.techcavern.wavetact.utils.AbstractCommand;
 
 import org.pircbotx.hooks.events.MessageEvent;
 
 
 /**
- *
  * @author jztech101
  */
-public class Join extends Command {
+public class Join extends AbstractCommand {
     public Join() {
         super("join", 10);
     }
 
     @Override
     public void onCommand(MessageEvent<?> event, String... args)
-        throws Exception {
+            throws Exception {
         event.getBot().sendIRC().joinChannel(args[0]);
     }
 }

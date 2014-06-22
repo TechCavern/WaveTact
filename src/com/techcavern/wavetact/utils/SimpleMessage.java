@@ -8,10 +8,9 @@ package com.techcavern.wavetact.utils;
 import org.pircbotx.hooks.events.MessageEvent;
 
 /**
- *
  * @author jztech101
  */
-public class SimpleMessage extends Command {
+public class SimpleMessage extends AbstractCommand {
 
     private String message;
     private boolean locked;

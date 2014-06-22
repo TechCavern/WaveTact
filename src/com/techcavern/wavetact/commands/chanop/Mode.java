@@ -5,14 +5,13 @@
  */
 package com.techcavern.wavetact.commands.chanop;
 
-import com.techcavern.wavetact.utils.Command;
+import com.techcavern.wavetact.utils.AbstractCommand;
 import org.pircbotx.hooks.events.MessageEvent;
 
 /**
- *
  * @author jztech101
  */
-public class Mode extends Command {
+public class Mode extends AbstractCommand {
 
     public Mode() {
         super("mode", 10);

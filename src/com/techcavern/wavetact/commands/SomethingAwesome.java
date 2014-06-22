@@ -5,15 +5,14 @@
  */
 package com.techcavern.wavetact.commands;
 
-import com.techcavern.wavetact.utils.Command;
+import com.techcavern.wavetact.utils.AbstractCommand;
 import org.pircbotx.UserLevel;
 import org.pircbotx.hooks.events.MessageEvent;
 
 /**
- *
  * @author jztech101
  */
-public class SomethingAwesome extends Command {
+public class SomethingAwesome extends AbstractCommand {
 
     public SomethingAwesome() {
         super("somethingawesome", 0);
@@ -21,7 +20,7 @@ public class SomethingAwesome extends Command {
 
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
-        if (event.getChannel().getUserLevels(event.getBot().getUserBot()).contains(UserLevel.OP) && event.getChannel().isOwner(event.getUser()) == false && event.getChannel().isSuperOp(event.getUser()) == false) {
+        if (event.getChannel().getUserLevels(event.getBot().getUserBot()).contains(UserLevel.OP) && !event.getChannel().isOwner(event.getUser()) && !event.getChannel().isSuperOp(event.getUser())) {
             event.getChannel().send().kick(event.getUser(), "http://bit.ly/1c9vo1S");
         } else if (event.getChannel().getUserLevels(event.getBot().getUserBot()).contains(UserLevel.OWNER)) {
             event.getChannel().send().kick(event.getUser(), "http://bit.ly/1c9vo1S");

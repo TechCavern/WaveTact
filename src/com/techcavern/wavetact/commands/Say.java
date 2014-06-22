@@ -5,15 +5,14 @@
  */
 package com.techcavern.wavetact.commands;
 
-import com.techcavern.wavetact.utils.Command;
+import com.techcavern.wavetact.utils.AbstractCommand;
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import org.pircbotx.hooks.events.MessageEvent;
 
 /**
- *
  * @author jztech101
  */
-public class Say extends Command {
+public class Say extends AbstractCommand {
 
     public Say() {
         super("say", 5);

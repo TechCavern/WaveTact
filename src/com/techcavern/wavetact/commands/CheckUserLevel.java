@@ -1,11 +1,11 @@
 package com.techcavern.wavetact.commands;
 
-import com.techcavern.wavetact.utils.Command;
+import com.techcavern.wavetact.utils.AbstractCommand;
 import org.pircbotx.hooks.events.MessageEvent;
 
 import com.techcavern.wavetact.utils.PermUtils;
 
-public class CheckUserLevel extends Command {
+public class CheckUserLevel extends AbstractCommand {
 
     public CheckUserLevel() {
         super("level", 10);
@@ -26,7 +26,5 @@ public class CheckUserLevel extends Command {
         } else {
             event.getChannel().send().message("You are a Regular User!");
         }
-
     }
-
 }

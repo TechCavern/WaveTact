@@ -8,22 +8,21 @@ package com.techcavern.wavetact.utils;
 import org.pircbotx.hooks.events.MessageEvent;
 
 /**
- *
  * @author jztech101
  */
-public abstract class Command implements ICommand {
+public abstract class AbstractCommand implements Command {
 
     private String comid;
     private int PermLevel;
 
-    protected Command(String comid, int PermLevel) {
+    protected AbstractCommand(String comid, int PermLevel) {
         this.comid = comid.toLowerCase();
         this.PermLevel = PermLevel;
         create();
 
     }
 
-    public ICommand create() {
+    public Command create() {
         GeneralRegistry.Commands.add(this);
         return this;
     }
@@ -36,7 +35,7 @@ public abstract class Command implements ICommand {
     }
 
     @Override
-    public String getcomid() {
+    public String getCommandID() {
         return comid;
     }
 }
