@@ -37,7 +37,7 @@ public class IRCUtils {
 
     public static PircBotX createbot(String g, String Name, List<String> channels, String Nick, String Server) throws Exception {
         System.out.println("Configuring " + Name);
-        Builder<PircBotX> Net = new Configuration.Builder<PircBotX>();
+        Builder<PircBotX> Net = new Configuration.Builder<>();
         Net.setName(Nick);
         Net.setLogin("WaveTact");
         Net.setEncoding(Charset.isSupported("UTF-8") ? Charset.forName("UTF-8") : Charset.defaultCharset());

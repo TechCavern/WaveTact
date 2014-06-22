@@ -21,6 +21,5 @@ public class Act extends Command {
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
         event.getChannel().send().action(event.getMessage().replace(GeneralRegistry.CommandChar + "act ", ""));
-
     }
 }

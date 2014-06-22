@@ -38,4 +38,8 @@ public abstract class Command {
         return comid;
     }
 
+    @Override
+    public String toString() {
+        return "Command(" + comid + ")";
+    }
 }

@@ -1,12 +1,9 @@
 package com.techcavern.wavetact.utils;
 
 import com.techcavern.wavetact.objects.Command;
-import com.techcavern.wavetact.objects.JSONFile;
 import com.techcavern.wavetact.objects.SimpleAction;
 import com.techcavern.wavetact.objects.SimpleMessage;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,7 +28,7 @@ public class GeneralRegistry {
     public static String ObsidianServer = "irc.obsidianirc.net";
     public static List<String> ObsidianChannels = Arrays.asList("#techcavern", "#szsocial");
     public static String ObsidianNick = "WaveTact";
-    public static List<Command> Commands = new ArrayList<>();
+    public static List<Command> Commands = new DebuggingArrayList<>("Commands");
     public static List<SimpleMessage> SimpleMessages = new ArrayList<>();
     public static List<SimpleAction> SimpleActions = new ArrayList<>();
     public static List<String> HighFives = new ArrayList<>();
