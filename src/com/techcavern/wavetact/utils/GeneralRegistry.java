@@ -9,7 +9,7 @@ import java.util.List;
 public class GeneralRegistry {
 
     public static String CommandChar = "@";
-    public static List<String> Controllers = Arrays.asList(new String[]{"jztech101", "Archtikz"});
+    public static List<String> Controllers = Arrays.asList(new String[]{"jztech101", "Archtikz", "kaendfinger"});
     public static List<String> ControllerHostmasks = Arrays.asList(new String[]{"*!jztech101@crabhost.org"});
     public static String OvdServer = "irc.overdrive.pw";
     public static List<String> OvdChannels = Arrays.asList(new String[]{"#techcavern", "#dev"});

@@ -1,7 +1,6 @@
 package com.techcavern.wavetact.utils;
 
 import com.techcavern.wavetact.objects.Command;
-import com.google.common.collect.Sets;
 import java.nio.charset.Charset;
 import java.util.List;
 
@@ -13,7 +12,6 @@ import org.pircbotx.User;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 import com.techcavern.wavetact.commands.chanop.Ban;
 import com.techcavern.wavetact.commands.chanop.Quiet;
 import com.techcavern.wavetact.commands.trusted.Act;
@@ -34,7 +32,6 @@ import com.techcavern.wavetact.commands.chanop.Topic;
 import com.techcavern.wavetact.events.HighFive;
 //import com.techcavern.wavetact.commands.TestCommand;
 import com.techcavern.wavetact.events.KickRejoin;
-import java.util.Set;
 import org.pircbotx.output.OutputChannel;
 import org.pircbotx.output.OutputUser;
 
