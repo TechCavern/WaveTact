@@ -118,7 +118,7 @@ public class IRCUtils {
             GeneralRegistry.SimpleMessage = Sets.newConcurrentHashSet();
         }
 
-        for (Command Command : GeneralRegistry.SimpleMessage) {
+        for (AbstractCommand Command : GeneralRegistry.SimpleMessage) {
             GeneralRegistry.Commands.add(Command);
         }
     }
@@ -133,14 +133,14 @@ public class IRCUtils {
             GeneralRegistry.SimpleAction = Sets.newConcurrentHashSet();
         }
 
-        for (Command Command : GeneralRegistry.SimpleAction) {
+        for (AbstractCommand Command : GeneralRegistry.SimpleAction) {
             GeneralRegistry.Commands.add(Command);
         }
     }
 
-    public static Command getCommand(String Command) {
-        for (Command g : GeneralRegistry.Commands) {
-            if (g.getcomid().equalsIgnoreCase(Command)) {
+    public static AbstractCommand getCommand(String Command) {
+        for (AbstractCommand g : GeneralRegistry.Commands) {
+            if (g.getCommandID().equalsIgnoreCase(Command)) {
                 return g;
             }
         }

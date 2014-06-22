@@ -1,6 +1,6 @@
 package com.techcavern.wavetact.commands.chanop;
 
-import com.techcavern.wavetact.utils.Command;
+import com.techcavern.wavetact.utils.AbstractCommand;
 import com.techcavern.wavetact.utils.IRCUtils;
 
 import org.pircbotx.Channel;
@@ -12,7 +12,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 import java.util.concurrent.TimeUnit;
 
 
-public class Quiet extends Command {
+public class Quiet extends AbstractCommand {
     public Quiet() {
         super("Quiet", 10);
     }

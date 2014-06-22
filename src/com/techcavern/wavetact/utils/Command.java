@@ -10,32 +10,13 @@ import org.pircbotx.hooks.events.MessageEvent;
 /**
  * @author jztech101
  */
-public abstract class Command implements ICommand {
+public interface Command {
 
-    private String comid;
-    private int PermLevel;
+    public Command create();
 
-    protected Command(String comid, int PermLevel) {
-        this.comid = comid.toLowerCase();
-        this.PermLevel = PermLevel;
-        create();
+    public void onCommand(MessageEvent<?> event, String... args) throws Exception;
 
-    }
+    public int getPermLevel();
 
-    public ICommand create() {
-        GeneralRegistry.Commands.add(this);
-        return this;
-    }
-
-    public abstract void onCommand(MessageEvent<?> event, String... args) throws Exception;
-
-    @Override
-    public int getPermLevel() {
-        return PermLevel;
-    }
-
-    @Override
-    public String getcomid() {
-        return comid;
-    }
+    public String getCommandID();
 }

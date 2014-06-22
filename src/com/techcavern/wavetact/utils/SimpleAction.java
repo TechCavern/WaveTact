@@ -10,7 +10,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 /**
  * @author jztech101
  */
-public class SimpleAction extends Command {
+public class SimpleAction extends AbstractCommand {
 
     private String action;
     private boolean locked;

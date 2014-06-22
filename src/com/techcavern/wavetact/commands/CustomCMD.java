@@ -5,12 +5,8 @@
  */
 package com.techcavern.wavetact.commands;
 
-import com.techcavern.wavetact.utils.Command;
-import com.techcavern.wavetact.utils.GeneralRegistry;
-import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.PermUtils;
-import com.techcavern.wavetact.utils.SimpleAction;
-import com.techcavern.wavetact.utils.SimpleMessage;
+import com.techcavern.wavetact.utils.*;
+import com.techcavern.wavetact.utils.AbstractCommand;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.hooks.events.MessageEvent;
@@ -18,7 +14,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 /**
  * @author jztech101
  */
-public class CustomCMD extends Command {
+public class CustomCMD extends AbstractCommand {
 
     public CustomCMD() {
         super("customcmd", 0);

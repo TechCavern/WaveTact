@@ -5,7 +5,7 @@
  */
 package com.techcavern.wavetact.commands.chanop;
 
-import com.techcavern.wavetact.utils.Command;
+import com.techcavern.wavetact.utils.AbstractCommand;
 import com.techcavern.wavetact.utils.IRCUtils;
 
 import org.pircbotx.hooks.events.MessageEvent;
@@ -14,7 +14,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 /**
  * @author jztech101
  */
-public class Protect extends Command {
+public class Protect extends AbstractCommand {
     public Protect() {
         super("protect", 15);
     }

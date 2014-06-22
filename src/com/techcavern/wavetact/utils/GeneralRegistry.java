@@ -24,7 +24,7 @@ public class GeneralRegistry {
     public static String XertionServer = "irc.xertion.org";
     public static List<String> XertionChannels = Arrays.asList("#techcavern");
     public static String XertionNick = "WaveTact";
-    public static List<Command> Commands = new ArrayList<Command>();
+    public static List<AbstractCommand> Commands = new ArrayList<AbstractCommand>();
     public static List<String> HighFives = new ArrayList<String>();
     public static Set<SimpleMessage> SimpleMessage = Sets.newConcurrentHashSet();
     public static Set<SimpleAction> SimpleAction = Sets.newConcurrentHashSet();

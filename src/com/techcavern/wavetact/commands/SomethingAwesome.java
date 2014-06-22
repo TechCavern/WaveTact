@@ -5,14 +5,14 @@
  */
 package com.techcavern.wavetact.commands;
 
-import com.techcavern.wavetact.utils.Command;
+import com.techcavern.wavetact.utils.AbstractCommand;
 import org.pircbotx.UserLevel;
 import org.pircbotx.hooks.events.MessageEvent;
 
 /**
  * @author jztech101
  */
-public class SomethingAwesome extends Command {
+public class SomethingAwesome extends AbstractCommand {
 
     public SomethingAwesome() {
         super("somethingawesome", 0);

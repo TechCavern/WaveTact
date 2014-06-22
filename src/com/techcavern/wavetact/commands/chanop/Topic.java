@@ -5,7 +5,7 @@
  */
 package com.techcavern.wavetact.commands.chanop;
 
-import com.techcavern.wavetact.utils.Command;
+import com.techcavern.wavetact.utils.AbstractCommand;
 
 import org.pircbotx.hooks.events.MessageEvent;
 
@@ -19,7 +19,7 @@ import org.apache.commons.lang3.StringUtils;
  * @author jztech101
  */
 @SuppressWarnings("UnusedDeclaration")
-public class Topic extends Command {
+public class Topic extends AbstractCommand {
 
     public Topic() {
         super("topic", 10);

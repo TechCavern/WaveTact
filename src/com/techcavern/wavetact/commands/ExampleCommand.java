@@ -1,13 +1,13 @@
 package com.techcavern.wavetact.commands;
 
-import com.techcavern.wavetact.utils.Command;
+import com.techcavern.wavetact.utils.AbstractCommand;
 import org.pircbotx.hooks.events.MessageEvent;
 
 /**
  * For Future Reference
  */
 @SuppressWarnings("ALL")
-public class ExampleCommand extends Command {
+public class ExampleCommand extends AbstractCommand {
     public ExampleCommand() {
         super("blah", 10);
     }
