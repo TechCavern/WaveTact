@@ -23,7 +23,6 @@ public class SimpleMessage extends Command {
 
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
-
         event.getChannel().send().message(message);
     }
 

@@ -100,7 +100,6 @@ public class IRCUtils {
         new BasicCommands();
         new Topic();
         new Lock();
-
     }
 
     /*
@@ -179,10 +178,11 @@ public class IRCUtils {
             }
         }
     }
+
     public static void saveSimpleMessages() {
         JSONFile file = new JSONFile("SimpleMessages.json");
         try {
-            file.write(GeneralRegistry.SimpleActions);
+            file.write(GeneralRegistry.SimpleMessages);
         } catch (IOException e) {
             ErrorUtils.handleException(e);
         }
@@ -193,9 +193,9 @@ public class IRCUtils {
         JSONFile file = new JSONFile("SimpleMessages.json");
         if (file.exists()) {
             try {
-                List<SimpleAction> actions = file.read(List.class);
-                GeneralRegistry.SimpleActions.clear();
-                GeneralRegistry.SimpleActions.addAll(actions);
+                List<SimpleMessage> messages = file.read();
+                GeneralRegistry.SimpleMessages.clear();
+                GeneralRegistry.SimpleMessages.addAll(messages);
             } catch (FileNotFoundException e) {
                 ErrorUtils.handleException(e);
             }
