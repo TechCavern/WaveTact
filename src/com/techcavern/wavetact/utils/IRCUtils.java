@@ -9,6 +9,7 @@ import com.techcavern.wavetact.commands.chanop.*;
 import com.techcavern.wavetact.commands.controller.*;
 import com.techcavern.wavetact.commands.trusted.Act;
 import com.techcavern.wavetact.commands.trusted.CustomCMD;
+import com.techcavern.wavetact.commands.trusted.Part;
 import com.techcavern.wavetact.commands.trusted.Say;
 import com.techcavern.wavetact.events.HighFive;
 import com.techcavern.wavetact.events.KickRejoin;

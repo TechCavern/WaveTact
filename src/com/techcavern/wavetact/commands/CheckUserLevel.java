@@ -7,7 +7,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class CheckUserLevel extends Command {
 
     public CheckUserLevel() {
-        super("level", 10);
+        super("level", 0);
     }
 
     @Override
