@@ -3,7 +3,10 @@ package com.techcavern.wavetact.utils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.internal.LinkedTreeMap;
+
 import com.techcavern.wavetact.commands.CheckUserLevel;
+import com.techcavern.wavetact.commands.Commands;
+import com.techcavern.wavetact.commands.Help;
 import com.techcavern.wavetact.commands.SomethingAwesome;
 import com.techcavern.wavetact.commands.chanop.*;
 import com.techcavern.wavetact.commands.controller.*;
@@ -30,7 +33,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.List;
 
-//import com.techcavern.wavetact.commands.TestCommand;
+//import com.techcavern.wavetact.Commands.Commands.TestCommand;
 
 public class IRCUtils {
 
@@ -101,6 +104,8 @@ public class IRCUtils {
         new Topic();
         new Lock();
         new Shutdown();
+        new Help();
+        new Commands();
     }
 
 

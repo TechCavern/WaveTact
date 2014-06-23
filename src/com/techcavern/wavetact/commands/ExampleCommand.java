@@ -1,7 +1,12 @@
 package com.techcavern.wavetact.commands;
 
 import com.techcavern.wavetact.objects.Command;
+import com.techcavern.wavetact.utils.GeneralRegistry;
+import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.hooks.events.MessageEvent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * For Future Reference
@@ -14,6 +19,6 @@ public class ExampleCommand extends Command {
 
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
-        event.getChannel().send().message("hi");
+          event.respond("hi");
     }
 }
