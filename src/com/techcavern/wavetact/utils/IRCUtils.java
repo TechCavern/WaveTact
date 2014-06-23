@@ -3,12 +3,10 @@ package com.techcavern.wavetact.utils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.internal.LinkedTreeMap;
-import com.techcavern.wavetact.commands.controller.BasicCommands;
 import com.techcavern.wavetact.commands.CheckUserLevel;
 import com.techcavern.wavetact.commands.SomethingAwesome;
 import com.techcavern.wavetact.commands.chanop.*;
-import com.techcavern.wavetact.commands.controller.Join;
-import com.techcavern.wavetact.commands.controller.Lock;
+import com.techcavern.wavetact.commands.controller.*;
 import com.techcavern.wavetact.commands.trusted.Act;
 import com.techcavern.wavetact.commands.trusted.CustomCMD;
 import com.techcavern.wavetact.commands.trusted.Say;
@@ -101,33 +99,10 @@ public class IRCUtils {
         new BasicCommands();
         new Topic();
         new Lock();
+        new Shutdown();
     }
 
-    /*
-        public static void RegisterExistingSimpleMessages() {
 
-
-
-            for (Command Command : GeneralRegistry.SimpleMessage.) {
-                GeneralRegistry.Commands.add(Command);
-            }
-        }
-
-        public static void RegisterExistingSimpleActions() {
-            Config config = new Config("SimpleAction.json");
-
-            GeneralRegistry.SimpleAction = new Gson().fromJson(config.getText(), new TypeToken<Set<SimpleMessage>>() {
-            }.getType());
-
-            if (GeneralRegistry.SimpleAction == null) {
-                GeneralRegistry.SimpleAction = Sets.newConcurrentHashSet();
-            }
-
-            for (Command Command : GeneralRegistry.SimpleAction) {
-                GeneralRegistry.Commands.add(Command);
-            }
-        }
-    */
     public static Command getCommand(String Command) {
         for (Command g : GeneralRegistry.Commands) {
             if (g.getCommandID().equalsIgnoreCase(Command)) {
