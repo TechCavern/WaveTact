@@ -27,10 +27,7 @@ public class SimpleAction extends Command {
         event.getChannel().send().action(action);
     }
 
-    public String getAction() {
-        return this.action;
-    }
-
+    @Override
     public boolean getLockedStatus() {
         return locked;
     }

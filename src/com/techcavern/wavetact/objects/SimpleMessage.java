@@ -30,6 +30,7 @@ public class SimpleMessage extends Command {
         return this.message;
     }
 
+    @Override
     public boolean getLockedStatus() {
         return locked;
     }

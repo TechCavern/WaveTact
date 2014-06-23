@@ -2,6 +2,7 @@ package com.techcavern.wavetact.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.internal.LinkedTreeMap;
 import com.techcavern.wavetact.commands.controller.BasicCommands;
 import com.techcavern.wavetact.commands.CheckUserLevel;
 import com.techcavern.wavetact.commands.SomethingAwesome;
@@ -170,9 +171,15 @@ public class IRCUtils {
         JSONFile file = new JSONFile("SimpleActions.json");
         if (file.exists()) {
             try {
-                List<SimpleAction> actions = file.read();
+                List<LinkedTreeMap> actions = file.read(List.class);
                 GeneralRegistry.SimpleActions.clear();
-                GeneralRegistry.SimpleActions.addAll(actions);
+                for (LinkedTreeMap act : actions) {
+                    GeneralRegistry.SimpleActions.add(
+                            new SimpleAction((String) act.get("comid"),
+                                                ((Double) act.get("PermLevel")).intValue(),
+                                                (String) act.get("action"),
+                                                (Boolean) act.get("locked")));
+                }
             } catch (FileNotFoundException e) {
                 ErrorUtils.handleException(e);
             }
@@ -193,9 +200,16 @@ public class IRCUtils {
         JSONFile file = new JSONFile("SimpleMessages.json");
         if (file.exists()) {
             try {
-                List<SimpleMessage> messages = file.read();
+                List<LinkedTreeMap> messages = file.read();
                 GeneralRegistry.SimpleMessages.clear();
-                GeneralRegistry.SimpleMessages.addAll(messages);
+
+                for (LinkedTreeMap msg : messages) {
+                    GeneralRegistry.SimpleMessages.add(
+                            new SimpleMessage((String) msg.get("comid"),
+                                    ((Double) msg.get("PermLevel")).intValue(),
+                                    (String) msg.get("action"),
+                                    (Boolean) msg.get("locked")));
+                }
             } catch (FileNotFoundException e) {
                 ErrorUtils.handleException(e);
             }

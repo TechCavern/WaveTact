@@ -30,6 +30,10 @@ public abstract class Command {
 
     public abstract void onCommand(MessageEvent<?> event, String... args) throws Exception;
 
+    public boolean getLockedStatus() {
+        return false;
+    }
+
     public int getPermLevel() {
         return PermLevel;
     }
