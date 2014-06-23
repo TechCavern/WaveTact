@@ -1,0 +1,20 @@
+[
+  {
+    "message": "pong",
+    "locked": true,
+    "comid": "ping",
+    "PermLevel": 0
+  },
+  {
+    "message": "ping",
+    "locked": true,
+    "comid": "pong",
+    "PermLevel": 0
+  },
+  {
+    "message": "http://github.com/TechCavern/WaveTact",
+    "locked": true,
+    "comid": "source",
+    "PermLevel": 0
+  }
+]

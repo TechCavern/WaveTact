@@ -10,7 +10,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 
 public class BasicCommands extends Command {
     public BasicCommands() {
-        super("AddBasicCommands", 10);
+        super("AddBasicCommands", 9001);
     }
 
     @Override
