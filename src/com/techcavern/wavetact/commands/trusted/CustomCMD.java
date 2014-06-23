@@ -60,11 +60,14 @@ public class CustomCMD extends Command {
             event.respond("Command already exists");
             return;
         }
-        if (type == Type.ACTION)
+        if (type == Type.ACTION) {
             GeneralRegistry.SimpleActions.add(new SimpleAction(cmd, accessLevel, msg, false));
-        else if (type == Type.MESSAGE)
+            IRCUtils.saveSimpleActions();
+        }
+        else if (type == Type.MESSAGE) {
             GeneralRegistry.SimpleMessages.add(new SimpleMessage(cmd, accessLevel, msg, false));
-
+            IRCUtils.saveSimpleMessages();
+        }
         event.respond("Command added");
     }
 
@@ -77,11 +80,15 @@ public class CustomCMD extends Command {
             GeneralRegistry.SimpleMessages.remove(cmd);
         }
 
-        if (type == Type.ACTION)
+        if (type == Type.ACTION) {
             GeneralRegistry.SimpleActions.add(new SimpleAction(command, accessLevel, msg, false));
-        else if (type == Type.MESSAGE)
+            IRCUtils.saveSimpleActions();
+        }
+        else if (type == Type.MESSAGE) {
             GeneralRegistry.SimpleMessages.add(new SimpleMessage(command, accessLevel, msg, false));
+            IRCUtils.saveSimpleMessages();
 
+        }
         event.respond("Command modified");
     }
 
@@ -98,11 +105,17 @@ public class CustomCMD extends Command {
         } else if (cmd.getLockedStatus()) {
             event.respond("Command is locked");
         } else {
-            if (type == Type.MESSAGE)
+            if (type == Type.MESSAGE) {
                 GeneralRegistry.SimpleMessages.remove(cmd);
-            else if (type == Type.ACTION)
+                IRCUtils.saveSimpleMessages();
+
+            }
+            else if (type == Type.ACTION) {
                 GeneralRegistry.SimpleActions.remove(cmd);
+                IRCUtils.saveSimpleActions();
+            }
             GeneralRegistry.Commands.remove(cmd);
+
             event.respond("Command removed");
         }
     }

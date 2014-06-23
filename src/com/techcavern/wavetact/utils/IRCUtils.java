@@ -182,7 +182,7 @@ public class IRCUtils {
                     GeneralRegistry.SimpleMessages.add(
                             new SimpleMessage((String) msg.get("comid"),
                                     ((Double) msg.get("PermLevel")).intValue(),
-                                    (String) msg.get("action"),
+                                    (String) msg.get("message"),
                                     (Boolean) msg.get("locked")));
                 }
             } catch (FileNotFoundException e) {
