@@ -16,5 +16,17 @@
     "locked": true,
     "comid": "source",
     "PermLevel": 0
+  },
+  {
+    "message": "Open Source Code Group",
+    "locked": false,
+    "comid": "directcode",
+    "PermLevel": 0
+  },
+  {
+    "message": "authentication successful",
+    "locked": false,
+    "comid": "authenticate",
+    "PermLevel": 0
   }
 ]
