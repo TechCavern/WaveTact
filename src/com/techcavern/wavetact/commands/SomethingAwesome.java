@@ -25,7 +25,7 @@ public class SomethingAwesome extends Command {
         } else if (event.getChannel().getUserLevels(event.getBot().getUserBot()).contains(UserLevel.OWNER)) {
             event.getChannel().send().kick(event.getUser(), "http://bit.ly/1c9vo1S");
         } else {
-            event.getChannel().send().message("http://bit.ly/1c9vo1S");
+            event.respond("http://bit.ly/1c9vo1S");
 
         }
     }
