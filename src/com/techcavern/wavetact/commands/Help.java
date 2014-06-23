@@ -20,8 +20,8 @@ public class Help extends Command {
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
      if(args.length > 0){
-      if(args[0].equalsIgnoreCase("Commands")) {
-          event.respond(IRCUtils.getCommand(args[0]).getDesc());
+      if(args[0].equalsIgnoreCase("permissions")) {
+          event.respond("0 = Everyone, 5 = Voiced & Half-opped, 10 = Opped & Protected, 15 = Ownered, 9001 = Controller ");
       } else{
           event.respond(IRCUtils.getCommand(args[0]).getDesc());
       }
