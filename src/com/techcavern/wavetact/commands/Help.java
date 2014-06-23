@@ -19,7 +19,7 @@ public class Help extends Command {
 
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
-     if(args.length < 0){
+     if(args.length > 0){
       if(args[0].equalsIgnoreCase("Commands")) {
           event.respond(IRCUtils.getCommand(args[0]).getDesc());
       } else{
