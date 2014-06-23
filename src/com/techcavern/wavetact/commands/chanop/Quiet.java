@@ -18,19 +18,12 @@ public class Quiet extends Command {
     @Override
     public void onCommand(MessageEvent<?> event, String... args)
             throws Exception {
-        if (args[0].equalsIgnoreCase("c") || args[0].equalsIgnoreCase("u") ||
-                args[0].equalsIgnoreCase("i")) {
             if ((args.length == 4) && (!args[1].startsWith("-"))) {
-                if (args[2].endsWith("s") || args[2].endsWith("h") ||
-                        args[2].endsWith("m") || args[2].endsWith("d")) {
                     quiettime time = new quiettime();
                     time.run(args[2], args[0],
                             IRCUtils.getUserByNick(event.getChannel(), args[1]),
                             event.getChannel(), event.getBot());
-                } else {
-                    IRCUtils.SendNotice(event.getBot(), event.getUser(),
-                            " Ensure you have specified a valid time (30s = 30 Seconds, 30m = 30 minutes, up to days)");
-                }
+
             } else if ((args.length < 4) && (!args[1].startsWith("-"))) {
                 quiet(IRCUtils.getUserByNick(event.getChannel(), args[1]),
                         args[0], event.getChannel(), event.getBot());
@@ -38,13 +31,7 @@ public class Quiet extends Command {
                 unquiet(IRCUtils.getUserByNick(event.getChannel(),
                                 args[1].replaceFirst("-", "")), args[0],
                         event.getChannel(), event.getBot());
-            } else {
-                IRCUtils.SendNotice(event.getBot(), event.getUser(),
-                        "Syntax: @quiet [ircd code] (-)[User to Quiet] (time in seconds)");
-            }
-        } else {
-            IRCUtils.SendNotice(event.getBot(), event.getUser(),
-                    "Ensure you have specified the IRCd as the first Argument - i = Inspircd, u = unreal and c = Charybdis or IRCdSeven");
+
         }
     }
 

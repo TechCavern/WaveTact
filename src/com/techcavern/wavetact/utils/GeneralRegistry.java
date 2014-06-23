@@ -30,9 +30,9 @@ public class GeneralRegistry {
     public static String ObsidianServer = "irc.obsidianirc.net";
     public static List<String> ObsidianChannels = Arrays.asList("#techcavern", "#szsocial");
     public static String ObsidianNick = "WaveTact";
-    public static List<Command> Commands = new ArrayList<>();
-    public static List<SimpleMessage> SimpleMessages = new ArrayList<>();
-    public static List<SimpleAction> SimpleActions = new ArrayList<>();
+    public static List<Command> Commands = new LoggingArrayList<>("Command");
+    public static List<SimpleMessage> SimpleMessages = new LoggingArrayList<>("SimpleMessages");
+    public static List<SimpleAction> SimpleActions = new LoggingArrayList<>("SimpleActions");
     public static List<String> HighFives = new ArrayList<>();
     public static MultiBotManager<PircBotX> WaveTact = new MultiBotManager<PircBotX>();
 }

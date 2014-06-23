@@ -2,10 +2,10 @@ package com.techcavern.wavetact.utils;
 
 import java.util.ArrayList;
 
-public class DebuggingArrayList<T> extends ArrayList<T> {
+public class LoggingArrayList<T> extends ArrayList<T> {
     private String tagName;
 
-    public DebuggingArrayList(String tagName) {
+    public LoggingArrayList(String tagName) {
         this.tagName = tagName;
     }
 
