@@ -15,10 +15,12 @@ public abstract class Command {
 
     private String comid;
     private int PermLevel;
+    private String Desc;
 
-    protected Command(String comid, int PermLevel) {
+    protected Command(String comid, int PermLevel, String Desc) {
         this.comid = comid.toLowerCase();
         this.PermLevel = PermLevel;
+        this.Desc = Desc;
         create();
 
     }
@@ -41,6 +43,7 @@ public abstract class Command {
     public String getCommandID() {
         return comid;
     }
+    public String getDesc(){return Desc;}
 
     @Override
     public String toString() {

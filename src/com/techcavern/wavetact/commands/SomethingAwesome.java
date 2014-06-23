@@ -15,7 +15,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class SomethingAwesome extends Command {
 
     public SomethingAwesome() {
-        super("somethingawesome", 0);
+        super("somethingawesome", 0, "somethingawesome");
     }
 
     @Override

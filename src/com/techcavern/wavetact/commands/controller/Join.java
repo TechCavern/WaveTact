@@ -14,7 +14,7 @@ import org.pircbotx.hooks.events.MessageEvent;
  */
 public class Join extends Command {
     public Join() {
-        super("join", 9001);
+        super("join", 9001, "join [channel]");
     }
 
     @Override

@@ -9,7 +9,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 @SuppressWarnings("ALL")
 public class ExampleCommand extends Command {
     public ExampleCommand() {
-        super("blah", 0);
+        super("blah", 0, "description");
     }
 
     @Override

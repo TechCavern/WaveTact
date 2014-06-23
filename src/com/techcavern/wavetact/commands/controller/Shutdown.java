@@ -11,7 +11,7 @@ import org.pircbotx.hooks.events.MessageEvent;
  */
 public class Shutdown extends Command {
     public Shutdown() {
-        super("Shutdown", 9001);
+        super("Shutdown", 9001, "Shutdown (r)");
     }
 
     @Override

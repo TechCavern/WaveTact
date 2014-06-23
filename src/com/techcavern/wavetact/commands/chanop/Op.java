@@ -15,7 +15,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class Op extends Command {
 
     public Op() {
-        super("op", 10);
+        super("op", 10, "op (-)(user to op)");
     }
 
     @Override

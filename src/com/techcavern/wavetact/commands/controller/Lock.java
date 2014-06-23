@@ -14,7 +14,7 @@ import org.pircbotx.hooks.events.MessageEvent;
  */
 public class Lock extends Command {
     public Lock() {
-        super("lock", 9001);
+        super("lock", 9001, "lock [type(m/a)] [command]");
     }
 
     @Override

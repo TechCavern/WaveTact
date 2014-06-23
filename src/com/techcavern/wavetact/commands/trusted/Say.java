@@ -15,7 +15,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class Say extends Command {
 
     public Say() {
-        super("say", 5);
+        super("say", 5, "say [something]");
     }
 
     @Override

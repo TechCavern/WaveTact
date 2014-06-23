@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Quiet extends Command {
     public Quiet() {
-        super("Quiet", 10);
+    super("Quiet", 10, "Quiet [ircd] (-)[User] (time)");
     }
 
     @Override

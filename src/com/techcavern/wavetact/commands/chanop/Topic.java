@@ -20,7 +20,7 @@ import java.util.List;
 public class Topic extends Command {
 
     public Topic() {
-        super("topic", 10);
+        super("topic", 10, "Broken Command :C");
     }
 
     @Override

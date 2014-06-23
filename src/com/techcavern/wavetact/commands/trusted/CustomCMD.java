@@ -18,7 +18,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class CustomCMD extends Command {
 
     public CustomCMD() {
-        super("customcmd", 5);
+        super("customcmd", 5, "customcmd [type(m/a)] (+/-)[Command] [permlevel] [Response]");
     }
 
     @Override

@@ -14,7 +14,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class Part extends Command {
 
     public Part() {
-        super("part", 5);
+        super("part", 5, "part [channel]");
     }
 
     @Override

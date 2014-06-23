@@ -16,7 +16,7 @@ public class SimpleMessage extends Command {
     private boolean locked;
 
     public SimpleMessage(String i, int p, String m, boolean b) {
-        super(i, p);
+        super(i, p, "A Basic Command that takes no Arguments");
         this.message = m;
         this.locked = b;
     }

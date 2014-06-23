@@ -15,7 +15,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class Owner extends Command {
 
     public Owner() {
-        super("owner", 15);
+        super("owner", 15, "Owner (-)(User)");
     }
 
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {

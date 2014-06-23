@@ -15,7 +15,7 @@ import org.pircbotx.hooks.events.MessageEvent;
  */
 public class Voice extends Command {
     public Voice() {
-        super("voice", 10);
+        super("voice", 10, "Voice (-)(User)");
     }
 
     @Override
