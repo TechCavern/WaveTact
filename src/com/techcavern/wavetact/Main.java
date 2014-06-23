@@ -9,7 +9,7 @@ import org.slf4j.impl.SimpleLogger;
 @SuppressWarnings("ConstantConditions")
 public class Main {
 
-    public static MultiBotManager<PircBotX> WaveTact = new MultiBotManager<PircBotX>();
+
 
     public static void main(String[] args) throws Exception {
         System.out.println("Starting...");
@@ -30,11 +30,12 @@ public class Main {
         PircBotX Obsidian = IRCUtils.createbot(pwd, "Obsidian", GeneralRegistry.ObsidianChannels, GeneralRegistry.ObsidianNick, GeneralRegistry.ObsidianServer);
 
         //      WaveTact.addBot(Obsidian);
-        WaveTact.addBot(Esper);
+        GeneralRegistry.WaveTact.addBot(Esper);
+
         //      WaveTact.addBot(Ovd);
         //    WaveTact.addBot(Xertion);
         //   WaveTact.addBot(ECode);
-        WaveTact.start();
+        GeneralRegistry.WaveTact.start();
     }
 
 }
