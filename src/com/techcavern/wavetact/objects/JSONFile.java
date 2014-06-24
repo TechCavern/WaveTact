@@ -17,6 +17,7 @@ public class JSONFile {
     public JSONFile(String a) {
         file = new File(a);
     }
+    public JSONFile(File f) { file = f; }
 
     public void write(Object obj, boolean pretty) throws IOException {
         Files.touch(file);

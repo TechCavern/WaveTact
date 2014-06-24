@@ -4,10 +4,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.internal.LinkedTreeMap;
 
-import com.techcavern.wavetact.commands.CheckUserLevel;
-import com.techcavern.wavetact.commands.Commands;
-import com.techcavern.wavetact.commands.Help;
-import com.techcavern.wavetact.commands.SomethingAwesome;
+import com.techcavern.wavetact.commands.Utils.CheckUserLevel;
+import com.techcavern.wavetact.commands.Utils.Commands;
+import com.techcavern.wavetact.commands.Utils.Help;
+import com.techcavern.wavetact.commands.Fun.SomethingAwesome;
+import com.techcavern.wavetact.commands.Utils.WolframAlpha;
 import com.techcavern.wavetact.commands.chanop.*;
 import com.techcavern.wavetact.commands.controller.*;
 import com.techcavern.wavetact.commands.trusted.Act;
@@ -106,6 +107,7 @@ public class IRCUtils {
         new Shutdown();
         new Help();
         new Commands();
+        new WolframAlpha();
     }
 
 

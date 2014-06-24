@@ -16,4 +16,5 @@ guava-17.0
 slf4j-api-1.7.7
 slf4j-simple-1.7.7
 commons-lang3-3.3.2
-
+Wolfram Alpha
+httpcomponents-4.3.4

@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.commands;
+package com.techcavern.wavetact.commands.Utils;
 
 import com.techcavern.wavetact.objects.Command;
 import com.techcavern.wavetact.utils.GeneralRegistry;
