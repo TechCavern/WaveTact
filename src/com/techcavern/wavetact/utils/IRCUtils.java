@@ -8,7 +8,8 @@ import com.techcavern.wavetact.commands.Utils.CheckUserLevel;
 import com.techcavern.wavetact.commands.Utils.Commands;
 import com.techcavern.wavetact.commands.Utils.Help;
 import com.techcavern.wavetact.commands.Fun.SomethingAwesome;
-import com.techcavern.wavetact.commands.Utils.WolframAlpha;
+import com.techcavern.wavetact.commands.Utils.Weather;
+import com.techcavern.wavetact.commands.trusted.WolframAlpha;
 import com.techcavern.wavetact.commands.chanop.*;
 import com.techcavern.wavetact.commands.controller.*;
 import com.techcavern.wavetact.commands.trusted.Act;
@@ -108,6 +109,7 @@ public class IRCUtils {
         new Help();
         new Commands();
         new WolframAlpha();
+        new Weather();
     }
 
 

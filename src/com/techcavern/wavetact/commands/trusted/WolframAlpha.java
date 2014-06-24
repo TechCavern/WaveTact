@@ -23,6 +23,9 @@ public class WolframAlpha extends Command {
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
         List<String> waresults = GeneralUtils.getWAResult(StringUtils.join(args," "));
-        System.out.println(GeneralUtils.buildMessage(0,waresults.size(), waresults.toArray(new String[waresults.size()])));
+        for(String results: waresults){
+           // event.respond(results);
+            System.out.println(results);
+        }
         }
 }

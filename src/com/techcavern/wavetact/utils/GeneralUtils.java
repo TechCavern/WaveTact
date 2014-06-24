@@ -1,8 +1,6 @@
 package com.techcavern.wavetact.utils;
 
-import com.wolfram.alpha.WAEngine;
-import com.wolfram.alpha.WAQuery;
-import com.wolfram.alpha.WAQueryResult;
+import com.wolfram.alpha.*;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -13,13 +11,14 @@ import org.apache.http.impl.client.SystemDefaultHttpClient;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by jztech101 on 6/23/14.
  */
 public class GeneralUtils {
-    public static WAQueryResult getWAResult(String input) throws Exception {
+    public static List<String> getWAResult(String input) throws Exception {
 
         WAEngine engine = new WAEngine();
         engine.setAppID("H3G288-R6ULG68XJW");
@@ -27,7 +26,20 @@ public class GeneralUtils {
         WAQuery query = engine.createQuery();
         query.setInput(input);
         WAQueryResult queryResult = engine.performQuery(query);
-        return queryResult;
+        List<String> waresults= new ArrayList<String>();
+        for (WAPod pod : queryResult.getPods()) {
+            if (!pod.isError()) {
+                for (WASubpod subpod : pod.getSubpods()) {
+                    for (Object element : subpod.getContents()) {
+                        if (element instanceof WAPlainText) {
+                            waresults.add(((WAPlainText) element).getText());
+                        }
+                    }
+                }
+
+            }
+        }
+        return waresults;
 
     }
     public static String buildMessage(int g,int p, String[] args) {
@@ -37,6 +49,13 @@ public class GeneralUtils {
             builder.append(' ');
         }
         return builder.toString().trim();
+    }
+    public static String buildMessage2(int g, int p, List<String> b){
+        String returnvalue = b.get(g);
+        for(int i = g+1; i<p; i++){
+            returnvalue = returnvalue + " " + b.get(i);
+        }
+        return returnvalue;
     }
 }
 

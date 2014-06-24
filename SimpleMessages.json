@@ -40,5 +40,12 @@
     "comid": "password",
     "PermLevel": 0,
     "Desc": "A Basic Command that takes no Arguments"
+  },
+  {
+    "message": "test test test",
+    "locked": false,
+    "comid": "test",
+    "PermLevel": 0,
+    "Desc": "A Basic Command that takes no Arguments"
   }
 ]
