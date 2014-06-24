@@ -4,11 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.internal.LinkedTreeMap;
 
-import com.techcavern.wavetact.commands.Utils.CheckUserLevel;
-import com.techcavern.wavetact.commands.Utils.Commands;
-import com.techcavern.wavetact.commands.Utils.Help;
+import com.techcavern.wavetact.commands.Utils.*;
 import com.techcavern.wavetact.commands.Fun.SomethingAwesome;
-import com.techcavern.wavetact.commands.Utils.Weather;
 import com.techcavern.wavetact.commands.trusted.WolframAlpha;
 import com.techcavern.wavetact.commands.chanop.*;
 import com.techcavern.wavetact.commands.controller.*;
@@ -110,6 +107,7 @@ public class IRCUtils {
         new Commands();
         new WolframAlpha();
         new Weather();
+        new Define();
     }
 
 
