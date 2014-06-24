@@ -28,10 +28,11 @@ public class Main {
         PircBotX ECode = IRCUtils.createbot(pwd, "ECode", GeneralRegistry.ECodeChannels, GeneralRegistry.ECodeNick, GeneralRegistry.ECodeServer);
         PircBotX Xertion = IRCUtils.createbot(pwd, "Xertion", GeneralRegistry.XertionChannels, GeneralRegistry.XertionNick, GeneralRegistry.XertionServer);
         PircBotX Obsidian = IRCUtils.createbot(pwd, "Obsidian", GeneralRegistry.ObsidianChannels, GeneralRegistry.ObsidianNick, GeneralRegistry.ObsidianServer);
+        PircBotX Freenode = IRCUtils.createbot(pwd, "Freenode", GeneralRegistry.FreenodeChannels, GeneralRegistry.FreenodeNick, GeneralRegistry.FreenodeServer);
 
-          GeneralRegistry.WaveTact.addBot(Obsidian);
+        GeneralRegistry.WaveTact.addBot(Obsidian);
         GeneralRegistry.WaveTact.addBot(Esper);
-
+        GeneralRegistry.WaveTact.addBot(Freenode);
               GeneralRegistry.WaveTact.addBot(Ovd);
             GeneralRegistry.WaveTact.addBot(Xertion);
            GeneralRegistry.WaveTact.addBot(ECode);

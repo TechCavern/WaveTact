@@ -12,7 +12,7 @@ import java.util.List;
 
 public class GeneralRegistry {
 
-    public static String CommandChar = "@";
+    public static String CommandChar = "&";
     public static List<String> Controllers = Arrays.asList("jztech101", "Archtikz", "kaendfinger", "deathcrazyuberlironman");
     public static List<String> ControllerHostmasks = Arrays.asList("*!jztech101@techcavern.com");
     public static String OvdServer = "irc.overdrive.pw";
@@ -30,6 +30,9 @@ public class GeneralRegistry {
     public static String ObsidianServer = "irc.obsidianirc.net";
     public static List<String> ObsidianChannels = Arrays.asList("#techcavern", "#szsocial");
     public static String ObsidianNick = "WaveTact";
+    public static String FreenodeServer = "irc.freenode.net";
+    public static List<String> FreenodeChannels = Arrays.asList("#techcavern", "##powder-bots");
+    public static String FreenodeNick = "WaveTact";
     public static List<Command> Commands = new LoggingArrayList<>("Command");
     public static List<SimpleMessage> SimpleMessages = new LoggingArrayList<>("SimpleMessages");
     public static List<SimpleAction> SimpleActions = new LoggingArrayList<>("SimpleActions");
