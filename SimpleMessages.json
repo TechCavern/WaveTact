@@ -33,5 +33,12 @@
     "comid": "authenticate",
     "PermLevel": 0,
     "Desc": "A Basic Command that takes no Arguments"
+  },
+  {
+    "message": "******** (If it comes up as stars to you, its because its also your password)",
+    "locked": false,
+    "comid": "password",
+    "PermLevel": 0,
+    "Desc": "A Basic Command that takes no Arguments"
   }
 ]

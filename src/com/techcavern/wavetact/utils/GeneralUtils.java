@@ -13,6 +13,7 @@ import org.apache.http.impl.client.SystemDefaultHttpClient;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 /**
  * Created by jztech101 on 6/23/14.
@@ -28,6 +29,14 @@ public class GeneralUtils {
         WAQueryResult queryResult = engine.performQuery(query);
         return queryResult;
 
+    }
+    public static String buildMessage(int g, String[] args) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = g; i < args.length; i++) {
+            builder.append(args[i]);
+            builder.append(' ');
+        }
+        return builder.toString().trim();
     }
 }
 
