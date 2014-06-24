@@ -30,18 +30,18 @@ public class CustomCMD extends Command {
                 if (args[1].startsWith("-")) {
                     removeCommand(event, Type.MESSAGE, args[1].substring(1));
                 } else if (args[1].startsWith("+")) {
-                    modifyCommand(event, Type.MESSAGE, Integer.parseInt(args[2]), args[1].substring(1), GeneralUtils.buildMessage(3,args));
+                    modifyCommand(event, Type.MESSAGE, Integer.parseInt(args[2]), args[1].substring(1), GeneralUtils.buildMessage(3,args.length,args));
                 } else {
-                    addCommand(event, Type.MESSAGE, Integer.parseInt(args[2]), args[1], GeneralUtils.buildMessage(3,args));
+                    addCommand(event, Type.MESSAGE, Integer.parseInt(args[2]), args[1], GeneralUtils.buildMessage(3,args.length,args));
                 }
                 break;
             case "a": // action
                 if (args[1].startsWith("-")) {
                     removeCommand(event, Type.ACTION, args[1].substring(1));
                 } else if (args[1].startsWith("+")) {
-                    modifyCommand(event, Type.ACTION, Integer.parseInt(args[2]), args[1].substring(1), GeneralUtils.buildMessage(3,args));
+                    modifyCommand(event, Type.ACTION, Integer.parseInt(args[2]), args[1].substring(1), GeneralUtils.buildMessage(3,args.length,args));
                 } else {
-                    addCommand(event, Type.ACTION, Integer.parseInt(args[2]), args[1], GeneralUtils.buildMessage(3,args));
+                    addCommand(event, Type.ACTION, Integer.parseInt(args[2]), args[1], GeneralUtils.buildMessage(3,args.length,args));
                 }
                 break;
         }

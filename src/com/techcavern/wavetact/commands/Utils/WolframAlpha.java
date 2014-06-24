@@ -35,6 +35,6 @@ public class WolframAlpha extends Command {
 
             }
         }
-        GeneralUtils.buildMessage(5, waresults.toArray(new String[waresults.size()]));
+        GeneralUtils.buildMessage(0,5, waresults.toArray(new String[waresults.size()]));
         }
 }

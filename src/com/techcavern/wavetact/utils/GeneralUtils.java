@@ -30,9 +30,9 @@ public class GeneralUtils {
         return queryResult;
 
     }
-    public static String buildMessage(int g, String[] args) {
+    public static String buildMessage(int g,int p, String[] args) {
         StringBuilder builder = new StringBuilder();
-        for (int i = g; i < args.length; i++) {
+        for (int i = g; i < p; i++) {
             builder.append(args[i]);
             builder.append(' ');
         }
