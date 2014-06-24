@@ -29,11 +29,11 @@ public class Main {
         PircBotX Xertion = IRCUtils.createbot(pwd, "Xertion", GeneralRegistry.XertionChannels, GeneralRegistry.XertionNick, GeneralRegistry.XertionServer);
         PircBotX Obsidian = IRCUtils.createbot(pwd, "Obsidian", GeneralRegistry.ObsidianChannels, GeneralRegistry.ObsidianNick, GeneralRegistry.ObsidianServer);
 
-        //      GeneralRegistry.WaveTact.addBot(Obsidian);
-     //   GeneralRegistry.WaveTact.addBot(Esper);
+          GeneralRegistry.WaveTact.addBot(Obsidian);
+        GeneralRegistry.WaveTact.addBot(Esper);
 
-        //      GeneralRegistry.WaveTact.addBot(Ovd);
-        //    GeneralRegistry.WaveTact.addBot(Xertion);
+              GeneralRegistry.WaveTact.addBot(Ovd);
+            GeneralRegistry.WaveTact.addBot(Xertion);
            GeneralRegistry.WaveTact.addBot(ECode);
         GeneralRegistry.WaveTact.start();
     }
