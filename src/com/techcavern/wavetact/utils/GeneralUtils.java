@@ -32,7 +32,7 @@ public class GeneralUtils {
                 for (WASubpod subpod : pod.getSubpods()) {
                     for (Object element : subpod.getContents()) {
                         if (element instanceof WAPlainText) {
-                            waresults.add(((WAPlainText) element).getText());
+                            waresults.add(((WAPlainText) element).getText().replaceAll(" | ", " ").replaceAll("\n"," | " ));
                         }
                     }
                 }
@@ -50,13 +50,7 @@ public class GeneralUtils {
         }
         return builder.toString().trim();
     }
-    public static String buildMessage2(int g, int p, List<String> b){
-        String returnvalue = b.get(g);
-        for(int i = g+1; i<p; i++){
-            returnvalue = returnvalue + " " + b.get(i);
-        }
-        return returnvalue;
-    }
+
 }
 
 
