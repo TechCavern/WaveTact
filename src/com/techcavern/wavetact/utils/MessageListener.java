@@ -20,7 +20,8 @@ public class MessageListener extends ListenerAdapter<PircBotX> {
     public void onMessage(MessageEvent<PircBotX> event) throws Exception {
         String[] messageParts = event.getMessage().split(" ");
         String m = messageParts[0].toLowerCase();
-        for (Command Command: GeneralRegistry.Commands) {
+        for (int i = 0; i<GeneralRegistry.Commands.size(); i++) {
+            Command Command= GeneralRegistry.Commands.get(i);
             if (m.equalsIgnoreCase(GeneralRegistry.CommandChar + Command.getCommandID())) {
                 if (PermUtils.getPermLevel(event.getBot(), event.getUser(), event.getChannel()) >= Command.getPermLevel()) {
                     if (Command.getPermLevel() == 10) {

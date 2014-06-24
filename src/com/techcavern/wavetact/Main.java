@@ -33,9 +33,9 @@ public class Main {
         GeneralRegistry.WaveTact.addBot(Obsidian);
         GeneralRegistry.WaveTact.addBot(Esper);
         GeneralRegistry.WaveTact.addBot(Freenode);
-              GeneralRegistry.WaveTact.addBot(Ovd);
-            GeneralRegistry.WaveTact.addBot(Xertion);
-           GeneralRegistry.WaveTact.addBot(ECode);
+        GeneralRegistry.WaveTact.addBot(Ovd);
+        GeneralRegistry.WaveTact.addBot(Xertion);
+        GeneralRegistry.WaveTact.addBot(ECode);
         GeneralRegistry.WaveTact.start();
     }
 
