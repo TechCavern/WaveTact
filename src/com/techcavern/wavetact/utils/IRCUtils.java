@@ -6,6 +6,7 @@ import com.google.gson.internal.LinkedTreeMap;
 
 import com.techcavern.wavetact.commands.Utils.*;
 import com.techcavern.wavetact.commands.Fun.SomethingAwesome;
+import com.techcavern.wavetact.commands.Utils.Math;
 import com.techcavern.wavetact.commands.trusted.WolframAlpha;
 import com.techcavern.wavetact.commands.chanop.*;
 import com.techcavern.wavetact.commands.controller.*;
@@ -108,6 +109,8 @@ public class IRCUtils {
         new WolframAlpha();
         new Weather();
         new Define();
+        new Question();
+        new Math();
     }
 
 
