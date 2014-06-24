@@ -32,7 +32,7 @@ public class GeneralUtils {
                 for (WASubpod subpod : pod.getSubpods()) {
                     for (Object element : subpod.getContents()) {
                         if (element instanceof WAPlainText) {
-                            waresults.add(((WAPlainText) element).getText().replaceAll("[|]","").replaceAll("\n"," | " ));
+                            waresults.add((((WAPlainText) element).getText().replaceAll("[|]","").replaceAll("\n",", " )).replaceAll("  "," "));
                         }
                     }
                 }

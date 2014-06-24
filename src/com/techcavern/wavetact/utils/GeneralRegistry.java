@@ -14,7 +14,7 @@ public class GeneralRegistry {
 
     public static String CommandChar = "@";
     public static List<String> Controllers = Arrays.asList("jztech101", "Archtikz", "kaendfinger", "deathcrazyuberlironman");
-    public static List<String> ControllerHostmasks = Arrays.asList("*!jztech101@crabhost.org");
+    public static List<String> ControllerHostmasks = Arrays.asList("*!jztech101@techcavern.com");
     public static String OvdServer = "irc.overdrive.pw";
     public static List<String> OvdChannels = Arrays.asList("#techcavern", "#dev");
     public static String OvdNick = "WaveTact";
