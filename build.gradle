@@ -12,14 +12,6 @@ dependencies {
 	compile files("lib/WolframAlpha.jar")
 }
 
-sourceSets{
-	main {
-		java{
-			srcDir "src"
-		}
-	}
-}
-
 compileJava{
 	sourceCompatibility = 1.7
 }
