@@ -1,6 +1,7 @@
 package com.techcavern.wavetact.utils;
 
 import com.techcavern.wavetact.objects.Command;
+import com.techcavern.wavetact.objects.LoggingArrayList;
 import com.techcavern.wavetact.objects.SimpleAction;
 import com.techcavern.wavetact.objects.SimpleMessage;
 import org.pircbotx.MultiBotManager;

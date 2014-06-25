@@ -1,8 +1,8 @@
-package com.techcavern.wavetact.utils;
+package com.techcavern.wavetact.objects;
 
 import java.util.ArrayList;
 
-class LoggingArrayList<T> extends ArrayList<T> {
+public class LoggingArrayList<T> extends ArrayList<T> {
     private final String tagName;
 
     public LoggingArrayList(String tagName) {
