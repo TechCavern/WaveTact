@@ -5,9 +5,9 @@ nbproject/
 build.xml
 manifest.mf
 readme.md
-/build/
-/dist/
+build/
+dist/
 *.iml
 .idea/
-libs/
+.gradle/
 out/

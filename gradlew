@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+export JAVA_HOME=/home/jztech101/jdk
+export PATH=$PATH:/home/jztech101/jdk/bin
 
 ##############################################################################
 ##
