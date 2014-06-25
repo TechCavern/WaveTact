@@ -90,7 +90,9 @@ class SaveUtils {
 
             FileWriter fw = new FileWriter(file);
 
-            lines.forEach(fw::write);
+            for (String s : lines) {
+                fw.write(s);
+            }
 
             fw.flush();
             fw.close();
