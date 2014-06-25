@@ -2,8 +2,8 @@ package com.techcavern.wavetact.utils;
 
 import java.util.ArrayList;
 
-public class LoggingArrayList<T> extends ArrayList<T> {
-    private String tagName;
+class LoggingArrayList<T> extends ArrayList<T> {
+    private final String tagName;
 
     public LoggingArrayList(String tagName) {
         this.tagName = tagName;

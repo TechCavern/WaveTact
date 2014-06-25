@@ -18,13 +18,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
-public class SaveUtils {
+class SaveUtils {
 
     public static String readTextFile(String filename) {
         return readTextFile(new File(filename));
     }
 
-    public static String readTextFile(File file) {
+    private static String readTextFile(File file) {
         try {
             Scanner scan = new Scanner(file);
 
@@ -51,7 +51,7 @@ public class SaveUtils {
         return saveAllToFile(new File(filename), strings);
     }
 
-    public static boolean saveAllToFile(File file, String... strings) {
+    private static boolean saveAllToFile(File file, String... strings) {
         try {
             FileWriter fw = new FileWriter(file);
 
@@ -74,11 +74,11 @@ public class SaveUtils {
         return addToFile(new File(filename), strings);
     }
 
-    public static boolean addToFile(File file, String... strings) {
+    private static boolean addToFile(File file, String... strings) {
         try {
             Scanner scan = new Scanner(file);
 
-            List<String> lines = new ArrayList<String>();
+            List<String> lines = new ArrayList<>();
 
             while (scan.hasNextLine()) {
                 lines.add(scan.nextLine());
@@ -90,9 +90,7 @@ public class SaveUtils {
 
             FileWriter fw = new FileWriter(file);
 
-            for (String s : lines) {
-                fw.write(s);
-            }
+            lines.forEach(fw::write);
 
             fw.flush();
             fw.close();

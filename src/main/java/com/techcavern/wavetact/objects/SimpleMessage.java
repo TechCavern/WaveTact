@@ -12,7 +12,7 @@ import org.pircbotx.hooks.events.MessageEvent;
  */
 public class SimpleMessage extends Command {
 
-    private String message;
+    private final String message;
     private boolean locked;
 
     public SimpleMessage(String i, int p, String m, boolean b) {

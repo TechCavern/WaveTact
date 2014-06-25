@@ -14,14 +14,14 @@ import org.pircbotx.hooks.events.MessageEvent;
 /**
  * @author jztech101
  */
-public class MessageListener extends ListenerAdapter<PircBotX> {
+class MessageListener extends ListenerAdapter<PircBotX> {
 
     @Override
     public void onMessage(MessageEvent<PircBotX> event) throws Exception {
         String[] messageParts = event.getMessage().split(" ");
         String m = messageParts[0].toLowerCase();
-        for (int i = 0; i<GeneralRegistry.Commands.size(); i++) {
-            Command Command= GeneralRegistry.Commands.get(i);
+        for (int i = 0; i < GeneralRegistry.Commands.size(); i++) {
+            Command Command = GeneralRegistry.Commands.get(i);
             if (m.equalsIgnoreCase(GeneralRegistry.CommandChar + Command.getCommandID())) {
                 if (PermUtils.getPermLevel(event.getBot(), event.getUser(), event.getChannel()) >= Command.getPermLevel()) {
                     if (Command.getPermLevel() == 10) {

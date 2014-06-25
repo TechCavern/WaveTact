@@ -22,7 +22,7 @@ public class HighFive extends ListenerAdapter<PircBotX> {
         }
     }
 
-    public void CheckIfTwoHighFives(Channel c) {
+    void CheckIfTwoHighFives(Channel c) {
         if (((GeneralRegistry.HighFives.size() % 2) == 0) &&
                 !GeneralRegistry.HighFives.isEmpty()) {
             c.send()

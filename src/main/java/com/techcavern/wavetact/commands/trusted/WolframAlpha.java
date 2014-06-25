@@ -4,6 +4,7 @@ import com.techcavern.wavetact.objects.Command;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.hooks.events.MessageEvent;
+
 import java.util.List;
 
 
@@ -14,15 +15,12 @@ public class WolframAlpha extends Command {
 
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
-        List<String> waresults = GeneralUtils.getWAResult(StringUtils.join(args," "));
+        List<String> waresults = GeneralUtils.getWAResult(StringUtils.join(args, " "));
 
         if (args.length > 0) {
             event.respond(waresults.get(Integer.parseInt(args[1])));
         } else {
-        for(String results: waresults){
-           event.respond(results);
-
+            waresults.forEach(event::respond);
         }
-        }
-        }
+    }
 }

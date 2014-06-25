@@ -12,30 +12,30 @@ import java.util.concurrent.TimeUnit;
 
 public class Quiet extends Command {
     public Quiet() {
-    super("Quiet", 10, "Quiet [ircd] (-)[User] (time)");
+        super("Quiet", 10, "Quiet [ircd] (-)[User] (time)");
     }
 
     @Override
     public void onCommand(MessageEvent<?> event, String... args)
             throws Exception {
-            if ((args.length == 4) && (!args[1].startsWith("-"))) {
-                    quiettime time = new quiettime();
-                    time.run(args[2], args[0],
-                            IRCUtils.getUserByNick(event.getChannel(), args[1]),
-                            event.getChannel(), event.getBot());
+        if ((args.length == 4) && (!args[1].startsWith("-"))) {
+            quiettime time = new quiettime();
+            time.run(args[2], args[0],
+                    IRCUtils.getUserByNick(event.getChannel(), args[1]),
+                    event.getChannel(), event.getBot());
 
-            } else if ((args.length < 4) && (!args[1].startsWith("-"))) {
-                quiet(IRCUtils.getUserByNick(event.getChannel(), args[1]),
-                        args[0], event.getChannel(), event.getBot());
-            } else if (args[1].startsWith("-")) {
-                unquiet(IRCUtils.getUserByNick(event.getChannel(),
-                                args[1].replaceFirst("-", "")), args[0],
-                        event.getChannel(), event.getBot());
+        } else if ((args.length < 4) && (!args[1].startsWith("-"))) {
+            quiet(IRCUtils.getUserByNick(event.getChannel(), args[1]),
+                    args[0], event.getChannel(), event.getBot());
+        } else if (args[1].startsWith("-")) {
+            unquiet(IRCUtils.getUserByNick(event.getChannel(),
+                            args[1].replaceFirst("-", "")), args[0],
+                    event.getChannel(), event.getBot());
 
         }
     }
 
-    public void quiet(User u, String i, Channel c, PircBotX b) {
+    void quiet(User u, String i, Channel c, PircBotX b) {
         if (i.equalsIgnoreCase("c")) {
             IRCUtils.setMode(c, b, "+q ", u);
         } else if (i.equalsIgnoreCase("u")) {
@@ -45,7 +45,7 @@ public class Quiet extends Command {
         }
     }
 
-    public void unquiet(User u, String i, Channel c, PircBotX b) {
+    void unquiet(User u, String i, Channel c, PircBotX b) {
         if (i.equalsIgnoreCase("c")) {
             IRCUtils.setMode(c, b, "-q ", u);
         } else if (i.equalsIgnoreCase("u")) {

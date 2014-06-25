@@ -7,9 +7,6 @@ import org.pircbotx.hooks.events.MessageEvent;
 
 import java.util.List;
 
-/**
- * Created by jztech101 on 6/24/14.
- */
 public class Math extends Command {
     public Math() {
         super("math", 0, "math [What to Calculate]");

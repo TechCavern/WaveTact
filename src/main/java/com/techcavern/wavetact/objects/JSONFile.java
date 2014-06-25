@@ -17,16 +17,15 @@ public class JSONFile {
     public JSONFile(String a) {
         file = new File(a);
     }
-    public JSONFile(File f) { file = f; }
 
-    public void write(Object obj, boolean pretty) throws IOException {
-        Files.touch(file);
-        Gson gson = pretty ? Constants.GSON_PRETTY_PRINT : Constants.GSON;
-        Files.write(gson.toJson(obj), file, charset);
+    public JSONFile(File f) {
+        file = f;
     }
 
     public void write(Object obj) throws IOException {
-        write(obj, true);
+        Files.touch(file);
+        Gson gson = Constants.GSON_PRETTY_PRINT;
+        Files.write(gson.toJson(obj), file, charset);
     }
 
     public boolean exists() {
@@ -34,10 +33,12 @@ public class JSONFile {
     }
 
     public <T> T read(Class<T> clazz) throws FileNotFoundException {
-        return Constants.GSON.fromJson(Files.newReader(file, charset), new TypeToken<T>(){}.getType());
+        return Constants.GSON.fromJson(Files.newReader(file, charset), new TypeToken<T>() {
+        }.getType());
     }
 
     public <T> T read() throws FileNotFoundException {
-        return Constants.GSON.fromJson(Files.newReader(file, charset), new TypeToken<T>(){}.getType());
+        return Constants.GSON.fromJson(Files.newReader(file, charset), new TypeToken<T>() {
+        }.getType());
     }
 }

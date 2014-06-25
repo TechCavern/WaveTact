@@ -2,13 +2,11 @@ package com.techcavern.wavetact;
 
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.IRCUtils;
-import org.pircbotx.MultiBotManager;
 import org.pircbotx.PircBotX;
 import org.slf4j.impl.SimpleLogger;
 
 @SuppressWarnings("ConstantConditions")
-public class Main {
-
+class Main {
 
 
     public static void main(String[] args) throws Exception {

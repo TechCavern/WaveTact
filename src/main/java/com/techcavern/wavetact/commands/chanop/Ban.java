@@ -29,6 +29,17 @@ public class Ban extends Command {
 
         }
     }
+
+    void ban(User u, Channel c, PircBotX b) {
+
+        IRCUtils.setMode(c, b, "+b ", u);
+
+    }
+
+    void unban(User u, Channel c, PircBotX b) {
+        IRCUtils.setMode(c, b, "-b ", u);
+    }
+
     public class bantime extends Thread {
 
         public void run(String i, User u, Channel c, PircBotX b) throws InterruptedException {
@@ -49,15 +60,5 @@ public class Ban extends Command {
 
             unban(u, c, b);
         }
-    }
-
-    public void ban(User u, Channel c, PircBotX b) {
-
-        IRCUtils.setMode(c, b, "+b ", u);
-
-    }
-
-    public void unban(User u, Channel c, PircBotX b) {
-        IRCUtils.setMode(c, b, "-b ", u);
     }
 }

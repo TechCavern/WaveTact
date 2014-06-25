@@ -28,5 +28,6 @@ public class BasicCommands extends Command {
         IRCUtils.saveSimpleActions();
         IRCUtils.saveSimpleMessages();
         event.getChannel().send().message("Basic Commands Added");
-    }    }
+    }
+}
 

@@ -30,18 +30,18 @@ public class CustomCMD extends Command {
                 if (args[1].startsWith("-")) {
                     removeCommand(event, Type.MESSAGE, args[1].substring(1));
                 } else if (args[1].startsWith("+")) {
-                    modifyCommand(event, Type.MESSAGE, Integer.parseInt(args[2]), args[1].substring(1), GeneralUtils.buildMessage(3,args.length,args));
+                    modifyCommand(event, Type.MESSAGE, Integer.parseInt(args[2]), args[1].substring(1), GeneralUtils.buildMessage(3, args.length, args));
                 } else {
-                    addCommand(event, Type.MESSAGE, Integer.parseInt(args[2]), args[1], GeneralUtils.buildMessage(3,args.length,args));
+                    addCommand(event, Type.MESSAGE, Integer.parseInt(args[2]), args[1], GeneralUtils.buildMessage(3, args.length, args));
                 }
                 break;
             case "a": // action
                 if (args[1].startsWith("-")) {
                     removeCommand(event, Type.ACTION, args[1].substring(1));
                 } else if (args[1].startsWith("+")) {
-                    modifyCommand(event, Type.ACTION, Integer.parseInt(args[2]), args[1].substring(1), GeneralUtils.buildMessage(3,args.length,args));
+                    modifyCommand(event, Type.ACTION, Integer.parseInt(args[2]), args[1].substring(1), GeneralUtils.buildMessage(3, args.length, args));
                 } else {
-                    addCommand(event, Type.ACTION, Integer.parseInt(args[2]), args[1], GeneralUtils.buildMessage(3,args.length,args));
+                    addCommand(event, Type.ACTION, Integer.parseInt(args[2]), args[1], GeneralUtils.buildMessage(3, args.length, args));
                 }
                 break;
         }
@@ -56,8 +56,7 @@ public class CustomCMD extends Command {
         if (type == Type.ACTION) {
             GeneralRegistry.SimpleActions.add(new SimpleAction(cmd, accessLevel, msg, false));
             IRCUtils.saveSimpleActions();
-        }
-        else if (type == Type.MESSAGE) {
+        } else if (type == Type.MESSAGE) {
             GeneralRegistry.SimpleMessages.add(new SimpleMessage(cmd, accessLevel, msg, false));
             IRCUtils.saveSimpleMessages();
         }
@@ -76,8 +75,7 @@ public class CustomCMD extends Command {
         if (type == Type.ACTION) {
             GeneralRegistry.SimpleActions.add(new SimpleAction(command, accessLevel, msg, false));
             IRCUtils.saveSimpleActions();
-        }
-        else if (type == Type.MESSAGE) {
+        } else if (type == Type.MESSAGE) {
             GeneralRegistry.SimpleMessages.add(new SimpleMessage(command, accessLevel, msg, false));
             IRCUtils.saveSimpleMessages();
 
@@ -102,8 +100,7 @@ public class CustomCMD extends Command {
                 GeneralRegistry.SimpleMessages.remove(cmd);
                 IRCUtils.saveSimpleMessages();
 
-            }
-            else if (type == Type.ACTION) {
+            } else if (type == Type.ACTION) {
                 GeneralRegistry.SimpleActions.remove(cmd);
                 IRCUtils.saveSimpleActions();
             }

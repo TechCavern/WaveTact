@@ -9,7 +9,7 @@ import org.pircbotx.hooks.events.WhoisEvent;
 public class PermUtils {
 
     @SuppressWarnings("unchecked")
-    public static String getAccount(PircBotX bot, User u) {
+    private static String getAccount(PircBotX bot, User u) {
         String user;
         bot.sendRaw().rawLineNow("WHOIS " + u.getNick());
         WaitForQueue waitForQueue = new WaitForQueue(bot);
@@ -26,7 +26,7 @@ public class PermUtils {
         return user;
     }
 
-    public static boolean isController(PircBotX bot, User u) {
+    private static boolean isController(PircBotX bot, User u) {
         String v = getAccount(bot, u);
         if (v != null) {
             return GeneralRegistry.Controllers.contains(v.toLowerCase());

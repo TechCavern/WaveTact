@@ -3,17 +3,15 @@ package com.techcavern.wavetact.utils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.internal.LinkedTreeMap;
-
-import com.techcavern.wavetact.commands.Utils.*;
 import com.techcavern.wavetact.commands.Fun.SomethingAwesome;
+import com.techcavern.wavetact.commands.Utils.*;
 import com.techcavern.wavetact.commands.Utils.Math;
-import com.techcavern.wavetact.commands.trusted.WolframAlpha;
 import com.techcavern.wavetact.commands.chanop.*;
-import com.techcavern.wavetact.commands.controller.*;
-import com.techcavern.wavetact.commands.trusted.Act;
-import com.techcavern.wavetact.commands.trusted.CustomCMD;
-import com.techcavern.wavetact.commands.trusted.Part;
-import com.techcavern.wavetact.commands.trusted.Say;
+import com.techcavern.wavetact.commands.controller.BasicCommands;
+import com.techcavern.wavetact.commands.controller.Join;
+import com.techcavern.wavetact.commands.controller.Lock;
+import com.techcavern.wavetact.commands.controller.Shutdown;
+import com.techcavern.wavetact.commands.trusted.*;
 import com.techcavern.wavetact.events.HighFive;
 import com.techcavern.wavetact.events.KickRejoin;
 import com.techcavern.wavetact.objects.Command;
@@ -32,6 +30,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.List;
+import java.util.stream.Collectors;
 
 //import com.techcavern.wavetact.Commands.Commands.TestCommand;
 
@@ -39,16 +38,14 @@ public class IRCUtils {
 
     public static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    public static PircBotX createbot(String g, String Name, List<String> channels, String Nick, String Server) throws Exception {
+    public static PircBotX createbot(String g, String Name, List<String> channels, String Nick, String Server) {
         System.out.println("Configuring " + Name);
         Builder<PircBotX> Net = new Configuration.Builder<>();
         Net.setName(Nick);
         Net.setLogin("WaveTact");
         Net.setEncoding(Charset.isSupported("UTF-8") ? Charset.forName("UTF-8") : Charset.defaultCharset());
         Net.setServer(Server, 6667);
-        for (String channel : channels) {
-            Net.addAutoJoinChannel(channel);
-        }
+        channels.forEach(Net::addAutoJoinChannel);
         Net.getListenerManager().addListener(new MessageListener());
         Net.getListenerManager().addListener(new HighFive());
         Net.getListenerManager().addListener(new KickRejoin());
@@ -111,6 +108,7 @@ public class IRCUtils {
         new Define();
         new Question();
         new Math();
+        new IRCUtils();
     }
 
 
@@ -159,13 +157,10 @@ public class IRCUtils {
             try {
                 List<LinkedTreeMap> actions = file.read(List.class);
                 GeneralRegistry.SimpleActions.clear();
-                for (LinkedTreeMap act : actions) {
-                    GeneralRegistry.SimpleActions.add(
-                            new SimpleAction((String) act.get("comid"),
-                                                ((Double) act.get("PermLevel")).intValue(),
-                                                (String) act.get("action"),
-                                                (Boolean) act.get("locked")));
-                }
+                GeneralRegistry.SimpleActions.addAll(actions.stream().map(act -> new SimpleAction((String) act.get("comid"),
+                        ((Double) act.get("PermLevel")).intValue(),
+                        (String) act.get("action"),
+                        (Boolean) act.get("locked"))).collect(Collectors.toList()));
             } catch (FileNotFoundException e) {
                 ErrorUtils.handleException(e);
             }
@@ -189,13 +184,10 @@ public class IRCUtils {
                 List<LinkedTreeMap> messages = file.read();
                 GeneralRegistry.SimpleMessages.clear();
 
-                for (LinkedTreeMap msg : messages) {
-                    GeneralRegistry.SimpleMessages.add(
-                            new SimpleMessage((String) msg.get("comid"),
-                                    ((Double) msg.get("PermLevel")).intValue(),
-                                    (String) msg.get("message"),
-                                    (Boolean) msg.get("locked")));
-                }
+                GeneralRegistry.SimpleMessages.addAll(messages.stream().map(msg -> new SimpleMessage((String) msg.get("comid"),
+                        ((Double) msg.get("PermLevel")).intValue(),
+                        (String) msg.get("message"),
+                        (Boolean) msg.get("locked"))).collect(Collectors.toList()));
             } catch (FileNotFoundException e) {
                 ErrorUtils.handleException(e);
             }

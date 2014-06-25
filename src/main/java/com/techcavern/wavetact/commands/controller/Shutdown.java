@@ -6,9 +6,6 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.events.MessageEvent;
 
 
-/**
- * Created by jztech101 on 6/23/14.
- */
 public class Shutdown extends Command {
     public Shutdown() {
         super("Shutdown", 9001, "Shutdown (r)");

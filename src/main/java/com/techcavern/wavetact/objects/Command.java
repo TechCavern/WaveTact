@@ -13,9 +13,9 @@ import org.pircbotx.hooks.events.MessageEvent;
  */
 public abstract class Command {
 
-    private String comid;
-    private int PermLevel;
-    private String Desc;
+    private final String comid;
+    private final int PermLevel;
+    private final String Desc;
 
     protected Command(String comid, int PermLevel, String Desc) {
         this.comid = comid.toLowerCase();
@@ -25,9 +25,8 @@ public abstract class Command {
 
     }
 
-    public Command create() {
+    void create() {
         GeneralRegistry.Commands.add(this);
-        return this;
     }
 
     public abstract void onCommand(MessageEvent<?> event, String... args) throws Exception;
@@ -43,7 +42,10 @@ public abstract class Command {
     public String getCommandID() {
         return comid;
     }
-    public String getDesc(){return Desc;}
+
+    public String getDesc() {
+        return Desc;
+    }
 
     @Override
     public String toString() {
