@@ -12,5 +12,8 @@ dependencies {
     compile files("libs/WolframAlpha.jar")
 }
 
-
-	
+jar {
+    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } 
+    manifest {
+        attributes('Main-class': 'Main.class')
+    }
