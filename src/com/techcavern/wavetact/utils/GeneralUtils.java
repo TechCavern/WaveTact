@@ -1,13 +1,7 @@
 package com.techcavern.wavetact.utils;
 
 import com.wolfram.alpha.*;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
 import com.google.gson.JsonObject;
-import org.apache.http.impl.client.SystemDefaultHttpClient;
 
 import java.io.IOException;
 import java.io.InputStream;
