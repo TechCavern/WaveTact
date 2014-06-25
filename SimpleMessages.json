@@ -1,51 +1,58 @@
 [
-  {
-    "message": "pong",
-    "locked": true,
-    "comid": "ping",
-    "PermLevel": 0,
-    "Desc": "A Basic Command that takes no Arguments"
-  },
-  {
-    "message": "ping",
-    "locked": true,
-    "comid": "pong",
-    "PermLevel": 0,
-    "Desc": "A Basic Command that takes no Arguments"
-  },
-  {
-    "message": "http://github.com/TechCavern/WaveTact",
-    "locked": true,
-    "comid": "source",
-    "PermLevel": 0,
-    "Desc": "A Basic Command that takes no Arguments"
-  },
-  {
-    "message": "Open Source Code Group",
-    "locked": false,
-    "comid": "directcode",
-    "PermLevel": 0,
-    "Desc": "A Basic Command that takes no Arguments"
-  },
-  {
-    "message": "authentication successful",
-    "locked": true,
-    "comid": "authenticate",
-    "PermLevel": 0,
-    "Desc": "A Basic Command that takes no Arguments"
-  },
-  {
-    "message": "******** (If it comes up as stars to you, its because its also your password)",
-    "locked": false,
-    "comid": "password",
-    "PermLevel": 0,
-    "Desc": "A Basic Command that takes no Arguments"
-  },
-  {
-    "message": "test test test",
-    "locked": false,
-    "comid": "test",
-    "PermLevel": 0,
-    "Desc": "A Basic Command that takes no Arguments"
-  }
+    {
+        "message": "pong",
+        "locked": true,
+        "comid": "ping",
+        "PermLevel": 0,
+        "Desc": "A Basic Command that takes no Arguments"
+    },
+    {
+        "message": "ping",
+        "locked": true,
+        "comid": "pong",
+        "PermLevel": 0,
+        "Desc": "A Basic Command that takes no Arguments"
+    },
+    {
+        "message": "http://github.com/TechCavern/WaveTact",
+        "locked": true,
+        "comid": "source",
+        "PermLevel": 0,
+        "Desc": "A Basic Command that takes no Arguments"
+    },
+    {
+        "message": "Open Source Code Group",
+        "locked": false,
+        "comid": "directcode",
+        "PermLevel": 0,
+        "Desc": "A Basic Command that takes no Arguments"
+    },
+    {
+        "message": "authentication successful",
+        "locked": true,
+        "comid": "authenticate",
+        "PermLevel": 0,
+        "Desc": "A Basic Command that takes no Arguments"
+    },
+    {
+        "message": "******** (If it comes up as stars to you, its because its also your password)",
+        "locked": false,
+        "comid": "password",
+        "PermLevel": 0,
+        "Desc": "A Basic Command that takes no Arguments"
+    },
+    {
+        "message": "test test test",
+        "locked": false,
+        "comid": "test",
+        "PermLevel": 0,
+        "Desc": "A Basic Command that takes no Arguments"
+    },
+    {
+        "message": "bbbbbb",
+        "locked": false,
+        "comid": "bbbbb",
+        "PermLevel": 0,
+        "Desc": "A Basic Command that takes no Arguments"
+    }
 ]

@@ -20,7 +20,7 @@ public class GeneralRegistry {
     public static final List<String> OvdChannels = Arrays.asList("#techcavern", "#dev");
     public static final String OvdNick = "WaveTact";
     public static final String EsperServer = "irc.esper.net";
-    public static final String EsperNick = "Wavetact";
+    public static final String EsperNick = "WaveTact";
     public static final List<String> EsperChannels = Arrays.asList("#directcode", "#techcavern");
     public static final String ECodeServer = "irc.electrocode.net";
     public static final List<String> ECodeChannels = Arrays.asList("#techcavern", "#bots");
