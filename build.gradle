@@ -15,6 +15,6 @@ dependencies {
 jar {
     from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
     manifest {
-        attributes('Main-class': 'Main.class')
+        attributes('Main-class': 'com.techcavern.wavetact.Main.class')
     }
 }
