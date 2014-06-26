@@ -21,7 +21,7 @@ public class Say extends Command {
 
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
-        event.getChannel().send().message(StringUtils.join(args, " ");
+        event.getChannel().send().message(StringUtils.join(args, " "));
 
     }
 }
