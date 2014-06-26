@@ -17,7 +17,7 @@ public class WolframAlpha extends Command {
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
         List<String> waresults = GeneralUtils.getWAResult(StringUtils.join(args, " "));
 
-        if (args.length > 0) {
+        if (args.length > 1) {
             event.respond(waresults.get(Integer.parseInt(args[1])));
         } else {
             for (int i = 0; i < waresults.size(); i++) {

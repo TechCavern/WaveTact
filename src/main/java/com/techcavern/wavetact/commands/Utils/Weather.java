@@ -15,8 +15,13 @@ public class Weather extends Command {
 
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
-        List<String> waresults = GeneralUtils.getWAResult("weather " + StringUtils.join(args, " "));
-        event.getChannel().send().message(waresults.get(1));
+        List<String> waresults = GeneralUtils.getWAResult("Weather " + StringUtils.join(args, " "));
+        if (waresults.size() < 1) {
+            event.getChannel().send().message("Unable to get response, try again or stop inputting gibberish");
+        } else {
+            event.getChannel().send().message(waresults.get(1));
+
+        }
     }
 
 }

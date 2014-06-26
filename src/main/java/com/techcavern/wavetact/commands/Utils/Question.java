@@ -16,7 +16,12 @@ public class Question extends Command {
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
         List<String> waresults = GeneralUtils.getWAResult("Question " + StringUtils.join(args, " "));
-        event.getChannel().send().message(waresults.get(1));
+        if (waresults.size() < 1) {
+            event.getChannel().send().message("Did you mean " + GeneralUtils.getWADidYouMeans("Question " + StringUtils.join(args, " ")));
+        } else {
+            event.getChannel().send().message(waresults.get(1));
+
+        }
     }
 
 }
