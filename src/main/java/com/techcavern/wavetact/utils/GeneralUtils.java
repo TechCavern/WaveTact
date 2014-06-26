@@ -1,7 +1,13 @@
 package com.techcavern.wavetact.utils;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.wolfram.alpha.*;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,13 +20,13 @@ public class GeneralUtils {
         WAQuery query = engine.createQuery();
         query.setInput(input);
         WAQueryResult queryResult = engine.performQuery(query);
-        List<String> waresults = new ArrayList<>();
+        List<String> waresults = new ArrayList<String>();
         for (WAPod pod : queryResult.getPods()) {
             if (!pod.isError()) {
                 for (WASubpod subpod : pod.getSubpods()) {
                     for (Object element : subpod.getContents()) {
                         if (element instanceof WAPlainText) {
-                            waresults.add((((WAPlainText) element).getText().replaceAll("[|]", "").replaceAll("\n", ", ")).replaceAll("  ", " "));
+                            waresults.add(((WAPlainText) element).getText().replaceAll("[|]", "").replaceAll("\n", ", ").replaceAll("  ", " "));
                         }
                     }
                 }
@@ -38,6 +44,15 @@ public class GeneralUtils {
             builder.append(' ');
         }
         return builder.toString().trim();
+    }
+
+    public static JsonObject getJsonObject(String s) throws Exception {
+        URL h = new URL(s);
+        BufferedReader f = new BufferedReader(new InputStreamReader(h.openStream()));
+        List<String> locinfo = new ArrayList<String>();
+        String g = f.readLine().replaceAll("\n", " ");
+        JsonObject b = new JsonParser().parse(g).getAsJsonObject();
+        return b;
     }
 
 }
