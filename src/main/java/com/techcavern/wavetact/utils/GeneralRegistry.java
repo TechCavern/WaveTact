@@ -13,7 +13,7 @@ import java.util.List;
 
 public class GeneralRegistry {
 
-    //  public static final String CommandChar = "&";
+    public static final String CommandChar = "&";
     public static final List<String> Controllers = Arrays.asList("jztech101", "Archtikz", "kaendfinger", "deathcrazyuberlironman");
     public static final List<String> ControllerHostmasks = Arrays.asList("*!jztech101@techcavern.com");
     public static final String OvdServer = "irc.overdrive.pw";
@@ -37,14 +37,14 @@ public class GeneralRegistry {
     public static final List<Command> Commands = new LoggingArrayList<Command>("Command");
     public static final List<SimpleMessage> SimpleMessages = new LoggingArrayList<SimpleMessage>("SimpleMessages");
     public static final List<SimpleAction> SimpleActions = new LoggingArrayList<SimpleAction>("SimpleActions");
-    public static final List<String> HighFives = new ArrayList<>();
+    public static final List<String> HighFives = new ArrayList<String>();
     public static final MultiBotManager<PircBotX> WaveTact = new MultiBotManager<PircBotX>();
 
     //Development Variables
-//    /**
+    /**
     public static final String CommandChar = "@";
     public static final String DevServer = "irc.esper.net";
     public static final List<String> DevChannels = Arrays.asList("#DirectCode");
     public static final String DevNick = "WaveTactDev";
-    //   **/
+     **/
 }
