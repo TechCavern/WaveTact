@@ -7,6 +7,7 @@ package com.techcavern.wavetact.commands.trusted;
 
 import com.techcavern.wavetact.objects.Command;
 import com.techcavern.wavetact.utils.GeneralRegistry;
+import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.hooks.events.MessageEvent;
 
 /**
@@ -20,6 +21,6 @@ public class Act extends Command {
 
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
-        event.getChannel().send().action(event.getMessage().replace(GeneralRegistry.CommandChar + "act ", ""));
+        event.getChannel().send().action(StringUtils.join(args, " "));
     }
 }

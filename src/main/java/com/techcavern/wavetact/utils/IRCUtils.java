@@ -3,6 +3,7 @@ package com.techcavern.wavetact.utils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.internal.LinkedTreeMap;
+import com.techcavern.wavetact.commands.Fun.Nom;
 import com.techcavern.wavetact.commands.Fun.SomethingAwesome;
 import com.techcavern.wavetact.commands.Fun.UrbanDictonary;
 import com.techcavern.wavetact.commands.Utils.*;
@@ -41,7 +42,7 @@ public class IRCUtils {
 
     public static PircBotX createbot(String g, String Name, List<String> channels, String Nick, String Server) {
         System.out.println("Configuring " + Name);
-        Builder<PircBotX> Net = new Configuration.Builder<>();
+        Builder<PircBotX> Net = new Configuration.Builder<PircBotX>();
         Net.setName(Nick);
         Net.setLogin("WaveTact");
         Net.setEncoding(Charset.isSupported("UTF-8") ? Charset.forName("UTF-8") : Charset.defaultCharset());
@@ -112,6 +113,7 @@ public class IRCUtils {
         new FindIP();
         new UrbanDictonary();
         new Hostmask();
+        new Nom();
     }
 
 

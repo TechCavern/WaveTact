@@ -7,6 +7,7 @@ package com.techcavern.wavetact.commands.trusted;
 
 import com.techcavern.wavetact.objects.Command;
 import com.techcavern.wavetact.utils.GeneralRegistry;
+import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.hooks.events.MessageEvent;
 
 /**
@@ -20,7 +21,7 @@ public class Say extends Command {
 
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
-        event.getChannel().send().message(event.getMessage().replace(GeneralRegistry.CommandChar + "say ", ""));
+        event.getChannel().send().message(StringUtils.join(args, " ");
 
     }
 }

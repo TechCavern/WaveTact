@@ -15,9 +15,9 @@ public class Question extends Command {
 
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
-        List<String> waresults = GeneralUtils.getWAResult("Question " + StringUtils.join(args, " "));
+        List<String> waresults = GeneralUtils.getWAResult(StringUtils.join(args, " "));
         if (waresults.size() < 1) {
-            event.getChannel().send().message("Did you mean " + GeneralUtils.getWADidYouMeans("Question " + StringUtils.join(args, " ")));
+            event.getChannel().send().message("Unable to get response, try again or stop inputting gibberish");
         } else {
             event.getChannel().send().message(waresults.get(1));
 
