@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.internal.LinkedTreeMap;
 import com.techcavern.wavetact.commands.Fun.SomethingAwesome;
+import com.techcavern.wavetact.commands.Fun.UrbanDictonary;
 import com.techcavern.wavetact.commands.Utils.*;
 import com.techcavern.wavetact.commands.Utils.Math;
 import com.techcavern.wavetact.commands.chanop.*;
@@ -109,6 +110,7 @@ public class IRCUtils {
         new Question();
         new Math();
         new FindIP();
+        new UrbanDictonary();
     }
 
 
