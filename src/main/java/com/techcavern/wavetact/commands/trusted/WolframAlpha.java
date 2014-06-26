@@ -20,7 +20,9 @@ public class WolframAlpha extends Command {
         if (args.length > 0) {
             event.respond(waresults.get(Integer.parseInt(args[1])));
         } else {
-            waresults.forEach(event::respond);
+            for (int i = 0; i < waresults.size(); i++) {
+                event.respond(waresults.get(i));
+            }
         }
     }
 }

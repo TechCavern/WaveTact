@@ -14,7 +14,11 @@ public class UrbanDictonary extends Command {
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
         JsonObject g = GeneralUtils.getJsonObject("http://api.urbandictionary.com/v0/define?term=" + StringUtils.join(args).replaceAll(" ", "%20"));
-        event.getChannel().send().message(g.getAsJsonArray("list").get(0).getAsJsonObject().get("definition").getAsString().replaceAll("\\n|\\r|\\t", " ").replaceAll("  ", " "));
-    }
+        if (g.getAsJsonArray("list").size() > 0) {
+            event.getChannel().send().message(g.getAsJsonArray("list").get(0).getAsJsonObject().get("definition").getAsString().replaceAll("\\n|\\r|\\t", " ").replaceAll("  ", " "));
+        } else {
+            event.getChannel().send().message("Not Defined in the Urban Dictionary");
+        }
 
+    }
 }

@@ -1,6 +1,5 @@
 package com.techcavern.wavetact.utils;
 
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.wolfram.alpha.*;
@@ -13,7 +12,6 @@ import java.util.List;
 
 public class GeneralUtils {
     public static List<String> getWAResult(String input) throws Exception {
-
         WAEngine engine = new WAEngine();
         engine.setAppID("H3G288-R6ULG68XJW");
         engine.addFormat("plaintext");
