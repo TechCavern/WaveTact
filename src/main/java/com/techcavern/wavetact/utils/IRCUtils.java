@@ -111,6 +111,7 @@ public class IRCUtils {
         new Math();
         new FindIP();
         new UrbanDictonary();
+        new Hostmask();
     }
 
 
