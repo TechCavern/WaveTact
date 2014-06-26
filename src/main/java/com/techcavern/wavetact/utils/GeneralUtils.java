@@ -47,10 +47,8 @@ public class GeneralUtils {
     public static JsonObject getJsonObject(String s) throws Exception {
         URL h = new URL(s);
         BufferedReader f = new BufferedReader(new InputStreamReader(h.openStream()));
-        List<String> locinfo = new ArrayList<String>();
         String g = f.readLine().replaceAll("\n", " ");
-        JsonObject b = new JsonParser().parse(g).getAsJsonObject();
-        return b;
+        return new JsonParser().parse(g).getAsJsonObject();
     }
 
 }
