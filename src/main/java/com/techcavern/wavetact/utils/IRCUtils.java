@@ -108,7 +108,7 @@ public class IRCUtils {
         new Define();
         new Question();
         new Math();
-        new IRCUtils();
+        new FindIP();
     }
 
 
