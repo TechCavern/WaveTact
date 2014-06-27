@@ -19,7 +19,7 @@ class Main {
         String g = args[0];
         IRCUtils.loadSimpleActions();
         IRCUtils.loadSimpleMessages();
-
+///**
         PircBotX Ovd = IRCUtils.createbot(pwd, "Ovd", GeneralRegistry.OvdChannels, GeneralRegistry.OvdNick, GeneralRegistry.OvdServer);
          PircBotX Esper = IRCUtils.createbot(g, "Esper", GeneralRegistry.EsperChannels, GeneralRegistry.EsperNick, GeneralRegistry.EsperServer);
          PircBotX ECode = IRCUtils.createbot(pwd, "ECode", GeneralRegistry.ECodeChannels, GeneralRegistry.ECodeNick, GeneralRegistry.ECodeServer);
@@ -32,8 +32,8 @@ class Main {
          GeneralRegistry.WaveTact.addBot(Freenode);
          GeneralRegistry.WaveTact.addBot(Ovd);
          GeneralRegistry.WaveTact.addBot(Xertion);
-         GeneralRegistry.WaveTact.addBot(ECode);
-
+        GeneralRegistry.WaveTact.addBot(ECode);
+//**/
         //Development Server
         /**
         PircBotX Dev = IRCUtils.createbot(pwd, "Dev", GeneralRegistry.DevChannels, GeneralRegistry.DevNick, GeneralRegistry.DevServer);

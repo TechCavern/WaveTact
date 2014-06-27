@@ -19,19 +19,17 @@ public class GeneralUtils {
         WAQuery query = engine.createQuery();
         query.setInput(input);
         WAQueryResult queryResult = engine.performQuery(query);
-        queryResult.getDidYouMeans();
         List<String> waresults = new ArrayList<String>();
         for (WAPod pod : queryResult.getPods()) {
-            if (!pod.isError()) {
                 for (WASubpod subpod : pod.getSubpods()) {
                     for (Object element : subpod.getContents()) {
                         if (element instanceof WAPlainText) {
                             waresults.add(((WAPlainText) element).getText().replaceAll("[|]", "").replaceAll("\n", ", ").replaceAll("  ", " "));
                         }
                     }
-                }
 
-            }
+
+                }
         }
         return waresults;
 
