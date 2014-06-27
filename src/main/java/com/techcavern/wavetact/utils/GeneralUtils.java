@@ -21,10 +21,10 @@ public class GeneralUtils {
         WAQueryResult queryResult = engine.performQuery(query);
         List<String> waresults = new ArrayList<String>();
         for (WAPod pod : queryResult.getPods()) {
-                for (WASubpod subpod : pod.getSubpods()) {
-                    for (Object element : subpod.getContents()) {
-                        if (element instanceof WAPlainText) {
-                            waresults.add(((WAPlainText) element).getText().replaceAll("[|]", "").replaceAll("\n", ", ").replaceAll("  ", " "));
+            for (WASubpod spod : pod.getSubpods()) {
+                for (Object e : spod.getContents()) {
+                    if (e instanceof WAPlainText) {
+                        waresults.add(((WAPlainText) e).getText().replaceAll("[|]", "").replaceAll("\n", ", ").replaceAll("  ", " "));
                         }
                     }
 
