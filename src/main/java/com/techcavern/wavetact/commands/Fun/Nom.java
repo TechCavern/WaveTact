@@ -8,12 +8,12 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class Nom extends Command {
 
     public Nom() {
-        super("nom", 5, "nom [something]");
+        super("nom", 0, "nom [something]");
     }
 
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
-        event.getChannel().send().action("noms on" + StringUtils.join(args, " "));
+        event.getChannel().send().action("noms on " + StringUtils.join(args, " "));
         event.getChannel().send().message("mmhmm");
     }
 }
