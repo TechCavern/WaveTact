@@ -114,6 +114,7 @@ public class IRCUtils {
         new UrbanDictonary();
         new Hostmask();
         new Nom();
+        new PingTime();
     }
 
 

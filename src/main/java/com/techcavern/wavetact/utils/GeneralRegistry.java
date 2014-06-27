@@ -23,7 +23,7 @@ public class GeneralRegistry {
     public static final String EsperNick = "WaveTact";
     public static final List<String> EsperChannels = Arrays.asList("#directcode", "#techcavern");
     public static final String ECodeServer = "irc.electrocode.net";
-    public static final List<String> ECodeChannels = Arrays.asList("#techcavern", "#bots");
+    public static final List<String> ECodeChannels = Arrays.asList("#techcavern", "#bots", "#chat");
     public static final String ECodeNick = "WaveTact";
     public static final String XertionServer = "irc.xertion.org";
     public static final List<String> XertionChannels = Arrays.asList("#techcavern");
@@ -44,7 +44,7 @@ public class GeneralRegistry {
     /**
     public static final String CommandChar = "@";
     public static final String DevServer = "irc.esper.net";
-    public static final List<String> DevChannels = Arrays.asList("#DirectCode");
+     public static final List<String> DevChannels = Arrays.asList("#TechCavern");
     public static final String DevNick = "WaveTactDev";
      **/
 }

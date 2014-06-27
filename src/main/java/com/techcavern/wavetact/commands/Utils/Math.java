@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Math extends Command {
     public Math() {
-        super("math", 0, "math [What to Calculate]");
+        super("calc", 0, "calc [What to Calculate]");
     }
 
     @Override
