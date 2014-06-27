@@ -13,7 +13,11 @@ public class Nom extends Command {
 
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
-        event.getChannel().send().action("noms on " + StringUtils.join(args, " "));
+        if (args.length > 0) {
+            event.getChannel().send().action("noms on " + StringUtils.join(args, " "));
+        } else {
+            event.getChannel().send().action("noms on " + event.getUser().getNick());
+        }
         event.getChannel().send().message("mmhmm");
     }
 }
