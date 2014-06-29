@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.commands.Utils;
+package com.techcavern.wavetact.commands.utils;
 
 import com.techcavern.wavetact.objects.Command;
 import org.pircbotx.hooks.events.MessageEvent;

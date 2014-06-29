@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.commands.Fun;
+package com.techcavern.wavetact.commands.fun;
 
 import com.google.gson.JsonObject;
 import com.techcavern.wavetact.objects.Command;

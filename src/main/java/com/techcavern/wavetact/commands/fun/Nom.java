@@ -1,7 +1,6 @@
-package com.techcavern.wavetact.commands.Fun;
+package com.techcavern.wavetact.commands.fun;
 
 import com.techcavern.wavetact.objects.Command;
-import com.techcavern.wavetact.utils.GeneralRegistry;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.hooks.events.MessageEvent;
 

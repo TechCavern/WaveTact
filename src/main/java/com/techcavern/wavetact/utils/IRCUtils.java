@@ -3,11 +3,11 @@ package com.techcavern.wavetact.utils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.internal.LinkedTreeMap;
-import com.techcavern.wavetact.commands.Fun.Nom;
-import com.techcavern.wavetact.commands.Fun.SomethingAwesome;
-import com.techcavern.wavetact.commands.Fun.UrbanDictonary;
-import com.techcavern.wavetact.commands.Utils.*;
-import com.techcavern.wavetact.commands.Utils.Math;
+import com.techcavern.wavetact.commands.fun.Nom;
+import com.techcavern.wavetact.commands.fun.SomethingAwesome;
+import com.techcavern.wavetact.commands.fun.UrbanDictonary;
+import com.techcavern.wavetact.commands.utils.*;
+import com.techcavern.wavetact.commands.utils.Math;
 import com.techcavern.wavetact.commands.chanop.*;
 import com.techcavern.wavetact.commands.controller.BasicCommands;
 import com.techcavern.wavetact.commands.controller.Join;
@@ -49,12 +49,11 @@ public class IRCUtils {
         Net.setServer(Server, 6667);
         channels.forEach(Net::addAutoJoinChannel);
         Net.getListenerManager().addListener(new MessageListener());
-        Net.getListenerManager().addListener(new HighFive());
+    //    Net.getListenerManager().addListener(new HighFive());
         Net.getListenerManager().addListener(new KickRejoin());
         if (g != null) {
             Net.setNickservPassword(g);
         }
-        //  Net.getListenerManager().addListener(new TestCommand());
         return new PircBotX(Net.buildConfiguration());
     }
 
@@ -92,6 +91,7 @@ public class IRCUtils {
         new Kick();
         new Mode();
         new Op();
+     //   new Topic();
         new Owner();
         new Part();
         new Protect();

@@ -13,7 +13,7 @@ import java.util.List;
 
 public class GeneralRegistry {
 
-    public static final String CommandChar = "&";
+ //   public static final String CommandChar = "&";
     public static final List<String> Controllers = Arrays.asList("jztech101", "Archtikz", "kaendfinger", "deathcrazyuberlironman");
     public static final List<String> ControllerHostmasks = Arrays.asList("*!jztech101@techcavern.com");
     public static final String OvdServer = "irc.overdrive.pw";
@@ -21,7 +21,7 @@ public class GeneralRegistry {
     public static final String OvdNick = "WaveTact";
     public static final String EsperServer = "irc.esper.net";
     public static final String EsperNick = "WaveTact";
-    public static final List<String> EsperChannels = Arrays.asList("#directcode", "#techcavern");
+    public static final List<String> EsperChannels = Arrays.asList("#directcode", "#techcavern", "#speakeasy", "#kingrunes");
     public static final String ECodeServer = "irc.electrocode.net";
     public static final List<String> ECodeChannels = Arrays.asList("#techcavern", "#bots", "#chat");
     public static final String ECodeNick = "WaveTact";
@@ -32,7 +32,7 @@ public class GeneralRegistry {
     public static final List<String> ObsidianChannels = Arrays.asList("#techcavern", "#szsocial");
     public static final String ObsidianNick = "WaveTact";
     public static final String FreenodeServer = "irc.freenode.net";
-    public static final List<String> FreenodeChannels = Arrays.asList("#techcavern", "##powder-bots");
+    public static final List<String> FreenodeChannels = Arrays.asList("#techcavern", "##powder-bots", "#directcode");
     public static final String FreenodeNick = "WaveTact";
     public static final List<Command> Commands = new LoggingArrayList<Command>("Command");
     public static final List<SimpleMessage> SimpleMessages = new LoggingArrayList<SimpleMessage>("SimpleMessages");
@@ -41,10 +41,10 @@ public class GeneralRegistry {
     public static final MultiBotManager<PircBotX> WaveTact = new MultiBotManager<PircBotX>();
 
     //Development Variables
-    /**
+
     public static final String CommandChar = "@";
     public static final String DevServer = "irc.esper.net";
      public static final List<String> DevChannels = Arrays.asList("#TechCavern");
     public static final String DevNick = "WaveTactDev";
-     **/
+
 }

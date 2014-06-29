@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.techcavern.wavetact.commands.Fun;
+package com.techcavern.wavetact.commands.fun;
 
 import com.techcavern.wavetact.objects.Command;
 import org.pircbotx.UserLevel;

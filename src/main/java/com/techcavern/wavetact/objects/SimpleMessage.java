@@ -5,6 +5,7 @@
  */
 package com.techcavern.wavetact.objects;
 
+import com.sun.deploy.util.StringUtils;
 import org.pircbotx.hooks.events.MessageEvent;
 
 /**
@@ -12,7 +13,7 @@ import org.pircbotx.hooks.events.MessageEvent;
  */
 public class SimpleMessage extends Command {
 
-    private final String message;
+    private String message;
     private boolean locked;
 
     public SimpleMessage(String i, int p, String m, boolean b) {
@@ -23,6 +24,9 @@ public class SimpleMessage extends Command {
 
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
+        message = message.replace("$1", args[0]);
+        message = message.replace("$2", args[1]);
+        message = message.replace("$*", StringUtils.join(args, " "));
         event.respond(message);
     }
 

@@ -12,3 +12,4 @@ dist/
 .gradle/
 out/
 pimp/
+src/META-INF/
