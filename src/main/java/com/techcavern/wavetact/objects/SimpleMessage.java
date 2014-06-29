@@ -5,7 +5,7 @@
  */
 package com.techcavern.wavetact.objects;
 
-import com.sun.deploy.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.hooks.events.MessageEvent;
 import java.util.Arrays;
 
