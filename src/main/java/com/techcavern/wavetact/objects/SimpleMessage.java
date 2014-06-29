@@ -7,6 +7,7 @@ package com.techcavern.wavetact.objects;
 
 import com.sun.deploy.util.StringUtils;
 import org.pircbotx.hooks.events.MessageEvent;
+import java.util.Arrays;
 
 /**
  * @author jztech101
@@ -26,7 +27,7 @@ public class SimpleMessage extends Command {
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
         message = message.replace("$1", args[0]);
         message = message.replace("$2", args[1]);
-        message = message.replace("$*", StringUtils.join(args, " "));
+        message = message.replace("$*", StringUtils.join(Arrays.asList(args), " "));
         event.respond(message);
     }
 

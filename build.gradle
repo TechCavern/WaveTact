@@ -2,6 +2,9 @@ apply plugin: 'java'
 
 repositories {
     jcenter()
+    maven {
+        url 'https://github.com/hyamamoto/maven-repository/raw/master/releases'
+    }
 }
 
 dependencies {
@@ -10,7 +13,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'org.slf4j:slf4j-simple:1.7.7'
     compile 'org.apache.httpcomponents:httpclient:4.3.4'
-    compile files("libs/WolframAlpha.jar")
+    compile 'jp.freepress.repo:WolframAlpha:1.1';
 }
 
 jar {
