@@ -95,12 +95,11 @@ public class IRCUtils {
         List<ClassLoader> classLoadersList = new LinkedList<ClassLoader>();
         classLoadersList.add(ClasspathHelper.contextClassLoader());
         classLoadersList.add(ClasspathHelper.staticClassLoader());
-
         Reflections reflections = new Reflections(new ConfigurationBuilder()
                 .setScanners(new SubTypesScanner(false /* don't exclude Object.class */), new ResourcesScanner())
                 .setUrls(ClasspathHelper.forClassLoader(classLoadersList.toArray(new ClassLoader[0])))
                 .filterInputsBy(new FilterBuilder().include(FilterBuilder.prefix("com.techcavern.wavetact"))));
-        Set<Class<? extends Commands>> subtypes = reflections.getSubTypesOf(Commands.class);
+        Set<Class<? extends Command>> subtypes = reflections.getSubTypesOf(Command.class);
         for(Class c:subtypes){
             Reflection.initialize(c);
         }
