@@ -1,15 +1,14 @@
 package com.techcavern.wavetact.utils;
 
-import com.techcavern.wavetact.objects.Command;
-import com.techcavern.wavetact.objects.LoggingArrayList;
-import com.techcavern.wavetact.objects.SimpleAction;
-import com.techcavern.wavetact.objects.SimpleMessage;
+import com.techcavern.wavetact.objects.*;
 import org.pircbotx.MultiBotManager;
 import org.pircbotx.PircBotX;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.ForkJoinPool;
 
 public class GeneralRegistry {
 
@@ -39,6 +38,11 @@ public class GeneralRegistry {
     public static final List<SimpleAction> SimpleActions = new LoggingArrayList<SimpleAction>("SimpleActions");
     public static final List<String> HighFives = new ArrayList<String>();
     public static final MultiBotManager<PircBotX> WaveTact = new MultiBotManager<PircBotX>();
+    public static final ForkJoinPool TASKS = new ForkJoinPool();
+    public static final List<Command> COMMANDS = new LinkedList<Command>();
+    public static final List<UTime> BanTimes = new LoggingArrayList<UTime>("BanTimes");
+    public static final List<UTime> QuietTimes = new LoggingArrayList<UTime>("QuietTimes");
+
 
     //Development Variables
 

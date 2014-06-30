@@ -19,18 +19,40 @@ public class CheckTime implements Runnable{
                 TimeUnit.SECONDS.sleep(5);
                 for(UTime x:GeneralRegistry.BanTimes) {
                     if(System.currentTimeMillis() >= x.getTime()){
-                        PircBotX b = IRCUtils.getBotByNetwork(x.getNetwork()){
-                                   IRCUtils.setMode(IRCUtils.getChannelbyName(b,x.getChannel()), b, "+b", x.getHostmask());
+                        PircBotX b = IRCUtils.getBotByNetwork(x.getNetwork());
+                                   IRCUtils.setMode(IRCUtils.getChannelbyName(b,x.getChannel()), b, "-b ", x.getHostmask());
+                        GeneralRegistry.BanTimes.remove(x);
+                        IRCUtils.saveBanTimes();
 
-                            }
 
                 }}
+                for(UTime x:GeneralRegistry.QuietTimes){
+                    if(System.currentTimeMillis() >= x.getTime()){
+                        PircBotX b = IRCUtils.getBotByNetwork(x.getNetwork());
+                        switch(x.getType().toLowerCase()) {
+                            case "u":
+                            IRCUtils.setMode(IRCUtils.getChannelbyName(b, x.getChannel()), b, "-b ~q:", x.getHostmask());
+                                break;
+                            case "c":
+                                IRCUtils.setMode(IRCUtils.getChannelbyName(b, x.getChannel()), b, "-q ", x.getHostmask());
+                                break;
+                            case "i":
+                                IRCUtils.setMode(IRCUtils.getChannelbyName(b, x.getChannel()), b, "-b m:", x.getHostmask());
+                                break;
+                        }
+                        GeneralRegistry.QuietTimes.remove(x);
+                        IRCUtils.saveQuietTimes();
+                    }
+
+
+                }
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
         }
         }
 
     }
-}
+

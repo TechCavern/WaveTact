@@ -60,6 +60,25 @@ public class GeneralUtils {
         WAQueryResult queryResult = engine.performQuery(query);
         return StringUtils.join(queryResult.getDidYouMeans(), ",");
     }
+    public static long getMilliSeconds(String c){
+        if(c.toLowerCase().endsWith("h")){
+            return Integer.parseInt(c.replace("h", ""))*60*60*1000;
+        }else if(c.toLowerCase().endsWith("m")){
+            return Integer.parseInt(c.replace("m", ""))*60*1000;
+
+        }else if(c.toLowerCase().endsWith("d")){
+            return Integer.parseInt(c.replace("d", ""))*24*60*60*1000;
+
+        }else if(c.toLowerCase().endsWith("w")){
+            return Integer.parseInt(c.replace("w", ""))*7*24*60*60*1000;
+
+        }else if(c.toLowerCase().endsWith("s")){
+            return Integer.parseInt(c.replace("s", ""))*1000;
+
+        }else{
+            return Integer.parseInt(c);
+        }
+    }
 
 }
 
