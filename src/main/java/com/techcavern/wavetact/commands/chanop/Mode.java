@@ -5,6 +5,7 @@
  */
 package com.techcavern.wavetact.commands.chanop;
 
+import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.objects.Command;
 import org.pircbotx.hooks.events.MessageEvent;
 
@@ -12,7 +13,7 @@ import org.pircbotx.hooks.events.MessageEvent;
  * @author jztech101
  */
 public class Mode extends Command {
-
+    @CMD
     public Mode() {
         super("mode", 10, "mode [modes to set]");
     }

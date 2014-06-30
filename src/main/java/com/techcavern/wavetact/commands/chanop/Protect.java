@@ -5,6 +5,7 @@
  */
 package com.techcavern.wavetact.commands.chanop;
 
+import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.objects.Command;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.pircbotx.hooks.events.MessageEvent;
@@ -14,6 +15,7 @@ import org.pircbotx.hooks.events.MessageEvent;
  * @author jztech101
  */
 public class Protect extends Command {
+    @CMD
     public Protect() {
         super("protect", 15, "protect (-)(User)");
     }

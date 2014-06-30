@@ -1,5 +1,6 @@
 package com.techcavern.wavetact.commands;
 
+import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.objects.Command;
 import org.pircbotx.hooks.events.MessageEvent;
 
@@ -8,6 +9,7 @@ import org.pircbotx.hooks.events.MessageEvent;
  */
 @SuppressWarnings("ALL")
 public class ExampleCommand extends Command {
+    @CMD
     public ExampleCommand() {
         super("blah", 0, "description");
     }

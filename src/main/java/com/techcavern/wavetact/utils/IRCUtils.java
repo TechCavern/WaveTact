@@ -28,12 +28,6 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 import org.pircbotx.output.OutputChannel;
 import org.pircbotx.output.OutputUser;
-import org.reflections.Reflections;
-import org.reflections.scanners.ResourcesScanner;
-import org.reflections.scanners.SubTypesScanner;
-import org.reflections.util.ClasspathHelper;
-import org.reflections.util.ConfigurationBuilder;
-import org.reflections.util.FilterBuilder;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -89,23 +83,6 @@ public class IRCUtils {
         OutputUser x = new OutputUser(b, u);
         x.notice(s);
     }
-
-    public static void RegisterCommands() throws Exception {
-        System.out.println("Registering Commands");
-        List<ClassLoader> classLoadersList = new LinkedList<ClassLoader>();
-        classLoadersList.add(ClasspathHelper.contextClassLoader());
-        classLoadersList.add(ClasspathHelper.staticClassLoader());
-
-        Reflections reflections = new Reflections(new ConfigurationBuilder()
-                .setScanners(new SubTypesScanner(false /* don't exclude Object.class */), new ResourcesScanner())
-                .setUrls(ClasspathHelper.forClassLoader(classLoadersList.toArray(new ClassLoader[0])))
-                .filterInputsBy(new FilterBuilder().include(FilterBuilder.prefix("com.techcavern.wavetact"))));
-        Set<Class<? extends Commands>> subtypes = reflections.getSubTypesOf(Commands.class);
-        for(Class c:subtypes){
-            Reflection.initialize(c);
-        }
-    }
-
 
     public static Command getCommand(String Command) {
         for (Command g : GeneralRegistry.Commands) {

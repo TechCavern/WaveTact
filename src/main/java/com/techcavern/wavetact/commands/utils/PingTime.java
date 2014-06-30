@@ -1,5 +1,6 @@
 package com.techcavern.wavetact.commands.utils;
 
+import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.objects.Command;
 import org.pircbotx.hooks.events.MessageEvent;
 
@@ -7,6 +8,7 @@ import java.net.InetAddress;
 import java.net.Socket;
 
 public class PingTime extends Command {
+    @CMD
     public PingTime() {
         super("checkping", 0, "ping [website] (port)");
     }

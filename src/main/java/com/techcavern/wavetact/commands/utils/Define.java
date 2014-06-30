@@ -1,5 +1,6 @@
 package com.techcavern.wavetact.commands.utils;
 
+import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.objects.Command;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -9,6 +10,7 @@ import java.util.List;
 
 
 public class Define extends Command {
+    @CMD
     public Define() {
         super("Define", 0, "Define [word]");
     }

@@ -1,5 +1,6 @@
 package com.techcavern.wavetact.commands.trusted;
 
+import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.objects.Command;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -9,6 +10,7 @@ import java.util.List;
 
 
 public class WolframAlpha extends Command {
+    @CMD
     public WolframAlpha() {
         super("wa", 5, "wa [input] (return array value #)");
     }

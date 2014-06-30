@@ -1,10 +1,12 @@
 package com.techcavern.wavetact.commands.utils;
 
+import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.objects.Command;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.pircbotx.hooks.events.MessageEvent;
 
 public class Help extends Command {
+    @CMD
     public Help() {
         super("help", 0, "help (command)");
     }

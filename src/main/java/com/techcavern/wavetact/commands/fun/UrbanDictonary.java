@@ -1,12 +1,14 @@
 package com.techcavern.wavetact.commands.fun;
 
 import com.google.gson.JsonObject;
+import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.objects.Command;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.hooks.events.MessageEvent;
 
 public class UrbanDictonary extends Command {
+    @CMD
     public UrbanDictonary() {
         super("urb", 0, "urb [what to define]");
     }

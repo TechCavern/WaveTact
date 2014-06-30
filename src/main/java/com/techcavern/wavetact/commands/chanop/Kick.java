@@ -5,6 +5,7 @@
  */
 package com.techcavern.wavetact.commands.chanop;
 
+import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.objects.Command;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.pircbotx.UserLevel;
@@ -14,7 +15,7 @@ import org.pircbotx.hooks.events.MessageEvent;
  * @author jztech101
  */
 public class Kick extends Command {
-
+    @CMD
     public Kick() {
         super("kick", 10, "kick [user]");
     }
