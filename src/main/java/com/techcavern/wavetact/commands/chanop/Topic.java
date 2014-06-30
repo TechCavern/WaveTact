@@ -12,11 +12,10 @@ import org.pircbotx.hooks.events.MessageEvent;
 
 import java.util.Arrays;
 import java.util.List;
-
 /**
  * @author jztech101
  */
-@SuppressWarnings("UnusedDeclaration")
+/**
 public class Topic extends Command {
 
     public Topic() {
@@ -78,3 +77,4 @@ public class Topic extends Command {
     }
 
 }
+**/

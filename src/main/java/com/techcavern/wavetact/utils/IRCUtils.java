@@ -27,11 +27,13 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 import org.pircbotx.output.OutputChannel;
 import org.pircbotx.output.OutputUser;
+import org.reflections.Reflections;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 //import com.techcavern.wavetact.Commands.Commands.TestCommand;
@@ -81,40 +83,13 @@ public class IRCUtils {
         x.notice(s);
     }
 
-    public static void RegisterCommands() {
+    public static void RegisterCommands() throws Exception {
         System.out.println("Registering Commands");
-        new Act();
-        new Say();
-        new SomethingAwesome();
-        new Ban();
-        new Quiet();
-        new Kick();
-        new Mode();
-        new Op();
-     //   new Topic();
-        new Owner();
-        new Part();
-        new Protect();
-        new Voice();
-        new Join();
-        new CustomCMD();
-        new CheckUserLevel();
-        new BasicCommands();
-        new Topic();
-        new Lock();
-        new Shutdown();
-        new Help();
-        new Commands();
-        new WolframAlpha();
-        new Weather();
-        new Define();
-        new Question();
-        new Math();
-        new FindIP();
-        new UrbanDictonary();
-        new Hostmask();
-        new Nom();
-        new PingTime();
+        Reflections reflections = new Reflections("com.techcavern.wavetact");
+        Set<Class<? extends Commands>> subtypes = reflections.getSubTypesOf(Commands.class);
+        for(Class c:subtypes){
+            c.newInstance();
+        }
     }
 
 

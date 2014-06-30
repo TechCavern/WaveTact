@@ -19,13 +19,13 @@ class Main {
         String g = args[0];
         IRCUtils.loadSimpleActions();
         IRCUtils.loadSimpleMessages();
-///**
+/**
         PircBotX Ovd = IRCUtils.createbot(pwd, "Ovd", GeneralRegistry.OvdChannels, GeneralRegistry.OvdNick, GeneralRegistry.OvdServer);
          PircBotX Esper = IRCUtils.createbot(g, "Esper", GeneralRegistry.EsperChannels, GeneralRegistry.EsperNick, GeneralRegistry.EsperServer);
-         PircBotX ECode = IRCUtils.createbot(pwd, "ECode", GeneralRegistry.ECodeChannels, GeneralRegistry.ECodeNick, GeneralRegistry.ECodeServer);
+         PircBotX ECode = IRCUtils.createbot(g, "ECode", GeneralRegistry.ECodeChannels, GeneralRegistry.ECodeNick, GeneralRegistry.ECodeServer);
          PircBotX Xertion = IRCUtils.createbot(pwd, "Xertion", GeneralRegistry.XertionChannels, GeneralRegistry.XertionNick, GeneralRegistry.XertionServer);
          PircBotX Obsidian = IRCUtils.createbot(pwd, "Obsidian", GeneralRegistry.ObsidianChannels, GeneralRegistry.ObsidianNick, GeneralRegistry.ObsidianServer);
-         PircBotX Freenode = IRCUtils.createbot(pwd, "Freenode", GeneralRegistry.FreenodeChannels, GeneralRegistry.FreenodeNick, GeneralRegistry.FreenodeServer);
+         PircBotX Freenode = IRCUtils.createbot(g, "Freenode", GeneralRegistry.FreenodeChannels, GeneralRegistry.FreenodeNick, GeneralRegistry.FreenodeServer);
 
          GeneralRegistry.WaveTact.addBot(Obsidian);
          GeneralRegistry.WaveTact.addBot(Esper);
@@ -33,12 +33,12 @@ class Main {
          GeneralRegistry.WaveTact.addBot(Ovd);
          GeneralRegistry.WaveTact.addBot(Xertion);
         GeneralRegistry.WaveTact.addBot(ECode);
-//**/
+**/
         //Development Server
-        /**
+    //    /**
         PircBotX Dev = IRCUtils.createbot(pwd, "Dev", GeneralRegistry.DevChannels, GeneralRegistry.DevNick, GeneralRegistry.DevServer);
         GeneralRegistry.WaveTact.addBot(Dev);
-         **/
+      //   **/
         GeneralRegistry.WaveTact.start();
 
     }

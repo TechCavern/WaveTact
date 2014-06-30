@@ -5,6 +5,7 @@
  */
 package com.techcavern.wavetact.objects;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.hooks.events.MessageEvent;
 import java.util.Arrays;
@@ -18,16 +19,19 @@ public class SimpleMessage extends Command {
     private boolean locked;
 
     public SimpleMessage(String i, int p, String m, boolean b) {
-        super(i, p, "A Basic Command that takes no Arguments");
+        super(i, p, "A Basic Command");
         this.message = m;
         this.locked = b;
     }
 
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
-        message = message.replace("$1", args[0]);
-        message = message.replace("$2", args[1]);
-        message = message.replace("$*", StringUtils.join(Arrays.asList(args), " "));
+        if(this.message.contains("$1")) {
+            this.message = this.message.replace("$1", args[0]);
+            this.message = this.message.replace("$*", StringUtils.join(Arrays.asList(ArrayUtils.remove(args,0)), " "));
+        }else if (message.contains("$*")){
+            this.message = this.message.replace("$*", StringUtils.join(Arrays.asList(args), " "));
+        }
         event.respond(message);
     }
 

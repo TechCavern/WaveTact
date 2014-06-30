@@ -5,14 +5,18 @@
  */
 package com.techcavern.wavetact.objects;
 
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.hooks.events.MessageEvent;
+
+import java.util.Arrays;
 
 /**
  * @author jztech101
  */
 public class SimpleAction extends Command {
 
-    private final String action;
+    private String action;
     private boolean locked;
 
     public SimpleAction(String i, int p, String a, boolean b) {
@@ -24,6 +28,12 @@ public class SimpleAction extends Command {
 
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
+        if(this.action.contains("$1")) {
+            this.action = this.action.replace("$1", args[0]);
+            this.action = this.action.replace("$*", StringUtils.join(Arrays.asList(ArrayUtils.remove(args, 0)), " "));
+        }else if (this.action.contains("$*")){
+            this.action = this.action.replace("$*", StringUtils.join(Arrays.asList(args), " "));
+        }
         event.getChannel().send().action(action);
     }
 

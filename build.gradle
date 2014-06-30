@@ -15,6 +15,8 @@ dependencies {
     compile 'org.slf4j:slf4j-simple:1.7.7'
     compile 'org.apache.httpcomponents:httpclient:4.3.4'
     compile 'jp.freepress.repo:WolframAlpha:1.1'
+    compile 'org.reflections:reflections:0.9.9-RC1'
+
 }
 
 jar {
