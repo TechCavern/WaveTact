@@ -20,13 +20,14 @@ class Main {
         System.setProperty(SimpleLogger.DATE_TIME_FORMAT_KEY, "[yyyy/MM/dd HH:mm:ss]");
         System.setProperty(SimpleLogger.LEVEL_IN_BRACKETS_KEY, "true");
         String pwd = null;
+        String g = args[0];
         IRCUtils.registerCommands();
         IRCUtils.loadSimpleActions();
         IRCUtils.loadSimpleMessages();
         IRCUtils.loadBanTimes();
         IRCUtils.loadQuietTimes();
         IRCUtils.startThreads();
-/**
+///**
         PircBotX Ovd = IRCUtils.createbot(pwd, "Ovd", GeneralRegistry.OvdChannels, GeneralRegistry.OvdNick, GeneralRegistry.OvdServer);
          PircBotX Esper = IRCUtils.createbot(g, "Esper", GeneralRegistry.EsperChannels, GeneralRegistry.EsperNick, GeneralRegistry.EsperServer);
          PircBotX ECode = IRCUtils.createbot(g, "ECode", GeneralRegistry.ECodeChannels, GeneralRegistry.ECodeNick, GeneralRegistry.ECodeServer);
@@ -40,12 +41,12 @@ class Main {
          GeneralRegistry.WaveTact.addBot(Ovd);
          GeneralRegistry.WaveTact.addBot(Xertion);
         GeneralRegistry.WaveTact.addBot(ECode);
-**/
+//**/
         //Development Server
-    //    /**
+        /**
         PircBotX Dev = IRCUtils.createbot(pwd, "Dev", GeneralRegistry.DevChannels, GeneralRegistry.DevNick, GeneralRegistry.DevServer);
         GeneralRegistry.WaveTact.addBot(Dev);
-      //   **/
+        **/
         GeneralRegistry.WaveTact.start();
     }
 }

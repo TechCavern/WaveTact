@@ -12,7 +12,7 @@ import java.util.concurrent.ForkJoinPool;
 
 public class GeneralRegistry {
 
- //   public static final String CommandChar = "&";
+    public static final String CommandChar = "&";
     public static final List<String> Controllers = Arrays.asList("jztech101", "Archtikz", "kaendfinger", "deathcrazyuberlironman");
     public static final List<String> ControllerHostmasks = Arrays.asList("*!jztech101@techcavern.com");
     public static final String OvdServer = "irc.overdrive.pw";
@@ -45,10 +45,10 @@ public class GeneralRegistry {
 
 
     //Development Variables
-
+/**
     public static final String CommandChar = "@";
     public static final String DevServer = "irc.esper.net";
      public static final List<String> DevChannels = Arrays.asList("#TechCavern");
     public static final String DevNick = "WaveTactDev";
-
+**/
 }
