@@ -15,7 +15,7 @@ import java.util.Arrays;
  */
 public class SimpleMessage extends Command {
 
-    private String message;
+    private final String message;
     private boolean locked;
 
     public SimpleMessage(String i, int p, String m, boolean b) {
@@ -26,13 +26,16 @@ public class SimpleMessage extends Command {
 
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
+        String dresponse;
         if(this.message.contains("$1")) {
-            this.message = this.message.replace("$1", args[0]);
-            this.message = this.message.replace("$*", StringUtils.join(Arrays.asList(ArrayUtils.remove(args,0)), " "));
+            dresponse = this.message.replace("$1", args[0]);
+            dresponse = dresponse.replace("$*", StringUtils.join(Arrays.asList(ArrayUtils.remove(args,0)), " "));
         }else if (message.contains("$*")){
-            this.message = this.message.replace("$*", StringUtils.join(Arrays.asList(args), " "));
+             dresponse = this.message.replace("$*", StringUtils.join(Arrays.asList(args), " "));
+        }else{
+             dresponse = this.message;
         }
-        event.respond(message);
+        event.respond(dresponse);
     }
 
     public String getMessage() {

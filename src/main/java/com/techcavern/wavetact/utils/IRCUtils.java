@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.internal.LinkedTreeMap;
 import com.techcavern.wavetact.events.KickRejoin;
+import com.techcavern.wavetact.events.MessageListener;
 import com.techcavern.wavetact.objects.*;
 import com.techcavern.wavetact.thread.CommandCollection;
 import org.pircbotx.Channel;

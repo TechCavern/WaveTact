@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.techcavern.wavetact.utils;
+package com.techcavern.wavetact.events;
 
 import com.techcavern.wavetact.objects.Command;
+import com.techcavern.wavetact.utils.GeneralRegistry;
+import com.techcavern.wavetact.utils.PermUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.ListenerAdapter;
@@ -14,7 +16,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 /**
  * @author jztech101
  */
-class MessageListener extends ListenerAdapter<PircBotX> {
+public class MessageListener extends ListenerAdapter<PircBotX> {
 
     @Override
     public void onMessage(MessageEvent<PircBotX> event) throws Exception {

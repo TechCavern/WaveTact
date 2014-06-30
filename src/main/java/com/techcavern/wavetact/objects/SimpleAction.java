@@ -16,7 +16,7 @@ import java.util.Arrays;
  */
 public class SimpleAction extends Command {
 
-    private String action;
+    private final String action;
     private boolean locked;
 
     public SimpleAction(String i, int p, String a, boolean b) {
@@ -28,13 +28,16 @@ public class SimpleAction extends Command {
 
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
+        String daction;
         if(this.action.contains("$1")) {
-            this.action = this.action.replace("$1", args[0]);
-            this.action = this.action.replace("$*", StringUtils.join(Arrays.asList(ArrayUtils.remove(args, 0)), " "));
+            daction = this.action.replace("$1", args[0]);
+            daction = action.replace("$*", StringUtils.join(Arrays.asList(ArrayUtils.remove(args, 0)), " "));
         }else if (this.action.contains("$*")){
-            this.action = this.action.replace("$*", StringUtils.join(Arrays.asList(args), " "));
+            daction = this.action.replace("$*", StringUtils.join(Arrays.asList(args), " "));
+        }else{
+            daction = this.action;
         }
-        event.getChannel().send().action(action);
+        event.getChannel().send().action(daction);
     }
 
     @Override
