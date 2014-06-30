@@ -25,7 +25,7 @@ class Main {
         IRCUtils.loadSimpleMessages();
         IRCUtils.loadBanTimes();
         IRCUtils.loadQuietTimes();
-        new CheckTime();
+        IRCUtils.startThreads();
 /**
         PircBotX Ovd = IRCUtils.createbot(pwd, "Ovd", GeneralRegistry.OvdChannels, GeneralRegistry.OvdNick, GeneralRegistry.OvdServer);
          PircBotX Esper = IRCUtils.createbot(g, "Esper", GeneralRegistry.EsperChannels, GeneralRegistry.EsperNick, GeneralRegistry.EsperServer);

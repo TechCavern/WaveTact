@@ -6,6 +6,7 @@ import com.google.gson.internal.LinkedTreeMap;
 import com.techcavern.wavetact.events.KickRejoin;
 import com.techcavern.wavetact.events.MessageListener;
 import com.techcavern.wavetact.objects.*;
+import com.techcavern.wavetact.thread.CheckTime;
 import com.techcavern.wavetact.thread.CommandCollection;
 import org.pircbotx.Channel;
 import org.pircbotx.Configuration;
@@ -82,7 +83,9 @@ public class IRCUtils {
         OutputUser x = new OutputUser(b, u);
         x.notice(s);
     }
-
+    public static void startThreads(){
+        (new Thread(new CheckTime())).start();
+    }
     public static Command getCommand(String Command) {
         for (Command g : GeneralRegistry.Commands) {
             if (g.getCommandID().equalsIgnoreCase(Command)) {
