@@ -1,11 +1,13 @@
 package com.techcavern.wavetact.commands.controller;
 
 
+import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.objects.Command;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import org.pircbotx.hooks.events.MessageEvent;
 
 public class IRCRaw extends Command {
+    @CMD
     public IRCRaw() {
         super("raw", 9001, "raw [to be sent to server]");
     }

@@ -5,6 +5,7 @@
  */
 package com.techcavern.wavetact.commands.chanop;
 
+import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.objects.Command;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.pircbotx.hooks.events.MessageEvent;
@@ -13,7 +14,7 @@ import org.pircbotx.hooks.events.MessageEvent;
  * @author jztech101
  */
 public class Op extends Command {
-
+    @CMD
     public Op() {
         super("op", 10, "op (-)(user to op)");
     }

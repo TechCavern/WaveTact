@@ -1,5 +1,6 @@
 package com.techcavern.wavetact.commands.utils;
 
+import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.objects.Command;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -8,6 +9,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 import java.util.List;
 
 public class Math extends Command {
+    @CMD
     public Math() {
         super("calc", 0, "calc [What to Calculate]");
     }

@@ -5,6 +5,7 @@
  */
 package com.techcavern.wavetact.commands.controller;
 
+import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.objects.Command;
 import org.pircbotx.hooks.events.MessageEvent;
 
@@ -13,6 +14,7 @@ import org.pircbotx.hooks.events.MessageEvent;
  * @author jztech101
  */
 public class Join extends Command {
+    @CMD
     public Join() {
         super("join", 9001, "join [channel]");
     }

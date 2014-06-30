@@ -5,6 +5,7 @@
  */
 package com.techcavern.wavetact.commands.fun;
 
+import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.objects.Command;
 import org.pircbotx.UserLevel;
 import org.pircbotx.hooks.events.MessageEvent;
@@ -14,6 +15,7 @@ import org.pircbotx.hooks.events.MessageEvent;
  */
 public class SomethingAwesome extends Command {
 
+    @CMD
     public SomethingAwesome() {
         super("somethingawesome", 0, "somethingawesome");
     }

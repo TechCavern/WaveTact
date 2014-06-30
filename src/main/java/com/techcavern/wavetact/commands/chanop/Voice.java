@@ -5,6 +5,7 @@
  */
 package com.techcavern.wavetact.commands.chanop;
 
+import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.objects.Command;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.pircbotx.hooks.events.MessageEvent;
@@ -14,6 +15,7 @@ import org.pircbotx.hooks.events.MessageEvent;
  * @author jztech101
  */
 public class Voice extends Command {
+    @CMD
     public Voice() {
         super("voice", 10, "Voice (-)(User)");
     }

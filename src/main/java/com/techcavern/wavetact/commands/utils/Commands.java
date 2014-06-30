@@ -1,5 +1,6 @@
 package com.techcavern.wavetact.commands.utils;
 
+import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.objects.Command;
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import org.apache.commons.lang3.StringUtils;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @SuppressWarnings("ALL")
 public class Commands extends Command {
+    @CMD
     public Commands() {
         super("Commands", 0, "Takes 0 arguments, returns list of Commands");
     }

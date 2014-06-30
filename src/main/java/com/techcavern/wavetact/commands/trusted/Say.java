@@ -5,6 +5,7 @@
  */
 package com.techcavern.wavetact.commands.trusted;
 
+import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.objects.Command;
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import org.apache.commons.lang3.StringUtils;
@@ -15,6 +16,7 @@ import org.pircbotx.hooks.events.MessageEvent;
  */
 public class Say extends Command {
 
+    @CMD
     public Say() {
         super("say", 5, "say [something]");
     }
