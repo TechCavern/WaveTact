@@ -1,5 +1,6 @@
 package com.techcavern.wavetact.utils;
 
+import com.google.common.reflect.Reflection;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.internal.LinkedTreeMap;
@@ -88,7 +89,7 @@ public class IRCUtils {
         Reflections reflections = new Reflections("com.techcavern.wavetact");
         Set<Class<? extends Commands>> subtypes = reflections.getSubTypesOf(Commands.class);
         for(Class c:subtypes){
-            c.newInstance();
+            Reflection.initialize(c);
         }
     }
 
