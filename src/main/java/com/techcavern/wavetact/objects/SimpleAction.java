@@ -21,7 +21,7 @@ public class SimpleAction extends Command {
     private boolean locked;
 
     public SimpleAction(String i, int p, String a, boolean b) {
-        super(i, p, "A Basic Command that takes no Arguments");
+        super(GeneralUtils.toArray(i), p, "A Basic Command that takes no Arguments");
         System.out.println("Created Simple Action: " + i);
         this.action = a;
         this.locked = b;

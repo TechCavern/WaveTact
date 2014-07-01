@@ -10,7 +10,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class UrbanDictonary extends Command {
     @CMD
     public UrbanDictonary() {
-        super("urb", 0, "urb [what to define]");
+        super(GeneralUtils.toArray("ub urban urb urbandictionary"), 0, "urb [what to define]");
     }
 
     @Override

@@ -7,6 +7,7 @@ package com.techcavern.wavetact.commands.controller;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.objects.Command;
+import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.pircbotx.hooks.events.MessageEvent;
 
@@ -16,7 +17,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class Lock extends Command {
     @CMD
     public Lock() {
-        super("lock", 9001, "lock [type(m/a)] [command]");
+        super(GeneralUtils.toArray("lock lo"), 9001, "lock [type(m/a)] [command]");
     }
 
     @Override

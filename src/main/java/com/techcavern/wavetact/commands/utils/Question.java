@@ -12,7 +12,7 @@ import java.util.List;
 public class Question extends Command {
     @CMD
     public Question() {
-        super("Question", 0, "Question [Ask a Question]");
+        super(GeneralUtils.toArray("q question"), 0, "Question [Ask a Question]");
     }
 
     @Override

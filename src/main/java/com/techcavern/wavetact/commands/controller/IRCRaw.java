@@ -9,7 +9,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class IRCRaw extends Command {
     @CMD
     public IRCRaw() {
-        super("raw", 9001, "raw [to be sent to server]");
+        super(GeneralUtils.toArray("raw ircraw quote"), 9001, "raw [to be sent to server]");
     }
 
     @Override

@@ -7,6 +7,7 @@ package com.techcavern.wavetact.commands.chanop;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.objects.Command;
+import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.pircbotx.hooks.events.MessageEvent;
 
@@ -16,7 +17,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class Owner extends Command {
     @CMD
     public Owner() {
-        super("owner", 15, "Owner (-)(User)");
+        super(GeneralUtils.toArray("owner own"), 15, "Owner (-)(User)");
     }
 
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {

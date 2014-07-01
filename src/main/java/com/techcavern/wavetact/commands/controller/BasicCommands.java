@@ -5,6 +5,7 @@ import com.techcavern.wavetact.objects.Command;
 import com.techcavern.wavetact.objects.SimpleAction;
 import com.techcavern.wavetact.objects.SimpleMessage;
 import com.techcavern.wavetact.utils.GeneralRegistry;
+import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.pircbotx.hooks.events.MessageEvent;
 
@@ -12,7 +13,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class BasicCommands extends Command {
     @CMD
     public BasicCommands() {
-        super("AddBasicCommands", 9001, "No Arguments, Use it ONCE and ONLY ONCE to populate the Basic Commands");
+        super(GeneralUtils.toArray("addbasiccommands"), 9001, "No Arguments, Use it ONCE and ONLY ONCE to populate the Basic Commands");
     }
 
     @Override

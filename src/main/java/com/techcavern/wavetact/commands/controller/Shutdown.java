@@ -3,6 +3,7 @@ package com.techcavern.wavetact.commands.controller;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.objects.Command;
 import com.techcavern.wavetact.utils.GeneralRegistry;
+import com.techcavern.wavetact.utils.GeneralUtils;
 import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.events.MessageEvent;
 
@@ -10,7 +11,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class Shutdown extends Command {
     @CMD
     public Shutdown() {
-        super("Shutdown", 9001, "Shutdown (r)");
+        super(GeneralUtils.toArray("Shutdown down"), 9001, "Shutdown (r)");
     }
 
     @Override

@@ -19,8 +19,9 @@ public class SimpleMessage extends Command {
     private final String message;
     private boolean locked;
 
+
     public SimpleMessage(String i, int p, String m, boolean b) {
-        super(i, p, "A Basic Command");
+        super(GeneralUtils.toArray(i), p, "A Basic Command");
         this.message = m;
         this.locked = b;
     }
@@ -46,6 +47,8 @@ public class SimpleMessage extends Command {
     public String getMessage() {
         return this.message;
     }
+
+
 
     @Override
     public boolean getLockedStatus() {

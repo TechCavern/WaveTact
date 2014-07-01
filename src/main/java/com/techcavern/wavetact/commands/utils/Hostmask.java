@@ -2,6 +2,7 @@ package com.techcavern.wavetact.commands.utils;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.objects.Command;
+import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.pircbotx.hooks.events.MessageEvent;
 
@@ -11,7 +12,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class Hostmask extends Command {
     @CMD
     public Hostmask() {
-        super("Hostmask", 0, "Hostmask [nick]");
+        super(GeneralUtils.toArray("host hostmask mask"), 0, "Hostmask [nick]");
     }
 
     @Override

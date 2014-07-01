@@ -13,12 +13,12 @@ import org.pircbotx.hooks.events.MessageEvent;
  */
 public abstract class Command {
 
-    private final String comid;
+    private final String[] comid;
     private final int PermLevel;
     private final String Desc;
 
-    protected Command(String comid, int PermLevel, String Desc) {
-        this.comid = comid.toLowerCase();
+    protected Command(String[] comid, int PermLevel, String Desc) {
+        this.comid = comid;
         this.PermLevel = PermLevel;
         this.Desc = Desc;
         create();
@@ -39,9 +39,11 @@ public abstract class Command {
         return PermLevel;
     }
 
-    public String getCommandID() {
+    public String[] getCommandID() {
         return comid;
     }
+
+    public String getCommand(){return comid[0];}
 
     public String getDesc() {
         return Desc;

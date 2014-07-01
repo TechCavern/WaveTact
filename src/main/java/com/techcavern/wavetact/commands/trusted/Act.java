@@ -8,6 +8,7 @@ package com.techcavern.wavetact.commands.trusted;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.objects.Command;
 import com.techcavern.wavetact.utils.GeneralRegistry;
+import com.techcavern.wavetact.utils.GeneralUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.hooks.events.MessageEvent;
 
@@ -18,7 +19,7 @@ public class Act extends Command {
 
     @CMD
     public Act() {
-        super("do", 5, "do [something]");
+        super(GeneralUtils.toArray("do act"), 5, "do [something]");
     }
 
     @Override

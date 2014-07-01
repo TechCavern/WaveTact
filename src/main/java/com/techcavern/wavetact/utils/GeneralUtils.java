@@ -79,6 +79,10 @@ public class GeneralUtils {
             return Integer.parseInt(c);
         }
     }
+    public static String[] toArray(String i){
+        String[] x = StringUtils.split(i, " ");
+        return x;
+    }
 
 }
 

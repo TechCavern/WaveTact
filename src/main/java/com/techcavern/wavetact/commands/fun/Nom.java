@@ -2,6 +2,7 @@ package com.techcavern.wavetact.commands.fun;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.objects.Command;
+import com.techcavern.wavetact.utils.GeneralUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.hooks.events.MessageEvent;
 
@@ -9,7 +10,7 @@ public class Nom extends Command {
 
     @CMD
     public Nom() {
-        super("nom", 0, "nom [something]");
+        super(GeneralUtils.toArray("nom eat"), 0, "nom [something]");
     }
 
     @Override

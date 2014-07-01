@@ -22,7 +22,7 @@ public class CustomCMD extends Command {
 
     @CMD
     public CustomCMD() {
-        super("customcmd", 5, "customcmd [type(m/a)] (+/-)[Command] [permlevel] [Response]");
+        super(GeneralUtils.toArray("customcmd cmd custom cc"), 5, "customcmd [type(m/a)] (+/-)[Command] [permlevel] [Response]");
     }
 
     @Override

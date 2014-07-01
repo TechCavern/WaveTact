@@ -12,7 +12,7 @@ import java.util.List;
 public class WolframAlpha extends Command {
     @CMD
     public WolframAlpha() {
-        super("wa", 5, "wa [input] (return array value #)");
+        super(GeneralUtils.toArray("wolframalpha wa wolfram"), 5, "wa [input] (return array value #)");
     }
 
     @Override

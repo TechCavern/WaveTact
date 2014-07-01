@@ -7,6 +7,7 @@ package com.techcavern.wavetact.commands.trusted;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.objects.Command;
+import com.techcavern.wavetact.utils.GeneralUtils;
 import org.pircbotx.hooks.events.MessageEvent;
 
 /**
@@ -16,7 +17,7 @@ public class Part extends Command {
 
     @CMD
     public Part() {
-        super("part", 5, "part [channel]");
+        super(GeneralUtils.toArray("part pa"), 5, "part [channel]");
     }
 
     @Override

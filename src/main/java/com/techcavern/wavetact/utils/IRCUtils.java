@@ -88,7 +88,7 @@ public class IRCUtils {
     }
     public static Command getCommand(String Command) {
         for (Command g : GeneralRegistry.Commands) {
-            if (g.getCommandID().equalsIgnoreCase(Command)) {
+            if (g.getCommand().equalsIgnoreCase(Command)) {
                 return g;
             }
         }
@@ -98,7 +98,7 @@ public class IRCUtils {
 
     public static SimpleMessage getSimpleMessage(String SimpleAction) {
         for (SimpleMessage g : GeneralRegistry.SimpleMessages) {
-            if (g.getCommandID().equalsIgnoreCase(SimpleAction)) {
+            if (g.getCommand().equalsIgnoreCase(SimpleAction)) {
                 return g;
             }
         }
@@ -108,7 +108,7 @@ public class IRCUtils {
 
     public static SimpleAction getSimpleAction(String SimpleAction) {
         for (SimpleAction g : GeneralRegistry.SimpleActions) {
-            if (g.getCommandID().equalsIgnoreCase(SimpleAction)) {
+            if (g.getCommand().equalsIgnoreCase(SimpleAction)) {
                 return g;
             }
         }

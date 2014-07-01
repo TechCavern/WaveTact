@@ -12,7 +12,7 @@ import java.util.List;
 public class Define extends Command {
     @CMD
     public Define() {
-        super("Define", 0, "Define [word]");
+        super(GeneralUtils.toArray("define whatis"), 0, "Define [word]");
     }
 
     @Override
