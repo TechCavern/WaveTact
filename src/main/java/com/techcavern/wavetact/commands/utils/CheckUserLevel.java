@@ -26,16 +26,16 @@ public class CheckUserLevel extends Command {
 
         int i = PermUtils.getPermLevel(event.getBot(), u, event.getChannel());
         if (i == 9001) {
-            event.respond(u.getNick()+ " are my Master!");
+            event.respond(u.getNick()+ " is my Master!");
         } else if (i == 15) {
-            event.respond(u.getNick()+ " are a Channel Owner!");
+            event.respond(u.getNick()+ " is a Channel Owner!");
 
         } else if (i == 10) {
-            event.respond(u.getNick()+ " are a Channel Operator!");
+            event.respond(u.getNick()+ " is a Channel Operator!");
         } else if (i == 5) {
-            event.respond(u.getNick()+ " are a Trusted User!");
+            event.respond(u.getNick()+ " is a Trusted User!");
         } else {
-            event.respond(u.getNick()+ " are a Regular User!");
+            event.respond(u.getNick()+ " is a Regular User!");
         }
     }
 }
