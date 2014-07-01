@@ -31,7 +31,7 @@ public class GeneralRegistry {
     public static final List<String> ObsidianChannels = Arrays.asList("#techcavern", "#szsocial");
     public static final String ObsidianNick = "WaveTact";
     public static final String FreenodeServer = "irc.freenode.net";
-    public static final List<String> FreenodeChannels = Arrays.asList("#techcavern", "##powder-bots", "#directcode");
+    public static final List<String> FreenodeChannels = Arrays.asList("#techcavern", "##powder-bots", "#directcode", "##neobotwar");
     public static final String FreenodeNick = "WaveTact";
     public static final List<Command> Commands = new LoggingArrayList<Command>("Command");
     public static final List<SimpleMessage> SimpleMessages = new LoggingArrayList<SimpleMessage>("SimpleMessages");
