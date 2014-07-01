@@ -13,7 +13,7 @@ import java.util.concurrent.ForkJoinPool;
 public class GeneralRegistry {
 
     public static final String CommandChar = "&";
-    public static final List<String> Controllers = Arrays.asList("jztech101", "Archtikz", "kaendfinger", "deathcrazyuberlironman");
+    public static final List<String> Controllers = Arrays.asList("jztech101", "archtikz", "kaendfinger", "deathcrazyuberlironman", "leah");
     public static final List<String> ControllerHostmasks = Arrays.asList("*!jztech101@techcavern.com");
     public static final String OvdServer = "irc.overdrive.pw";
     public static final List<String> OvdChannels = Arrays.asList("#techcavern", "#dev");
