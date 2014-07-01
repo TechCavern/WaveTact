@@ -11,7 +11,7 @@ import java.net.Socket;
 public class PingTime extends Command {
     @CMD
     public PingTime() {
-        super(GeneralUtils.toArray("cping cpi checkping"), 0, "ping [website] (port)");
+        super(GeneralUtils.toArray("checkping cping cpi"), 0, "checkping [website] (port)");
     }
 
     @Override

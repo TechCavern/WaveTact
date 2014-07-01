@@ -10,7 +10,7 @@ public class CheckUserLevel extends Command {
 
     @CMD
     public CheckUserLevel() {
-        super(GeneralUtils.toArray("level checklevel"), 0, "Checks User Level, 0 arguments");
+        super(GeneralUtils.toArray(" checkuserlevel level checklevel"), 0, "Checks User Level, 0 arguments");
     }
 
     @Override

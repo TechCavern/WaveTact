@@ -18,7 +18,7 @@ import java.util.List;
 public class Commands extends Command {
     @CMD
     public Commands() {
-        super(GeneralUtils.toArray("commands cmds coms"), 0, "Takes 0 arguments, returns list of Commands");
+        super(GeneralUtils.toArray("commands list cmds coms"), 0, "Takes 0 arguments, returns list of Commands");
     }
 
     @Override

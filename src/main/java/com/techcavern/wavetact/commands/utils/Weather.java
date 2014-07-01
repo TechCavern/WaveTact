@@ -12,7 +12,7 @@ import java.util.List;
 public class Weather extends Command {
     @CMD
     public Weather() {
-        super(GeneralUtils.toArray("weather temperature temp w"), 0, "Weather [zipcode]");
+        super(GeneralUtils.toArray("weather temperature temp w"), 0, "weather [zipcode]");
     }
 
     @Override

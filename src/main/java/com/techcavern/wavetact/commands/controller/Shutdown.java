@@ -11,7 +11,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class Shutdown extends Command {
     @CMD
     public Shutdown() {
-        super(GeneralUtils.toArray("Shutdown down"), 9001, "Shutdown (r)");
+        super(GeneralUtils.toArray("shutdown down"), 9001, "Shutdown (r)");
     }
 
     @Override

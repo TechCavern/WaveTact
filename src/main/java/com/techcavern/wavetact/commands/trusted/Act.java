@@ -19,7 +19,7 @@ public class Act extends Command {
 
     @CMD
     public Act() {
-        super(GeneralUtils.toArray("do act"), 5, "do [something]");
+        super(GeneralUtils.toArray("act do"), 5, "act [something]");
     }
 
     @Override

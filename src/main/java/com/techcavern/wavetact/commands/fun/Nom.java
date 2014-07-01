@@ -10,7 +10,7 @@ public class Nom extends Command {
 
     @CMD
     public Nom() {
-        super(GeneralUtils.toArray("nom eat"), 0, "nom [something]");
+        super(GeneralUtils.toArray("eat nom"), 0, "eat [something]");
     }
 
     @Override

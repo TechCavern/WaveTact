@@ -12,7 +12,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class Hostmask extends Command {
     @CMD
     public Hostmask() {
-        super(GeneralUtils.toArray("host hostmask mask"), 0, "Hostmask [nick]");
+        super(GeneralUtils.toArray("hostmask host mask"), 0, "Hostmask [nick]");
     }
 
     @Override
