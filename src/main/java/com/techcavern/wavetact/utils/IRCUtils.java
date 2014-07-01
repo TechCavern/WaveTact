@@ -3,7 +3,8 @@ package com.techcavern.wavetact.utils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.internal.LinkedTreeMap;
-import com.techcavern.wavetact.events.KickRejoin;
+import com.techcavern.wavetact.events.DisconnectListener;
+import com.techcavern.wavetact.events.KickListener;
 import com.techcavern.wavetact.events.MessageListener;
 import com.techcavern.wavetact.objects.*;
 import com.techcavern.wavetact.thread.CheckTime;
@@ -37,8 +38,10 @@ public class IRCUtils {
         Net.setServer(Server, 6667);
         channels.forEach(Net::addAutoJoinChannel);
         Net.getListenerManager().addListener(new MessageListener());
-    //    Net.getListenerManager().addListener(new HighFive());
-        Net.getListenerManager().addListener(new KickRejoin());
+        Net.getListenerManager().addListener(new DisconnectListener());
+
+        //    Net.getListenerManager().addListener(new HighFive());
+        Net.getListenerManager().addListener(new KickListener());
         if (g != null) {
             Net.setNickservPassword(g);
         }

@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author jztech101
  */
-public class KickRejoin extends ListenerAdapter<PircBotX> {
+public class KickListener extends ListenerAdapter<PircBotX> {
     public void onKick(KickEvent<PircBotX> event) throws Exception {
         if (event.getRecipient() == event.getBot().getUserBot()) {
             event.getBot().sendIRC().joinChannel(event.getChannel().getName());
