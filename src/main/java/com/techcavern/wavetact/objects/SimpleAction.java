@@ -35,7 +35,9 @@ public class SimpleAction extends Command {
         for(String g:action){
             if(g.startsWith("$") &&!g.contains("*")){
                 daction = daction.replace(g,args[Integer.parseInt(g.replace("$", ""))-1]);
-                i++;
+                if(Integer.parseInt(g.replace("$", "")) > i) {
+                    i++;
+                }
             }
         }
         daction = daction.replace("$*", GeneralUtils.buildMessage(i, args.length, args));

@@ -33,8 +33,9 @@ public class SimpleMessage extends Command {
         for(String g:message){
             if(g.startsWith("$") &&!g.contains("*")){
                 dresponse = dresponse.replace(g,args[Integer.parseInt(g.replace("$", ""))-1]);
-                i++;
-            }
+                if(Integer.parseInt(g.replace("$", "")) > i) {
+                    i++;
+                }            }
         }
         dresponse = dresponse.replace("$*", GeneralUtils.buildMessage(i,args.length,args));
         event.getChannel().send().message(dresponse);
