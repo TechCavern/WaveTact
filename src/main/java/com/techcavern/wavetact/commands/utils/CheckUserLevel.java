@@ -3,7 +3,9 @@ package com.techcavern.wavetact.commands.utils;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.objects.Command;
 import com.techcavern.wavetact.utils.GeneralUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.PermUtils;
+import org.pircbotx.User;
 import org.pircbotx.hooks.events.MessageEvent;
 
 public class CheckUserLevel extends Command {
@@ -15,18 +17,25 @@ public class CheckUserLevel extends Command {
 
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
-        int i = PermUtils.getPermLevel(event.getBot(), event.getUser(), event.getChannel());
+        User u;
+        if(args.length < 1){
+            u = event.getUser();
+        }else{
+            u = IRCUtils.getUserByNick(event.getChannel(),args[0]);
+        }
+
+        int i = PermUtils.getPermLevel(event.getBot(), u, event.getChannel());
         if (i == 9001) {
-            event.respond("You are my Master!");
+            event.respond(u.getNick()+ " are my Master!");
         } else if (i == 15) {
-            event.respond("You are a Channel Owner!");
+            event.respond(u.getNick()+ " are a Channel Owner!");
 
         } else if (i == 10) {
-            event.respond("You are a Channel Operator!");
+            event.respond(u.getNick()+ " are a Channel Operator!");
         } else if (i == 5) {
-            event.respond("You are a Trusted User!");
+            event.respond(u.getNick()+ " are a Trusted User!");
         } else {
-            event.respond("You are a Regular User!");
+            event.respond(u.getNick()+ " are a Regular User!");
         }
     }
 }
