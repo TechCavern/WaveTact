@@ -5,6 +5,7 @@
  */
 package com.techcavern.wavetact.objects;
 
+import com.techcavern.wavetact.utils.GeneralUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.hooks.events.MessageEvent;
@@ -28,15 +29,16 @@ public class SimpleAction extends Command {
 
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
-        String daction;
-        if(this.action.contains("$1")) {
-            daction = this.action.replace("$1", args[0]);
-            daction = action.replace("$*", StringUtils.join(Arrays.asList(ArrayUtils.remove(args, 0)), " "));
-        }else if (this.action.contains("$*")){
-            daction = this.action.replace("$*", StringUtils.join(Arrays.asList(args), " "));
-        }else{
-            daction = this.action;
+        String daction = this.action;
+        String[] action = StringUtils.split(this.action, "");
+        int i = 0;
+        for(String g:action){
+            if(g.startsWith("$") &&!g.contains("*")){
+                daction = daction.replace(g,args[Integer.parseInt(g.replace("$", ""))-1]);
+                i++;
+            }
         }
+        daction = daction.replace("$*", GeneralUtils.buildMessage(i, args.length, args));
         event.getChannel().send().action(daction);
     }
 

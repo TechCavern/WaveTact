@@ -5,6 +5,7 @@
  */
 package com.techcavern.wavetact.objects;
 
+import com.techcavern.wavetact.utils.GeneralUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.hooks.events.MessageEvent;
@@ -26,16 +27,19 @@ public class SimpleMessage extends Command {
 
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
-        String dresponse;
-        if(this.message.contains("$1")) {
-            dresponse = this.message.replace("$1", args[0]);
-            dresponse = dresponse.replace("$*", StringUtils.join(Arrays.asList(ArrayUtils.remove(args,0)), " "));
-        }else if (message.contains("$*")){
-             dresponse = this.message.replace("$*", StringUtils.join(Arrays.asList(args), " "));
-        }else{
-             dresponse = this.message;
+        String dresponse = this.message;
+        String[] message = StringUtils.split(this.message, "");
+        int i = 0;
+        for(String g:message){
+            if(g.startsWith("$") &&!g.contains("*")){
+                dresponse = dresponse.replace(g,args[Integer.parseInt(g.replace("$", ""))-1]);
+                i++;
+            }
         }
-        event.respond(dresponse);
+        dresponse = dresponse.replace("$*", GeneralUtils.buildMessage(i,args.length,args));
+        event.getChannel().send().message(dresponse);
+
+
     }
 
     public String getMessage() {
