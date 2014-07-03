@@ -9,7 +9,6 @@ import java.util.concurrent.ForkJoinPool;
 
 public class GeneralRegistry {
 
-    public static final String CommandChar = "&";
     public static final List<String> Controllers = Arrays.asList("jztech101", "archtikz", "kaendfinger", "deathcrazyuberlironman", "leah");
     public static final List<String> ControllerHostmasks = Arrays.asList("*!jztech101@techcavern.com");
     public static final List<Command> Commands = new LoggingArrayList<Command>("Command");
@@ -22,6 +21,7 @@ public class GeneralRegistry {
     public static Map<String, Configuration> configs = new HashMap<String, Configuration>();
     public static final List<UTime> BanTimes = new LoggingArrayList<UTime>("BanTimes");
     public static final List<UTime> QuietTimes = new LoggingArrayList<UTime>("QuietTimes");
+    public static final List<CommandChar> CommandChars= new LoggingArrayList<CommandChar>("CommandChar");
 
 
     //Development Variables

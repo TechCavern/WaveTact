@@ -3,3 +3,5 @@ server=irc.xertion.org
 nick=WaveTact
 channels=#techcavern, #dev
 nickserv=False
+CommandChar=&
+

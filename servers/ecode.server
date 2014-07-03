@@ -3,3 +3,4 @@ server=irc.electrocode.net
 nick=WaveTact
 channels=#techcavern, #bots, #chat
 nickserv=False
+CommandChar=&

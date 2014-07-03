@@ -37,13 +37,15 @@ public class IRCUtils {
         Net.setName(nick);
         Net.setLogin("WaveTact");
         Net.setEncoding(Charset.isSupported("UTF-8") ? Charset.forName("UTF-8") : Charset.defaultCharset());
-        // TODO: @logangorence Add support for port changes. Also, does PircBotX support SSL?
+        // TODO: @logangorence Add support for port changes. Also, does PircBotX support SSL? I think so
         Net.setServer(server, 6667);
         channels.forEach(Net::addAutoJoinChannel);
         Net.getListenerManager().addListener(new MessageListener());
         Net.getListenerManager().addListener(new DisconnectListener());
 
         //    TODO: @logangorence Add support for saving configuration to allow for configuration per-network on "modules"... Should we also modularize? Anyways, each network will be able to enable/disable modules and if they are enabled, it will be added to the server file(maybe later on, server folders, which would have a server.info, modules.info, and possibly logs and other stuff).
+        //    Hm... the only module I can currently think of is "HighFive"
+
         //    Net.getListenerManager().addListener(new HighFive());
         Net.getListenerManager().addListener(new KickListener());
         if (g != null) {
@@ -82,9 +84,9 @@ public class IRCUtils {
             }else{
                 ns = null;
             }
-
             bot = IRCUtils.createbot(ns, c.getString("name"), chans,c.getString("nick"), c.getString("server"));
             GeneralRegistry.WaveTact.addBot(bot);
+            new CommandChar(c.getString("CommandChar"), bot);
         }
     }
 
@@ -203,6 +205,15 @@ public class IRCUtils {
         } catch(Exception ex){
             ex.printStackTrace(System.err);
         }
+    }
+
+    public static String getCommandChar(PircBotX b){
+        for(CommandChar d:GeneralRegistry.CommandChars){
+            if(d.getBot() == b){
+                return d.getCommandChar();
+            }
+        }
+        return null;
     }
 
     @SuppressWarnings("unchecked")
