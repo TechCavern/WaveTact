@@ -9,13 +9,15 @@ public class UTime {
     private final String network;
     private final String channel;
     private final String type;
-    public UTime(String u, String n,String t, String c, long x){
+
+    public UTime(String u, String n, String t, String c, long x){
         this.time = x;
         this.network = n;
         this.channel = c;
         this.type = t;
         this.hostmask = u;
     }
+
     public String getHostmask(){
         return this.hostmask;
     }

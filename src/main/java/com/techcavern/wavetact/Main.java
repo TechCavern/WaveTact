@@ -22,8 +22,6 @@ public class Main {
 //        IRCUtils.registerDevServer();
         IRCUtils.loadSimpleActions();
         IRCUtils.loadSimpleMessages();
-        IRCUtils.loadBanTimes();
-        IRCUtils.loadQuietTimes();
         IRCUtils.startThreads();
         GeneralRegistry.WaveTact.start();
     }

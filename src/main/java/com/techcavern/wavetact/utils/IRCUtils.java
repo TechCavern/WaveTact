@@ -94,7 +94,7 @@ public class IRCUtils {
 
     public static void registerDevServer(){
         List<String> Chans = Arrays.asList("#techcavern");
-        PircBotX Dev = IRCUtils.createbot(null, "Dev", Chans, "WaveTactDev", "irc.esper.net");
+        PircBotX Dev = IRCUtils.createbot(null, "EsperNet", Chans, "WaveTactDev", "irc.esper.net");
         GeneralRegistry.WaveTact.addBot(Dev);
         new CommandChar("@", Dev);
     }
@@ -119,7 +119,7 @@ public class IRCUtils {
 
     public static PircBotX getBotByNetwork(String n) {
         for (PircBotX c : GeneralRegistry.WaveTact.getBots()) {
-            if (c.getUserBot().getServer().equalsIgnoreCase(n)) {
+            if (c.getServerInfo().getNetwork().equals(n)) {
                 return c;
             }
         }
@@ -245,7 +245,7 @@ public class IRCUtils {
     
     public static UTime getBanTime(String u) {
         for (UTime x : GeneralRegistry.BanTimes) {
-            if (x.getHostmask() == u) {
+            if (x.getHostmask().equals(u)) {
                 return x;
             }
         }
@@ -270,9 +270,9 @@ public class IRCUtils {
                 GeneralRegistry.BanTimes.clear();
                 GeneralRegistry.BanTimes.addAll(actions.stream().map(act -> new UTime((String) act.get("hostmask"),
                         (String) act.get("network"),
-                        (String) act.get("channel"),
                         (String) act.get("type"),
-                        (long) act.get("time"))).collect(Collectors.toList()));
+                        (String) act.get("channel"),
+                        ((Double) act.get("time")).longValue())).collect(Collectors.toList()));
             } catch (FileNotFoundException e) {
                 ErrorUtils.handleException(e);
             }
@@ -281,7 +281,7 @@ public class IRCUtils {
     
     public static UTime getQuietTime(String u) {
         for (UTime x : GeneralRegistry.QuietTimes) {
-            if (x.getHostmask() == u) {
+            if (x.getHostmask().equals(u)) {
                 return x;
             }
         }
@@ -306,9 +306,9 @@ public class IRCUtils {
                 GeneralRegistry.QuietTimes.clear();
                 GeneralRegistry.QuietTimes.addAll(actions.stream().map(act -> new UTime((String) act.get("hostmask"),
                         (String) act.get("network"),
-                        (String) act.get("channel"),
                         (String) act.get("type"),
-                        (long) act.get("time"))).collect(Collectors.toList()));
+                        (String) act.get("channel"),
+                        ((Double) act.get("time")).longValue())).collect(Collectors.toList()));
             } catch (FileNotFoundException e) {
                 ErrorUtils.handleException(e);
             }

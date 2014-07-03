@@ -9,29 +9,42 @@ import org.pircbotx.User;
 
 import java.util.concurrent.TimeUnit;
 
-public class CheckTime implements Runnable{
+public class CheckTime implements Runnable {
 
+    private boolean loaded = false;
 
     @Override
     public void run() {
-        while(true){
+        while (true) {
             try {
                 TimeUnit.SECONDS.sleep(5);
-                for(UTime x:GeneralRegistry.BanTimes) {
-                    if(System.currentTimeMillis() >= x.getTime()){
+                try {
+                    if (!loaded) {
+                        IRCUtils.loadBanTimes();
+                        IRCUtils.loadQuietTimes();
+                        loaded = true;
+                    }
+                } catch (NullPointerException ignored) {}
+
+                if (!loaded)
+                    continue;
+
+                for (int i = 0; i < GeneralRegistry.BanTimes.size(); i++) {
+                    UTime x = GeneralRegistry.BanTimes.get(i);
+                    if (System.currentTimeMillis() >= x.getTime()) {
                         PircBotX b = IRCUtils.getBotByNetwork(x.getNetwork());
-                                   IRCUtils.setMode(IRCUtils.getChannelbyName(b,x.getChannel()), b, "-b ", x.getHostmask());
+                        IRCUtils.setMode(IRCUtils.getChannelbyName(b, x.getChannel()), b, "-b ", x.getHostmask());
                         GeneralRegistry.BanTimes.remove(x);
-                        IRCUtils.saveBanTimes();
+                    }
+                }
 
-
-                }}
-                for(UTime x:GeneralRegistry.QuietTimes){
-                    if(System.currentTimeMillis() >= x.getTime()){
+                for (int i = 0; i < GeneralRegistry.QuietTimes.size(); i++) {
+                    UTime x = GeneralRegistry.QuietTimes.get(i);
+                    if (System.currentTimeMillis() >= x.getTime()) {
                         PircBotX b = IRCUtils.getBotByNetwork(x.getNetwork());
-                        switch(x.getType().toLowerCase()) {
+                        switch (x.getType().toLowerCase()) {
                             case "u":
-                            IRCUtils.setMode(IRCUtils.getChannelbyName(b, x.getChannel()), b, "-b ~q:", x.getHostmask());
+                                IRCUtils.setMode(IRCUtils.getChannelbyName(b, x.getChannel()), b, "-b ~q:", x.getHostmask());
                                 break;
                             case "c":
                                 IRCUtils.setMode(IRCUtils.getChannelbyName(b, x.getChannel()), b, "-q ", x.getHostmask());
@@ -41,18 +54,18 @@ public class CheckTime implements Runnable{
                                 break;
                         }
                         GeneralRegistry.QuietTimes.remove(x);
-                        IRCUtils.saveQuietTimes();
                     }
-
-
                 }
 
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                IRCUtils.saveBanTimes();
+                IRCUtils.saveQuietTimes();
+            } catch (InterruptedException
+                    | IllegalArgumentException
+                    | NullPointerException e) {
+                // Ignored
             }
-
         }
-        }
-
     }
+
+}
 
