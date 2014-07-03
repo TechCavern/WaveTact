@@ -18,7 +18,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class Protect extends Command {
     @CMD
     public Protect() {
-        super(GeneralUtils.toArray("protect prot pr"), 15, "protect (-)(User)");
+        super(GeneralUtils.toArray("protect prot pr"), 14, "protect (-)(User)");
     }
 
     @Override

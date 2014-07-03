@@ -18,7 +18,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class Kick extends Command {
     @CMD
     public Kick() {
-        super(GeneralUtils.toArray("kick k"), 10, "kick [user]");
+        super(GeneralUtils.toArray("kick k"), 9, "kick [user]");
     }
 
     @Override

@@ -17,7 +17,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class Op extends Command {
     @CMD
     public Op() {
-        super(GeneralUtils.toArray("op"), 10, "op (-)(user to op)");
+        super(GeneralUtils.toArray("op"), 9, "op (-)(user to op)");
     }
 
     @Override

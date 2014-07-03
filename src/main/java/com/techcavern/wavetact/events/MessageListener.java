@@ -29,13 +29,13 @@ public class MessageListener extends ListenerAdapter<PircBotX> {
                 String CommandID = Command.getCommandID()[c];
             if (m.equalsIgnoreCase(IRCUtils.getCommandChar(event.getBot()) + CommandID)) {
                 if (PermUtils.getPermLevel(event.getBot(), event.getUser(), event.getChannel()) >= Command.getPermLevel()) {
-                    if (Command.getPermLevel() == 10) {
+                    if (Command.getPermLevel() == 9) {
                         if (event.getChannel().isOp(event.getBot().getUserBot()) || event.getChannel().isOwner(event.getBot().getUserBot())) {
                             Command.onCommand(event, ArrayUtils.remove(messageParts, 0));
                         } else {
                             event.getChannel().send().message("Error: I must be Opped to perform the operation requested");
                         }
-                    } else if (Command.getPermLevel() == 15) {
+                    } else if (Command.getPermLevel() == 14) {
 
                         if (event.getChannel().isOwner(event.getBot().getUserBot())) {
                             Command.onCommand(event, ArrayUtils.remove(messageParts, 0));

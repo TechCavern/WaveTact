@@ -14,7 +14,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class Quiet extends Command {
     @CMD
     public Quiet() {
-        super(GeneralUtils.toArray("quiet mute q m"), 10, "Quiet [ircd] (-)[User] (time)");
+        super(GeneralUtils.toArray("quiet mute q m"), 9, "Quiet [ircd] (-)[User] (time)");
     }
 
     @Override
