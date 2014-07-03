@@ -1,5 +1,6 @@
 package com.techcavern.wavetact.commandline;
 
+import com.techcavern.wavetact.annot.CMDLine;
 import org.apache.commons.lang3.StringUtils;
 import com.techcavern.wavetact.objects.CommandLine;
 import com.techcavern.wavetact.utils.GeneralRegistry;
@@ -9,6 +10,7 @@ import java.util.Arrays;
 
 public class Help extends CommandLine
 {
+    @CMDLine
     public Help(){
         super(GeneralUtils.toArray("h help"), "Prints this help screen");
     }

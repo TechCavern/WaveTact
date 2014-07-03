@@ -1,5 +1,6 @@
 package com.techcavern.wavetact.commandline.utils;
 
+import com.techcavern.wavetact.annot.CMDLine;
 import com.techcavern.wavetact.objects.CommandLine;
 import com.techcavern.wavetact.utils.Configuration;
 import com.techcavern.wavetact.utils.GeneralUtils;
@@ -9,6 +10,7 @@ import java.util.Scanner;
 
 public class AddServer extends CommandLine
 {
+    @CMDLine
     public AddServer() {
         super(GeneralUtils.toArray("a addserver"), "Create a server configuration file");
     }

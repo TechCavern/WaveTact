@@ -1,6 +1,7 @@
 package com.techcavern.wavetact.commandline.utils;
 
 import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.CMDLine;
 import com.techcavern.wavetact.objects.Command;
 import com.techcavern.wavetact.objects.CommandLine;
 import com.techcavern.wavetact.objects.SimpleAction;
@@ -12,6 +13,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 
 
 public class BasicCommands extends CommandLine {
+    @CMDLine
     public BasicCommands() {
         super(GeneralUtils.toArray("addbasiccommands"), "No Arguments, Use it ONCE and ONLY ONCE to populate the Basic Commands");
     }
