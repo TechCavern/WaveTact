@@ -25,7 +25,7 @@ class Main {
         System.setProperty(SimpleLogger.DATE_TIME_FORMAT_KEY, "[yyyy/MM/dd HH:mm:ss]");
         System.setProperty(SimpleLogger.LEVEL_IN_BRACKETS_KEY, "true");
         IRCUtils.registerCommands();
-        IRCUtils.registerNetworks(args[0]);
+        IRCUtils.registerNetworks();
 //        IRCUtils.registerDevServer();
         IRCUtils.loadSimpleActions();
         IRCUtils.loadSimpleMessages();
