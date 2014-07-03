@@ -26,17 +26,12 @@ class Main {
         System.setProperty(SimpleLogger.LEVEL_IN_BRACKETS_KEY, "true");
         IRCUtils.registerCommands();
         IRCUtils.registerNetworks(args[0]);
+//        IRCUtils.registerDevServer();
         IRCUtils.loadSimpleActions();
         IRCUtils.loadSimpleMessages();
         IRCUtils.loadBanTimes();
         IRCUtils.loadQuietTimes();
         IRCUtils.startThreads();
-
-        //Development Server
-        /*
-        PircBotX Dev = IRCUtils.createbot(pwd, "Dev", GeneralRegistry.DevChannels, GeneralRegistry.DevNick, GeneralRegistry.DevServer);
-        GeneralRegistry.WaveTact.addBot(Dev);
-        */
         GeneralRegistry.WaveTact.start();
     }
 }

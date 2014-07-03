@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -88,6 +89,13 @@ public class IRCUtils {
             GeneralRegistry.WaveTact.addBot(bot);
             new CommandChar(c.getString("CommandChar"), bot);
         }
+    }
+
+    public static void registerDevServer(){
+        List<String> Chans = Arrays.asList("#techcavern");
+        PircBotX Dev = IRCUtils.createbot(null, "Dev", Chans, "WaveTactDev", "irc.esper.net");
+        GeneralRegistry.WaveTact.addBot(Dev);
+        new CommandChar("@", Dev);
     }
 
     public static User getUserByNick(Channel c, String n) {
