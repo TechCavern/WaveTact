@@ -29,17 +29,19 @@ public class IRCUtils {
 
     public static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    public static PircBotX createbot(String g, String Name, List<String> channels, String Nick, String Server) {
-        System.out.println("Configuring " + Name);
+    public static PircBotX createbot(String g, String name, List<String> channels, String nick, String server) {
+        System.out.println("Configuring " + name);
         Builder<PircBotX> Net = new Configuration.Builder<PircBotX>();
-        Net.setName(Nick);
+        Net.setName(nick);
         Net.setLogin("WaveTact");
         Net.setEncoding(Charset.isSupported("UTF-8") ? Charset.forName("UTF-8") : Charset.defaultCharset());
-        Net.setServer(Server, 6667);
+        // TODO: @logangorence Add support for port changes. Also, does PircBotX support SSL?
+        Net.setServer(server, 6667);
         channels.forEach(Net::addAutoJoinChannel);
         Net.getListenerManager().addListener(new MessageListener());
         Net.getListenerManager().addListener(new DisconnectListener());
 
+        //    TODO: @logangorence Add support for saving configuration to allow for configuration per-network on "modules"... Should we also modularize? Anyways, each network will be able to enable/disable modules and if they are enabled, it will be added to the server file(maybe later on, server folders, which would have a server.info, modules.info, and possibly logs and other stuff).
         //    Net.getListenerManager().addListener(new HighFive());
         Net.getListenerManager().addListener(new KickListener());
         if (g != null) {
@@ -56,6 +58,7 @@ public class IRCUtils {
         }
         return null;
     }
+
     public static Channel getChannelbyName(PircBotX b, String n) {
         for (Channel u : b.getUserBot().getChannels()) {
             if (u.getName().equalsIgnoreCase(n)) {
@@ -64,6 +67,7 @@ public class IRCUtils {
         }
         return null;
     }
+
     public static PircBotX getBotByNetwork(String n) {
         for (PircBotX c : GeneralRegistry.WaveTact.getBots()) {
             if (c.getUserBot().getServer().equalsIgnoreCase(n)) {
@@ -86,9 +90,11 @@ public class IRCUtils {
         OutputUser x = new OutputUser(b, u);
         x.notice(s);
     }
+
     public static void startThreads(){
         (new Thread(new CheckTime())).start();
     }
+
     public static Command getCommand(String Command) {
         for (Command g : GeneralRegistry.Commands) {
             if (g.getCommand().equalsIgnoreCase(Command)) {
@@ -152,6 +158,7 @@ public class IRCUtils {
             ErrorUtils.handleException(e);
         }
     }
+    
     public static void registerCommands(){
         try{
             GeneralRegistry.COMMANDS.addAll(GeneralRegistry.TASKS.submit(new CommandCollection("com.techcavern.wavetact.commands")).get());
@@ -177,6 +184,7 @@ public class IRCUtils {
             }
         }
     }
+    
     public static UTime getBanTime(String u) {
         for (UTime x : GeneralRegistry.BanTimes) {
             if (x.getHostmask() == u) {
@@ -212,6 +220,7 @@ public class IRCUtils {
             }
         }
     }
+    
     public static UTime getQuietTime(String u) {
         for (UTime x : GeneralRegistry.QuietTimes) {
             if (x.getHostmask() == u) {
