@@ -1,11 +1,11 @@
 package com.techcavern.wavetact.commands.utils;
 
-import com.sun.deploy.util.StringUtils;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.objects.Command;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.pircbotx.hooks.events.MessageEvent;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
 

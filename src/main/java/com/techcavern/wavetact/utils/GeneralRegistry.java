@@ -45,10 +45,10 @@ public class GeneralRegistry {
 
 
     //Development Variables
-/**
+    /**
     public static final String CommandChar = "@";
     public static final String DevServer = "irc.esper.net";
-     public static final List<String> DevChannels = Arrays.asList("#TechCavern");
+    public static final List<String> DevChannels = Arrays.asList("#TechCavern");
     public static final String DevNick = "WaveTactDev";
-**/
+    **/
 }

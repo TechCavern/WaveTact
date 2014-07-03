@@ -29,17 +29,17 @@ class Main {
         IRCUtils.startThreads();
 ///**
         PircBotX Ovd = IRCUtils.createbot(pwd, "Ovd", GeneralRegistry.OvdChannels, GeneralRegistry.OvdNick, GeneralRegistry.OvdServer);
-         PircBotX Esper = IRCUtils.createbot(g, "Esper", GeneralRegistry.EsperChannels, GeneralRegistry.EsperNick, GeneralRegistry.EsperServer);
-         PircBotX ECode = IRCUtils.createbot(g, "ECode", GeneralRegistry.ECodeChannels, GeneralRegistry.ECodeNick, GeneralRegistry.ECodeServer);
-         PircBotX Xertion = IRCUtils.createbot(pwd, "Xertion", GeneralRegistry.XertionChannels, GeneralRegistry.XertionNick, GeneralRegistry.XertionServer);
-         PircBotX Obsidian = IRCUtils.createbot(pwd, "Obsidian", GeneralRegistry.ObsidianChannels, GeneralRegistry.ObsidianNick, GeneralRegistry.ObsidianServer);
-         PircBotX Freenode = IRCUtils.createbot(g, "Freenode", GeneralRegistry.FreenodeChannels, GeneralRegistry.FreenodeNick, GeneralRegistry.FreenodeServer);
+        PircBotX Esper = IRCUtils.createbot(g, "Esper", GeneralRegistry.EsperChannels, GeneralRegistry.EsperNick, GeneralRegistry.EsperServer);
+        PircBotX ECode = IRCUtils.createbot(g, "ECode", GeneralRegistry.ECodeChannels, GeneralRegistry.ECodeNick, GeneralRegistry.ECodeServer);
+        PircBotX Xertion = IRCUtils.createbot(pwd, "Xertion", GeneralRegistry.XertionChannels, GeneralRegistry.XertionNick, GeneralRegistry.XertionServer);
+        PircBotX Obsidian = IRCUtils.createbot(pwd, "Obsidian", GeneralRegistry.ObsidianChannels, GeneralRegistry.ObsidianNick, GeneralRegistry.ObsidianServer);
+        PircBotX Freenode = IRCUtils.createbot(g, "Freenode", GeneralRegistry.FreenodeChannels, GeneralRegistry.FreenodeNick, GeneralRegistry.FreenodeServer);
 
-         GeneralRegistry.WaveTact.addBot(Obsidian);
-         GeneralRegistry.WaveTact.addBot(Esper);
-         GeneralRegistry.WaveTact.addBot(Freenode);
-         GeneralRegistry.WaveTact.addBot(Ovd);
-         GeneralRegistry.WaveTact.addBot(Xertion);
+        GeneralRegistry.WaveTact.addBot(Obsidian);
+        GeneralRegistry.WaveTact.addBot(Esper);
+        GeneralRegistry.WaveTact.addBot(Freenode);
+        GeneralRegistry.WaveTact.addBot(Ovd);
+        GeneralRegistry.WaveTact.addBot(Xertion);
         GeneralRegistry.WaveTact.addBot(ECode);
 //**/
         //Development Server

@@ -22,7 +22,6 @@ public abstract class Command {
         this.PermLevel = PermLevel;
         this.Desc = Desc;
         create();
-
     }
 
     void create() {
