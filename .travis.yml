@@ -1,0 +1,6 @@
+language: java
+jdk: oraclejdk8
+install:
+  - "TERM=dumb ./gradlew tasks"
+script:
+  - "TERM=dumb ./gradlew jar"
