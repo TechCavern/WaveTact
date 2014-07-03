@@ -13,3 +13,4 @@ dist/
 out/
 pimp/
 src/META-INF/
+*.swp
