@@ -55,7 +55,7 @@ public class IRCUtils {
         return new PircBotX(Net.buildConfiguration());
     }
 
-    public static void registerNetworks(String nickserv){
+    public static void registerNetworks(){
         File serversFolder = new File("servers/");
         serversFolder.mkdir();
         File[] files = serversFolder.listFiles();
@@ -80,12 +80,7 @@ public class IRCUtils {
         {
             for (String s : c.getString("channels").split(", "))
                 chans.add(s);
-            if(c.getString("nickserv").equals("True")){
-                ns = nickserv;
-            }else{
-                ns = null;
-            }
-            bot = IRCUtils.createbot(ns, c.getString("name"), chans,c.getString("nick"), c.getString("server"));
+            bot = IRCUtils.createbot(c.getString("nickserv"), c.getString("name"), chans,c.getString("nick"), c.getString("server"));
             GeneralRegistry.WaveTact.addBot(bot);
             new CommandChar(c.getString("CommandChar"), bot);
         }
