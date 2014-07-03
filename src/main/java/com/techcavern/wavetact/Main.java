@@ -51,9 +51,10 @@ class Main {
 
         PircBotX bot;
         LinkedList<String> chans = new LinkedList<String>();
-        chans.add("#directcode");
         for (Configuration c : configs.values())
         {
+            for (String s : c.getString("channels").split(", "))
+                chans.add(s);
             bot = IRCUtils.createbot(c.getString("nickserv"), c.getString("name"), chans,c.getString("nick"), c.getString("server"));
             GeneralRegistry.WaveTact.addBot(bot);
         }

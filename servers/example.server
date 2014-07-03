@@ -1,0 +1,5 @@
+name=ExampleNET
+server=irc.example.net
+nick=WaveTactBot
+channels=#example, #lobby
+nickserv=MyPass01234
