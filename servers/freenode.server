@@ -1,7 +1,0 @@
-name=freenode
-server=irc.freenode.net
-nick=WaveTact
-channels=#techcavern, ##powder-bots, #directcode, ##neobotwar
-nickserv=True
-CommandChar=&
-

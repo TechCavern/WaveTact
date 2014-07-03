@@ -1,7 +1,0 @@
-name=Esper
-server=irc.esper.net
-nick=WaveTact
-channels=#techcavern, #directcode, #speakeasy, #kingrunes
-nickserv=True
-CommandChar=&
-
