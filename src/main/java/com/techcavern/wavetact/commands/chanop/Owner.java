@@ -17,7 +17,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class Owner extends Command {
     @CMD
     public Owner() {
-        super(GeneralUtils.toArray("owner own"), 15, "Owner (-)(User)");
+        super(GeneralUtils.toArray("owner own"), 14, "Owner (-)(User)");
     }
 
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {

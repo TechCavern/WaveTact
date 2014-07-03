@@ -15,7 +15,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class Ban extends Command {
     @CMD
     public Ban() {
-        super(GeneralUtils.toArray("Ban b"), 10, "Ban (-)(+)[User] (time)");
+        super(GeneralUtils.toArray("Ban b"), 9, "Ban (-)(+)[User] (time)");
     }
 
     @Override

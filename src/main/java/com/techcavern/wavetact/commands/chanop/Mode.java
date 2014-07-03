@@ -16,7 +16,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class Mode extends Command {
     @CMD
     public Mode() {
-        super(GeneralUtils.toArray("mode mo"), 10, "mode [modes to set]");
+        super(GeneralUtils.toArray("mode mo"), 9, "mode [modes to set]");
     }
 
     @Override
