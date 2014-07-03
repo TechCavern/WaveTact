@@ -1,6 +1,7 @@
 package com.techcavern.wavetact.utils;
 
 import com.techcavern.wavetact.commandline.utils.AddServer;
+import com.techcavern.wavetact.commandline.utils.BasicCommands;
 import com.techcavern.wavetact.commands.utils.Help;
 import com.techcavern.wavetact.objects.CommandLine;
 
@@ -10,10 +11,11 @@ import com.techcavern.wavetact.objects.CommandLine;
 public class CommandLineUtils {
 
     public static void initializeCommandlines(){
-        //TODO Fix this to work with @COmmandLines once @Commands is fixed
+        //TODO Fix this to work with @CMDLine once @CMD is fixed
 
         new AddServer();
         new Help();
+        new BasicCommands();
     }
 
     public static void parseCommandLineArguments(String[] args)
@@ -25,7 +27,7 @@ public class CommandLineUtils {
             for(String b : c.getArgument()) {
                 for (String s : args) {
                     {
-                        if(b.equalsIgnoreCase(b)){
+                        if(b.equalsIgnoreCase("-" +b)){
                             c.doAction(args);
                             invalid = false;
                         }

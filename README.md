@@ -19,5 +19,6 @@ Building
 Running
 =======
 - Run `java -jar WaveTact.jar`
-- WaveTact help is access by the -h or --help parameter
-- Make configuration by using the -a or --addserver parameter
+- WaveTact help is access by the -h or -help parameter
+- Make configuration by using the -addserver or -a parameter
+- If you wish to populate the custom commands database with some prechosen commands use -addbasiccommands ONCE.
