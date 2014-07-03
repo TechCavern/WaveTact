@@ -209,11 +209,13 @@ public class IRCUtils {
     }
     
     public static void registerCommands(){
+
         try{
             GeneralRegistry.COMMANDS.addAll(GeneralRegistry.TASKS.submit(new CommandCollection("com.techcavern.wavetact.commands")).get());
         } catch(Exception ex){
             ex.printStackTrace(System.err);
         }
+
     }
 
     public static String getCommandChar(PircBotX b){
