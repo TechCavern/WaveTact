@@ -27,31 +27,31 @@ public class MessageListener extends ListenerAdapter<PircBotX> {
             Command Command = GeneralRegistry.Commands.get(i);
             for(int c = 0; c < Command.getCommandID().length; c++){
                 String CommandID = Command.getCommandID()[c];
-            if (m.equalsIgnoreCase(IRCUtils.getCommandChar(event.getBot()) + CommandID)) {
-                if (PermUtils.getPermLevel(event.getBot(), event.getUser(), event.getChannel()) >= Command.getPermLevel()) {
-                    if (Command.getPermLevel() == 9) {
-                        if (event.getChannel().isOp(event.getBot().getUserBot()) || event.getChannel().isOwner(event.getBot().getUserBot())) {
-                            Command.onCommand(event, ArrayUtils.remove(messageParts, 0));
-                        } else {
-                            event.getChannel().send().message("Error: I must be Opped to perform the operation requested");
-                        }
-                    } else if (Command.getPermLevel() == 14) {
+                if (m.equalsIgnoreCase(IRCUtils.getCommandChar(event.getBot()) + CommandID)) {
+                    if (PermUtils.getPermLevel(event.getBot(), event.getUser(), event.getChannel()) >= Command.getPermLevel()) {
+                        if (Command.getPermLevel() == 9) {
+                            if (event.getChannel().isOp(event.getBot().getUserBot()) || event.getChannel().isOwner(event.getBot().getUserBot())) {
+                                Command.onCommand(event, ArrayUtils.remove(messageParts, 0));
+                            } else {
+                                event.getChannel().send().message("Error: I must be Opped to perform the operation requested");
+                            }
+                        } else if (Command.getPermLevel() == 14) {
 
-                        if (event.getChannel().isOwner(event.getBot().getUserBot())) {
-                            Command.onCommand(event, ArrayUtils.remove(messageParts, 0));
+                            if (event.getChannel().isOwner(event.getBot().getUserBot())) {
+                                Command.onCommand(event, ArrayUtils.remove(messageParts, 0));
+                            } else {
+                                event.getChannel().send().message("Error: I must be Ownered to perform the operation requested");
+                            }
                         } else {
-                            event.getChannel().send().message("Error: I must be Ownered to perform the operation requested");
+                            Command.onCommand(event, ArrayUtils.remove(messageParts, 0));
+
                         }
+
                     } else {
-                        Command.onCommand(event, ArrayUtils.remove(messageParts, 0));
+                        event.getChannel().send().message("Permission Denied");
 
                     }
-
-                } else {
-                    event.getChannel().send().message("Permission Denied");
-
                 }
-            }
             }
         }
     }
