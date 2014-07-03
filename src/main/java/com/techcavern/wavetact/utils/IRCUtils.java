@@ -82,7 +82,7 @@ public class IRCUtils {
                 chans.add(s);
             bot = IRCUtils.createbot(c.getString("nickserv"), c.getString("name"), chans,c.getString("nick"), c.getString("server"));
             GeneralRegistry.WaveTact.addBot(bot);
-            new CommandChar(c.getString("CommandChar"), bot);
+            new CommandChar(c.getString("prefix"), bot);
         }
     }
 

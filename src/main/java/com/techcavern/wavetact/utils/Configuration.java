@@ -2,6 +2,8 @@ package com.techcavern.wavetact.utils;
 
 import java.io.File;
 import java.io.BufferedReader;
+import java.io.PrintWriter;
+import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.FileNotFoundException;
@@ -50,6 +52,8 @@ public class Configuration
             BufferedReader reader = new BufferedReader(new FileReader(file));
             while ((line = reader.readLine()) != null)
             {
+                if (line.startsWith("#"))
+                    continue;
                 if (StringUtils.countMatches(line, "=") != 1)
                     System.out.println("Problem parsing config file for " + file.getName());
                 split = line.split("=");
@@ -62,11 +66,23 @@ public class Configuration
         }
     }
 
-    // TODO: Implement saving...
-    private void save()
+    public void save()
     {
         if (lock)
             return;
+        try
+        {
+            PrintWriter writer = new PrintWriter(new FileWriter(file));
+            for (String s : pairs.keySet())
+            {
+                writer.println(s + "=" + pairs.get(s));
+            }
+            writer.close();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public void lock()
