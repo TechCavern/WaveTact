@@ -24,7 +24,7 @@ public abstract class CommandLine {
     public String getHelpString(){
         return this.helpstring;
     }
-    public abstract void doAction();
+    public abstract void doAction(String [] args);
 
 }
 

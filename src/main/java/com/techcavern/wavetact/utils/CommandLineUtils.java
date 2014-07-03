@@ -26,7 +26,7 @@ public class CommandLineUtils {
                 for (String s : args) {
                     {
                         if(b.equalsIgnoreCase(b)){
-                            c.doAction();
+                            c.doAction(args);
                             invalid = false;
                         }
 

@@ -1,6 +1,6 @@
 package com.techcavern.wavetact.commandline;
 
-import com.sun.deploy.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import com.techcavern.wavetact.objects.CommandLine;
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GeneralUtils;
@@ -14,8 +14,9 @@ public class Help extends CommandLine
     }
 
     @Override
-    public void doAction()
+    public void doAction(String [] args)
     {
+
         System.out.println("Help");
         for (CommandLine c : GeneralRegistry.CommandLines)
         {

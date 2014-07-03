@@ -1,7 +1,8 @@
-package com.techcavern.wavetact.commands.controller;
+package com.techcavern.wavetact.commandline.utils;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.objects.Command;
+import com.techcavern.wavetact.objects.CommandLine;
 import com.techcavern.wavetact.objects.SimpleAction;
 import com.techcavern.wavetact.objects.SimpleMessage;
 import com.techcavern.wavetact.utils.GeneralRegistry;
@@ -10,15 +11,13 @@ import com.techcavern.wavetact.utils.IRCUtils;
 import org.pircbotx.hooks.events.MessageEvent;
 
 
-public class BasicCommands extends Command {
-    @CMD
+public class BasicCommands extends CommandLine {
     public BasicCommands() {
-        super(GeneralUtils.toArray("addbasiccommands"), 9001, "No Arguments, Use it ONCE and ONLY ONCE to populate the Basic Commands");
+        super(GeneralUtils.toArray("addbasiccommands"), "No Arguments, Use it ONCE and ONLY ONCE to populate the Basic Commands");
     }
 
     @Override
-    public void onCommand(MessageEvent<?> event, String... args)
-            throws Exception {
+    public void doAction(String [] args) {
         SimpleAction potato = new SimpleAction("potato", 0, "is a potato", true);
         SimpleMessage ping = new SimpleMessage("ping", 0, "pong", true);
         SimpleMessage pong = new SimpleMessage("pong", 0, "ping", true);
@@ -30,7 +29,9 @@ public class BasicCommands extends Command {
         GeneralRegistry.SimpleMessages.add(source);
         IRCUtils.saveSimpleActions();
         IRCUtils.saveSimpleMessages();
-        event.getChannel().send().message("Basic Commands Added");
+        System.out.println("Basic Commands Added");
+        System.exit(0);
+
     }
 }
 

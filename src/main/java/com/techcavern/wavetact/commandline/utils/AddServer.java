@@ -13,7 +13,7 @@ public class AddServer extends CommandLine
         super(GeneralUtils.toArray("a addserver"), "Create a server configuration file");
     }
     @Override
-    public void doAction()
+    public void doAction(String [] args)
     {
         boolean loop = true;
         while (loop)
