@@ -17,4 +17,4 @@ Running
 =======
 - Run `java -jar WaveTact.jar`
 - WaveTact help is access by the -h or --help parameter
-- Make configuration by using the -m or --makeconf parameter
+- Make configuration by using the -a or --addserver parameter
