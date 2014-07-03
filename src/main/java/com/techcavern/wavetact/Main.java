@@ -1,19 +1,19 @@
 package com.techcavern.wavetact;
 
+import com.sun.xml.internal.bind.v2.TODO;
+import com.techcavern.wavetact.utils.CommandLineUtils;
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.commandline.CommandLine;
 
 import org.slf4j.impl.SimpleLogger;
-
-import java.util.concurrent.ForkJoinPool;
 
 @SuppressWarnings("ConstantConditions")
 public class Main {
 
 
     public static void main(String[] args) throws Exception {
-        CommandLine.parseCommandLineArguments(args);
+        CommandLineUtils.initializeCommandlines();
+        CommandLineUtils.parseCommandLineArguments(args);
         System.out.println("Starting...");
         System.setProperty(SimpleLogger.SHOW_DATE_TIME_KEY, "true");
         System.setProperty(SimpleLogger.DATE_TIME_FORMAT_KEY, "[yyyy/MM/dd HH:mm:ss]");

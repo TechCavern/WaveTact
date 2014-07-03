@@ -22,6 +22,7 @@ public class GeneralRegistry {
     public static final List<UTime> BanTimes = new LoggingArrayList<UTime>("BanTimes");
     public static final List<UTime> QuietTimes = new LoggingArrayList<UTime>("QuietTimes");
     public static final List<CommandChar> CommandChars= new LoggingArrayList<CommandChar>("CommandChar");
+    public static final List<CommandLine> CommandLines = new LoggingArrayList<CommandLine>("CommandLine");
 
 
     //Development Variables

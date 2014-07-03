@@ -1,29 +1,18 @@
-package com.techcavern.wavetact.utils.commandline;
+package com.techcavern.wavetact.commandline.utils;
 
-import com.techcavern.wavetact.objects.CommandLineObject;
+import com.techcavern.wavetact.objects.CommandLine;
 import com.techcavern.wavetact.utils.Configuration;
+import com.techcavern.wavetact.utils.GeneralUtils;
 
 import java.io.File;
 import java.util.Scanner;
 
-public class AddServer implements CommandLineObject
+public class AddServer extends CommandLine
 {
-
-    public String getShortArgument()
-    {
-        return "a";
+    public AddServer() {
+        super(GeneralUtils.toArray("a addserver"), "Create a server configuration file");
     }
-
-    public String getLongArgument()
-    {
-        return "addserver";
-    }
-
-    public String getHelpString()
-    {
-        return "Create a server configuration file";
-    }
-
+    @Override
     public void doAction()
     {
         boolean loop = true;
