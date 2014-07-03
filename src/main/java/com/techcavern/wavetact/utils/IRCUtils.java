@@ -17,9 +17,11 @@ import org.pircbotx.User;
 import org.pircbotx.output.OutputChannel;
 import org.pircbotx.output.OutputUser;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,6 +50,42 @@ public class IRCUtils {
             Net.setNickservPassword(g);
         }
         return new PircBotX(Net.buildConfiguration());
+    }
+
+    public static void registerNetworks(String nickserv){
+        File serversFolder = new File("servers/");
+        serversFolder.mkdir();
+        File[] files = serversFolder.listFiles();
+
+        String name;
+        com.techcavern.wavetact.utils.Configuration config;
+        for (File f : files)
+        {
+            if (!f.isDirectory())
+            {
+                name = f.getName();
+                name = name.substring(0, f.getName().lastIndexOf('.'));
+                config = new com.techcavern.wavetact.utils.Configuration(f);
+                GeneralRegistry.configs.put(name, config);
+            }
+        }
+
+        PircBotX bot;
+        LinkedList<String> chans = new LinkedList<String>();
+        String ns;
+        for (com.techcavern.wavetact.utils.Configuration c : GeneralRegistry.configs.values())
+        {
+            for (String s : c.getString("channels").split(", "))
+                chans.add(s);
+            if(c.getString("nickserv").equals("True")){
+                ns = nickserv;
+            }else{
+                ns = null;
+            }
+
+            bot = IRCUtils.createbot(ns, c.getString("name"), chans,c.getString("nick"), c.getString("server"));
+            GeneralRegistry.WaveTact.addBot(bot);
+        }
     }
 
     public static User getUserByNick(Channel c, String n) {

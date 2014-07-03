@@ -1,0 +1,5 @@
+name=Overdrive
+server=irc.obsidianirc.net
+nick=WaveTact
+channels=#techcavern, #szsocial
+nickserv=False

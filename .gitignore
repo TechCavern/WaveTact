@@ -14,5 +14,3 @@ out/
 pimp/
 src/META-INF/
 *.swp
-servers/*
-!servers/example.server
