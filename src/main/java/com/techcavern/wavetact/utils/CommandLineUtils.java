@@ -20,6 +20,12 @@ public class CommandLineUtils {
     {
         boolean exit = false;
         boolean invalid = true;
+
+        if(args.length < 1){
+            Help c = new Help();
+            c.doAction(args);
+        }
+
         for (CommandLine c : GeneralRegistry.CommandLineArguments)
         {
             for(String b : c.getArgument()) {
