@@ -60,7 +60,6 @@ public class IRCUtils {
         File serversFolder = new File("servers/");
         serversFolder.mkdir();
         File[] files = serversFolder.listFiles();
-
         String name;
         com.techcavern.wavetact.utils.Configuration config;
         for (File f : files)
