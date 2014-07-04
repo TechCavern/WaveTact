@@ -48,17 +48,17 @@ public class Ban extends Command {
             } else {
                 event.getChannel().send().message("Ban already exists!");
             }
+        } else  if (args[0].startsWith("-")) {
+            if(GetUtils.getBanTime(hostmask) != null) {
+                GetUtils.getBanTime(hostmask).setTime(0);
+                BanTimeUtils.saveBanTimes();
+            }else{
+                IRCUtils.setMode(event.getChannel(), event.getBot(), "-b ", hostmask);
+            }
+
         } else {
             if (GetUtils.getBanTime(hostmask) != null) {
-                if (args[0].startsWith("-")) {
-                    if(GetUtils.getBanTime(hostmask) != null) {
-                        GetUtils.getBanTime(hostmask).setTime(0);
-                        BanTimeUtils.saveBanTimes();
-                    }else{
-                        IRCUtils.setMode(event.getChannel(), event.getBot(), "-b ", hostmask);
-                    }
-
-                } else if (args[0].startsWith("\\+")) {
+                if (args[0].startsWith("\\+")) {
                     if (args[1].startsWith("\\+")) {
                         GetUtils.getBanTime(hostmask).setTime(GetUtils.getBanTime(hostmask).getTime() + GeneralUtils.getMilliSeconds(args[1].replace("\\+", "")));
                     } else if (args[1].startsWith("-")) {

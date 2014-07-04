@@ -50,26 +50,26 @@ public class Quiet extends Command {
             } else {
                 event.getChannel().send().message("Quiet already exists!");
             }
+        } else  if (args[1].startsWith("-")) {
+            if(GetUtils.getQuietTime(hostmask) != null) {
+                GetUtils.getQuietTime(hostmask).setTime(0);
+                QuietTimeUtils.saveQuietTimes();
+            }else{
+                switch (args[0].toLowerCase()) {
+                    case "c":
+                        IRCUtils.setMode(event.getChannel(), event.getBot(), "-q ", hostmask);
+                        break;
+                    case "u":
+                        IRCUtils.setMode(event.getChannel(), event.getBot(), "-b ~q:", hostmask);
+                        break;
+                    case "i":
+                        IRCUtils.setMode(event.getChannel(), event.getBot(), "-b m:", hostmask);
+                        break;
+                }
+            }
         } else {
             if (GetUtils.getQuietTime(hostmask) != null) {
-                if (args[1].startsWith("-")) {
-                    if(GetUtils.getQuietTime(hostmask) != null) {
-                        GetUtils.getQuietTime(hostmask).setTime(0);
-                        QuietTimeUtils.saveQuietTimes();
-                    }else{
-                        switch (args[0].toLowerCase()) {
-                            case "c":
-                                IRCUtils.setMode(event.getChannel(), event.getBot(), "-q ", hostmask);
-                                break;
-                            case "u":
-                                IRCUtils.setMode(event.getChannel(), event.getBot(), "-b ~q:", hostmask);
-                                break;
-                            case "i":
-                                IRCUtils.setMode(event.getChannel(), event.getBot(), "-b m:", hostmask);
-                                break;
-                        }
-                    }
-                } else if (args[1].startsWith("\\+")) {
+                if (args[1].startsWith("\\+")) {
                     if (args[1].startsWith("\\+")) {
                         GetUtils.getQuietTime(hostmask).setTime(GetUtils.getQuietTime(hostmask).getTime() + GeneralUtils.getMilliSeconds(args[2].replace("\\+", "")));
                     } else if (args[1].startsWith("-")) {
