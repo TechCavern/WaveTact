@@ -53,10 +53,11 @@ public class Ban extends Command {
                         IRCUtils.getBanTime(h).setTime(IRCUtils.getBanTime(h).getTime() + GeneralUtils.getMilliSeconds(args[1].replace("+", "")));
                         }else
                         if(args[1].startsWith("-")) {
-                            IRCUtils.getBanTime(h).setTime(IRCUtils.getBanTime(h).getTime() + GeneralUtils.getMilliSeconds(args[1].replace("-", "")));
+                            IRCUtils.getBanTime(h).setTime(IRCUtils.getBanTime(h).getTime() - GeneralUtils.getMilliSeconds(args[1].replace("-", "")));
                         }else{
                             IRCUtils.getBanTime(h).setTime(GeneralUtils.getMilliSeconds(args[1].replace("-", "")));
                         }
+                        event.getChannel().send().message("Ban Modified");
                     } else {
                     event.getChannel().send().message("Ban does not exist!");
                 }

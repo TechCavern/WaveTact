@@ -52,10 +52,12 @@ public class Quiet extends Command {
                         IRCUtils.getQuietTime(h).setTime(IRCUtils.getQuietTime(h).getTime() + GeneralUtils.getMilliSeconds(args[1].replace("+", "")));
                     }else
                     if(args[1].startsWith("-")) {
-                        IRCUtils.getQuietTime(h).setTime(IRCUtils.getQuietTime(h).getTime() + GeneralUtils.getMilliSeconds(args[1].replace("-", "")));
+                        IRCUtils.getQuietTime(h).setTime(IRCUtils.getQuietTime(h).getTime() - GeneralUtils.getMilliSeconds(args[1].replace("-", "")));
                     }else{
                         IRCUtils.getQuietTime(h).setTime(GeneralUtils.getMilliSeconds(args[1].replace("-", "")));
                     }
+                    event.getChannel().send().message("Quiet Modified");
+
                 } else {
                     event.getChannel().send().message("Quiet does not exist!");
                 }
