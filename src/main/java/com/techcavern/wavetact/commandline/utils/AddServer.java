@@ -8,18 +8,16 @@ import com.techcavern.wavetact.utils.GeneralUtils;
 import java.io.File;
 import java.util.Scanner;
 
-public class AddServer extends CommandLine
-{
+public class AddServer extends CommandLine {
     @CMDLine
     public AddServer() {
         super(GeneralUtils.toArray("a addserver"), "Create a server configuration file", false);
     }
+
     @Override
-    public void doAction(String [] args)
-    {
+    public void doAction(String[] args) {
         boolean loop = true;
-        while (loop)
-        {
+        while (loop) {
             Scanner input = new Scanner(System.in);
             System.out.print("Server name: ");
             String name = input.nextLine();
@@ -34,7 +32,7 @@ public class AddServer extends CommandLine
             System.out.print("Nickserv Pass(empty for none): ");
             config.set("nickserv", input.nextLine());
             System.out.print("Command Prefix: ");
-            config.set("prefix", input.nextLine()); 
+            config.set("prefix", input.nextLine());
             config.save();
             System.out.print("Add another? [y/n]");
             char ans = input.next().charAt(0);

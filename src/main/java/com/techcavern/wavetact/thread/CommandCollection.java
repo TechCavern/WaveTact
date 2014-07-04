@@ -12,37 +12,37 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 public final class CommandCollection
-implements Callable<List<Command>> {
+        implements Callable<List<Command>> {
     private final String start_pkg;
 
-    public CommandCollection(String pkg){
+    public CommandCollection(String pkg) {
         this.start_pkg = pkg;
     }
 
     @Override
     public List<Command> call()
-    throws Exception {
+            throws Exception {
         List<Command> commands = new LinkedList<>();
         ClassLoader loader = Thread.currentThread().getContextClassLoader();
-        Enumeration<URL> resources  = loader.getResources(this.start_pkg.replace('.', '/'));
-        while(resources.hasMoreElements()){
+        Enumeration<URL> resources = loader.getResources(this.start_pkg.replace('.', '/'));
+        while (resources.hasMoreElements()) {
             commands.addAll(this.findCommands(new File(resources.nextElement().getFile()), this.start_pkg));
         }
 
         return commands;
     }
 
-    private List<Command> findCommands(File dir, String  pkgName)
-    throws Exception{
+    private List<Command> findCommands(File dir, String pkgName)
+            throws Exception {
         List<Command> commands = new LinkedList<>();
-        if(!dir.exists()){
+        if (!dir.exists()) {
             return commands;
         }
 
-        for(File file : dir.listFiles()){
-            if(file.isDirectory()){
+        for (File file : dir.listFiles()) {
+            if (file.isDirectory()) {
                 commands.addAll(this.findCommands(file, pkgName + "." + file.getName()));
-            } else if(file.getName().endsWith(".class")){
+            } else if (file.getName().endsWith(".class")) {
                 commands.add(this.newCommand(Class.forName(pkgName + "." + file.getName().substring(0, file.getName().length() - 6))));
             }
         }
@@ -51,12 +51,12 @@ implements Callable<List<Command>> {
     }
 
     private Command newCommand(Class<?> clazz)
-    throws Exception{
-        for(Constructor<?> c : clazz.getDeclaredConstructors()){
-            if(c.isAnnotationPresent(CMD.class)){
-                if(c.getParameterTypes().length > 0){
+            throws Exception {
+        for (Constructor<?> c : clazz.getDeclaredConstructors()) {
+            if (c.isAnnotationPresent(CMD.class)) {
+                if (c.getParameterTypes().length > 0) {
                     throw new InvalidCommandConstructorException(clazz, c);
-                } else{
+                } else {
                     c.setAccessible(true);
                     return (Command) c.newInstance();
                 }
@@ -66,32 +66,32 @@ implements Callable<List<Command>> {
         throw new InvalidCommandException(clazz);
     }
 
-    private final class InvalidCommandException
-    extends Exception{
-        public InvalidCommandException(Class<?> c){
-            super("Class " + c.getName() + " is invalid for a command");
-        }
-    }
-
     private static final class InvalidCommandConstructorException
-    extends Exception{
-        public InvalidCommandConstructorException(Class<?> c, Constructor<?> constructor){
+            extends Exception {
+        public InvalidCommandConstructorException(Class<?> c, Constructor<?> constructor) {
             super("Constructor " + c.getName() + "#" + constructor.getName() + "(" + parameterString(constructor) + ") is invalid");
         }
 
-        private static String parameterString(Constructor<?> c){
+        private static String parameterString(Constructor<?> c) {
             StringBuilder builder = new StringBuilder();
 
             Class<?>[] params = c.getParameterTypes();
-            for(int i = 0; i < params.length; i++){
+            for (int i = 0; i < params.length; i++) {
                 builder.append(params[i].getSimpleName());
 
-                if(i < params.length - 1){
+                if (i < params.length - 1) {
                     builder.append(",");
                 }
             }
 
             return builder.toString();
+        }
+    }
+
+    private final class InvalidCommandException
+            extends Exception {
+        public InvalidCommandException(Class<?> c) {
+            super("Class " + c.getName() + " is invalid for a command");
         }
     }
 }

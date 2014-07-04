@@ -8,23 +8,23 @@ public class CommandChar {
     private final String chard;
     private final PircBotX bot;
 
-    public CommandChar(String c, PircBotX d){
+    public CommandChar(String c, PircBotX d) {
         this.chard = c;
         this.bot = d;
         create();
     }
 
-    void create(){
+    void create() {
         GeneralRegistry.CommandChars.add(this);
     }
-    public String getCommandChar(){
+
+    public String getCommandChar() {
         return this.chard;
     }
 
-    public PircBotX getBot(){
+    public PircBotX getBot() {
         return this.bot;
     }
-
 
 
 }

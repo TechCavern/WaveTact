@@ -10,7 +10,10 @@ import com.techcavern.wavetact.objects.Command;
 import com.techcavern.wavetact.objects.CommandType;
 import com.techcavern.wavetact.objects.SimpleAction;
 import com.techcavern.wavetact.objects.SimpleMessage;
-import com.techcavern.wavetact.utils.*;
+import com.techcavern.wavetact.utils.GeneralRegistry;
+import com.techcavern.wavetact.utils.GeneralUtils;
+import com.techcavern.wavetact.utils.GetUtils;
+import com.techcavern.wavetact.utils.SaveUtils;
 import org.pircbotx.hooks.events.MessageEvent;
 
 /**

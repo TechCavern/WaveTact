@@ -21,7 +21,8 @@ public class CheckTime implements Runnable {
                         LoadUtils.loadQuietTimes();
                         loaded = true;
                     }
-                } catch (NullPointerException ignored) {}
+                } catch (NullPointerException ignored) {
+                }
 
                 if (!loaded)
                     continue;

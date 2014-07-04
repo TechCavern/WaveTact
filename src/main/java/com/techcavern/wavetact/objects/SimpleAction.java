@@ -29,10 +29,10 @@ public class SimpleAction extends Command {
         String daction = this.action;
         String[] action = StringUtils.split(this.action, " ");
         int i = 0;
-        for(String g:action){
-            if(g.startsWith("$") &&!g.contains("*")){
-                daction = daction.replace(g,args[Integer.parseInt(g.replace("$", ""))-1]);
-                if(Integer.parseInt(g.replace("$", "")) > i) {
+        for (String g : action) {
+            if (g.startsWith("$") && !g.contains("*")) {
+                daction = daction.replace(g, args[Integer.parseInt(g.replace("$", "")) - 1]);
+                if (Integer.parseInt(g.replace("$", "")) > i) {
                     i++;
                 }
             }

@@ -2,13 +2,13 @@ package com.techcavern.wavetact.objects;
 
 
 public class UTime {
-    private long time;
     private final String hostmask;
     private final String network;
     private final String channel;
     private final String type;
+    private long time;
 
-    public UTime(String u, String n, String t, String c, long x){
+    public UTime(String u, String n, String t, String c, long x) {
         this.time = x;
         this.network = n;
         this.channel = c;
@@ -16,22 +16,27 @@ public class UTime {
         this.hostmask = u;
     }
 
-    public String getHostmask(){
+    public String getHostmask() {
         return this.hostmask;
     }
-    public long getTime(){
+
+    public long getTime() {
         return this.time;
     }
-    public String getChannel(){
+
+    public void setTime(long x) {
+        this.time = x;
+    }
+
+    public String getChannel() {
         return this.channel;
     }
-    public String getNetwork(){
+
+    public String getNetwork() {
         return this.network;
     }
-    public String getType(){
+
+    public String getType() {
         return this.type;
-    }
-    public void setTime(long x){
-        this.time = x;
     }
 }

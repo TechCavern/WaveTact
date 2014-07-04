@@ -42,7 +42,9 @@ public abstract class Command {
         return comid;
     }
 
-    public String getCommand(){return comid[0];}
+    public String getCommand() {
+        return comid[0];
+    }
 
     public String getDesc() {
         return Desc;

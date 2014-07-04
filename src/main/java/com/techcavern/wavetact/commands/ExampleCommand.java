@@ -11,7 +11,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class ExampleCommand extends Command {
     @CMD
     public ExampleCommand() {
-        super(new String[] { "blah" }, 0, "description");
+        super(new String[]{"blah"}, 0, "description");
     }
 
     @Override

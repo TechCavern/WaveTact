@@ -29,14 +29,15 @@ public class SimpleMessage extends Command {
         String dresponse = this.message;
         String[] message = StringUtils.split(this.message, " ");
         int i = 0;
-        for(String g:message){
-            if(g.startsWith("$") &&!g.contains("*")){
-                dresponse = dresponse.replace(g,args[Integer.parseInt(g.replace("$", ""))-1]);
-                if(Integer.parseInt(g.replace("$", "")) > i) {
+        for (String g : message) {
+            if (g.startsWith("$") && !g.contains("*")) {
+                dresponse = dresponse.replace(g, args[Integer.parseInt(g.replace("$", "")) - 1]);
+                if (Integer.parseInt(g.replace("$", "")) > i) {
                     i++;
-                }            }
+                }
+            }
         }
-        dresponse = dresponse.replace("$*", GeneralUtils.buildMessage(i,args.length,args));
+        dresponse = dresponse.replace("$*", GeneralUtils.buildMessage(i, args.length, args));
         event.getChannel().send().message(dresponse);
 
 
@@ -45,7 +46,6 @@ public class SimpleMessage extends Command {
     public String getMessage() {
         return this.message;
     }
-
 
 
     @Override

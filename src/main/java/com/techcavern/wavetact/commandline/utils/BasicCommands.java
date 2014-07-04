@@ -16,7 +16,7 @@ public class BasicCommands extends CommandLine {
     }
 
     @Override
-    public void doAction(String [] args) {
+    public void doAction(String[] args) {
         SimpleAction potato = new SimpleAction("potato", 0, "is a potato", true);
         SimpleMessage ping = new SimpleMessage("ping", 0, "pong", true);
         SimpleMessage pong = new SimpleMessage("pong", 0, "ping", true);

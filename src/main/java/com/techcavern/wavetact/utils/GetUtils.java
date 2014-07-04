@@ -66,9 +66,9 @@ public class GetUtils {
         return null;
     }
 
-    public static String getCommandChar(PircBotX b){
-        for(CommandChar d:GeneralRegistry.CommandChars){
-            if(d.getBot() == b){
+    public static String getCommandChar(PircBotX b) {
+        for (CommandChar d : GeneralRegistry.CommandChars) {
+            if (d.getBot() == b) {
                 return d.getCommandChar();
             }
         }

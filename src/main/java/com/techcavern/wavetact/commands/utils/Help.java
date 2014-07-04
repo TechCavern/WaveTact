@@ -4,8 +4,8 @@ import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.objects.Command;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
-import org.pircbotx.hooks.events.MessageEvent;
 import org.apache.commons.lang3.StringUtils;
+import org.pircbotx.hooks.events.MessageEvent;
 
 import java.util.Arrays;
 

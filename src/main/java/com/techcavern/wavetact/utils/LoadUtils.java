@@ -3,6 +3,15 @@ package com.techcavern.wavetact.utils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.internal.LinkedTreeMap;
+import com.techcavern.wavetact.commands.chanop.*;
+import com.techcavern.wavetact.commands.controller.IRCRaw;
+import com.techcavern.wavetact.commands.controller.Join;
+import com.techcavern.wavetact.commands.controller.Lock;
+import com.techcavern.wavetact.commands.controller.Shutdown;
+import com.techcavern.wavetact.commands.fun.SomethingAwesome;
+import com.techcavern.wavetact.commands.fun.UrbanDictonary;
+import com.techcavern.wavetact.commands.trusted.*;
+import com.techcavern.wavetact.commands.utils.*;
 import com.techcavern.wavetact.events.DisconnectListener;
 import com.techcavern.wavetact.events.KickListener;
 import com.techcavern.wavetact.events.MessageListener;
@@ -11,11 +20,7 @@ import com.techcavern.wavetact.thread.CheckTime;
 import org.pircbotx.Configuration;
 import org.pircbotx.Configuration.Builder;
 import org.pircbotx.PircBotX;
-import com.techcavern.wavetact.commands.chanop.*;
-import com.techcavern.wavetact.commands.controller.*;
-import com.techcavern.wavetact.commands.fun.*;
-import com.techcavern.wavetact.commands.trusted.*;
-import com.techcavern.wavetact.commands.utils.*;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.charset.Charset;
@@ -51,16 +56,14 @@ public class LoadUtils {
         return new PircBotX(Net.buildConfiguration());
     }
 
-    public static void registerNetworks(){
+    public static void registerNetworks() {
         File serversFolder = new File("servers/");
         serversFolder.mkdir();
         File[] files = serversFolder.listFiles();
         String name;
         com.techcavern.wavetact.utils.Configuration config;
-        for (File f : files)
-        {
-            if (!f.isDirectory())
-            {
+        for (File f : files) {
+            if (!f.isDirectory()) {
                 name = f.getName();
                 name = name.substring(0, f.getName().lastIndexOf('.'));
                 config = new com.techcavern.wavetact.utils.Configuration(f);
@@ -71,12 +74,11 @@ public class LoadUtils {
         PircBotX bot;
         LinkedList<String> chans = new LinkedList<String>();
         String ns;
-        for (com.techcavern.wavetact.utils.Configuration c : GeneralRegistry.configs.values())
-        {
+        for (com.techcavern.wavetact.utils.Configuration c : GeneralRegistry.configs.values()) {
             Collections.addAll(chans, c.getString("channels").split(", "));
-            if(c.getString("nickserv").equalsIgnoreCase("False")){
+            if (c.getString("nickserv").equalsIgnoreCase("False")) {
                 ns = null;
-            }else{
+            } else {
                 ns = c.getString("nickserv");
             }
 
@@ -86,7 +88,7 @@ public class LoadUtils {
         }
     }
 
-    public static void registerDevServer(){
+    public static void registerDevServer() {
         List<String> Chans = Arrays.asList("#techcavern");
         PircBotX Dev = LoadUtils.createbot(null, "EsperNet", Chans, "WaveTactDev", "irc.esper.net");
         GeneralRegistry.WaveTact.addBot(Dev);
@@ -94,7 +96,7 @@ public class LoadUtils {
     }
 
 
-    public static void startThreads(){
+    public static void startThreads() {
         (new Thread(new CheckTime())).start();
     }
 
@@ -116,14 +118,14 @@ public class LoadUtils {
         }
     }
 
-    public static void registerCommands(){
-      /**
-        try{
-            GeneralRegistry.COMMANDS.addAll(GeneralRegistry.TASKS.submit(new CommandCollection("com.techcavern.wavetact.commands")).get());
-        } catch(Exception ex){
-            ex.printStackTrace(System.err);
-        }
-       **/
+    public static void registerCommands() {
+        /**
+         try{
+         GeneralRegistry.COMMANDS.addAll(GeneralRegistry.TASKS.submit(new CommandCollection("com.techcavern.wavetact.commands")).get());
+         } catch(Exception ex){
+         ex.printStackTrace(System.err);
+         }
+         **/
         new Ban();
         new HalfOp();
         new Kick();

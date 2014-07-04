@@ -21,8 +21,8 @@ public class GeneralRegistry {
     public static final Map<String, Configuration> configs = new HashMap<String, Configuration>();
     public static final List<UTime> BanTimes = new LoggingArrayList<UTime>("BanTimes");
     public static final List<UTime> QuietTimes = new LoggingArrayList<UTime>("QuietTimes");
-    public static final List<CommandChar> CommandChars= new LoggingArrayList<CommandChar>("CommandChar");
+    public static final List<CommandChar> CommandChars = new LoggingArrayList<CommandChar>("CommandChar");
     public static final List<CommandLine> CommandLines = new LoggingArrayList<CommandLine>("CommandLine");
-    public static final List<CommandLine> CommandLineArguments= new LoggingArrayList<CommandLine>("CommandLineArguments");
+    public static final List<CommandLine> CommandLineArguments = new LoggingArrayList<CommandLine>("CommandLineArguments");
 
 }

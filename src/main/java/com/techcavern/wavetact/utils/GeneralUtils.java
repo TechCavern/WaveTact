@@ -25,11 +25,11 @@ public class GeneralUtils {
                 for (Object e : spod.getContents()) {
                     if (e instanceof WAPlainText) {
                         waresults.add(((WAPlainText) e).getText().replaceAll("[|]", "").replaceAll("\n", ", ").replaceAll("  ", " "));
-                        }
                     }
-
-
                 }
+
+
+            }
         }
         return waresults;
 
@@ -60,26 +60,28 @@ public class GeneralUtils {
         WAQueryResult queryResult = engine.performQuery(query);
         return StringUtils.join(queryResult.getDidYouMeans(), ",");
     }
-    public static long getMilliSeconds(String input){
-        if(input.toLowerCase().endsWith("h")){
-            return Integer.parseInt(input.replace("h", ""))*60*60*1000;
-        }else if(input.toLowerCase().endsWith("m")){
-            return Integer.parseInt(input.replace("m", ""))*60*1000;
 
-        }else if(input.toLowerCase().endsWith("d")){
-            return Integer.parseInt(input.replace("d", ""))*24*60*60*1000;
+    public static long getMilliSeconds(String input) {
+        if (input.toLowerCase().endsWith("h")) {
+            return Integer.parseInt(input.replace("h", "")) * 60 * 60 * 1000;
+        } else if (input.toLowerCase().endsWith("m")) {
+            return Integer.parseInt(input.replace("m", "")) * 60 * 1000;
 
-        }else if(input.toLowerCase().endsWith("w")){
-            return Integer.parseInt(input.replace("w", ""))*7*24*60*60*1000;
+        } else if (input.toLowerCase().endsWith("d")) {
+            return Integer.parseInt(input.replace("d", "")) * 24 * 60 * 60 * 1000;
 
-        }else if(input.toLowerCase().endsWith("s")){
-            return Integer.parseInt(input.replace("s", ""))*1000;
+        } else if (input.toLowerCase().endsWith("w")) {
+            return Integer.parseInt(input.replace("w", "")) * 7 * 24 * 60 * 60 * 1000;
 
-        }else{
+        } else if (input.toLowerCase().endsWith("s")) {
+            return Integer.parseInt(input.replace("s", "")) * 1000;
+
+        } else {
             return Integer.parseInt(input);
         }
     }
-    public static String[] toArray(String input){
+
+    public static String[] toArray(String input) {
         return StringUtils.split(input, " ");
     }
 
