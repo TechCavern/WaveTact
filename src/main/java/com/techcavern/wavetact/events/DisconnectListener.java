@@ -9,7 +9,7 @@ public class DisconnectListener extends ListenerAdapter<PircBotX> {
 
     public void onDisconnect(DisconnectEvent<PircBotX> event) throws Exception{
         event.getBot().stopBotReconnect();
-        event.getBot().sendIRC().quitServer();
+//        event.getBot().sendIRC().quitServer();
         Thread.sleep(20000);
         event.getBot().startBot();
     }
