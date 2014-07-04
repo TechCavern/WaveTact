@@ -7,7 +7,7 @@ package com.techcavern.wavetact.events;
 
 import com.techcavern.wavetact.objects.Command;
 import com.techcavern.wavetact.utils.GeneralRegistry;
-import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.PermUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.pircbotx.PircBotX;
@@ -27,7 +27,7 @@ public class MessageListener extends ListenerAdapter<PircBotX> {
             Command Command = GeneralRegistry.Commands.get(i);
             for(int c = 0; c < Command.getCommandID().length; c++){
                 String CommandID = Command.getCommandID()[c];
-                if (m.equalsIgnoreCase(IRCUtils.getCommandChar(event.getBot()) + CommandID)) {
+                if (m.equalsIgnoreCase(GetUtils.getCommandChar(event.getBot()) + CommandID)) {
                     if (PermUtils.getPermLevel(event.getBot(), event.getUser(), event.getChannel()) >= Command.getPermLevel()) {
                         if (Command.getPermLevel() == 9) {
                             if (event.getChannel().isOp(event.getBot().getUserBot()) || event.getChannel().isOwner(event.getBot().getUserBot())) {

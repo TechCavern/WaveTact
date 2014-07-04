@@ -35,17 +35,17 @@ public class GeneralUtils {
 
     }
 
-    public static String buildMessage(int g, int p, String[] args) {
+    public static String buildMessage(int startint, int finishint, String[] args) {
         StringBuilder builder = new StringBuilder();
-        for (int i = g; i < p; i++) {
+        for (int i = startint; i < finishint; i++) {
             builder.append(args[i]);
             builder.append(' ');
         }
         return builder.toString().trim();
     }
 
-    public static JsonObject getJsonObject(String s) throws Exception {
-        URL h = new URL(s);
+    public static JsonObject getJsonObject(String url) throws Exception {
+        URL h = new URL(url);
         BufferedReader f = new BufferedReader(new InputStreamReader(h.openStream()));
         String g = f.readLine().replaceAll("\n", " ");
         return new JsonParser().parse(g).getAsJsonObject();
@@ -60,27 +60,27 @@ public class GeneralUtils {
         WAQueryResult queryResult = engine.performQuery(query);
         return StringUtils.join(queryResult.getDidYouMeans(), ",");
     }
-    public static long getMilliSeconds(String c){
-        if(c.toLowerCase().endsWith("h")){
-            return Integer.parseInt(c.replace("h", ""))*60*60*1000;
-        }else if(c.toLowerCase().endsWith("m")){
-            return Integer.parseInt(c.replace("m", ""))*60*1000;
+    public static long getMilliSeconds(String input){
+        if(input.toLowerCase().endsWith("h")){
+            return Integer.parseInt(input.replace("h", ""))*60*60*1000;
+        }else if(input.toLowerCase().endsWith("m")){
+            return Integer.parseInt(input.replace("m", ""))*60*1000;
 
-        }else if(c.toLowerCase().endsWith("d")){
-            return Integer.parseInt(c.replace("d", ""))*24*60*60*1000;
+        }else if(input.toLowerCase().endsWith("d")){
+            return Integer.parseInt(input.replace("d", ""))*24*60*60*1000;
 
-        }else if(c.toLowerCase().endsWith("w")){
-            return Integer.parseInt(c.replace("w", ""))*7*24*60*60*1000;
+        }else if(input.toLowerCase().endsWith("w")){
+            return Integer.parseInt(input.replace("w", ""))*7*24*60*60*1000;
 
-        }else if(c.toLowerCase().endsWith("s")){
-            return Integer.parseInt(c.replace("s", ""))*1000;
+        }else if(input.toLowerCase().endsWith("s")){
+            return Integer.parseInt(input.replace("s", ""))*1000;
 
         }else{
-            return Integer.parseInt(c);
+            return Integer.parseInt(input);
         }
     }
-    public static String[] toArray(String i){
-        return StringUtils.split(i, " ");
+    public static String[] toArray(String input){
+        return StringUtils.split(input, " ");
     }
 
 }

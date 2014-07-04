@@ -8,7 +8,8 @@ package com.techcavern.wavetact.commands.chanop;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.objects.Command;
 import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.GetUtils;
+import com.techcavern.wavetact.utils.LoadUtils;
 import org.pircbotx.UserLevel;
 import org.pircbotx.hooks.events.MessageEvent;
 
@@ -24,18 +25,18 @@ public class Kick extends Command {
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
 
-        if (event.getChannel().getUserLevels(event.getBot().getUserBot()).contains(UserLevel.OP) && !event.getChannel().isOwner(IRCUtils.getUserByNick(event.getChannel(), args[0])) && !event.getChannel().isSuperOp(IRCUtils.getUserByNick(event.getChannel(), args[0]))) {
+        if (event.getChannel().getUserLevels(event.getBot().getUserBot()).contains(UserLevel.OP) && !event.getChannel().isOwner(GetUtils.getUserByNick(event.getChannel(), args[0])) && !event.getChannel().isSuperOp(GetUtils.getUserByNick(event.getChannel(), args[0]))) {
             if (args.length > 1) {
-                event.getChannel().send().kick(IRCUtils.getUserByNick(event.getChannel(), args[0]), args[1]);
+                event.getChannel().send().kick(GetUtils.getUserByNick(event.getChannel(), args[0]), args[1]);
             } else {
-                event.getChannel().send().kick(IRCUtils.getUserByNick(event.getChannel(), args[0]));
+                event.getChannel().send().kick(GetUtils.getUserByNick(event.getChannel(), args[0]));
 
             }
         } else if (event.getChannel().getUserLevels(event.getBot().getUserBot()).contains(UserLevel.OWNER)) {
             if (args.length > 1) {
-                event.getChannel().send().kick(IRCUtils.getUserByNick(event.getChannel(), args[0]), args[1]);
+                event.getChannel().send().kick(GetUtils.getUserByNick(event.getChannel(), args[0]), args[1]);
             } else {
-                event.getChannel().send().kick(IRCUtils.getUserByNick(event.getChannel(), args[0]));
+                event.getChannel().send().kick(GetUtils.getUserByNick(event.getChannel(), args[0]));
 
             }
         } else {

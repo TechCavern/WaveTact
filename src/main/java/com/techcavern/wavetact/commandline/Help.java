@@ -18,7 +18,6 @@ public class Help extends CommandLine
     @Override
     public void doAction(String [] args)
     {
-
         System.out.println("Help");
         for (CommandLine c : GeneralRegistry.CommandLines)
         {

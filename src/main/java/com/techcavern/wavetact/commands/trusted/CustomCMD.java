@@ -10,9 +10,7 @@ import com.techcavern.wavetact.objects.Command;
 import com.techcavern.wavetact.objects.CommandType;
 import com.techcavern.wavetact.objects.SimpleAction;
 import com.techcavern.wavetact.objects.SimpleMessage;
-import com.techcavern.wavetact.utils.GeneralRegistry;
-import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.*;
 import org.pircbotx.hooks.events.MessageEvent;
 
 /**
@@ -52,24 +50,24 @@ public class CustomCMD extends Command {
 
 
     private void addCommand(MessageEvent<?> event, CommandType type, int accessLevel, String cmd, String msg) {
-        if (IRCUtils.getCommand(cmd) != null) {
+        if (GetUtils.getCommand(cmd) != null) {
             event.respond("Command already exists");
             return;
         }
         if (type == CommandType.ACTION) {
             GeneralRegistry.SimpleActions.add(new SimpleAction(cmd, accessLevel, msg, false));
-            IRCUtils.saveSimpleActions();
+            SaveUtils.saveSimpleActions();
         } else if (type == CommandType.MESSAGE) {
             GeneralRegistry.SimpleMessages.add(new SimpleMessage(cmd, accessLevel, msg, false));
-            IRCUtils.saveSimpleMessages();
+            SaveUtils.saveSimpleMessages();
         }
         event.respond("Command added");
     }
 
     @SuppressWarnings("SuspiciousMethodCalls")
     private void modifyCommand(MessageEvent<?> event, CommandType type, int accessLevel, String command, String msg) {
-        if (IRCUtils.getCommand(command) != null) {
-            Command cmd = IRCUtils.getCommand(command);
+        if (GetUtils.getCommand(command) != null) {
+            Command cmd = GetUtils.getCommand(command);
             GeneralRegistry.Commands.remove(cmd);
             GeneralRegistry.SimpleActions.remove(cmd);
             GeneralRegistry.SimpleMessages.remove(cmd);
@@ -77,10 +75,10 @@ public class CustomCMD extends Command {
 
         if (type == CommandType.ACTION) {
             GeneralRegistry.SimpleActions.add(new SimpleAction(command, accessLevel, msg, false));
-            IRCUtils.saveSimpleActions();
+            SaveUtils.saveSimpleActions();
         } else if (type == CommandType.MESSAGE) {
             GeneralRegistry.SimpleMessages.add(new SimpleMessage(command, accessLevel, msg, false));
-            IRCUtils.saveSimpleMessages();
+            SaveUtils.saveSimpleMessages();
 
         }
         event.respond("Command modified");
@@ -90,9 +88,9 @@ public class CustomCMD extends Command {
     private void removeCommand(MessageEvent<?> event, CommandType type, String command) {
         Command cmd = null;
         if (type == CommandType.MESSAGE)
-            cmd = IRCUtils.getSimpleMessage(command);
+            cmd = GetUtils.getSimpleMessage(command);
         else if (type == CommandType.ACTION)
-            cmd = IRCUtils.getSimpleAction(command);
+            cmd = GetUtils.getSimpleAction(command);
 
         if (cmd == null) {
             event.respond("Command does not exist");
@@ -101,11 +99,11 @@ public class CustomCMD extends Command {
         } else {
             if (type == CommandType.MESSAGE) {
                 GeneralRegistry.SimpleMessages.remove(cmd);
-                IRCUtils.saveSimpleMessages();
+                SaveUtils.saveSimpleMessages();
 
             } else if (type == CommandType.ACTION) {
                 GeneralRegistry.SimpleActions.remove(cmd);
-                IRCUtils.saveSimpleActions();
+                SaveUtils.saveSimpleActions();
             }
             GeneralRegistry.Commands.remove(cmd);
 

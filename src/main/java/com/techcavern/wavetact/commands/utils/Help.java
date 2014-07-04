@@ -3,7 +3,7 @@ package com.techcavern.wavetact.commands.utils;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.objects.Command;
 import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.GetUtils;
 import org.pircbotx.hooks.events.MessageEvent;
 import org.apache.commons.lang3.StringUtils;
 
@@ -21,8 +21,8 @@ public class Help extends Command {
             if (args[0].equalsIgnoreCase("permissions")) {
                 event.respond("0 = Everyone, 5 = Voiced & Half-opped, 10 = Opped & Protected, 15 = Ownered, 9001 = Controller ");
             } else {
-                event.respond("aliases: " + StringUtils.join(Arrays.asList(IRCUtils.getCommand(args[0]).getCommandID()), " "));
-                event.respond(IRCUtils.getCommand(args[0]).getDesc());
+                event.respond("aliases: " + StringUtils.join(Arrays.asList(GetUtils.getCommand(args[0]).getCommandID()), " "));
+                event.respond(GetUtils.getCommand(args[0]).getDesc());
             }
         } else {
             event.respond("help [command] - Generally a + before something means editing it, and a - means removing it. None means adding it. - Time is in [time](s/m/h/d) format, IRCd is specified with c for Charybdis, u for Unreal, and i for inspircd.\n");

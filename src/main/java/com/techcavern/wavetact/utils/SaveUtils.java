@@ -10,6 +10,8 @@ package com.techcavern.wavetact.utils;
  * @author jztech101
  */
 
+import com.techcavern.wavetact.objects.JSONFile;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -18,7 +20,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
-class SaveUtils {
+public class SaveUtils {
 
     public static String readTextFile(String filename) {
         return readTextFile(new File(filename));
@@ -102,6 +104,42 @@ class SaveUtils {
             e.printStackTrace();
             System.out.println("Adding to file " + file.getName() + " failed! Aborting shut down...");
             return false;
+        }
+    }
+
+    public static void saveSimpleActions() {
+        JSONFile file = new JSONFile("SimpleActions.json");
+        try {
+            file.write(GeneralRegistry.SimpleActions);
+        } catch (IOException e) {
+            ErrorUtils.handleException(e);
+        }
+    }
+
+    public static void saveBanTimes() {
+        JSONFile file = new JSONFile("BanTimes.json");
+        try {
+            file.write(GeneralRegistry.BanTimes);
+        } catch (IOException e) {
+            ErrorUtils.handleException(e);
+        }
+    }
+
+    public static void saveQuietTimes() {
+        JSONFile file = new JSONFile("BanTimes.json");
+        try {
+            file.write(GeneralRegistry.QuietTimes);
+        } catch (IOException e) {
+            ErrorUtils.handleException(e);
+        }
+    }
+
+    public static void saveSimpleMessages() {
+        JSONFile file = new JSONFile("SimpleMessages.json");
+        try {
+            file.write(GeneralRegistry.SimpleMessages);
+        } catch (IOException e) {
+            ErrorUtils.handleException(e);
         }
     }
 }

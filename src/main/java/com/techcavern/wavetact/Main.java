@@ -2,7 +2,7 @@ package com.techcavern.wavetact;
 
 import com.techcavern.wavetact.utils.CommandLineUtils;
 import com.techcavern.wavetact.utils.GeneralRegistry;
-import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.LoadUtils;
 
 import org.slf4j.impl.SimpleLogger;
 
@@ -16,11 +16,11 @@ public class Main {
         System.setProperty(SimpleLogger.LEVEL_IN_BRACKETS_KEY, "true");
         CommandLineUtils.initializeCommandlines();
         CommandLineUtils.parseCommandLineArguments(args);
-        IRCUtils.registerCommands();
-        IRCUtils.registerDevServer();
-        IRCUtils.loadSimpleActions();
-        IRCUtils.loadSimpleMessages();
-        IRCUtils.startThreads();
+        LoadUtils.registerCommands();
+        LoadUtils.registerDevServer();
+        LoadUtils.loadSimpleActions();
+        LoadUtils.loadSimpleMessages();
+        LoadUtils.startThreads();
         GeneralRegistry.WaveTact.start();
     }
 }

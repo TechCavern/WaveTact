@@ -8,7 +8,8 @@ package com.techcavern.wavetact.commands.chanop;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.objects.Command;
 import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.GetUtils;
+import com.techcavern.wavetact.utils.LoadUtils;
 import org.pircbotx.hooks.events.MessageEvent;
 
 
@@ -27,9 +28,9 @@ public class Voice extends Command {
             if (args[0].equalsIgnoreCase("-")) {
                 event.getChannel().send().deVoice(event.getUser());
             } else if (args[0].startsWith("-")) {
-                event.getChannel().send().deVoice(IRCUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", "")));
+                event.getChannel().send().deVoice(GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", "")));
             } else {
-                event.getChannel().send().voice(IRCUtils.getUserByNick(event.getChannel(), args[0]));
+                event.getChannel().send().voice(GetUtils.getUserByNick(event.getChannel(), args[0]));
 
             }
         } else {

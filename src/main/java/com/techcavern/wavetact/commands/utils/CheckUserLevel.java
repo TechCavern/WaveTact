@@ -3,7 +3,8 @@ package com.techcavern.wavetact.commands.utils;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.objects.Command;
 import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.GetUtils;
+import com.techcavern.wavetact.utils.LoadUtils;
 import com.techcavern.wavetact.utils.PermUtils;
 import org.pircbotx.User;
 import org.pircbotx.hooks.events.MessageEvent;
@@ -21,7 +22,7 @@ public class CheckUserLevel extends Command {
         if(args.length < 1){
             u = event.getUser();
         }else{
-            u = IRCUtils.getUserByNick(event.getChannel(),args[0]);
+            u = GetUtils.getUserByNick(event.getChannel(), args[0]);
         }
 
         int i = PermUtils.getPermLevel(event.getBot(), u, event.getChannel());

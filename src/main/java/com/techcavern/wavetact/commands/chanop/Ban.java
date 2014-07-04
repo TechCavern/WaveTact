@@ -3,9 +3,7 @@ package com.techcavern.wavetact.commands.chanop;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.objects.Command;
 import com.techcavern.wavetact.objects.UTime;
-import com.techcavern.wavetact.utils.GeneralRegistry;
-import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.*;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.events.MessageEvent;
@@ -24,48 +22,48 @@ public class Ban extends Command {
             h = args[0];
         }else{
             if(args[0].startsWith("+"))
-                h=IRCUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("\\+", "")).getHostmask();
+                h= GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("\\+", "")).getHostmask();
             else if(args[0].startsWith("-"))
-                h=IRCUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", "")).getHostmask();
+                h= GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", "")).getHostmask();
             else
-                h=IRCUtils.getUserByNick(event.getChannel(), args[0]).getHostmask();
+                h= GetUtils.getUserByNick(event.getChannel(), args[0]).getHostmask();
         }
         if ((!args[0].startsWith("-")) && (!args[0].startsWith("+"))) {
 
-            if (IRCUtils.getBanTime(h) == null) {
+            if (GetUtils.getBanTime(h) == null) {
 
                 if (args.length == 2) {
                     ban(h,event.getChannel(), event.getBot());
                     UTime c = new UTime(h, event.getBot().getServerInfo().getNetwork(),"b", event.getChannel().getName(), GeneralUtils.getMilliSeconds(args[1]) + System.currentTimeMillis());
                     GeneralRegistry.BanTimes.add(c);
-                    IRCUtils.saveBanTimes();
+                    SaveUtils.saveBanTimes();
 
                 } else if (args.length < 2) {
                     ban(h, event.getChannel(), event.getBot());
                     UTime c = new UTime(h, event.getBot().getServerInfo().getNetwork(), "b", event.getChannel().getName(), GeneralUtils.getMilliSeconds("7w") + System.currentTimeMillis());
                     GeneralRegistry.BanTimes.add(c);
-                    IRCUtils.saveBanTimes();
+                    SaveUtils.saveBanTimes();
                 }
             } else {
                 event.getChannel().send().message("Ban already exists!");
             }
         } else {
-            if (IRCUtils.getBanTime(h) != null) {
+            if (GetUtils.getBanTime(h) != null) {
                 if (args[0].startsWith("-")) {
-                    IRCUtils.getBanTime(h).setTime(0);
-                    IRCUtils.saveBanTimes();
+                    GetUtils.getBanTime(h).setTime(0);
+                    SaveUtils.saveBanTimes();
 
                 } else if (args[0].startsWith("+")) {
                     if(args[1].startsWith("+")) {
-                        IRCUtils.getBanTime(h).setTime(IRCUtils.getBanTime(h).getTime() + GeneralUtils.getMilliSeconds(args[1].replace("+", "")));
+                        GetUtils.getBanTime(h).setTime(GetUtils.getBanTime(h).getTime() + GeneralUtils.getMilliSeconds(args[1].replace("+", "")));
                         }else
                         if(args[1].startsWith("-")) {
-                            IRCUtils.getBanTime(h).setTime(IRCUtils.getBanTime(h).getTime() - GeneralUtils.getMilliSeconds(args[1].replace("-", "")));
+                            GetUtils.getBanTime(h).setTime(GetUtils.getBanTime(h).getTime() - GeneralUtils.getMilliSeconds(args[1].replace("-", "")));
                         }else{
-                            IRCUtils.getBanTime(h).setTime(GeneralUtils.getMilliSeconds(args[1].replace("-", "")));
+                            GetUtils.getBanTime(h).setTime(GeneralUtils.getMilliSeconds(args[1].replace("-", "")));
                         }
                         event.getChannel().send().message("Ban Modified");
-                        IRCUtils.saveBanTimes();
+                        SaveUtils.saveBanTimes();
                     } else {
                     event.getChannel().send().message("Ban does not exist!");
                 }

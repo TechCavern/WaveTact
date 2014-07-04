@@ -8,7 +8,8 @@ package com.techcavern.wavetact.commands.controller;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.objects.Command;
 import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.GetUtils;
+import com.techcavern.wavetact.utils.SaveUtils;
 import org.pircbotx.hooks.events.MessageEvent;
 
 /**
@@ -25,24 +26,24 @@ public class Lock extends Command {
             throws Exception {
         if (args[0].equalsIgnoreCase("a")) {
             if (args[1].startsWith("-")) {
-                IRCUtils.getSimpleAction(args[1].replaceFirst("-", "")).unlock();
-                IRCUtils.saveSimpleActions();
+                GetUtils.getSimpleAction(args[1].replaceFirst("-", "")).unlock();
+                SaveUtils.saveSimpleActions();
                 event.getChannel().send().message("Command Unlocked");
             } else {
-                IRCUtils.getSimpleAction(args[1].replaceFirst("-", "")).lock();
-                IRCUtils.saveSimpleActions();
+                GetUtils.getSimpleAction(args[1].replaceFirst("-", "")).lock();
+                SaveUtils.saveSimpleActions();
                 event.getChannel().send().message("Command locked");
 
             }
         } else if (args[0].equalsIgnoreCase("m")) {
             if (args[1].startsWith("-")) {
-                IRCUtils.getSimpleMessage(args[1].replaceFirst("-", "")).unlock();
-                IRCUtils.saveSimpleMessages();
+                GetUtils.getSimpleMessage(args[1].replaceFirst("-", "")).unlock();
+                SaveUtils.saveSimpleMessages();
                 event.getChannel().send().message("Command Unlocked");
 
             } else {
-                IRCUtils.getSimpleMessage(args[1].replaceFirst("-", "")).lock();
-                IRCUtils.saveSimpleMessages();
+                GetUtils.getSimpleMessage(args[1].replaceFirst("-", "")).lock();
+                SaveUtils.saveSimpleMessages();
                 event.getChannel().send().message("Command locked");
 
             }
