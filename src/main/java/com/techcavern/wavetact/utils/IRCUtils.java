@@ -26,6 +26,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -194,7 +195,8 @@ public class IRCUtils {
             try {
                 List<LinkedTreeMap> actions = file.read(List.class);
                 GeneralRegistry.SimpleActions.clear();
-                GeneralRegistry.SimpleActions.addAll(actions.stream().map(act -> new SimpleAction((String) act.get("comid"),
+                GeneralRegistry.SimpleActions.addAll(actions.stream().map(act -> new SimpleAction(
+                        ((ArrayList<String>) act.get("comid")).get(0),
                         ((Double) act.get("PermLevel")).intValue(),
                         (String) act.get("action"),
                         (Boolean) act.get("locked"))).collect(Collectors.toList()));
@@ -271,7 +273,8 @@ public class IRCUtils {
                 List<LinkedTreeMap> messages = file.read();
                 GeneralRegistry.SimpleMessages.clear();
 
-                GeneralRegistry.SimpleMessages.addAll(messages.stream().map(msg -> new SimpleMessage((String) msg.get("comid"),
+                GeneralRegistry.SimpleMessages.addAll(messages.stream().map(msg -> new SimpleMessage(
+                        ((ArrayList<String>) msg.get("comid")).get(0),
                         ((Double) msg.get("PermLevel")).intValue(),
                         (String) msg.get("message"),
                         (Boolean) msg.get("locked"))).collect(Collectors.toList()));
