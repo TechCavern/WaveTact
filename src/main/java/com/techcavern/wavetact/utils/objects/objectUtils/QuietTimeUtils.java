@@ -3,7 +3,7 @@ package com.techcavern.wavetact.utils.objects.objectUtils;
 import com.google.gson.internal.LinkedTreeMap;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralRegistry;
-import com.techcavern.wavetact.utils.objects.JSONFile;
+import com.techcavern.wavetact.utils.fileUtils.JSONFile;
 import com.techcavern.wavetact.utils.objects.UTime;
 
 import java.io.FileNotFoundException;

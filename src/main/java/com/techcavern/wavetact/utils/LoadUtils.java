@@ -25,10 +25,8 @@ import org.pircbotx.Configuration.Builder;
 import org.pircbotx.PircBotX;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.nio.charset.Charset;
 import java.util.*;
-import java.util.stream.Collectors;
 
 //import com.techcavern.wavetact.Commands.Commands.TestCommand;
 
@@ -65,12 +63,12 @@ public class LoadUtils {
         serversFolder.mkdir();
         File[] files = serversFolder.listFiles();
         String name;
-        com.techcavern.wavetact.utils.Configuration config;
+        com.techcavern.wavetact.utils.fileUtils.Configuration config;
         for (File f : files) {
             if (!f.isDirectory()) {
                 name = f.getName();
                 name = name.substring(0, f.getName().lastIndexOf('.'));
-                config = new com.techcavern.wavetact.utils.Configuration(f);
+                config = new com.techcavern.wavetact.utils.fileUtils.Configuration(f);
                 GeneralRegistry.configs.put(name, config);
             }
         }
@@ -78,7 +76,7 @@ public class LoadUtils {
         PircBotX bot;
         LinkedList<String> chans = new LinkedList<String>();
         String nsPass;
-        for (com.techcavern.wavetact.utils.Configuration c : GeneralRegistry.configs.values()) {
+        for (com.techcavern.wavetact.utils.fileUtils.Configuration c : GeneralRegistry.configs.values()) {
             Collections.addAll(chans, c.getString("channels").split(", "));
             if (c.getString("nickserv").equalsIgnoreCase("False")) {
                 nsPass = null;
