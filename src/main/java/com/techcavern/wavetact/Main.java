@@ -2,6 +2,8 @@ package com.techcavern.wavetact;
 
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.LoadUtils;
+import com.techcavern.wavetact.utils.objects.objectUtils.SimpleActionUtils;
+import com.techcavern.wavetact.utils.objects.objectUtils.SimpleMessageUtils;
 import org.slf4j.impl.SimpleLogger;
 
 @SuppressWarnings("ConstantConditions")
@@ -15,8 +17,8 @@ public class Main {
         LoadUtils.initializeCommandlines();
         LoadUtils.parseCommandLineArguments(args);
         LoadUtils.registerCommands();
-        LoadUtils.loadSimpleActions();
-        LoadUtils.loadSimpleMessages();
+        SimpleActionUtils.loadSimpleActions();
+        SimpleMessageUtils.loadSimpleMessages();
         LoadUtils.startThreads();
         GeneralRegistry.WaveTact.start();
     }

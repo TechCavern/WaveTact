@@ -8,12 +8,13 @@ package com.techcavern.wavetact.commands.trusted;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.utils.objects.Command;
 import com.techcavern.wavetact.utils.objects.CommandType;
+import com.techcavern.wavetact.utils.objects.objectUtils.SimpleActionUtils;
+import com.techcavern.wavetact.utils.objects.objectUtils.SimpleMessageUtils;
 import com.techcavern.wavetact.utils.objects.SimpleAction;
 import com.techcavern.wavetact.utils.objects.SimpleMessage;
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
-import com.techcavern.wavetact.utils.SaveUtils;
 import org.pircbotx.hooks.events.MessageEvent;
 
 /**
@@ -59,10 +60,10 @@ public class CustomCMD extends Command {
         }
         if (type == CommandType.ACTION) {
             GeneralRegistry.SimpleActions.add(new SimpleAction(cmd, accessLevel, msg, false));
-            SaveUtils.saveSimpleActions();
+            SimpleActionUtils.saveSimpleActions();
         } else if (type == CommandType.MESSAGE) {
             GeneralRegistry.SimpleMessages.add(new SimpleMessage(cmd, accessLevel, msg, false));
-            SaveUtils.saveSimpleMessages();
+            SimpleMessageUtils.saveSimpleMessages();
         }
         event.respond("Command added");
     }
@@ -78,10 +79,10 @@ public class CustomCMD extends Command {
 
         if (type == CommandType.ACTION) {
             GeneralRegistry.SimpleActions.add(new SimpleAction(command, accessLevel, msg, false));
-            SaveUtils.saveSimpleActions();
+            SimpleActionUtils.saveSimpleActions();
         } else if (type == CommandType.MESSAGE) {
             GeneralRegistry.SimpleMessages.add(new SimpleMessage(command, accessLevel, msg, false));
-            SaveUtils.saveSimpleMessages();
+            SimpleMessageUtils.saveSimpleMessages();
 
         }
         event.respond("Command modified");
@@ -102,11 +103,11 @@ public class CustomCMD extends Command {
         } else {
             if (type == CommandType.MESSAGE) {
                 GeneralRegistry.SimpleMessages.remove(cmd);
-                SaveUtils.saveSimpleMessages();
+                SimpleMessageUtils.saveSimpleMessages();
 
             } else if (type == CommandType.ACTION) {
                 GeneralRegistry.SimpleActions.remove(cmd);
-                SaveUtils.saveSimpleActions();
+                SimpleActionUtils.saveSimpleActions();
             }
             GeneralRegistry.Commands.remove(cmd);
 

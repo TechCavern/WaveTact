@@ -105,24 +105,6 @@ public class LoadUtils {
         (new Thread(new CheckTime())).start();
     }
 
-    @SuppressWarnings("unchecked")
-    public static void loadSimpleActions() {
-        JSONFile file = new JSONFile("SimpleActions.json");
-        if (file.exists()) {
-            try {
-                List<LinkedTreeMap> actions = file.read(List.class);
-                GeneralRegistry.SimpleActions.clear();
-                GeneralRegistry.SimpleActions.addAll(actions.stream().map(act -> new SimpleAction(
-                        ((ArrayList<String>) act.get("comid")).get(0),
-                        ((Double) act.get("PermLevel")).intValue(),
-                        (String) act.get("action"),
-                        (Boolean) act.get("locked"))).collect(Collectors.toList()));
-            } catch (FileNotFoundException e) {
-                ErrorUtils.handleException(e);
-            }
-        }
-    }
-
     public static void registerCommands() {
         /**
          try{
@@ -164,60 +146,6 @@ public class LoadUtils {
 
     }
 
-    @SuppressWarnings("unchecked")
-    public static void loadSimpleMessages() {
-        JSONFile file = new JSONFile("SimpleMessages.json");
-        if (file.exists()) {
-            try {
-                List<LinkedTreeMap> messages = file.read();
-                GeneralRegistry.SimpleMessages.clear();
-
-                GeneralRegistry.SimpleMessages.addAll(messages.stream().map(msg -> new SimpleMessage(
-                        ((ArrayList<String>) msg.get("comid")).get(0),
-                        ((Double) msg.get("PermLevel")).intValue(),
-                        (String) msg.get("message"),
-                        (Boolean) msg.get("locked"))).collect(Collectors.toList()));
-            } catch (FileNotFoundException e) {
-                ErrorUtils.handleException(e);
-            }
-        }
-    }
-
-    @SuppressWarnings("unchecked")
-    public static void loadBanTimes() {
-        JSONFile file = new JSONFile("BanTimes.json");
-        if (file.exists()) {
-            try {
-                List<LinkedTreeMap> actions = file.read(List.class);
-                GeneralRegistry.BanTimes.clear();
-                GeneralRegistry.BanTimes.addAll(actions.stream().map(act -> new UTime((String) act.get("hostmask"),
-                        (String) act.get("network"),
-                        (String) act.get("type"),
-                        (String) act.get("channel"),
-                        ((Double) act.get("time")).longValue())).collect(Collectors.toList()));
-            } catch (FileNotFoundException e) {
-                ErrorUtils.handleException(e);
-            }
-        }
-    }
-
-    @SuppressWarnings("unchecked")
-    public static void loadQuietTimes() {
-        JSONFile file = new JSONFile("QuietTimes.json");
-        if (file.exists()) {
-            try {
-                List<LinkedTreeMap> actions = file.read(List.class);
-                GeneralRegistry.QuietTimes.clear();
-                GeneralRegistry.QuietTimes.addAll(actions.stream().map(act -> new UTime((String) act.get("hostmask"),
-                        (String) act.get("network"),
-                        (String) act.get("type"),
-                        (String) act.get("channel"),
-                        ((Double) act.get("time")).longValue())).collect(Collectors.toList()));
-            } catch (FileNotFoundException e) {
-                ErrorUtils.handleException(e);
-            }
-        }
-    }
     public static void initializeCommandlines() {
         //TODO Fix this to work with @CMDLine once @CMD is fixed
         GeneralRegistry.CommandLines.add(new AddServer());

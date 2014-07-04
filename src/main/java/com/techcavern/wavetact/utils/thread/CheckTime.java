@@ -1,5 +1,7 @@
 package com.techcavern.wavetact.utils.thread;
 
+import com.techcavern.wavetact.utils.objects.objectUtils.BanTimeUtils;
+import com.techcavern.wavetact.utils.objects.objectUtils.QuietTimeUtils;
 import com.techcavern.wavetact.utils.objects.UTime;
 import com.techcavern.wavetact.utils.*;
 import org.pircbotx.PircBotX;
@@ -17,8 +19,8 @@ public class CheckTime implements Runnable {
                 TimeUnit.SECONDS.sleep(5);
                 try {
                     if (!loaded) {
-                        LoadUtils.loadBanTimes();
-                        LoadUtils.loadQuietTimes();
+                        BanTimeUtils.loadBanTimes();
+                        QuietTimeUtils.loadQuietTimes();
                         loaded = true;
                     }
                 } catch (NullPointerException ignored) {
@@ -34,7 +36,7 @@ public class CheckTime implements Runnable {
                             PircBotX botObject = GetUtils.getBotByNetwork(utimeObject.getNetworkName());
                             IRCUtils.setMode(GetUtils.getChannelbyName(botObject, utimeObject.getChannelName()), botObject, "-b ", utimeObject.getHostmask());
                             GeneralRegistry.BanTimes.remove(utimeObject);
-                            SaveUtils.saveBanTimes();
+                            BanTimeUtils.saveBanTimes();
                         }
                     } catch (IllegalArgumentException | NullPointerException e) {
                         // ignored
@@ -58,7 +60,7 @@ public class CheckTime implements Runnable {
                                     break;
                             }
                             GeneralRegistry.QuietTimes.remove(utimeObject);
-                            SaveUtils.saveQuietTimes();
+                            QuietTimeUtils.saveQuietTimes();
                         }
                     } catch (IllegalArgumentException | NullPointerException e) {
                         // ignored

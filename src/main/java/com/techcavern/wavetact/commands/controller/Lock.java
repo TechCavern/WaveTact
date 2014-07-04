@@ -9,7 +9,8 @@ import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.utils.objects.Command;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
-import com.techcavern.wavetact.utils.SaveUtils;
+import com.techcavern.wavetact.utils.objects.objectUtils.SimpleActionUtils;
+import com.techcavern.wavetact.utils.objects.objectUtils.SimpleMessageUtils;
 import org.pircbotx.hooks.events.MessageEvent;
 
 /**
@@ -27,23 +28,23 @@ public class Lock extends Command {
         if (args[0].equalsIgnoreCase("a")) {
             if (args[1].startsWith("-")) {
                 GetUtils.getSimpleAction(args[1].replaceFirst("-", "")).unlock();
-                SaveUtils.saveSimpleActions();
+                SimpleActionUtils.saveSimpleActions();
                 event.getChannel().send().message("Command Unlocked");
             } else {
                 GetUtils.getSimpleAction(args[1].replaceFirst("-", "")).lock();
-                SaveUtils.saveSimpleActions();
+                SimpleActionUtils.saveSimpleActions();
                 event.getChannel().send().message("Command locked");
 
             }
         } else if (args[0].equalsIgnoreCase("m")) {
             if (args[1].startsWith("-")) {
                 GetUtils.getSimpleMessage(args[1].replaceFirst("-", "")).unlock();
-                SaveUtils.saveSimpleMessages();
+                SimpleMessageUtils.saveSimpleMessages();
                 event.getChannel().send().message("Command Unlocked");
 
             } else {
                 GetUtils.getSimpleMessage(args[1].replaceFirst("-", "")).lock();
-                SaveUtils.saveSimpleMessages();
+                SimpleMessageUtils.saveSimpleMessages();
                 event.getChannel().send().message("Command locked");
 
             }

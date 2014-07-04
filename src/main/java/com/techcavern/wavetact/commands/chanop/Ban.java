@@ -2,6 +2,7 @@ package com.techcavern.wavetact.commands.chanop;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.utils.objects.Command;
+import com.techcavern.wavetact.utils.objects.objectUtils.BanTimeUtils;
 import com.techcavern.wavetact.utils.objects.UTime;
 import com.techcavern.wavetact.utils.*;
 import org.pircbotx.Channel;
@@ -36,13 +37,13 @@ public class Ban extends Command {
                     ban(hostmask, event.getChannel(), event.getBot());
                     UTime utimeObject = new UTime(hostmask, event.getBot().getServerInfo().getNetwork(), "b", event.getChannel().getName(), GeneralUtils.getMilliSeconds(args[1]) + System.currentTimeMillis());
                     GeneralRegistry.BanTimes.add(utimeObject);
-                    SaveUtils.saveBanTimes();
+                    BanTimeUtils.saveBanTimes();
 
                 } else if (args.length < 2) {
                     ban(hostmask, event.getChannel(), event.getBot());
                     UTime utimeObject = new UTime(hostmask, event.getBot().getServerInfo().getNetwork(), "b", event.getChannel().getName(), GeneralUtils.getMilliSeconds("7w") + System.currentTimeMillis());
                     GeneralRegistry.BanTimes.add(utimeObject);
-                    SaveUtils.saveBanTimes();
+                    BanTimeUtils.saveBanTimes();
                 }
             } else {
                 event.getChannel().send().message("Ban already exists!");
@@ -51,7 +52,7 @@ public class Ban extends Command {
             if (GetUtils.getBanTime(hostmask) != null) {
                 if (args[0].startsWith("-")) {
                     GetUtils.getBanTime(hostmask).setTime(0);
-                    SaveUtils.saveBanTimes();
+                    BanTimeUtils.saveBanTimes();
 
                 } else if (args[0].startsWith("\\+")) {
                     if (args[1].startsWith("\\+")) {
@@ -62,7 +63,7 @@ public class Ban extends Command {
                         GetUtils.getBanTime(hostmask).setTime(GeneralUtils.getMilliSeconds(args[1].replace("-", "")));
                     }
                     event.getChannel().send().message("Ban Modified");
-                    SaveUtils.saveBanTimes();
+                    BanTimeUtils.saveBanTimes();
                 } else {
                     event.getChannel().send().message("Ban does not exist!");
                 }

@@ -107,39 +107,4 @@ public class SaveUtils {
         }
     }
 
-    public static void saveSimpleActions() {
-        JSONFile file = new JSONFile("SimpleActions.json");
-        try {
-            file.write(GeneralRegistry.SimpleActions);
-        } catch (IOException e) {
-            ErrorUtils.handleException(e);
-        }
-    }
-
-    public static void saveBanTimes() {
-        JSONFile file = new JSONFile("BanTimes.json");
-        try {
-            file.write(GeneralRegistry.BanTimes);
-        } catch (IOException e) {
-            ErrorUtils.handleException(e);
-        }
-    }
-
-    public static void saveQuietTimes() {
-        JSONFile file = new JSONFile("BanTimes.json");
-        try {
-            file.write(GeneralRegistry.QuietTimes);
-        } catch (IOException e) {
-            ErrorUtils.handleException(e);
-        }
-    }
-
-    public static void saveSimpleMessages() {
-        JSONFile file = new JSONFile("SimpleMessages.json");
-        try {
-            file.write(GeneralRegistry.SimpleMessages);
-        } catch (IOException e) {
-            ErrorUtils.handleException(e);
-        }
-    }
 }

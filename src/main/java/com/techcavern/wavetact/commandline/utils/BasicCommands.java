@@ -2,11 +2,12 @@ package com.techcavern.wavetact.commandline.utils;
 
 import com.techcavern.wavetact.annot.CMDLine;
 import com.techcavern.wavetact.utils.objects.CommandLine;
+import com.techcavern.wavetact.utils.objects.objectUtils.SimpleActionUtils;
+import com.techcavern.wavetact.utils.objects.objectUtils.SimpleMessageUtils;
 import com.techcavern.wavetact.utils.objects.SimpleAction;
 import com.techcavern.wavetact.utils.objects.SimpleMessage;
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.SaveUtils;
 
 
 public class BasicCommands extends CommandLine {
@@ -26,8 +27,8 @@ public class BasicCommands extends CommandLine {
         GeneralRegistry.SimpleMessages.add(ping);
         GeneralRegistry.SimpleMessages.add(pong);
         GeneralRegistry.SimpleMessages.add(source);
-        SaveUtils.saveSimpleActions();
-        SaveUtils.saveSimpleMessages();
+        SimpleActionUtils.saveSimpleActions();
+        SimpleMessageUtils.saveSimpleMessages();
         System.out.println("Basic Commands Added");
         System.exit(0);
 

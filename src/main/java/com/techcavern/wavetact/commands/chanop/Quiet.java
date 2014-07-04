@@ -2,6 +2,7 @@ package com.techcavern.wavetact.commands.chanop;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.utils.objects.Command;
+import com.techcavern.wavetact.utils.objects.objectUtils.QuietTimeUtils;
 import com.techcavern.wavetact.utils.objects.UTime;
 import com.techcavern.wavetact.utils.*;
 import org.pircbotx.Channel;
@@ -37,13 +38,13 @@ public class Quiet extends Command {
                             event.getChannel(), event.getBot());
                     UTime c = new UTime(hostmask, event.getBot().getServerInfo().getNetwork(), args[0], event.getChannel().getName(), GeneralUtils.getMilliSeconds(args[2]) + System.currentTimeMillis());
                     GeneralRegistry.QuietTimes.add(c);
-                    SaveUtils.saveQuietTimes();
+                    QuietTimeUtils.saveQuietTimes();
 
                 } else if (args.length < 3) {
                     quiet(hostmask, args[0], event.getChannel(), event.getBot());
                     UTime c = new UTime(hostmask, event.getBot().getServerInfo().getNetwork(), args[0], event.getChannel().getName(), GeneralUtils.getMilliSeconds("7w") + System.currentTimeMillis());
                     GeneralRegistry.QuietTimes.add(c);
-                    SaveUtils.saveQuietTimes();
+                    QuietTimeUtils.saveQuietTimes();
 
                 }
             } else {
@@ -53,7 +54,7 @@ public class Quiet extends Command {
             if (GetUtils.getQuietTime(hostmask) != null) {
                 if (args[1].startsWith("-")) {
                     GetUtils.getQuietTime(hostmask).setTime(0);
-                    SaveUtils.saveQuietTimes();
+                    QuietTimeUtils.saveQuietTimes();
                 } else if (args[1].startsWith("\\+")) {
                     if (args[1].startsWith("\\+")) {
                         GetUtils.getQuietTime(hostmask).setTime(GetUtils.getQuietTime(hostmask).getTime() + GeneralUtils.getMilliSeconds(args[2].replace("\\+", "")));
@@ -64,7 +65,7 @@ public class Quiet extends Command {
                         GetUtils.getQuietTime(hostmask).setTime(GeneralUtils.getMilliSeconds(args[2].replace("-", "")));
                     }
                     event.getChannel().send().message("Quiet Modified");
-                    SaveUtils.saveQuietTimes();
+                    QuietTimeUtils.saveQuietTimes();
                 } else {
                     event.getChannel().send().message("Quiet does not exist!");
                 }
