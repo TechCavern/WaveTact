@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.utils.debug;
+package com.techcavern.wavetact.utils.logUtils;
 
 import java.util.ArrayList;
 
