@@ -5,6 +5,7 @@
  */
 package com.techcavern.wavetact.utils.objects;
 
+import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.hooks.events.MessageEvent;
@@ -39,8 +40,13 @@ public class SimpleMessage extends Command {
         }
         dresponse = dresponse.replace("$*", GeneralUtils.buildMessage(i, args.length, args));
         event.getChannel().send().message(dresponse);
+        create();
 
 
+    }
+
+    void create(){
+        GeneralRegistry.Commands.add(this);
     }
 
     public String getMessage() {

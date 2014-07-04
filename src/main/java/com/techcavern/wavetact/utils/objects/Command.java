@@ -21,11 +21,6 @@ public abstract class Command {
         this.comid = comid;
         this.PermLevel = PermLevel;
         this.Desc = Desc;
-        create();
-    }
-
-    void create() {
-        GeneralRegistry.Commands.add(this);
     }
 
     public abstract void onCommand(MessageEvent<?> event, String... args) throws Exception;

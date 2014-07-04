@@ -12,16 +12,11 @@ public abstract class CommandLine {
         this.argument = stringArray;
         this.helpString = helpString;
         this.isPriority = isPriority;
-        create();
 
     }
 
-    public void create() {
-        if (this.isPriority) {
-            GeneralRegistry.CommandLineArguments.add(this);
-        } else {
-            GeneralRegistry.CommandLines.add(this);
-        }
+    public boolean getIsPriority(){
+        return isPriority;
     }
 
 

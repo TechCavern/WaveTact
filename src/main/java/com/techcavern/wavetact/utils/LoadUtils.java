@@ -3,6 +3,10 @@ package com.techcavern.wavetact.utils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.internal.LinkedTreeMap;
+import com.techcavern.wavetact.commandline.*;
+import com.techcavern.wavetact.commandline.utils.AddServer;
+import com.techcavern.wavetact.commandline.utils.BasicCommands;
+import com.techcavern.wavetact.commandline.utils.Start;
 import com.techcavern.wavetact.commands.chanop.*;
 import com.techcavern.wavetact.commands.controller.IRCRaw;
 import com.techcavern.wavetact.commands.controller.Join;
@@ -12,6 +16,7 @@ import com.techcavern.wavetact.commands.fun.SomethingAwesome;
 import com.techcavern.wavetact.commands.fun.UrbanDictonary;
 import com.techcavern.wavetact.commands.trusted.*;
 import com.techcavern.wavetact.commands.utils.*;
+import com.techcavern.wavetact.commands.utils.Help;
 import com.techcavern.wavetact.utils.events.DisconnectListener;
 import com.techcavern.wavetact.utils.events.KickListener;
 import com.techcavern.wavetact.utils.events.MessageListener;
@@ -126,35 +131,36 @@ public class LoadUtils {
          ex.printStackTrace(System.err);
          }
          **/
-        new Ban();
-        new HalfOp();
-        new Kick();
-        new Mode();
-        new Owner();
-        new Protect();
-        new Quiet();
-        new Voice();
-        new IRCRaw();
-        new Join();
-        new Lock();
-        new Shutdown();
-        new SomethingAwesome();
-        new UrbanDictonary();
-        new Act();
-        new CustomCMD();
-        new Part();
-        new Say();
-        new WolframAlpha();
-        new CheckUserLevel();
-        new Commands();
-        new Define();
-        new FindIP();
-        new Help();
-        new Hostmask();
-        new MathC();
-        new PingTime();
-        new Question();
-        new Weather();
+        GeneralRegistry.Commands.add(new Ban());
+        GeneralRegistry.Commands.add(new HalfOp());
+        GeneralRegistry.Commands.add(new Kick());
+        GeneralRegistry.Commands.add(new Mode());
+        GeneralRegistry.Commands.add(new Owner());
+        GeneralRegistry.Commands.add(new Protect());
+        GeneralRegistry.Commands.add(new Quiet());
+        GeneralRegistry.Commands.add(new Voice());
+        GeneralRegistry.Commands.add(new IRCRaw());
+        GeneralRegistry.Commands.add(new Join());
+        GeneralRegistry.Commands.add(new Lock());
+        GeneralRegistry.Commands.add(new Shutdown());
+        GeneralRegistry.Commands.add(new SomethingAwesome());
+        GeneralRegistry.Commands.add(new UrbanDictonary());
+        GeneralRegistry.Commands.add(new Act());
+        GeneralRegistry.Commands.add(new CustomCMD());
+        GeneralRegistry.Commands.add(new Part());
+        GeneralRegistry.Commands.add(new Say());
+        GeneralRegistry.Commands.add(new WolframAlpha());
+        GeneralRegistry.Commands.add(new CheckUserLevel());
+        GeneralRegistry.Commands.add(new Commands());
+        GeneralRegistry.Commands.add(new Define());
+        GeneralRegistry.Commands.add(new FindIP());
+        GeneralRegistry.Commands.add(new Help());
+        GeneralRegistry.Commands.add(new Hostmask());
+        GeneralRegistry.Commands.add(new MathC());
+        GeneralRegistry.Commands.add(new PingTime());
+        GeneralRegistry.Commands.add(new Question());
+        GeneralRegistry.Commands.add(new Weather());
+
 
     }
 
@@ -211,5 +217,48 @@ public class LoadUtils {
                 ErrorUtils.handleException(e);
             }
         }
+    }
+    public static void initializeCommandlines() {
+        //TODO Fix this to work with @CMDLine once @CMD is fixed
+        GeneralRegistry.CommandLines.add(new AddServer());
+        GeneralRegistry.CommandLines.add(new com.techcavern.wavetact.commandline.Help());
+        GeneralRegistry.CommandLines.add(new BasicCommands());
+        GeneralRegistry.CommandLines.add(new Start());
+    }
+
+    public static void parseCommandLineArguments(String[] args) {
+        boolean exit = false;
+        boolean invalid = true;
+
+        if (args.length < 1) {
+            com.techcavern.wavetact.commandline.Help c = new com.techcavern.wavetact.commandline.Help();
+            c.doAction(args);
+        }
+
+        for (CommandLine c : GeneralRegistry.CommandLineArguments) {
+            for (String b : c.getArgument()) {
+                for (String s : args) {
+
+                    if (s.equalsIgnoreCase("-" + b)) {
+                        c.doAction(args);
+                        invalid = false;
+
+
+                    }
+                }
+            }
+        }
+        for (CommandLine c : GeneralRegistry.CommandLines) {
+            for (String b : c.getArgument()) {
+
+                if (args[0].equalsIgnoreCase("-" + b)) {
+                    c.doAction(args);
+                    invalid = false;
+
+
+                }
+            }
+        }
+        if (invalid) System.exit(0);
     }
 }
