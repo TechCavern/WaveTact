@@ -15,6 +15,7 @@ public class JSONFile {
     private final File file;
 
     public JSONFile(String a) {
+
         file = new File("databases/" + a);
     }
 
