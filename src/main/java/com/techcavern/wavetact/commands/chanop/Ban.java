@@ -58,9 +58,9 @@ public class Ban extends Command {
 
         } else {
             if (GetUtils.getBanTime(hostmask) != null) {
-                if (args[0].startsWith("\\+")) {
-                    if (args[1].startsWith("\\+")) {
-                        GetUtils.getBanTime(hostmask).setTime(GetUtils.getBanTime(hostmask).getTime() + GeneralUtils.getMilliSeconds(args[1].replace("\\+", "")));
+                if (args[0].startsWith("+")) {
+                    if (args[1].startsWith("+")) {
+                        GetUtils.getBanTime(hostmask).setTime(GetUtils.getBanTime(hostmask).getTime() + GeneralUtils.getMilliSeconds(args[1].replace("+", "")));
                     } else if (args[1].startsWith("-")) {
                         GetUtils.getBanTime(hostmask).setTime(GetUtils.getBanTime(hostmask).getTime() - GeneralUtils.getMilliSeconds(args[1].replace("-", "")));
                     } else {

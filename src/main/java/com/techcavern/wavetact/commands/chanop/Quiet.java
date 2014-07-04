@@ -30,7 +30,7 @@ public class Quiet extends Command {
                 hostmask = GetUtils.getUserByNick(event.getChannel(), args[1]).getHostmask();
 
         }
-        if ((!args[1].startsWith("-")) && (!args[1].startsWith("\\+"))) {
+        if ((!args[1].startsWith("-")) && (!args[1].startsWith("+"))) {
             if (GetUtils.getQuietTime(hostmask) == null) {
 
                 if (args.length == 3) {
@@ -69,10 +69,10 @@ public class Quiet extends Command {
             }
         } else {
             if (GetUtils.getQuietTime(hostmask) != null) {
-                if (args[1].startsWith("\\+")) {
-                    if (args[1].startsWith("\\+")) {
-                        GetUtils.getQuietTime(hostmask).setTime(GetUtils.getQuietTime(hostmask).getTime() + GeneralUtils.getMilliSeconds(args[2].replace("\\+", "")));
-                    } else if (args[1].startsWith("-")) {
+                if (args[1].startsWith("+")) {
+                    if (args[2].startsWith("+")) {
+                        GetUtils.getQuietTime(hostmask).setTime(GetUtils.getQuietTime(hostmask).getTime() + GeneralUtils.getMilliSeconds(args[2].replace("+", "")));
+                    } else if (args[2].startsWith("-")) {
                         GetUtils.getQuietTime(hostmask).setTime(GetUtils.getQuietTime(hostmask).getTime() - GeneralUtils.getMilliSeconds(args[2].replace("-", "")));
 
                     } else {

@@ -119,6 +119,7 @@ public class LoadUtils {
         GeneralRegistry.Commands.add(new Protect());
         GeneralRegistry.Commands.add(new Quiet());
         GeneralRegistry.Commands.add(new Voice());
+        GeneralRegistry.Commands.add(new Op());
         GeneralRegistry.Commands.add(new IRCRaw());
         GeneralRegistry.Commands.add(new Join());
         GeneralRegistry.Commands.add(new Lock());
