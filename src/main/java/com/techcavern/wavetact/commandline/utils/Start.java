@@ -14,7 +14,7 @@ public class Start extends CommandLine {
 
     @Override
     public void doAction(String [] args) {
-        if(args.length > 1 && args[1].equalsIgnoreCase("debug")){
+        if(args.length > 2 && args[1].equalsIgnoreCase("debug")){
             System.out.println("Running in developer mode");
             LoadUtils.registerDevServer();
         }else{
