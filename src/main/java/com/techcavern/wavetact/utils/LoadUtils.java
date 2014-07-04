@@ -2,8 +2,6 @@ package com.techcavern.wavetact.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.internal.LinkedTreeMap;
-import com.techcavern.wavetact.commandline.*;
 import com.techcavern.wavetact.commandline.utils.AddServer;
 import com.techcavern.wavetact.commandline.utils.BasicCommands;
 import com.techcavern.wavetact.commandline.utils.Start;
@@ -47,6 +45,7 @@ public class LoadUtils {
         // TODO: @logangorence Add support for port changes. Also, does PircBotX support SSL? I think so
         Net.setServer(server, 6667);
         channels.forEach(Net::addAutoJoinChannel);
+        Net.setRealName(nick);
         Net.getListenerManager().addListener(new MessageListener());
         Net.getListenerManager().addListener(new DisconnectListener());
 

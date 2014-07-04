@@ -3,7 +3,6 @@ package com.techcavern.wavetact.utils;
 import com.techcavern.wavetact.utils.objects.*;
 import org.pircbotx.MultiBotManager;
 import org.pircbotx.PircBotX;
-
 import java.util.*;
 import java.util.concurrent.ForkJoinPool;
 
