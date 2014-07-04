@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.objects;
+package com.techcavern.wavetact.utils.objects;
 
 import java.util.ArrayList;
 

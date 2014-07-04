@@ -4,7 +4,7 @@ import com.techcavern.wavetact.commandline.Help;
 import com.techcavern.wavetact.commandline.utils.AddServer;
 import com.techcavern.wavetact.commandline.utils.BasicCommands;
 import com.techcavern.wavetact.commandline.utils.Start;
-import com.techcavern.wavetact.objects.CommandLine;
+import com.techcavern.wavetact.utils.objects.CommandLine;
 
 public class CommandLineUtils {
 

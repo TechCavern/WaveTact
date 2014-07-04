@@ -10,7 +10,7 @@ package com.techcavern.wavetact.utils;
  * @author jztech101
  */
 
-import com.techcavern.wavetact.objects.JSONFile;
+import com.techcavern.wavetact.utils.objects.JSONFile;
 
 import java.io.File;
 import java.io.FileWriter;

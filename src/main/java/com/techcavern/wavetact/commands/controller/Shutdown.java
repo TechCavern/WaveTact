@@ -1,7 +1,7 @@
 package com.techcavern.wavetact.commands.controller;
 
 import com.techcavern.wavetact.annot.CMD;
-import com.techcavern.wavetact.objects.Command;
+import com.techcavern.wavetact.utils.objects.Command;
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import org.pircbotx.PircBotX;
@@ -17,12 +17,12 @@ public class Shutdown extends Command {
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
         if (args.length > 1 && args[0].equalsIgnoreCase("r")) {
-            PircBotX c = event.getBot();
+            PircBotX botObject = event.getBot();
             event.getChannel().send().message("Restarting Bot");
-            c.stopBotReconnect();
-            c.sendIRC().quitServer();
+            botObject.stopBotReconnect();
+            botObject.sendIRC().quitServer();
             Thread.sleep(20000);
-            GeneralRegistry.WaveTact.addBot(c);
+            GeneralRegistry.WaveTact.addBot(botObject);
         } else {
             GeneralRegistry.WaveTact.stop();
             System.exit(0);

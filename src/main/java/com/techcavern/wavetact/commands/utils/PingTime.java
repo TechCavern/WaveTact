@@ -1,7 +1,7 @@
 package com.techcavern.wavetact.commands.utils;
 
 import com.techcavern.wavetact.annot.CMD;
-import com.techcavern.wavetact.objects.Command;
+import com.techcavern.wavetact.utils.objects.Command;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import org.pircbotx.hooks.events.MessageEvent;
 
@@ -24,8 +24,8 @@ public class PingTime extends Command {
         }
         Long time = System.currentTimeMillis();
         args[0] = args[0].replaceAll("http://|https://", "");
-        Socket s = new Socket(InetAddress.getByName(args[0]), port);
-        s.close();
+        Socket socket = new Socket(InetAddress.getByName(args[0]), port);
+        socket.close();
         time = System.currentTimeMillis() - time;
         event.getChannel().send().message("Ping Time: " + time + " milliseconds");
 

@@ -10,17 +10,17 @@ import org.pircbotx.output.OutputUser;
  * Created by jztech101 on 7/4/14.
  */
 public class IRCUtils {
-    public static void setMode(Channel c, PircBotX b, String d, String u) {
-        OutputChannel o = new OutputChannel(b, c);
-        if (u != null) {
-            o.setMode(d, u);
+    public static void setMode(Channel channelObject, PircBotX botObject, String modeToSet, String hostmask) {
+        OutputChannel o = new OutputChannel(botObject, channelObject);
+        if (hostmask != null) {
+            o.setMode(modeToSet, hostmask);
         } else {
-            o.setMode(d);
+            o.setMode(modeToSet);
         }
     }
 
-    public static void SendNotice(PircBotX b, User u, String s) {
-        OutputUser x = new OutputUser(b, u);
-        x.notice(s);
+    public static void SendNotice(PircBotX botObject, User userObject, String notice) {
+        OutputUser x = new OutputUser(botObject, userObject);
+        x.notice(notice);
     }
 }

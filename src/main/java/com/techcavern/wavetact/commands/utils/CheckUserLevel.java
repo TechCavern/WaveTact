@@ -1,7 +1,7 @@
 package com.techcavern.wavetact.commands.utils;
 
 import com.techcavern.wavetact.annot.CMD;
-import com.techcavern.wavetact.objects.Command;
+import com.techcavern.wavetact.utils.objects.Command;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.PermUtils;
@@ -17,25 +17,25 @@ public class CheckUserLevel extends Command {
 
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
-        User u;
+        User userObject;
         if (args.length < 1) {
-            u = event.getUser();
+            userObject = event.getUser();
         } else {
-            u = GetUtils.getUserByNick(event.getChannel(), args[0]);
+            userObject = GetUtils.getUserByNick(event.getChannel(), args[0]);
         }
 
-        int i = PermUtils.getPermLevel(event.getBot(), u, event.getChannel());
+        int i = PermUtils.getPermLevel(event.getBot(), userObject, event.getChannel());
         if (i == 9001) {
-            event.respond(u.getNick() + " is my Master!");
+            event.respond(userObject.getNick() + " is my Master!");
         } else if (i == 15) {
-            event.respond(u.getNick() + " is a Channel Owner!");
+            event.respond(userObject.getNick() + " is a Channel Owner!");
 
         } else if (i == 10) {
-            event.respond(u.getNick() + " is a Channel Operator!");
+            event.respond(userObject.getNick() + " is a Channel Operator!");
         } else if (i == 5) {
-            event.respond(u.getNick() + " is a Trusted User!");
+            event.respond(userObject.getNick() + " is a Trusted User!");
         } else {
-            event.respond(u.getNick() + " is a Regular User!");
+            event.respond(userObject.getNick() + " is a Regular User!");
         }
     }
 }

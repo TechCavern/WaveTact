@@ -6,7 +6,7 @@
 package com.techcavern.wavetact.commands.chanop;
 
 import com.techcavern.wavetact.annot.CMD;
-import com.techcavern.wavetact.objects.Command;
+import com.techcavern.wavetact.utils.objects.Command;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
 import org.pircbotx.hooks.events.MessageEvent;

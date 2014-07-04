@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.techcavern.wavetact.objects;
+package com.techcavern.wavetact.utils.objects;
 
 import com.techcavern.wavetact.utils.GeneralUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -18,10 +18,10 @@ public class SimpleMessage extends Command {
     private boolean locked;
 
 
-    public SimpleMessage(String i, int p, String m, boolean b) {
-        super(GeneralUtils.toArray(i), p, "A Basic Command");
-        this.message = m;
-        this.locked = b;
+    public SimpleMessage(String inputString, int permLevel, String message, boolean locked) {
+        super(GeneralUtils.toArray(inputString), permLevel, "A Basic Command");
+        this.message = message;
+        this.locked = locked;
     }
 
     @Override

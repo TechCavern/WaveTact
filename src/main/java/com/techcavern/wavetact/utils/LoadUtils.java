@@ -12,11 +12,11 @@ import com.techcavern.wavetact.commands.fun.SomethingAwesome;
 import com.techcavern.wavetact.commands.fun.UrbanDictonary;
 import com.techcavern.wavetact.commands.trusted.*;
 import com.techcavern.wavetact.commands.utils.*;
-import com.techcavern.wavetact.events.DisconnectListener;
-import com.techcavern.wavetact.events.KickListener;
-import com.techcavern.wavetact.events.MessageListener;
-import com.techcavern.wavetact.objects.*;
-import com.techcavern.wavetact.thread.CheckTime;
+import com.techcavern.wavetact.utils.events.DisconnectListener;
+import com.techcavern.wavetact.utils.events.KickListener;
+import com.techcavern.wavetact.utils.events.MessageListener;
+import com.techcavern.wavetact.utils.objects.*;
+import com.techcavern.wavetact.utils.thread.CheckTime;
 import org.pircbotx.Configuration;
 import org.pircbotx.Configuration.Builder;
 import org.pircbotx.PircBotX;
@@ -33,7 +33,7 @@ public class LoadUtils {
 
     public static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    public static PircBotX createbot(String g, String name, List<String> channels, String nick, String server) {
+    public static PircBotX createbot(String nickservPassword, String name, List<String> channels, String nick, String server) {
         System.out.println("Configuring " + name);
         Builder<PircBotX> Net = new Configuration.Builder<PircBotX>();
         Net.setName(nick);
@@ -50,8 +50,8 @@ public class LoadUtils {
 
         //    Net.getListenerManager().addListener(new HighFive());
         Net.getListenerManager().addListener(new KickListener());
-        if (g != null) {
-            Net.setNickservPassword(g);
+        if (nickservPassword != null) {
+            Net.setNickservPassword(nickservPassword);
         }
         return new PircBotX(Net.buildConfiguration());
     }
@@ -61,28 +61,28 @@ public class LoadUtils {
         serversFolder.mkdir();
         File[] files = serversFolder.listFiles();
         String name;
-        com.techcavern.wavetact.utils.Configuration config;
+        com.techcavern.wavetact.utils.objects.Configuration config;
         for (File f : files) {
             if (!f.isDirectory()) {
                 name = f.getName();
                 name = name.substring(0, f.getName().lastIndexOf('.'));
-                config = new com.techcavern.wavetact.utils.Configuration(f);
+                config = new com.techcavern.wavetact.utils.objects.Configuration(f);
                 GeneralRegistry.configs.put(name, config);
             }
         }
 
         PircBotX bot;
         LinkedList<String> chans = new LinkedList<String>();
-        String ns;
-        for (com.techcavern.wavetact.utils.Configuration c : GeneralRegistry.configs.values()) {
+        String nsPass;
+        for (com.techcavern.wavetact.utils.objects.Configuration c : GeneralRegistry.configs.values()) {
             Collections.addAll(chans, c.getString("channels").split(", "));
             if (c.getString("nickserv").equalsIgnoreCase("False")) {
-                ns = null;
+                nsPass = null;
             } else {
-                ns = c.getString("nickserv");
+                nsPass = c.getString("nickserv");
             }
 
-            bot = LoadUtils.createbot(ns, c.getString("name"), chans, c.getString("nick"), c.getString("server"));
+            bot = LoadUtils.createbot(nsPass, c.getString("name"), chans, c.getString("nick"), c.getString("server"));
             GeneralRegistry.WaveTact.addBot(bot);
             new CommandChar(c.getString("prefix"), bot);
         }

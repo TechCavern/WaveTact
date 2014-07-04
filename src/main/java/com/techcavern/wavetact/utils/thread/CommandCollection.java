@@ -1,7 +1,7 @@
-package com.techcavern.wavetact.thread;
+package com.techcavern.wavetact.utils.thread;
 
 import com.techcavern.wavetact.annot.CMD;
-import com.techcavern.wavetact.objects.Command;
+import com.techcavern.wavetact.utils.objects.Command;
 
 import java.io.File;
 import java.lang.reflect.Constructor;

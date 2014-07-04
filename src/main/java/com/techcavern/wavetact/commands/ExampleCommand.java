@@ -1,7 +1,7 @@
 package com.techcavern.wavetact.commands;
 
 import com.techcavern.wavetact.annot.CMD;
-import com.techcavern.wavetact.objects.Command;
+import com.techcavern.wavetact.utils.objects.Command;
 import org.pircbotx.hooks.events.MessageEvent;
 
 /**

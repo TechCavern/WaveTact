@@ -9,40 +9,40 @@ import org.pircbotx.hooks.events.WhoisEvent;
 public class PermUtils {
 
     @SuppressWarnings("unchecked")
-    private static String getAccount(PircBotX bot, User u) {
-        String user;
-        bot.sendRaw().rawLineNow("WHOIS " + u.getNick());
+    private static String getAccount(PircBotX bot, User userObject) {
+        String userString;
+        bot.sendRaw().rawLineNow("WHOIS " + userObject.getNick());
         WaitForQueue waitForQueue = new WaitForQueue(bot);
         WhoisEvent<PircBotX> test;
         try {
             test = waitForQueue.waitFor(WhoisEvent.class);
             waitForQueue.close();
-            user = test.getRegisteredAs();
+            userString = test.getRegisteredAs();
         } catch (InterruptedException ex) {
             ex.printStackTrace();
-            user = null;
+            userString = null;
         }
 
-        return user;
+        return userString;
     }
 
-    private static boolean isController(PircBotX bot, User u) {
-        String v = getAccount(bot, u);
+    private static boolean isController(PircBotX bot, User userObject) {
+        String v = getAccount(bot, userObject);
         if (v != null) {
             return GeneralRegistry.Controllers.contains(v.toLowerCase());
         } else {
-            return GeneralRegistry.ControllerHostmasks.contains(u.getHostmask());
+            return GeneralRegistry.ControllerHostmasks.contains(userObject.getHostmask());
         }
     }
 
-    public static int getPermLevel(PircBotX bot, User u, Channel z) {
-        if (PermUtils.isController(bot, u)) {
+    public static int getPermLevel(PircBotX bot, User userObject, Channel channelObject) {
+        if (PermUtils.isController(bot, userObject)) {
             return 9001;
-        } else if (z.isOwner(u)) {
+        } else if (channelObject.isOwner(userObject)) {
             return 15;
-        } else if (z.isOp(u) || z.isSuperOp(u)) {
+        } else if (channelObject.isOp(userObject) || channelObject.isSuperOp(userObject)) {
             return 10;
-        } else if (z.isHalfOp(u) || z.hasVoice(u)) {
+        } else if (channelObject.isHalfOp(userObject) || channelObject.hasVoice(userObject)) {
             return 5;
         } else {
             return 0;

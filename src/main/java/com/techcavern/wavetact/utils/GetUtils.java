@@ -1,6 +1,6 @@
 package com.techcavern.wavetact.utils;
 
-import com.techcavern.wavetact.objects.*;
+import com.techcavern.wavetact.utils.objects.*;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -10,27 +10,27 @@ import org.pircbotx.User;
  */
 public class GetUtils {
 
-    public static User getUserByNick(Channel c, String n) {
-        for (User u : c.getUsers()) {
-            if (u.getNick().equalsIgnoreCase(n)) {
+    public static User getUserByNick(Channel channelObject, String nick) {
+        for (User u : channelObject.getUsers()) {
+            if (u.getNick().equalsIgnoreCase(nick)) {
                 return u;
             }
         }
         return null;
     }
 
-    public static Channel getChannelbyName(PircBotX b, String n) {
-        for (Channel u : b.getUserBot().getChannels()) {
-            if (u.getName().equalsIgnoreCase(n)) {
+    public static Channel getChannelbyName(PircBotX botObject, String channelName) {
+        for (Channel u : botObject.getUserBot().getChannels()) {
+            if (u.getName().equalsIgnoreCase(channelName)) {
                 return u;
             }
         }
         return null;
     }
 
-    public static PircBotX getBotByNetwork(String n) {
+    public static PircBotX getBotByNetwork(String network) {
         for (PircBotX c : GeneralRegistry.WaveTact.getBots()) {
-            if (c.getServerInfo().getNetwork().equals(n)) {
+            if (c.getServerInfo().getNetwork().equals(network)) {
                 return c;
             }
         }
@@ -66,27 +66,27 @@ public class GetUtils {
         return null;
     }
 
-    public static String getCommandChar(PircBotX b) {
+    public static String getCommandChar(PircBotX botObject) {
         for (CommandChar d : GeneralRegistry.CommandChars) {
-            if (d.getBot() == b) {
+            if (d.getBot() == botObject) {
                 return d.getCommandChar();
             }
         }
         return null;
     }
 
-    public static UTime getQuietTime(String u) {
+    public static UTime getQuietTime(String hostmask) {
         for (UTime x : GeneralRegistry.QuietTimes) {
-            if (x.getHostmask().equals(u)) {
+            if (x.getHostmask().equals(hostmask)) {
                 return x;
             }
         }
         return null;
     }
 
-    public static UTime getBanTime(String u) {
+    public static UTime getBanTime(String hostmask) {
         for (UTime x : GeneralRegistry.BanTimes) {
-            if (x.getHostmask().equals(u)) {
+            if (x.getHostmask().equals(hostmask)) {
                 return x;
             }
         }

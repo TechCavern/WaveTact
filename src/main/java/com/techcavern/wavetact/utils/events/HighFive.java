@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.events;
+package com.techcavern.wavetact.utils.events;
 
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import org.pircbotx.Channel;

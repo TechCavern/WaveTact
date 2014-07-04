@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.techcavern.wavetact.objects;
+package com.techcavern.wavetact.utils.objects;
 
 import com.techcavern.wavetact.utils.GeneralUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -17,11 +17,11 @@ public class SimpleAction extends Command {
     private final String action;
     private boolean locked;
 
-    public SimpleAction(String i, int p, String a, boolean b) {
-        super(GeneralUtils.toArray(i), p, "A Basic Command that takes no Arguments");
-        System.out.println("Created Simple Action: " + i);
-        this.action = a;
-        this.locked = b;
+    public SimpleAction(String inputString, int permLevel, String action, boolean locked) {
+        super(GeneralUtils.toArray(inputString), permLevel, "A Basic Command that takes no Arguments");
+        System.out.println("Created Simple Action: " + inputString);
+        this.action = action;
+        this.locked = locked;
     }
 
     @Override

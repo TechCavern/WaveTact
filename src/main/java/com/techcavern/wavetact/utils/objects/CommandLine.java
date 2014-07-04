@@ -1,17 +1,17 @@
-package com.techcavern.wavetact.objects;
+package com.techcavern.wavetact.utils.objects;
 
 import com.techcavern.wavetact.utils.GeneralRegistry;
 
 public abstract class CommandLine {
 
     private final String[] argument;
-    private final String helpstring;
+    private final String helpString;
     private final boolean isPriority;
 
-    protected CommandLine(String[] sa, String hs, boolean ds) {
-        this.argument = sa;
-        this.helpstring = hs;
-        this.isPriority = ds;
+    protected CommandLine(String[] stringArray, String helpString, boolean isPriority) {
+        this.argument = stringArray;
+        this.helpString = helpString;
+        this.isPriority = isPriority;
         create();
 
     }
@@ -30,7 +30,7 @@ public abstract class CommandLine {
     }
 
     public String getHelpString() {
-        return this.helpstring;
+        return this.helpString;
     }
 
     public abstract void doAction(String[] args);
