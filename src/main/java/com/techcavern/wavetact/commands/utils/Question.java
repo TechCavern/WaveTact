@@ -18,7 +18,7 @@ public class Question extends Command {
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
         List<String> waresults = GeneralUtils.getWAResult(StringUtils.join(args, " "));
-        if (waresults.size() < 1) {
+        if (waresults.size() < 1 || waresults.get(1) != null) {
             event.getChannel().send().message("Unable to get response, try again or stop inputting gibberish");
         } else {
             event.getChannel().send().message(waresults.get(1));
