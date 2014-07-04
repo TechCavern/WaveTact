@@ -35,11 +35,13 @@ public class Ban extends Command {
                     ban(h,event.getChannel(), event.getBot());
                     UTime c = new UTime(h, event.getBot().getServerInfo().getNetwork(),"b", event.getChannel().getName(), GeneralUtils.getMilliSeconds(args[1]) + System.currentTimeMillis());
                     GeneralRegistry.BanTimes.add(c);
+                    IRCUtils.saveBanTimes();
 
                 } else if (args.length < 2) {
                     ban(h, event.getChannel(), event.getBot());
                     UTime c = new UTime(h, event.getBot().getServerInfo().getNetwork(), "b", event.getChannel().getName(), GeneralUtils.getMilliSeconds("7w") + System.currentTimeMillis());
                     GeneralRegistry.BanTimes.add(c);
+                    IRCUtils.saveBanTimes();
                 }
             } else {
                 event.getChannel().send().message("Ban already exists!");
@@ -48,6 +50,8 @@ public class Ban extends Command {
             if (IRCUtils.getBanTime(h) != null) {
                 if (args[0].startsWith("-")) {
                     IRCUtils.getBanTime(h).setTime(0);
+                    IRCUtils.saveBanTimes();
+
                 } else if (args[0].startsWith("+")) {
                     if(args[1].startsWith("+")) {
                         IRCUtils.getBanTime(h).setTime(IRCUtils.getBanTime(h).getTime() + GeneralUtils.getMilliSeconds(args[1].replace("+", "")));
@@ -58,6 +62,7 @@ public class Ban extends Command {
                             IRCUtils.getBanTime(h).setTime(GeneralUtils.getMilliSeconds(args[1].replace("-", "")));
                         }
                         event.getChannel().send().message("Ban Modified");
+                        IRCUtils.saveBanTimes();
                     } else {
                     event.getChannel().send().message("Ban does not exist!");
                 }

@@ -34,11 +34,14 @@ public class Quiet extends Command {
                             event.getChannel(), event.getBot());
                     UTime c = new UTime(h, event.getBot().getServerInfo().getNetwork(), args[0], event.getChannel().getName(), GeneralUtils.getMilliSeconds(args[2]) + System.currentTimeMillis());
                     GeneralRegistry.QuietTimes.add(c);
+                    IRCUtils.saveQuietTimes();
 
                 } else if (args.length < 3) {
                     quiet(h, args[0], event.getChannel(), event.getBot());
                     UTime c = new UTime(h, event.getBot().getServerInfo().getNetwork(), args[0], event.getChannel().getName(), GeneralUtils.getMilliSeconds("7w") + System.currentTimeMillis());
                     GeneralRegistry.QuietTimes.add(c);
+                    IRCUtils.saveQuietTimes();
+
                 }
             } else {
                 event.getChannel().send().message("Quiet already exists!");
@@ -47,17 +50,20 @@ public class Quiet extends Command {
             if (IRCUtils.getQuietTime(h) != null) {
                 if (args[1].startsWith("-")) {
                     IRCUtils.getQuietTime(h).setTime(0);
+                    IRCUtils.saveQuietTimes();
                 } else if (args[1].startsWith("+")) {
                     if(args[1].startsWith("+")) {
                         IRCUtils.getQuietTime(h).setTime(IRCUtils.getQuietTime(h).getTime() + GeneralUtils.getMilliSeconds(args[1].replace("+", "")));
+
                     }else
                     if(args[1].startsWith("-")) {
                         IRCUtils.getQuietTime(h).setTime(IRCUtils.getQuietTime(h).getTime() - GeneralUtils.getMilliSeconds(args[1].replace("-", "")));
+
                     }else{
                         IRCUtils.getQuietTime(h).setTime(GeneralUtils.getMilliSeconds(args[1].replace("-", "")));
                     }
                     event.getChannel().send().message("Quiet Modified");
-
+                    IRCUtils.saveQuietTimes();
                 } else {
                     event.getChannel().send().message("Quiet does not exist!");
                 }
