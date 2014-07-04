@@ -15,6 +15,7 @@ public class Main {
             System.out.println("Running in production mode");
             CommandLineUtils.initializeCommandlines();
             CommandLineUtils.parseCommandLineArguments(args);
+            IRCUtils.registerNetworks();
         } else {
             System.out.println("Running in developer mode");
             IRCUtils.registerDevServer();
