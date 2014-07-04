@@ -23,11 +23,11 @@ public class Quiet extends Command {
             hostmask = args[1];
         } else {
             if (args[1].startsWith("+"))
-                hostmask = GetUtils.getUserByNick(event.getChannel(), args[1].replaceFirst("\\+", "")).getHostmask();
+                hostmask = "*!*@" + GetUtils.getUserByNick(event.getChannel(), args[1].replaceFirst("\\+", "")).getHostmask();
             else if (args[1].startsWith("-"))
-                hostmask = GetUtils.getUserByNick(event.getChannel(), args[1].replaceFirst("-", "")).getHostmask();
+                hostmask = "*!*@" + GetUtils.getUserByNick(event.getChannel(), args[1].replaceFirst("-", "")).getHostmask();
             else
-                hostmask = GetUtils.getUserByNick(event.getChannel(), args[1]).getHostmask();
+                hostmask = "*!*@" + GetUtils.getUserByNick(event.getChannel(), args[1]).getHostmask();
 
         }
         if ((!args[1].startsWith("-")) && (!args[1].startsWith("+"))) {

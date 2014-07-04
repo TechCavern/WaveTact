@@ -23,11 +23,11 @@ public class Ban extends Command {
             hostmask = args[0];
         } else {
             if (args[0].startsWith("+"))
-                hostmask = GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("\\+", "")).getHostmask();
+                hostmask = "*!*@" + GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("\\+", "")).getHostmask();
             else if (args[0].startsWith("-"))
-                hostmask = GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", "")).getHostmask();
+                hostmask = "*!*@" + GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", "")).getHostmask();
             else
-                hostmask = GetUtils.getUserByNick(event.getChannel(), args[0]).getHostmask();
+                hostmask = "*!*@" + GetUtils.getUserByNick(event.getChannel(), args[0]).getHostmask();
         }
         if ((!args[0].startsWith("-")) && (!args[0].startsWith("\\+"))) {
 
