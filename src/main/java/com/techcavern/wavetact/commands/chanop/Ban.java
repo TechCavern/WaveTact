@@ -34,7 +34,7 @@ public class Ban extends Command {
         }
         if ((!args[0].startsWith("-")) && (!args[0].startsWith("+"))) {
 
-            if (IRCUtils.getBanTime(IRCUtils.getUserByNick(event.getChannel(), args[0]).getHostmask()) == null) {
+            if (IRCUtils.getBanTime(h) == null) {
 
                 if (args.length == 2) {
                     ban(h,event.getChannel(), event.getBot());
