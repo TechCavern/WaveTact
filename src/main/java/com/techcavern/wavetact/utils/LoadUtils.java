@@ -65,12 +65,12 @@ public class LoadUtils {
         serversFolder.mkdir();
         File[] files = serversFolder.listFiles();
         String name;
-        com.techcavern.wavetact.utils.objects.Configuration config;
+        com.techcavern.wavetact.utils.Configuration config;
         for (File f : files) {
             if (!f.isDirectory()) {
                 name = f.getName();
                 name = name.substring(0, f.getName().lastIndexOf('.'));
-                config = new com.techcavern.wavetact.utils.objects.Configuration(f);
+                config = new com.techcavern.wavetact.utils.Configuration(f);
                 GeneralRegistry.configs.put(name, config);
             }
         }
@@ -78,7 +78,7 @@ public class LoadUtils {
         PircBotX bot;
         LinkedList<String> chans = new LinkedList<String>();
         String nsPass;
-        for (com.techcavern.wavetact.utils.objects.Configuration c : GeneralRegistry.configs.values()) {
+        for (com.techcavern.wavetact.utils.Configuration c : GeneralRegistry.configs.values()) {
             Collections.addAll(chans, c.getString("channels").split(", "));
             if (c.getString("nickserv").equalsIgnoreCase("False")) {
                 nsPass = null;

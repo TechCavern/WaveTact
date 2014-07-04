@@ -6,6 +6,9 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+  * Written by logangorence
+  */
 public class Configuration {
 
     private final File file;
