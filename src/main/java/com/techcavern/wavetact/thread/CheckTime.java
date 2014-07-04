@@ -31,38 +31,43 @@ public class CheckTime implements Runnable {
 
                 for (int i = 0; i < GeneralRegistry.BanTimes.size(); i++) {
                     UTime x = GeneralRegistry.BanTimes.get(i);
-                    if (System.currentTimeMillis() >= x.getTime()) {
-                        PircBotX b = IRCUtils.getBotByNetwork(x.getNetwork());
-                        IRCUtils.setMode(IRCUtils.getChannelbyName(b, x.getChannel()), b, "-b ", x.getHostmask());
-                        GeneralRegistry.BanTimes.remove(x);
+                    try {
+                        if (System.currentTimeMillis() >= x.getTime()) {
+                            PircBotX b = IRCUtils.getBotByNetwork(x.getNetwork());
+                            IRCUtils.setMode(IRCUtils.getChannelbyName(b, x.getChannel()), b, "-b ", x.getHostmask());
+                            GeneralRegistry.BanTimes.remove(x);
+                            IRCUtils.saveBanTimes();
+                        }
+                    } catch (IllegalArgumentException | NullPointerException e) {
+                        // ignored
                     }
                 }
 
                 for (int i = 0; i < GeneralRegistry.QuietTimes.size(); i++) {
                     UTime x = GeneralRegistry.QuietTimes.get(i);
-                    if (System.currentTimeMillis() >= x.getTime()) {
-                        PircBotX b = IRCUtils.getBotByNetwork(x.getNetwork());
-                        switch (x.getType().toLowerCase()) {
-                            case "u":
-                                IRCUtils.setMode(IRCUtils.getChannelbyName(b, x.getChannel()), b, "-b ~q:", x.getHostmask());
-                                break;
-                            case "c":
-                                IRCUtils.setMode(IRCUtils.getChannelbyName(b, x.getChannel()), b, "-q ", x.getHostmask());
-                                break;
-                            case "i":
-                                IRCUtils.setMode(IRCUtils.getChannelbyName(b, x.getChannel()), b, "-b m:", x.getHostmask());
-                                break;
+                    try {
+                        if (System.currentTimeMillis() >= x.getTime()) {
+                            PircBotX b = IRCUtils.getBotByNetwork(x.getNetwork());
+                            switch (x.getType().toLowerCase()) {
+                                case "u":
+                                    IRCUtils.setMode(IRCUtils.getChannelbyName(b, x.getChannel()), b, "-b ~q:", x.getHostmask());
+                                    break;
+                                case "c":
+                                    IRCUtils.setMode(IRCUtils.getChannelbyName(b, x.getChannel()), b, "-q ", x.getHostmask());
+                                    break;
+                                case "i":
+                                    IRCUtils.setMode(IRCUtils.getChannelbyName(b, x.getChannel()), b, "-b m:", x.getHostmask());
+                                    break;
+                            }
+                            GeneralRegistry.QuietTimes.remove(x);
+                            IRCUtils.saveQuietTimes();
                         }
-                        GeneralRegistry.QuietTimes.remove(x);
+                    } catch (IllegalArgumentException | NullPointerException e) {
+                        // ignored
                     }
                 }
-
-                IRCUtils.saveBanTimes();
-                IRCUtils.saveQuietTimes();
-            } catch (InterruptedException
-                    | IllegalArgumentException
-                    | NullPointerException e) {
-                // Ignored
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }
