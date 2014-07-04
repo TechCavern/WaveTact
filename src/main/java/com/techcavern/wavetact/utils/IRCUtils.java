@@ -3,6 +3,7 @@ package com.techcavern.wavetact.utils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.internal.LinkedTreeMap;
+import com.techcavern.wavetact.commands.fun.UrbanDictonary;
 import com.techcavern.wavetact.events.DisconnectListener;
 import com.techcavern.wavetact.events.KickListener;
 import com.techcavern.wavetact.events.MessageListener;
@@ -16,7 +17,11 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 import org.pircbotx.output.OutputChannel;
 import org.pircbotx.output.OutputUser;
-
+import com.techcavern.wavetact.commands.chanop.*;
+import com.techcavern.wavetact.commands.controller.*;
+import com.techcavern.wavetact.commands.fun.*;
+import com.techcavern.wavetact.commands.trusted.*;
+import com.techcavern.wavetact.commands.utils.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -209,12 +214,43 @@ public class IRCUtils {
     }
     
     public static void registerCommands(){
-
+      /**
         try{
             GeneralRegistry.COMMANDS.addAll(GeneralRegistry.TASKS.submit(new CommandCollection("com.techcavern.wavetact.commands")).get());
         } catch(Exception ex){
             ex.printStackTrace(System.err);
         }
+       **/
+        new Ban();
+        new HalfOp();
+        new Kick();
+        new Mode();
+        new Owner();
+        new Protect();
+        new Quiet();
+        new Voice();
+        new IRCRaw();
+        new Join();
+        new Lock();
+        new Shutdown();
+        new Nom();
+        new SomethingAwesome();
+        new UrbanDictonary();
+        new Act();
+        new CustomCMD();
+        new Part();
+        new Say();
+        new WolframAlpha();
+        new CheckUserLevel();
+        new Commands();
+        new Define();
+        new FindIP();
+        new Help();
+        new Hostmask();
+        new MathC();
+        new PingTime();
+        new Question();
+        new Weather();
 
     }
 

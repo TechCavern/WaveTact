@@ -12,14 +12,14 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         CommandLineUtils.initializeCommandlines();
-        CommandLineUtils.parseCommandLineArguments(args);
+  //      CommandLineUtils.parseCommandLineArguments(args);
         System.out.println("Starting...");
         System.setProperty(SimpleLogger.SHOW_DATE_TIME_KEY, "true");
         System.setProperty(SimpleLogger.DATE_TIME_FORMAT_KEY, "[yyyy/MM/dd HH:mm:ss]");
         System.setProperty(SimpleLogger.LEVEL_IN_BRACKETS_KEY, "true");
         IRCUtils.registerCommands();
-        IRCUtils.registerNetworks();
-//        IRCUtils.registerDevServer();
+//        IRCUtils.registerNetworks();
+        IRCUtils.registerDevServer();
         IRCUtils.loadSimpleActions();
         IRCUtils.loadSimpleMessages();
         IRCUtils.startThreads();

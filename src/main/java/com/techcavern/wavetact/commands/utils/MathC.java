@@ -8,9 +8,9 @@ import org.pircbotx.hooks.events.MessageEvent;
 
 import java.util.List;
 
-public class Math extends Command {
+public class MathC extends Command {
     @CMD
-    public Math() {
+    public MathC() {
         super(GeneralUtils.toArray("calculate calc c"), 0, "calculate [What to Calculate]");
     }
 
