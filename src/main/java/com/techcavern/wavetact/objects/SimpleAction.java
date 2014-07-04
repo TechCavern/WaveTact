@@ -30,7 +30,7 @@ public class SimpleAction extends Command {
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
         String daction = this.action;
-        String[] action = StringUtils.split(this.action, "");
+        String[] action = StringUtils.split(this.action, " ");
         int i = 0;
         for(String g:action){
             if(g.startsWith("$") &&!g.contains("*")){

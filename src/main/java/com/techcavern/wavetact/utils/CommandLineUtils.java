@@ -3,6 +3,7 @@ package com.techcavern.wavetact.utils;
 import com.techcavern.wavetact.commandline.utils.AddServer;
 import com.techcavern.wavetact.commandline.utils.BasicCommands;
 import com.techcavern.wavetact.commandline.Help;
+import com.techcavern.wavetact.commandline.utils.Start;
 import com.techcavern.wavetact.objects.CommandLine;
 
 /**
@@ -15,6 +16,7 @@ public class CommandLineUtils {
         new AddServer();
         new Help();
         new BasicCommands();
+        new Start();
     }
 
     public static void parseCommandLineArguments(String[] args)

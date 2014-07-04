@@ -29,7 +29,7 @@ public class SimpleMessage extends Command {
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
         String dresponse = this.message;
-        String[] message = StringUtils.split(this.message, "");
+        String[] message = StringUtils.split(this.message, " ");
         int i = 0;
         for(String g:message){
             if(g.startsWith("$") &&!g.contains("*")){
