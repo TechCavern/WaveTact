@@ -16,7 +16,7 @@ public class Shutdown extends Command {
 
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
-        if (args[0].equalsIgnoreCase("r")) {
+        if (args > 1 && args[0].equalsIgnoreCase("r")) {
             PircBotX c = event.getBot();
             event.getChannel().send().message("Restarting Bot");
             c.stopBotReconnect();
