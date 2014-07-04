@@ -77,6 +77,7 @@ public class LoadUtils {
         LinkedList<String> chans = new LinkedList<String>();
         String nsPass;
         for (com.techcavern.wavetact.utils.fileUtils.Configuration c : GeneralRegistry.configs.values()) {
+            chans.clear();
             Collections.addAll(chans, c.getString("channels").split(", "));
             if (c.getString("nickserv").equalsIgnoreCase("False")) {
                 nsPass = null;
