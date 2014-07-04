@@ -2,7 +2,7 @@ package com.techcavern.wavetact.utils;
 
 import com.techcavern.wavetact.commandline.utils.AddServer;
 import com.techcavern.wavetact.commandline.utils.BasicCommands;
-import com.techcavern.wavetact.commands.utils.Help;
+import com.techcavern.wavetact.commandline.Help;
 import com.techcavern.wavetact.objects.CommandLine;
 
 /**
@@ -21,6 +21,9 @@ public class CommandLineUtils {
     {
         boolean exit = false;
         boolean invalid = true;
+        if(args.length < 1){
+            invalid = false;
+        }
         for (CommandLine c : GeneralRegistry.CommandLineArguments)
         {
             for(String b : c.getArgument()) {
