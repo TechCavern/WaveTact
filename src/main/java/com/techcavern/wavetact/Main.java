@@ -17,7 +17,6 @@ public class Main {
         CommandLineUtils.initializeCommandlines();
         CommandLineUtils.parseCommandLineArguments(args);
         LoadUtils.registerCommands();
-        LoadUtils.registerDevServer();
         LoadUtils.loadSimpleActions();
         LoadUtils.loadSimpleMessages();
         LoadUtils.startThreads();
