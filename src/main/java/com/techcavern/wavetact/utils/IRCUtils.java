@@ -228,7 +228,6 @@ public class IRCUtils {
         new Join();
         new Lock();
         new Shutdown();
-        new Nom();
         new SomethingAwesome();
         new UrbanDictonary();
         new Act();
