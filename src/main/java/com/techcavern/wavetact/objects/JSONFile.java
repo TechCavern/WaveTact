@@ -15,11 +15,7 @@ public class JSONFile {
     private final File file;
 
     public JSONFile(String a) {
-        file = new File(a);
-    }
-
-    public JSONFile(File f) {
-        file = f;
+        file = new File("databases/" + a);
     }
 
     public void write(Object obj) throws IOException {
