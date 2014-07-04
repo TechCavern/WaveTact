@@ -51,8 +51,12 @@ public class Ban extends Command {
         } else {
             if (GetUtils.getBanTime(hostmask) != null) {
                 if (args[0].startsWith("-")) {
-                    GetUtils.getBanTime(hostmask).setTime(0);
-                    BanTimeUtils.saveBanTimes();
+                    if(GetUtils.getBanTime(hostmask) != null) {
+                        GetUtils.getBanTime(hostmask).setTime(0);
+                        BanTimeUtils.saveBanTimes();
+                    }else{
+                        IRCUtils.setMode(event.getChannel(), event.getBot(), "-b ", hostmask);
+                    }
 
                 } else if (args[0].startsWith("\\+")) {
                     if (args[1].startsWith("\\+")) {
