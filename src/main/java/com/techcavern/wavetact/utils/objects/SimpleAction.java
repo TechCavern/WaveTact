@@ -23,6 +23,8 @@ public class SimpleAction extends Command {
         System.out.println("Created Simple Action: " + inputString);
         this.action = action;
         this.locked = locked;
+        create();
+
     }
 
     @Override
@@ -40,7 +42,6 @@ public class SimpleAction extends Command {
         }
         daction = daction.replace("$*", GeneralUtils.buildMessage(i, args.length, args));
         event.getChannel().send().action(daction);
-        create();
     }
 
     void create(){

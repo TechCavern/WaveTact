@@ -23,6 +23,8 @@ public class SimpleMessage extends Command {
         super(GeneralUtils.toArray(inputString), permLevel, "A Basic Command");
         this.message = message;
         this.locked = locked;
+        create();
+
     }
 
     @Override
@@ -40,7 +42,6 @@ public class SimpleMessage extends Command {
         }
         dresponse = dresponse.replace("$*", GeneralUtils.buildMessage(i, args.length, args));
         event.getChannel().send().message(dresponse);
-        create();
 
 
     }
