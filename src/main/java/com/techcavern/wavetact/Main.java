@@ -17,7 +17,6 @@ public class Main {
         CommandLineUtils.initializeCommandlines();
         CommandLineUtils.parseCommandLineArguments(args);
         IRCUtils.registerCommands();
-        IRCUtils.registerDevServer();
         IRCUtils.loadSimpleActions();
         IRCUtils.loadSimpleMessages();
         IRCUtils.startThreads();
