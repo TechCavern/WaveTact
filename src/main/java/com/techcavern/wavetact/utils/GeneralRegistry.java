@@ -9,7 +9,7 @@ import java.util.concurrent.ForkJoinPool;
 
 public class GeneralRegistry {
 
-    public static final List<String> Controllers = Arrays.asList("jztech101", "archtikz", "kaendfinger", "deathcrazyuberlironman", "leah");
+    public static final List<String> Controllers = Arrays.asList("jztech101", "kaendfinger", "deathcrazyuberlironman", "leah", "logan_");
     public static final List<String> ControllerHostmasks = Arrays.asList("*!jztech101@techcavern.com");
     public static final List<Command> Commands = new LoggingArrayList<Command>("Command");
     public static final List<SimpleMessage> SimpleMessages = new LoggingArrayList<SimpleMessage>("SimpleMessages");
