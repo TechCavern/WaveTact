@@ -17,11 +17,11 @@ public class Question extends Command {
 
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
-        List<String> waresults = GeneralUtils.getWAResult(StringUtils.join(args, " "));
-        if (waresults.size() < 1 || waresults.get(1) != null) {
+        List<String> waResults = GeneralUtils.getWAResult(StringUtils.join(args, " "));
+        if (waResults.size() < 1 || waResults.get(1) != null) {
             event.getChannel().send().message("Unable to get response, try again or stop inputting gibberish");
         } else {
-            event.getChannel().send().message(waresults.get(1));
+            event.getChannel().send().message(waResults.get(1));
 
         }
     }

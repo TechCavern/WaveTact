@@ -17,12 +17,12 @@ public class WolframAlpha extends Command {
 
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
-        List<String> waresults = GeneralUtils.getWAResult(StringUtils.join(args, " "));
+        List<String> waResults = GeneralUtils.getWAResult(StringUtils.join(args, " "));
 
-        if (args.length > 1) {
-            event.respond(waresults.get(Integer.parseInt(args[1])));
+        if (args.length > 1 || waResults.get(1) != null) {
+            event.respond(waResults.get(Integer.parseInt(args[1])));
         } else {
-            for (String waresult : waresults) {
+            for (String waresult : waResults) {
                 event.respond(waresult);
             }
         }
