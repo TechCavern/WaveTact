@@ -6,9 +6,6 @@ import com.techcavern.wavetact.commandline.Help;
 import com.techcavern.wavetact.commandline.utils.Start;
 import com.techcavern.wavetact.objects.CommandLine;
 
-/**
- * Created by jztech101 on 7/3/14.
- */
 public class CommandLineUtils {
 
     public static void initializeCommandlines(){

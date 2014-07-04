@@ -25,13 +25,4 @@ public class GeneralRegistry {
     public static final List<CommandLine> CommandLines = new LoggingArrayList<CommandLine>("CommandLine");
     public static final List<CommandLine> CommandLineArguments= new LoggingArrayList<CommandLine>("CommandLineArguments");
 
-
-
-    //Development Variables
-    /**
-    public static final String CommandChar = "@";
-    public static final String DevServer = "irc.esper.net";
-    public static final List<String> DevChannels = Arrays.asList("#TechCavern");
-    public static final String DevNick = "WaveTactDev";
-    **/
 }

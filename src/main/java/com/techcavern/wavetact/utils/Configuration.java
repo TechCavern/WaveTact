@@ -6,7 +6,6 @@ import java.io.PrintWriter;
 import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.FileNotFoundException;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -17,8 +16,8 @@ public class Configuration
 {
 
     private boolean lock;
-    private File file;
-    private Map<String, String> pairs;
+    private final File file;
+    private final Map<String, String> pairs;
 
     public Configuration(String file)
     {

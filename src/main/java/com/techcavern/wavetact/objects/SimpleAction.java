@@ -6,11 +6,8 @@
 package com.techcavern.wavetact.objects;
 
 import com.techcavern.wavetact.utils.GeneralUtils;
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.hooks.events.MessageEvent;
-
-import java.util.Arrays;
 
 /**
  * @author jztech101

@@ -22,8 +22,8 @@ public class WolframAlpha extends Command {
         if (args.length > 1) {
             event.respond(waresults.get(Integer.parseInt(args[1])));
         } else {
-            for (int i = 0; i < waresults.size(); i++) {
-                event.respond(waresults.get(i));
+            for (String waresult : waresults) {
+                event.respond(waresult);
             }
         }
     }

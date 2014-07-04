@@ -3,13 +3,11 @@ package com.techcavern.wavetact.utils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.internal.LinkedTreeMap;
-import com.techcavern.wavetact.commands.fun.UrbanDictonary;
 import com.techcavern.wavetact.events.DisconnectListener;
 import com.techcavern.wavetact.events.KickListener;
 import com.techcavern.wavetact.events.MessageListener;
 import com.techcavern.wavetact.objects.*;
 import com.techcavern.wavetact.thread.CheckTime;
-import com.techcavern.wavetact.thread.CommandCollection;
 import org.pircbotx.Channel;
 import org.pircbotx.Configuration;
 import org.pircbotx.Configuration.Builder;
@@ -26,10 +24,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 //import com.techcavern.wavetact.Commands.Commands.TestCommand;
@@ -84,8 +79,7 @@ public class IRCUtils {
         String ns;
         for (com.techcavern.wavetact.utils.Configuration c : GeneralRegistry.configs.values())
         {
-            for (String s : c.getString("channels").split(", "))
-                chans.add(s);
+            Collections.addAll(chans, c.getString("channels").split(", "));
             if(c.getString("nickserv").equalsIgnoreCase("False")){
                 ns = null;
             }else{

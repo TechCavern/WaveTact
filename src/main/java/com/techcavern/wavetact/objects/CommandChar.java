@@ -3,9 +3,7 @@ package com.techcavern.wavetact.objects;
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import org.pircbotx.PircBotX;
 
-/**
- * Created by jztech101 on 7/3/14.
- */
+
 public class CommandChar {
     private final String chard;
     private final PircBotX bot;

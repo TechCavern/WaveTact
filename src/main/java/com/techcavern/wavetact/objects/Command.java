@@ -50,6 +50,6 @@ public abstract class Command {
 
     @Override
     public String toString() {
-        return "Command(" + comid + ")";
+        return "Command(" + comid[0] + ")";
     }
 }

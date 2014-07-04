@@ -80,8 +80,7 @@ public class GeneralUtils {
         }
     }
     public static String[] toArray(String i){
-        String[] x = StringUtils.split(i, " ");
-        return x;
+        return StringUtils.split(i, " ");
     }
 
 }

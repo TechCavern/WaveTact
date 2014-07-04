@@ -5,13 +5,6 @@
  */
 package com.techcavern.wavetact.commands.chanop;
 
-import com.techcavern.wavetact.objects.Command;
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.pircbotx.hooks.events.MessageEvent;
-
-import java.util.Arrays;
-import java.util.List;
 /**
  * @author jztech101
  */
