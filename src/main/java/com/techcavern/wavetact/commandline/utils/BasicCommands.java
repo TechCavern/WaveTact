@@ -15,7 +15,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class BasicCommands extends CommandLine {
     @CMDLine
     public BasicCommands() {
-        super(GeneralUtils.toArray("addbasiccommands"), "No Arguments, Use it ONCE and ONLY ONCE to populate the Basic Commands");
+        super(GeneralUtils.toArray("addbasiccommands"), "No Arguments, Use it ONCE and ONLY ONCE to populate the Basic Commands", false);
     }
 
     @Override

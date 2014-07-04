@@ -12,7 +12,7 @@ public class Help extends CommandLine
 {
     @CMDLine
     public Help(){
-        super(GeneralUtils.toArray("h help"), "Prints this help screen");
+        super(GeneralUtils.toArray("h help"), "Prints this help screen", false);
     }
 
     @Override

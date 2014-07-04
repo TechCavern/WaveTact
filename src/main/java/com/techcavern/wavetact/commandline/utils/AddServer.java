@@ -12,7 +12,7 @@ public class AddServer extends CommandLine
 {
     @CMDLine
     public AddServer() {
-        super(GeneralUtils.toArray("a addserver"), "Create a server configuration file");
+        super(GeneralUtils.toArray("a addserver"), "Create a server configuration file", false);
     }
     @Override
     public void doAction(String [] args)
