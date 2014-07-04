@@ -14,7 +14,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class Quiet extends Command {
     @CMD
     public Quiet() {
-        super(GeneralUtils.toArray("quiet mute q m"), 9, "Quiet [ircd] (-)[User] (time)");
+        super(GeneralUtils.toArray("quiet mute m"), 9, "Quiet [ircd] (-)[User] (time)");
     }
 
     @Override
@@ -24,7 +24,13 @@ public class Quiet extends Command {
         if(args[1].contains("!") && args[0].contains("@")){
             h = args[1];
         }else{
-            h=IRCUtils.getUserByNick(event.getChannel(), args[1].replace("+", "").replace("-", "")).getHostmask();
+            if(args[1].startsWith("+"))
+            h=IRCUtils.getUserByNick(event.getChannel(), args[1].replaceFirst("\\+", "")).getHostmask();
+            else if(args[1].startsWith("-"))
+                h=IRCUtils.getUserByNick(event.getChannel(), args[1].replaceFirst("-", "")).getHostmask();
+            else
+                h=IRCUtils.getUserByNick(event.getChannel(), args[1]).getHostmask();
+
         }
         if ((!args[1].startsWith("-")) && (!args[1].startsWith("+"))) {
             if (IRCUtils.getQuietTime(h) == null) {
@@ -53,14 +59,13 @@ public class Quiet extends Command {
                     IRCUtils.saveQuietTimes();
                 } else if (args[1].startsWith("+")) {
                     if(args[1].startsWith("+")) {
-                        IRCUtils.getQuietTime(h).setTime(IRCUtils.getQuietTime(h).getTime() + GeneralUtils.getMilliSeconds(args[1].replace("+", "")));
-
+                        IRCUtils.getQuietTime(h).setTime(IRCUtils.getQuietTime(h).getTime() + GeneralUtils.getMilliSeconds(args[2].replace("+", "")));
                     }else
                     if(args[1].startsWith("-")) {
-                        IRCUtils.getQuietTime(h).setTime(IRCUtils.getQuietTime(h).getTime() - GeneralUtils.getMilliSeconds(args[1].replace("-", "")));
+                        IRCUtils.getQuietTime(h).setTime(IRCUtils.getQuietTime(h).getTime() - GeneralUtils.getMilliSeconds(args[2].replace("-", "")));
 
                     }else{
-                        IRCUtils.getQuietTime(h).setTime(GeneralUtils.getMilliSeconds(args[1].replace("-", "")));
+                        IRCUtils.getQuietTime(h).setTime(GeneralUtils.getMilliSeconds(args[2].replace("-", "")));
                     }
                     event.getChannel().send().message("Quiet Modified");
                     IRCUtils.saveQuietTimes();

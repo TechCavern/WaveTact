@@ -25,7 +25,12 @@ public class Ban extends Command {
         if(args[0].contains("!") && args[0].contains("@")){
             h = args[0];
         }else{
-            h=IRCUtils.getUserByNick(event.getChannel(), args[0].replace("+", "").replace("-", "")).getHostmask();
+            if(args[0].startsWith("+"))
+                h=IRCUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("\\+", "")).getHostmask();
+            else if(args[0].startsWith("-"))
+                h=IRCUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", "")).getHostmask();
+            else
+                h=IRCUtils.getUserByNick(event.getChannel(), args[0]).getHostmask();
         }
         if ((!args[0].startsWith("-")) && (!args[0].startsWith("+"))) {
 
