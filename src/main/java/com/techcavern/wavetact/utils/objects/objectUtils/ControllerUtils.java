@@ -20,7 +20,7 @@ public class ControllerUtils {
         JSONFile file = new JSONFile("Controllers.json");
         if (file.exists()) {
             try {
-                List<LinkedTreeMap> messages = file.read();
+                List<String> messages = file.read();
                 GeneralRegistry.Controllers.clear();
                 GeneralRegistry.Controllers.addAll(messages.stream().collect(Collectors.toList()));
             } catch (FileNotFoundException e) {
