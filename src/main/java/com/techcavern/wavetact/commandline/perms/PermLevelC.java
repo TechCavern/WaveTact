@@ -4,6 +4,7 @@ import com.techcavern.wavetact.annot.CMDLine;
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.objects.*;
+import com.techcavern.wavetact.utils.objects.objectUtils.ControllerUtils;
 import com.techcavern.wavetact.utils.objects.objectUtils.PermUserUtils;
 
 /**
@@ -19,8 +20,11 @@ public class PermLevelC extends CommandLine {
     public void doAction(String[] args) {
         if (args[0].startsWith("-")) {
             GeneralRegistry.Controllers.remove(args[1].replace("-", ""));
+            ControllerUtils.saveControllers();
         } else {
             GeneralRegistry.Controllers.add(args[1]);
+            ControllerUtils.saveControllers();
+
 
         }
     }
