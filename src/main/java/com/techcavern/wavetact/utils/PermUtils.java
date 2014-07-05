@@ -43,7 +43,10 @@ public class PermUtils {
 
     public static int getAutomaticPermLevel(PircBotX bot, User userObject, Channel channelObject) {
 
-        if (channelObject.isOwner(userObject)) {
+        if(userObject.isIrcop()){
+            return 20;
+        }
+        else if (channelObject.isOwner(userObject)) {
             return 15;
         } else if (channelObject.isOp(userObject) || channelObject.isSuperOp(userObject)) {
             return 10;
