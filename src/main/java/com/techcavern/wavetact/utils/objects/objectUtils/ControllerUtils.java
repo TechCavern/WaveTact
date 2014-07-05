@@ -22,7 +22,7 @@ public class ControllerUtils {
             try {
                 List<LinkedTreeMap> messages = file.read();
                 GeneralRegistry.Controllers.clear();
-                GeneralRegistry.Controllers.addAll(messages.stream().map(msg -> msg.get("String")).collect(Collectors.toList());
+                GeneralRegistry.Controllers.addAll(messages.stream().map(msg -> msg.get("String")).collect(Collectors.toList()));
             } catch (FileNotFoundException e) {
                 ErrorUtils.handleException(e);
             }
