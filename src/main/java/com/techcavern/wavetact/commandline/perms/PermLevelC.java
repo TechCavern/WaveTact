@@ -12,10 +12,10 @@ import com.techcavern.wavetact.utils.objects.objectUtils.SimpleMessageUtils;
 /**
  * Created by jztech101 on 7/5/14.
  */
-public class PermLevel extends CommandLine {
+public class PermLevelC extends CommandLine {
     @CMDLine
-    public PermLevel() {
-        super(GeneralUtils.toArray("permlevel"), "permlevel (+)(-)[user/hostmask] [permlevel]", false);
+    public PermLevelC() {
+        super(GeneralUtils.toArray("permlevel pl"), "permlevel (+)(-)[user/hostmask] [permlevel]", false);
     }
 
     @Override

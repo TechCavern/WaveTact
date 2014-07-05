@@ -16,7 +16,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class PermLevel extends Command {
     @CMDLine
     public PermLevel() {
-        super(GeneralUtils.toArray("permlevel"), 9001, "permlevel (+)(-)[user/hostmask] [permlevel]");
+        super(GeneralUtils.toArray("permlevel pl"), 9001, "permlevel (+)(-)[user/hostmask] [permlevel]");
     }
 
     @Override

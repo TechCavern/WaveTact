@@ -25,7 +25,7 @@ public class Attack extends Command {
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
         String Something = GeneralUtils.buildMessage(0, args.length, args);
-        int randomint = RandomUtils.nextInt(0 , 10);
+        int randomint = RandomUtils.nextInt(0 , 3);
         switch(randomint){
             case 1:
                 event.getChannel().send().action("sends a 53 inch monitor flying at " + Something);

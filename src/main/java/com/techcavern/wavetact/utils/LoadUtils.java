@@ -2,6 +2,7 @@ package com.techcavern.wavetact.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.techcavern.wavetact.commandline.perms.PermLevelC;
 import com.techcavern.wavetact.commandline.utils.AddServer;
 import com.techcavern.wavetact.commandline.utils.BasicCommands;
 import com.techcavern.wavetact.commandline.utils.Start;
@@ -9,10 +10,8 @@ import com.techcavern.wavetact.commands.chanhalfop.*;
 import com.techcavern.wavetact.commands.chanop.*;
 import com.techcavern.wavetact.commands.chanowner.Owner;
 import com.techcavern.wavetact.commands.chanowner.Protect;
-import com.techcavern.wavetact.commands.controller.IRCRaw;
-import com.techcavern.wavetact.commands.controller.Join;
-import com.techcavern.wavetact.commands.controller.Lock;
-import com.techcavern.wavetact.commands.controller.Shutdown;
+import com.techcavern.wavetact.commands.controller.*;
+import com.techcavern.wavetact.commands.fun.Attack;
 import com.techcavern.wavetact.commands.fun.SomethingAwesome;
 import com.techcavern.wavetact.commands.fun.UrbanDictonary;
 import com.techcavern.wavetact.commands.trusted.*;
@@ -96,6 +95,7 @@ public class LoadUtils {
 
     public static void registerDevServer() {
         List<String> Chans = Arrays.asList("#techcavern");
+        new PermUser("JZTech101", 10);
         PircBotX Dev = LoadUtils.createbot(null, "EsperNet", Chans, "WaveTactDev", "irc.esper.net");
         GeneralRegistry.WaveTact.addBot(Dev);
         new CommandChar("@", Dev);
@@ -145,6 +145,11 @@ public class LoadUtils {
         GeneralRegistry.Commands.add(new Question());
         GeneralRegistry.Commands.add(new Weather());
         GeneralRegistry.Commands.add(new Topic());
+        GeneralRegistry.Commands.add(new Attack());
+        GeneralRegistry.Commands.add(new Lockdown());
+        GeneralRegistry.Commands.add(new PermLevel());
+
+
 
 
     }
@@ -155,6 +160,8 @@ public class LoadUtils {
         GeneralRegistry.CommandLines.add(new com.techcavern.wavetact.commandline.Help());
         GeneralRegistry.CommandLines.add(new BasicCommands());
         GeneralRegistry.CommandLines.add(new Start());
+        GeneralRegistry.CommandLines.add(new PermLevelC());
+
     }
 
     public static void parseCommandLineArguments(String[] args) {
