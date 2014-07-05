@@ -22,14 +22,14 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class Lockdown extends Command {
     @CMD
     public Lockdown() {
-        super(GeneralUtils.toArray("lo lockdown"), 9001, "lockdown (-)");
+        super(GeneralUtils.toArray("ld lockdown"), 9001, "lockdown (-) locks down the bot to controller-only");
     }
 
     @Override
     public void onCommand(MessageEvent<?> event, String... args)
             throws Exception {
 
-        if(args.length>=1){
+        if(args.length>=1 && args[0].equalsIgnoreCase("-")){
            GeneralRegistry.Commands.clear();
             GeneralRegistry.SimpleActions.clear();
             GeneralRegistry.SimpleMessages.clear();
