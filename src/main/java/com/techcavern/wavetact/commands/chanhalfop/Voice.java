@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.techcavern.wavetact.commands.chanop;
+package com.techcavern.wavetact.commands.chanhalfop;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.utils.objects.Command;
@@ -18,7 +18,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class Voice extends Command {
     @CMD
     public Voice() {
-        super(GeneralUtils.toArray("voice vo vop"), 9, "Voice (-)(User)");
+        super(GeneralUtils.toArray("voice vo vop"), 6, "Voice (-)(User)");
     }
 
     @Override

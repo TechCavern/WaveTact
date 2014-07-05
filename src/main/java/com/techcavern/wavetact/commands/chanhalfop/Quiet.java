@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.commands.chanop;
+package com.techcavern.wavetact.commands.chanhalfop;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.utils.objects.Command;
@@ -12,7 +12,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class Quiet extends Command {
     @CMD
     public Quiet() {
-        super(GeneralUtils.toArray("quiet mute m"), 9, "Quiet [ircd] (-)[User] (time)");
+        super(GeneralUtils.toArray("quiet mute m"), 6, "Quiet [ircd] (-)[User] (time)");
     }
 
     @Override

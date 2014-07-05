@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.commands.chanop;
+package com.techcavern.wavetact.commands.chanhalfop;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.utils.objects.Command;
@@ -12,7 +12,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class Ban extends Command {
     @CMD
     public Ban() {
-        super(GeneralUtils.toArray("ban b"), 9, "Ban (-)(+)[User] (time)");
+        super(GeneralUtils.toArray("ban b"), 6, "Ban (-)(+)[User] (time)");
     }
 
     @Override

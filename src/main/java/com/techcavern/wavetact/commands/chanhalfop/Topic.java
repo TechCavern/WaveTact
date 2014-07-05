@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.techcavern.wavetact.commands.chanop;
+package com.techcavern.wavetact.commands.chanhalfop;
 
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.objects.Command;
@@ -21,7 +21,7 @@ import java.util.List;
 public class Topic extends Command {
 
     public Topic() {
-        super(GeneralUtils.toArray("topic t"), 10, "Topic [Seperator] [a(add)/s(switch)/+[topic #]/-[topic #]/(Insert message to replace whole topic)/ss(switch seperator)] (Messages to add)(Integer to swap)(seperator to change to) (Integer to swap)");
+        super(GeneralUtils.toArray("topic t"), 6, "Topic [Seperator] [a(add)/s(switch)/+[topic #]/-[topic #]/(Insert message to replace whole topic)/ss(switch seperator)] (Messages to add)(Integer to swap)(seperator to change to) (Integer to swap)");
     }
 
     @Override

@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.techcavern.wavetact.commandline.utils.AddServer;
 import com.techcavern.wavetact.commandline.utils.BasicCommands;
 import com.techcavern.wavetact.commandline.utils.Start;
+import com.techcavern.wavetact.commands.chanhalfop.*;
 import com.techcavern.wavetact.commands.chanop.*;
 import com.techcavern.wavetact.commands.chanowner.Owner;
 import com.techcavern.wavetact.commands.chanowner.Protect;
