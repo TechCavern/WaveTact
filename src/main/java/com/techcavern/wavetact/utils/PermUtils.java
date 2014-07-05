@@ -1,5 +1,7 @@
 package com.techcavern.wavetact.utils;
 
+import com.techcavern.wavetact.utils.objects.PermUser;
+import com.techcavern.wavetact.utils.objects.PermUserHostmask;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -25,36 +27,53 @@ public class PermUtils {
 
         return userString;
     }
-
-    private static boolean isController(PircBotX bot, User userObject) {
-        String account = getAccount(bot, userObject);
-        if (account != null) {
-            return GeneralRegistry.Controllers.equals(account);
-        } else {
-            return GeneralRegistry.ControllerHostmasks.equals(userObject.getHostmask());
-        }
-    }
-
     private static boolean isAuthor(PircBotX bot, User userObject) {
         String account = getAccount(bot, userObject);
         if (account != null) {
             return GeneralRegistry.Authors.equals(account);
         } else {
-            return GeneralRegistry.AuthorHostmasks.equals(userObject.getHostmask());
+            return GeneralRegistry.AuthorHostmasks.equals("*!" + userObject.getRealName() +"@" + userObject.getHostmask());
         }
     }
 
-    public static int getPermLevel(PircBotX bot, User userObject, Channel channelObject) {
-        if (isController(bot, userObject)) {
-            return 9001;
-        } else if (channelObject.isOwner(userObject)) {
+    public static int getAutomaticPermLevel(PircBotX bot, User userObject, Channel channelObject) {
+
+        if (channelObject.isOwner(userObject)) {
             return 15;
         } else if (channelObject.isOp(userObject) || channelObject.isSuperOp(userObject)) {
             return 10;
-        } else if (channelObject.isHalfOp(userObject) || channelObject.hasVoice(userObject) || isAuthor(bot, userObject)) {
+        }else if (channelObject.isHalfOp(userObject)){
+            return 7;
+        } else if (channelObject.hasVoice(userObject) || isAuthor(bot, userObject)) {
             return 5;
         } else {
             return 0;
+        }
+    }
+    public static int getManualPermLevel(PircBotX bot, User userObject) {
+        String account = getAccount(bot, userObject);
+        if(account != null) {
+            for(PermUser user: GeneralRegistry.PermUsers){
+                if(user.getPermUser().equals(account)){
+                    return user.getPermLevel();
+                }
+
+            }
+        }else{
+            for(PermUserHostmask hostmask : GeneralRegistry.PermUserHostmasks){
+                if((hostmask.getHostmask().equals(userObject.getHostmask()) || hostmask.getHostmask().equals("*")) &&(hostmask.getRealname().equalsIgnoreCase(userObject.getRealName()) || hostmask.getRealname().equals("*"))){
+                    return hostmask.getPermLevel();
+                }
+            }
+        }
+        return 0;
+
+    }
+    public static int getPermLevel(PircBotX bot, User userObject, Channel channelObject){
+        if(getAutomaticPermLevel(bot, userObject, channelObject) < getManualPermLevel(bot, userObject)){
+            return getManualPermLevel(bot, userObject);
+        }else{
+            return getAutomaticPermLevel(bot, userObject, channelObject);
         }
     }
 }
