@@ -29,6 +29,7 @@ public class CPermLevel extends Command {
                 if (PLChannel != null) {
                     PLUser.getPermChannel().remove(PLChannel);
                     PermUserUtils.savePermUsers();
+                    event.getChannel().send().message("User Removed");
                 } else {
                     event.getChannel().send().message("User is not found on channel access lists");
                 }
@@ -38,6 +39,8 @@ public class CPermLevel extends Command {
                 if (PLChannel != null) {
                     PLChannel.setPermLevel(Integer.parseInt(args[1]));
                     PermUserUtils.savePermUsers();
+                    event.getChannel().send().message("User Modified");
+
                 } else {
                     event.getChannel().send().message("User is not found on channel access lists");
                 }
@@ -57,6 +60,7 @@ public class CPermLevel extends Command {
                         newPLUser.getPermChannel().add(new PermChannel(event.getChannel().getName(), Integer.getInteger(args[1]), false));
                         PermUserUtils.savePermUsers();
                     }
+                    event.getChannel().send().message("User Added");
                 } else {
                     event.getChannel().send().message("User is already in channel access lists!");
                 }

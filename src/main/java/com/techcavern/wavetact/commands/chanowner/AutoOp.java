@@ -27,6 +27,7 @@ public class AutoOp extends Command {
             if (PLChannel != null) {
                 PLChannel.setAuto(false);
                 PermUserUtils.savePermUsers();
+                event.getChannel().send().message("User will no longer be auto-opped");
             } else {
                 event.getChannel().send().message("User is not found on channel access lists");
             }
@@ -36,6 +37,8 @@ public class AutoOp extends Command {
             if (PLChannel != null) {
                 PLChannel.setAuto(true);
                 PermUserUtils.savePermUsers();
+                event.getChannel().send().message("User will henceforth be auto-opped");
+
             } else {
                 event.getChannel().send().message("User is not found on channel access lists");
             }

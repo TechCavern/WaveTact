@@ -19,10 +19,10 @@ import org.pircbotx.hooks.events.MessageEvent;
 /**
  * @author jztech101
  */
-public class Lockdown extends Command {
+public class DefCon extends Command {
     @CMD
-    public Lockdown() {
-        super(GeneralUtils.toArray("ld lockdown"), 9001, "lockdown (-) locks down the bot to controller-only");
+    public DefCon() {
+        super(GeneralUtils.toArray("defcon"), 9001, "defcon (-) locks down the bot to controller-only");
     }
 
     @Override

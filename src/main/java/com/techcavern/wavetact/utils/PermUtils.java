@@ -30,10 +30,15 @@ public class PermUtils {
     private static boolean isAuthor(PircBotX bot, User userObject) {
         String account = getAccount(bot, userObject);
         if (account != null) {
-            return GeneralRegistry.Authors.equals(account);
+            for(String author: GeneralRegistry.Authors){
+                if(author.equals(account)){
+                    return true;
+                }
+            }
         } else {
-            return GeneralRegistry.AuthorHostmasks.equals("*!" + userObject.getRealName() +"@" + userObject.getHostmask());
+            return false;
         }
+        return false;
     }
 
     public static int getAutomaticPermLevel(PircBotX bot, User userObject, Channel channelObject) {

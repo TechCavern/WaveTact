@@ -146,7 +146,7 @@ public class LoadUtils {
         GeneralRegistry.Commands.add(new Weather());
         GeneralRegistry.Commands.add(new Topic());
         GeneralRegistry.Commands.add(new Attack());
-        GeneralRegistry.Commands.add(new Lockdown());
+        GeneralRegistry.Commands.add(new DefCon());
      //   GeneralRegistry.Commands.add(new PermLevel());
 
 
