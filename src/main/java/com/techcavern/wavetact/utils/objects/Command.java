@@ -14,7 +14,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 public abstract class Command {
 
     private final String[] comid;
-    private final int PermLevel;
+    private int PermLevel;
     private final String Desc;
 
     protected Command(String[] comid, int PermLevel, String Desc) {
@@ -35,6 +35,10 @@ public abstract class Command {
 
     public String[] getCommandID() {
         return comid;
+    }
+
+    public void setPermLevel(int newpermlevel) {
+        this.PermLevel = newpermlevel;
     }
 
     public String getCommand() {
