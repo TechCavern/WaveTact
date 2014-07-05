@@ -5,11 +5,14 @@ import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.PermUtils;
+import com.techcavern.wavetact.utils.logUtils.LoggingArrayList;
 import com.techcavern.wavetact.utils.objects.Command;
 import com.techcavern.wavetact.utils.objects.PermChannel;
 import com.techcavern.wavetact.utils.objects.PermUser;
 import com.techcavern.wavetact.utils.objects.objectUtils.PermUserUtils;
 import org.pircbotx.hooks.events.MessageEvent;
+
+import java.util.List;
 
 /**
  * Created by jztech101 on 7/5/14.
@@ -22,8 +25,11 @@ public class CPermLevel extends Command {
 
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
-        int c = Integer.parseInt(args[1]);
-        if (c > 15) {
+    int c = 0;
+        if(args.length > 1) {
+            c = Integer.parseInt(args[1]);
+    }
+        if (c <= 15) {
             if(PermUtils.getAccount(event.getBot(), GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", ""))) != null) {
                 if (args[0].startsWith("-")) {
                     PermChannel PLChannel = PermUserUtils.getPermLevelChannel(event.getBot().getServerInfo().getNetwork(), PermUtils.getAccount(event.getBot(), GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", ""))), event.getChannel().getName());
@@ -53,16 +59,20 @@ public class CPermLevel extends Command {
                     PermUser PLUser = PermUserUtils.getPermUserbyNick(PermUtils.getAccount(event.getBot(), GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", ""))), event.getBot().getServerInfo().getNetwork());
                     if (PLChannel == null) {
                         if (PLUser == null) {
-                            GeneralRegistry.PermUsers.add(new PermUser(event.getBot().getServerInfo().getNetwork(), null, PermUtils.getAccount(event.getBot(), GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", ""))), false));
+                            List<PermChannel> emptylist = new LoggingArrayList<PermChannel>("PermChannel");
+                            GeneralRegistry.PermUsers.add(new PermUser(event.getBot().getServerInfo().getNetwork(), emptylist, PermUtils.getAccount(event.getBot(), GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", ""))), false));
                             PermUser newPLUser = PermUserUtils.getPermUserbyNick(PermUtils.getAccount(event.getBot(), GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", ""))), event.getBot().getServerInfo().getNetwork());
                             newPLUser.getPermChannel().add(new PermChannel(event.getChannel().getName(), Integer.getInteger(args[1]), false));
                             PermUserUtils.savePermUsers();
+                            event.getChannel().send().message("User Added");
+
                         } else {
                             PermUser newPLUser = PermUserUtils.getPermUserbyNick(PermUtils.getAccount(event.getBot(), GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", ""))), event.getBot().getServerInfo().getNetwork());
                             newPLUser.getPermChannel().add(new PermChannel(event.getChannel().getName(), Integer.getInteger(args[1]), false));
                             PermUserUtils.savePermUsers();
+                            event.getChannel().send().message("User Added");
+
                         }
-                        event.getChannel().send().message("User Added");
                     } else {
                         event.getChannel().send().message("User is already in channel access lists!");
                     }
