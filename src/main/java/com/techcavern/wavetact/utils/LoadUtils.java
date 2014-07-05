@@ -141,6 +141,7 @@ public class LoadUtils {
         GeneralRegistry.Commands.add(new PingTime());
         GeneralRegistry.Commands.add(new Question());
         GeneralRegistry.Commands.add(new Weather());
+        GeneralRegistry.Commands.add(new Topic());
 
 
     }
