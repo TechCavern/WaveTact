@@ -25,12 +25,14 @@ public class BasicCommands extends CommandLine {
                 "http://github.com/TechCavern/WaveTact", true);
         SimpleMessage authors = new SimpleMessage("authors", 0 , "Julian (JZTech101), Logan", true);
         SimpleMessage contributors = new SimpleMessage("contributors", 0 , "Kenneth (kaendfinger), Sam (samrg472), Leah", true);
+        SimpleAction nom = new SimpleAction("nom", 0, "noms on $*", true);
         GeneralRegistry.SimpleActions.add(potato);
         GeneralRegistry.SimpleMessages.add(ping);
         GeneralRegistry.SimpleMessages.add(pong);
         GeneralRegistry.SimpleMessages.add(source);
         GeneralRegistry.SimpleMessages.add(authors);
         GeneralRegistry.SimpleMessages.add(contributors);
+        GeneralRegistry.SimpleActions.add(nom);
         SimpleActionUtils.saveSimpleActions();
         SimpleMessageUtils.saveSimpleMessages();
         System.out.println("Basic Commands Added");
