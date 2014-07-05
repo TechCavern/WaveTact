@@ -21,7 +21,7 @@ public class CPermLevel extends Command {
 
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
-        int c = Integer.parseInt(GetUtils.getUserByNick(event.getChannel(), args[0]).getLogin());
+        int c = Integer.parseInt(args[1]);
         if (c > 15) {
             if (args[0].startsWith("-")) {
                 PermChannel PLChannel = PermUserUtils.getPermLevelChannel(event.getBot().getServerInfo().getNetwork(), GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", "")).getLogin(), event.getChannel().getName());
