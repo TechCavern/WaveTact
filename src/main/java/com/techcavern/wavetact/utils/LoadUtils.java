@@ -8,6 +8,8 @@ import com.techcavern.wavetact.commandline.utils.BasicCommands;
 import com.techcavern.wavetact.commandline.utils.Start;
 import com.techcavern.wavetact.commands.chanhalfop.*;
 import com.techcavern.wavetact.commands.chanop.*;
+import com.techcavern.wavetact.commands.chanowner.AutoOp;
+import com.techcavern.wavetact.commands.chanowner.CPermLevel;
 import com.techcavern.wavetact.commands.chanowner.Owner;
 import com.techcavern.wavetact.commands.chanowner.Protect;
 import com.techcavern.wavetact.commands.controller.*;
@@ -146,8 +148,8 @@ public class LoadUtils {
         GeneralRegistry.Commands.add(new Topic());
         GeneralRegistry.Commands.add(new Attack());
         GeneralRegistry.Commands.add(new DefCon());
-     //   GeneralRegistry.Commands.add(new PermLevel());
-
+        GeneralRegistry.Commands.add(new CPermLevel());
+        GeneralRegistry.Commands.add(new AutoOp());
 
 
 
