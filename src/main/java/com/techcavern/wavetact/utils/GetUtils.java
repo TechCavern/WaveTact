@@ -1,6 +1,7 @@
 package com.techcavern.wavetact.utils;
 
 import com.techcavern.wavetact.utils.objects.*;
+import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -14,6 +15,26 @@ public class GetUtils {
         for (User u : channelObject.getUsers()) {
             if (u.getNick().equalsIgnoreCase(nick)) {
                 return u;
+            }
+        }
+        return null;
+    }
+    public static PermUser getPermUserbyNick(String nick){
+        for(PermUser c: GeneralRegistry.PermUsers){
+            if(c.getPermUser().equals(nick)){
+                return c;
+            }
+        }
+        return null;
+    }
+    public static PermUserHostmask getPermUserHostmaskbyHostmask(String Hostmask){
+        String realnamebfr = StringUtils.substringAfter(Hostmask, "!");
+        String realname = StringUtils.substringBefore(realnamebfr, "@");
+        String hostmask = StringUtils.substringAfter(Hostmask, "@");
+        String nick = StringUtils.substringBefore(Hostmask, "!");
+        for(PermUserHostmask c: GeneralRegistry.PermUserHostmasks){
+            if((c.getHostmask().equals(hostmask))&&(c.getRealname().equalsIgnoreCase(realname))&& (c.getNick().equals(nick))){
+                return c;
             }
         }
         return null;

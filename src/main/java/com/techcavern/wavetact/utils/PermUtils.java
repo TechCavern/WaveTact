@@ -2,6 +2,7 @@ package com.techcavern.wavetact.utils;
 
 import com.techcavern.wavetact.utils.objects.PermUser;
 import com.techcavern.wavetact.utils.objects.PermUserHostmask;
+import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -61,7 +62,7 @@ public class PermUtils {
             }
         }else{
             for(PermUserHostmask hostmask : GeneralRegistry.PermUserHostmasks){
-                if((hostmask.getHostmask().equals(userObject.getHostmask()) || hostmask.getHostmask().equals("*")) &&(hostmask.getRealname().equalsIgnoreCase(userObject.getRealName()) || hostmask.getRealname().equals("*"))){
+                if((hostmask.getNick().equals(userObject.getNick()) || hostmask.getHostmask().equals("*")) && (hostmask.getHostmask().equals(userObject.getHostmask()) || hostmask.getHostmask().equals("*")) &&(hostmask.getRealname().equalsIgnoreCase(userObject.getRealName()) || hostmask.getRealname().equals("*"))){
                     return hostmask.getPermLevel();
                 }
             }
@@ -75,5 +76,12 @@ public class PermUtils {
         }else{
             return getAutomaticPermLevel(bot, userObject, channelObject);
         }
+    }
+    public static void createPermHostmask(String Hostmask, int permLevel){
+        String realnamebfr = StringUtils.substringAfter(Hostmask, "!");
+        String realname = StringUtils.substringBefore(realnamebfr, "@");
+        String hostmask = StringUtils.substringAfter(Hostmask, "@");
+        String nick = StringUtils.substringBefore(Hostmask, "!");
+        GeneralRegistry.PermUserHostmasks.add(new PermUserHostmask(nick, realname, hostmask, permLevel));
     }
 }

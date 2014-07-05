@@ -2,6 +2,9 @@ package com.techcavern.wavetact;
 
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.LoadUtils;
+import com.techcavern.wavetact.utils.objects.PermUserHostmask;
+import com.techcavern.wavetact.utils.objects.objectUtils.PermUserHostmaskUtils;
+import com.techcavern.wavetact.utils.objects.objectUtils.PermUserUtils;
 import com.techcavern.wavetact.utils.objects.objectUtils.SimpleActionUtils;
 import com.techcavern.wavetact.utils.objects.objectUtils.SimpleMessageUtils;
 import org.slf4j.impl.SimpleLogger;
@@ -17,6 +20,8 @@ public class Main {
         LoadUtils.initializeCommandlines();
         LoadUtils.parseCommandLineArguments(args);
         LoadUtils.registerCommands();
+        PermUserHostmaskUtils.loadPermUserHostmasks();
+        PermUserUtils.loadPermUsers();
         SimpleActionUtils.loadSimpleActions();
         SimpleMessageUtils.loadSimpleMessages();
         LoadUtils.startThreads();

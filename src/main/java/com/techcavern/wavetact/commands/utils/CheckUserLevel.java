@@ -29,9 +29,10 @@ public class CheckUserLevel extends Command {
             event.respond(userObject.getNick() + " is my Master!");
         } else if (i == 15) {
             event.respond(userObject.getNick() + " is a Channel Owner!");
-
         } else if (i == 10) {
             event.respond(userObject.getNick() + " is a Channel Operator!");
+        } else if (i == 7) {
+            event.respond(userObject.getNick() + " is a Channel Half-Operator");
         } else if (i == 5) {
             event.respond(userObject.getNick() + " is a Trusted User!");
         } else {

@@ -24,6 +24,7 @@ public class PermUserHostmaskUtils {
                 List<LinkedTreeMap> actions = file.read(List.class);
                 GeneralRegistry.PermUserHostmasks.clear();
                 GeneralRegistry.PermUserHostmasks.addAll(actions.stream().map(act -> new PermUserHostmask((String) act.get("hostmask"),
+                        (String) act.get("nick"),
                         (String) act.get("realname"),
                         ((Double) act.get("PermLevel")).intValue())).collect(Collectors.toList()));
             } catch (FileNotFoundException e) {
