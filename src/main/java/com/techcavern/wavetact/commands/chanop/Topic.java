@@ -21,7 +21,7 @@ import java.util.List;
 public class Topic extends Command {
 
     public Topic() {
-        super(GeneralUtils.toArray("topic t"), 10, "Topic [Seperator] [a(add)/s(switch)/+[topic #]/-[topic #]/(Insert message to replace whole topic)] (Messages to add)(Integer to swap) (Integer to swap)");
+        super(GeneralUtils.toArray("topic t"), 10, "Topic [Seperator] [a(add)/s(switch)/+[topic #]/-[topic #]/(Insert message to replace whole topic)/ss(switch seperator)] (Messages to add)(Integer to swap)(seperator to change to) (Integer to swap)");
     }
 
     @Override
@@ -32,11 +32,17 @@ public class Topic extends Command {
         if(args[1].equalsIgnoreCase("a")){
             event.getChannel().send().setTopic(event.getChannel().getTopic()+ " " + args[0] + " " + GeneralUtils.buildMessage(2, args.length, args));
         }else if(args[1].startsWith("+")){
-            event.getChannel().send().setTopic(event.getChannel().getTopic().replace(topic.get(Integer.parseInt(args[1].replaceFirst("\\+", ""))-1), " " + GeneralUtils.buildMessage(2,args.length, args)));
+            newtopic.set(Integer.parseInt(args[1].replaceFirst("\\+", ""))-1, " " + GeneralUtils.buildMessage(2,args.length, args));
+            event.getChannel().send().setTopic(StringUtils.join(newtopic, args[0]));
         }else if(args[1].startsWith("-")){
-            event.getChannel().send().setTopic(event.getChannel().getTopic().replace(topic.get(Integer.parseInt(args[1].replace("-", ""))-1), ""));
+            newtopic.remove(Integer.parseInt(args[1].replaceFirst("\\+", ""))-1);
+            event.getChannel().send().setTopic(StringUtils.join(newtopic, args[0]));
         }else if(args[1].equalsIgnoreCase("s")){
-            event.getChannel().send().setTopic(event.getChannel().getTopic().replace(topic.get(Integer.parseInt(args[2])), topic.get(Integer.parseInt(args[3])-1)).replace(topic.get(Integer.parseInt(args[3])-1), topic.get(Integer.parseInt(args[2]))));
+            newtopic.set((Integer.parseInt(args[2])-1), topic.get(Integer.parseInt(args[3])-1));
+            newtopic.set((Integer.parseInt(args[3])-1), topic.get(Integer.parseInt(args[2])-1));
+            event.getChannel().send().setTopic(StringUtils.join(newtopic, args[0]));
+        }else if (args[1].equalsIgnoreCase("ss")){
+            event.getChannel().send().setTopic(event.getChannel().getTopic().replace(args[0], args[2]));
         }else{
             event.getChannel().send().setTopic(GeneralUtils.buildMessage(1, args.length, args));
         }
