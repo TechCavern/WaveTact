@@ -35,13 +35,13 @@ public class Ban extends Command {
 
                 if (args.length == 2) {
                     ban(hostmask, event.getChannel(), event.getBot());
-                    UTime utimeObject = new UTime(hostmask, event.getBot().getServerInfo().getNetwork(), "b", event.getChannel().getName(), GeneralUtils.getMilliSeconds(args[1]) + System.currentTimeMillis());
+                    UTime utimeObject = new UTime(hostmask, event.getBot().getServerInfo().getNetwork(), "b", event.getChannel().getName(), GeneralUtils.getMilliSeconds(args[1]));
                     GeneralRegistry.BanTimes.add(utimeObject);
                     BanTimeUtils.saveBanTimes();
 
                 } else if (args.length < 2) {
                     ban(hostmask, event.getChannel(), event.getBot());
-                    UTime utimeObject = new UTime(hostmask, event.getBot().getServerInfo().getNetwork(), "b", event.getChannel().getName(), GeneralUtils.getMilliSeconds("7w") + System.currentTimeMillis());
+                    UTime utimeObject = new UTime(hostmask, event.getBot().getServerInfo().getNetwork(), "b", event.getChannel().getName(), GeneralUtils.getMilliSeconds("7w"));
                     GeneralRegistry.BanTimes.add(utimeObject);
                     BanTimeUtils.saveBanTimes();
                 }

@@ -32,7 +32,7 @@ public class CheckTime implements Runnable {
                 for (int i = 0; i < GeneralRegistry.BanTimes.size(); i++) {
                     UTime utimeObject = GeneralRegistry.BanTimes.get(i);
                     try {
-                        if (System.currentTimeMillis() >= utimeObject.getTime()) {
+                        if (System.currentTimeMillis() >= utimeObject.getTime()  + System.currentTimeMillis()) {
                             PircBotX botObject = GetUtils.getBotByNetwork(utimeObject.getNetworkName());
                             IRCUtils.setMode(GetUtils.getChannelbyName(botObject, utimeObject.getChannelName()), botObject, "-b ", utimeObject.getHostmask());
                             GeneralRegistry.BanTimes.remove(utimeObject);
@@ -46,7 +46,7 @@ public class CheckTime implements Runnable {
                 for (int i = 0; i < GeneralRegistry.QuietTimes.size(); i++) {
                     UTime utimeObject = GeneralRegistry.QuietTimes.get(i);
                     try {
-                        if (System.currentTimeMillis() >= utimeObject.getTime()) {
+                        if (System.currentTimeMillis() >= utimeObject.getTime() + System.currentTimeMillis()) {
                             PircBotX botObject = GetUtils.getBotByNetwork(utimeObject.getNetworkName());
                             switch (utimeObject.getType().toLowerCase()) {
                                 case "u":

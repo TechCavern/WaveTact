@@ -36,13 +36,13 @@ public class Quiet extends Command {
                 if (args.length == 3) {
                     quiet(hostmask, args[0],
                             event.getChannel(), event.getBot());
-                    UTime c = new UTime(hostmask, event.getBot().getServerInfo().getNetwork(), args[0], event.getChannel().getName(), GeneralUtils.getMilliSeconds(args[2]) + System.currentTimeMillis());
+                    UTime c = new UTime(hostmask, event.getBot().getServerInfo().getNetwork(), args[0], event.getChannel().getName(), GeneralUtils.getMilliSeconds(args[2]));
                     GeneralRegistry.QuietTimes.add(c);
                     QuietTimeUtils.saveQuietTimes();
 
                 } else if (args.length < 3) {
                     quiet(hostmask, args[0], event.getChannel(), event.getBot());
-                    UTime c = new UTime(hostmask, event.getBot().getServerInfo().getNetwork(), args[0], event.getChannel().getName(), GeneralUtils.getMilliSeconds("7w") + System.currentTimeMillis());
+                    UTime c = new UTime(hostmask, event.getBot().getServerInfo().getNetwork(), args[0], event.getChannel().getName(), GeneralUtils.getMilliSeconds("7w"));
                     GeneralRegistry.QuietTimes.add(c);
                     QuietTimeUtils.saveQuietTimes();
 
