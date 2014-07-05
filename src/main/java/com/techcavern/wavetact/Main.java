@@ -17,11 +17,11 @@ public class Main {
         System.setProperty(SimpleLogger.SHOW_DATE_TIME_KEY, "true");
         System.setProperty(SimpleLogger.DATE_TIME_FORMAT_KEY, "[yyyy/MM/dd HH:mm:ss]");
         System.setProperty(SimpleLogger.LEVEL_IN_BRACKETS_KEY, "true");
+        PermUserHostmaskUtils.loadPermUserHostmasks();
+        PermUserUtils.loadPermUsers();
         LoadUtils.initializeCommandlines();
         LoadUtils.parseCommandLineArguments(args);
         LoadUtils.registerCommands();
-        PermUserHostmaskUtils.loadPermUserHostmasks();
-        PermUserUtils.loadPermUsers();
         SimpleActionUtils.loadSimpleActions();
         SimpleMessageUtils.loadSimpleMessages();
         LoadUtils.startThreads();
