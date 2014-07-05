@@ -27,22 +27,31 @@ public class PermUtils {
     }
 
     private static boolean isController(PircBotX bot, User userObject) {
-        String v = getAccount(bot, userObject);
-        if (v != null) {
-            return GeneralRegistry.Controllers.contains(v.toLowerCase());
+        String account = getAccount(bot, userObject);
+        if (account != null) {
+            return GeneralRegistry.Controllers.equals(account);
         } else {
-            return GeneralRegistry.ControllerHostmasks.contains(userObject.getHostmask());
+            return GeneralRegistry.ControllerHostmasks.equals(userObject.getHostmask());
+        }
+    }
+
+    private static boolean isAuthor(PircBotX bot, User userObject) {
+        String account = getAccount(bot, userObject);
+        if (account != null) {
+            return GeneralRegistry.Authors.equals(account);
+        } else {
+            return GeneralRegistry.AuthorHostmasks.equals(userObject.getHostmask());
         }
     }
 
     public static int getPermLevel(PircBotX bot, User userObject, Channel channelObject) {
-        if (PermUtils.isController(bot, userObject)) {
+        if (isController(bot, userObject)) {
             return 9001;
         } else if (channelObject.isOwner(userObject)) {
             return 15;
         } else if (channelObject.isOp(userObject) || channelObject.isSuperOp(userObject)) {
             return 10;
-        } else if (channelObject.isHalfOp(userObject) || channelObject.hasVoice(userObject)) {
+        } else if (channelObject.isHalfOp(userObject) || channelObject.hasVoice(userObject) || isAuthor(bot, userObject)) {
             return 5;
         } else {
             return 0;

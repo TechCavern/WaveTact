@@ -16,6 +16,12 @@ Building
 - Libraries will be downloaded and packed into the JAR
 - You will find the JAR in PROJECT_ROOT/build/libs/
 
+Permissions
+===========
+-By default, everyone is given their permissions based on channel status. Voiced is representative of trusted
+-By default, authors are given trusted status
+-In src/main/java/com/techcavern/wavetact/utils/GeneralRegistry.java, you will find Controller and Controller hostmasks. Controller hostmasks are a failover in case the network you are on does not run Atheme or fails to show "is Logged in as" in /whois. Controllers have access to ALL commands and override all other permissions. Be careful as to who you give this to.
+
 Running
 =======
 - Run `java -jar WaveTact.jar`
