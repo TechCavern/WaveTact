@@ -20,11 +20,22 @@ Permissions
 ===========
 - By default, everyone is given their permissions based on channel status. Voiced is representative of trusted
 - By default, authors are given trusted status
-- In src/main/java/com/techcavern/wavetact/utils/GeneralRegistry.java, you will find Controller and Controller hostmasks. Controller hostmasks are a failover in case the network you are on does not run Atheme or fails to show "is Logged in as" in /whois. Controllers have access to ALL commands and override all other permissions. Be careful as to who you give this to.
+
+PermLevels
+==========
+- 9001 - Bot Controller (Access to all commands everywhere)
+- 20 - Network Oper (Access to all commands below controller on a specific network)
+- 15 - Channel Owner (Access to all commands below controller on a specific channel)
+- 10 - Channel Operator (Access to all commands below Owner on a specific channel)
+- 7 - Channel Half-Operator (Access to all commands below Operator on a specific channel)
+- 5 - Channel Trusted (Access to all commands below Half-Operator on a specific channel)
+- 0 - Default Access. Everyone has it.
 
 Running
 =======
 - Run `java -jar WaveTact.jar`
 - WaveTact help is access by the -h or -help parameter
+- Adding and removing controllers is available via the -c or -controller parameter.
 - Make configuration by using the -addserver or -a parameter
 - If you wish to populate the custom commands database with some prechosen commands use -addbasiccommands ONCE.
+-
