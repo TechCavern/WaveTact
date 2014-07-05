@@ -27,7 +27,9 @@ public class CheckUserLevel extends Command {
         int i = PermUtils.getPermLevel(event.getBot(), userObject, event.getChannel());
         if (i == 9001) {
             event.respond(userObject.getNick() + " is my Master!");
-        } else if (i == 15) {
+        } else if (i == 20) {
+            event.respond(userObject.getNick() + " is a Network Administrator!");
+        }else if (i == 15) {
             event.respond(userObject.getNick() + " is a Channel Owner!");
         } else if (i == 10) {
             event.respond(userObject.getNick() + " is a Channel Operator!");

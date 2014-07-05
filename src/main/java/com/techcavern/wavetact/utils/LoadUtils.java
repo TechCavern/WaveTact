@@ -95,7 +95,6 @@ public class LoadUtils {
 
     public static void registerDevServer() {
         List<String> Chans = Arrays.asList("#techcavern");
-      //  new PermUser("JZTech101", 10);
         PircBotX Dev = LoadUtils.createbot(null, "EsperNet", Chans, "WaveTactDev", "irc.esper.net");
         GeneralRegistry.WaveTact.addBot(Dev);
         new CommandChar("@", Dev);
