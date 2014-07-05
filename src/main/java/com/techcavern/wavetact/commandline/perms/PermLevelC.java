@@ -18,7 +18,7 @@ public class PermLevelC extends CommandLine {
 
     @Override
     public void doAction(String[] args) {
-        if (args[0].startsWith("-")) {
+        if (args[1].startsWith("-")) {
             GeneralRegistry.Controllers.remove(args[1].replace("-", ""));
             ControllerUtils.saveControllers();
         } else {
