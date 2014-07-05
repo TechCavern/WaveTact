@@ -48,7 +48,9 @@ public class PermUtils {
         }
         else if (channelObject.isOwner(userObject)) {
             return 15;
-        } else if (channelObject.isOp(userObject) || channelObject.isSuperOp(userObject)) {
+        }else if(channelObject.isSuperOp(userObject)){
+            return 13;
+        } else if (channelObject.isOp(userObject)) {
             return 10;
         }else if (channelObject.isHalfOp(userObject)){
             return 7;

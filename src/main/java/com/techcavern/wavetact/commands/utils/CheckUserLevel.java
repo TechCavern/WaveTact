@@ -31,6 +31,8 @@ public class CheckUserLevel extends Command {
             event.respond(userObject.getNick() + " is a Network Administrator!");
         }else if (i == 15) {
             event.respond(userObject.getNick() + " is a Channel Owner!");
+        }else if (i == 13) {
+            event.respond(userObject.getNick() + " is a Channel Admin!");
         } else if (i == 10) {
             event.respond(userObject.getNick() + " is a Channel Operator!");
         } else if (i == 7) {
