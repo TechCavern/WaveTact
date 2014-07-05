@@ -27,7 +27,7 @@ public class PermUserUtils {
                 GeneralRegistry.PermUsers.addAll(actions.stream().map(act -> new PermUser((String) act.get("PermNetwork"),
                         (List<PermChannel>) act.get("Channel"),
                         (String) act.get("PermUser"),
-                        (Boolean) act.get("Global")).collect(Collectors.toList()));
+                        (Boolean) act.get("Global")).collect(Collectors.toList())));
             } catch (FileNotFoundException e) {
                 ErrorUtils.handleException(e);
             }

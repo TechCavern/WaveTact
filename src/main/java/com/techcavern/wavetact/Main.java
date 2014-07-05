@@ -2,6 +2,7 @@ package com.techcavern.wavetact;
 
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.LoadUtils;
+import com.techcavern.wavetact.utils.objects.objectUtils.ControllerUtils;
 import com.techcavern.wavetact.utils.objects.objectUtils.PermUserUtils;
 import com.techcavern.wavetact.utils.objects.objectUtils.SimpleActionUtils;
 import com.techcavern.wavetact.utils.objects.objectUtils.SimpleMessageUtils;
@@ -15,10 +16,11 @@ public class Main {
         System.setProperty(SimpleLogger.SHOW_DATE_TIME_KEY, "true");
         System.setProperty(SimpleLogger.DATE_TIME_FORMAT_KEY, "[yyyy/MM/dd HH:mm:ss]");
         System.setProperty(SimpleLogger.LEVEL_IN_BRACKETS_KEY, "true");
-        PermUserUtils.loadPermUsers();
+        ControllerUtils.loadControllers();
         LoadUtils.initializeCommandlines();
         LoadUtils.parseCommandLineArguments(args);
         LoadUtils.registerCommands();
+        PermUserUtils.loadPermUsers();
         SimpleActionUtils.loadSimpleActions();
         SimpleMessageUtils.loadSimpleMessages();
         LoadUtils.startThreads();

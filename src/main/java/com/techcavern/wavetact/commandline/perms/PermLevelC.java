@@ -24,8 +24,6 @@ public class PermLevelC extends CommandLine {
         } else {
             GeneralRegistry.Controllers.add(args[1]);
             ControllerUtils.saveControllers();
-
-
         }
     }
 }
