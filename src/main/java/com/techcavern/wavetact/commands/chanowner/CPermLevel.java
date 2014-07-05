@@ -51,7 +51,7 @@ public class CPermLevel extends Command {
                 } else {
                     PermChannel PLChannel = PermUserUtils.getPermLevelChannel(event.getBot().getServerInfo().getNetwork(), PermUtils.getAccount(event.getBot(), GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", ""))), event.getChannel().getName());
                     PermUser PLUser = PermUserUtils.getPermUserbyNick(PermUtils.getAccount(event.getBot(), GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", ""))), event.getBot().getServerInfo().getNetwork());
-                    if (PLChannel != null) {
+                    if (PLChannel == null) {
                         if (PLUser == null) {
                             GeneralRegistry.PermUsers.add(new PermUser(event.getBot().getServerInfo().getNetwork(), null, PermUtils.getAccount(event.getBot(), GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", ""))), false));
                             PermUser newPLUser = PermUserUtils.getPermUserbyNick(PermUtils.getAccount(event.getBot(), GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", ""))), event.getBot().getServerInfo().getNetwork());

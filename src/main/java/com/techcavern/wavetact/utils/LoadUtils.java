@@ -99,6 +99,7 @@ public class LoadUtils {
         List<String> Chans = Arrays.asList("#techcavern");
         PircBotX Dev = LoadUtils.createbot(null, "EsperNet", Chans, "WaveTactDev", "irc.esper.net");
         GeneralRegistry.WaveTact.addBot(Dev);
+        GeneralRegistry.Controllers.add("JZTech101");
         new CommandChar("@", Dev);
     }
 
