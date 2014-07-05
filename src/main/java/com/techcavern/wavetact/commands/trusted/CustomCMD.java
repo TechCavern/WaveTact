@@ -92,9 +92,9 @@ public class CustomCMD extends Command {
     private void removeCommand(MessageEvent<?> event, CommandType type, String command) {
         Command cmd = null;
         if (type == CommandType.MESSAGE)
-            cmd = GetUtils.getSimpleMessage(command);
+            cmd = SimpleMessageUtils.getSimpleMessage(command);
         else if (type == CommandType.ACTION)
-            cmd = GetUtils.getSimpleAction(command);
+            cmd = SimpleActionUtils.getSimpleAction(command);
 
         if (cmd == null) {
             event.respond("Command does not exist");

@@ -95,7 +95,7 @@ public class LoadUtils {
 
     public static void registerDevServer() {
         List<String> Chans = Arrays.asList("#techcavern");
-        new PermUser("JZTech101", 10);
+      //  new PermUser("JZTech101", 10);
         PircBotX Dev = LoadUtils.createbot(null, "EsperNet", Chans, "WaveTactDev", "irc.esper.net");
         GeneralRegistry.WaveTact.addBot(Dev);
         new CommandChar("@", Dev);
@@ -147,7 +147,7 @@ public class LoadUtils {
         GeneralRegistry.Commands.add(new Topic());
         GeneralRegistry.Commands.add(new Attack());
         GeneralRegistry.Commands.add(new Lockdown());
-        GeneralRegistry.Commands.add(new PermLevel());
+     //   GeneralRegistry.Commands.add(new PermLevel());
 
 
 

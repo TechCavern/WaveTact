@@ -42,4 +42,13 @@ public class SimpleActionUtils {
             ErrorUtils.handleException(e);
         }
     }
+
+    public static SimpleAction getSimpleAction(String SimpleAction) {
+        for (SimpleAction g : GeneralRegistry.SimpleActions) {
+            if (g.getCommand().equalsIgnoreCase(SimpleAction)) {
+                return g;
+            }
+        }
+        return null;
+    }
 }

@@ -19,26 +19,7 @@ public class GetUtils {
         }
         return null;
     }
-    public static PermUser getPermUserbyNick(String nick){
-        for(PermUser c: GeneralRegistry.PermUsers){
-            if(c.getPermUser().equals(nick)){
-                return c;
-            }
-        }
-        return null;
-    }
-    public static PermUserHostmask getPermUserHostmaskbyHostmask(String Hostmask){
-        String realnamebfr = StringUtils.substringAfter(Hostmask, "!");
-        String realname = StringUtils.substringBefore(realnamebfr, "@");
-        String hostmask = StringUtils.substringAfter(Hostmask, "@");
-        String nick = StringUtils.substringBefore(Hostmask, "!");
-        for(PermUserHostmask c: GeneralRegistry.PermUserHostmasks){
-            if((c.getHostmask().equals(hostmask))&&(c.getRealname().equalsIgnoreCase(realname))&& (c.getNick().equals(nick))){
-                return c;
-            }
-        }
-        return null;
-    }
+
 
     public static Channel getChannelbyName(PircBotX botObject, String channelName) {
         for (Channel u : botObject.getUserBot().getChannels()) {
@@ -68,25 +49,6 @@ public class GetUtils {
 
     }
 
-    public static SimpleMessage getSimpleMessage(String SimpleAction) {
-        for (SimpleMessage g : GeneralRegistry.SimpleMessages) {
-            if (g.getCommand().equalsIgnoreCase(SimpleAction)) {
-                return g;
-            }
-        }
-        return null;
-
-    }
-
-    public static SimpleAction getSimpleAction(String SimpleAction) {
-        for (SimpleAction g : GeneralRegistry.SimpleActions) {
-            if (g.getCommand().equalsIgnoreCase(SimpleAction)) {
-                return g;
-            }
-        }
-        return null;
-    }
-
     public static String getCommandChar(PircBotX botObject) {
         for (CommandChar d : GeneralRegistry.CommandChars) {
             if (d.getBot() == botObject) {
@@ -96,21 +58,4 @@ public class GetUtils {
         return null;
     }
 
-    public static UTime getQuietTime(String hostmask) {
-        for (UTime x : GeneralRegistry.QuietTimes) {
-            if (x.getHostmask().equals(hostmask)) {
-                return x;
-            }
-        }
-        return null;
-    }
-
-    public static UTime getBanTime(String hostmask) {
-        for (UTime x : GeneralRegistry.BanTimes) {
-            if (x.getHostmask().equals(hostmask)) {
-                return x;
-            }
-        }
-        return null;
-    }
 }

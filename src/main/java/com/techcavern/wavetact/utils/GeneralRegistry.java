@@ -12,7 +12,7 @@ import java.util.concurrent.ForkJoinPool;
 public class GeneralRegistry {
 
     public static final List<PermUser> PermUsers = new LoggingArrayList<PermUser>("PermUser");
-    public static final List<PermUserHostmask> PermUserHostmasks = new LoggingArrayList<PermUserHostmask>("PermUserHostmasks");
+    public static final List<String> Controllers = new LoggingArrayList<String>("Controllers");
     public static final List<String> Authors = Arrays.asList("JZTech101", "kaendfinger", "deathcrazyuberlironman", "Leah", "Logan_");
     public static final List<String> AuthorHostmasks = Arrays.asList("*!jztech101@techcavern.com","*!jztech101@techcavern.c", "*!jztech101@crabhost.org");
     public static final List<Command> Commands = new LoggingArrayList<Command>("Command");

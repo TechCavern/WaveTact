@@ -1,8 +1,7 @@
 package com.techcavern.wavetact.utils;
 
 import com.techcavern.wavetact.utils.objects.PermUser;
-import com.techcavern.wavetact.utils.objects.PermUserHostmask;
-import org.apache.commons.lang3.StringUtils;
+import com.techcavern.wavetact.utils.objects.objectUtils.PermUserUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -12,7 +11,7 @@ import org.pircbotx.hooks.events.WhoisEvent;
 public class PermUtils {
 
     @SuppressWarnings("unchecked")
-    private static String getAccount(PircBotX bot, User userObject) {
+    public static String getAccount(PircBotX bot, User userObject) {
         String userString;
         bot.sendRaw().rawLineNow("WHOIS " + userObject.getNick());
         WaitForQueue waitForQueue = new WaitForQueue(bot);
@@ -51,37 +50,34 @@ public class PermUtils {
             return 0;
         }
     }
-    public static int getManualPermLevel(PircBotX bot, User userObject) {
+    public static int getManualPermLevel(PircBotX bot, User userObject, Channel channelObject) {
         String account = getAccount(bot, userObject);
         if(account != null) {
-            for(PermUser user: GeneralRegistry.PermUsers){
-                if(user.getPermUser().equals(account)){
-                    return user.getPermLevel();
+            for(String c: GeneralRegistry.Controllers){
+                if(c.equals(account))
+                    return 9001;
+            }
+            if(PermUserUtils.getPermUserbyNick(account, bot.getServerInfo().getNetwork()).getisGlobal()){
+                return 20;
+            }else{
+                if(PermUserUtils.getPermLevelChannel(bot.getServerInfo().getNetwork(), account,channelObject.getName()) != null) {
+                    return PermUserUtils.getPermLevelChannel(bot.getServerInfo().getNetwork(), account, channelObject.getName()).getPermLevel();
+                }else{
+                    return 0;
                 }
+            }
 
-            }
         }else{
-            for(PermUserHostmask hostmask : GeneralRegistry.PermUserHostmasks){
-                if((hostmask.getNick().equals(userObject.getNick()) || hostmask.getHostmask().equals("*")) && (hostmask.getHostmask().equals(userObject.getHostmask()) || hostmask.getHostmask().equals("*")) &&(hostmask.getRealname().equalsIgnoreCase(userObject.getRealName()) || hostmask.getRealname().equals("*"))){
-                    return hostmask.getPermLevel();
-                }
-            }
+            return 0;
         }
-        return 0;
 
     }
     public static int getPermLevel(PircBotX bot, User userObject, Channel channelObject){
-        if(getAutomaticPermLevel(bot, userObject, channelObject) < getManualPermLevel(bot, userObject)){
-            return getManualPermLevel(bot, userObject);
+
+        if(getAutomaticPermLevel(bot, userObject, channelObject) < getManualPermLevel(bot,userObject, channelObject)){
+            return getManualPermLevel(bot, userObject, channelObject);
         }else{
             return getAutomaticPermLevel(bot, userObject, channelObject);
         }
-    }
-    public static void createPermHostmask(String Hostmask, int permLevel){
-        String realnamebfr = StringUtils.substringAfter(Hostmask, "!");
-        String realname = StringUtils.substringBefore(realnamebfr, "@");
-        String hostmask = StringUtils.substringAfter(Hostmask, "@");
-        String nick = StringUtils.substringBefore(Hostmask, "!");
-        GeneralRegistry.PermUserHostmasks.add(new PermUserHostmask(nick, realname, hostmask, permLevel));
     }
 }

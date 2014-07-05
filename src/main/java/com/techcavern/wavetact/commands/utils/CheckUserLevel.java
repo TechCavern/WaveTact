@@ -38,5 +38,6 @@ public class CheckUserLevel extends Command {
         } else {
             event.respond(userObject.getNick() + " is a Regular User!");
         }
+
     }
 }

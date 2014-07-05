@@ -43,4 +43,14 @@ public class SimpleMessageUtils {
             ErrorUtils.handleException(e);
         }
     }
+
+    public static SimpleMessage getSimpleMessage(String SimpleAction) {
+        for (SimpleMessage g : GeneralRegistry.SimpleMessages) {
+            if (g.getCommand().equalsIgnoreCase(SimpleAction)) {
+                return g;
+            }
+        }
+        return null;
+
+    }
 }

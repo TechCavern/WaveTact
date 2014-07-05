@@ -41,4 +41,13 @@ public class BanTimeUtils {
             ErrorUtils.handleException(e);
         }
     }
+
+    public static UTime getBanTime(String hostmask) {
+        for (UTime x : GeneralRegistry.BanTimes) {
+            if (x.getHostmask().equals(hostmask)) {
+                return x;
+            }
+        }
+        return null;
+    }
 }

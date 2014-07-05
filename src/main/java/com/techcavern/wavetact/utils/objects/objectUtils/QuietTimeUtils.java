@@ -41,4 +41,13 @@ public class QuietTimeUtils {
             ErrorUtils.handleException(e);
         }
     }
+
+    public static UTime getQuietTime(String hostmask) {
+        for (UTime x : GeneralRegistry.QuietTimes) {
+            if (x.getHostmask().equals(hostmask)) {
+                return x;
+            }
+        }
+        return null;
+    }
 }

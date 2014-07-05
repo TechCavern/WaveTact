@@ -31,7 +31,7 @@ public class Quiet extends Command {
 
         }
         if ((!args[1].startsWith("-")) && (!args[1].startsWith("+"))) {
-            if (GetUtils.getQuietTime(hostmask) == null) {
+            if (QuietTimeUtils.getQuietTime(hostmask) == null) {
 
                 if (args.length == 3) {
                     quiet(hostmask, args[0],
@@ -51,8 +51,8 @@ public class Quiet extends Command {
                 event.getChannel().send().message("Quiet already exists!");
             }
         } else  if (args[1].startsWith("-")) {
-            if(GetUtils.getQuietTime(hostmask) != null) {
-                GetUtils.getQuietTime(hostmask).setTime(0);
+            if(QuietTimeUtils.getQuietTime(hostmask) != null) {
+                QuietTimeUtils.getQuietTime(hostmask).setTime(0);
                 QuietTimeUtils.saveQuietTimes();
             }else{
                 switch (args[0].toLowerCase()) {
@@ -68,15 +68,15 @@ public class Quiet extends Command {
                 }
             }
         } else {
-            if (GetUtils.getQuietTime(hostmask) != null) {
+            if (QuietTimeUtils.getQuietTime(hostmask) != null) {
                 if (args[1].startsWith("+")) {
                     if (args[2].startsWith("+")) {
-                        GetUtils.getQuietTime(hostmask).setTime(GetUtils.getQuietTime(hostmask).getTime() + GeneralUtils.getMilliSeconds(args[2].replace("+", "")));
+                        QuietTimeUtils.getQuietTime(hostmask).setTime(QuietTimeUtils.getQuietTime(hostmask).getTime() + GeneralUtils.getMilliSeconds(args[2].replace("+", "")));
                     } else if (args[2].startsWith("-")) {
-                        GetUtils.getQuietTime(hostmask).setTime(GetUtils.getQuietTime(hostmask).getTime() - GeneralUtils.getMilliSeconds(args[2].replace("-", "")));
+                        QuietTimeUtils.getQuietTime(hostmask).setTime(QuietTimeUtils.getQuietTime(hostmask).getTime() - GeneralUtils.getMilliSeconds(args[2].replace("-", "")));
 
                     } else {
-                        GetUtils.getQuietTime(hostmask).setTime(GeneralUtils.getMilliSeconds(args[2].replace("-", "")));
+                        QuietTimeUtils.getQuietTime(hostmask).setTime(GeneralUtils.getMilliSeconds(args[2].replace("-", "")));
                     }
                     event.getChannel().send().message("Quiet Modified");
                     QuietTimeUtils.saveQuietTimes();

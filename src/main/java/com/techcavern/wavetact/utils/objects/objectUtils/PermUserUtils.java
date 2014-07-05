@@ -4,11 +4,12 @@ import com.google.gson.internal.LinkedTreeMap;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.fileUtils.JSONFile;
+import com.techcavern.wavetact.utils.objects.PermChannel;
 import com.techcavern.wavetact.utils.objects.PermUser;
-import com.techcavern.wavetact.utils.objects.UTime;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,7 +24,9 @@ public class PermUserUtils {
             try {
                 List<LinkedTreeMap> actions = file.read(List.class);
                 GeneralRegistry.PermUsers.clear();
-                GeneralRegistry.PermUsers.addAll(actions.stream().map(act -> new PermUser((String) act.get("user"),
+                GeneralRegistry.PermUsers.addAll(actions.stream().map(act -> new PermUser((ArrayList<String>) act.get("Network"),
+                        (ArrayList<String>) act.get("Channel"),
+                        (String) act.get("user"),
                         ((Double) act.get("PermLevel")).intValue())).collect(Collectors.toList()));
             } catch (FileNotFoundException e) {
                 ErrorUtils.handleException(e);
@@ -37,6 +40,29 @@ public class PermUserUtils {
             file.write(GeneralRegistry.PermUsers);
         } catch (IOException e) {
             ErrorUtils.handleException(e);
+        }
+    }
+
+    public static PermUser getPermUserbyNick(String nick, String Network){
+        for(PermUser c: GeneralRegistry.PermUsers){
+            if(c.getPermUser().equals(nick) && c.getPermNetwork().equals(Network)){
+                return c;
+            }
+        }
+        return null;
+    }
+
+    public static PermChannel getPermLevelChannel(String Network, String nick, String Channel) {
+        PermUser user = getPermUserbyNick(nick, Network);
+        if (user != null) {
+            for (PermChannel c : user.getPermChannel()) {
+                if (c.getChannel().equals(Channel)) {
+                    return c;
+                }
+            }
+            return null;
+        } else {
+            return null;
         }
     }
 }

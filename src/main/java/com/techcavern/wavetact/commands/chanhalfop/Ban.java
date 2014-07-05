@@ -31,7 +31,7 @@ public class Ban extends Command {
         }
         if ((!args[0].startsWith("-")) && (!args[0].startsWith("\\+"))) {
 
-            if (GetUtils.getBanTime(hostmask) == null) {
+            if (BanTimeUtils.getBanTime(hostmask) == null) {
 
                 if (args.length == 2) {
                     ban(hostmask, event.getChannel(), event.getBot());
@@ -49,22 +49,22 @@ public class Ban extends Command {
                 event.getChannel().send().message("Ban already exists!");
             }
         } else  if (args[0].startsWith("-")) {
-            if(GetUtils.getBanTime(hostmask) != null) {
-                GetUtils.getBanTime(hostmask).setTime(0);
+            if(BanTimeUtils.getBanTime(hostmask) != null) {
+                BanTimeUtils.getBanTime(hostmask).setTime(0);
                 BanTimeUtils.saveBanTimes();
             }else{
                 IRCUtils.setMode(event.getChannel(), event.getBot(), "-b ", hostmask);
             }
 
         } else {
-            if (GetUtils.getBanTime(hostmask) != null) {
+            if (BanTimeUtils.getBanTime(hostmask) != null) {
                 if (args[0].startsWith("+")) {
                     if (args[1].startsWith("+")) {
-                        GetUtils.getBanTime(hostmask).setTime(GetUtils.getBanTime(hostmask).getTime() + GeneralUtils.getMilliSeconds(args[1].replace("+", "")));
+                        BanTimeUtils.getBanTime(hostmask).setTime(BanTimeUtils.getBanTime(hostmask).getTime() + GeneralUtils.getMilliSeconds(args[1].replace("+", "")));
                     } else if (args[1].startsWith("-")) {
-                        GetUtils.getBanTime(hostmask).setTime(GetUtils.getBanTime(hostmask).getTime() - GeneralUtils.getMilliSeconds(args[1].replace("-", "")));
+                        BanTimeUtils.getBanTime(hostmask).setTime(BanTimeUtils.getBanTime(hostmask).getTime() - GeneralUtils.getMilliSeconds(args[1].replace("-", "")));
                     } else {
-                        GetUtils.getBanTime(hostmask).setTime(GeneralUtils.getMilliSeconds(args[1].replace("-", "")));
+                        BanTimeUtils.getBanTime(hostmask).setTime(GeneralUtils.getMilliSeconds(args[1].replace("-", "")));
                     }
                     event.getChannel().send().message("Ban Modified");
                     BanTimeUtils.saveBanTimes();
