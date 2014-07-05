@@ -20,6 +20,7 @@ import com.techcavern.wavetact.commands.trusted.*;
 import com.techcavern.wavetact.commands.utils.*;
 import com.techcavern.wavetact.commands.utils.Help;
 import com.techcavern.wavetact.utils.events.DisconnectListener;
+import com.techcavern.wavetact.utils.events.JoinListener;
 import com.techcavern.wavetact.utils.events.KickListener;
 import com.techcavern.wavetact.utils.events.MessageListener;
 import com.techcavern.wavetact.utils.objects.*;
@@ -50,6 +51,8 @@ public class LoadUtils {
         Net.setRealName(nick);
         Net.getListenerManager().addListener(new MessageListener());
         Net.getListenerManager().addListener(new DisconnectListener());
+        Net.getListenerManager().addListener(new JoinListener());
+
 
         //    TODO: @logangorence Add support for saving configuration to allow for configuration per-network on "modules"... Should we also modularize? Anyways, each network will be able to enable/disable modules and if they are enabled, it will be added to the server file(maybe later on, server folders, which would have a server.info, modules.info, and possibly logs and other stuff).
         //    Hm... the only module I can currently think of is "HighFive"

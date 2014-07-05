@@ -13,15 +13,25 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class Quiet extends Command {
     @CMD
     public Quiet() {
-        super(GeneralUtils.toArray("quiet mute m"), 6, "Quiet [ircd] (-)[User] (time)");
+        super(GeneralUtils.toArray("quiet mute m"), 6, "Quiet (-)[User][hostmask] (time)");
     }
 
     @Override
     public void onCommand(MessageEvent<?> event, String... args)
             throws Exception {
+        String ircd;
+        if(event.getBot().getServerInfo().getChannelModes().contains("q")){
+            ircd = "c";
+        }else if (event.getBot().getServerInfo().getExceptBans().contains("m")){
+            ircd = "i";
+        }else if (event.getBot().getServerInfo().getExceptBans().contains("q")){
+            ircd = "u";
+        }else{
+            ircd = null;
+        }
         String hostmask;
-        if (args[1].contains("!") && args[0].contains("@")) {
-            hostmask = args[1];
+        if (args[0].contains("!") && args[0].contains("@")) {
+            hostmask = args[0];
         } else {
             if (args[0].startsWith("+")) {
                 User user = GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("\\+", ""));
@@ -50,16 +60,16 @@ public class Quiet extends Command {
         if ((!args[1].startsWith("-")) && (!args[1].startsWith("+"))) {
             if (QuietTimeUtils.getQuietTime(hostmask) == null) {
 
-                if (args.length == 3) {
-                    quiet(hostmask, args[0],
+                if (args.length == 2) {
+                    quiet(hostmask, ircd,
                             event.getChannel(), event.getBot());
-                    UTime c = new UTime(hostmask, event.getBot().getServerInfo().getNetwork(), args[0], event.getChannel().getName(), GeneralUtils.getMilliSeconds(args[2]));
+                    UTime c = new UTime(hostmask, event.getBot().getServerInfo().getNetwork(), ircd, event.getChannel().getName(), GeneralUtils.getMilliSeconds(args[1]));
                     GeneralRegistry.QuietTimes.add(c);
                     QuietTimeUtils.saveQuietTimes();
 
-                } else if (args.length < 3) {
-                    quiet(hostmask, args[0], event.getChannel(), event.getBot());
-                    UTime c = new UTime(hostmask, event.getBot().getServerInfo().getNetwork(), args[0], event.getChannel().getName(), GeneralUtils.getMilliSeconds("7w"));
+                } else if (args.length < 2) {
+                    quiet(hostmask, ircd, event.getChannel(), event.getBot());
+                    UTime c = new UTime(hostmask, event.getBot().getServerInfo().getNetwork(), ircd, event.getChannel().getName(), GeneralUtils.getMilliSeconds("7w"));
                     GeneralRegistry.QuietTimes.add(c);
                     QuietTimeUtils.saveQuietTimes();
 
@@ -67,12 +77,12 @@ public class Quiet extends Command {
             } else {
                 event.getChannel().send().message("Quiet already exists!");
             }
-        } else  if (args[1].startsWith("-")) {
+        } else  if (args[0].startsWith("-")) {
             if(QuietTimeUtils.getQuietTime(hostmask) != null) {
                 QuietTimeUtils.getQuietTime(hostmask).setTime(0);
                 QuietTimeUtils.saveQuietTimes();
             }else{
-                switch (args[0].toLowerCase()) {
+                switch (ircd.toLowerCase()) {
                     case "c":
                         IRCUtils.setMode(event.getChannel(), event.getBot(), "-q ", hostmask);
                         break;
@@ -86,14 +96,14 @@ public class Quiet extends Command {
             }
         } else {
             if (QuietTimeUtils.getQuietTime(hostmask) != null) {
-                if (args[1].startsWith("+")) {
-                    if (args[2].startsWith("+")) {
-                        QuietTimeUtils.getQuietTime(hostmask).setTime(QuietTimeUtils.getQuietTime(hostmask).getTime() + GeneralUtils.getMilliSeconds(args[2].replace("+", "")));
-                    } else if (args[2].startsWith("-")) {
-                        QuietTimeUtils.getQuietTime(hostmask).setTime(QuietTimeUtils.getQuietTime(hostmask).getTime() - GeneralUtils.getMilliSeconds(args[2].replace("-", "")));
+                if (args[0].startsWith("+")) {
+                    if (args[1].startsWith("+")) {
+                        QuietTimeUtils.getQuietTime(hostmask).setTime(QuietTimeUtils.getQuietTime(hostmask).getTime() + GeneralUtils.getMilliSeconds(args[1].replace("+", "")));
+                    } else if (args[1].startsWith("-")) {
+                        QuietTimeUtils.getQuietTime(hostmask).setTime(QuietTimeUtils.getQuietTime(hostmask).getTime() - GeneralUtils.getMilliSeconds(args[1].replace("-", "")));
 
                     } else {
-                        QuietTimeUtils.getQuietTime(hostmask).setTime(GeneralUtils.getMilliSeconds(args[2].replace("-", "")));
+                        QuietTimeUtils.getQuietTime(hostmask).setTime(GeneralUtils.getMilliSeconds(args[1].replace("-", "")));
                     }
                     event.getChannel().send().message("Quiet Modified");
                     QuietTimeUtils.saveQuietTimes();

@@ -25,7 +25,7 @@ public class Help extends Command {
                 event.respond(GetUtils.getCommand(args[0]).getDesc());
             }
         } else {
-            event.respond("help [command] - Generally a + before something means editing it, and a - means removing it. None means adding it. - Time is in [time](s/m/h/d) format, IRCd is specified with c for Charybdis, u for Unreal, and i for inspircd.\n");
+            event.respond("help [command] - Generally a + before something means editing it, and a - means removing it. None means adding it. - Time is in [time](s/m/h/d/w) format\n");
 
 
         }
