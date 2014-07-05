@@ -7,6 +7,7 @@ import com.techcavern.wavetact.utils.objects.UTime;
 import com.techcavern.wavetact.utils.*;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
+import org.pircbotx.User;
 import org.pircbotx.hooks.events.MessageEvent;
 
 public class Quiet extends Command {
@@ -22,12 +23,28 @@ public class Quiet extends Command {
         if (args[1].contains("!") && args[0].contains("@")) {
             hostmask = args[1];
         } else {
-            if (args[1].startsWith("+"))
-                hostmask = "*!*@" + GetUtils.getUserByNick(event.getChannel(), args[1].replaceFirst("\\+", "")).getHostmask();
-            else if (args[1].startsWith("-"))
-                hostmask = "*!*@" + GetUtils.getUserByNick(event.getChannel(), args[1].replaceFirst("-", "")).getHostmask();
-            else
-                hostmask = "*!*@" + GetUtils.getUserByNick(event.getChannel(), args[1]).getHostmask();
+            if (args[0].startsWith("+")) {
+                User user = GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("\\+", ""));
+                if (user.getRealName().startsWith("~")) {
+                    hostmask = "*!*@" + user.getHostmask();
+                } else {
+                    hostmask = "*!" + user.getRealName() + "@" + user.getHostmask();
+                }
+            } else if (args[0].startsWith("-")) {
+                User user = GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", ""));
+                if (user.getRealName().startsWith("~")) {
+                    hostmask = "*!*@" + user.getHostmask();
+                } else {
+                    hostmask = "*!" + user.getRealName() + "@" + user.getHostmask();
+                }
+            } else {
+                User user = GetUtils.getUserByNick(event.getChannel(), args[0]);
+                if (user.getRealName().startsWith("~")) {
+                    hostmask = "*!*@" + user.getHostmask();
+                } else {
+                    hostmask = "*!" + user.getRealName() + "@" + user.getHostmask();
+                }
+            }
 
         }
         if ((!args[1].startsWith("-")) && (!args[1].startsWith("+"))) {
