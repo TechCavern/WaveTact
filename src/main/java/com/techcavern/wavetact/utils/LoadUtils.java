@@ -6,6 +6,8 @@ import com.techcavern.wavetact.commandline.utils.AddServer;
 import com.techcavern.wavetact.commandline.utils.BasicCommands;
 import com.techcavern.wavetact.commandline.utils.Start;
 import com.techcavern.wavetact.commands.chanop.*;
+import com.techcavern.wavetact.commands.chanowner.Owner;
+import com.techcavern.wavetact.commands.chanowner.Protect;
 import com.techcavern.wavetact.commands.controller.IRCRaw;
 import com.techcavern.wavetact.commands.controller.Join;
 import com.techcavern.wavetact.commands.controller.Lock;

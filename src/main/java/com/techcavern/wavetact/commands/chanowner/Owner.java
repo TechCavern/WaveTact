@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.techcavern.wavetact.commands.chanop;
+package com.techcavern.wavetact.commands.chanowner;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.utils.objects.Command;
@@ -11,29 +11,27 @@ import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
 import org.pircbotx.hooks.events.MessageEvent;
 
-
 /**
  * @author jztech101
  */
-public class Protect extends Command {
+public class Owner extends Command {
     @CMD
-    public Protect() {
-        super(GeneralUtils.toArray("protect prot pr sop"), 14, "protect (-)(User)");
+    public Owner() {
+        super(GeneralUtils.toArray("owner own oop"), 14, "Owner (-)(User)");
     }
 
-    @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
         if (args[0] != null) {
             if (args[0].equalsIgnoreCase("-")) {
-                event.getChannel().send().deSuperOp(event.getUser());
+                event.getChannel().send().deOwner(event.getUser());
             } else if (args[0].startsWith("-")) {
-                event.getChannel().send().deSuperOp(GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", "")));
+                event.getChannel().send().deOwner(GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", "")));
             } else {
-                event.getChannel().send().superOp(GetUtils.getUserByNick(event.getChannel(), args[0]));
+                event.getChannel().send().owner(GetUtils.getUserByNick(event.getChannel(), args[0]));
 
             }
         } else {
-            event.getChannel().send().superOp(event.getUser());
+            event.getChannel().send().owner(event.getUser());
         }
     }
 }
