@@ -24,10 +24,10 @@ public class PermUserUtils {
             try {
                 List<LinkedTreeMap> actions = file.read(List.class);
                 GeneralRegistry.PermUsers.clear();
-                GeneralRegistry.PermUsers.addAll(actions.stream().map(act -> new PermUser((ArrayList<String>) act.get("Network"),
-                        (ArrayList<String>) act.get("Channel"),
-                        (String) act.get("user"),
-                        ((Double) act.get("PermLevel")).intValue())).collect(Collectors.toList()));
+                GeneralRegistry.PermUsers.addAll(actions.stream().map(act -> new PermUser((String) act.get("PermNetwork"),
+                        (List<PermChannel>) act.get("Channel"),
+                        (String) act.get("PermUser"),
+                        (Boolean) act.get("Global")).collect(Collectors.toList()));
             } catch (FileNotFoundException e) {
                 ErrorUtils.handleException(e);
             }
