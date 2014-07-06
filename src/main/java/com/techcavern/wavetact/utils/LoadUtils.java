@@ -19,10 +19,7 @@ import com.techcavern.wavetact.commands.fun.UrbanDictonary;
 import com.techcavern.wavetact.commands.trusted.*;
 import com.techcavern.wavetact.commands.utils.*;
 import com.techcavern.wavetact.commands.utils.Help;
-import com.techcavern.wavetact.utils.events.DisconnectListener;
-import com.techcavern.wavetact.utils.events.JoinListener;
-import com.techcavern.wavetact.utils.events.KickListener;
-import com.techcavern.wavetact.utils.events.MessageListener;
+import com.techcavern.wavetact.utils.events.*;
 import com.techcavern.wavetact.utils.objects.*;
 import com.techcavern.wavetact.utils.thread.CheckTime;
 import org.pircbotx.Configuration;
@@ -52,13 +49,13 @@ public class LoadUtils {
         Net.getListenerManager().addListener(new MessageListener());
         Net.getListenerManager().addListener(new DisconnectListener());
         Net.getListenerManager().addListener(new JoinListener());
-
+        Net.getListenerManager().addListener(new VersionListener());
+        Net.getListenerManager().addListener(new KickListener());
 
         //    TODO: @logangorence Add support for saving configuration to allow for configuration per-network on "modules"... Should we also modularize? Anyways, each network will be able to enable/disable modules and if they are enabled, it will be added to the server file(maybe later on, server folders, which would have a server.info, modules.info, and possibly logs and other stuff).
         //    Hm... the only module I can currently think of is "HighFive"
 
         //    Net.getListenerManager().addListener(new HighFive());
-        Net.getListenerManager().addListener(new KickListener());
         if (nickservPassword != null) {
             Net.setNickservPassword(nickservPassword);
         }
