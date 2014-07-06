@@ -26,7 +26,8 @@ public class QuietTimeUtils {
                         (String) quiets.get("network"),
                         (String) quiets.get("type"),
                         (String) quiets.get("channel"),
-                        ((Double) quiets.get("time")).longValue())).collect(Collectors.toList()));
+                        ((Double) quiets.get("time")).longValue(),
+                        ((Double) quiets.get("init")).longValue())).collect(Collectors.toList()));
             } catch (FileNotFoundException e) {
                 ErrorUtils.handleException(e);
             }

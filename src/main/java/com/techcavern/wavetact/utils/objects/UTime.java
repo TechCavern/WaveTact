@@ -6,14 +6,16 @@ public class UTime {
     private final String networkName;
     private final String channelName;
     private final String type;
+    private long init;
     private long time;
 
-    public UTime(String hostmask, String networkName, String type, String channelName, long time) {
+    public UTime(String hostmask, String networkName, String type, String channelName, long time, long init) {
         this.time = time;
         this.networkName = networkName;
         this.channelName = channelName;
         this.type = type;
         this.hostmask = hostmask;
+        this.init = init;
     }
 
     public String getHostmask() {
@@ -39,4 +41,6 @@ public class UTime {
     public String getType() {
         return this.type;
     }
+
+    public long getInit() {return this.init;}
 }
