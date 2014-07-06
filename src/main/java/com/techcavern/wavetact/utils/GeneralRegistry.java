@@ -15,6 +15,7 @@ public class GeneralRegistry {
     public static final List<String> Controllers = new LoggingArrayList<String>("Controllers");
     public static final List<String> Authors = Arrays.asList("JZTech101", "kaendfinger", "deathcrazyuberlironman", "Leah", "Logan_");
     public static final List<Command> Commands = new LoggingArrayList<Command>("Command");
+    public static final List<Command> PrivateCommands = new LoggingArrayList<Command>("PrivateCommand");
     public static final List<SimpleMessage> SimpleMessages = new LoggingArrayList<SimpleMessage>("SimpleMessages");
     public static final List<SimpleAction> SimpleActions = new LoggingArrayList<SimpleAction>("SimpleActions");
     public static final List<String> HighFives = new ArrayList<String>();

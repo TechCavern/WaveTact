@@ -26,6 +26,7 @@ public class CPermLevel extends Command {
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
     int c = 0;
+
         if(args.length > 1) {
             c = Integer.parseInt(args[1]);
     }
