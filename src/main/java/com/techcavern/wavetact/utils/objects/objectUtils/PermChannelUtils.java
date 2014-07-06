@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 public class PermChannelUtils {
     @SuppressWarnings("unchecked")
     public static void loadPermChannels() {
-        JSONFile file = new JSONFile("PermUsers.json");
+        JSONFile file = new JSONFile("PermChannels.json");
         if (file.exists()) {
             try {
 
