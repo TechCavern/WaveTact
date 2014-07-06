@@ -5,7 +5,6 @@ import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.objects.*;
 import com.techcavern.wavetact.utils.objects.objectUtils.ControllerUtils;
-import com.techcavern.wavetact.utils.objects.objectUtils.PermUserUtils;
 
 /**
  * Created by jztech101 on 7/5/14.

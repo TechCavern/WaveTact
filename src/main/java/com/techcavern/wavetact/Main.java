@@ -2,10 +2,7 @@ package com.techcavern.wavetact;
 
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.LoadUtils;
-import com.techcavern.wavetact.utils.objects.objectUtils.ControllerUtils;
-import com.techcavern.wavetact.utils.objects.objectUtils.PermUserUtils;
-import com.techcavern.wavetact.utils.objects.objectUtils.SimpleActionUtils;
-import com.techcavern.wavetact.utils.objects.objectUtils.SimpleMessageUtils;
+import com.techcavern.wavetact.utils.objects.objectUtils.*;
 import org.slf4j.impl.SimpleLogger;
 
 @SuppressWarnings("ConstantConditions")
@@ -20,7 +17,8 @@ public class Main {
         LoadUtils.initializeCommandlines();
         LoadUtils.parseCommandLineArguments(args);
         LoadUtils.registerCommands();
-        PermUserUtils.loadPermUsers();
+        GlobalUtils.loadGlobals();
+        PermChannelUtils.loadPermChannels();
         SimpleActionUtils.loadSimpleActions();
         SimpleMessageUtils.loadSimpleMessages();
         LoadUtils.startThreads();

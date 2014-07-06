@@ -1,7 +1,6 @@
 package com.techcavern.wavetact.utils;
 
-import com.techcavern.wavetact.utils.objects.PermUser;
-import com.techcavern.wavetact.utils.objects.objectUtils.PermUserUtils;
+import com.techcavern.wavetact.utils.objects.objectUtils.PermChannelUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -71,20 +70,18 @@ public class PermUtils {
                 if(c.equals(account))
                     return 9001;
             }
-            if(PermUserUtils.getPermUserbyNick(account, bot.getServerInfo().getNetwork()).getisGlobal()){
-                return 20;
-            }else{
-                if(PermUserUtils.getPermLevelChannel(bot.getServerInfo().getNetwork(), account,channelObject.getName()) != null) {
-                    return PermUserUtils.getPermLevelChannel(bot.getServerInfo().getNetwork(), account, channelObject.getName()).getPermLevel();
+            for(String c: GeneralRegistry.Controllers){
+                if(c.equals(account))
+                    return 20;
+            }
+                if(PermChannelUtils.getPermLevelChannel(bot.getServerInfo().getNetwork(), account, channelObject.getName()) != null) {
+                    return PermChannelUtils.getPermLevelChannel(bot.getServerInfo().getNetwork(), account, channelObject.getName()).getPermLevel();
                 }else{
                     return 0;
                 }
-            }
-
-        }else{
+            }else {
             return 0;
         }
-
     }
     public static int getPermLevel(PircBotX bot, User userObject, Channel channelObject){
         if(getManualPermLevel(bot,userObject, channelObject) == -1){

@@ -26,8 +26,8 @@ public class BanTimeUtils {
                         (String) bans.get("network"),
                         (String) bans.get("type"),
                         (String) bans.get("channel"),
-                        ((Double) bans.get("time")).longValue(),
-                        ((Double) bans.get("init")).longValue())).collect(Collectors.toList()));
+                        Long.parseLong((String) bans.get("time")),
+                        Long.parseLong((String) bans.get("init")))).collect(Collectors.toList()));
             } catch (FileNotFoundException e) {
                 ErrorUtils.handleException(e);
             }
