@@ -30,7 +30,7 @@ public class CPermLevel extends Command {
             c = Integer.parseInt(args[1]);
     }
         if (c <= 15) {
-            if(PermUtils.getAccount(event.getBot(), GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", ""))) != null) {
+            if(PermUtils.getAccount(event.getBot(), GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", ""))) != null || PermUtils.getAccount(event.getBot(), GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("\\+", ""))) != null) {
                 if (args[0].startsWith("-")) {
                     PermChannel PLChannel = PermUserUtils.getPermLevelChannel(event.getBot().getServerInfo().getNetwork(), PermUtils.getAccount(event.getBot(), GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", ""))), event.getChannel().getName());
                     PermUser PLUser = PermUserUtils.getPermUserbyNick(PermUtils.getAccount(event.getBot(), GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", ""))), event.getBot().getServerInfo().getNetwork());
@@ -42,33 +42,36 @@ public class CPermLevel extends Command {
                         event.getChannel().send().message("User is not found on channel access lists");
                     }
                 } else if (args[0].startsWith("+")) {
-                    PermChannel PLChannel = PermUserUtils.getPermLevelChannel(event.getBot().getServerInfo().getNetwork(), PermUtils.getAccount(event.getBot(), GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", ""))), event.getChannel().getName());
-                    PermUser PLUser = PermUserUtils.getPermUserbyNick(PermUtils.getAccount(event.getBot(), GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", ""))), event.getBot().getServerInfo().getNetwork());
+                    PermChannel PLChannel = PermUserUtils.getPermLevelChannel(event.getBot().getServerInfo().getNetwork(), PermUtils.getAccount(event.getBot(), GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("\\+", ""))), event.getChannel().getName());
+                    PermUser PLUser = PermUserUtils.getPermUserbyNick(PermUtils.getAccount(event.getBot(), GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("\\+", ""))), event.getBot().getServerInfo().getNetwork());
                     if (PLChannel != null) {
                         PLChannel.setPermLevel(Integer.parseInt(args[1]));
                         PermUserUtils.savePermUsers();
                         event.getChannel().send().message("User Modified");
-
                     } else {
                         event.getChannel().send().message("User is not found on channel access lists");
                     }
 
 
                 } else {
-                    PermChannel PLChannel = PermUserUtils.getPermLevelChannel(event.getBot().getServerInfo().getNetwork(), PermUtils.getAccount(event.getBot(), GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", ""))), event.getChannel().getName());
+                    PermChannel PLChannel = PermUserUtils.getPermLevelChannel(event.getBot().getServerInfo().getNetwork(), PermUtils.getAccount(event.getBot(), GetUtils.getUserByNick(event.getChannel(), args[0])), event.getChannel().getName());
                     PermUser PLUser = PermUserUtils.getPermUserbyNick(PermUtils.getAccount(event.getBot(), GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", ""))), event.getBot().getServerInfo().getNetwork());
                     if (PLChannel == null) {
                         if (PLUser == null) {
                             List<PermChannel> emptylist = new LoggingArrayList<PermChannel>("PermChannel");
-                            GeneralRegistry.PermUsers.add(new PermUser(event.getBot().getServerInfo().getNetwork(), emptylist, PermUtils.getAccount(event.getBot(), GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", ""))), false));
+                            GeneralRegistry.PermUsers.add(new PermUser(event.getBot().getServerInfo().getNetwork(), emptylist, PermUtils.getAccount(event.getBot(), GetUtils.getUserByNick(event.getChannel(), args[0])), false));
                             PermUser newPLUser = PermUserUtils.getPermUserbyNick(PermUtils.getAccount(event.getBot(), GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", ""))), event.getBot().getServerInfo().getNetwork());
-                            newPLUser.getPermChannel().add(new PermChannel(event.getChannel().getName(), Integer.getInteger(args[1]), false));
+                            newPLUser
+                                    .getPermChannel().add(
+                                    new PermChannel(
+                                            event.getChannel().getName(),
+                                            Integer.parseInt(args[1]), false));
                             PermUserUtils.savePermUsers();
                             event.getChannel().send().message("User Added");
 
                         } else {
-                            PermUser newPLUser = PermUserUtils.getPermUserbyNick(PermUtils.getAccount(event.getBot(), GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", ""))), event.getBot().getServerInfo().getNetwork());
-                            newPLUser.getPermChannel().add(new PermChannel(event.getChannel().getName(), Integer.getInteger(args[1]), false));
+                            PermUser newPLUser = PermUserUtils.getPermUserbyNick(PermUtils.getAccount(event.getBot(), GetUtils.getUserByNick(event.getChannel(), args[0])), event.getBot().getServerInfo().getNetwork());
+                            newPLUser.getPermChannel().add(new PermChannel(event.getChannel().getName(), Integer.parseInt(args[1]), false));
                             PermUserUtils.savePermUsers();
                             event.getChannel().send().message("User Added");
 

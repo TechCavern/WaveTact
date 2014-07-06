@@ -44,7 +44,7 @@ public class Attack extends Command {
                 event.getChannel().send().message("BANG");
                 break;
             case 5:
-                event.getChannel().send().action("places a kickme sign near "+Something);
+                event.getChannel().send().action("drops a 2000 pound object on "+Something);
                 break;
         }
 

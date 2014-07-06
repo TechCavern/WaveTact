@@ -13,7 +13,11 @@ public class PermUtils {
     @SuppressWarnings("unchecked")
     public static String getAccount(PircBotX bot, User userObject) {
         String userString;
-        bot.sendRaw().rawLineNow("WHOIS " + userObject.getNick());
+        if(userObject != null) {
+            bot.sendRaw().rawLineNow("WHOIS " + userObject.getNick());
+        }else{
+            userString = null;
+        }
         WaitForQueue waitForQueue = new WaitForQueue(bot);
         WhoisEvent<PircBotX> test;
         try {

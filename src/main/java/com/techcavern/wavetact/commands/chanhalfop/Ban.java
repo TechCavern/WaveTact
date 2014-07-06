@@ -28,24 +28,24 @@ public class Ban extends Command {
         } else {
             if (args[0].startsWith("+")) {
                 User user = GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("\\+", ""));
-                if (user.getRealName().startsWith("~")) {
+                if (user.getLogin().startsWith("~")) {
                     hostmask = "*!*@" + user.getHostmask();
                 } else {
-                    hostmask = "*!" + user.getRealName() + "@" + user.getHostmask();
+                    hostmask = "*!" + user.getLogin() + "@" + user.getHostmask();
                 }
             } else if (args[0].startsWith("-")) {
                 User user = GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", ""));
-                if (user.getRealName().startsWith("~")) {
+                if (user.getLogin().startsWith("~")) {
                     hostmask = "*!*@" + user.getHostmask();
                 } else {
-                    hostmask = "*!" + user.getRealName() + "@" + user.getHostmask();
+                    hostmask = "*!" + user.getLogin() + "@" + user.getHostmask();
                 }
             } else {
                 User user = GetUtils.getUserByNick(event.getChannel(), args[0]);
-                if (user.getRealName().startsWith("~")) {
+                if (user.getLogin().startsWith("~")) {
                     hostmask = "*!*@" + user.getHostmask();
                 } else {
-                    hostmask = "*!" + user.getRealName() + "@" + user.getHostmask();
+                    hostmask = "*!" + user.getLogin() + "@" + user.getHostmask();
                 }
             }
         }

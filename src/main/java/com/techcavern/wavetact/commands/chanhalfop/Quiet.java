@@ -35,24 +35,24 @@ public class Quiet extends Command {
         } else {
             if (args[0].startsWith("+")) {
                 User user = GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("\\+", ""));
-                if (user.getRealName().startsWith("~")) {
+                if (user.getLogin().startsWith("~")) {
                     hostmask = "*!*@" + user.getHostmask();
                 } else {
-                    hostmask = "*!" + user.getRealName() + "@" + user.getHostmask();
+                    hostmask = "*!" + user.getLogin() + "@" + user.getHostmask();
                 }
             } else if (args[0].startsWith("-")) {
                 User user = GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", ""));
-                if (user.getRealName().startsWith("~")) {
+                if (user.getLogin().startsWith("~")) {
                     hostmask = "*!*@" + user.getHostmask();
                 } else {
-                    hostmask = "*!" + user.getRealName() + "@" + user.getHostmask();
+                    hostmask = "*!" + user.getLogin() + "@" + user.getHostmask();
                 }
             } else {
                 User user = GetUtils.getUserByNick(event.getChannel(), args[0]);
-                if (user.getRealName().startsWith("~")) {
+                if (user.getLogin().startsWith("~")) {
                     hostmask = "*!*@" + user.getHostmask();
                 } else {
-                    hostmask = "*!" + user.getRealName() + "@" + user.getHostmask();
+                    hostmask = "*!" + user.getLogin() + "@" + user.getHostmask();
                 }
             }
 
@@ -69,7 +69,7 @@ public class Quiet extends Command {
 
                 } else if (args.length < 2) {
                     quiet(hostmask, ircd, event.getChannel(), event.getBot());
-                    UTime c = new UTime(hostmask, event.getBot().getServerInfo().getNetwork(), ircd, event.getChannel().getName(), GeneralUtils.getMilliSeconds("7w"));
+                    UTime c = new UTime(hostmask, event.getBot().getServerInfo().getNetwork(), ircd, event.getChannel().getName(), GeneralUtils.getMilliSeconds("24h"));
                     GeneralRegistry.QuietTimes.add(c);
                     QuietTimeUtils.saveQuietTimes();
 
