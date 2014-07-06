@@ -103,6 +103,8 @@ public class LoadUtils {
         PircBotX Dev = LoadUtils.createbot(null, "EsperNet", Chans, "WaveTactDev", "irc.esper.net");
         GeneralRegistry.WaveTact.addBot(Dev);
         GeneralRegistry.Controllers.add("JZTech101");
+        GeneralRegistry.Controllers.add("samrg472");
+
         new CommandChar("@", Dev);
     }
 
