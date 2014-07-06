@@ -87,8 +87,9 @@ public class PermUtils {
 
     }
     public static int getPermLevel(PircBotX bot, User userObject, Channel channelObject){
-
-        if(getAutomaticPermLevel(bot, userObject, channelObject) < getManualPermLevel(bot,userObject, channelObject)){
+        if(getManualPermLevel(bot,userObject, channelObject) == -1){
+            return -1;
+        }else if(getAutomaticPermLevel(bot, userObject, channelObject) < getManualPermLevel(bot,userObject, channelObject)){
             return getManualPermLevel(bot, userObject, channelObject);
         }else{
             return getAutomaticPermLevel(bot, userObject, channelObject);

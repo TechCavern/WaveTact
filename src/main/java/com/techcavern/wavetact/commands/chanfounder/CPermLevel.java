@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.commands.chanowner;
+package com.techcavern.wavetact.commands.chanfounder;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.utils.GeneralRegistry;
@@ -20,7 +20,7 @@ import java.util.List;
 public class CPermLevel extends Command {
     @CMD
     public CPermLevel() {
-        super(GeneralUtils.toArray("permlevel pl"), 15, "permlevel (+)(-)[user] (permlevel) - adds, removes, modifies permissions");
+        super(GeneralUtils.toArray("permlevel pl"), 18, "permlevel (+)(-)[user] (permlevel) - adds, removes, modifies permissions");
     }
 
     @Override
@@ -30,7 +30,7 @@ public class CPermLevel extends Command {
         if(args.length > 1) {
             c = Integer.parseInt(args[1]);
     }
-        if (c <= 15) {
+        if (c <= 18) {
             if(PermUtils.getAccount(event.getBot(), GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", ""))) != null || PermUtils.getAccount(event.getBot(), GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("\\+", ""))) != null) {
                 if (args[0].startsWith("-")) {
                     PermChannel PLChannel = PermUserUtils.getPermLevelChannel(event.getBot().getServerInfo().getNetwork(), PermUtils.getAccount(event.getBot(), GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", ""))), event.getChannel().getName());

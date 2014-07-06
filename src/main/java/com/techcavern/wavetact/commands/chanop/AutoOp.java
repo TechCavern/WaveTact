@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.commands.chanowner;
+package com.techcavern.wavetact.commands.chanop;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.utils.GeneralRegistry;
@@ -16,7 +16,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class AutoOp extends Command {
     @CMD
     public AutoOp() {
-        super(GeneralUtils.toArray("autoop autop ap"), 15, "autoop (-)[user] - Define whether to autoop the user or not");
+        super(GeneralUtils.toArray("autoop autop ap"), 10, "autoop (-)[user] - Define whether to autoop the user or not");
     }
 
     @Override
