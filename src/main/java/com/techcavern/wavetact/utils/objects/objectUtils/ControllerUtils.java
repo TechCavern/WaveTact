@@ -20,9 +20,9 @@ public class ControllerUtils {
         JSONFile file = new JSONFile("Controllers.json");
         if (file.exists()) {
             try {
-                List<String> messages = file.read();
+                List<String> controllers = file.read();
                 GeneralRegistry.Controllers.clear();
-                GeneralRegistry.Controllers.addAll(messages.stream().collect(Collectors.toList()));
+                GeneralRegistry.Controllers.addAll(controllers.stream().collect(Collectors.toList()));
             } catch (FileNotFoundException e) {
                 ErrorUtils.handleException(e);
             }

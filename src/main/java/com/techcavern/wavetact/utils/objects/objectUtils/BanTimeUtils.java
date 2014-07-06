@@ -20,9 +20,9 @@ public class BanTimeUtils {
         JSONFile file = new JSONFile("BanTimes.json");
         if (file.exists()) {
             try {
-                List<LinkedTreeMap> actions = file.read(List.class);
+                List<LinkedTreeMap> bantimes = file.read(List.class);
                 GeneralRegistry.BanTimes.clear();
-                GeneralRegistry.BanTimes.addAll(actions.stream().map(act -> new UTime((String) act.get("hostmask"),
+                GeneralRegistry.BanTimes.addAll(bantimes.stream().map(act -> new UTime((String) act.get("hostmask"),
                         (String) act.get("network"),
                         (String) act.get("type"),
                         (String) act.get("channel"),

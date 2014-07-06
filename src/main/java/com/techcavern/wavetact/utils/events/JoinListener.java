@@ -1,10 +1,13 @@
 package com.techcavern.wavetact.utils.events;
 
+import com.techcavern.wavetact.utils.GetUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.PermUtils;
 import com.techcavern.wavetact.utils.objects.PermChannel;
 import com.techcavern.wavetact.utils.objects.PermUser;
 import com.techcavern.wavetact.utils.objects.objectUtils.PermUserUtils;
 import org.pircbotx.PircBotX;
+import org.pircbotx.User;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.JoinEvent;
 import org.pircbotx.hooks.events.KickEvent;
@@ -44,7 +47,14 @@ public class JoinListener extends ListenerAdapter<PircBotX> {
                                }                           } else if (i == 5) {
                                event.getChannel().send().voice(event.getUser());
                            } else if (i == -1){
-
+                               User user = event.getUser();
+                               String hostmask;
+                               if (user.getLogin().startsWith("~")) {
+                                   hostmask = "*!*@" + user.getHostmask();
+                               } else {
+                                   hostmask = "*!" + user.getLogin() + "@" + user.getHostmask();
+                               }
+                               IRCUtils.setMode(event.getChannel(), event.getBot(), "+b ",hostmask);
                            }
                        }
                    }

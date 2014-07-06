@@ -20,9 +20,9 @@ public class QuietTimeUtils {
         JSONFile file = new JSONFile("QuietTimes.json");
         if (file.exists()) {
             try {
-                List<LinkedTreeMap> actions = file.read(List.class);
+                List<LinkedTreeMap> quiettimes = file.read(List.class);
                 GeneralRegistry.QuietTimes.clear();
-                GeneralRegistry.QuietTimes.addAll(actions.stream().map(act -> new UTime((String) act.get("hostmask"),
+                GeneralRegistry.QuietTimes.addAll(quiettimes.stream().map(act -> new UTime((String) act.get("hostmask"),
                         (String) act.get("network"),
                         (String) act.get("type"),
                         (String) act.get("channel"),
