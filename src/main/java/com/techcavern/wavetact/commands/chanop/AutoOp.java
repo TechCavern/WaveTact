@@ -5,7 +5,6 @@ import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.objects.Command;
 import com.techcavern.wavetact.utils.objects.PermChannel;
-import com.techcavern.wavetact.utils.objects.PermUser;
 import com.techcavern.wavetact.utils.objects.objectUtils.PermChannelUtils;
 import org.pircbotx.hooks.events.MessageEvent;
 
@@ -22,7 +21,6 @@ public class AutoOp extends Command {
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
         if (args[0].startsWith("-")) {
             PermChannel PLChannel = PermChannelUtils.getPermLevelChannel(event.getBot().getServerInfo().getNetwork(), GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", "")).getLogin(), event.getChannel().getName());
-            PermUser PLUser = PermChannelUtils.getPermUserbyNick(GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", "")).getLogin(), event.getBot().getServerInfo().getNetwork());
             if (PLChannel != null) {
                 PLChannel.setAuto(false);
                 PermChannelUtils.savePermChannels();
@@ -32,7 +30,6 @@ public class AutoOp extends Command {
             }
         } else {
             PermChannel PLChannel = PermChannelUtils.getPermLevelChannel(event.getBot().getServerInfo().getNetwork(), GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("\\+", "")).getLogin(), event.getChannel().getName());
-            PermUser PLUser = PermChannelUtils.getPermUserbyNick(GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("\\+", "")).getLogin(), event.getBot().getServerInfo().getNetwork());
             if (PLChannel != null) {
                 PLChannel.setAuto(true);
                 PermChannelUtils.savePermChannels();
