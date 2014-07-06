@@ -57,7 +57,7 @@ public class Quiet extends Command {
             }
 
         }
-        if ((!args[1].startsWith("-")) && (!args[1].startsWith("+"))) {
+        if ((!args[0].startsWith("-")) && (!args[1].startsWith("+"))) {
             if (QuietTimeUtils.getQuietTime(hostmask) == null) {
 
                 if (args.length == 2) {
