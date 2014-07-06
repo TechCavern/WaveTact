@@ -26,9 +26,9 @@ public class PermUserUtils {
 
                 GeneralRegistry.PermUsers.clear();
                 GeneralRegistry.PermUsers.addAll(actions.stream().map(act -> new PermUser((String) act.get("PermNetwork"),
-                         (List<PermChannel>) act.get("Channel"),
-                         (String) act.get("PermUser"),
-                         (Boolean) act.get("Global"))).collect(Collectors.toList()));
+                        act.getChannel(),
+                        act.PermUser,
+                        (Boolean) act.get("Global"))).collect(Collectors.toList()));
 
 
 
