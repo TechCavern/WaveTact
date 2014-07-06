@@ -22,11 +22,11 @@ public class QuietTimeUtils {
             try {
                 List<LinkedTreeMap> quiettimes = file.read(List.class);
                 GeneralRegistry.QuietTimes.clear();
-                GeneralRegistry.QuietTimes.addAll(quiettimes.stream().map(act -> new UTime((String) act.get("hostmask"),
-                        (String) act.get("network"),
-                        (String) act.get("type"),
-                        (String) act.get("channel"),
-                        ((Double) act.get("time")).longValue())).collect(Collectors.toList()));
+                GeneralRegistry.QuietTimes.addAll(quiettimes.stream().map(quiets -> new UTime((String) quiets.get("hostmask"),
+                        (String) quiets.get("network"),
+                        (String) quiets.get("type"),
+                        (String) quiets.get("channel"),
+                        ((Double) quiets.get("time")).longValue())).collect(Collectors.toList()));
             } catch (FileNotFoundException e) {
                 ErrorUtils.handleException(e);
             }

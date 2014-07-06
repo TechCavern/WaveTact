@@ -22,11 +22,11 @@ public class BanTimeUtils {
             try {
                 List<LinkedTreeMap> bantimes = file.read(List.class);
                 GeneralRegistry.BanTimes.clear();
-                GeneralRegistry.BanTimes.addAll(bantimes.stream().map(act -> new UTime((String) act.get("hostmask"),
-                        (String) act.get("network"),
-                        (String) act.get("type"),
-                        (String) act.get("channel"),
-                        ((Double) act.get("time")).longValue())).collect(Collectors.toList()));
+                GeneralRegistry.BanTimes.addAll(bantimes.stream().map(bans -> new UTime((String) bans.get("hostmask"),
+                        (String) bans.get("network"),
+                        (String) bans.get("type"),
+                        (String) bans.get("channel"),
+                        ((Double) bans.get("time")).longValue())).collect(Collectors.toList()));
             } catch (FileNotFoundException e) {
                 ErrorUtils.handleException(e);
             }
