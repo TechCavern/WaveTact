@@ -25,7 +25,9 @@ public class PermUserUtils {
                 List<LinkedTreeMap> actions = file.read(List.class);
                 GeneralRegistry.PermUsers.clear();
                  GeneralRegistry.PermUsers.addAll(actions.stream().map(act -> new PermUser((String) act.get("PermNetwork"),
-                        (List<PermChannel>) act.get("Channel"),
+                        (List<PermChannel>) new PermChannel((String) act.get ("Channel") ,
+                                ((Double) act.get ("PermLevel")).intValue(),
+                                (boolean) act.get ("auto")),
                        (String) act.get("PermUser"),
                          (Boolean) act.get("Global"))).collect(Collectors.toList()));
 
