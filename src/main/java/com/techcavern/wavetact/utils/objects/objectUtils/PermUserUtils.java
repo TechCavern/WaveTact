@@ -22,7 +22,7 @@ public class PermUserUtils {
         JSONFile file = new JSONFile("PermUsers.json");
         if (file.exists()) {
             try {
-                List<LinkedTreeMap> actions = file.read(List.class);
+                List<PermChannel> actions = file.read(List.class);
 
                 GeneralRegistry.PermUsers.clear();
                 GeneralRegistry.PermUsers.addAll(actions.stream().map(act -> new PermUser((String) act.get("PermNetwork"),
