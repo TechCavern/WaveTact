@@ -17,9 +17,6 @@ public class Start extends CommandLine {
     public void doAction(String[] args) {
         if (args.length >= 2 && args[1].equalsIgnoreCase("debug")) {
             System.out.println("Running in developer mode");
-     //       System.setProperty(SimpleLogger.SHOW_DATE_TIME_KEY, "true");
-     //       System.setProperty(SimpleLogger.DATE_TIME_FORMAT_KEY, "[yyyy/MM/dd HH:mm:ss]");
-     //       System.setProperty(SimpleLogger.LEVEL_IN_BRACKETS_KEY, "true");
             LoadUtils.registerDevServer();
         } else {
             System.out.println("Running in production mode");

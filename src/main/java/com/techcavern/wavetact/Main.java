@@ -10,6 +10,9 @@ public class Main {
 
 
     public static void main(String[] args) throws Exception {
+        System.setProperty(SimpleLogger.SHOW_DATE_TIME_KEY, "true");
+        System.setProperty(SimpleLogger.DATE_TIME_FORMAT_KEY, "[yyyy/MM/dd HH:mm:ss]");
+        System.setProperty(SimpleLogger.LEVEL_IN_BRACKETS_KEY, "true");
         ControllerUtils.loadControllers();
         LoadUtils.initializeCommandlines();
         LoadUtils.parseCommandLineArguments(args);
