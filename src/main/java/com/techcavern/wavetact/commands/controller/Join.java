@@ -24,7 +24,7 @@ public class Join extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, String... args)
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, String... args)
             throws Exception {
         Bot.sendIRC().joinChannel(args[0]);
     }

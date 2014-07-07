@@ -18,10 +18,10 @@ public class Shutdown extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, String... args) throws Exception {
         if (args.length > 1 && args[0].equalsIgnoreCase("r")) {
             PircBotX botObject = Bot;
-            IRCUtils.SendMessage(user, channel, "Restarting");
+            IRCUtils.SendMessage(user, channel, "Restarting", isPrivate);
             botObject.stopBotReconnect();
             botObject.sendIRC().quitServer();
             Thread.sleep(20000);

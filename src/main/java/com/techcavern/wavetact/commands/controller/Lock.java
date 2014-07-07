@@ -25,7 +25,7 @@ public class Lock extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, String... args)
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, String... args)
             throws Exception {
         if (args[0].equalsIgnoreCase("a")) {
             if (args[1].startsWith("-")) {
