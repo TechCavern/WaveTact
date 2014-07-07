@@ -23,11 +23,11 @@ public class QuietTimeUtils {
                 List<LinkedTreeMap> quiettimes = file.read(List.class);
                 GeneralRegistry.QuietTimes.clear();
                 GeneralRegistry.QuietTimes.addAll(quiettimes.stream().map(quiets -> new UTime((String) quiets.get("hostmask"),
-                        (String) quiets.get("network"),
+                        (String) quiets.get("networkName"),
                         (String) quiets.get("type"),
-                        (String) quiets.get("channel"),
-                        Long.parseLong((String) quiets.get("time")),
-                        Long.parseLong((String) quiets.get("init")))).collect(Collectors.toList()));
+                        (String) quiets.get("channelName"),
+                        ((Double) quiets.get("time")).longValue(),
+                        ((Double) quiets.get("init")).longValue())).collect(Collectors.toList()));
             } catch (FileNotFoundException e) {
                 ErrorUtils.handleException(e);
             }
@@ -35,7 +35,7 @@ public class QuietTimeUtils {
     }
 
     public static void saveQuietTimes() {
-        JSONFile file = new JSONFile("BanTimes.json");
+        JSONFile file = new JSONFile("QuietTimes.json");
         try {
             file.write(GeneralRegistry.QuietTimes);
         } catch (IOException e) {

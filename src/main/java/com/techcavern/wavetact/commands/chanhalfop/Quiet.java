@@ -22,9 +22,9 @@ public class Quiet extends Command {
         String ircd;
         if(event.getBot().getServerInfo().getChannelModes().contains("q")){
             ircd = "c";
-        }else if (event.getBot().getServerInfo().getExceptBans().contains("m")){
+        }else if (event.getBot().getServerInfo().getServerVersion().contains("InspIRCd")){
             ircd = "i";
-        }else if (event.getBot().getServerInfo().getExceptBans().contains("q")){
+        }else if (event.getBot().getServerInfo().getServerVersion().contains("Unreal")){
             ircd = "u";
         }else{
             ircd = null;
@@ -107,12 +107,12 @@ public class Quiet extends Command {
                     }
                     event.getChannel().send().message("Quiet Modified");
                     QuietTimeUtils.saveQuietTimes();
-                } else {
+                }} else {
                     event.getChannel().send().message("Quiet does not exist!");
                 }
             }
         }
-    }
+
 
     void quiet(String hostmask, String type, Channel channelName, PircBotX botObject) {
         switch (type.toLowerCase()) {

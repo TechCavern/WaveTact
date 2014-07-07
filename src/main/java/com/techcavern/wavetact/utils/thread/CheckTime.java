@@ -13,29 +13,22 @@ public class CheckTime implements Runnable {
     private boolean loaded = false;
 
     @Override
-    public void run() {
+    public void run(){
+        try {
+            TimeUnit.SECONDS.sleep(30);
+        } catch (InterruptedException c){
+            // ignored
+        }
         while (true) {
             try {
                 TimeUnit.SECONDS.sleep(5);
-                try {
-                    if (!loaded) {
-                        BanTimeUtils.loadBanTimes();
-                        QuietTimeUtils.loadQuietTimes();
-                        loaded = true;
-                    }
-                } catch (NullPointerException ignored) {
-                }
-
-                if (!loaded)
-                    continue;
-
                 for (int i = 0; i < GeneralRegistry.BanTimes.size(); i++) {
                     UTime utimeObject = GeneralRegistry.BanTimes.get(i);
                     try {
                         if (System.currentTimeMillis() >= utimeObject.getTime()  + utimeObject.getInit()) {
                             PircBotX botObject = GetUtils.getBotByNetwork(utimeObject.getNetworkName());
                             IRCUtils.setMode(GetUtils.getChannelbyName(botObject, utimeObject.getChannelName()), botObject, "-b ", utimeObject.getHostmask());
-                            GeneralRegistry.BanTimes.remove(utimeObject);
+                            GeneralRegistry.BanTimes.remove(i);
                             BanTimeUtils.saveBanTimes();
                         }
                     } catch (IllegalArgumentException | NullPointerException e) {
@@ -59,7 +52,7 @@ public class CheckTime implements Runnable {
                                     IRCUtils.setMode(GetUtils.getChannelbyName(botObject, utimeObject.getChannelName()), botObject, "-b m:", utimeObject.getHostmask());
                                     break;
                             }
-                            GeneralRegistry.QuietTimes.remove(utimeObject);
+                            GeneralRegistry.QuietTimes.remove(i);
                             QuietTimeUtils.saveQuietTimes();
                         }
                     } catch (IllegalArgumentException | NullPointerException e) {

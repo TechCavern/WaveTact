@@ -70,7 +70,7 @@ public class PermUtils {
                 if(c.equals(account))
                     return 9001;
             }
-            for(String c: GeneralRegistry.Controllers){
+            for(String c: GeneralRegistry.Globals){
                 if(c.equals(account))
                     return 20;
             }

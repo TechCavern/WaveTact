@@ -1,5 +1,6 @@
 package com.techcavern.wavetact.utils.events;
 
+import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.PermUtils;
 import com.techcavern.wavetact.utils.objects.PermChannel;
@@ -14,13 +15,11 @@ import org.pircbotx.hooks.events.JoinEvent;
  */
 public class JoinListener extends ListenerAdapter<PircBotX> {
     public void onJoin(JoinEvent<PircBotX> event) throws Exception {
-       if(PermUtils.getAccount(event.getBot(), event.getUser()) != null){
-           String account = PermUtils.getAccount(event.getBot(), event.getUser());
-               if(PermChannelUtils.getPermLevelChannel(event.getBot().getServerInfo().getNetwork(), account, event.getChannel().getName()) != null){
-                   PermChannel channel = PermChannelUtils.getPermLevelChannel(event.getBot().getServerInfo().getNetwork(), account, event.getChannel().getName());
-                   if(channel.getAuto()){
-                        int i = channel.getPermLevel();
-                           if (i == 9001 || i == 20 || i == 15) {
+        PermChannel PLChannel = PermChannelUtils.getPermLevelChannel(event.getBot().getServerInfo().getNetwork(), PermUtils.getAccount(event.getBot(), GetUtils.getUserByNick(event.getChannel(), event.getUser().getNick())), event.getChannel().getName());
+               if(PLChannel != null){
+                   if(PLChannel.getAuto()){
+                        int i = PLChannel.getPermLevel();
+                           if (i == 9001 || i == 20 || i == 15 || i == 18) {
                                 if(event.getBot().getServerInfo().getPrefixes().contains("~")) {
                                     event.getChannel().send().owner(event.getUser());
                                 }else {
@@ -55,5 +54,5 @@ public class JoinListener extends ListenerAdapter<PircBotX> {
                    }
            }
        }
-    }
+
 

@@ -46,7 +46,6 @@ public class SimpleAction extends Command {
 
     void create(){
         GeneralRegistry.Commands.add(this);
-        GeneralRegistry.PrivateCommands.add(this);
     }
 
     @Override

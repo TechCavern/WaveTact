@@ -63,21 +63,21 @@ public class GeneralUtils {
 
     public static long getMilliSeconds(String input) {
         if (input.toLowerCase().endsWith("h")) {
-            return Integer.parseInt(input.replace("h", "")) * 60 * 60 * 1000;
+            return Long.parseLong(input.replace("h", "")) * 60 * 60 * 1000;
         } else if (input.toLowerCase().endsWith("m")) {
-            return Integer.parseInt(input.replace("m", "")) * 60 * 1000;
+            return Long.parseLong(input.replace("m", "")) * 60 * 1000;
 
         } else if (input.toLowerCase().endsWith("d")) {
-            return Integer.parseInt(input.replace("d", "")) * 24 * 60 * 60 * 1000;
+            return Long.parseLong(input.replace("d", "")) * 24 * 60 * 60 * 1000;
 
         } else if (input.toLowerCase().endsWith("w")) {
-            return Integer.parseInt(input.replace("w", "")) * 7 * 24 * 60 * 60 * 1000;
+            return Long.parseLong(input.replace("w", "")) * 7 * 24 * 60 * 60 * 1000;
 
         } else if (input.toLowerCase().endsWith("s")) {
-            return Integer.parseInt(input.replace("s", "")) * 1000;
+            return Long.parseLong(input.replace("s", "")) * 1000;
 
         } else {
-            return Integer.parseInt(input);
+            return Long.parseLong(input);
         }
     }
 

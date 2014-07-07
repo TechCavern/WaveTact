@@ -88,12 +88,12 @@ public class Ban extends Command {
                         }
                         event.getChannel().send().message("Ban Modified");
                         BanTimeUtils.saveBanTimes();
-                    } else {
+                    }} else {
                         event.getChannel().send().message("Ban does not exist!");
                     }
                 }
             }
-        }
+
 
 
     void ban(String hostmask, Channel channel, PircBotX botObject) {

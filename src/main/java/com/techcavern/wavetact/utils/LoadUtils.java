@@ -97,7 +97,7 @@ public class LoadUtils {
 
     public static void registerDevServer() {
         List<String> Chans = Arrays.asList("#techcavern");
-        PircBotX Dev = LoadUtils.createbot(null, "EsperNet", Chans, "WaveTactDev", "irc.esper.net");
+        PircBotX Dev = LoadUtils.createbot(null, "EsperNet", Chans, "WaveTactDev", "irc.electrocode.net");
         GeneralRegistry.WaveTact.addBot(Dev);
         GeneralRegistry.Controllers.add("JZTech101");
         GeneralRegistry.Controllers.add("deathcrazyuberlironman");
@@ -153,6 +153,8 @@ public class LoadUtils {
         GeneralRegistry.Commands.add(new DefCon());
         GeneralRegistry.Commands.add(new CPermLevel());
         GeneralRegistry.Commands.add(new AutoOp());
+        GeneralRegistry.Commands.add(new Globals());
+
 
 
 

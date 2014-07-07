@@ -48,7 +48,6 @@ public class SimpleMessage extends Command {
 
     void create(){
         GeneralRegistry.Commands.add(this);
-        GeneralRegistry.PrivateCommands.add(this);
     }
 
     public String getMessage() {

@@ -8,7 +8,7 @@ An IRC bot that is based upon PircBotX, and sits in #techcavern on the following
 - Freenode (irc.freenode.net)
 - ObsidianIRC (irc.obsidianirc.net)
 
-WaveTact is under the DWTFPL
+WaveTact is under the DWTFPL - (But I do ask that you not sell it)
 
 Building
 ========
@@ -20,7 +20,7 @@ Permissions
 ===========
 - By default, everyone is given their permissions based on channel status. Voiced is representative of trusted
 - By default, authors are given trusted status
-- Permissions work in conjunction with NickServ. It has been tested with Anope & Atheme. Other services may work, but is not guranteed.
+- Permissions work in conjunction with NickServ. It has been tested with Anope & Atheme. Other services may work, but is not guaranteed.
 
 PermLevels
 ==========

@@ -3,6 +3,7 @@ package com.techcavern.wavetact.commands.chanop;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
+import com.techcavern.wavetact.utils.PermUtils;
 import com.techcavern.wavetact.utils.objects.Command;
 import com.techcavern.wavetact.utils.objects.PermChannel;
 import com.techcavern.wavetact.utils.objects.objectUtils.PermChannelUtils;
@@ -20,7 +21,7 @@ public class AutoOp extends Command {
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
         if (args[0].startsWith("-")) {
-            PermChannel PLChannel = PermChannelUtils.getPermLevelChannel(event.getBot().getServerInfo().getNetwork(), GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", "")).getLogin(), event.getChannel().getName());
+            PermChannel PLChannel = PermChannelUtils.getPermLevelChannel(event.getBot().getServerInfo().getNetwork(), PermUtils.getAccount(event.getBot(), GetUtils.getUserByNick(event.getChannel(), args[0])), event.getChannel().getName());
             if (PLChannel != null) {
                 PLChannel.setAuto(false);
                 PermChannelUtils.savePermChannels();
@@ -29,7 +30,7 @@ public class AutoOp extends Command {
                 event.getChannel().send().message("User is not found on channel access lists");
             }
         } else {
-            PermChannel PLChannel = PermChannelUtils.getPermLevelChannel(event.getBot().getServerInfo().getNetwork(), GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("\\+", "")).getLogin(), event.getChannel().getName());
+            PermChannel PLChannel = PermChannelUtils.getPermLevelChannel(event.getBot().getServerInfo().getNetwork(), PermUtils.getAccount(event.getBot(), GetUtils.getUserByNick(event.getChannel(), args[0])), event.getChannel().getName());
             if (PLChannel != null) {
                 PLChannel.setAuto(true);
                 PermChannelUtils.savePermChannels();
