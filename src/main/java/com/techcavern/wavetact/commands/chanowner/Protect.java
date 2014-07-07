@@ -23,7 +23,7 @@ public class Protect extends Command {
 
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
-        if (args[0] != null) {
+        if (args.length >= 1) {
             if (args[0].equalsIgnoreCase("-")) {
                 event.getChannel().send().deSuperOp(event.getUser());
             } else if (args[0].startsWith("-")) {
