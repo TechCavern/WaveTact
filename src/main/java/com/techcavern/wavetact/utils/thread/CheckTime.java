@@ -27,7 +27,7 @@ public class CheckTime implements Runnable {
                     try {
                         if (System.currentTimeMillis() >= utimeObject.getTime()  + utimeObject.getInit()) {
                             PircBotX botObject = GetUtils.getBotByNetwork(utimeObject.getNetworkName());
-                            IRCUtils.setMode(GetUtils.getChannelbyName(botObject, utimeObject.getChannelName()), botObject, "-b ", utimeObject.getHostmask());
+                            IRCUtils.setMode(GetUtils.getChannelbyName(botObject, utimeObject.getChannelName()), botObject, "-b ", utimeObject.getSomething());
                             GeneralRegistry.BanTimes.remove(i);
                             BanTimeUtils.saveBanTimes();
                         }
@@ -43,13 +43,13 @@ public class CheckTime implements Runnable {
                             PircBotX botObject = GetUtils.getBotByNetwork(utimeObject.getNetworkName());
                             switch (utimeObject.getType().toLowerCase()) {
                                 case "u":
-                                    IRCUtils.setMode(GetUtils.getChannelbyName(botObject, utimeObject.getChannelName()), botObject, "-b ~q:", utimeObject.getHostmask());
+                                    IRCUtils.setMode(GetUtils.getChannelbyName(botObject, utimeObject.getChannelName()), botObject, "-b ~q:", utimeObject.getSomething());
                                     break;
                                 case "c":
-                                    IRCUtils.setMode(GetUtils.getChannelbyName(botObject, utimeObject.getChannelName()), botObject, "-q ", utimeObject.getHostmask());
+                                    IRCUtils.setMode(GetUtils.getChannelbyName(botObject, utimeObject.getChannelName()), botObject, "-q ", utimeObject.getSomething());
                                     break;
                                 case "i":
-                                    IRCUtils.setMode(GetUtils.getChannelbyName(botObject, utimeObject.getChannelName()), botObject, "-b m:", utimeObject.getHostmask());
+                                    IRCUtils.setMode(GetUtils.getChannelbyName(botObject, utimeObject.getChannelName()), botObject, "-b m:", utimeObject.getSomething());
                                     break;
                             }
                             GeneralRegistry.QuietTimes.remove(i);

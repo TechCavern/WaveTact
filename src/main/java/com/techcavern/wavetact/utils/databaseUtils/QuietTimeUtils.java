@@ -22,7 +22,7 @@ public class QuietTimeUtils {
             try {
                 List<LinkedTreeMap> quiettimes = file.read(List.class);
                 GeneralRegistry.QuietTimes.clear();
-                GeneralRegistry.QuietTimes.addAll(quiettimes.stream().map(quiets -> new UTime((String) quiets.get("hostmask"),
+                GeneralRegistry.QuietTimes.addAll(quiettimes.stream().map(quiets -> new UTime((String) quiets.get("Something"),
                         (String) quiets.get("networkName"),
                         (String) quiets.get("type"),
                         (String) quiets.get("channelName"),
@@ -45,7 +45,7 @@ public class QuietTimeUtils {
 
     public static UTime getQuietTime(String hostmask) {
         for (UTime x : GeneralRegistry.QuietTimes) {
-            if (x.getHostmask().equals(hostmask)) {
+            if (x.getSomething().equals(hostmask)) {
                 return x;
             }
         }

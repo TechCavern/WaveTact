@@ -57,5 +57,14 @@ public class GetUtils {
         }
         return null;
     }
+    public static UTime getTopic(String channelName, String networkName) {
+        for (int i = GeneralRegistry.Topic.size()-1; i > -1; i-- ) {
+            UTime x = GeneralRegistry.Topic.get(i);
+            if (x.getChannelName().equalsIgnoreCase(channelName) && x.getNetworkName().equalsIgnoreCase(networkName)) {
+                return x;
+            }
+        }
+        return null;
+    }
 
 }

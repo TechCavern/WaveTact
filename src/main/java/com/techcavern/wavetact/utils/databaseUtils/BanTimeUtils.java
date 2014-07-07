@@ -22,7 +22,7 @@ public class BanTimeUtils {
             try {
                 List<LinkedTreeMap> bantimes = file.read(List.class);
                 GeneralRegistry.BanTimes.clear();
-                GeneralRegistry.BanTimes.addAll(bantimes.stream().map(bans -> new UTime((String) bans.get("hostmask"),
+                GeneralRegistry.BanTimes.addAll(bantimes.stream().map(bans -> new UTime((String) bans.get("Something"),
                         (String) bans.get("networkName"),
                         (String) bans.get("type"),
                         (String) bans.get("channelName"),
@@ -45,7 +45,7 @@ public class BanTimeUtils {
 
     public static UTime getBanTime(String hostmask) {
         for (UTime x : GeneralRegistry.BanTimes) {
-            if (x.getHostmask().equals(hostmask)) {
+            if (x.getSomething().equals(hostmask)) {
                 return x;
             }
         }

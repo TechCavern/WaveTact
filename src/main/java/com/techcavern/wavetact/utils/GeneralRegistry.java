@@ -11,6 +11,7 @@ import java.util.concurrent.ForkJoinPool;
 public class GeneralRegistry {
 
     public static final List<PermChannel> PermChannels = new LoggingArrayList<PermChannel>("PermChannel");
+    public static final List<UTime> Topic = new LoggingArrayList<UTime>("Topic") ;
     public static final List<String> Controllers = new LoggingArrayList<String>("Controllers");
     public static final List<String> Globals = new LoggingArrayList<String>("Globals");
     public static final List<String> Authors = Arrays.asList("JZTech101", "kaendfinger", "deathcrazyuberlironman", "Leah", "Logan_");
