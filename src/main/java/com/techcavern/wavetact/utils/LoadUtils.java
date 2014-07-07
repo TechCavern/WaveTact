@@ -26,7 +26,6 @@ import org.pircbotx.Configuration;
 import org.pircbotx.Configuration.Builder;
 import org.pircbotx.PircBotX;
 
-import java.io.File;
 import java.nio.charset.Charset;
 import java.util.*;
 

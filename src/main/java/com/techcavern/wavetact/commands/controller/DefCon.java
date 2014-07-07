@@ -8,6 +8,7 @@ package com.techcavern.wavetact.commands.controller;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GeneralUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.LoadUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleActionUtils;
@@ -28,7 +29,7 @@ public class DefCon extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, String... args)
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, String... args)
             throws Exception {
 
         if(args.length>=1 && args[0].equalsIgnoreCase("-")){
@@ -44,6 +45,7 @@ public class DefCon extends GenericCommand {
             SimpleActionUtils.loadSimpleActions();
             SimpleMessageUtils.loadSimpleMessages();
             LoadUtils.registerCommands();
+            IRCUtils.SendMessage(user, channel, "DefCon OFF", isPrivate);
         }else{
             for(GenericCommand command:GeneralRegistry.GenericCommands){
                 command.setPermLevel(9001);
@@ -66,6 +68,7 @@ public class DefCon extends GenericCommand {
             for(GenericCommand command:GeneralRegistry.ChanHalfOpCommands){
                 command.setPermLevel(9001);
             }
+            IRCUtils.SendMessage(user, channel, "DefCon ON", isPrivate);
         }
     }
 }

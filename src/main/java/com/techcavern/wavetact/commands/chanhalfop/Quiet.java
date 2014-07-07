@@ -17,7 +17,7 @@ public class Quiet extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, String... args)
+    public void onCommand(User user, PircBotX Bot, Channel channel,boolean isPrivate, String... args)
             throws Exception {
         String ircd;
         if(Bot.getServerInfo().getChannelModes().contains("q")){

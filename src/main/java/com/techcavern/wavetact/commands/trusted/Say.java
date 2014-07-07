@@ -6,9 +6,13 @@
 package com.techcavern.wavetact.commands.trusted;
 
 import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.pircbotx.Channel;
+import org.pircbotx.PircBotX;
+import org.pircbotx.User;
 import org.pircbotx.hooks.events.MessageEvent;
 
 /**
@@ -22,8 +26,8 @@ public class Say extends GenericCommand {
     }
 
     @Override
-    public void onCommand(MessageEvent<?> event, String... args) throws Exception {
-        event.getChannel().send().message(StringUtils.join(args, " "));
+    public void onCommand(User user, PircBotX Bot, Channel channel, String... args) throws Exception {
+        IRCUtils.SendMessage(user, channel,StringUtils.join(args, " "));
 
     }
 }

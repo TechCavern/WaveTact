@@ -32,7 +32,7 @@ public class SimpleMessage extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, String... args) throws Exception {
         String dresponse = this.message;
         String[] message = StringUtils.split(this.message, " ");
         int i = 0;
@@ -45,7 +45,7 @@ public class SimpleMessage extends GenericCommand {
             }
         }
         dresponse = dresponse.replace("$*", GeneralUtils.buildMessage(i, args.length, args));
-        IRCUtils.SendMessage(user, channel, dresponse);
+        IRCUtils.SendMessage(user, channel, dresponse, isPrivate);
     }
 
     void create(){

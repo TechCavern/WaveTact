@@ -30,6 +30,26 @@ public class PermUtils {
 
         return userString;
     }
+    public static String getAccount(PircBotX bot, String userObject) {
+        String userString;
+        if(userObject != null) {
+            bot.sendRaw().rawLineNow("WHOIS " + userObject);
+        }else{
+            userString = null;
+        }
+        WaitForQueue waitForQueue = new WaitForQueue(bot);
+        WhoisEvent<PircBotX> test;
+        try {
+            test = waitForQueue.waitFor(WhoisEvent.class);
+            waitForQueue.close();
+            userString = test.getRegisteredAs();
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+            userString = null;
+        }
+
+        return userString;
+    }
     private static boolean isAuthor(PircBotX bot, User userObject) {
         String account = getAccount(bot, userObject);
         if (account != null) {

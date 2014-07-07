@@ -22,7 +22,7 @@ public class AutoOp extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, String... args) throws Exception {
         if (args[0].startsWith("-")) {
             PermChannel PLChannel = PermChannelUtils.getPermLevelChannel(Bot.getServerInfo().getNetwork(), PermUtils.getAccount(Bot, GetUtils.getUserByNick(channel, args[0])), channel.getName());
             if (PLChannel != null) {

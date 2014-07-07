@@ -3,11 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.techcavern.wavetact.commands.trusted;
+package com.techcavern.wavetact.commands.chanhalfop;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
+import org.pircbotx.Channel;
+import org.pircbotx.PircBotX;
+import org.pircbotx.User;
 import org.pircbotx.hooks.events.MessageEvent;
 
 /**
@@ -21,7 +24,7 @@ public class Part extends GenericCommand {
     }
 
     @Override
-    public void onCommand(MessageEvent<?> event, String... args) throws Exception {
-        event.getChannel().send().part();
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, String... args) throws Exception {
+       channel.send().part();
     }
 }

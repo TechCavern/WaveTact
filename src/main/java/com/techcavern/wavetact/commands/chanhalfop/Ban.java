@@ -20,7 +20,7 @@ public class Ban extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, String... args)
+    public void onCommand(User user, PircBotX Bot, Channel channel,boolean isPrivate, String... args)
             throws Exception {
         String hostmask;
         if (args[0].contains("!") && args[0].contains("@")) {

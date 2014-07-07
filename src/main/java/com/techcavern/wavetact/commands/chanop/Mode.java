@@ -25,7 +25,7 @@ public class Mode extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, String... args) throws Exception {
         if(!args[0].contains("#")){
             if(PermUtils.getPermLevel(Bot, user, channel) >= 9){
                 if(channel.isOp(Bot.getUserBot()) || channel.isSuperOp(Bot.getUserBot()) || channel.isOwner(Bot.getUserBot())) {

@@ -23,7 +23,7 @@ public class CPermLevel extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel,boolean isPrivate, String... args) throws Exception {
     int c = 0;
 
         if(args.length > 1) {

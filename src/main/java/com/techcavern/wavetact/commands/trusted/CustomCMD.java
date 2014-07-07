@@ -6,6 +6,7 @@
 package com.techcavern.wavetact.commands.trusted;
 
 import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.objects.CommandType;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleActionUtils;
@@ -15,6 +16,9 @@ import com.techcavern.wavetact.utils.objects.SimpleMessage;
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
+import org.pircbotx.Channel;
+import org.pircbotx.PircBotX;
+import org.pircbotx.User;
 import org.pircbotx.hooks.events.MessageEvent;
 
 /**
@@ -28,34 +32,34 @@ public class CustomCMD extends GenericCommand {
     }
 
     @Override
-    public void onCommand(MessageEvent<?> event, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, String... args) throws Exception {
 
         switch (args[0].toLowerCase()) {
             case "m": // message
                 if (args[1].startsWith("-")) {
-                    removeCommand(event, CommandType.MESSAGE, args[1].substring(1));
+                    removeCommand(user,channel, CommandType.MESSAGE, args[1].substring(1));
                 } else if (args[1].startsWith("+")) {
-                    modifyCommand(event, CommandType.MESSAGE, Integer.parseInt(args[2]), args[1].substring(1), GeneralUtils.buildMessage(3, args.length, args));
+                    modifyCommand(user,channel, CommandType.MESSAGE, Integer.parseInt(args[2]), args[1].substring(1), GeneralUtils.buildMessage(3, args.length, args));
                 } else {
-                    addCommand(event, CommandType.MESSAGE, Integer.parseInt(args[2]), args[1], GeneralUtils.buildMessage(3, args.length, args));
+                    addCommand(user,channel, CommandType.MESSAGE, Integer.parseInt(args[2]), args[1], GeneralUtils.buildMessage(3, args.length, args));
                 }
                 break;
             case "a": // action
                 if (args[1].startsWith("-")) {
-                    removeCommand(event, CommandType.ACTION, args[1].substring(1));
+                    removeCommand(user,channel, CommandType.ACTION, args[1].substring(1));
                 } else if (args[1].startsWith("+")) {
-                    modifyCommand(event, CommandType.ACTION, Integer.parseInt(args[2]), args[1].substring(1), GeneralUtils.buildMessage(3, args.length, args));
+                    modifyCommand(user,channel, CommandType.ACTION, Integer.parseInt(args[2]), args[1].substring(1), GeneralUtils.buildMessage(3, args.length, args));
                 } else {
-                    addCommand(event, CommandType.ACTION, Integer.parseInt(args[2]), args[1], GeneralUtils.buildMessage(3, args.length, args));
+                    addCommand(user,channel, CommandType.ACTION, Integer.parseInt(args[2]), args[1], GeneralUtils.buildMessage(3, args.length, args));
                 }
                 break;
         }
     }
 
 
-    private void addCommand(MessageEvent<?> event, CommandType type, int accessLevel, String cmd, String msg) {
+    private void addCommand(User user, Channel channel, CommandType type, int accessLevel, String cmd, String msg) {
         if (GetUtils.getCommand(cmd) != null) {
-            event.respond("Command already exists");
+            user.send().notice("Command already exists");
             return;
         }
         if (type == CommandType.ACTION) {
@@ -65,14 +69,14 @@ public class CustomCMD extends GenericCommand {
             GeneralRegistry.SimpleMessages.add(new SimpleMessage(cmd, accessLevel, msg, false));
             SimpleMessageUtils.saveSimpleMessages();
         }
-        event.respond("Command added");
+        IRCUtils.SendMessage(user, channel,"Command added");
     }
 
     @SuppressWarnings("SuspiciousMethodCalls")
-    private void modifyCommand(MessageEvent<?> event, CommandType type, int accessLevel, String command, String msg) {
+    private void modifyCommand(User user, Channel channel, CommandType type, int accessLevel, String command, String msg) {
         if (GetUtils.getCommand(command) != null) {
             GenericCommand cmd = GetUtils.getCommand(command);
-            GeneralRegistry.Commands.remove(cmd);
+            GeneralRegistry.GenericCommands.remove(cmd);
             GeneralRegistry.SimpleActions.remove(cmd);
             GeneralRegistry.SimpleMessages.remove(cmd);
         }
@@ -85,11 +89,11 @@ public class CustomCMD extends GenericCommand {
             SimpleMessageUtils.saveSimpleMessages();
 
         }
-        event.respond("Command modified");
+        IRCUtils.SendMessage(user, channel, "Command modified");
     }
 
     @SuppressWarnings({"SuspiciousMethodCalls", "ConstantConditions"})
-    private void removeCommand(MessageEvent<?> event, CommandType type, String command) {
+    private void removeCommand(User user, Channel channel, CommandType type, String command) {
         GenericCommand cmd = null;
         if (type == CommandType.MESSAGE)
             cmd = SimpleMessageUtils.getSimpleMessage(command);
@@ -97,9 +101,9 @@ public class CustomCMD extends GenericCommand {
             cmd = SimpleActionUtils.getSimpleAction(command);
 
         if (cmd == null) {
-            event.respond("Command does not exist");
+            user.send().notice("Command does not exist");
         } else if (cmd.getLockedStatus()) {
-            event.respond("Command is locked");
+            user.send().notice("Command is locked");
         } else {
             if (type == CommandType.MESSAGE) {
                 GeneralRegistry.SimpleMessages.remove(cmd);
@@ -109,9 +113,9 @@ public class CustomCMD extends GenericCommand {
                 GeneralRegistry.SimpleActions.remove(cmd);
                 SimpleActionUtils.saveSimpleActions();
             }
-            GeneralRegistry.Commands.remove(cmd);
+            GeneralRegistry.GenericCommands.remove(cmd);
 
-            event.respond("Command removed");
+            IRCUtils.SendMessage(user, channel, "Command removed");
         }
     }
 }

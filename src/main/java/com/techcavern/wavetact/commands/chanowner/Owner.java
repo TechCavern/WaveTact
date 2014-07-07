@@ -23,7 +23,7 @@ public class Owner extends GenericCommand {
         super(GeneralUtils.toArray("owner own oop"), 14, "Owner (-)(User)");
     }
 
-    public void onCommand(User user, PircBotX Bot, Channel channel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, String... args) throws Exception {
         if (args.length >= 1) {
             if (args[0].equalsIgnoreCase("-")) {
                 channel.send().deOwner(user);

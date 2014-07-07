@@ -2,9 +2,13 @@ package com.techcavern.wavetact.commands.fun;
 
 import com.google.gson.JsonObject;
 import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.pircbotx.Channel;
+import org.pircbotx.PircBotX;
+import org.pircbotx.User;
 import org.pircbotx.hooks.events.MessageEvent;
 
 public class UrbanDictonary extends GenericCommand {
@@ -14,12 +18,12 @@ public class UrbanDictonary extends GenericCommand {
     }
 
     @Override
-    public void onCommand(MessageEvent<?> event, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, String... args) throws Exception {
         JsonObject objectJSON = GeneralUtils.getJsonObject("http://api.urbandictionary.com/v0/define?term=" + StringUtils.join(args).replaceAll(" ", "%20"));
         if (objectJSON.getAsJsonArray("list").size() > 0) {
-            event.getChannel().send().message(objectJSON.getAsJsonArray("list").get(0).getAsJsonObject().get("definition").getAsString().replaceAll("\\n|\\r|\\t", " ").replaceAll("  ", " "));
+            IRCUtils.SendMessage(user, channel, objectJSON.getAsJsonArray("list").get(0).getAsJsonObject().get("definition").getAsString().replaceAll("\\n|\\r|\\t", " ").replaceAll("  ", " "));
         } else {
-            event.getChannel().send().message("Not Defined in the Urban Dictionary");
+            user.send().notice("Not Defined in the Urban Dictionary");
         }
 
     }
