@@ -6,7 +6,7 @@ import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.PermUtils;
 import com.techcavern.wavetact.utils.objects.Command;
 import com.techcavern.wavetact.utils.objects.PermChannel;
-import com.techcavern.wavetact.utils.objects.objectUtils.PermChannelUtils;
+import com.techcavern.wavetact.utils.databaseUtils.PermChannelUtils;
 import org.pircbotx.hooks.events.MessageEvent;
 
 /**

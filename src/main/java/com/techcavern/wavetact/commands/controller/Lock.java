@@ -8,8 +8,8 @@ package com.techcavern.wavetact.commands.controller;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.utils.objects.Command;
 import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.objects.objectUtils.SimpleActionUtils;
-import com.techcavern.wavetact.utils.objects.objectUtils.SimpleMessageUtils;
+import com.techcavern.wavetact.utils.databaseUtils.SimpleActionUtils;
+import com.techcavern.wavetact.utils.databaseUtils.SimpleMessageUtils;
 import org.pircbotx.hooks.events.MessageEvent;
 
 /**

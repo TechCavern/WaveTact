@@ -11,8 +11,7 @@ import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.PermUtils;
 import com.techcavern.wavetact.utils.objects.Command;
-import com.techcavern.wavetact.utils.objects.objectUtils.ControllerUtils;
-import com.techcavern.wavetact.utils.objects.objectUtils.GlobalUtils;
+import com.techcavern.wavetact.utils.databaseUtils.GlobalUtils;
 import org.pircbotx.hooks.events.MessageEvent;
 
 

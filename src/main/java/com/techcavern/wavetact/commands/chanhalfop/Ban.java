@@ -7,7 +7,7 @@ import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.Command;
 import com.techcavern.wavetact.utils.objects.UTime;
-import com.techcavern.wavetact.utils.objects.objectUtils.BanTimeUtils;
+import com.techcavern.wavetact.utils.databaseUtils.BanTimeUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;

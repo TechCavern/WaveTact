@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.utils.objects.objectUtils;
+package com.techcavern.wavetact.utils.databaseUtils;
 
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralRegistry;
@@ -12,24 +12,24 @@ import java.util.stream.Collectors;
 /**
  * Created by jztech101 on 7/5/14.
  */
-public class GlobalUtils {
-    public static void loadGlobals() {
-        JSONFile file = new JSONFile("Globals.json");
+public class ControllerUtils {
+    public static void loadControllers() {
+        JSONFile file = new JSONFile("Controllers.json");
         if (file.exists()) {
             try {
-                List<String> Globals = file.read();
-                GeneralRegistry.Globals.clear();
-                GeneralRegistry.Globals.addAll(Globals.stream().collect(Collectors.toList()));
+                List<String> controllers = file.read();
+                GeneralRegistry.Controllers.clear();
+                GeneralRegistry.Controllers.addAll(controllers.stream().collect(Collectors.toList()));
             } catch (FileNotFoundException e) {
                 ErrorUtils.handleException(e);
             }
         }
     }
 
-    public static void saveGlobals() {
-        JSONFile file = new JSONFile("Globals.json");
+    public static void saveControllers() {
+        JSONFile file = new JSONFile("Controllers.json");
         try {
-            file.write(GeneralRegistry.Globals);
+            file.write(GeneralRegistry.Controllers);
         } catch (IOException e) {
             ErrorUtils.handleException(e);
         }

@@ -1,7 +1,7 @@
 package com.techcavern.wavetact.utils.thread;
 
-import com.techcavern.wavetact.utils.objects.objectUtils.BanTimeUtils;
-import com.techcavern.wavetact.utils.objects.objectUtils.QuietTimeUtils;
+import com.techcavern.wavetact.utils.databaseUtils.BanTimeUtils;
+import com.techcavern.wavetact.utils.databaseUtils.QuietTimeUtils;
 import com.techcavern.wavetact.utils.objects.UTime;
 import com.techcavern.wavetact.utils.*;
 import org.pircbotx.PircBotX;

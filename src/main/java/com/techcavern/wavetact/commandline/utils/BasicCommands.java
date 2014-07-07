@@ -2,8 +2,8 @@ package com.techcavern.wavetact.commandline.utils;
 
 import com.techcavern.wavetact.annot.CMDLine;
 import com.techcavern.wavetact.utils.objects.CommandLine;
-import com.techcavern.wavetact.utils.objects.objectUtils.SimpleActionUtils;
-import com.techcavern.wavetact.utils.objects.objectUtils.SimpleMessageUtils;
+import com.techcavern.wavetact.utils.databaseUtils.SimpleActionUtils;
+import com.techcavern.wavetact.utils.databaseUtils.SimpleMessageUtils;
 import com.techcavern.wavetact.utils.objects.SimpleAction;
 import com.techcavern.wavetact.utils.objects.SimpleMessage;
 import com.techcavern.wavetact.utils.GeneralRegistry;
