@@ -25,7 +25,7 @@ import java.util.List;
 public class Topic extends Command {
 
     public Topic() {
-        super(GeneralUtils.toArray("topic t"), 6, "Topic [Seperator] [a(add)/s(switch)/+[topic #]/-[topic #]/(Insert message to replace whole topic)/ss(switch seperator)] (Messages to add)(Integer to swap)(seperator to change to) (Integer to swap)");
+        super(GeneralUtils.toArray("topic t"), 6, "Topic [Seperator] [a(add)/sw(switch)/+[topic #]/-[topic #]/(Insert message to replace whole topic)/ss(switch seperator)/r(revert)] (Messages to add)(Integer to swap)(seperator to change to) (Integer to swap)");
     }
 
     @Override
