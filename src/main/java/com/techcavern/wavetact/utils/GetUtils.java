@@ -1,7 +1,6 @@
 package com.techcavern.wavetact.utils;
 
 import com.techcavern.wavetact.utils.objects.*;
-import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -39,8 +38,33 @@ public class GetUtils {
         return null;
     }
 
-    public static Command getCommand(String Command) {
-        for (Command g : GeneralRegistry.Commands) {
+    public static GenericCommand getCommand(String Command) {
+        for (GenericCommand g : GeneralRegistry.GenericCommands) {
+            if (g.getCommand().equalsIgnoreCase(Command)) {
+                return g;
+            }
+        }
+        for (GenericCommand g : GeneralRegistry.TrustedCommands) {
+            if (g.getCommand().equalsIgnoreCase(Command)) {
+                return g;
+            }
+        }
+        for (GenericCommand g : GeneralRegistry.ControllerCommands) {
+            if (g.getCommand().equalsIgnoreCase(Command)) {
+                return g;
+            }
+        }
+        for (GenericCommand g : GeneralRegistry.ChanOwnerCommands) {
+            if (g.getCommand().equalsIgnoreCase(Command)) {
+                return g;
+            }
+        }
+        for (GenericCommand g : GeneralRegistry.ChanOpCommands) {
+            if (g.getCommand().equalsIgnoreCase(Command)) {
+                return g;
+            }
+        }
+        for (GenericCommand g : GeneralRegistry.ChanFounderCommands) {
             if (g.getCommand().equalsIgnoreCase(Command)) {
                 return g;
             }

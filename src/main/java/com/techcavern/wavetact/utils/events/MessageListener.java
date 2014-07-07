@@ -5,7 +5,7 @@
  */
 package com.techcavern.wavetact.utils.events;
 
-import com.techcavern.wavetact.utils.objects.Command;
+import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.PermUtils;
@@ -24,7 +24,7 @@ public class MessageListener extends ListenerAdapter<PircBotX> {
         String[] messageParts = event.getMessage().split(" ");
         String m = messageParts[0].toLowerCase();
         for (int i = 0; i < GeneralRegistry.Commands.size(); i++) {
-            Command Command = GeneralRegistry.Commands.get(i);
+            GenericCommand Command = GeneralRegistry.Commands.get(i);
             for (int c = 0; c < Command.getCommandID().length; c++) {
                 String CommandID = Command.getCommandID()[c];
                 if (m.equalsIgnoreCase(GetUtils.getCommandChar(event.getBot()) + CommandID)) {

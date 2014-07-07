@@ -10,7 +10,7 @@ import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.PermUtils;
-import com.techcavern.wavetact.utils.objects.Command;
+import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.databaseUtils.GlobalUtils;
 import org.pircbotx.hooks.events.MessageEvent;
 
@@ -18,7 +18,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 /**
  * @author jztech101
  */
-public class Globals extends Command {
+public class Globals extends GenericCommand {
     @CMD
     public Globals() {
         super(GeneralUtils.toArray("globals global gl"), 9001, "global (-)[user]");

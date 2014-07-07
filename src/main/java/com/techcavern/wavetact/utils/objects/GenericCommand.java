@@ -6,24 +6,28 @@
 package com.techcavern.wavetact.utils.objects;
 
 import com.techcavern.wavetact.utils.GeneralRegistry;
+import org.pircbotx.Channel;
+import org.pircbotx.PircBotX;
+import org.pircbotx.User;
 import org.pircbotx.hooks.events.MessageEvent;
+import org.pircbotx.hooks.types.GenericEvent;
 
 /**
  * @author jztech101
  */
-public abstract class Command {
+public abstract class GenericCommand {
 
     private final String[] comid;
     private int PermLevel;
     private final String Desc;
 
-    protected Command(String[] comid, int PermLevel, String Desc) {
+    protected GenericCommand(String[] comid, int PermLevel, String Desc) {
         this.comid = comid;
         this.PermLevel = PermLevel;
         this.Desc = Desc;
     }
 
-    public abstract void onCommand(MessageEvent<?> event, String... args) throws Exception;
+    public abstract void onCommand(User user, PircBotX Bot, Channel channel, String... args) throws Exception;
 
     public boolean getLockedStatus() {
         return false;

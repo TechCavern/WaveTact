@@ -4,7 +4,7 @@ import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.PermUtils;
-import com.techcavern.wavetact.utils.objects.Command;
+import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.objects.PermChannel;
 import com.techcavern.wavetact.utils.databaseUtils.PermChannelUtils;
 import org.pircbotx.hooks.events.MessageEvent;
@@ -12,7 +12,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 /**
  * Created by jztech101 on 7/5/14.
  */
-public class AutoOp extends Command {
+public class AutoOp extends GenericCommand {
     @CMD
     public AutoOp() {
         super(GeneralUtils.toArray("autoop autop ap"), 10, "autoop (-)[user] - Define whether to autoop the user or not");

@@ -6,7 +6,7 @@
 package com.techcavern.wavetact.commands.trusted;
 
 import com.techcavern.wavetact.annot.CMD;
-import com.techcavern.wavetact.utils.objects.Command;
+import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.objects.CommandType;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleActionUtils;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleMessageUtils;
@@ -20,7 +20,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 /**
  * @author jztech101
  */
-public class CustomCMD extends Command {
+public class CustomCMD extends GenericCommand {
 
     @CMD
     public CustomCMD() {
@@ -71,7 +71,7 @@ public class CustomCMD extends Command {
     @SuppressWarnings("SuspiciousMethodCalls")
     private void modifyCommand(MessageEvent<?> event, CommandType type, int accessLevel, String command, String msg) {
         if (GetUtils.getCommand(command) != null) {
-            Command cmd = GetUtils.getCommand(command);
+            GenericCommand cmd = GetUtils.getCommand(command);
             GeneralRegistry.Commands.remove(cmd);
             GeneralRegistry.SimpleActions.remove(cmd);
             GeneralRegistry.SimpleMessages.remove(cmd);
@@ -90,7 +90,7 @@ public class CustomCMD extends Command {
 
     @SuppressWarnings({"SuspiciousMethodCalls", "ConstantConditions"})
     private void removeCommand(MessageEvent<?> event, CommandType type, String command) {
-        Command cmd = null;
+        GenericCommand cmd = null;
         if (type == CommandType.MESSAGE)
             cmd = SimpleMessageUtils.getSimpleMessage(command);
         else if (type == CommandType.ACTION)

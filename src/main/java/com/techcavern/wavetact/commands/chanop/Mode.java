@@ -8,14 +8,14 @@ package com.techcavern.wavetact.commands.chanop;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.PermUtils;
-import com.techcavern.wavetact.utils.objects.Command;
+import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import org.pircbotx.hooks.events.MessageEvent;
 
 /**
  * @author jztech101
  */
-public class Mode extends Command {
+public class Mode extends GenericCommand {
     @CMD
     public Mode() {
         super(GeneralUtils.toArray("mode mo"), 0, "mode (channel) [modes to set]");

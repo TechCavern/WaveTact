@@ -8,9 +8,8 @@ package com.techcavern.wavetact.commands.chanhalfop;
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
-import com.techcavern.wavetact.utils.objects.Command;
+import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.objects.UTime;
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.hooks.events.MessageEvent;
 
@@ -22,7 +21,7 @@ import java.util.List;
  * @author jztech101
  */
 
-public class Topic extends Command {
+public class Topic extends GenericCommand {
 
     public Topic() {
         super(GeneralUtils.toArray("topic t"), 6, "Topic [Seperator] [a(add)/sw(switch)/+[topic #]/-[topic #]/(Insert message to replace whole topic)/ss(switch seperator)/r(revert)] (Messages to add)(Integer to swap)(seperator to change to) (Integer to swap)");

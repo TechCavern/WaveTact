@@ -6,7 +6,7 @@
 package com.techcavern.wavetact.commands.chanowner;
 
 import com.techcavern.wavetact.annot.CMD;
-import com.techcavern.wavetact.utils.objects.Command;
+import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
 import org.pircbotx.hooks.events.MessageEvent;
@@ -14,7 +14,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 /**
  * @author jztech101
  */
-public class Owner extends Command {
+public class Owner extends GenericCommand {
     @CMD
     public Owner() {
         super(GeneralUtils.toArray("owner own oop"), 14, "Owner (-)(User)");

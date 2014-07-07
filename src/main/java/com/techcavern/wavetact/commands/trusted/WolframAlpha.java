@@ -1,7 +1,7 @@
 package com.techcavern.wavetact.commands.trusted;
 
 import com.techcavern.wavetact.annot.CMD;
-import com.techcavern.wavetact.utils.objects.Command;
+import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.hooks.events.MessageEvent;
@@ -9,7 +9,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 import java.util.List;
 
 
-public class WolframAlpha extends Command {
+public class WolframAlpha extends GenericCommand {
     @CMD
     public WolframAlpha() {
         super(GeneralUtils.toArray("wolframalpha wa wolfram"), 5, "wolframalpha [input] (return array value #)");

@@ -1,7 +1,7 @@
 package com.techcavern.wavetact.commands.utils;
 
 import com.techcavern.wavetact.annot.CMD;
-import com.techcavern.wavetact.utils.objects.Command;
+import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.hooks.events.MessageEvent;
@@ -9,7 +9,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 import java.util.List;
 
 
-public class Question extends Command {
+public class Question extends GenericCommand {
     @CMD
     public Question() {
         super(GeneralUtils.toArray("question q"), 0, "question [Ask a Question]");

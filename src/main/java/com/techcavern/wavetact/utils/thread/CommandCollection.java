@@ -1,7 +1,7 @@
 package com.techcavern.wavetact.utils.thread;
 
 import com.techcavern.wavetact.annot.CMD;
-import com.techcavern.wavetact.utils.objects.Command;
+import com.techcavern.wavetact.utils.objects.GenericCommand;
 
 import java.io.File;
 import java.lang.reflect.Constructor;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 public final class CommandCollection
-        implements Callable<List<Command>> {
+        implements Callable<List<GenericCommand>> {
     private final String start_pkg;
 
     public CommandCollection(String pkg) {
@@ -20,9 +20,9 @@ public final class CommandCollection
     }
 
     @Override
-    public List<Command> call()
+    public List<GenericCommand> call()
             throws Exception {
-        List<Command> commands = new LinkedList<>();
+        List<GenericCommand> commands = new LinkedList<>();
         ClassLoader loader = Thread.currentThread().getContextClassLoader();
         Enumeration<URL> resources = loader.getResources(this.start_pkg.replace('.', '/'));
         while (resources.hasMoreElements()) {
@@ -32,9 +32,9 @@ public final class CommandCollection
         return commands;
     }
 
-    private List<Command> findCommands(File dir, String pkgName)
+    private List<GenericCommand> findCommands(File dir, String pkgName)
             throws Exception {
-        List<Command> commands = new LinkedList<>();
+        List<GenericCommand> commands = new LinkedList<>();
         if (!dir.exists()) {
             return commands;
         }
@@ -50,7 +50,7 @@ public final class CommandCollection
         return commands;
     }
 
-    private Command newCommand(Class<?> clazz)
+    private GenericCommand newCommand(Class<?> clazz)
             throws Exception {
         for (Constructor<?> c : clazz.getDeclaredConstructors()) {
             if (c.isAnnotationPresent(CMD.class)) {
@@ -58,7 +58,7 @@ public final class CommandCollection
                     throw new InvalidCommandConstructorException(clazz, c);
                 } else {
                     c.setAccessible(true);
-                    return (Command) c.newInstance();
+                    return (GenericCommand) c.newInstance();
                 }
             }
         }

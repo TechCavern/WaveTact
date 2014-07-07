@@ -6,7 +6,7 @@
 package com.techcavern.wavetact.commands.chanhalfop;
 
 import com.techcavern.wavetact.annot.CMD;
-import com.techcavern.wavetact.utils.objects.Command;
+import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
 import org.pircbotx.hooks.events.MessageEvent;
@@ -15,7 +15,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 /**
  * @author jztech101
  */
-public class Voice extends Command {
+public class Voice extends GenericCommand {
     @CMD
     public Voice() {
         super(GeneralUtils.toArray("voice vo vop"), 6, "Voice (-)(User)");

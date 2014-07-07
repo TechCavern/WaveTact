@@ -9,7 +9,7 @@ import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.LoadUtils;
-import com.techcavern.wavetact.utils.objects.Command;
+import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleActionUtils;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleMessageUtils;
 import org.pircbotx.hooks.events.MessageEvent;
@@ -18,7 +18,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 /**
  * @author jztech101
  */
-public class DefCon extends Command {
+public class DefCon extends GenericCommand {
     @CMD
     public DefCon() {
         super(GeneralUtils.toArray("defcon"), 9001, "defcon (-) locks down the bot to controller-only");
@@ -36,7 +36,7 @@ public class DefCon extends Command {
             SimpleMessageUtils.loadSimpleMessages();
             LoadUtils.registerCommands();
         }else{
-            for(Command command:GeneralRegistry.Commands){
+            for(GenericCommand command:GeneralRegistry.Commands){
                 command.setPermLevel(9001);
             }
         }

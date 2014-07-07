@@ -6,7 +6,7 @@
 package com.techcavern.wavetact.commands.chanowner;
 
 import com.techcavern.wavetact.annot.CMD;
-import com.techcavern.wavetact.utils.objects.Command;
+import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
 import org.pircbotx.hooks.events.MessageEvent;
@@ -15,7 +15,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 /**
  * @author jztech101
  */
-public class Protect extends Command {
+public class Protect extends GenericCommand {
     @CMD
     public Protect() {
         super(GeneralUtils.toArray("protect prot pr sop"), 14, "protect (-)(User)");

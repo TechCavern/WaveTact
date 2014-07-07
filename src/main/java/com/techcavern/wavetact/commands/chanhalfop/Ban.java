@@ -5,7 +5,7 @@ import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.objects.Command;
+import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.objects.UTime;
 import com.techcavern.wavetact.utils.databaseUtils.BanTimeUtils;
 import org.pircbotx.Channel;
@@ -13,39 +13,39 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 import org.pircbotx.hooks.events.MessageEvent;
 
-public class Ban extends Command {
+public class Ban extends GenericCommand {
     @CMD
     public Ban() {
         super(GeneralUtils.toArray("ban b"), 6, "Ban (-)(+)[User] (time)");
     }
 
     @Override
-    public void onCommand(MessageEvent<?> event, String... args)
+    public void onCommand(User user, PircBotX Bot, Channel channel, String... args)
             throws Exception {
         String hostmask;
         if (args[0].contains("!") && args[0].contains("@")) {
             hostmask = args[0];
         } else {
             if (args[0].startsWith("+")) {
-                User user = GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("\\+", ""));
-                if (user.getLogin().startsWith("~")) {
-                    hostmask = "*!*@" + user.getHostmask();
+                User use = GetUtils.getUserByNick(channel, args[0].replaceFirst("\\+", ""));
+                if (use.getLogin().startsWith("~")) {
+                    hostmask = "*!*@" + use.getHostmask();
                 } else {
-                    hostmask = "*!" + user.getLogin() + "@" + user.getHostmask();
+                    hostmask = "*!" + use.getLogin() + "@" + use.getHostmask();
                 }
             } else if (args[0].startsWith("-")) {
-                User user = GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", ""));
-                if (user.getLogin().startsWith("~")) {
-                    hostmask = "*!*@" + user.getHostmask();
+                User use = GetUtils.getUserByNick(channel, args[0].replaceFirst("-", ""));
+                if (use.getLogin().startsWith("~")) {
+                    hostmask = "*!*@" + use.getHostmask();
                 } else {
-                    hostmask = "*!" + user.getLogin() + "@" + user.getHostmask();
+                    hostmask = "*!" + use.getLogin() + "@" + use.getHostmask();
                 }
             } else {
-                User user = GetUtils.getUserByNick(event.getChannel(), args[0]);
-                if (user.getLogin().startsWith("~")) {
-                    hostmask = "*!*@" + user.getHostmask();
+                User use = GetUtils.getUserByNick(channel, args[0]);
+                if (use.getLogin().startsWith("~")) {
+                    hostmask = "*!*@" + use.getHostmask();
                 } else {
-                    hostmask = "*!" + user.getLogin() + "@" + user.getHostmask();
+                    hostmask = "*!" + use.getLogin() + "@" + use.getHostmask();
                 }
             }
         }
@@ -54,26 +54,26 @@ public class Ban extends Command {
                 if (BanTimeUtils.getBanTime(hostmask) == null) {
 
                     if (args.length == 2) {
-                        ban(hostmask, event.getChannel(), event.getBot());
-                        UTime utimeObject = new UTime(hostmask, event.getBot().getServerInfo().getNetwork(), "b", event.getChannel().getName(), GeneralUtils.getMilliSeconds(args[1]), System.currentTimeMillis());
+                        ban(hostmask, channel, Bot);
+                        UTime utimeObject = new UTime(hostmask, Bot.getServerInfo().getNetwork(), "b", channel.getName(), GeneralUtils.getMilliSeconds(args[1]), System.currentTimeMillis());
                         GeneralRegistry.BanTimes.add(utimeObject);
                         BanTimeUtils.saveBanTimes();
 
                     } else if (args.length < 2) {
-                        ban(hostmask, event.getChannel(), event.getBot());
-                        UTime utimeObject = new UTime(hostmask, event.getBot().getServerInfo().getNetwork(), "b", event.getChannel().getName(), GeneralUtils.getMilliSeconds("7w"), System.currentTimeMillis());
+                        ban(hostmask, channel, Bot);
+                        UTime utimeObject = new UTime(hostmask, Bot.getServerInfo().getNetwork(), "b", channel.getName(), GeneralUtils.getMilliSeconds("7w"), System.currentTimeMillis());
                         GeneralRegistry.BanTimes.add(utimeObject);
                         BanTimeUtils.saveBanTimes();
                     }
                 } else {
-                    event.getChannel().send().message("Ban already exists!");
+                    user.send().notice("Ban already exists!");
                 }
             } else if (args[0].startsWith("-")) {
                 if (BanTimeUtils.getBanTime(hostmask) != null) {
                     BanTimeUtils.getBanTime(hostmask).setTime(0);
                     BanTimeUtils.saveBanTimes();
                 } else {
-                    IRCUtils.setMode(event.getChannel(), event.getBot(), "-b ", hostmask);
+                    IRCUtils.setMode(channel, Bot, "-b ", hostmask);
                 }
 
             } else {
@@ -86,10 +86,10 @@ public class Ban extends Command {
                         } else {
                             BanTimeUtils.getBanTime(hostmask).setTime(GeneralUtils.getMilliSeconds(args[1].replace("-", "")));
                         }
-                        event.getChannel().send().message("Ban Modified");
+                        channel.send().message("Ban Modified");
                         BanTimeUtils.saveBanTimes();
                     }} else {
-                        event.getChannel().send().message("Ban does not exist!");
+                        channel.send().message("Ban does not exist!");
                     }
                 }
             }

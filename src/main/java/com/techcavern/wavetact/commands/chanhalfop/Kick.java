@@ -6,38 +6,41 @@
 package com.techcavern.wavetact.commands.chanhalfop;
 
 import com.techcavern.wavetact.annot.CMD;
-import com.techcavern.wavetact.utils.objects.Command;
+import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
+import org.pircbotx.Channel;
+import org.pircbotx.PircBotX;
+import org.pircbotx.User;
 import org.pircbotx.UserLevel;
 import org.pircbotx.hooks.events.MessageEvent;
 
 /**
  * @author jztech101
  */
-public class Kick extends Command {
+public class Kick extends GenericCommand {
     @CMD
     public Kick() {
         super(GeneralUtils.toArray("kick k"), 6, "kick [user]");
     }
 
     @Override
-    public void onCommand(MessageEvent<?> event, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, String... args) throws Exception {
 
-        if (event.getChannel().getUserLevels(event.getBot().getUserBot()).contains(UserLevel.HALFOP) && !event.getChannel().isOwner(GetUtils.getUserByNick(event.getChannel(), args[0])) && !event.getChannel().isSuperOp(GetUtils.getUserByNick(event.getChannel(), args[0]))) {
-            if (event.getChannel().isHalfOp(GetUtils.getUserByNick(event.getChannel(), args[0])) || event.getChannel().isOp(GetUtils.getUserByNick(event.getChannel(), args[0]))) {
-                event.getChannel().send().message("Error: I must be at least opped to kick someone that is opped or halfopped");
+        if (channel.getUserLevels(Bot.getUserBot()).contains(UserLevel.HALFOP) && !channel.isOwner(GetUtils.getUserByNick(channel, args[0])) && !channel.isSuperOp(GetUtils.getUserByNick(channel, args[0]))) {
+            if (channel.isHalfOp(GetUtils.getUserByNick(channel, args[0])) || channel.isOp(GetUtils.getUserByNick(channel, args[0]))) {
+                user.send().notice("Error: I must be at least opped to kick someone that is opped or halfopped");
             } else{
-                event.getChannel().send().kick(GetUtils.getUserByNick(event.getChannel(), args[0]));
+                channel.send().kick(GetUtils.getUserByNick(channel, args[0]));
         }
-        }else if (event.getChannel().getUserLevels(event.getBot().getUserBot()).contains(UserLevel.OP) && !event.getChannel().isOwner(GetUtils.getUserByNick(event.getChannel(), args[0])) && !event.getChannel().isSuperOp(GetUtils.getUserByNick(event.getChannel(), args[0]))) {
-                event.getChannel().send().kick(GetUtils.getUserByNick(event.getChannel(), args[0]));
+        }else if (channel.getUserLevels(Bot.getUserBot()).contains(UserLevel.OP) && !channel.isOwner(GetUtils.getUserByNick(channel, args[0])) && !channel.isSuperOp(GetUtils.getUserByNick(channel, args[0]))) {
+                channel.send().kick(GetUtils.getUserByNick(channel, args[0]));
 
-        } else if (event.getChannel().getUserLevels(event.getBot().getUserBot()).contains(UserLevel.OWNER)) {
-                event.getChannel().send().kick(GetUtils.getUserByNick(event.getChannel(), args[0]));
+        } else if (channel.getUserLevels(Bot.getUserBot()).contains(UserLevel.OWNER)) {
+                channel.send().kick(GetUtils.getUserByNick(channel, args[0]));
 
         } else {
-            event.getChannel().send().message("Error: I must be ownered in the channel to kick someone that is protected or ownered");
+            user.send().notice("Error: I must be ownered in the channel to kick someone that is protected or ownered");
         }
     }
 

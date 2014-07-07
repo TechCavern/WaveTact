@@ -6,7 +6,7 @@
 package com.techcavern.wavetact.commands.controller;
 
 import com.techcavern.wavetact.annot.CMD;
-import com.techcavern.wavetact.utils.objects.Command;
+import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleActionUtils;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleMessageUtils;
@@ -15,7 +15,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 /**
  * @author jztech101
  */
-public class Lock extends Command {
+public class Lock extends GenericCommand {
     @CMD
     public Lock() {
         super(GeneralUtils.toArray("lock lo"), 9001, "lock [type(m/a)] [command]");

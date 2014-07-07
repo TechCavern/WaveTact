@@ -1,7 +1,7 @@
 package com.techcavern.wavetact.commands.utils;
 
 import com.techcavern.wavetact.annot.CMD;
-import com.techcavern.wavetact.utils.objects.Command;
+import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -15,7 +15,7 @@ import java.util.List;
  */
 
 @SuppressWarnings("ALL")
-public class Commands extends Command {
+public class Commands extends GenericCommand {
     @CMD
     public Commands() {
         super(GeneralUtils.toArray("commands list cmds coms"), 0, "Takes 0 arguments, returns list of Commands");
@@ -24,7 +24,7 @@ public class Commands extends Command {
     @Override
     public void onCommand(MessageEvent<?> event, String... args) throws Exception {
         List<String> commands = new ArrayList<String>();
-        for (Command command : GeneralRegistry.Commands) {
+        for (GenericCommand command : GeneralRegistry.Commands) {
             commands.add(command.getCommand());
         }
         String commandstring = StringUtils.join(commands, ", ");

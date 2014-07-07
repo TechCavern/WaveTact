@@ -3,12 +3,12 @@ package com.techcavern.wavetact.commands.utils;
 import com.google.gson.JsonObject;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.utils.GetUtils;
-import com.techcavern.wavetact.utils.objects.Command;
+import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import org.pircbotx.hooks.events.MessageEvent;
 
 
-public class FindIP extends Command {
+public class FindIP extends GenericCommand {
     @CMD
     public FindIP() {
         super(GeneralUtils.toArray("findip locate find loc"), 0, "findip [ipv4]");

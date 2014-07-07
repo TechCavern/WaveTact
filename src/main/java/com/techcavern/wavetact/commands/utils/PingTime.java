@@ -1,14 +1,14 @@
 package com.techcavern.wavetact.commands.utils;
 
 import com.techcavern.wavetact.annot.CMD;
-import com.techcavern.wavetact.utils.objects.Command;
+import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import org.pircbotx.hooks.events.MessageEvent;
 
 import java.net.InetAddress;
 import java.net.Socket;
 
-public class PingTime extends Command {
+public class PingTime extends GenericCommand {
     @CMD
     public PingTime() {
         super(GeneralUtils.toArray("checkping cping cpi"), 0, "checkping [website] (port)");

@@ -8,12 +8,14 @@ package com.techcavern.wavetact.utils.objects;
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.pircbotx.hooks.events.MessageEvent;
+import org.pircbotx.Channel;
+import org.pircbotx.PircBotX;
+import org.pircbotx.User;
 
 /**
  * @author jztech101
  */
-public class SimpleAction extends Command {
+public class SimpleAction extends GenericCommand {
 
     private final String action;
     private boolean locked;
@@ -28,7 +30,7 @@ public class SimpleAction extends Command {
     }
 
     @Override
-    public void onCommand(MessageEvent<?> event, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, String... args) throws Exception {
         String daction = this.action;
         String[] action = StringUtils.split(this.action, " ");
         int i = 0;
@@ -41,11 +43,15 @@ public class SimpleAction extends Command {
             }
         }
         daction = daction.replace("$*", GeneralUtils.buildMessage(i, args.length, args));
-        event.getChannel().send().action(daction);
+        if(channel == null) {
+            user.send().action(daction);
+        }else{
+            channel.send().action(daction);
+        }
     }
 
     void create(){
-        GeneralRegistry.Commands.add(this);
+        GeneralRegistry.GenericCommands.add(this);
     }
 
     @Override

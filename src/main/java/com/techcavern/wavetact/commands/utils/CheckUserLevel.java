@@ -1,14 +1,14 @@
 package com.techcavern.wavetact.commands.utils;
 
 import com.techcavern.wavetact.annot.CMD;
-import com.techcavern.wavetact.utils.objects.Command;
+import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.PermUtils;
 import org.pircbotx.User;
 import org.pircbotx.hooks.events.MessageEvent;
 
-public class CheckUserLevel extends Command {
+public class CheckUserLevel extends GenericCommand {
 
     @CMD
     public CheckUserLevel() {

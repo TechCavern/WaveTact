@@ -7,17 +7,14 @@ package com.techcavern.wavetact.commands.fun;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.objects.Command;
+import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.apache.commons.lang3.RandomUtils;
-import org.pircbotx.UserLevel;
 import org.pircbotx.hooks.events.MessageEvent;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author jztech101
  */
-public class Attack extends Command {
+public class Attack extends GenericCommand {
 
     @CMD
     public Attack() {
@@ -47,6 +44,15 @@ public class Attack extends Command {
                 break;
             case 6:
                 event.getChannel().send().action("packs "+Something+" up and ships it to another galaxy");
+                break;
+            case 7:
+                event.getChannel().send().action("eats "+Something+" for breakfast");
+                break;
+            case 8:
+                event.getChannel().send().action("sends a flying desk at "+Something);
+                break;
+            case 9:
+                event.getChannel().send().action("swallows "+Something+" whole");
                 break;
         }
 
