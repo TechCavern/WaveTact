@@ -69,6 +69,11 @@ public class GetUtils {
                 return g;
             }
         }
+        for (GenericCommand g : GeneralRegistry.AnonymonityCommands) {
+            if (g.getCommand().equalsIgnoreCase(Command)) {
+                return g;
+            }
+        }
         for (GenericCommand g : GeneralRegistry.ChanFounderCommands) {
             if (g.getCommand().equalsIgnoreCase(Command)) {
                 return g;

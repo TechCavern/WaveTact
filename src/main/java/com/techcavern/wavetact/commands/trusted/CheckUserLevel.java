@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.commands.chanhalfop;
+package com.techcavern.wavetact.commands.trusted;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.utils.IRCUtils;
@@ -31,21 +31,21 @@ public class CheckUserLevel extends GenericCommand {
         if (i == 9001) {
             IRCUtils.SendMessage(user, channel, userObject.getNick() + " is my Master!", isPrivate);
         } else if (i == 20) {
-            IRCUtils.SendMessage(user, channel,userObject.getNick() + " is a Network Administrator!",isPrivate);
+            IRCUtils.SendMessage(user, channel, userObject.getNick() + " is a Network Administrator!", isPrivate);
         }else if (i == 18) {
-            IRCUtils.SendMessage(user, channel,userObject.getNick() + " is a Channel Founder!",isPrivate);
+            IRCUtils.SendMessage(user, channel, userObject.getNick() + " is a Channel Founder!", isPrivate);
         }else if (i == 15) {
-            IRCUtils.SendMessage(user, channel,userObject.getNick() + " is a Channel Owner!",isPrivate);
+            IRCUtils.SendMessage(user, channel, userObject.getNick() + " is a Channel Owner!", isPrivate);
         }else if (i == 13) {
-            IRCUtils.SendMessage(user, channel,userObject.getNick() + " is a Channel Admin!",isPrivate);
+            IRCUtils.SendMessage(user, channel, userObject.getNick() + " is a Channel Admin!", isPrivate);
         } else if (i == 10) {
-            IRCUtils.SendMessage(user, channel,userObject.getNick() + " is a Channel Operator!",isPrivate);
+            IRCUtils.SendMessage(user, channel, userObject.getNick() + " is a Channel Operator!", isPrivate);
         } else if (i == 7) {
-            IRCUtils.SendMessage(user, channel,userObject.getNick() + " is a Channel Half-Operator",isPrivate);
+            IRCUtils.SendMessage(user, channel, userObject.getNick() + " is a Channel Half-Operator", isPrivate);
         } else if (i == 5) {
-            IRCUtils.SendMessage(user, channel,userObject.getNick() + " is a Trusted User!",isPrivate);
+            IRCUtils.SendMessage(user, channel, userObject.getNick() + " is a Trusted User!", isPrivate);
         } else {
-            IRCUtils.SendMessage(user, channel,userObject.getNick() + " is a Regular User!",isPrivate);
+            IRCUtils.SendMessage(user, channel, userObject.getNick() + " is a Regular User!", isPrivate);
         }
 
     }

@@ -1,8 +1,12 @@
 package com.techcavern.wavetact.commands.utils;
 
 import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
+import org.pircbotx.Channel;
+import org.pircbotx.PircBotX;
+import org.pircbotx.User;
 import org.pircbotx.hooks.events.MessageEvent;
 
 import java.net.InetAddress;
@@ -15,7 +19,7 @@ public class PingTime extends GenericCommand {
     }
 
     @Override
-    public void onCommand(MessageEvent<?> event, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, String... args) throws Exception {
         int port;
         if (args.length < 2) {
             port = 80;
@@ -27,7 +31,7 @@ public class PingTime extends GenericCommand {
         Socket socket = new Socket(InetAddress.getByName(args[0]), port);
         socket.close();
         time = System.currentTimeMillis() - time;
-        event.getChannel().send().message("Ping Time: " + time + " milliseconds");
+        IRCUtils.SendMessage(user, channel, "Ping Time: " + time + " milliseconds", isPrivate);
 
     }
 }

@@ -20,14 +20,14 @@ public class WolframAlpha extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, String... args) throws Exception {
         List<String> waResults = GeneralUtils.getWAResult(StringUtils.join(args, " "));
 
         if (args.length > 1) {
-            IRCUtils.SendMessage(user, channel, waResults.get(Integer.parseInt(args[1])));
+            IRCUtils.SendMessage(user, channel, waResults.get(Integer.parseInt(args[1])), isPrivate);
         } else {
             for (String waresult : waResults) {
-                IRCUtils.SendMessage(user, channel, waresult);
+                IRCUtils.SendMessage(user, channel, waresult, isPrivate);
             }
         }
     }

@@ -6,16 +6,13 @@
 package com.techcavern.wavetact.commands.trusted;
 
 import com.techcavern.wavetact.annot.CMD;
-import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.objects.CommandType;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleActionUtils;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleMessageUtils;
 import com.techcavern.wavetact.utils.objects.SimpleAction;
 import com.techcavern.wavetact.utils.objects.SimpleMessage;
-import com.techcavern.wavetact.utils.GeneralRegistry;
-import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.GetUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -32,32 +29,32 @@ public class CustomCMD extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, String... args) throws Exception {
 
         switch (args[0].toLowerCase()) {
             case "m": // message
                 if (args[1].startsWith("-")) {
-                    removeCommand(user,channel, CommandType.MESSAGE, args[1].substring(1));
+                    removeCommand(Bot, user,channel, CommandType.MESSAGE, isPrivate,  args[1].substring(1));
                 } else if (args[1].startsWith("+")) {
-                    modifyCommand(user,channel, CommandType.MESSAGE, Integer.parseInt(args[2]), args[1].substring(1), GeneralUtils.buildMessage(3, args.length, args));
+                    modifyCommand(user,channel, Bot, CommandType.MESSAGE, Integer.parseInt(args[2]),isPrivate, args[1].substring(1), GeneralUtils.buildMessage(3, args.length, args));
                 } else {
-                    addCommand(user,channel, CommandType.MESSAGE, Integer.parseInt(args[2]), args[1], GeneralUtils.buildMessage(3, args.length, args));
+                    addCommand(user,channel, CommandType.MESSAGE, Integer.parseInt(args[2]), isPrivate, args[1], GeneralUtils.buildMessage(3, args.length, args));
                 }
                 break;
             case "a": // action
                 if (args[1].startsWith("-")) {
-                    removeCommand(user,channel, CommandType.ACTION, args[1].substring(1));
+                    removeCommand(Bot, user,channel, CommandType.ACTION,isPrivate,  args[1].substring(1));
                 } else if (args[1].startsWith("+")) {
-                    modifyCommand(user,channel, CommandType.ACTION, Integer.parseInt(args[2]), args[1].substring(1), GeneralUtils.buildMessage(3, args.length, args));
+                    modifyCommand(user,channel, Bot, CommandType.ACTION, Integer.parseInt(args[2]), isPrivate, args[1].substring(1), GeneralUtils.buildMessage(3, args.length, args));
                 } else {
-                    addCommand(user,channel, CommandType.ACTION, Integer.parseInt(args[2]), args[1], GeneralUtils.buildMessage(3, args.length, args));
+                    addCommand(user,channel, CommandType.ACTION, Integer.parseInt(args[2]), isPrivate, args[1], GeneralUtils.buildMessage(3, args.length, args));
                 }
                 break;
         }
     }
 
 
-    private void addCommand(User user, Channel channel, CommandType type, int accessLevel, String cmd, String msg) {
+    private void addCommand(User user, Channel channel, CommandType type, int accessLevel, boolean isPrivate, String cmd, String msg) {
         if (GetUtils.getCommand(cmd) != null) {
             user.send().notice("Command already exists");
             return;
@@ -69,16 +66,26 @@ public class CustomCMD extends GenericCommand {
             GeneralRegistry.SimpleMessages.add(new SimpleMessage(cmd, accessLevel, msg, false));
             SimpleMessageUtils.saveSimpleMessages();
         }
-        IRCUtils.SendMessage(user, channel,"Command added");
+        IRCUtils.SendMessage(user, channel,"Command added", isPrivate);
     }
 
     @SuppressWarnings("SuspiciousMethodCalls")
-    private void modifyCommand(User user, Channel channel, CommandType type, int accessLevel, String command, String msg) {
-        if (GetUtils.getCommand(command) != null) {
+    private void modifyCommand(User user, Channel channel, PircBotX bot, CommandType type, int accessLevel,boolean isPrivate, String command, String msg) {
+
+        GenericCommand cm = GetUtils.getCommand(command);
+        if(cm.getPermLevel() <= PermUtils.getPermLevel(bot, user, channel)){
+        if (cm  != null && !cm.getLockedStatus()) {
             GenericCommand cmd = GetUtils.getCommand(command);
             GeneralRegistry.GenericCommands.remove(cmd);
             GeneralRegistry.SimpleActions.remove(cmd);
             GeneralRegistry.SimpleMessages.remove(cmd);
+        }else if(cm.getLockedStatus()) {
+            IRCUtils.SendMessage(user, channel, "Command Locked", isPrivate);
+
+        } else{
+
+            IRCUtils.SendMessage(user, channel, "Command Does Not Exist", isPrivate);
+
         }
 
         if (type == CommandType.ACTION) {
@@ -89,17 +96,20 @@ public class CustomCMD extends GenericCommand {
             SimpleMessageUtils.saveSimpleMessages();
 
         }
-        IRCUtils.SendMessage(user, channel, "Command modified");
+        IRCUtils.SendMessage(user, channel, "Command modified", isPrivate);
+        }else{
+            IRCUtils.SendMessage(user, channel, "Permission Denied", isPrivate);
+        }
     }
 
     @SuppressWarnings({"SuspiciousMethodCalls", "ConstantConditions"})
-    private void removeCommand(User user, Channel channel, CommandType type, String command) {
+    private void removeCommand(PircBotX bot, User user, Channel channel, CommandType type, boolean isPrivate, String command) {
         GenericCommand cmd = null;
         if (type == CommandType.MESSAGE)
             cmd = SimpleMessageUtils.getSimpleMessage(command);
         else if (type == CommandType.ACTION)
             cmd = SimpleActionUtils.getSimpleAction(command);
-
+        if(cmd.getPermLevel() <= PermUtils.getPermLevel(bot, user, channel)){
         if (cmd == null) {
             user.send().notice("Command does not exist");
         } else if (cmd.getLockedStatus()) {
@@ -115,7 +125,10 @@ public class CustomCMD extends GenericCommand {
             }
             GeneralRegistry.GenericCommands.remove(cmd);
 
-            IRCUtils.SendMessage(user, channel, "Command removed");
+            IRCUtils.SendMessage(user, channel, "Command removed", isPrivate);
         }
-    }
-}
+    }else{
+            IRCUtils.SendMessage(user, channel, "Permission Denied", isPrivate);
+        }
+}}
+

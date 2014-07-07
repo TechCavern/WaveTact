@@ -1,9 +1,13 @@
 package com.techcavern.wavetact.commands.utils;
 
 import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
+import org.pircbotx.Channel;
+import org.pircbotx.PircBotX;
+import org.pircbotx.User;
 import org.pircbotx.hooks.events.MessageEvent;
 
 
@@ -14,8 +18,8 @@ public class Hostmask extends GenericCommand {
     }
 
     @Override
-    public void onCommand(MessageEvent<?> event, String... args) throws Exception {
-        event.getChannel().send().message(GetUtils.getUserByNick(event.getChannel(), args[0]).getHostmask());
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, String... args) throws Exception {
+        IRCUtils.SendMessage(user, channel, GetUtils.getUserByNick(channel, args[0]).getHostmask(), isPrivate);
 
     }
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.techcavern.wavetact.commands.trusted;
+package com.techcavern.wavetact.commands.Anonymonity;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.utils.IRCUtils;
@@ -18,15 +18,16 @@ import org.pircbotx.hooks.events.MessageEvent;
 /**
  * @author jztech101
  */
-public class Act extends GenericCommand {
+public class Say extends GenericCommand {
 
     @CMD
-    public Act() {
-        super(GeneralUtils.toArray("act do"), 5, "act [something]");
+    public Say() {
+        super(GeneralUtils.toArray("say msg"), 5, "say [something]");
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, String... args) throws Exception {
-        IRCUtils.SendAction(user, channel, StringUtils.join(args, " "));
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, String... args) throws Exception {
+        IRCUtils.SendMessage(user, channel,StringUtils.join(args, " "), isPrivate);
+
     }
 }

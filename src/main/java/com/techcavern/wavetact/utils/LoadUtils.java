@@ -6,6 +6,8 @@ import com.techcavern.wavetact.commandline.perms.PermLevelC;
 import com.techcavern.wavetact.commandline.utils.AddServer;
 import com.techcavern.wavetact.commandline.utils.BasicCommands;
 import com.techcavern.wavetact.commandline.utils.Start;
+import com.techcavern.wavetact.commands.Anonymonity.Act;
+import com.techcavern.wavetact.commands.Anonymonity.Say;
 import com.techcavern.wavetact.commands.chanhalfop.*;
 import com.techcavern.wavetact.commands.chanop.*;
 import com.techcavern.wavetact.commands.chanop.AutoOp;
