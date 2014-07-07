@@ -10,6 +10,9 @@ import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleActionUtils;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleMessageUtils;
+import org.pircbotx.Channel;
+import org.pircbotx.PircBotX;
+import org.pircbotx.User;
 import org.pircbotx.hooks.events.MessageEvent;
 
 /**
@@ -22,29 +25,29 @@ public class Lock extends GenericCommand {
     }
 
     @Override
-    public void onCommand(MessageEvent<?> event, String... args)
+    public void onCommand(User user, PircBotX Bot, Channel channel, String... args)
             throws Exception {
         if (args[0].equalsIgnoreCase("a")) {
             if (args[1].startsWith("-")) {
                 SimpleActionUtils.getSimpleAction(args[1].replaceFirst("-", "")).unlock();
                 SimpleActionUtils.saveSimpleActions();
-                event.getChannel().send().message("Command Unlocked");
+                user.send().notice("Command Unlocked");
             } else {
                 SimpleActionUtils.getSimpleAction(args[1].replaceFirst("-", "")).lock();
                 SimpleActionUtils.saveSimpleActions();
-                event.getChannel().send().message("Command locked");
+                user.send().notice("Command locked");
 
             }
         } else if (args[0].equalsIgnoreCase("m")) {
             if (args[1].startsWith("-")) {
                 SimpleMessageUtils.getSimpleMessage(args[1].replaceFirst("-", "")).unlock();
                 SimpleMessageUtils.saveSimpleMessages();
-                event.getChannel().send().message("Command Unlocked");
+                user.send().notice("Command Unlocked");
 
             } else {
                 SimpleMessageUtils.getSimpleMessage(args[1].replaceFirst("-", "")).lock();
                 SimpleMessageUtils.saveSimpleMessages();
-                event.getChannel().send().message("Command locked");
+                user.send().notice("Command locked");
 
             }
         }

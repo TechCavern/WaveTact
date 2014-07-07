@@ -6,8 +6,12 @@
 package com.techcavern.wavetact.commands.fun;
 
 import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
+import org.pircbotx.Channel;
+import org.pircbotx.PircBotX;
+import org.pircbotx.User;
 import org.pircbotx.UserLevel;
 import org.pircbotx.hooks.events.MessageEvent;
 
@@ -22,14 +26,18 @@ public class SomethingAwesome extends GenericCommand {
     }
 
     @Override
-    public void onCommand(MessageEvent<?> event, String... args) throws Exception {
-        if (event.getChannel().getUserLevels(event.getBot().getUserBot()).contains(UserLevel.OP) && !event.getChannel().isOwner(event.getUser()) && !event.getChannel().isSuperOp(event.getUser())) {
-            event.getChannel().send().kick(event.getUser(), "http://bit.ly/1c9vo1S");
-        } else if (event.getChannel().getUserLevels(event.getBot().getUserBot()).contains(UserLevel.OWNER)) {
-            event.getChannel().send().kick(event.getUser(), "http://bit.ly/1c9vo1S");
+    public void onCommand(User user, PircBotX Bot, Channel channel, String... args) throws Exception {
+        if(channel != null){
+        if (channel.getUserLevels(Bot.getUserBot()).contains(UserLevel.OP) && !channel.isOwner(user) && !channel.isSuperOp(user)) {
+            channel.send().kick(user, "http://bit.ly/1c9vo1S");
+        } else if (channel.getUserLevels(Bot.getUserBot()).contains(UserLevel.OWNER)) {
+            channel.send().kick(user, "http://bit.ly/1c9vo1S");
         } else {
-            event.respond("http://bit.ly/1c9vo1S");
+            IRCUtils.SendAction(user, channel, "kicks " + user.getNick() + "(http://bit.ly/1c9vo1S)");
 
-        }
+        }}else{
+                IRCUtils.SendAction(user, channel,"kicks " + user.getNick() +"(http://bit.ly/1c9vo1S)");
+
+            }
     }
 }
