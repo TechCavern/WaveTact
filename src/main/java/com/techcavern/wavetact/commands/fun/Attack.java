@@ -39,12 +39,14 @@ public class Attack extends Command {
                 event.getChannel().send().action("punches "+Something+" right in the nuts");
                 break;
             case 4:
-                event.getChannel().send().action("places a bomb near "+Something+" set for 5 seconds");
-                TimeUnit.SECONDS.sleep(5);
+                event.getChannel().send().action("places a bomb near "+Something+" set for 2 seconds");
                 event.getChannel().send().message("BANG");
                 break;
             case 5:
                 event.getChannel().send().action("drops a 2000 pound object on "+Something);
+                break;
+            case 6:
+                event.getChannel().send().action("packs "+Something+" up and ships it to another galaxy");
                 break;
         }
 
