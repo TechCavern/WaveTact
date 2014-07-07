@@ -12,6 +12,9 @@ import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.PermUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.databaseUtils.GlobalUtils;
+import org.pircbotx.Channel;
+import org.pircbotx.PircBotX;
+import org.pircbotx.User;
 import org.pircbotx.hooks.events.MessageEvent;
 
 
@@ -25,16 +28,16 @@ public class Globals extends GenericCommand {
     }
 
     @Override
-    public void onCommand(MessageEvent<?> event, String... args)
+    public void onCommand(User user, PircBotX Bot, Channel channel, String... args)
             throws Exception {
         if (args[0].startsWith("-")) {
-            GeneralRegistry.Globals.remove(PermUtils.getAccount(event.getBot(), GetUtils.getUserByNick(event.getChannel(), args[0].replace("-", ""))));
+            GeneralRegistry.Globals.remove(PermUtils.getAccount(Bot, GetUtils.getUserByNick(channel, args[0].replace("-", ""))));
             GlobalUtils.saveGlobals();
-            event.getChannel().send().message("Global Removed");
+            user.send().notice("Global Removed");
         } else {
-            GeneralRegistry.Globals.add(PermUtils.getAccount(event.getBot(), GetUtils.getUserByNick(event.getChannel(), args[0].replace("-", ""))));
+            GeneralRegistry.Globals.add(PermUtils.getAccount(Bot, GetUtils.getUserByNick(channel, args[0].replace("-", ""))));
             GlobalUtils.saveGlobals();
-            event.getChannel().send().message("Global Added");
+            user.send().notice("Global Added");
         }
     }
 }

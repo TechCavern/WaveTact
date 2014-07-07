@@ -17,14 +17,14 @@ public class Quiet extends GenericCommand {
     }
 
     @Override
-    public void onCommand(MessageEvent<?> event, String... args)
+    public void onCommand(User user, PircBotX Bot, Channel channel, String... args)
             throws Exception {
         String ircd;
-        if(event.getBot().getServerInfo().getChannelModes().contains("q")){
+        if(Bot.getServerInfo().getChannelModes().contains("q")){
             ircd = "c";
-        }else if (event.getBot().getServerInfo().getServerVersion().contains("InspIRCd")){
+        }else if (Bot.getServerInfo().getServerVersion().contains("InspIRCd")){
             ircd = "i";
-        }else if (event.getBot().getServerInfo().getServerVersion().contains("Unreal")){
+        }else if (Bot.getServerInfo().getServerVersion().contains("Unreal")){
             ircd = "u";
         }else{
             ircd = null;
@@ -34,25 +34,25 @@ public class Quiet extends GenericCommand {
             hostmask = args[0];
         } else {
             if (args[0].startsWith("+")) {
-                User user = GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("\\+", ""));
-                if (user.getLogin().startsWith("~")) {
-                    hostmask = "*!*@" + user.getHostmask();
+                User use = GetUtils.getUserByNick(channel, args[0].replaceFirst("\\+", ""));
+                if (use.getLogin().startsWith("~")) {
+                    hostmask = "*!*@" + use.getHostmask();
                 } else {
-                    hostmask = "*!" + user.getLogin() + "@" + user.getHostmask();
+                    hostmask = "*!" + use.getLogin() + "@" + use.getHostmask();
                 }
             } else if (args[0].startsWith("-")) {
-                User user = GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", ""));
-                if (user.getLogin().startsWith("~")) {
-                    hostmask = "*!*@" + user.getHostmask();
+                User use = GetUtils.getUserByNick(channel, args[0].replaceFirst("-", ""));
+                if (use.getLogin().startsWith("~")) {
+                    hostmask = "*!*@" + use.getHostmask();
                 } else {
-                    hostmask = "*!" + user.getLogin() + "@" + user.getHostmask();
+                    hostmask = "*!" + use.getLogin() + "@" + use.getHostmask();
                 }
             } else {
-                User user = GetUtils.getUserByNick(event.getChannel(), args[0]);
-                if (user.getLogin().startsWith("~")) {
-                    hostmask = "*!*@" + user.getHostmask();
+                User use = GetUtils.getUserByNick(channel, args[0]);
+                if (use.getLogin().startsWith("~")) {
+                    hostmask = "*!*@" + use.getHostmask();
                 } else {
-                    hostmask = "*!" + user.getLogin() + "@" + user.getHostmask();
+                    hostmask = "*!" + use.getLogin() + "@" + use.getHostmask();
                 }
             }
 
@@ -62,20 +62,20 @@ public class Quiet extends GenericCommand {
 
                 if (args.length == 2) {
                     quiet(hostmask, ircd,
-                            event.getChannel(), event.getBot());
-                    UTime c = new UTime(hostmask, event.getBot().getServerInfo().getNetwork(), ircd, event.getChannel().getName(), GeneralUtils.getMilliSeconds(args[1]), System.currentTimeMillis());
+                            channel, Bot);
+                    UTime c = new UTime(hostmask, Bot.getServerInfo().getNetwork(), ircd, channel.getName(), GeneralUtils.getMilliSeconds(args[1]), System.currentTimeMillis());
                     GeneralRegistry.QuietTimes.add(c);
                     QuietTimeUtils.saveQuietTimes();
 
                 } else if (args.length < 2) {
-                    quiet(hostmask, ircd, event.getChannel(), event.getBot());
-                    UTime c = new UTime(hostmask, event.getBot().getServerInfo().getNetwork(), ircd, event.getChannel().getName(), GeneralUtils.getMilliSeconds("24h"), System.currentTimeMillis());
+                    quiet(hostmask, ircd, channel, Bot);
+                    UTime c = new UTime(hostmask, Bot.getServerInfo().getNetwork(), ircd, channel.getName(), GeneralUtils.getMilliSeconds("24h"), System.currentTimeMillis());
                     GeneralRegistry.QuietTimes.add(c);
                     QuietTimeUtils.saveQuietTimes();
 
                 }
             } else {
-                event.getChannel().send().message("Quiet already exists!");
+                channel.send().message("Quiet already exists!");
             }
         } else  if (args[0].startsWith("-")) {
             if(QuietTimeUtils.getQuietTime(hostmask) != null) {
@@ -84,13 +84,13 @@ public class Quiet extends GenericCommand {
             }else{
                 switch (ircd.toLowerCase()) {
                     case "c":
-                        IRCUtils.setMode(event.getChannel(), event.getBot(), "-q ", hostmask);
+                        IRCUtils.setMode(channel, Bot, "-q ", hostmask);
                         break;
                     case "u":
-                        IRCUtils.setMode(event.getChannel(), event.getBot(), "-b ~q:", hostmask);
+                        IRCUtils.setMode(channel, Bot, "-b ~q:", hostmask);
                         break;
                     case "i":
-                        IRCUtils.setMode(event.getChannel(), event.getBot(), "-b m:", hostmask);
+                        IRCUtils.setMode(channel, Bot, "-b m:", hostmask);
                         break;
                 }
             }
@@ -105,10 +105,10 @@ public class Quiet extends GenericCommand {
                     } else {
                         QuietTimeUtils.getQuietTime(hostmask).setTime(GeneralUtils.getMilliSeconds(args[1].replace("-", "")));
                     }
-                    event.getChannel().send().message("Quiet Modified");
+                    channel.send().message("Quiet Modified");
                     QuietTimeUtils.saveQuietTimes();
                 }} else {
-                    event.getChannel().send().message("Quiet does not exist!");
+                    channel.send().message("Quiet does not exist!");
                 }
             }
         }

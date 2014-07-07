@@ -11,6 +11,9 @@ import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.objects.UTime;
 import org.apache.commons.lang3.StringUtils;
+import org.pircbotx.Channel;
+import org.pircbotx.PircBotX;
+import org.pircbotx.User;
 import org.pircbotx.hooks.events.MessageEvent;
 
 import java.util.Arrays;
@@ -28,43 +31,43 @@ public class Topic extends GenericCommand {
     }
 
     @Override
-    public void onCommand(MessageEvent<?> event, String... args) throws Exception {
-        StringUtils.split(event.getChannel().getTopic(), args[0]);
-        List<String> topic = new LinkedList(Arrays.asList(StringUtils.split(event.getChannel().getTopic(), args[0])));
-        List<String> newtopic = new LinkedList(Arrays.asList(StringUtils.split(event.getChannel().getTopic(), args[0])));
+    public void onCommand(User user, PircBotX Bot, Channel channel, String... args) throws Exception {
+        StringUtils.split(channel.getTopic(), args[0]);
+        List<String> topic = new LinkedList(Arrays.asList(StringUtils.split(channel.getTopic(), args[0])));
+        List<String> newtopic = new LinkedList(Arrays.asList(StringUtils.split(channel.getTopic(), args[0])));
         if(args[1].equalsIgnoreCase("a")){
-            event.getChannel().send().setTopic(event.getChannel().getTopic() + " " + args[0] + " " + GeneralUtils.buildMessage(2, args.length, args));
-            saveTopic(event);
+            channel.send().setTopic(channel.getTopic() + " " + args[0] + " " + GeneralUtils.buildMessage(2, args.length, args));
+            saveTopic(channel, Bot);
         }else if(args[1].startsWith("+")){
             newtopic.set(Integer.parseInt(args[1].replaceFirst("\\+", ""))-1, " " + GeneralUtils.buildMessage(2,args.length, args));
-            event.getChannel().send().setTopic(StringUtils.join(newtopic, args[0]));
-            saveTopic(event);
+            channel.send().setTopic(StringUtils.join(newtopic, args[0]));
+            saveTopic(channel, Bot);
         }else if(args[1].startsWith("-")){
             newtopic.remove(Integer.parseInt(args[1].replaceFirst("\\-", ""))-1);
-            event.getChannel().send().setTopic(StringUtils.join(newtopic, args[0]));
-            saveTopic(event);
+            channel.send().setTopic(StringUtils.join(newtopic, args[0]));
+            saveTopic(channel, Bot);
         }else if(args[1].equalsIgnoreCase("sw") || args[1].equalsIgnoreCase("swap")){
             newtopic.set((Integer.parseInt(args[2])-1)," " + topic.get(Integer.parseInt(args[3])-1));
             newtopic.set((Integer.parseInt(args[3])-1), " " + topic.get(Integer.parseInt(args[2])-1));
-            event.getChannel().send().setTopic(StringUtils.join(newtopic, args[0]));
-            saveTopic(event);
+            channel.send().setTopic(StringUtils.join(newtopic, args[0]));
+            saveTopic(channel, Bot);
         }else if (args[1].equalsIgnoreCase("ss")) {
-            event.getChannel().send().setTopic(event.getChannel().getTopic().replace(args[0], args[2]));
-            saveTopic(event);
+            channel.send().setTopic(channel.getTopic().replace(args[0], args[2]));
+            saveTopic(channel, Bot);
         }else if (args[1].equalsIgnoreCase("r")){
-            UTime oldTopic = GetUtils.getTopic(event.getChannel().getName(), event.getBot().getServerInfo().getNetwork());
+            UTime oldTopic = GetUtils.getTopic(channel.getName(), Bot.getServerInfo().getNetwork());
             if(oldTopic != null) {
-                event.getChannel().send().setTopic(oldTopic.getSomething());
+                channel.send().setTopic(oldTopic.getSomething());
                 GeneralRegistry.Topic.remove(oldTopic);
             }else{
-                event.getChannel().send().message("Error: No Reversal Possible");
+                channel.send().message("Error: No Reversal Possible");
             }
         }else{
-            event.getChannel().send().setTopic(GeneralUtils.buildMessage(1, args.length, args));
-            saveTopic(event);
+            channel.send().setTopic(GeneralUtils.buildMessage(1, args.length, args));
+            saveTopic(channel, Bot);
         }
     }
-    void saveTopic(MessageEvent<?> event){
-        GeneralRegistry.Topic.add(new UTime(event.getChannel().getTopic(), event.getBot().getServerInfo().getNetwork(), "Topic", event.getChannel().getName(), GeneralUtils.getMilliSeconds("30s"), System.currentTimeMillis()));
+    void saveTopic(Channel channel, PircBotX Bot){
+        GeneralRegistry.Topic.add(new UTime(channel.getTopic(), Bot.getServerInfo().getNetwork(), "Topic", channel.getName(), GeneralUtils.getMilliSeconds("30s"), System.currentTimeMillis()));
     }
 }

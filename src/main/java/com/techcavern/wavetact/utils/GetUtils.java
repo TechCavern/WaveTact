@@ -64,6 +64,11 @@ public class GetUtils {
                 return g;
             }
         }
+        for (GenericCommand g : GeneralRegistry.ChanHalfOpCommands) {
+            if (g.getCommand().equalsIgnoreCase(Command)) {
+                return g;
+            }
+        }
         for (GenericCommand g : GeneralRegistry.ChanFounderCommands) {
             if (g.getCommand().equalsIgnoreCase(Command)) {
                 return g;

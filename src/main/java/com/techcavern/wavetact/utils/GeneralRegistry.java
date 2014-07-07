@@ -19,6 +19,8 @@ public class GeneralRegistry {
     public static final List<GenericCommand> TrustedCommands = new LoggingArrayList<GenericCommand>("TrustedCommand");
     public static final List<GenericCommand> ControllerCommands = new LoggingArrayList<GenericCommand>("ControllerCommand");
     public static final List<GenericCommand> ChanOwnerCommands = new LoggingArrayList<GenericCommand>("ChanOwnerCommand");
+    public static final List<GenericCommand> ChanHalfOpCommands = new LoggingArrayList<GenericCommand>("ChanHalfOpCommand");
+
     public static final List<GenericCommand> ChanOpCommands = new LoggingArrayList<GenericCommand>("ChanOpCommand");
     public static final List<GenericCommand> ChanFounderCommands = new LoggingArrayList<GenericCommand>("ChanFounderCommand");
     public static final List<SimpleMessage> SimpleMessages = new LoggingArrayList<SimpleMessage>("SimpleMessages");

@@ -9,6 +9,9 @@ import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
+import org.pircbotx.Channel;
+import org.pircbotx.PircBotX;
+import org.pircbotx.User;
 import org.pircbotx.hooks.events.MessageEvent;
 
 /**
@@ -20,18 +23,18 @@ public class Owner extends GenericCommand {
         super(GeneralUtils.toArray("owner own oop"), 14, "Owner (-)(User)");
     }
 
-    public void onCommand(MessageEvent<?> event, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, String... args) throws Exception {
         if (args.length >= 1) {
             if (args[0].equalsIgnoreCase("-")) {
-                event.getChannel().send().deOwner(event.getUser());
+                channel.send().deOwner(user);
             } else if (args[0].startsWith("-")) {
-                event.getChannel().send().deOwner(GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", "")));
+                channel.send().deOwner(GetUtils.getUserByNick(channel, args[0].replaceFirst("-", "")));
             } else {
-                event.getChannel().send().owner(GetUtils.getUserByNick(event.getChannel(), args[0]));
+                channel.send().owner(GetUtils.getUserByNick(channel, args[0]));
 
             }
         } else {
-            event.getChannel().send().owner(event.getUser());
+            channel.send().owner(user);
         }
     }
 }

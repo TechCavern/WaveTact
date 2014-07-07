@@ -23,4 +23,18 @@ public class IRCUtils {
         OutputUser x = new OutputUser(botObject, userObject);
         x.notice(notice);
     }
+    public static void SendMessage(User userObject, Channel channelObject, String message){
+        if(channelObject != null){
+            channelObject.send().message(message);
+        }else{
+            userObject.send().message(message);
+        }
+    }
+    public static void SendAction(User userObject, Channel channelObject, String message){
+        if(channelObject != null){
+            channelObject.send().action(message);
+        }else{
+            userObject.send().action(message);
+        }
+    }
 }

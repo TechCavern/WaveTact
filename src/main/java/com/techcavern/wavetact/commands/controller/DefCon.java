@@ -12,6 +12,9 @@ import com.techcavern.wavetact.utils.LoadUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleActionUtils;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleMessageUtils;
+import org.pircbotx.Channel;
+import org.pircbotx.PircBotX;
+import org.pircbotx.User;
 import org.pircbotx.hooks.events.MessageEvent;
 
 
@@ -25,18 +28,42 @@ public class DefCon extends GenericCommand {
     }
 
     @Override
-    public void onCommand(MessageEvent<?> event, String... args)
+    public void onCommand(User user, PircBotX Bot, Channel channel, String... args)
             throws Exception {
 
         if(args.length>=1 && args[0].equalsIgnoreCase("-")){
-           GeneralRegistry.Commands.clear();
+           GeneralRegistry.GenericCommands.clear();
             GeneralRegistry.SimpleActions.clear();
             GeneralRegistry.SimpleMessages.clear();
+            GeneralRegistry.TrustedCommands.clear();
+            GeneralRegistry.ChanHalfOpCommands.clear();
+            GeneralRegistry.ControllerCommands.clear();
+            GeneralRegistry.ChanOwnerCommands.clear();
+            GeneralRegistry.ChanOpCommands.clear();
+            GeneralRegistry.ChanFounderCommands.clear();
             SimpleActionUtils.loadSimpleActions();
             SimpleMessageUtils.loadSimpleMessages();
             LoadUtils.registerCommands();
         }else{
-            for(GenericCommand command:GeneralRegistry.Commands){
+            for(GenericCommand command:GeneralRegistry.GenericCommands){
+                command.setPermLevel(9001);
+            }
+            for(GenericCommand command:GeneralRegistry.TrustedCommands){
+                command.setPermLevel(9001);
+            }
+            for(GenericCommand command:GeneralRegistry.ControllerCommands){
+                command.setPermLevel(9001);
+            }
+            for(GenericCommand command:GeneralRegistry.ChanOpCommands){
+                command.setPermLevel(9001);
+            }
+            for(GenericCommand command:GeneralRegistry.ChanOwnerCommands){
+                command.setPermLevel(9001);
+            }
+            for(GenericCommand command:GeneralRegistry.ChanFounderCommands){
+                command.setPermLevel(9001);
+            }
+            for(GenericCommand command:GeneralRegistry.ChanHalfOpCommands){
                 command.setPermLevel(9001);
             }
         }

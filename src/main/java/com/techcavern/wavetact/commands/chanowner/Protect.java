@@ -9,6 +9,9 @@ import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
+import org.pircbotx.Channel;
+import org.pircbotx.PircBotX;
+import org.pircbotx.User;
 import org.pircbotx.hooks.events.MessageEvent;
 
 
@@ -22,18 +25,18 @@ public class Protect extends GenericCommand {
     }
 
     @Override
-    public void onCommand(MessageEvent<?> event, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, String... args) throws Exception {
         if (args.length >= 1) {
             if (args[0].equalsIgnoreCase("-")) {
-                event.getChannel().send().deSuperOp(event.getUser());
+                channel.send().deSuperOp(user);
             } else if (args[0].startsWith("-")) {
-                event.getChannel().send().deSuperOp(GetUtils.getUserByNick(event.getChannel(), args[0].replaceFirst("-", "")));
+                channel.send().deSuperOp(GetUtils.getUserByNick(channel, args[0].replaceFirst("-", "")));
             } else {
-                event.getChannel().send().superOp(GetUtils.getUserByNick(event.getChannel(), args[0]));
+                channel.send().superOp(GetUtils.getUserByNick(channel, args[0]));
 
             }
         } else {
-            event.getChannel().send().superOp(event.getUser());
+            channel.send().superOp(user);
         }
     }
 }
