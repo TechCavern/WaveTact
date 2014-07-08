@@ -23,33 +23,31 @@ public class MessageListener extends ListenerAdapter<PircBotX> {
     public void onMessage(MessageEvent<PircBotX> event) throws Exception {
         String[] messageParts = event.getMessage().split(" ");
         String m = messageParts[0].toLowerCase();
-        for (int i = 0; i < GeneralRegistry.Commands.size(); i++) {
-            GenericCommand Command = GeneralRegistry.Commands.get(i);
-            for (int c = 0; c < Command.getCommandID().length; c++) {
-                String CommandID = Command.getCommandID()[c];
-                if (m.equalsIgnoreCase(GetUtils.getCommandChar(event.getBot()) + CommandID)) {
+        GenericCommand Command = GetUtils.getCommand(m.replaceFirst(GetUtils.getCommandChar(event.getBot()), ""));
+
+                if (m != null && m.startsWith(GetUtils.getCommandChar(event.getBot()))) {
                     if (PermUtils.getPermLevel(event.getBot(), event.getUser(), event.getChannel()) >= Command.getPermLevel()) {
                         if (Command.getPermLevel() == 9) {
                             if (event.getChannel().isOp(event.getBot().getUserBot()) || event.getChannel().isOp(event.getBot().getUserBot()) ||  event.getChannel().isOwner(event.getBot().getUserBot())) {
-                                Command.onCommand(event, ArrayUtils.remove(messageParts, 0));
+                                Command.onCommand(event.getUser(), event.getBot(), event.getChannel(), false, ArrayUtils.remove(messageParts, 0));
                             } else {
                                 event.getChannel().send().message("Error: I must be at least Opped to perform the operation requested");
                             }
                         } else if (Command.getPermLevel() == 14) {
 
                             if (event.getChannel().isOwner(event.getBot().getUserBot())) {
-                                Command.onCommand(event, ArrayUtils.remove(messageParts, 0));
+                                Command.onCommand(event.getUser(), event.getBot(), event.getChannel(), false, ArrayUtils.remove(messageParts, 0));
                             } else {
                                 event.getChannel().send().message("Error: I must be Ownered to perform the operation requested");
                             }
                         } else if (Command.getPermLevel() == 6) {
                             if (event.getChannel().isOwner(event.getBot().getUserBot()) || event.getChannel().isOp(event.getBot().getUserBot()) ||event.getChannel().isHalfOp(event.getBot().getUserBot())|| event.getChannel().isSuperOp(event.getBot().getUserBot())) {
-                                Command.onCommand(event, ArrayUtils.remove(messageParts, 0));
+                                Command.onCommand(event.getUser(), event.getBot(), event.getChannel(), false, ArrayUtils.remove(messageParts, 0));
                             } else {
                                 event.getChannel().send().message("Error: I must be at least half-opped to perform the operation requested");
                             }
                         }else{
-                            Command.onCommand(event, ArrayUtils.remove(messageParts, 0));
+                            Command.onCommand(event.getUser(), event.getBot(), event.getChannel(), false, ArrayUtils.remove(messageParts, 0));
                         }
 
                     } else {
@@ -59,6 +57,6 @@ public class MessageListener extends ListenerAdapter<PircBotX> {
                 }
             }
         }
-    }
 
-}
+
+

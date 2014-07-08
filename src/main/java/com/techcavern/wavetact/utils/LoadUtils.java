@@ -52,6 +52,7 @@ public class LoadUtils {
         Net.getListenerManager().addListener(new JoinListener());
         Net.getListenerManager().addListener(new VersionListener());
         Net.getListenerManager().addListener(new KickListener());
+        Net.getListenerManager().addListener(new PrivateMessageListener());
 
         //    TODO: @logangorence Add support for saving configuration to allow for configuration per-network on "modules"... Should we also modularize? Anyways, each network will be able to enable/disable modules and if they are enabled, it will be added to the server file(maybe later on, server folders, which would have a server.info, modules.info, and possibly logs and other stuff).
         //    Hm... the only module I can currently think of is "HighFive"
@@ -76,42 +77,42 @@ public class LoadUtils {
          ex.printStackTrace(System.err);
          }
          **/
-        GeneralRegistry.Commands.add(new Ban());
-        GeneralRegistry.Commands.add(new HalfOp());
-        GeneralRegistry.Commands.add(new Kick());
-        GeneralRegistry.Commands.add(new Mode());
-        GeneralRegistry.Commands.add(new Owner());
-        GeneralRegistry.Commands.add(new Protect());
-        GeneralRegistry.Commands.add(new Quiet());
-        GeneralRegistry.Commands.add(new Voice());
-        GeneralRegistry.Commands.add(new Op());
-        GeneralRegistry.Commands.add(new IRCRaw());
-        GeneralRegistry.Commands.add(new Join());
-        GeneralRegistry.Commands.add(new Lock());
-        GeneralRegistry.Commands.add(new Shutdown());
-        GeneralRegistry.Commands.add(new SomethingAwesome());
-        GeneralRegistry.Commands.add(new UrbanDictonary());
-        GeneralRegistry.Commands.add(new Act());
-        GeneralRegistry.Commands.add(new CustomCMD());
-        GeneralRegistry.Commands.add(new Part());
-        GeneralRegistry.Commands.add(new Say());
-        GeneralRegistry.Commands.add(new WolframAlpha());
-        GeneralRegistry.Commands.add(new CheckUserLevel());
-        GeneralRegistry.Commands.add(new Commands());
-        GeneralRegistry.Commands.add(new Define());
-        GeneralRegistry.Commands.add(new FindIP());
-        GeneralRegistry.Commands.add(new Help());
-        GeneralRegistry.Commands.add(new Hostmask());
-        GeneralRegistry.Commands.add(new MathC());
-        GeneralRegistry.Commands.add(new PingTime());
-        GeneralRegistry.Commands.add(new Question());
-        GeneralRegistry.Commands.add(new Weather());
-        GeneralRegistry.Commands.add(new Topic());
-        GeneralRegistry.Commands.add(new Attack());
-        GeneralRegistry.Commands.add(new DefCon());
-        GeneralRegistry.Commands.add(new CPermLevel());
-        GeneralRegistry.Commands.add(new AutoOp());
-        GeneralRegistry.Commands.add(new Globals());
+        GeneralRegistry.ChanHalfOpCommands.add(new Ban());
+        GeneralRegistry.ChanOpCommands.add(new HalfOp());
+        GeneralRegistry.ChanHalfOpCommands.add(new Kick());
+        GeneralRegistry.ChanOpCommands.add(new Mode());
+        GeneralRegistry.ChanOwnerCommands.add(new Owner());
+        GeneralRegistry.ChanOwnerCommands.add(new Protect());
+        GeneralRegistry.ChanHalfOpCommands.add(new Quiet());
+        GeneralRegistry.ChanHalfOpCommands.add(new Voice());
+        GeneralRegistry.ChanOpCommands.add(new Op());
+        GeneralRegistry.ControllerCommands.add(new IRCRaw());
+        GeneralRegistry.ControllerCommands.add(new Join());
+        GeneralRegistry.ControllerCommands.add(new Lock());
+        GeneralRegistry.ControllerCommands.add(new Shutdown());
+        GeneralRegistry.GenericCommands.add(new SomethingAwesome());
+        GeneralRegistry.GenericCommands.add(new UrbanDictonary());
+        GeneralRegistry.TrustedCommands.add(new Act());
+        GeneralRegistry.TrustedCommands.add(new CustomCMD());
+        GeneralRegistry.ChanHalfOpCommands.add(new Part());
+        GeneralRegistry.TrustedCommands.add(new Say());
+        GeneralRegistry.TrustedCommands.add(new WolframAlpha());
+        GeneralRegistry.GenericCommands.add(new CheckUserLevel());
+        GeneralRegistry.GenericCommands.add(new Commands());
+        GeneralRegistry.GenericCommands.add(new Define());
+        GeneralRegistry.GenericCommands.add(new FindIP());
+        GeneralRegistry.GenericCommands.add(new Help());
+        GeneralRegistry.GenericCommands.add(new Hostmask());
+        GeneralRegistry.GenericCommands.add(new MathC());
+        GeneralRegistry.GenericCommands.add(new PingTime());
+        GeneralRegistry.GenericCommands.add(new Question());
+        GeneralRegistry.GenericCommands.add(new Weather());
+        GeneralRegistry.ChanHalfOpCommands.add(new Topic());
+        GeneralRegistry.GenericCommands.add(new Attack());
+        GeneralRegistry.ControllerCommands.add(new DefCon());
+        GeneralRegistry.ChanFounderCommands.add(new CPermLevel());
+        GeneralRegistry.ChanOpCommands.add(new AutoOp());
+        GeneralRegistry.ControllerCommands.add(new Globals());
 
 
 
