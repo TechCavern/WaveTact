@@ -41,7 +41,7 @@ public class Attack extends GenericCommand {
                 break;
             case 4:
                 IRCUtils.SendAction(user, channel, "places a bomb near "+Something+" set for 2 seconds", isPrivate);
-                IRCUtils.SendAction(user, channel, "BANG", isPrivate);
+                IRCUtils.SendMessage(user, channel, "BANG", isPrivate);
                 break;
             case 5:
                 IRCUtils.SendAction(user, channel, "drops a 2000 pound object on "+Something, isPrivate);

@@ -116,14 +116,15 @@ public class PermUtils {
           if(account != null) {
               if(GetUtils.getControllerByNick(account) != null){
                   return 9001;
-              }
-              if(GetUtils.getGlobalByNick(account, bot.getServerInfo().getServerName()) != null){
+              }else if(GetUtils.getGlobalByNick(account, bot.getServerInfo().getServerName()) != null){
                   return 20;
+              }else{
+                  return 2;
               }
+
           } else{
-                  return 0;
+                  return 2;
               }
       }
-        return 0;
     }
 }
