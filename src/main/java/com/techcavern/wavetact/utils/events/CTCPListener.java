@@ -5,14 +5,13 @@ import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.MessageEvent;
 import org.pircbotx.hooks.events.VersionEvent;
 import org.pircbotx.hooks.types.GenericCTCPEvent;
-/**
+
 
 public class CTCPListener extends ListenerAdapter<PircBotX> {
 
     @Override
     public void onGenericCTCP(GenericCTCPEvent<PircBotX> event) throws Exception {
-        if(event.)
+        event.respond("Attempt Failed, Try Again!");
 
     }
 }
-**/
