@@ -19,7 +19,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class CPermLevel extends GenericCommand {
     @CMD
     public CPermLevel() {
-        super(GeneralUtils.toArray("permlevel pl"), 18, "permlevel (+)(-)[user] (permlevel) - adds, removes, modifies permissions");
+        super(GeneralUtils.toArray("permlevel pl cpermlevel"), 18, "permlevel (+)(-)[user] (permlevel) - adds, removes, modifies permissions");
     }
 
     @Override
