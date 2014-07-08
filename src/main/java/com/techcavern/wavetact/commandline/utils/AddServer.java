@@ -29,8 +29,8 @@ public class AddServer extends CommandLine {
             config.set("nick", input.nextLine());
             System.out.print("Channels(#chan1, #chan2): ");
             config.set("channels", input.nextLine());
-            System.out.print("Nickserv Pass(empty for none): ");
-            config.set("nickserv (type False to disable)", input.nextLine());
+            System.out.print("Nickserv Pass(False to disable): ");
+            config.set("nickserv", input.nextLine());
             System.out.print("Command Prefix: ");
             config.set("prefix", input.nextLine());
             config.save();
