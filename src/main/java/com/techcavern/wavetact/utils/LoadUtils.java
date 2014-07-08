@@ -50,7 +50,7 @@ public class LoadUtils {
         Net.getListenerManager().addListener(new MessageListener());
         Net.getListenerManager().addListener(new DisconnectListener());
         Net.getListenerManager().addListener(new JoinListener());
-        Net.getListenerManager().addListener(new VersionListener());
+        Net.getListenerManager().addListener(new CTCPListener());
         Net.getListenerManager().addListener(new KickListener());
         Net.getListenerManager().addListener(new PrivateMessageListener());
 

@@ -21,12 +21,11 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class Mode extends GenericCommand {
     @CMD
     public Mode() {
-        super(GeneralUtils.toArray("mode mo"), 0, "mode (channel) [modes to set]");
+        super(GeneralUtils.toArray("mode mo"), 9, "mode (channel) [modes to set]");
     }
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, String... args) throws Exception {
-        if(!args[0].contains("#")){
             if(PermUtils.getPermLevel(Bot, user, channel) >= 9){
                 if(channel.isOp(Bot.getUserBot()) || channel.isSuperOp(Bot.getUserBot()) || channel.isOwner(Bot.getUserBot())) {
                     channel.send().setMode(args[0]);
@@ -36,16 +35,5 @@ public class Mode extends GenericCommand {
             }else{
                 channel.send().message("Permission Denied");
             }
-        }else{
-            if(PermUtils.getPermLevel(Bot, user, GetUtils.getChannelbyName(Bot, args[0])) >= 9){
-                if(GetUtils.getChannelbyName(Bot, args[0]).isOp(Bot.getUserBot()) || GetUtils.getChannelbyName(Bot, args[0]).isSuperOp(Bot.getUserBot()) || GetUtils.getChannelbyName(Bot, args[0]).isOwner(Bot.getUserBot())) {
-                    GetUtils.getChannelbyName(Bot, args[0]).send().setMode(args[0]);
-                }else{
-                    user.send().notice("Error I must be at least op in the channel to perform the operation requested.");
-                }
-            }else{
-                user.send().notice("Permission Denied");
-            }
-        }
     }
 }
