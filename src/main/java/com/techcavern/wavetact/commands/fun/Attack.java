@@ -28,7 +28,7 @@ public class Attack extends GenericCommand {
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, String... args) throws Exception {
         String Something = GeneralUtils.buildMessage(0, args.length, args);
-        int randomint = RandomUtils.nextInt(0 , 6);
+        int randomint = RandomUtils.nextInt(1 , 10);
         switch(randomint){
             case 1:
                 IRCUtils.SendAction(user, channel, "sends a 53 inch monitor flying at " + Something, isPrivate);
