@@ -12,6 +12,7 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 import org.pircbotx.hooks.events.MessageEvent;
 
+import javax.xml.bind.annotation.XmlElementDecl;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +33,7 @@ public class Commands extends GenericCommand {
         List<String>  TrustedCommands = new ArrayList<String>();
         List<String>  ControllerCommands = new ArrayList<String>();
         List<String>  ChanOwnerCommands = new ArrayList<String>();
+        List<String>  GlobalCommands = new ArrayList<String>();
         List<String>  ChanHalfOpCommands = new ArrayList<String>();
         List<String>  ChanOpCommands = new ArrayList<String>();
         List<String>  ChanFounderCommands = new ArrayList<String>();
@@ -44,6 +46,8 @@ public class Commands extends GenericCommand {
           ChanOwnerCommands.add(command.getCommand());
           ChanFounderCommands.add(command.getCommand());
           ControllerCommands.add(command.getCommand());
+            GlobalCommands.add(command.getCommand());
+
         }
         for(GenericCommand command : GeneralRegistry.TrustedCommands){
             TrustedCommands.add(command.getCommand());
@@ -52,6 +56,8 @@ public class Commands extends GenericCommand {
             ChanOwnerCommands.add(command.getCommand());
             ChanFounderCommands.add(command.getCommand());
             ControllerCommands.add(command.getCommand());
+            GlobalCommands.add(command.getCommand());
+
         }
         for(GenericCommand command : GeneralRegistry.AnonymonityCommands){
             TrustedCommands.add(command.getCommand());
@@ -60,6 +66,8 @@ public class Commands extends GenericCommand {
             ChanOwnerCommands.add(command.getCommand());
             ChanFounderCommands.add(command.getCommand());
             ControllerCommands.add(command.getCommand());
+            GlobalCommands.add(command.getCommand());
+
         }
         for(GenericCommand command : GeneralRegistry.ChanHalfOpCommands){
             ChanHalfOpCommands.add(command.getCommand());
@@ -67,21 +75,31 @@ public class Commands extends GenericCommand {
             ChanOwnerCommands.add(command.getCommand());
             ChanFounderCommands.add(command.getCommand());
             ControllerCommands.add(command.getCommand());
+            GlobalCommands.add(command.getCommand());
+
         }
         for(GenericCommand command : GeneralRegistry.ChanOpCommands){
             ChanOpCommands.add(command.getCommand());
             ChanOwnerCommands.add(command.getCommand());
             ChanFounderCommands.add(command.getCommand());
             ControllerCommands.add(command.getCommand());
+            GlobalCommands.add(command.getCommand());
+
         }
         for(GenericCommand command : GeneralRegistry.ChanOwnerCommands){
             ChanOwnerCommands.add(command.getCommand());
             ChanFounderCommands.add(command.getCommand());
             ControllerCommands.add(command.getCommand());
+            GlobalCommands.add(command.getCommand());
         }
         for(GenericCommand command : GeneralRegistry.ChanFounderCommands){
             ChanFounderCommands.add(command.getCommand());
             ControllerCommands.add(command.getCommand());
+            GlobalCommands.add(command.getCommand());
+        }
+        for(GenericCommand command : GeneralRegistry.GlobalCommands){
+            ControllerCommands.add(command.getCommand());
+            GlobalCommands.add(command.getCommand());
         }
         for(GenericCommand command : GeneralRegistry.ControllerCommands){
             ControllerCommands.add(command.getCommand());

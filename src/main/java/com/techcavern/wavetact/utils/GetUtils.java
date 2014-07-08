@@ -65,6 +65,11 @@ public class GetUtils {
                 return g;
             }
         }
+        for (GenericCommand g : GeneralRegistry.GlobalCommands) {
+            if (g.getCommand().equalsIgnoreCase(Command)) {
+                return g;
+            }
+        }
         for (GenericCommand g : GeneralRegistry.ChanOpCommands) {
             for(String commandid : g.getCommandID()){
                 if(commandid.equalsIgnoreCase(Command)){
@@ -108,6 +113,22 @@ public class GetUtils {
             UTime x = GeneralRegistry.Topic.get(i);
             if (x.getChannelName().equalsIgnoreCase(channelName) && x.getNetworkName().equalsIgnoreCase(networkName)) {
                 return x;
+            }
+        }
+        return null;
+    }
+    public static Global getGlobalByNick(String nick, String Network){
+        for(Global global:GeneralRegistry.Globals){
+            if(global.getUser().equals(nick) && global.getNetwork().equalsIgnoreCase(Network)){
+                return global;
+            }
+        }
+        return null;
+    }
+    public static String getControllerByNick(String Nick){
+        for(String c:GeneralRegistry.Controllers){
+            if(c.equals(Nick)){
+                return c;
             }
         }
         return null;

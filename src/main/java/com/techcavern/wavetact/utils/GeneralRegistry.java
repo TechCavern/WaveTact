@@ -13,11 +13,12 @@ public class GeneralRegistry {
     public static final List<PermChannel> PermChannels = new LoggingArrayList<PermChannel>("PermChannel");
     public static final List<UTime> Topic = new LoggingArrayList<UTime>("Topic") ;
     public static final List<String> Controllers = new LoggingArrayList<String>("Controllers");
-    public static final List<String> Globals = new LoggingArrayList<String>("Globals");
+    public static final List<Global> Globals = new LoggingArrayList<Global>("Globals");
     public static final List<String> Authors = Arrays.asList("JZTech101", "kaendfinger", "deathcrazyuberlironman", "Leah", "Logan_");
     public static final List<GenericCommand> GenericCommands = new LoggingArrayList<GenericCommand>("Command");
     public static final List<GenericCommand> TrustedCommands = new LoggingArrayList<GenericCommand>("TrustedCommand");
     public static final List<GenericCommand> ControllerCommands = new LoggingArrayList<GenericCommand>("ControllerCommand");
+    public static final List<GenericCommand> GlobalCommands = new LoggingArrayList<GenericCommand>("GlobalCommands");
     public static final List<GenericCommand> ChanOwnerCommands = new LoggingArrayList<GenericCommand>("ChanOwnerCommand");
     public static final List<GenericCommand> ChanHalfOpCommands = new LoggingArrayList<GenericCommand>("ChanHalfOpCommand");
     public static final List<GenericCommand> AnonymonityCommands = new LoggingArrayList<GenericCommand>("AnonymonityCommand");

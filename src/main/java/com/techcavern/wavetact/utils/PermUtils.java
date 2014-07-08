@@ -1,6 +1,7 @@
 package com.techcavern.wavetact.utils;
 
 import com.techcavern.wavetact.utils.databaseUtils.PermChannelUtils;
+import com.techcavern.wavetact.utils.objects.Global;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -86,13 +87,11 @@ public class PermUtils {
     public static int getManualPermLevel(PircBotX bot, User userObject, Channel channelObject) {
         String account = getAccount(bot, userObject);
         if(account != null) {
-            for(String c: GeneralRegistry.Controllers){
-                if(c.equals(account))
-                    return 9001;
+            if(GetUtils.getControllerByNick(account) != null){
+                return 9001;
             }
-            for(String c: GeneralRegistry.Globals){
-                if(c.equals(account))
-                    return 20;
+            if(GetUtils.getGlobalByNick(account, bot.getServerInfo().getServerName()) != null){
+                return 20;
             }
                 if(PermChannelUtils.getPermLevelChannel(bot.getServerInfo().getNetwork(), account, channelObject.getName()) != null) {
                     return PermChannelUtils.getPermLevelChannel(bot.getServerInfo().getNetwork(), account, channelObject.getName()).getPermLevel();
@@ -115,13 +114,11 @@ public class PermUtils {
       }else{
           String account = getAccount(bot, userObject);
           if(account != null) {
-              for (String c : GeneralRegistry.Controllers) {
-                  if (c.equals(account))
-                      return 9001;
+              if(GetUtils.getControllerByNick(account) != null){
+                  return 9001;
               }
-              for (String c : GeneralRegistry.Globals) {
-                  if (c.equals(account))
-                      return 20;
+              if(GetUtils.getGlobalByNick(account, bot.getServerInfo().getServerName()) != null){
+                  return 20;
               }
           } else{
                   return 0;

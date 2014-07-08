@@ -40,6 +40,7 @@ public class DefCon extends GenericCommand {
             GeneralRegistry.ChanHalfOpCommands.clear();
             GeneralRegistry.ControllerCommands.clear();
             GeneralRegistry.ChanOwnerCommands.clear();
+            GeneralRegistry.GlobalCommands.clear();
             GeneralRegistry.ChanOpCommands.clear();
             GeneralRegistry.ChanFounderCommands.clear();
             GeneralRegistry.AnonymonityCommands.clear();
@@ -70,6 +71,9 @@ public class DefCon extends GenericCommand {
                 command.setPermLevel(9001);
             }
             for(GenericCommand command:GeneralRegistry.AnonymonityCommands){
+                command.setPermLevel(9001);
+            }
+            for(GenericCommand command:GeneralRegistry.GlobalCommands){
                 command.setPermLevel(9001);
             }
             IRCUtils.SendMessage(user, channel, "DefCon ON", isPrivate);

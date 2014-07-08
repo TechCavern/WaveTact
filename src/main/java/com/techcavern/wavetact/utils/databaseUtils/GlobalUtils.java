@@ -1,8 +1,11 @@
 package com.techcavern.wavetact.utils.databaseUtils;
 
+import com.google.gson.internal.LinkedTreeMap;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.fileUtils.JSONFile;
+import com.techcavern.wavetact.utils.objects.Global;
+import com.techcavern.wavetact.utils.objects.PermChannel;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -17,9 +20,11 @@ public class GlobalUtils {
         JSONFile file = new JSONFile("Globals.json");
         if (file.exists()) {
             try {
-                List<String> Globals = file.read();
+                List<LinkedTreeMap> permChannels = file.read(List.class);
+
                 GeneralRegistry.Globals.clear();
-                GeneralRegistry.Globals.addAll(Globals.stream().collect(Collectors.toList()));
+                GeneralRegistry.Globals.addAll(permChannels.stream().map(perms -> new Global((String) perms.get("Network"),
+                        (String) perms.get("user"))).collect(Collectors.toList()));
             } catch (FileNotFoundException e) {
                 ErrorUtils.handleException(e);
             }
