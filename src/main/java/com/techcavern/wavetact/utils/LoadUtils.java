@@ -174,7 +174,7 @@ public class LoadUtils {
         GeneralRegistry.Attacks.add(new FunObject("drops a 2000 pound object on $*" , false, null));
         GeneralRegistry.Attacks.add(new FunObject("packs $* up and ships it off to another galaxy", false, null));
         GeneralRegistry.Attacks.add(new FunObject("eats $* up for breakfast", false, null));
-        GeneralRegistry.Attacks.add(new FunObject("sends flying desk at $*", false, null));
+        GeneralRegistry.Attacks.add(new FunObject("sends a flying desk at $*", false, null));
         GeneralRegistry.Attacks.add(new FunObject("swallows $* whole", false, null));
         GeneralRegistry.Attacks.add(new FunObject("runs over $*", true, "HEY! WATCH WHERE YOU'RE GOING!"));
         GeneralRegistry.Attacks.add(new FunObject("throws a racket at $*", false, null));
