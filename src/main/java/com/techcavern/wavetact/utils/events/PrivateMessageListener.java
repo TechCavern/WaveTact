@@ -27,7 +27,7 @@ public class PrivateMessageListener extends ListenerAdapter<PircBotX> {
         GenericCommand Command = GetUtils.getCommand(m.replaceFirst(GetUtils.getCommandChar(event.getBot()), ""));
         messageParts = ArrayUtils.remove(messageParts, 0);
         Channel channel = null;
-        if(messageParts[0].startsWith("#")){
+        if(messageParts.length > 1 && messageParts[0].startsWith("#")){
             channel = GetUtils.getChannelbyName(event.getBot(), messageParts[0]);
             messageParts = ArrayUtils.remove(messageParts, 0);
         }

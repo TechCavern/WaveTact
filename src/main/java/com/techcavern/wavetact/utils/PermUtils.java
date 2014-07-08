@@ -104,12 +104,29 @@ public class PermUtils {
         }
     }
     public static int getPermLevel(PircBotX bot, User userObject, Channel channelObject){
-        if(getManualPermLevel(bot,userObject, channelObject) == -1){
-            return -1;
-        }else if(getAutomaticPermLevel(bot, userObject, channelObject) < getManualPermLevel(bot,userObject, channelObject)){
-            return getManualPermLevel(bot, userObject, channelObject);
-        }else{
-            return getAutomaticPermLevel(bot, userObject, channelObject);
-        }
+      if(channelObject != null) {
+          if (getManualPermLevel(bot, userObject, channelObject) == -1) {
+              return -1;
+          } else if (getAutomaticPermLevel(bot, userObject, channelObject) < getManualPermLevel(bot, userObject, channelObject)) {
+              return getManualPermLevel(bot, userObject, channelObject);
+          } else {
+              return getAutomaticPermLevel(bot, userObject, channelObject);
+          }
+      }else{
+          String account = getAccount(bot, userObject);
+          if(account != null) {
+              for (String c : GeneralRegistry.Controllers) {
+                  if (c.equals(account))
+                      return 9001;
+              }
+              for (String c : GeneralRegistry.Globals) {
+                  if (c.equals(account))
+                      return 20;
+              }
+          } else{
+                  return 0;
+              }
+      }
+        return 0;
     }
 }

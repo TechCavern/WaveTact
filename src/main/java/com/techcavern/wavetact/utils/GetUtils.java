@@ -40,18 +40,24 @@ public class GetUtils {
 
     public static GenericCommand getCommand(String Command) {
         for (GenericCommand g : GeneralRegistry.GenericCommands) {
-            if (g.getCommand().equalsIgnoreCase(Command)) {
-                return g;
+            for(String commandid : g.getCommandID()){
+                if(commandid.equalsIgnoreCase(Command)){
+                    return g;
+                }
             }
         }
         for (GenericCommand g : GeneralRegistry.TrustedCommands) {
-            if (g.getCommand().equalsIgnoreCase(Command)) {
-                return g;
+            for(String commandid : g.getCommandID()){
+                if(commandid.equalsIgnoreCase(Command)){
+                    return g;
+                }
             }
         }
         for (GenericCommand g : GeneralRegistry.ControllerCommands) {
-            if (g.getCommand().equalsIgnoreCase(Command)) {
-                return g;
+            for(String commandid : g.getCommandID()){
+                if(commandid.equalsIgnoreCase(Command)){
+                    return g;
+                }
             }
         }
         for (GenericCommand g : GeneralRegistry.ChanOwnerCommands) {
@@ -60,8 +66,10 @@ public class GetUtils {
             }
         }
         for (GenericCommand g : GeneralRegistry.ChanOpCommands) {
-            if (g.getCommand().equalsIgnoreCase(Command)) {
-                return g;
+            for(String commandid : g.getCommandID()){
+                if(commandid.equalsIgnoreCase(Command)){
+                    return g;
+                }
             }
         }
         for (GenericCommand g : GeneralRegistry.ChanHalfOpCommands) {
@@ -70,13 +78,17 @@ public class GetUtils {
             }
         }
         for (GenericCommand g : GeneralRegistry.AnonymonityCommands) {
-            if (g.getCommand().equalsIgnoreCase(Command)) {
-                return g;
+            for(String commandid : g.getCommandID()){
+                if(commandid.equalsIgnoreCase(Command)){
+                    return g;
+                }
             }
         }
         for (GenericCommand g : GeneralRegistry.ChanFounderCommands) {
-            if (g.getCommand().equalsIgnoreCase(Command)) {
-                return g;
+            for(String commandid : g.getCommandID()){
+                if(commandid.equalsIgnoreCase(Command)){
+                    return g;
+                }
             }
         }
         return null;

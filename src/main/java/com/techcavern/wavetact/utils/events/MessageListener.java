@@ -25,7 +25,7 @@ public class MessageListener extends ListenerAdapter<PircBotX> {
         String m = messageParts[0].toLowerCase();
         GenericCommand Command = GetUtils.getCommand(m.replaceFirst(GetUtils.getCommandChar(event.getBot()), ""));
 
-                if (m != null && m.startsWith(GetUtils.getCommandChar(event.getBot()))) {
+                if (Command != null && m.startsWith(GetUtils.getCommandChar(event.getBot()))) {
                     if (PermUtils.getPermLevel(event.getBot(), event.getUser(), event.getChannel()) >= Command.getPermLevel()) {
                         if (Command.getPermLevel() == 9) {
                             if (event.getChannel().isOp(event.getBot().getUserBot()) || event.getChannel().isOp(event.getBot().getUserBot()) ||  event.getChannel().isOwner(event.getBot().getUserBot())) {

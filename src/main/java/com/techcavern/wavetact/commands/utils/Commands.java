@@ -90,23 +90,23 @@ public class Commands extends GenericCommand {
 
         int i = PermUtils.getPermLevel(Bot, user, channel);
         if (i == 9001) {
-            IRCUtils.SendMessage(user, channel, StringUtils.join(ControllerCommands, " , "), isPrivate);
+            IRCUtils.SendMessage(user, channel, StringUtils.join(ControllerCommands, ", "), isPrivate);
         } else if (i == 20) {
-            IRCUtils.SendMessage(user, channel, StringUtils.join(ChanFounderCommands, " , "), isPrivate);
+            IRCUtils.SendMessage(user, channel, StringUtils.join(ChanFounderCommands, ", "), isPrivate);
         }else if (i == 18) {
-            IRCUtils.SendMessage(user, channel, StringUtils.join(ChanFounderCommands, " , "), isPrivate);
+            IRCUtils.SendMessage(user, channel, StringUtils.join(ChanFounderCommands, ", "), isPrivate);
         }else if (i == 15) {
-            IRCUtils.SendMessage(user, channel, StringUtils.join(ChanOwnerCommands, " , "), isPrivate);
+            IRCUtils.SendMessage(user, channel, StringUtils.join(ChanOwnerCommands, ", "), isPrivate);
         }else if (i == 13) {
-            IRCUtils.SendMessage(user, channel, StringUtils.join(ChanOpCommands, " , "), isPrivate);
+            IRCUtils.SendMessage(user, channel, StringUtils.join(ChanOpCommands, ", "), isPrivate);
         } else if (i == 10) {
-            IRCUtils.SendMessage(user, channel, StringUtils.join(ChanOpCommands, " , "), isPrivate);
+            IRCUtils.SendMessage(user, channel, StringUtils.join(ChanOpCommands, ", "), isPrivate);
         } else if (i == 7) {
-            IRCUtils.SendMessage(user, channel, StringUtils.join(ChanHalfOpCommands, " , "), isPrivate);
+            IRCUtils.SendMessage(user, channel, StringUtils.join(ChanHalfOpCommands, ", "), isPrivate);
         } else if (i == 5) {
-            IRCUtils.SendMessage(user, channel, StringUtils.join(TrustedCommands, " , "), isPrivate);
+            IRCUtils.SendMessage(user, channel, StringUtils.join(TrustedCommands, ", "), isPrivate);
         } else {
-            IRCUtils.SendMessage(user, channel, StringUtils.join(GenericCommands, " , "), isPrivate);
+            IRCUtils.SendMessage(user, channel, StringUtils.join(GenericCommands, ", "), isPrivate);
         }
 
     }
