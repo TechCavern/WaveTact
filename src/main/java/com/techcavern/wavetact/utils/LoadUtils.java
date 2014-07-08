@@ -165,4 +165,18 @@ public class LoadUtils {
         }
         if (invalid) System.exit(0);
     }
+    public static void registerAttacks(){
+
+        GeneralRegistry.Attacks.add(new FunObject("sends a 53 inch monitor flying at $*" , false, null));
+        GeneralRegistry.Attacks.add(new FunObject("shoots a rocket at $*" , false, null));
+        GeneralRegistry.Attacks.add(new FunObject("punches $* right in the crotch", false, null));
+        GeneralRegistry.Attacks.add(new FunObject("places a bomb near $* set for 2 seconds", true, "BANG!"));
+        GeneralRegistry.Attacks.add(new FunObject("drops a 2000 pound object on $*" , false, null));
+        GeneralRegistry.Attacks.add(new FunObject("packs $* up and ships it off to another galaxy", false, null));
+        GeneralRegistry.Attacks.add(new FunObject("eats $* up for breakfast", false, null));
+        GeneralRegistry.Attacks.add(new FunObject("sends flying desk at $*", false, null));
+        GeneralRegistry.Attacks.add(new FunObject("swallows $* whole", false, null));
+        GeneralRegistry.Attacks.add(new FunObject("runs over $*", true, "HEY! WATCH WHERE YOU'RE GOING!"));
+        GeneralRegistry.Attacks.add(new FunObject("throws a racket at $*", false, null));
+    }
 }

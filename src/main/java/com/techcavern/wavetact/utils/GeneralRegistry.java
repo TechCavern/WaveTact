@@ -22,7 +22,7 @@ public class GeneralRegistry {
     public static final List<GenericCommand> ChanOwnerCommands = new LoggingArrayList<GenericCommand>("ChanOwnerCommand");
     public static final List<GenericCommand> ChanHalfOpCommands = new LoggingArrayList<GenericCommand>("ChanHalfOpCommand");
     public static final List<GenericCommand> AnonymonityCommands = new LoggingArrayList<GenericCommand>("AnonymonityCommand");
-
+    public static final List<FunObject> Attacks = new LoggingArrayList<FunObject>("Attacks");
     public static final List<GenericCommand> ChanOpCommands = new LoggingArrayList<GenericCommand>("ChanOpCommand");
     public static final List<GenericCommand> ChanFounderCommands = new LoggingArrayList<GenericCommand>("ChanFounderCommand");
     public static final List<SimpleMessage> SimpleMessages = new LoggingArrayList<SimpleMessage>("SimpleMessages");
