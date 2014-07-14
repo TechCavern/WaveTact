@@ -14,7 +14,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class UrbanDictonary extends GenericCommand {
     @CMD
     public UrbanDictonary() {
-        super(GeneralUtils.toArray("urbandictionary ub urban urb"), 0, "urbandictionary [what to define]");
+        super(GeneralUtils.toArray("urbandictionary ub urban urb ud"), 0, "urbandictionary [what to define]");
     }
 
     @Override
