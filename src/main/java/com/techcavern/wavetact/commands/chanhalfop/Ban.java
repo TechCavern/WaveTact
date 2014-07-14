@@ -24,7 +24,13 @@ public class Ban extends GenericCommand {
             throws Exception {
         String hostmask;
         if (args[0].contains("!") && args[0].contains("@")) {
-            hostmask = args[0];
+            if(args[0].startsWith("-")) {
+                hostmask = args[0].replaceFirst("-", "");
+            }else if(args[0].startsWith("+")){
+                hostmask = args[0].replaceFirst("\\+", "");
+            }else{
+                hostmask = args[0];
+            }
         } else {
             if (args[0].startsWith("+")) {
                 User use = GetUtils.getUserByNick(channel, args[0].replaceFirst("\\+", ""));
@@ -49,7 +55,7 @@ public class Ban extends GenericCommand {
                 }
             }
         }
-            if ((!args[0].startsWith("-")) && (!args[0].startsWith("\\+"))) {
+            if ((!args[0].startsWith("-")) && (!args[0].startsWith("+"))) {
 
                 if (BanTimeUtils.getBanTime(hostmask) == null) {
 
