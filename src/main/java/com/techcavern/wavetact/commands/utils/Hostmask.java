@@ -14,12 +14,20 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class Hostmask extends GenericCommand {
     @CMD
     public Hostmask() {
-        super(GeneralUtils.toArray("hostmask host mask"), 0, "Hostmask [nick]");
+        super(GeneralUtils.toArray("hostmask host mask"), 0, "Hostmask $[nick]");
     }
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, String... args) throws Exception {
-        IRCUtils.SendMessage(user, channel, GetUtils.getUserByNick(channel, args[0]).getHostmask(), isPrivate);
+        if(IRCUtils.getHostmask(Bot, args[0].replaceFirst("\\$", "")) != null) {
+            if (args[0].startsWith("$")) {
+                IRCUtils.SendMessage(user, channel, IRCUtils.getBanmask(Bot, args[0].replaceFirst("\\$", "")), isPrivate);
+            } else {
+                IRCUtils.SendMessage(user, channel, IRCUtils.getHostmask(Bot, args[0]), isPrivate);
+            }
+        }else{
+            user.send().notice("User not found");
+        }
 
     }
 }

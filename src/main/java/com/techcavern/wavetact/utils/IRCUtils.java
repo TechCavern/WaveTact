@@ -3,6 +3,8 @@ package com.techcavern.wavetact.utils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
+import org.pircbotx.hooks.WaitForQueue;
+import org.pircbotx.hooks.events.WhoisEvent;
 import org.pircbotx.output.OutputChannel;
 import org.pircbotx.output.OutputUser;
 
@@ -36,5 +38,54 @@ public class IRCUtils {
         }else{
             userObject.send().action(message);
         }
+    }
+    public static String getBanmask(PircBotX bot, String userObject) {
+        String hostmask;
+        if(userObject != null) {
+            bot.sendRaw().rawLineNow("WHOIS " + userObject);
+        }else{
+            hostmask = null;
+        }
+        WaitForQueue waitForQueue = new WaitForQueue(bot);
+        WhoisEvent<PircBotX> test;
+        try {
+            test = waitForQueue.waitFor(WhoisEvent.class);
+            waitForQueue.close();
+            String hostname = test.getHostname();
+            String Login = test.getLogin();
+            if(!Login.startsWith("~")){
+                hostmask = "*!" + Login+"@"+hostname;
+            }else{
+                hostmask = "*!*@"+hostname;
+            }
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+            hostmask = null;
+        }
+
+        return hostmask;
+    }
+    public static String getHostmask(PircBotX bot, String userObject) {
+        String hostmask;
+        if(userObject != null) {
+            bot.sendRaw().rawLineNow("WHOIS " + userObject);
+        }else{
+            hostmask = null;
+        }
+        WaitForQueue waitForQueue = new WaitForQueue(bot);
+        WhoisEvent<PircBotX> test;
+        try {
+            test = waitForQueue.waitFor(WhoisEvent.class);
+            waitForQueue.close();
+            String hostname = test.getHostname();
+            String Login = test.getLogin();
+        //    String Nick = test.getNick();
+            hostmask = userObject +"!" + Login+"@"+hostname;
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+            hostmask = null;
+        }
+
+        return hostmask;
     }
 }

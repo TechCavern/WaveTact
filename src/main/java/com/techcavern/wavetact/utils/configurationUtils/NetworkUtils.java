@@ -49,7 +49,7 @@ public class NetworkUtils {
     }
 
     public static void registerDevServer() {
-        List<String> Chans = Arrays.asList("#techcavern");
+        List<String> Chans = Arrays.asList("#DirectCode");
         PircBotX Dev = LoadUtils.createbot(null, "EsperNet", Chans, "WaveTactDev", "irc.esper.net");
         GeneralRegistry.WaveTact.addBot(Dev);
         GeneralRegistry.Controllers.add("JZTech101");
