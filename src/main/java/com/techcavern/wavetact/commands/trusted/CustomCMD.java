@@ -36,18 +36,18 @@ public class CustomCMD extends GenericCommand {
                 if (args[1].startsWith("-")) {
                     removeCommand(Bot, user,channel, CommandType.MESSAGE, isPrivate,  args[1].substring(1));
                 } else if (args[1].startsWith("+")) {
-                    modifyCommand(user,channel, Bot, CommandType.MESSAGE, Integer.parseInt(args[2]),isPrivate, args[1].substring(1), GeneralUtils.buildMessage(3, args.length, args));
+                    modifyCommand(user,channel, Bot, CommandType.MESSAGE, Integer.parseInt(args[2]),isPrivate, args[1].substring(1), GeneralUtils.buildMessage(3, args.length, args).replace("\n", " "));
                 } else {
-                    addCommand(user,channel, CommandType.MESSAGE, Integer.parseInt(args[2]), isPrivate, args[1], GeneralUtils.buildMessage(3, args.length, args));
+                    addCommand(user,channel, CommandType.MESSAGE, Integer.parseInt(args[2]), isPrivate, args[1], GeneralUtils.buildMessage(3, args.length, args).replace("\n", " "));
                 }
                 break;
             case "a": // action
                 if (args[1].startsWith("-")) {
                     removeCommand(Bot, user,channel, CommandType.ACTION,isPrivate,  args[1].substring(1));
                 } else if (args[1].startsWith("+")) {
-                    modifyCommand(user,channel, Bot, CommandType.ACTION, Integer.parseInt(args[2]), isPrivate, args[1].substring(1), GeneralUtils.buildMessage(3, args.length, args));
+                    modifyCommand(user,channel, Bot, CommandType.ACTION, Integer.parseInt(args[2]), isPrivate, args[1].substring(1), GeneralUtils.buildMessage(3, args.length, args).replace("\n"," "));
                 } else {
-                    addCommand(user,channel, CommandType.ACTION, Integer.parseInt(args[2]), isPrivate, args[1], GeneralUtils.buildMessage(3, args.length, args));
+                    addCommand(user,channel, CommandType.ACTION, Integer.parseInt(args[2]), isPrivate, args[1], GeneralUtils.buildMessage(3, args.length, args).replace("\n"," "));
                 }
                 break;
         }

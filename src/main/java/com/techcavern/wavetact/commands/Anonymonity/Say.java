@@ -27,7 +27,7 @@ public class Say extends GenericCommand {
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, String... args) throws Exception {
-        IRCUtils.SendMessage(user, channel,StringUtils.join(args, " "), isPrivate);
+        IRCUtils.SendMessage(user, channel,StringUtils.join(args, " ").replace("\n", " "), isPrivate);
 
     }
 }
