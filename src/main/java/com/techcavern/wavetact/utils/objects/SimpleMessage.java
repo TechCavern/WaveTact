@@ -27,7 +27,6 @@ public class SimpleMessage extends GenericCommand {
         super(GeneralUtils.toArray(inputString), permLevel, "A Basic Command");
         this.message = message;
         this.locked = locked;
-        create();
 
     }
 
@@ -48,9 +47,6 @@ public class SimpleMessage extends GenericCommand {
         IRCUtils.SendMessage(user, channel, dresponse, isPrivate);
     }
 
-    void create(){
-        GeneralRegistry.GenericCommands.add(this);
-    }
 
     public String getMessage() {
         return this.message;

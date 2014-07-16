@@ -37,4 +37,12 @@ public class GeneralRegistry {
     public static final List<CommandChar> CommandChars = new LoggingArrayList<CommandChar>("CommandChar");
     public static final List<CommandLine> CommandLines = new LoggingArrayList<CommandLine>("CommandLine");
     public static final List<CommandLine> CommandLineArguments = new LoggingArrayList<CommandLine>("CommandLineArguments");
+    public static final List<String> GenericListCommands = new ArrayList<String>();
+    public static final List<String>  TrustedListCommands = new ArrayList<String>();
+    public static final List<String>  ControllerListCommands = new ArrayList<String>();
+    public static final List<String>  ChanOwnerListCommands = new ArrayList<String>();
+    public static final List<String>  GlobalListCommands = new ArrayList<String>();
+    public static final List<String>  ChanHalfOpListCommands = new ArrayList<String>();
+    public static final List<String>  ChanOpListCommands = new ArrayList<String>();
+    public static final List<String>  ChanFounderListCommands = new ArrayList<String>();
 }

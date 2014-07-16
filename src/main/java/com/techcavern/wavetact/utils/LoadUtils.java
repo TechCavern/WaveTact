@@ -179,4 +179,71 @@ public class LoadUtils {
         GeneralRegistry.Attacks.add(new FunObject("runs over $*", true, "HEY! WATCH WHERE YOU'RE GOING!"));
         GeneralRegistry.Attacks.add(new FunObject("throws a racket at $*", false, null));
     }
+    public static void registerCommandList(){
+        for(GenericCommand command : GeneralRegistry.GenericCommands){
+            GeneralRegistry.GenericListCommands.add(command.getCommand());
+            GeneralRegistry.TrustedListCommands.add(command.getCommand());
+            GeneralRegistry.ChanHalfOpListCommands.add(command.getCommand());
+            GeneralRegistry.ChanOpListCommands.add(command.getCommand());
+            GeneralRegistry.ChanOwnerListCommands.add(command.getCommand());
+            GeneralRegistry.ChanFounderListCommands.add(command.getCommand());
+            GeneralRegistry.ControllerListCommands.add(command.getCommand());
+            GeneralRegistry.GlobalListCommands.add(command.getCommand());
+
+        }
+        for(GenericCommand command : GeneralRegistry.TrustedCommands){
+            GeneralRegistry.TrustedListCommands.add(command.getCommand());
+            GeneralRegistry.ChanHalfOpListCommands.add(command.getCommand());
+            GeneralRegistry.ChanOpListCommands.add(command.getCommand());
+            GeneralRegistry.ChanOwnerListCommands.add(command.getCommand());
+            GeneralRegistry.ChanFounderListCommands.add(command.getCommand());
+            GeneralRegistry.ControllerListCommands.add(command.getCommand());
+            GeneralRegistry.GlobalListCommands.add(command.getCommand());
+        }
+        for(GenericCommand command : GeneralRegistry.AnonymonityCommands){
+            GeneralRegistry.TrustedListCommands.add(command.getCommand());
+            GeneralRegistry.ChanHalfOpListCommands.add(command.getCommand());
+            GeneralRegistry.ChanOpListCommands.add(command.getCommand());
+            GeneralRegistry.ChanOwnerListCommands.add(command.getCommand());
+            GeneralRegistry.ChanFounderListCommands.add(command.getCommand());
+            GeneralRegistry.ControllerListCommands.add(command.getCommand());
+            GeneralRegistry.GlobalListCommands.add(command.getCommand());
+
+        }
+        for(GenericCommand command : GeneralRegistry.ChanHalfOpCommands){
+            GeneralRegistry.ChanHalfOpListCommands.add(command.getCommand());
+            GeneralRegistry.ChanOpListCommands.add(command.getCommand());
+            GeneralRegistry.ChanOwnerListCommands.add(command.getCommand());
+            GeneralRegistry.ChanFounderListCommands.add(command.getCommand());
+            GeneralRegistry.ControllerListCommands.add(command.getCommand());
+            GeneralRegistry.GlobalListCommands.add(command.getCommand());
+
+        }
+        for(GenericCommand command : GeneralRegistry.ChanOpCommands){
+            GeneralRegistry.ChanOpListCommands.add(command.getCommand());
+            GeneralRegistry.ChanOwnerListCommands.add(command.getCommand());
+            GeneralRegistry.ChanFounderListCommands.add(command.getCommand());
+            GeneralRegistry.ControllerListCommands.add(command.getCommand());
+            GeneralRegistry.GlobalListCommands.add(command.getCommand());
+
+        }
+        for(GenericCommand command : GeneralRegistry.ChanOwnerCommands){
+            GeneralRegistry.ChanOwnerListCommands.add(command.getCommand());
+            GeneralRegistry.ChanFounderListCommands.add(command.getCommand());
+            GeneralRegistry.ControllerListCommands.add(command.getCommand());
+            GeneralRegistry.GlobalListCommands.add(command.getCommand());
+        }
+        for(GenericCommand command : GeneralRegistry.ChanFounderCommands){
+            GeneralRegistry.ChanFounderListCommands.add(command.getCommand());
+            GeneralRegistry.ControllerListCommands.add(command.getCommand());
+            GeneralRegistry.GlobalListCommands.add(command.getCommand());
+        }
+        for(GenericCommand command : GeneralRegistry.GlobalCommands){
+            GeneralRegistry.ControllerListCommands.add(command.getCommand());
+            GeneralRegistry.GlobalListCommands.add(command.getCommand());
+        }
+        for(GenericCommand command : GeneralRegistry.ControllerCommands){
+            GeneralRegistry.ControllerListCommands.add(command.getCommand());
+        }
+    }
 }

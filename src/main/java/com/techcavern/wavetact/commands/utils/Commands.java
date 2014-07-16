@@ -29,102 +29,27 @@ public class Commands extends GenericCommand {
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, String... args) throws Exception {
-        List<String> GenericCommands = new ArrayList<String>();
-        List<String>  TrustedCommands = new ArrayList<String>();
-        List<String>  ControllerCommands = new ArrayList<String>();
-        List<String>  ChanOwnerCommands = new ArrayList<String>();
-        List<String>  GlobalCommands = new ArrayList<String>();
-        List<String>  ChanHalfOpCommands = new ArrayList<String>();
-        List<String>  ChanOpCommands = new ArrayList<String>();
-        List<String>  ChanFounderCommands = new ArrayList<String>();
-
-        for(GenericCommand command : GeneralRegistry.GenericCommands){
-          GenericCommands.add(command.getCommand());
-          TrustedCommands.add(command.getCommand());
-          ChanHalfOpCommands.add(command.getCommand());
-          ChanOpCommands.add(command.getCommand());
-          ChanOwnerCommands.add(command.getCommand());
-          ChanFounderCommands.add(command.getCommand());
-          ControllerCommands.add(command.getCommand());
-            GlobalCommands.add(command.getCommand());
-
-        }
-        for(GenericCommand command : GeneralRegistry.TrustedCommands){
-            TrustedCommands.add(command.getCommand());
-            ChanHalfOpCommands.add(command.getCommand());
-            ChanOpCommands.add(command.getCommand());
-            ChanOwnerCommands.add(command.getCommand());
-            ChanFounderCommands.add(command.getCommand());
-            ControllerCommands.add(command.getCommand());
-            GlobalCommands.add(command.getCommand());
-
-        }
-        for(GenericCommand command : GeneralRegistry.AnonymonityCommands){
-            TrustedCommands.add(command.getCommand());
-            ChanHalfOpCommands.add(command.getCommand());
-            ChanOpCommands.add(command.getCommand());
-            ChanOwnerCommands.add(command.getCommand());
-            ChanFounderCommands.add(command.getCommand());
-            ControllerCommands.add(command.getCommand());
-            GlobalCommands.add(command.getCommand());
-
-        }
-        for(GenericCommand command : GeneralRegistry.ChanHalfOpCommands){
-            ChanHalfOpCommands.add(command.getCommand());
-            ChanOpCommands.add(command.getCommand());
-            ChanOwnerCommands.add(command.getCommand());
-            ChanFounderCommands.add(command.getCommand());
-            ControllerCommands.add(command.getCommand());
-            GlobalCommands.add(command.getCommand());
-
-        }
-        for(GenericCommand command : GeneralRegistry.ChanOpCommands){
-            ChanOpCommands.add(command.getCommand());
-            ChanOwnerCommands.add(command.getCommand());
-            ChanFounderCommands.add(command.getCommand());
-            ControllerCommands.add(command.getCommand());
-            GlobalCommands.add(command.getCommand());
-
-        }
-        for(GenericCommand command : GeneralRegistry.ChanOwnerCommands){
-            ChanOwnerCommands.add(command.getCommand());
-            ChanFounderCommands.add(command.getCommand());
-            ControllerCommands.add(command.getCommand());
-            GlobalCommands.add(command.getCommand());
-        }
-        for(GenericCommand command : GeneralRegistry.ChanFounderCommands){
-            ChanFounderCommands.add(command.getCommand());
-            ControllerCommands.add(command.getCommand());
-            GlobalCommands.add(command.getCommand());
-        }
-        for(GenericCommand command : GeneralRegistry.GlobalCommands){
-            ControllerCommands.add(command.getCommand());
-            GlobalCommands.add(command.getCommand());
-        }
-        for(GenericCommand command : GeneralRegistry.ControllerCommands){
-            ControllerCommands.add(command.getCommand());
-        }
 
 
         int i = PermUtils.getPermLevel(Bot, user, channel);
         if (i == 9001) {
-            IRCUtils.SendMessage(user, channel, StringUtils.join(ControllerCommands, ", "), isPrivate);
+            IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.ControllerListCommands, ", "), isPrivate);
         } else if (i == 20) {
-            IRCUtils.SendMessage(user, channel, StringUtils.join(ChanFounderCommands, ", "), isPrivate);
+            IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.GlobalListCommands, ", "), isPrivate);
         }else if (i == 18) {
-            IRCUtils.SendMessage(user, channel, StringUtils.join(ChanFounderCommands, ", "), isPrivate);
+            IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.ChanFounderListCommands, ", "), isPrivate);
         }else if (i == 15) {
-            IRCUtils.SendMessage(user, channel, StringUtils.join(ChanOwnerCommands, ", "), isPrivate);
+            IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.ChanOwnerListCommands, ", "), isPrivate);
         }else if (i == 13) {
-            IRCUtils.SendMessage(user, channel, StringUtils.join(ChanOpCommands, ", "), isPrivate);
+            IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.ChanOpListCommands, ", "), isPrivate);
         } else if (i == 10) {
-            IRCUtils.SendMessage(user, channel, StringUtils.join(ChanOpCommands, ", "), isPrivate);
+            IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.ChanOpListCommands, ", "), isPrivate);
         } else if (i == 7) {
-            IRCUtils.SendMessage(user, channel, StringUtils.join(ChanHalfOpCommands, ", "), isPrivate);
+            IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.ChanHalfOpListCommands, ", "), isPrivate);
         } else if (i == 5) {
-            IRCUtils.SendMessage(user, channel, StringUtils.join(TrustedCommands, ", "), isPrivate);
+            IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.TrustedListCommands, ", "), isPrivate);
         } else {
-            IRCUtils.SendMessage(user, channel, StringUtils.join(GenericCommands, ", "), isPrivate);
+            IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.GenericListCommands, ", "), isPrivate);
         }
 
     }

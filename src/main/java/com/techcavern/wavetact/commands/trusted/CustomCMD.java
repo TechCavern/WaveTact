@@ -71,23 +71,22 @@ public class CustomCMD extends GenericCommand {
 
     @SuppressWarnings("SuspiciousMethodCalls")
     private void modifyCommand(User user, Channel channel, PircBotX bot, CommandType type, int accessLevel,boolean isPrivate, String command, String msg) {
-
-        GenericCommand cm = GetUtils.getCommand(command);
-        if(cm.getPermLevel() <= PermUtils.getPermLevel(bot, user, channel)){
-        if (cm  != null && !cm.getLockedStatus()) {
-            GenericCommand cmd = GetUtils.getCommand(command);
-            GeneralRegistry.GenericCommands.remove(cmd);
+        GenericCommand cmd = null;
+        if (type == CommandType.MESSAGE)
+            cmd = SimpleMessageUtils.getSimpleMessage(command);
+        else if (type == CommandType.ACTION)
+            cmd = SimpleActionUtils.getSimpleAction(command);
+        if(cmd.getPermLevel() <= PermUtils.getPermLevel(bot, user, channel)){
+        if (cmd  != null && !cmd.getLockedStatus()) {
             GeneralRegistry.SimpleActions.remove(cmd);
             GeneralRegistry.SimpleMessages.remove(cmd);
-        }else if(cm.getLockedStatus()) {
+        }else if(cmd.getLockedStatus()) {
             IRCUtils.SendMessage(user, channel, "Command Locked", isPrivate);
 
         } else{
-
             IRCUtils.SendMessage(user, channel, "Command Does Not Exist", isPrivate);
 
         }
-
         if (type == CommandType.ACTION) {
             GeneralRegistry.SimpleActions.add(new SimpleAction(command, accessLevel, msg, false));
             SimpleActionUtils.saveSimpleActions();
@@ -123,7 +122,6 @@ public class CustomCMD extends GenericCommand {
                 GeneralRegistry.SimpleActions.remove(cmd);
                 SimpleActionUtils.saveSimpleActions();
             }
-            GeneralRegistry.GenericCommands.remove(cmd);
 
             IRCUtils.SendMessage(user, channel, "Command removed", isPrivate);
         }

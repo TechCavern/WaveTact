@@ -53,6 +53,37 @@ public class GetUtils {
                 }
             }
         }
+        for (GenericCommand g : GeneralRegistry.SimpleMessages){
+            if(g.getCommand().equalsIgnoreCase(Command)){
+                return g;
+            }
+        }
+        for (GenericCommand g : GeneralRegistry.SimpleActions){
+            if(g.getCommand().equalsIgnoreCase(Command)){
+                return g;
+            }
+        }
+        for (GenericCommand g : GeneralRegistry.AnonymonityCommands) {
+            for(String commandid : g.getCommandID()){
+                if(commandid.equalsIgnoreCase(Command)){
+                    return g;
+                }
+            }
+        }
+        for (GenericCommand g : GeneralRegistry.ChanHalfOpCommands) {
+            for(String commandid : g.getCommandID()){
+                if(commandid.equalsIgnoreCase(Command)){
+                    return g;
+                }
+            }
+        }
+        for (GenericCommand g : GeneralRegistry.ChanOpCommands) {
+            for(String commandid : g.getCommandID()){
+                if(commandid.equalsIgnoreCase(Command)){
+                    return g;
+                }
+            }
+        }
         for (GenericCommand g : GeneralRegistry.ControllerCommands) {
             for(String commandid : g.getCommandID()){
                 if(commandid.equalsIgnoreCase(Command)){
@@ -68,27 +99,6 @@ public class GetUtils {
             }
         }
         for (GenericCommand g : GeneralRegistry.GlobalCommands) {
-            for(String commandid : g.getCommandID()){
-                if(commandid.equalsIgnoreCase(Command)){
-                    return g;
-                }
-            }
-        }
-        for (GenericCommand g : GeneralRegistry.ChanOpCommands) {
-            for(String commandid : g.getCommandID()){
-                if(commandid.equalsIgnoreCase(Command)){
-                    return g;
-                }
-            }
-        }
-        for (GenericCommand g : GeneralRegistry.ChanHalfOpCommands) {
-            for(String commandid : g.getCommandID()){
-                if(commandid.equalsIgnoreCase(Command)){
-                    return g;
-                }
-            }
-        }
-        for (GenericCommand g : GeneralRegistry.AnonymonityCommands) {
             for(String commandid : g.getCommandID()){
                 if(commandid.equalsIgnoreCase(Command)){
                     return g;

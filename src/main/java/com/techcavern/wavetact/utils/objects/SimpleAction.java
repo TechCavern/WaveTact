@@ -26,7 +26,6 @@ public class SimpleAction extends GenericCommand {
         System.out.println("Created Simple Action: " + inputString);
         this.action = action;
         this.locked = locked;
-        create();
 
     }
 
@@ -45,10 +44,6 @@ public class SimpleAction extends GenericCommand {
         }
         daction = daction.replace("$*", GeneralUtils.buildMessage(i, args.length, args));
         IRCUtils.SendAction(user, channel, daction, isPrivate);
-    }
-
-    void create(){
-        GeneralRegistry.GenericCommands.add(this);
     }
 
     @Override
