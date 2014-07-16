@@ -13,9 +13,7 @@ public class FunObject {
         this.Action = Action;
         this.MessageExists = MessageExists;
         this.Message = Message;
-
     }
-
     public String getAction(){
         return this.Action;
     }
@@ -25,5 +23,4 @@ public class FunObject {
     public boolean getMessageExists(){
         return MessageExists;
     }
-
 }

@@ -37,5 +37,4 @@ public class GeneralRegistry {
     public static final List<CommandChar> CommandChars = new LoggingArrayList<CommandChar>("CommandChar");
     public static final List<CommandLine> CommandLines = new LoggingArrayList<CommandLine>("CommandLine");
     public static final List<CommandLine> CommandLineArguments = new LoggingArrayList<CommandLine>("CommandLineArguments");
-
 }

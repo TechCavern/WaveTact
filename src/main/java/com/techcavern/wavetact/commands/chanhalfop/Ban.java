@@ -99,9 +99,6 @@ public class Ban extends GenericCommand {
                     }
                 }
             }
-
-
-
     void ban(String hostmask, Channel channel, PircBotX botObject) {
         IRCUtils.setMode(channel, botObject, "+b ", hostmask);
 
