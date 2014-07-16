@@ -61,13 +61,17 @@ public class GetUtils {
             }
         }
         for (GenericCommand g : GeneralRegistry.ChanOwnerCommands) {
-            if (g.getCommand().equalsIgnoreCase(Command)) {
-                return g;
+            for(String commandid : g.getCommandID()){
+                if(commandid.equalsIgnoreCase(Command)){
+                    return g;
+                }
             }
         }
         for (GenericCommand g : GeneralRegistry.GlobalCommands) {
-            if (g.getCommand().equalsIgnoreCase(Command)) {
-                return g;
+            for(String commandid : g.getCommandID()){
+                if(commandid.equalsIgnoreCase(Command)){
+                    return g;
+                }
             }
         }
         for (GenericCommand g : GeneralRegistry.ChanOpCommands) {
@@ -78,8 +82,10 @@ public class GetUtils {
             }
         }
         for (GenericCommand g : GeneralRegistry.ChanHalfOpCommands) {
-            if (g.getCommand().equalsIgnoreCase(Command)) {
-                return g;
+            for(String commandid : g.getCommandID()){
+                if(commandid.equalsIgnoreCase(Command)){
+                    return g;
+                }
             }
         }
         for (GenericCommand g : GeneralRegistry.AnonymonityCommands) {
