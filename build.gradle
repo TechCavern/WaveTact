@@ -6,10 +6,6 @@ repositories {
     maven {
         url 'https://github.com/hyamamoto/maven-repository/raw/master/releases'
     }
-
-    maven {
-        url 'https://oss.sonatype.org/content/repositories/snapshots'
-    }
 }
 
 dependencies {
