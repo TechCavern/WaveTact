@@ -5,6 +5,7 @@ repositories {
     jcenter()
     maven {
         url 'https://github.com/hyamamoto/maven-repository/raw/master/releases'
+        url 'https://code.google.com/p/pircbotx/wiki/DevVersion'
     }
 }
 
