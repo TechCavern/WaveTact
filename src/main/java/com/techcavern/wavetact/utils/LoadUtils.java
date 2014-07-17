@@ -45,7 +45,6 @@ public class LoadUtils {
         Net.setName(nick);
         Net.setLogin("WaveTact");
         Net.setEncoding(Charset.isSupported("UTF-8") ? Charset.forName("UTF-8") : Charset.defaultCharset());
-        // TODO: @logangorence Add support for port changes. Also, does PircBotX support SSL? I think so
         Net.setServer(server, 6667);
         channels.forEach(Net::addAutoJoinChannel);
         Net.setRealName(nick);
@@ -56,8 +55,6 @@ public class LoadUtils {
         Net.getListenerManager().addListener(new KickListener());
         Net.getListenerManager().addListener(new PrivateMessageListener());
 
-        //    TODO: @logangorence Add support for saving configuration to allow for configuration per-network on "modules"... Should we also modularize? Anyways, each network will be able to enable/disable modules and if they are enabled, it will be added to the server file(maybe later on, server folders, which would have a server.info, modules.info, and possibly logs and other stuff).
-        //    Hm... the only module I can currently think of is "HighFive"
 
         //    Net.getListenerManager().addListener(new HighFive());
         if (nickservPassword != null) {
@@ -122,7 +119,6 @@ public class LoadUtils {
     }
 
     public static void initializeCommandlines() {
-        //TODO Fix this to work with @CMDLine once @CMD is fixed
         GeneralRegistry.CommandLines.add(new AddServer());
         GeneralRegistry.CommandLines.add(new com.techcavern.wavetact.commandline.Help());
         GeneralRegistry.CommandLines.add(new BasicCommands());

@@ -54,7 +54,6 @@ public class NetworkUtils {
         GeneralRegistry.WaveTact.addBot(Dev);
         GeneralRegistry.Controllers.add("JZTech101");
         GeneralRegistry.Controllers.add("deathcrazyuberlironman");
-
         new CommandChar("@", Dev);
     }
 }
