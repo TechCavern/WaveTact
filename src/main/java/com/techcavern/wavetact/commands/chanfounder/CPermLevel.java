@@ -67,7 +67,7 @@ public class CPermLevel extends GenericCommand {
                 user.send().notice("User is not registered with NickServ");
             }
         } else {
-            user.send().notice("Globals & Controllers must be registered by the controller via command line");
+            user.send().notice("Globals & Controllers must be registered by the controller");
         }
     }
 }

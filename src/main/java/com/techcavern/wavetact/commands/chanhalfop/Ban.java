@@ -33,26 +33,13 @@ public class Ban extends GenericCommand {
             }
         } else {
             if (args[0].startsWith("+")) {
-                User use = GetUtils.getUserByNick(channel, args[0].replaceFirst("\\+", ""));
-                if (use.getLogin().startsWith("~")) {
-                    hostmask = "*!*@" + use.getHostmask();
-                } else {
-                    hostmask = "*!" + use.getLogin() + "@" + use.getHostmask();
-                }
+                hostmask = IRCUtils.getBanmask(Bot, args[0].replaceFirst("\\+", ""));
             } else if (args[0].startsWith("-")) {
-                User use = GetUtils.getUserByNick(channel, args[0].replaceFirst("-", ""));
-                if (use.getLogin().startsWith("~")) {
-                    hostmask = "*!*@" + use.getHostmask();
-                } else {
-                    hostmask = "*!" + use.getLogin() + "@" + use.getHostmask();
-                }
+                hostmask = IRCUtils.getBanmask(Bot, args[0].replaceFirst("-", ""));
+
             } else {
-                User use = GetUtils.getUserByNick(channel, args[0]);
-                if (use.getLogin().startsWith("~")) {
-                    hostmask = "*!*@" + use.getHostmask();
-                } else {
-                    hostmask = "*!" + use.getLogin() + "@" + use.getHostmask();
-                }
+                hostmask = IRCUtils.getBanmask(Bot, args[0]);
+
             }
         }
             if ((!args[0].startsWith("-")) && (!args[0].startsWith("+"))) {
