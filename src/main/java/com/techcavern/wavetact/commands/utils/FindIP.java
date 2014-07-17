@@ -24,7 +24,7 @@ public class FindIP extends GenericCommand {
         if(args[0].contains(".")) {
             objectJson = GeneralUtils.getJsonObject("http://freegeoip.net/json/" + args[0]);
         }else{
-            objectJson = GeneralUtils.getJsonObject("http://freegeoip.net/json/" + GetUtils.getUserByNick(channel,args[0]).getHostmask());
+            objectJson = GeneralUtils.getJsonObject("http://freegeoip.net/json/" + GetUtils.getUserByNick(Bot,args[0]).getHostmask());
         }
         String location = objectJson.get("city").getAsString() + ", " + objectJson.get("region_name").getAsString() + ", " + objectJson.get("zipcode").getAsString();
         if (location.equalsIgnoreCase(", , ")) {

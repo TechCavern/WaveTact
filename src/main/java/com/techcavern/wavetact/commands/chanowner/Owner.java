@@ -28,9 +28,9 @@ public class Owner extends GenericCommand {
             if (args[0].equalsIgnoreCase("-")) {
                 channel.send().deOwner(user);
             } else if (args[0].startsWith("-")) {
-                channel.send().deOwner(GetUtils.getUserByNick(channel, args[0].replaceFirst("-", "")));
+                channel.send().deOwner(GetUtils.getUserByNick(Bot, args[0].replaceFirst("-", "")));
             } else {
-                channel.send().owner(GetUtils.getUserByNick(channel, args[0]));
+                channel.send().owner(GetUtils.getUserByNick(Bot, args[0]));
 
             }
         } else {

@@ -30,9 +30,9 @@ public class Protect extends GenericCommand {
             if (args[0].equalsIgnoreCase("-")) {
                 channel.send().deSuperOp(user);
             } else if (args[0].startsWith("-")) {
-                channel.send().deSuperOp(GetUtils.getUserByNick(channel, args[0].replaceFirst("-", "")));
+                channel.send().deSuperOp(GetUtils.getUserByNick(Bot, args[0].replaceFirst("-", "")));
             } else {
-                channel.send().superOp(GetUtils.getUserByNick(channel, args[0]));
+                channel.send().superOp(GetUtils.getUserByNick(Bot, args[0]));
 
             }
         } else {

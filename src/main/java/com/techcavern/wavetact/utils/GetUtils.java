@@ -10,25 +10,18 @@ import org.pircbotx.User;
  */
 public class GetUtils {
 
-    public static User getUserByNick(Channel channelObject, String nick) {
-        for (User u : channelObject.getUsers()) {
-            if (u.getNick().equalsIgnoreCase(nick)) {
-                return u;
-            }
+    public static User getUserByNick(PircBotX botObject, String Nick) {
+        User userObject = botObject.getUserChannelDao().getUser(Nick);
+        if(!userObject.getHostmask().isEmpty()) {
+            return userObject;
+        }else{
+            return null;
         }
-        return null;
     }
-
-
     public static Channel getChannelbyName(PircBotX botObject, String channelName) {
-        for (Channel u : botObject.getUserBot().getChannels()) {
-            if (u.getName().equalsIgnoreCase(channelName)) {
-                return u;
-            }
-        }
-        return null;
-    }
+        return botObject.getUserChannelDao().getChannel(channelName);
 
+    }
     public static PircBotX getBotByNetwork(String network) {
         for (PircBotX c : GeneralRegistry.WaveTact.getBots()) {
             if (c.getServerInfo().getNetwork().equals(network)) {
@@ -37,7 +30,6 @@ public class GetUtils {
         }
         return null;
     }
-
     public static GenericCommand getCommand(String Command) {
         for (GenericCommand g : GeneralRegistry.GenericCommands) {
             for(String commandid : g.getCommandID()){

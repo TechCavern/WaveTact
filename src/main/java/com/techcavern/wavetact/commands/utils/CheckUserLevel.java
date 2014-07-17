@@ -24,7 +24,7 @@ public class CheckUserLevel extends GenericCommand {
         if (args.length < 1) {
             userObject = user;
         } else {
-            userObject = GetUtils.getUserByNick(channel, args[0]);
+            userObject = GetUtils.getUserByNick(Bot, args[0]);
         }
         if(channel == null){
             user.send().notice("Channel must be specified as Argument #1");

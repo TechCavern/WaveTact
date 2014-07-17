@@ -29,9 +29,9 @@ public class HalfOp extends GenericCommand {
             if (args[0].equalsIgnoreCase("-")) {
                 channel.send().deHalfOp(user);
             } else if (args[0].startsWith("-")) {
-                channel.send().deHalfOp(GetUtils.getUserByNick(channel, args[0].replaceFirst("-", "")));
+                channel.send().deHalfOp(GetUtils.getUserByNick(Bot, args[0].replaceFirst("-", "")));
             } else {
-                channel.send().halfOp(GetUtils.getUserByNick(channel, args[0]));
+                channel.send().halfOp(GetUtils.getUserByNick(Bot, args[0]));
 
             }
         } else {

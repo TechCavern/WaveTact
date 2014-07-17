@@ -30,9 +30,9 @@ public class Voice extends GenericCommand {
             if (args[0].equalsIgnoreCase("-")) {
                 channel.send().deVoice(user);
             } else if (args[0].startsWith("-")) {
-                channel.send().deVoice(GetUtils.getUserByNick(channel, args[0].replaceFirst("-", "")));
+                channel.send().deVoice(GetUtils.getUserByNick(Bot, args[0].replaceFirst("-", "")));
             } else {
-                channel.send().voice(GetUtils.getUserByNick(channel, args[0]));
+                channel.send().voice(GetUtils.getUserByNick(Bot, args[0]));
 
             }
         } else {

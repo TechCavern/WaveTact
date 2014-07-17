@@ -29,9 +29,9 @@ public class Op extends GenericCommand {
             if (args[0].equalsIgnoreCase("-")) {
                 channel.send().deOp(user);
             } else if (args[0].startsWith("-")) {
-                channel.send().deOp(GetUtils.getUserByNick(channel, args[0].replaceFirst("-", "")));
+                channel.send().deOp(GetUtils.getUserByNick(Bot, args[0].replaceFirst("-", "")));
             } else {
-                channel.send().op(GetUtils.getUserByNick(channel, args[0]));
+                channel.send().op(GetUtils.getUserByNick(Bot, args[0]));
 
             }
         } else {

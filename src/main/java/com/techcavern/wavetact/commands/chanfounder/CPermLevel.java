@@ -30,9 +30,9 @@ public class CPermLevel extends GenericCommand {
             c = Integer.parseInt(args[1]);
         }
         if (c <= 18) {
-            if(PermUtils.getAccount(Bot, GetUtils.getUserByNick(channel, args[0].replaceFirst("-", ""))) != null || PermUtils.getAccount(Bot, GetUtils.getUserByNick(channel, args[0].replaceFirst("\\+", ""))) != null) {
+            if(PermUtils.getAccount(Bot, GetUtils.getUserByNick(Bot, args[0].replaceFirst("-", ""))) != null || PermUtils.getAccount(Bot, GetUtils.getUserByNick(Bot, args[0].replaceFirst("\\+", ""))) != null) {
                 if (args[0].startsWith("-")) {
-                    PermChannel PLChannel = PermChannelUtils.getPermLevelChannel(Bot.getServerInfo().getNetwork(), PermUtils.getAccount(Bot, GetUtils.getUserByNick(channel, args[0].replaceFirst("-", ""))), channel.getName());
+                    PermChannel PLChannel = PermChannelUtils.getPermLevelChannel(Bot.getServerInfo().getNetwork(), PermUtils.getAccount(Bot, GetUtils.getUserByNick(Bot, args[0].replaceFirst("-", ""))), channel.getName());
                     if (PLChannel != null) {
                         GeneralRegistry.PermChannels.remove(PLChannel);
                         PermChannelUtils.savePermChannels();
@@ -41,7 +41,7 @@ public class CPermLevel extends GenericCommand {
                         user.send().notice("User is not found on channel access lists");
                     }
                 } else if (args[0].startsWith("+")) {
-                    PermChannel PLChannel = PermChannelUtils.getPermLevelChannel(Bot.getServerInfo().getNetwork(), PermUtils.getAccount(Bot, GetUtils.getUserByNick(channel, args[0].replaceFirst("\\+", ""))), channel.getName());
+                    PermChannel PLChannel = PermChannelUtils.getPermLevelChannel(Bot.getServerInfo().getNetwork(), PermUtils.getAccount(Bot, GetUtils.getUserByNick(Bot, args[0].replaceFirst("\\+", ""))), channel.getName());
                     if (PLChannel != null) {
                         PLChannel.setPermLevel(Integer.parseInt(args[1]));
                         PermChannelUtils.savePermChannels();
@@ -52,9 +52,9 @@ public class CPermLevel extends GenericCommand {
 
 
                 } else {
-                    PermChannel PLChannel = PermChannelUtils.getPermLevelChannel(Bot.getServerInfo().getNetwork(), PermUtils.getAccount(Bot, GetUtils.getUserByNick(channel, args[0])), channel.getName());
+                    PermChannel PLChannel = PermChannelUtils.getPermLevelChannel(Bot.getServerInfo().getNetwork(), PermUtils.getAccount(Bot, GetUtils.getUserByNick(Bot, args[0])), channel.getName());
                     if (PLChannel == null) {
-                            GeneralRegistry.PermChannels.add(new PermChannel(channel.getName(), Integer.parseInt(args[1]), false, Bot.getServerInfo().getNetwork(),PermUtils.getAccount(Bot, GetUtils.getUserByNick(channel, args[0])) ));
+                            GeneralRegistry.PermChannels.add(new PermChannel(channel.getName(), Integer.parseInt(args[1]), false, Bot.getServerInfo().getNetwork(),PermUtils.getAccount(Bot, GetUtils.getUserByNick(Bot, args[0])) ));
                             PermChannelUtils.savePermChannels();
                         channel.send().message(args[0].replaceFirst("-", "")+ " added to access lists");
 
