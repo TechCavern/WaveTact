@@ -6,6 +6,7 @@ import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
+import org.apache.commons.lang3.text.WordUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -29,6 +30,7 @@ public class MCStatus extends GenericCommand {
         url = new URL("https://status.mojang.com/check");
         BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
         Result = reader.readLine().replace("\"},{\""," | " ).replace("\":\"", ": ").replace("green", "Online").replace("red", "Offline").replace("[{\"", "").replace("\"}]", "").replace(".minecraft.net", "").replace(".mojang.com", "");
+        Result = WordUtils.capitalizeFully(Result);
         if(Result != null) {
             IRCUtils.SendMessage(user, channel, Result, isPrivate);
         }else{
