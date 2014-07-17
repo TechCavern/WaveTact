@@ -28,7 +28,7 @@ public class MCStatus extends GenericCommand {
         URL url;
         url = new URL("https://status.mojang.com/check");
         BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
-        Result = reader.readLine().replace("\"},{\""," | " ).replace("\":\"", ": ");
+        Result = reader.readLine().replace("\"},{\""," | " ).replace("\":\"", ": ").replace("green", "Online").replace("red", "Offline").replace("[{\"", "").replace("\"}]", "").replace(".minecraft.net", "").replace(".mojang.com", "");
         if(Result != null) {
             IRCUtils.SendMessage(user, channel, Result, isPrivate);
         }else{
