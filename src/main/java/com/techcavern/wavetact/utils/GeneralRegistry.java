@@ -14,7 +14,6 @@ public class GeneralRegistry {
     public static final List<UTime> Topic = new LoggingArrayList<UTime>("Topic") ;
     public static final List<String> Controllers = new LoggingArrayList<String>("Controllers");
     public static final List<Global> Globals = new LoggingArrayList<Global>("Globals");
-    public static final List<String> Authors = Arrays.asList("JZTech101", "kaendfinger", "deathcrazyuberlironman", "Leah", "Logan_");
     public static final List<GenericCommand> GenericCommands = new LoggingArrayList<GenericCommand>("Command");
     public static final List<GenericCommand> TrustedCommands = new LoggingArrayList<GenericCommand>("TrustedCommand");
     public static final List<GenericCommand> ControllerCommands = new LoggingArrayList<GenericCommand>("ControllerCommand");

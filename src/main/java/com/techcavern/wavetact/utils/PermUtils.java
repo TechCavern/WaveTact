@@ -51,20 +51,6 @@ public class PermUtils {
 
         return userString;
     }
-    private static boolean isAuthor(PircBotX bot, User userObject) {
-        String account = getAccount(bot, userObject);
-        if (account != null) {
-            for(String author: GeneralRegistry.Authors){
-                if(author.equals(account)){
-                    return true;
-                }
-            }
-        } else {
-            return false;
-        }
-        return false;
-    }
-
     public static int getAutomaticPermLevel(PircBotX bot, User userObject, Channel channelObject) {
 
         if(userObject.isIrcop()){
@@ -78,7 +64,7 @@ public class PermUtils {
             return 10;
         }else if (channelObject.isHalfOp(userObject)){
             return 7;
-        } else if (channelObject.hasVoice(userObject) || isAuthor(bot, userObject)) {
+        } else if (channelObject.hasVoice(userObject)) {
             return 5;
         } else {
             return 0;
