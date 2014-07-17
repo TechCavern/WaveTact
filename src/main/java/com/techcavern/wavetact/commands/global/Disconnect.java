@@ -19,7 +19,7 @@ import org.pircbotx.User;
 public class Disconnect extends GenericCommand {
     @CMD
     public Disconnect() {
-        super(GeneralUtils.toArray("disconnect dc"), 18, "op (-)(user to op)");
+        super(GeneralUtils.toArray("disconnect dc"), 20, "op (-)(user to op)");
     }
 
     @Override

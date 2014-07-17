@@ -13,10 +13,14 @@ import com.techcavern.wavetact.utils.databaseUtils.SimpleActionUtils;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleMessageUtils;
 import com.techcavern.wavetact.utils.objects.SimpleAction;
 import com.techcavern.wavetact.utils.objects.SimpleMessage;
+import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 import org.pircbotx.hooks.events.MessageEvent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author jztech101
@@ -25,7 +29,7 @@ public class CustomCMD extends GenericCommand {
 
     @CMD
     public CustomCMD() {
-        super(GeneralUtils.toArray("customcmd cmd custom cc"), 2, "customcmd [type(m/a)] (+/-)[Command] [permlevel] [Response] Responses may contain $1, $2, etc which indicate the argument separated by a space. $* indicates all remaining arguments.");
+        super(GeneralUtils.toArray("customcmd cmd custom cc"), 5, "customcmd [type(m/a)] (+/-)[Command] [permlevel] [Response] Responses may contain $1, $2, etc which indicate the argument separated by a space. $* indicates all remaining arguments.");
     }
 
     @Override
@@ -36,7 +40,7 @@ public class CustomCMD extends GenericCommand {
                 if (args[1].startsWith("-")) {
                     removeCommand(Bot, user,channel, CommandType.MESSAGE, isPrivate,  args[1].substring(1));
                 } else if (args[1].startsWith("+")) {
-                    modifyCommand(user,channel, Bot, CommandType.MESSAGE, Integer.parseInt(args[2]),isPrivate, args[1].substring(1), GeneralUtils.buildMessage(3, args.length, args).replace("\n", " "));
+                    modifyCommand(user, channel, Bot, CommandType.MESSAGE, Integer.parseInt(args[2]), isPrivate, args[1].substring(1), GeneralUtils.buildMessage(3, args.length, args).replace("\n", " "));
                 } else {
                     addCommand(user,channel, CommandType.MESSAGE, Integer.parseInt(args[2]), isPrivate, args[1], GeneralUtils.buildMessage(3, args.length, args).replace("\n", " "));
                 }
@@ -45,11 +49,21 @@ public class CustomCMD extends GenericCommand {
                 if (args[1].startsWith("-")) {
                     removeCommand(Bot, user,channel, CommandType.ACTION,isPrivate,  args[1].substring(1));
                 } else if (args[1].startsWith("+")) {
-                    modifyCommand(user,channel, Bot, CommandType.ACTION, Integer.parseInt(args[2]), isPrivate, args[1].substring(1), GeneralUtils.buildMessage(3, args.length, args).replace("\n"," "));
+                    modifyCommand(user,channel, Bot, CommandType.ACTION, Integer.parseInt(args[2]), isPrivate, args[1].substring(1), GeneralUtils.buildMessage(3, args.length, args).replace("\n", " "));
                 } else {
                     addCommand(user,channel, CommandType.ACTION, Integer.parseInt(args[2]), isPrivate, args[1], GeneralUtils.buildMessage(3, args.length, args).replace("\n"," "));
                 }
                 break;
+            case "list":
+                List<String> SimpleCommands = new ArrayList<String>();
+                for (GenericCommand g : GeneralRegistry.SimpleMessages){
+                    if(g.getPermLevel() <= PermUtils.getPermLevel(Bot, user, channel))
+                    SimpleCommands.add(g.getCommand());
+                }
+                for (GenericCommand g : GeneralRegistry.SimpleActions){
+                    if(g.getPermLevel() <= PermUtils.getPermLevel(Bot, user, channel))
+                        SimpleCommands.add(g.getCommand());                }
+                IRCUtils.SendMessage(user, channel, StringUtils.join(SimpleCommands, ", "), isPrivate );
         }
     }
 

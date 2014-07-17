@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.techcavern.wavetact.commands.controller;
+package com.techcavern.wavetact.commands.global;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
@@ -20,7 +20,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class Join extends GenericCommand {
     @CMD
     public Join() {
-        super(GeneralUtils.toArray("join jo"), 9001, "join [channel]");
+        super(GeneralUtils.toArray("join jo"), 20, "join [channel]");
     }
 
     @Override

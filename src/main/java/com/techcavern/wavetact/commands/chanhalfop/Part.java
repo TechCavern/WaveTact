@@ -20,7 +20,7 @@ public class Part extends GenericCommand {
 
     @CMD
     public Part() {
-        super(GeneralUtils.toArray("part pa"), 5, "part [channel]");
+        super(GeneralUtils.toArray("part pa"), 7, "part [channel]");
     }
 
     @Override

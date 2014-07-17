@@ -27,9 +27,7 @@ public class SimpleMessage extends GenericCommand {
         super(GeneralUtils.toArray(inputString), permLevel, "A Basic Command");
         this.message = message;
         this.locked = locked;
-
     }
-
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, String... args) throws Exception {
         String dresponse = this.message;

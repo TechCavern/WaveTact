@@ -32,21 +32,21 @@ public class Commands extends GenericCommand {
 
 
         int i = PermUtils.getPermLevel(Bot, user, channel);
-        if (i == 9001) {
+        if (i >= 9001) {
             IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.ControllerListCommands, ", "), isPrivate);
-        } else if (i == 20) {
+        }else if (i >= 20) {
             IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.GlobalListCommands, ", "), isPrivate);
-        }else if (i == 18) {
+        }else if (i >= 18) {
             IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.ChanFounderListCommands, ", "), isPrivate);
-        }else if (i == 15) {
+        }else if (i >= 15) {
             IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.ChanOwnerListCommands, ", "), isPrivate);
-        }else if (i == 13) {
+        }else if (i >= 13) {
             IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.ChanOpListCommands, ", "), isPrivate);
-        } else if (i == 10) {
+        } else if (i >= 10) {
             IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.ChanOpListCommands, ", "), isPrivate);
-        } else if (i == 7) {
+        } else if (i >= 7) {
             IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.ChanHalfOpListCommands, ", "), isPrivate);
-        } else if (i == 5) {
+        } else if (i >= 5) {
             IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.TrustedListCommands, ", "), isPrivate);
         } else {
             IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.GenericListCommands, ", "), isPrivate);

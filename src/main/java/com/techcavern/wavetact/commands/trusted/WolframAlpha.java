@@ -16,7 +16,7 @@ import java.util.List;
 public class WolframAlpha extends GenericCommand {
     @CMD
     public WolframAlpha() {
-        super(GeneralUtils.toArray("wolframalpha wa wolfram"), 2, "wolframalpha [input] (return array value #)");
+        super(GeneralUtils.toArray("wolframalpha wa wolfram"), 5, "wolframalpha [input] (return array value #)");
     }
 
     @Override

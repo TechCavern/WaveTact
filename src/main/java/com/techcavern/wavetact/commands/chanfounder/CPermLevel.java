@@ -28,7 +28,7 @@ public class CPermLevel extends GenericCommand {
 
         if(args.length > 1) {
             c = Integer.parseInt(args[1]);
-    }
+        }
         if (c <= 18) {
             if(PermUtils.getAccount(Bot, GetUtils.getUserByNick(channel, args[0].replaceFirst("-", ""))) != null || PermUtils.getAccount(Bot, GetUtils.getUserByNick(channel, args[0].replaceFirst("\\+", ""))) != null) {
                 if (args[0].startsWith("-")) {
@@ -67,7 +67,7 @@ public class CPermLevel extends GenericCommand {
                 user.send().notice("User is not registered with NickServ");
             }
         } else {
-            user.send().notice("Permission Denied");
+            user.send().notice("Globals & Controllers must be registered by the controller via command line");
         }
     }
 }

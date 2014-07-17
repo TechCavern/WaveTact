@@ -19,6 +19,7 @@ import com.techcavern.wavetact.commands.fun.Attack;
 import com.techcavern.wavetact.commands.fun.SomethingAwesome;
 import com.techcavern.wavetact.commands.fun.UrbanDictonary;
 import com.techcavern.wavetact.commands.global.Disconnect;
+import com.techcavern.wavetact.commands.global.Join;
 import com.techcavern.wavetact.commands.trusted.*;
 import com.techcavern.wavetact.commands.utils.*;
 import com.techcavern.wavetact.commands.utils.Help;

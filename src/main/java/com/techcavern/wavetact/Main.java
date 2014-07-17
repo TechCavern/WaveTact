@@ -19,6 +19,7 @@ public class Main {
         LoadUtils.parseCommandLineArguments(args);
         LoadUtils.registerCommands();
         LoadUtils.registerAttacks();
+        LoadUtils.registerCommandList();
         GlobalUtils.loadGlobals();
         BanTimeUtils.loadBanTimes();
         QuietTimeUtils.loadQuietTimes();
