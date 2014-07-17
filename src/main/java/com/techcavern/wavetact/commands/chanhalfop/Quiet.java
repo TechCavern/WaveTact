@@ -43,7 +43,6 @@ public class Quiet extends GenericCommand {
                 hostmask = IRCUtils.getBanmask(Bot, args[0].replaceFirst("\\+", ""));
             } else if (args[0].startsWith("-")) {
                 hostmask = IRCUtils.getBanmask(Bot, args[0].replaceFirst("-", ""));
-
             } else {
                 hostmask = IRCUtils.getBanmask(Bot, args[0]);
 
@@ -80,10 +79,10 @@ public class Quiet extends GenericCommand {
                         IRCUtils.setMode(channel, Bot, "-q ", hostmask);
                         break;
                     case "u":
-                        IRCUtils.setMode(channel, Bot, "-b ~q:", hostmask);
+                        IRCUtils.setMode(channel, Bot, "-b ~q:",hostmask);
                         break;
                     case "i":
-                        IRCUtils.setMode(channel, Bot, "-b m:", hostmask);
+                        IRCUtils.setMode(channel, Bot, "-b m:",hostmask);
                         break;
                 }
             }

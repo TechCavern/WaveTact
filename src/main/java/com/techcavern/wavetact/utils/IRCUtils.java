@@ -15,7 +15,8 @@ public class IRCUtils {
     public static void setMode(Channel channelObject, PircBotX botObject, String modeToSet, String hostmask) {
         OutputChannel o = new OutputChannel(botObject, channelObject);
         if (hostmask != null) {
-            o.setMode(modeToSet, hostmask);
+            modeToSet = modeToSet + hostmask;
+            o.setMode(modeToSet);
         } else {
             o.setMode(modeToSet);
         }
@@ -40,11 +41,11 @@ public class IRCUtils {
         }
     }
     public static String getBanmask(PircBotX bot, String userObject) {
-        String hostmask;
+        String banmask;
         if(userObject != null) {
             bot.sendRaw().rawLineNow("WHOIS " + userObject);
         }else{
-            hostmask = null;
+            banmask = null;
         }
         WaitForQueue waitForQueue = new WaitForQueue(bot);
         WhoisEvent<PircBotX> test;
@@ -54,16 +55,15 @@ public class IRCUtils {
             String hostname = test.getHostname();
             String Login = test.getLogin();
             if(!Login.startsWith("~")){
-                hostmask = "*!" + Login+"@"+hostname;
+                banmask = "*!" + Login+"@"+hostname;
             }else{
-                hostmask = "*!*@"+hostname;
+                banmask = "*!*@"+hostname;
             }
         } catch (InterruptedException ex) {
             ex.printStackTrace();
-            hostmask = null;
+            banmask = null;
         }
-
-        return hostmask;
+        return banmask.replace(" ", "");
     }
     public static String getHostmask(PircBotX bot, String userObject) {
         String hostmask;
@@ -86,6 +86,6 @@ public class IRCUtils {
             hostmask = null;
         }
 
-        return hostmask;
+        return hostmask.replace(" ", "");
     }
 }
