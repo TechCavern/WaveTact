@@ -15,7 +15,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class FindIP extends GenericCommand {
     @CMD
     public FindIP() {
-        super(GeneralUtils.toArray("findip locate find loc"), 0, "findip [ipv4]");
+        super(GeneralUtils.toArray("findip locate find loc"), 0, "findip [ipv4][user]");
     }
 
     @Override

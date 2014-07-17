@@ -19,7 +19,6 @@ Building
 Permissions
 ===========
 - By default, everyone is given their permissions based on channel status. Voiced is representative of trusted
-- By default, authors are given trusted status
 - Permissions work in conjunction with NickServ. It has been tested to work with Anope 1.8.8 and higher & Atheme. Other services may work, but is not guaranteed.
 
 PermLevels
