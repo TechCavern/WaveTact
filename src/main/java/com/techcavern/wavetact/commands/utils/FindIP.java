@@ -29,7 +29,8 @@ public class FindIP extends GenericCommand {
         String location = objectJson.get("city").getAsString() + ", " + objectJson.get("region_name").getAsString() + ", " + objectJson.get("zipcode").getAsString();
         if (location.equalsIgnoreCase(", , ")) {
             user.send().notice("IP is Protected");
-        } else {
+        } else
+        {
             IRCUtils.SendMessage(user, channel, location,isPrivate);
         }
 

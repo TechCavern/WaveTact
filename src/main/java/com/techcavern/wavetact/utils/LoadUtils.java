@@ -116,7 +116,7 @@ public class LoadUtils {
         GeneralRegistry.ChanOpCommands.add(new AutoOp());
         GeneralRegistry.ControllerCommands.add(new Globals());
         GeneralRegistry.GlobalCommands.add(new Disconnect());
-
+        GeneralRegistry.GenericCommands.add(new MCStatus());
 
 
     }
