@@ -11,26 +11,6 @@ import org.pircbotx.hooks.events.WhoisEvent;
 public class PermUtils {
 
     @SuppressWarnings("unchecked")
-    public static String getAccount(PircBotX bot, User userObject) {
-        String userString;
-        if(userObject != null) {
-            bot.sendRaw().rawLineNow("WHOIS " + userObject.getNick());
-        }else{
-            userString = null;
-        }
-        WaitForQueue waitForQueue = new WaitForQueue(bot);
-        WhoisEvent<PircBotX> test;
-        try {
-            test = waitForQueue.waitFor(WhoisEvent.class);
-            waitForQueue.close();
-            userString = test.getRegisteredAs();
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
-            userString = null;
-        }
-
-        return userString;
-    }
     public static String getAccount(PircBotX bot, String userObject) {
         String userString;
         if(userObject != null) {
@@ -48,7 +28,11 @@ public class PermUtils {
             ex.printStackTrace();
             userString = null;
         }
-
+        if(userString == null || userString.isEmpty()){
+            if(GetUtils.getUserByNick(bot, userObject).isVerified()){
+                userString = userObject;
+            }
+        }
         return userString;
     }
     public static int getAutomaticPermLevel(PircBotX bot, User userObject, Channel channelObject) {
@@ -70,7 +54,7 @@ public class PermUtils {
             return 0;
         }
     }
-    public static int getManualPermLevel(PircBotX bot, User userObject, Channel channelObject) {
+    public static int getManualPermLevel(PircBotX bot, String userObject, Channel channelObject) {
         String account = getAccount(bot, userObject);
         if(account != null) {
             if(GetUtils.getControllerByNick(account) != null){
@@ -90,15 +74,15 @@ public class PermUtils {
     }
     public static int getPermLevel(PircBotX bot, User userObject, Channel channelObject){
       if(channelObject != null) {
-          if (getManualPermLevel(bot, userObject, channelObject) == -1) {
+          if (getManualPermLevel(bot, userObject.getNick(), channelObject) == -1) {
               return -1;
-          } else if (getAutomaticPermLevel(bot, userObject, channelObject) < getManualPermLevel(bot, userObject, channelObject)) {
-              return getManualPermLevel(bot, userObject, channelObject);
+          } else if (getAutomaticPermLevel(bot, userObject, channelObject) < getManualPermLevel(bot, userObject.getNick(), channelObject)) {
+              return getManualPermLevel(bot, userObject.getNick(), channelObject);
           } else {
               return getAutomaticPermLevel(bot, userObject, channelObject);
           }
       }else{
-          String account = getAccount(bot, userObject);
+          String account = getAccount(bot, userObject.getNick());
           if(account != null) {
               if(GetUtils.getControllerByNick(account) != null){
                   return 9001;
@@ -107,7 +91,6 @@ public class PermUtils {
               }else{
                   return 2;
               }
-
           } else{
                   return 2;
               }

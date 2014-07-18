@@ -30,9 +30,17 @@ public class CPermLevel extends GenericCommand {
             c = Integer.parseInt(args[1]);
         }
         if (c <= 18) {
-            if(PermUtils.getAccount(Bot, GetUtils.getUserByNick(Bot, args[0].replaceFirst("-", ""))) != null || PermUtils.getAccount(Bot, GetUtils.getUserByNick(Bot, args[0].replaceFirst("\\+", ""))) != null) {
+            String account;
+            if(args[0].startsWith("-")){
+                account = PermUtils.getAccount(Bot, args[0].replaceFirst("-", ""));
+            }else if(args[0].startsWith("+")){
+                account = PermUtils.getAccount(Bot, args[0].replaceFirst("\\+", ""));
+            }else{
+                account = PermUtils.getAccount(Bot, args[0]);
+            }
+            PermChannel PLChannel = PermChannelUtils.getPermLevelChannel(Bot.getServerInfo().getNetwork(), account, channel.getName());
+            if(account != null) {
                 if (args[0].startsWith("-")) {
-                    PermChannel PLChannel = PermChannelUtils.getPermLevelChannel(Bot.getServerInfo().getNetwork(), PermUtils.getAccount(Bot, GetUtils.getUserByNick(Bot, args[0].replaceFirst("-", ""))), channel.getName());
                     if (PLChannel != null) {
                         GeneralRegistry.PermChannels.remove(PLChannel);
                         PermChannelUtils.savePermChannels();
@@ -41,22 +49,20 @@ public class CPermLevel extends GenericCommand {
                         user.send().notice("User is not found on channel access lists");
                     }
                 } else if (args[0].startsWith("+")) {
-                    PermChannel PLChannel = PermChannelUtils.getPermLevelChannel(Bot.getServerInfo().getNetwork(), PermUtils.getAccount(Bot, GetUtils.getUserByNick(Bot, args[0].replaceFirst("\\+", ""))), channel.getName());
                     if (PLChannel != null) {
                         PLChannel.setPermLevel(Integer.parseInt(args[1]));
                         PermChannelUtils.savePermChannels();
-                        channel.send().message(args[0].replaceFirst("-", "")+ " Modified in access lists");
+                        channel.send().message(args[0].replaceFirst("\\+", "")+ " Modified in access lists");
                     } else {
                         user.send().notice("User is not found on channel access lists");
                     }
 
 
                 } else {
-                    PermChannel PLChannel = PermChannelUtils.getPermLevelChannel(Bot.getServerInfo().getNetwork(), PermUtils.getAccount(Bot, GetUtils.getUserByNick(Bot, args[0])), channel.getName());
                     if (PLChannel == null) {
-                            GeneralRegistry.PermChannels.add(new PermChannel(channel.getName(), Integer.parseInt(args[1]), false, Bot.getServerInfo().getNetwork(),PermUtils.getAccount(Bot, GetUtils.getUserByNick(Bot, args[0])) ));
+                            GeneralRegistry.PermChannels.add(new PermChannel(channel.getName(), Integer.parseInt(args[1]), false, Bot.getServerInfo().getNetwork(),account ));
                             PermChannelUtils.savePermChannels();
-                        channel.send().message(args[0].replaceFirst("-", "")+ " added to access lists");
+                        channel.send().message(args[0]+ " added to access lists");
 
 
                     } else {

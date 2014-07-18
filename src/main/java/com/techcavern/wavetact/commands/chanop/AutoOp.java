@@ -23,8 +23,14 @@ public class AutoOp extends GenericCommand {
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, String... args) throws Exception {
+        String account;
+        if(args[0].startsWith("-")){
+            account = PermUtils.getAccount(Bot, args[0].replaceFirst("-", ""));
+        }else{
+            account = PermUtils.getAccount(Bot, args[0]);
+        }
+        PermChannel PLChannel = PermChannelUtils.getPermLevelChannel(Bot.getServerInfo().getNetwork(),account, channel.getName() );
         if (args[0].startsWith("-")) {
-            PermChannel PLChannel = PermChannelUtils.getPermLevelChannel(Bot.getServerInfo().getNetwork(), PermUtils.getAccount(Bot, GetUtils.getUserByNick(Bot, args[0])), channel.getName());
             if (PLChannel != null) {
                 PLChannel.setAuto(false);
                 PermChannelUtils.savePermChannels();
@@ -33,7 +39,6 @@ public class AutoOp extends GenericCommand {
                 channel.send().message("User is not found on channel access lists");
             }
         } else {
-            PermChannel PLChannel = PermChannelUtils.getPermLevelChannel(Bot.getServerInfo().getNetwork(), PermUtils.getAccount(Bot, GetUtils.getUserByNick(Bot, args[0])), channel.getName());
             if (PLChannel != null) {
                 PLChannel.setAuto(true);
                 PermChannelUtils.savePermChannels();
