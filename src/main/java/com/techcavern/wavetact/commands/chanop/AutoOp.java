@@ -34,18 +34,17 @@ public class AutoOp extends GenericCommand {
             if (PLChannel != null) {
                 PLChannel.setAuto(false);
                 PermChannelUtils.savePermChannels();
-                channel.send().message("User will no longer be auto-opped");
+                channel.send().message(account+" will no longer be auto-opped");
             } else {
-                channel.send().message("User is not found on channel access lists");
+                user.send().notice("User is not found on channel access lists");
             }
         } else {
             if (PLChannel != null) {
                 PLChannel.setAuto(true);
                 PermChannelUtils.savePermChannels();
-                channel.send().message("User will henceforth be auto-opped");
-
+                channel.send().message(account+" will henceforth be auto-opped");
             } else {
-                channel.send().message("User is not found on channel access lists");
+                user.send().notice("User is not found on channel access lists");
             }
         }
     }
