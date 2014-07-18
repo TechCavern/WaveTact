@@ -16,7 +16,7 @@ public class IRCRaw extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate,int UserPermLevel, String... args) throws Exception {
         Bot.sendRaw().rawLine(GeneralUtils.buildMessage(0, args.length, args));
     }
 }

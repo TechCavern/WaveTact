@@ -26,8 +26,8 @@ public class Globals extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, String... args)
-            throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate,int UserPermLevel, String... args) throws Exception {
+
         String account;
         if(args[0].startsWith("-")) {
             account = PermUtils.getAccount(Bot, args[0].replace("-", ""));

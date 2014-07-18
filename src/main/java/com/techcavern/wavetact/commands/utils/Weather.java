@@ -20,7 +20,7 @@ public class Weather extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate,int UserPermLevel, String... args) throws Exception {
         List<String> waResults = GeneralUtils.getWAResult("Weather " + StringUtils.join(args, " "));
         if (waResults.size() < 1 || waResults.get(1).isEmpty()) {
             user.send().notice("Unable to get response, try again or stop inputting gibberish");

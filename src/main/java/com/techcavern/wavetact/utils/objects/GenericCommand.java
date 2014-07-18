@@ -27,7 +27,7 @@ public abstract class GenericCommand {
         this.Desc = Desc;
     }
 
-    public abstract void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate,String... args) throws Exception;
+    public abstract void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception;
 
     public boolean getLockedStatus() {
         return false;

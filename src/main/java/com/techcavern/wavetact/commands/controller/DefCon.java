@@ -29,8 +29,8 @@ public class DefCon extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, String... args)
-            throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate,int UserPermLevel, String... args) throws Exception {
+
 
         if(args.length>=1 && args[0].equalsIgnoreCase("-")){
            GeneralRegistry.GenericCommands.clear();

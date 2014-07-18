@@ -18,7 +18,7 @@ public class Hostmask extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate,int UserPermLevel, String... args) throws Exception {
         if(IRCUtils.getHostmask(Bot, args[0].replaceFirst("\\$", "")) != null) {
             if (args[0].startsWith("$")) {
                 IRCUtils.SendMessage(user, channel, IRCUtils.getBanmask(Bot, args[0].replaceFirst("\\$", "")), isPrivate);

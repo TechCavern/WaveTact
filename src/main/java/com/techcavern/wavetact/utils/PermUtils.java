@@ -36,7 +36,6 @@ public class PermUtils {
         return userString;
     }
     public static int getAutomaticPermLevel(PircBotX bot, User userObject, Channel channelObject) {
-
         if(userObject.isIrcop()){
             return 20;
         }
@@ -74,12 +73,14 @@ public class PermUtils {
     }
     public static int getPermLevel(PircBotX bot, User userObject, Channel channelObject){
       if(channelObject != null) {
-          if (getManualPermLevel(bot, userObject.getNick(), channelObject) == -1) {
+          int mpermlevel = getManualPermLevel(bot, userObject.getNick(), channelObject);
+          int apermlevel = getAutomaticPermLevel(bot, userObject, channelObject);
+          if (mpermlevel == -1) {
               return -1;
-          } else if (getAutomaticPermLevel(bot, userObject, channelObject) < getManualPermLevel(bot, userObject.getNick(), channelObject)) {
-              return getManualPermLevel(bot, userObject.getNick(), channelObject);
+          } else if (apermlevel < mpermlevel) {
+              return mpermlevel;
           } else {
-              return getAutomaticPermLevel(bot, userObject, channelObject);
+              return apermlevel;
           }
       }else{
           String account = getAccount(bot, userObject.getNick());

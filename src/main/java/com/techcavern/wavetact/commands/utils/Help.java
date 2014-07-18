@@ -20,7 +20,7 @@ public class Help extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate,int UserPermLevel, String... args) throws Exception {
         if (args.length > 0) {
             if (args[0].equalsIgnoreCase("permissions")) {
                 IRCUtils.SendMessage(user, channel, "0 = Everyone, 5 = Voiced, 7 = Half-opped, 10 = Opped & Protected, 15 = Ownered, 18 = Network Admin,  9001 = Controller ", isPrivate);

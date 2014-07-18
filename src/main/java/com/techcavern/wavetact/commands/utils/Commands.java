@@ -28,25 +28,24 @@ public class Commands extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate,int UserPermLevel, String... args) throws Exception {
 
 
-        int i = PermUtils.getPermLevel(Bot, user, channel);
-        if (i >= 9001) {
+        if (UserPermLevel >= 9001) {
             IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.ControllerListCommands, ", "), isPrivate);
-        }else if (i >= 20) {
+        }else if (UserPermLevel >= 20) {
             IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.GlobalListCommands, ", "), isPrivate);
-        }else if (i >= 18) {
+        }else if (UserPermLevel >= 18) {
             IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.ChanFounderListCommands, ", "), isPrivate);
-        }else if (i >= 15) {
+        }else if (UserPermLevel >= 15) {
             IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.ChanOwnerListCommands, ", "), isPrivate);
-        }else if (i >= 13) {
+        }else if (UserPermLevel >= 13) {
             IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.ChanOpListCommands, ", "), isPrivate);
-        } else if (i >= 10) {
+        } else if (UserPermLevel >= 10) {
             IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.ChanOpListCommands, ", "), isPrivate);
-        } else if (i >= 7) {
+        } else if (UserPermLevel >= 7) {
             IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.ChanHalfOpListCommands, ", "), isPrivate);
-        } else if (i >= 5) {
+        } else if (UserPermLevel >= 5) {
             IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.TrustedListCommands, ", "), isPrivate);
         } else {
             IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.GenericListCommands, ", "), isPrivate);

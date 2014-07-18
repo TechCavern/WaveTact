@@ -19,7 +19,7 @@ public class FindIP extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate,int UserPermLevel, String... args) throws Exception {
         JsonObject objectJson;
         if(args[0].contains(".")) {
             objectJson = GeneralUtils.getJsonObject("http://freegeoip.net/json/" + args[0]);

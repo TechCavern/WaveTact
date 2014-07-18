@@ -19,7 +19,7 @@ public class CheckUserLevel extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel,boolean isPrivate, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate,int UserPermLevel, String... args) throws Exception {
         User userObject;
         if (args.length < 1) {
             userObject = user;
@@ -29,22 +29,21 @@ public class CheckUserLevel extends GenericCommand {
         if(channel == null){
             user.send().notice("Channel must be specified as Argument #1");
         }else {
-            int i = PermUtils.getPermLevel(Bot, userObject, channel);
-            if (i == 9001) {
+            if (UserPermLevel >= 9001) {
                 IRCUtils.SendMessage(user, channel, userObject.getNick() + " is my Master!", isPrivate);
-            } else if (i == 20) {
+            } else if (UserPermLevel >= 20) {
                 IRCUtils.SendMessage(user, channel, userObject.getNick() + " is a Network Administrator!", isPrivate);
-            } else if (i == 18) {
+            } else if (UserPermLevel >= 18) {
                 IRCUtils.SendMessage(user, channel, userObject.getNick() + " is a Channel Founder!", isPrivate);
-            } else if (i == 15) {
+            } else if (UserPermLevel >= 15) {
                 IRCUtils.SendMessage(user, channel, userObject.getNick() + " is a Channel Owner!", isPrivate);
-            } else if (i == 13) {
+            } else if (UserPermLevel >= 13) {
                 IRCUtils.SendMessage(user, channel, userObject.getNick() + " is a Channel Admin!", isPrivate);
-            } else if (i == 10) {
+            } else if (UserPermLevel >= 10) {
                 IRCUtils.SendMessage(user, channel, userObject.getNick() + " is a Channel Operator!", isPrivate);
-            } else if (i == 7) {
+            } else if (UserPermLevel >= 7) {
                 IRCUtils.SendMessage(user, channel, userObject.getNick() + " is a Channel Half-Operator", isPrivate);
-            } else if (i == 5) {
+            } else if (UserPermLevel >= 5) {
                 IRCUtils.SendMessage(user, channel, userObject.getNick() + " is a Trusted User!", isPrivate);
             } else {
                 IRCUtils.SendMessage(user, channel, userObject.getNick() + " is a Regular User!", isPrivate);

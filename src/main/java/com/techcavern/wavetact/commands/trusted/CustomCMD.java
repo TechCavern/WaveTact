@@ -33,23 +33,23 @@ public class CustomCMD extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate,int UserPermLevel, String... args) throws Exception {
 
         switch (args[0].toLowerCase()) {
             case "m": // message
                 if (args[1].startsWith("-")) {
-                    removeCommand(Bot, user,channel, CommandType.MESSAGE, isPrivate,  args[1].substring(1));
+                    removeCommand(Bot, user,channel, CommandType.MESSAGE, isPrivate, UserPermLevel, args[1].substring(1));
                 } else if (args[1].startsWith("+")) {
-                    modifyCommand(user, channel, Bot, CommandType.MESSAGE, Integer.parseInt(args[2]), isPrivate, args[1].substring(1), GeneralUtils.buildMessage(3, args.length, args).replace("\n", " "));
+                    modifyCommand(user, channel, Bot, CommandType.MESSAGE, Integer.parseInt(args[2]), isPrivate, args[1].substring(1), UserPermLevel,GeneralUtils.buildMessage(3, args.length, args).replace("\n", " "));
                 } else {
                     addCommand(user,channel, CommandType.MESSAGE, Integer.parseInt(args[2]), isPrivate, args[1], GeneralUtils.buildMessage(3, args.length, args).replace("\n", " "));
                 }
                 break;
             case "a": // action
                 if (args[1].startsWith("-")) {
-                    removeCommand(Bot, user,channel, CommandType.ACTION,isPrivate,  args[1].substring(1));
+                    removeCommand(Bot, user,channel, CommandType.ACTION,isPrivate, UserPermLevel, args[1].substring(1));
                 } else if (args[1].startsWith("+")) {
-                    modifyCommand(user,channel, Bot, CommandType.ACTION, Integer.parseInt(args[2]), isPrivate, args[1].substring(1), GeneralUtils.buildMessage(3, args.length, args).replace("\n", " "));
+                    modifyCommand(user,channel, Bot, CommandType.ACTION, Integer.parseInt(args[2]), isPrivate, args[1].substring(1),UserPermLevel, GeneralUtils.buildMessage(3, args.length, args).replace("\n", " "));
                 } else {
                     addCommand(user,channel, CommandType.ACTION, Integer.parseInt(args[2]), isPrivate, args[1], GeneralUtils.buildMessage(3, args.length, args).replace("\n"," "));
                 }
@@ -57,11 +57,11 @@ public class CustomCMD extends GenericCommand {
             case "list":
                 List<String> SimpleCommands = new ArrayList<String>();
                 for (GenericCommand g : GeneralRegistry.SimpleMessages){
-                    if(g.getPermLevel() <= PermUtils.getPermLevel(Bot, user, channel))
+                    if(g.getPermLevel() <= UserPermLevel)
                     SimpleCommands.add(g.getCommand());
                 }
                 for (GenericCommand g : GeneralRegistry.SimpleActions){
-                    if(g.getPermLevel() <= PermUtils.getPermLevel(Bot, user, channel))
+                    if(g.getPermLevel() <= UserPermLevel)
                         SimpleCommands.add(g.getCommand());                }
                 IRCUtils.SendMessage(user, channel, StringUtils.join(SimpleCommands, ", "), isPrivate );
         }
@@ -84,13 +84,13 @@ public class CustomCMD extends GenericCommand {
     }
 
     @SuppressWarnings("SuspiciousMethodCalls")
-    private void modifyCommand(User user, Channel channel, PircBotX bot, CommandType type, int accessLevel,boolean isPrivate, String command, String msg) {
+    private void modifyCommand(User user, Channel channel, PircBotX bot, CommandType type, int accessLevel,boolean isPrivate, String command,int UserPermLevel, String msg) {
         GenericCommand cmd = null;
         if (type == CommandType.MESSAGE)
             cmd = SimpleMessageUtils.getSimpleMessage(command);
         else if (type == CommandType.ACTION)
             cmd = SimpleActionUtils.getSimpleAction(command);
-        if(cmd.getPermLevel() <= PermUtils.getPermLevel(bot, user, channel)){
+        if(cmd.getPermLevel() <= UserPermLevel){
         if (cmd  != null && !cmd.getLockedStatus()) {
             GeneralRegistry.SimpleActions.remove(cmd);
             GeneralRegistry.SimpleMessages.remove(cmd);
@@ -116,13 +116,13 @@ public class CustomCMD extends GenericCommand {
     }
 
     @SuppressWarnings({"SuspiciousMethodCalls", "ConstantConditions"})
-    private void removeCommand(PircBotX bot, User user, Channel channel, CommandType type, boolean isPrivate, String command) {
+    private void removeCommand(PircBotX bot, User user, Channel channel, CommandType type, boolean isPrivate,int UserPermLevel, String command) {
         GenericCommand cmd = null;
         if (type == CommandType.MESSAGE)
             cmd = SimpleMessageUtils.getSimpleMessage(command);
         else if (type == CommandType.ACTION)
             cmd = SimpleActionUtils.getSimpleAction(command);
-        if(cmd.getPermLevel() <= PermUtils.getPermLevel(bot, user, channel)){
+        if(cmd.getPermLevel() <= UserPermLevel){
         if (cmd == null) {
             user.send().notice("Command does not exist");
         } else if (cmd.getLockedStatus()) {

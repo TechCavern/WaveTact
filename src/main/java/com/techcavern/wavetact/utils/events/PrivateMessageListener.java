@@ -31,35 +31,36 @@ public class PrivateMessageListener extends ListenerAdapter<PircBotX> {
             channel = GetUtils.getChannelbyName(event.getBot(), messageParts[0]);
             messageParts = ArrayUtils.remove(messageParts, 0);
         }
-                if (Command != null) {
+        int UserPermLevel = PermUtils.getPermLevel(event.getBot(), event.getUser(), channel);
+
+        if (Command != null) {
                     if((Command.getPermLevel() >= 0 && ( Command.getPermLevel() <= 5 || Command.getPermLevel() > 17)||( channel != null) )){
-                    if (PermUtils.getPermLevel(event.getBot(), event.getUser(), channel) >= Command.getPermLevel()) {
+                    if (UserPermLevel >= Command.getPermLevel()) {
                         if (Command.getPermLevel() == 9) {
                             if (channel.isOp(event.getBot().getUserBot()) || channel.isOp(event.getBot().getUserBot()) ||  channel.isOwner(event.getBot().getUserBot())) {
-                                Command.onCommand(event.getUser(), event.getBot(), channel, false,messageParts );
+                                Command.onCommand(event.getUser(), event.getBot(), channel, true, UserPermLevel, ArrayUtils.remove(messageParts, 0));
                             } else {
                                 channel.send().message("Error: I must be at least Opped to perform the operation requested");
                             }
                         } else if (Command.getPermLevel() == 14) {
 
                             if (channel.isOwner(event.getBot().getUserBot())) {
-                                Command.onCommand(event.getUser(), event.getBot(), channel, false, messageParts);
+                                Command.onCommand(event.getUser(), event.getBot(), channel, true, UserPermLevel, ArrayUtils.remove(messageParts, 0));
                             } else {
                                 channel.send().message("Error: I must be Ownered to perform the operation requested");
                             }
                         } else if (Command.getPermLevel() == 6) {
                             if (channel.isOwner(event.getBot().getUserBot()) || channel.isOp(event.getBot().getUserBot()) ||channel.isHalfOp(event.getBot().getUserBot())|| channel.isSuperOp(event.getBot().getUserBot())) {
-                                Command.onCommand(event.getUser(), event.getBot(), channel, false, messageParts);
+                                Command.onCommand(event.getUser(), event.getBot(), channel, true, UserPermLevel, ArrayUtils.remove(messageParts, 0));
                             } else {
                                 channel.send().message("Error: I must be at least half-opped to perform the operation requested");
                             }
                         }else{
-                            Command.onCommand(event.getUser(), event.getBot(), channel, false, messageParts);
+                            Command.onCommand(event.getUser(), event.getBot(), channel, true, UserPermLevel, ArrayUtils.remove(messageParts, 0));
                         }
 
                     } else {
                         event.getUser().send().message("Permission Denied");
-
                     }}else{
                         event.getUser().send().message("Channel Must be Specified as argument #1");
                     }

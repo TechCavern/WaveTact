@@ -25,15 +25,12 @@ public class Mode extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, String... args) throws Exception {
-            if(PermUtils.getPermLevel(Bot, user, channel) >= 9){
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate,int UserPermLevel, String... args) throws Exception {
                 if(channel.isOp(Bot.getUserBot()) || channel.isSuperOp(Bot.getUserBot()) || channel.isOwner(Bot.getUserBot())) {
                     channel.send().setMode(args[0]);
                 }else{
                     channel.send().message("Error I must be at least op to perform the operation requested.");
                 }
-            }else{
-                channel.send().message("Permission Denied");
-            }
+
     }
 }
