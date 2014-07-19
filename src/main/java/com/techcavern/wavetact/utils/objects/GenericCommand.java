@@ -25,6 +25,7 @@ public abstract class GenericCommand {
         this.comid = comid;
         this.PermLevel = PermLevel;
         this.Desc = Desc;
+        GeneralRegistry.AllCommands.add(this);
     }
 
     public abstract void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception;
