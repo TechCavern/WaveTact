@@ -21,21 +21,12 @@ import org.pircbotx.User;
 public class Disconnect extends GenericCommand {
     @CMD
     public Disconnect() {
-        super(GeneralUtils.toArray("disconnect dc"), 20, "disconnect (r)");
+        super(GeneralUtils.toArray("disconnect dc"), 20, "disconnect");
     }
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate,int UserPermLevel, String... args) throws Exception {
-        if (args.length > 1 && args[0].equalsIgnoreCase("r")) {
-            PircBotX botObject = Bot;
-            IRCUtils.SendMessage(user, channel, "Reconnecting", isPrivate);
-            botObject.stopBotReconnect();
-            botObject.sendIRC().quitServer();
-            Thread.sleep(20000);
-            GeneralRegistry.WaveTact.addBot(botObject);
-        }else {
             Bot.stopBotReconnect();
             Bot.sendIRC().quitServer();
-        }
     }
 }
