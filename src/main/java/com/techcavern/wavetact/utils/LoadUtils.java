@@ -49,33 +49,21 @@ public class LoadUtils {
         channels.forEach(Net::addAutoJoinChannel);
         Net.setRealName(nick);
         Net.getListenerManager().addListener(new MessageListener());
-        Net.getListenerManager().addListener(new DisconnectListener());
         Net.getListenerManager().addListener(new JoinListener());
         Net.getListenerManager().addListener(new CTCPListener());
         Net.getListenerManager().addListener(new KickListener());
         Net.getListenerManager().addListener(new PrivateMessageListener());
-
-
-        //    Net.getListenerManager().addListener(new HighFive());
+        Net.setAutoReconnect(true);
         if (nickservPassword != null) {
             Net.setNickservPassword(nickservPassword);
         }
         return new PircBotX(Net.buildConfiguration());
     }
-
-
     public static void startThreads() {
         (new Thread(new CheckTime())).start();
     }
 
     public static void registerCommands() {
-        /**
-         try{
-         GeneralRegistry.COMMANDS.addAll(GeneralRegistry.TASKS.submit(new CommandCollection("com.techcavern.wavetact.commands")).get());
-         } catch(Exception ex){
-         ex.printStackTrace(System.err);
-         }
-         **/
         GeneralRegistry.ChanHalfOpCommands.add(new Ban());
         GeneralRegistry.ChanOpCommands.add(new HalfOp());
         GeneralRegistry.ChanHalfOpCommands.add(new Kick());

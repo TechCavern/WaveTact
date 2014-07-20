@@ -1,4 +1,4 @@
-WaveTact [![Build Status](https://travis-ci.org/TechCavern/WaveTact.svg?branch=master)](https://travis-ci.org/TechCavern/WaveTact)
+WaveTact [![Build Status](https://travis-ci.org/DirectMyFile/WaveTact.svg?branch=master)](https://travis-ci.org/DirectMyFile/WaveTact)
 --------
 An IRC bot that is based upon PircBotX and sits in #techcavern on the following networks:
 - ElectroCode (irc.electrocode.net)
@@ -12,7 +12,7 @@ WaveTact is under the DWTFPL - (But I do ask that you not sell it)
 
 Building
 ========
-- Run `gradle jar`
+- Run `./gradlew jar`
 - Libraries will be downloaded and packed into the JAR
 - You will find the JAR in PROJECT_ROOT/build/libs/
 
