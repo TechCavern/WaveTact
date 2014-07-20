@@ -12,7 +12,7 @@ WaveTact is under the DWTFPL - (But I do ask that you not sell it)
 
 Building
 ========
-- Run `gradle jar`
+- Run `./gradlew jar`
 - Libraries will be downloaded and packed into the JAR
 - You will find the JAR in PROJECT_ROOT/build/libs/
 
