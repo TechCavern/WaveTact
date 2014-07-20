@@ -24,18 +24,20 @@ public class PrivateMessageListener extends ListenerAdapter<PircBotX> {
     public void onPrivateMessage(PrivateMessageEvent<PircBotX> event) throws Exception {
         String[] messageParts = event.getMessage().split(" ");
         String m = messageParts[0].toLowerCase();
-        GenericCommand Command = GetUtils.getCommand(m.replaceFirst(GetUtils.getCommandChar(event.getBot()), ""));
+        GenericCommand Command = GetUtils.getCommand(m);
+        if(Command == null){
+            Command = GetUtils.getCommand(m.replaceFirst(GetUtils.getCommandChar(event.getBot()), ""));
+        }
         messageParts = ArrayUtils.remove(messageParts, 0);
         Channel channel = null;
         if(messageParts.length > 1 && messageParts[0].startsWith("#")){
             channel = GetUtils.getChannelbyName(event.getBot(), messageParts[0]);
             messageParts = ArrayUtils.remove(messageParts, 0);
         }
-        int UserPermLevel = PermUtils.getPermLevel(event.getBot(), event.getUser(), channel);
-
         if (Command != null) {
                     if((Command.getPermLevel() >= 0 && ( Command.getPermLevel() <= 5 || Command.getPermLevel() > 17)||( channel != null) )){
-                    if (UserPermLevel >= Command.getPermLevel()) {
+                        int UserPermLevel = PermUtils.getPermLevel(event.getBot(), event.getUser(), channel);
+                        if (UserPermLevel >= Command.getPermLevel()) {
                         if (Command.getPermLevel() == 9) {
                             if (channel.isOp(event.getBot().getUserBot()) || channel.isOp(event.getBot().getUserBot()) ||  channel.isOwner(event.getBot().getUserBot())) {
                                 Command.onCommand(event.getUser(), event.getBot(), channel, true, UserPermLevel, messageParts);

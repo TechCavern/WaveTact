@@ -49,21 +49,17 @@ public class LoadUtils {
         channels.forEach(Net::addAutoJoinChannel);
         Net.setRealName(nick);
         Net.getListenerManager().addListener(new MessageListener());
-        Net.getListenerManager().addListener(new DisconnectListener());
         Net.getListenerManager().addListener(new JoinListener());
         Net.getListenerManager().addListener(new CTCPListener());
         Net.getListenerManager().addListener(new KickListener());
         Net.getListenerManager().addListener(new PrivateMessageListener());
-
-
+        Net.setAutoReconnect(true);
         //    Net.getListenerManager().addListener(new HighFive());
         if (nickservPassword != null) {
             Net.setNickservPassword(nickservPassword);
         }
         return new PircBotX(Net.buildConfiguration());
     }
-
-
     public static void startThreads() {
         (new Thread(new CheckTime())).start();
     }
