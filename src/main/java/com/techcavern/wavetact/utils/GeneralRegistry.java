@@ -26,10 +26,7 @@ public class GeneralRegistry {
     public static final List<GenericCommand> ChanFounderCommands = new ArrayList<GenericCommand>();
     public static final List<SimpleMessage> SimpleMessages = new ArrayList<SimpleMessage>();
     public static final List<SimpleAction> SimpleActions = new ArrayList<SimpleAction>();
-    public static final List<String> HighFives = new ArrayList<String>();
     public static final MultiBotManager<PircBotX> WaveTact = new MultiBotManager<PircBotX>();
-    public static final ForkJoinPool TASKS = new ForkJoinPool();
-    public static final List<GenericCommand> COMMANDS = new LinkedList<GenericCommand>();
     public static final Map<String, Configuration> configs = new HashMap<String, Configuration>();
     public static final List<UTime> BanTimes = new ArrayList<UTime>();
     public static final List<UTime> QuietTimes = new ArrayList<UTime>();

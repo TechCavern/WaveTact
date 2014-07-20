@@ -54,7 +54,6 @@ public class LoadUtils {
         Net.getListenerManager().addListener(new KickListener());
         Net.getListenerManager().addListener(new PrivateMessageListener());
         Net.setAutoReconnect(true);
-        //    Net.getListenerManager().addListener(new HighFive());
         if (nickservPassword != null) {
             Net.setNickservPassword(nickservPassword);
         }
@@ -65,13 +64,6 @@ public class LoadUtils {
     }
 
     public static void registerCommands() {
-        /**
-         try{
-         GeneralRegistry.COMMANDS.addAll(GeneralRegistry.TASKS.submit(new CommandCollection("com.techcavern.wavetact.commands")).get());
-         } catch(Exception ex){
-         ex.printStackTrace(System.err);
-         }
-         **/
         GeneralRegistry.ChanHalfOpCommands.add(new Ban());
         GeneralRegistry.ChanOpCommands.add(new HalfOp());
         GeneralRegistry.ChanHalfOpCommands.add(new Kick());
