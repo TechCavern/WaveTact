@@ -28,6 +28,5 @@ public class Main {
         SimpleMessageUtils.loadSimpleMessages();
         LoadUtils.startThreads();
         GeneralRegistry.WaveTact.start();
-
     }
 }

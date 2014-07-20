@@ -14,22 +14,14 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class Shutdown extends GenericCommand {
     @CMD
     public Shutdown() {
-        super(GeneralUtils.toArray("shutdown down"), 9001, "Shutdown (r)");
+        super(GeneralUtils.toArray("shutdown down"), 9001, "Shutdown");
     }
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate,int UserPermLevel, String... args) throws Exception {
-        if (args.length > 1 && args[0].equalsIgnoreCase("r")) {
-            PircBotX botObject = Bot;
-            IRCUtils.SendMessage(user, channel, "Restarting", isPrivate);
-            botObject.stopBotReconnect();
-            botObject.sendIRC().quitServer();
-            Thread.sleep(20000);
-            GeneralRegistry.WaveTact.addBot(botObject);
-        } else {
             GeneralRegistry.WaveTact.stop();
             System.exit(0);
 
         }
     }
-}
+
