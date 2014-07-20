@@ -39,7 +39,7 @@ public class Topic extends GenericCommand {
             channel.send().setTopic(channel.getTopic() + " " + args[0] + " " + GeneralUtils.buildMessage(2, args.length, args));
             saveTopic(channel, Bot);
         }else if(args[1].startsWith("+")){
-            newtopic.set(Integer.parseInt(args[1].replaceFirst("\\+", ""))-1, " " + GeneralUtils.buildMessage(2,args.length, args));
+            newtopic.set(Integer.parseInt(args[1].replaceFirst("\\+", ""))-1, " " + GeneralUtils.buildMessage(2,args.length, args) + " ");
             channel.send().setTopic(StringUtils.join(newtopic, args[0]));
             saveTopic(channel, Bot);
         }else if(args[1].startsWith("-")){
@@ -47,8 +47,8 @@ public class Topic extends GenericCommand {
             channel.send().setTopic(StringUtils.join(newtopic, args[0]));
             saveTopic(channel, Bot);
         }else if(args[1].equalsIgnoreCase("sw") || args[1].equalsIgnoreCase("swap")){
-            newtopic.set((Integer.parseInt(args[2])-1)," " + topic.get(Integer.parseInt(args[3])-1));
-            newtopic.set((Integer.parseInt(args[3])-1), " " + topic.get(Integer.parseInt(args[2])-1));
+            newtopic.set((Integer.parseInt(args[2])-1),topic.get(Integer.parseInt(args[3])-1));
+            newtopic.set((Integer.parseInt(args[3])-1),topic.get(Integer.parseInt(args[2])-1));
             channel.send().setTopic(StringUtils.join(newtopic, args[0]));
             saveTopic(channel, Bot);
         }else if (args[1].equalsIgnoreCase("ss")) {
