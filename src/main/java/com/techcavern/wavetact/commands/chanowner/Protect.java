@@ -29,7 +29,6 @@ public class Protect extends GenericCommand {
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        if(Bot.getServerInfo().getPrefixes().contains("a")) {
             if (args.length >= 1) {
                 if (args[0].equalsIgnoreCase("-")) {
                     channel.send().deSuperOp(user);
@@ -42,8 +41,5 @@ public class Protect extends GenericCommand {
             } else {
                 channel.send().superOp(user);
             }
-        }else{
-            user.send().notice("This server does not support the protect prefix");
-        }
     }
 }

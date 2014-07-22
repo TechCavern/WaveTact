@@ -27,7 +27,6 @@ public class Owner extends GenericCommand {
     }
 
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        if (Bot.getServerInfo().getPrefixes().contains("q")) {
             if (args.length >= 1) {
                 if (args[0].equalsIgnoreCase("-")) {
                     channel.send().deOwner(user);
@@ -40,8 +39,5 @@ public class Owner extends GenericCommand {
             } else {
                 channel.send().owner(user);
             }
-        } else {
-            user.send().notice("This server does not support the owner Prefix");
-        }
     }
 }

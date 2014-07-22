@@ -37,13 +37,13 @@ public class MessageListener extends ListenerAdapter<PircBotX> {
                     if (event.getChannel().isOwner(event.getBot().getUserBot())) {
                         Command.onCommand(event.getUser(), event.getBot(), event.getChannel(), false, UserPermLevel, ArrayUtils.remove(messageParts, 0));
                     } else {
-                        event.getUser().send().notice("Error: I must be Ownered to perform the operation requested");
+                        event.getUser().send().notice("Error: I must be ownered to perform the operation requested");
                     }
                 } else if (Command.getPermLevel() == 6) {
                     if (event.getChannel().isOwner(event.getBot().getUserBot()) || event.getChannel().isOp(event.getBot().getUserBot()) || event.getChannel().isHalfOp(event.getBot().getUserBot()) || event.getChannel().isSuperOp(event.getBot().getUserBot())) {
                         Command.onCommand(event.getUser(), event.getBot(), event.getChannel(), false, UserPermLevel, ArrayUtils.remove(messageParts, 0));
                     } else {
-                        event.getUser().send().notice("Error: I must be at least half-opped to perform the operation requested");
+                        event.getUser().send().notice("Error: I must be at least half-opped/opped to perform the operation requested");
                     }
                 } else {
                     Command.onCommand(event.getUser(), event.getBot(), event.getChannel(), false, UserPermLevel, ArrayUtils.remove(messageParts, 0));
