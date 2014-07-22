@@ -40,11 +40,11 @@ public class Quiet extends GenericCommand {
             }
         } else {
             if (args[0].startsWith("+")) {
-                hostmask = IRCUtils.getBanmask(Bot, args[0].replaceFirst("\\+", ""));
+                hostmask = IRCUtils.getHostmask(Bot, args[0].replaceFirst("\\+", ""), true);
             } else if (args[0].startsWith("-")) {
-                hostmask = IRCUtils.getBanmask(Bot, args[0].replaceFirst("-", ""));
+                hostmask = IRCUtils.getHostmask(Bot, args[0].replaceFirst("-", ""), true);
             } else {
-                hostmask = IRCUtils.getBanmask(Bot, args[0]);
+                hostmask = IRCUtils.getHostmask(Bot, args[0], true);
 
             }
 

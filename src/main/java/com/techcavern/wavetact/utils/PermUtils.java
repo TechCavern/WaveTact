@@ -13,25 +13,16 @@ public class PermUtils {
     @SuppressWarnings("unchecked")
     public static String getAccount(PircBotX bot, String userObject) {
         String userString;
-        if(userObject != null) {
-            bot.sendRaw().rawLineNow("WHOIS " + userObject);
-        }else{
-            userString = null;
-        }
-        WaitForQueue waitForQueue = new WaitForQueue(bot);
-        WhoisEvent<PircBotX> test;
-        try {
-            test = waitForQueue.waitFor(WhoisEvent.class);
-            waitForQueue.close();
-            userString = test.getRegisteredAs();
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
-            userString = null;
-        }
+        WhoisEvent whois = IRCUtils.WhoisEvent(bot, userObject);
+        if(whois != null) {
+            userString = whois.getRegisteredAs();
         if(userString == null || userString.isEmpty()){
             if(GetUtils.getUserByNick(bot, userObject).isVerified()){
                 userString = userObject;
             }
+        }
+        }else{
+            userString = null;
         }
         return userString;
     }
