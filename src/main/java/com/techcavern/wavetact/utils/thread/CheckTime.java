@@ -15,10 +15,10 @@ public class CheckTime implements Runnable {
     private boolean loaded = false;
 
     @Override
-    public void run(){
+    public void run() {
         try {
             TimeUnit.SECONDS.sleep(30);
-        } catch (InterruptedException c){
+        } catch (InterruptedException c) {
             // ignored
         }
         while (true) {
@@ -27,7 +27,7 @@ public class CheckTime implements Runnable {
                 for (int i = 0; i < GeneralRegistry.BanTimes.size(); i++) {
                     UTime utimeObject = GeneralRegistry.BanTimes.get(i);
                     try {
-                        if (System.currentTimeMillis() >= utimeObject.getTime()  + utimeObject.getInit()) {
+                        if (System.currentTimeMillis() >= utimeObject.getTime() + utimeObject.getInit()) {
                             PircBotX botObject = GetUtils.getBotByNetwork(utimeObject.getNetworkName());
                             IRCUtils.setMode(GetUtils.getChannelbyName(botObject, utimeObject.getChannelName()), botObject, "-b ", utimeObject.getSomething());
                             GeneralRegistry.BanTimes.remove(i);

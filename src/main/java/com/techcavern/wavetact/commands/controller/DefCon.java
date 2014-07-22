@@ -25,13 +25,13 @@ public class DefCon extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate,int UserPermLevel, String... args) throws Exception {
-        if(args.length>=1){
-            if(args[0].startsWith("-")) {
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+        if (args.length >= 1) {
+            if (args[0].startsWith("-")) {
                 initializeCommands();
                 IRCUtils.SendMessage(user, channel, "DefCon OFF", isPrivate);
             }
-            switch(Integer.parseInt(args[0])){
+            switch (Integer.parseInt(args[0])) {
                 case 1:
                     sPermLevel(5);
                     break;
@@ -49,12 +49,13 @@ public class DefCon extends GenericCommand {
                     break;
             }
             IRCUtils.SendMessage(user, channel, "DefCon ON", isPrivate);
-        }else{
+        } else {
             sPermLevel(9001);
             IRCUtils.SendMessage(user, channel, "DefCon ON", isPrivate);
         }
     }
-    void initializeCommands(){
+
+    void initializeCommands() {
         GeneralRegistry.GenericCommands.clear();
         GeneralRegistry.SimpleActions.clear();
         GeneralRegistry.SimpleMessages.clear();
@@ -70,10 +71,11 @@ public class DefCon extends GenericCommand {
         SimpleMessageUtils.loadSimpleMessages();
         LoadUtils.registerCommands();
     }
-    void sPermLevel(int PermLevel){
-        for(String Com:GeneralRegistry.ControllerListCommands){
+
+    void sPermLevel(int PermLevel) {
+        for (String Com : GeneralRegistry.ControllerListCommands) {
             GenericCommand Command = GetUtils.getCommand(Com);
-            if(Command.getPermLevel() < PermLevel){
+            if (Command.getPermLevel() < PermLevel) {
                 Command.setPermLevel(PermLevel);
             }
         }

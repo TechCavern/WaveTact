@@ -22,18 +22,18 @@ public class Commands extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate,int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
 
 
         if (UserPermLevel >= 9001) {
             IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.ControllerListCommands, ", "), isPrivate);
-        }else if (UserPermLevel >= 20) {
+        } else if (UserPermLevel >= 20) {
             IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.GlobalListCommands, ", "), isPrivate);
-        }else if (UserPermLevel >= 18) {
+        } else if (UserPermLevel >= 18) {
             IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.ChanFounderListCommands, ", "), isPrivate);
-        }else if (UserPermLevel >= 15) {
+        } else if (UserPermLevel >= 15) {
             IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.ChanOwnerListCommands, ", "), isPrivate);
-        }else if (UserPermLevel >= 13) {
+        } else if (UserPermLevel >= 13) {
             IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.ChanOpListCommands, ", "), isPrivate);
         } else if (UserPermLevel >= 10) {
             IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.ChanOpListCommands, ", "), isPrivate);

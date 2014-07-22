@@ -13,7 +13,7 @@ import java.util.Map;
 public class GeneralRegistry {
 
     public static final List<PermChannel> PermChannels = new ArrayList<>();
-    public static final List<UTime> Topic = new ArrayList<>() ;
+    public static final List<UTime> Topic = new ArrayList<>();
     public static final List<String> Controllers = new ArrayList<>();
     public static final List<Global> Globals = new ArrayList<>();
     public static final List<GenericCommand> AllCommands = new ArrayList<>();
@@ -37,11 +37,11 @@ public class GeneralRegistry {
     public static final List<CommandLine> CommandLines = new ArrayList<>();
     public static final List<CommandLine> CommandLineArguments = new ArrayList<>();
     public static final List<String> GenericListCommands = new ArrayList<>();
-    public static final List<String>  TrustedListCommands = new ArrayList<>();
-    public static final List<String>  ControllerListCommands = new ArrayList<>();
-    public static final List<String>  ChanOwnerListCommands = new ArrayList<>();
-    public static final List<String>  GlobalListCommands = new ArrayList<>();
-    public static final List<String>  ChanHalfOpListCommands = new ArrayList<>();
-    public static final List<String>  ChanOpListCommands = new ArrayList<>();
-    public static final List<String>  ChanFounderListCommands = new ArrayList<>();
+    public static final List<String> TrustedListCommands = new ArrayList<>();
+    public static final List<String> ControllerListCommands = new ArrayList<>();
+    public static final List<String> ChanOwnerListCommands = new ArrayList<>();
+    public static final List<String> GlobalListCommands = new ArrayList<>();
+    public static final List<String> ChanHalfOpListCommands = new ArrayList<>();
+    public static final List<String> ChanOpListCommands = new ArrayList<>();
+    public static final List<String> ChanFounderListCommands = new ArrayList<>();
 }

@@ -19,16 +19,16 @@ public class Help extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate,int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         if (args.length > 0) {
             if (args[0].equalsIgnoreCase("permissions")) {
                 IRCUtils.SendMessage(user, channel, "0 = Everyone, 5 = Voiced, 7 = Half-opped, 10 = Opped & Protected, 15 = Ownered, 18 = Network Admin,  9001 = Controller ", isPrivate);
             } else {
-                IRCUtils.SendMessage(user, channel,"aliases: " + StringUtils.join(Arrays.asList(GetUtils.getCommand(args[0]).getCommandID()), " "), isPrivate);
-                IRCUtils.SendMessage(user, channel,GetUtils.getCommand(args[0]).getDesc(), isPrivate);
+                IRCUtils.SendMessage(user, channel, "aliases: " + StringUtils.join(Arrays.asList(GetUtils.getCommand(args[0]).getCommandID()), " "), isPrivate);
+                IRCUtils.SendMessage(user, channel, GetUtils.getCommand(args[0]).getDesc(), isPrivate);
             }
         } else {
-            IRCUtils.SendMessage(user, channel,"help [command] - Generally a + before something means editing it, and a - means removing it. None means adding it. - Time is in [time](s/m/h/d/w) format\n", isPrivate);
+            IRCUtils.SendMessage(user, channel, "help [command] - Generally a + before something means editing it, and a - means removing it. None means adding it. - Time is in [time](s/m/h/d/w) format\n", isPrivate);
 
 
         }

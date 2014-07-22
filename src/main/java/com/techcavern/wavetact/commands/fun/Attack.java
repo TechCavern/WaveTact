@@ -27,14 +27,14 @@ public class Attack extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate,int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         String Something = GeneralUtils.buildMessage(0, args.length, args);
-        int randomint = RandomUtils.nextInt(0 , GeneralRegistry.Attacks.size());
+        int randomint = RandomUtils.nextInt(0, GeneralRegistry.Attacks.size());
         FunObject attack = GeneralRegistry.Attacks.get(randomint);
-        if(attack.getMessageExists()){
+        if (attack.getMessageExists()) {
             IRCUtils.SendAction(user, channel, attack.getAction().replace("$*", Something), isPrivate);
             IRCUtils.SendMessage(user, channel, attack.getMessage().replace("$*", Something), isPrivate);
-        }else{
+        } else {
             IRCUtils.SendAction(user, channel, attack.getAction().replace("$*", Something), isPrivate);
         }
 

@@ -14,13 +14,16 @@ public class FunObject {
         this.MessageExists = MessageExists;
         this.Message = Message;
     }
-    public String getAction(){
+
+    public String getAction() {
         return this.Action;
     }
-    public String getMessage(){
+
+    public String getMessage() {
         return this.Message;
     }
-    public boolean getMessageExists(){
+
+    public boolean getMessageExists() {
         return MessageExists;
     }
 }

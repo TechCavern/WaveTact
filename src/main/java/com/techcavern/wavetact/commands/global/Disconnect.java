@@ -22,8 +22,8 @@ public class Disconnect extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate,int UserPermLevel, String... args) throws Exception {
-            Bot.stopBotReconnect();
-            Bot.sendIRC().quitServer();
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+        Bot.stopBotReconnect();
+        Bot.sendIRC().quitServer();
     }
 }

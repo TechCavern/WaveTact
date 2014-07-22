@@ -16,8 +16,8 @@ import org.pircbotx.User;
 public abstract class GenericCommand {
 
     private final String[] comid;
-    private int PermLevel;
     private final String Desc;
+    private int PermLevel;
 
     protected GenericCommand(String[] comid, int PermLevel, String Desc) {
         this.comid = comid;
@@ -36,12 +36,12 @@ public abstract class GenericCommand {
         return PermLevel;
     }
 
-    public String[] getCommandID() {
-        return comid;
-    }
-
     public void setPermLevel(int newpermlevel) {
         this.PermLevel = newpermlevel;
+    }
+
+    public String[] getCommandID() {
+        return comid;
     }
 
     public String getCommand() {

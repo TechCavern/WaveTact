@@ -23,8 +23,8 @@ public class BasicCommands extends CommandLine {
         SimpleMessage pong = new SimpleMessage("pong", 0, "ping", true);
         SimpleMessage source = new SimpleMessage("source", 0,
                 "http://github.com/TechCavern/WaveTact", true);
-        SimpleMessage authors = new SimpleMessage("authors", 0 , "Julian (JZTech101), Logan", true);
-        SimpleMessage contributors = new SimpleMessage("contributors", 0 , "Kenneth (kaendfinger), Sam (samrg472), Leah", true);
+        SimpleMessage authors = new SimpleMessage("authors", 0, "Julian (JZTech101), Logan", true);
+        SimpleMessage contributors = new SimpleMessage("contributors", 0, "Kenneth (kaendfinger), Sam (samrg472), Leah", true);
         SimpleAction nom = new SimpleAction("nom", 0, "noms on $*", true);
         GeneralRegistry.SimpleActions.add(potato);
         GeneralRegistry.SimpleMessages.add(ping);

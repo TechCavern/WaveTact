@@ -25,35 +25,37 @@ public class Globals extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate,int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
 
         String account;
-        if(args[0].startsWith("-")) {
+        if (args[0].startsWith("-")) {
             account = PermUtils.getAccount(Bot, args[0].replace("-", ""));
-        }else{
+        } else {
             account = PermUtils.getAccount(Bot, args[0]);
 
         }
-        if(account != null){
-        if (args[0].startsWith("-")) {
-            if(GetUtils.getGlobalByNick(account, Bot.getServerInfo().getNetwork()) != null) {
-                GeneralRegistry.Globals.remove(GetUtils.getGlobalByNick(account, Bot.getServerInfo().getNetwork()));
-                GlobalUtils.saveGlobals();
-                IRCUtils.SendMessage(user, channel, "Global Removed", isPrivate);
-            }else{
-                user.send().notice("User does not existing in Globals");
+        if (account != null) {
+            if (args[0].startsWith("-")) {
+                if (GetUtils.getGlobalByNick(account, Bot.getServerInfo().getNetwork()) != null) {
+                    GeneralRegistry.Globals.remove(GetUtils.getGlobalByNick(account, Bot.getServerInfo().getNetwork()));
+                    GlobalUtils.saveGlobals();
+                    IRCUtils.SendMessage(user, channel, "Global Removed", isPrivate);
+                } else {
+                    user.send().notice("User does not existing in Globals");
+                }
+            } else {
+                if (GetUtils.getGlobalByNick(account, Bot.getServerInfo().getNetwork()) != null) {
+                    user.send().notice("User is already in database");
+                } else {
+                    GeneralRegistry.Globals.add(new Global(Bot.getServerInfo().getNetwork(), account));
+                    GlobalUtils.saveGlobals();
+                    IRCUtils.SendMessage(user, channel, "Global Added", isPrivate);
+                }
             }
         } else {
-            if(GetUtils.getGlobalByNick(account, Bot.getServerInfo().getNetwork()) != null) {
-                user.send().notice("User is already in database");
-            } else{
-                GeneralRegistry.Globals.add(new Global(Bot.getServerInfo().getNetwork(), account));
-            GlobalUtils.saveGlobals();
-            IRCUtils.SendMessage(user, channel, "Global Added", isPrivate);
-            }}
-    }else{
 
 
             user.send().notice("User is not registered with Nickserv or not loggedin");
         }
-}}
+    }
+}

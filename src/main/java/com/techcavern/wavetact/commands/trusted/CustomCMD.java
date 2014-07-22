@@ -35,31 +35,31 @@ public class CustomCMD extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate,int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
 
         switch (args[0].toLowerCase()) {
             case "m": // message
                 if (args[1].startsWith("-")) {
-                    removeCommand(user,channel, CommandType.MESSAGE, isPrivate, UserPermLevel, args[1].substring(1));
+                    removeCommand(user, channel, CommandType.MESSAGE, isPrivate, UserPermLevel, args[1].substring(1));
                 } else if (args[1].startsWith("+")) {
-                    modifyCommand(user, channel, CommandType.MESSAGE, Integer.parseInt(args[2]), isPrivate, args[1].substring(1), UserPermLevel,GeneralUtils.buildMessage(3, args.length, args).replace("\n", " "));
+                    modifyCommand(user, channel, CommandType.MESSAGE, Integer.parseInt(args[2]), isPrivate, args[1].substring(1), UserPermLevel, GeneralUtils.buildMessage(3, args.length, args).replace("\n", " "));
                 } else {
-                    addCommand(user,channel, CommandType.MESSAGE, Integer.parseInt(args[2]), isPrivate, args[1], GeneralUtils.buildMessage(3, args.length, args).replace("\n", " "));
+                    addCommand(user, channel, CommandType.MESSAGE, Integer.parseInt(args[2]), isPrivate, args[1], GeneralUtils.buildMessage(3, args.length, args).replace("\n", " "));
                 }
                 break;
             case "a": // action
                 if (args[1].startsWith("-")) {
-                    removeCommand(user,channel, CommandType.ACTION,isPrivate, UserPermLevel, args[1].substring(1));
+                    removeCommand(user, channel, CommandType.ACTION, isPrivate, UserPermLevel, args[1].substring(1));
                 } else if (args[1].startsWith("+")) {
-                    modifyCommand(user,channel, CommandType.ACTION, Integer.parseInt(args[2]), isPrivate, args[1].substring(1),UserPermLevel, GeneralUtils.buildMessage(3, args.length, args).replace("\n", " "));
+                    modifyCommand(user, channel, CommandType.ACTION, Integer.parseInt(args[2]), isPrivate, args[1].substring(1), UserPermLevel, GeneralUtils.buildMessage(3, args.length, args).replace("\n", " "));
                 } else {
-                    addCommand(user,channel, CommandType.ACTION, Integer.parseInt(args[2]), isPrivate, args[1], GeneralUtils.buildMessage(3, args.length, args).replace("\n"," "));
+                    addCommand(user, channel, CommandType.ACTION, Integer.parseInt(args[2]), isPrivate, args[1], GeneralUtils.buildMessage(3, args.length, args).replace("\n", " "));
                 }
                 break;
             case "list":
                 List<String> SimpleCommands = GeneralRegistry.SimpleMessages.stream().filter(g -> g.getPermLevel() <= UserPermLevel).map(GenericCommand::getCommand).collect(Collectors.toList());
                 SimpleCommands.addAll(GeneralRegistry.SimpleActions.stream().filter(g -> g.getPermLevel() <= UserPermLevel).map(GenericCommand::getCommand).collect(Collectors.toList()));
-                IRCUtils.SendMessage(user, channel, StringUtils.join(SimpleCommands, ", "), isPrivate );
+                IRCUtils.SendMessage(user, channel, StringUtils.join(SimpleCommands, ", "), isPrivate);
         }
     }
 
@@ -76,7 +76,7 @@ public class CustomCMD extends GenericCommand {
             GeneralRegistry.SimpleMessages.add(new SimpleMessage(cmd, accessLevel, msg, false));
             SimpleMessageUtils.saveSimpleMessages();
         }
-        IRCUtils.SendMessage(user, channel,"Command added", isPrivate);
+        IRCUtils.SendMessage(user, channel, "Command added", isPrivate);
     }
 
     @SuppressWarnings("SuspiciousMethodCalls")
@@ -86,27 +86,27 @@ public class CustomCMD extends GenericCommand {
             cmd = SimpleMessageUtils.getSimpleMessage(command);
         else if (type == CommandType.ACTION)
             cmd = SimpleActionUtils.getSimpleAction(command);
-        if(cmd.getPermLevel() <= UserPermLevel){
-        if (cmd  != null && !cmd.getLockedStatus()) {
-            GeneralRegistry.SimpleActions.remove(cmd);
-            GeneralRegistry.SimpleMessages.remove(cmd);
-        }else if(cmd.getLockedStatus()) {
-            IRCUtils.SendMessage(user, channel, "Command Locked", isPrivate);
+        if (cmd.getPermLevel() <= UserPermLevel) {
+            if (cmd != null && !cmd.getLockedStatus()) {
+                GeneralRegistry.SimpleActions.remove(cmd);
+                GeneralRegistry.SimpleMessages.remove(cmd);
+            } else if (cmd.getLockedStatus()) {
+                IRCUtils.SendMessage(user, channel, "Command Locked", isPrivate);
 
-        } else{
-            IRCUtils.SendMessage(user, channel, "Command Does Not Exist", isPrivate);
+            } else {
+                IRCUtils.SendMessage(user, channel, "Command Does Not Exist", isPrivate);
 
-        }
-        if (type == CommandType.ACTION) {
-            GeneralRegistry.SimpleActions.add(new SimpleAction(command, accessLevel, msg, false));
-            SimpleActionUtils.saveSimpleActions();
-        } else if (type == CommandType.MESSAGE) {
-            GeneralRegistry.SimpleMessages.add(new SimpleMessage(command, accessLevel, msg, false));
-            SimpleMessageUtils.saveSimpleMessages();
+            }
+            if (type == CommandType.ACTION) {
+                GeneralRegistry.SimpleActions.add(new SimpleAction(command, accessLevel, msg, false));
+                SimpleActionUtils.saveSimpleActions();
+            } else if (type == CommandType.MESSAGE) {
+                GeneralRegistry.SimpleMessages.add(new SimpleMessage(command, accessLevel, msg, false));
+                SimpleMessageUtils.saveSimpleMessages();
 
-        }
-        IRCUtils.SendMessage(user, channel, "Command modified", isPrivate);
-        }else{
+            }
+            IRCUtils.SendMessage(user, channel, "Command modified", isPrivate);
+        } else {
             IRCUtils.SendMessage(user, channel, "Permission Denied", isPrivate);
         }
     }
@@ -118,25 +118,26 @@ public class CustomCMD extends GenericCommand {
             cmd = SimpleMessageUtils.getSimpleMessage(command);
         else if (type == CommandType.ACTION)
             cmd = SimpleActionUtils.getSimpleAction(command);
-        if(cmd.getPermLevel() <= UserPermLevel){
-        if (cmd == null) {
-            user.send().notice("Command does not exist");
-        } else if (cmd.getLockedStatus()) {
-            user.send().notice("Command is locked");
-        } else {
-            if (type == CommandType.MESSAGE) {
-                GeneralRegistry.SimpleMessages.remove(cmd);
-                SimpleMessageUtils.saveSimpleMessages();
+        if (cmd.getPermLevel() <= UserPermLevel) {
+            if (cmd == null) {
+                user.send().notice("Command does not exist");
+            } else if (cmd.getLockedStatus()) {
+                user.send().notice("Command is locked");
+            } else {
+                if (type == CommandType.MESSAGE) {
+                    GeneralRegistry.SimpleMessages.remove(cmd);
+                    SimpleMessageUtils.saveSimpleMessages();
 
-            } else if (type == CommandType.ACTION) {
-                GeneralRegistry.SimpleActions.remove(cmd);
-                SimpleActionUtils.saveSimpleActions();
+                } else if (type == CommandType.ACTION) {
+                    GeneralRegistry.SimpleActions.remove(cmd);
+                    SimpleActionUtils.saveSimpleActions();
+                }
+
+                IRCUtils.SendMessage(user, channel, "Command removed", isPrivate);
             }
-
-            IRCUtils.SendMessage(user, channel, "Command removed", isPrivate);
-        }
-    }else{
+        } else {
             IRCUtils.SendMessage(user, channel, "Permission Denied", isPrivate);
         }
-}}
+    }
+}
 

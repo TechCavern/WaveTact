@@ -19,12 +19,12 @@ public class Question extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate,int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         List<String> waResults = GeneralUtils.getWAResult(StringUtils.join(args, " "));
         if (waResults.size() < 1 || waResults.get(1).isEmpty()) {
             user.send().notice("Unable to get response, try again or stop inputting gibberish");
         } else {
-            IRCUtils.SendMessage(user, channel,waResults.get(1), isPrivate);
+            IRCUtils.SendMessage(user, channel, waResults.get(1), isPrivate);
 
         }
     }

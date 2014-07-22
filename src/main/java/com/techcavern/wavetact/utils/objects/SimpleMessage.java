@@ -27,8 +27,9 @@ public class SimpleMessage extends GenericCommand {
         this.message = message;
         this.locked = locked;
     }
+
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate,int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         String dresponse = this.message;
         String[] message = StringUtils.split(this.message, " ");
         int i = 0;
@@ -42,7 +43,7 @@ public class SimpleMessage extends GenericCommand {
         }
         dresponse = dresponse.replace("$*", GeneralUtils.buildMessage(i, args.length, args));
         String prefix = GetUtils.getCommandChar(Bot);
-        if(dresponse.startsWith(prefix)){
+        if (dresponse.startsWith(prefix)) {
             dresponse.replace(prefix, "");
         }
         IRCUtils.SendMessage(user, channel, dresponse, isPrivate);

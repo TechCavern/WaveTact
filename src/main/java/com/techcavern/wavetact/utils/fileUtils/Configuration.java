@@ -7,8 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
-  * Written by logangorence
-  */
+ * Written by logangorence
+ */
 public class Configuration {
 
     private final File file;

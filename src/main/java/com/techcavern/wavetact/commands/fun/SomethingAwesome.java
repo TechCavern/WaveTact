@@ -25,14 +25,14 @@ public class SomethingAwesome extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate,int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         if (channel != null && channel.getUserLevels(Bot.getUserBot()).contains(UserLevel.OP) && !channel.isOwner(user) && !channel.isSuperOp(user)) {
             channel.send().kick(user, "http://bit.ly/1c9vo1S");
-        } else if (channel != null &&channel.getUserLevels(Bot.getUserBot()).contains(UserLevel.OWNER)) {
+        } else if (channel != null && channel.getUserLevels(Bot.getUserBot()).contains(UserLevel.OWNER)) {
             channel.send().kick(user, "http://bit.ly/1c9vo1S");
-        }else{
-                IRCUtils.SendAction(user, channel,"kicks " + user.getNick() +"(http://bit.ly/1c9vo1S)", isPrivate);
+        } else {
+            IRCUtils.SendAction(user, channel, "kicks " + user.getNick() + "(http://bit.ly/1c9vo1S)", isPrivate);
 
-            }
+        }
     }
 }

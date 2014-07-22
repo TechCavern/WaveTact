@@ -64,6 +64,7 @@ public class LoadUtils {
         }
         return new PircBotX(Net.buildConfiguration());
     }
+
     public static void startThreads() {
         (new Thread(new CheckTime())).start();
     }
@@ -155,13 +156,14 @@ public class LoadUtils {
         }
         if (invalid) System.exit(0);
     }
-    public static void registerAttacks(){
 
-        GeneralRegistry.Attacks.add(new FunObject("sends a 53 inch monitor flying at $*" , false, null));
-        GeneralRegistry.Attacks.add(new FunObject("shoots a rocket at $*" , false, null));
+    public static void registerAttacks() {
+
+        GeneralRegistry.Attacks.add(new FunObject("sends a 53 inch monitor flying at $*", false, null));
+        GeneralRegistry.Attacks.add(new FunObject("shoots a rocket at $*", false, null));
         GeneralRegistry.Attacks.add(new FunObject("punches $* right in the crotch", false, null));
         GeneralRegistry.Attacks.add(new FunObject("places a bomb near $* set for 2 seconds", true, "BANG!"));
-        GeneralRegistry.Attacks.add(new FunObject("drops a 2000 pound object on $*" , false, null));
+        GeneralRegistry.Attacks.add(new FunObject("drops a 2000 pound object on $*", false, null));
         GeneralRegistry.Attacks.add(new FunObject("packs $* up and ships it off to another galaxy", false, null));
         GeneralRegistry.Attacks.add(new FunObject("eats $* up for breakfast", false, null));
         GeneralRegistry.Attacks.add(new FunObject("sends a flying desk at $*", false, null));
@@ -169,8 +171,9 @@ public class LoadUtils {
         GeneralRegistry.Attacks.add(new FunObject("runs over $*", true, "HEY! WATCH WHERE YOU'RE GOING!"));
         GeneralRegistry.Attacks.add(new FunObject("throws a racket at $*", false, null));
     }
-    public static void registerCommandList(){
-        for(GenericCommand command : GeneralRegistry.GenericCommands){
+
+    public static void registerCommandList() {
+        for (GenericCommand command : GeneralRegistry.GenericCommands) {
             GeneralRegistry.GenericListCommands.add(command.getCommand());
             GeneralRegistry.TrustedListCommands.add(command.getCommand());
             GeneralRegistry.ChanHalfOpListCommands.add(command.getCommand());
@@ -181,7 +184,7 @@ public class LoadUtils {
             GeneralRegistry.GlobalListCommands.add(command.getCommand());
 
         }
-        for(GenericCommand command : GeneralRegistry.TrustedCommands){
+        for (GenericCommand command : GeneralRegistry.TrustedCommands) {
             GeneralRegistry.TrustedListCommands.add(command.getCommand());
             GeneralRegistry.ChanHalfOpListCommands.add(command.getCommand());
             GeneralRegistry.ChanOpListCommands.add(command.getCommand());
@@ -190,7 +193,7 @@ public class LoadUtils {
             GeneralRegistry.ControllerListCommands.add(command.getCommand());
             GeneralRegistry.GlobalListCommands.add(command.getCommand());
         }
-        for(GenericCommand command : GeneralRegistry.AnonymonityCommands){
+        for (GenericCommand command : GeneralRegistry.AnonymonityCommands) {
             GeneralRegistry.TrustedListCommands.add(command.getCommand());
             GeneralRegistry.ChanHalfOpListCommands.add(command.getCommand());
             GeneralRegistry.ChanOpListCommands.add(command.getCommand());
@@ -200,7 +203,7 @@ public class LoadUtils {
             GeneralRegistry.GlobalListCommands.add(command.getCommand());
 
         }
-        for(GenericCommand command : GeneralRegistry.ChanHalfOpCommands){
+        for (GenericCommand command : GeneralRegistry.ChanHalfOpCommands) {
             GeneralRegistry.ChanHalfOpListCommands.add(command.getCommand());
             GeneralRegistry.ChanOpListCommands.add(command.getCommand());
             GeneralRegistry.ChanOwnerListCommands.add(command.getCommand());
@@ -209,7 +212,7 @@ public class LoadUtils {
             GeneralRegistry.GlobalListCommands.add(command.getCommand());
 
         }
-        for(GenericCommand command : GeneralRegistry.ChanOpCommands){
+        for (GenericCommand command : GeneralRegistry.ChanOpCommands) {
             GeneralRegistry.ChanOpListCommands.add(command.getCommand());
             GeneralRegistry.ChanOwnerListCommands.add(command.getCommand());
             GeneralRegistry.ChanFounderListCommands.add(command.getCommand());
@@ -217,22 +220,22 @@ public class LoadUtils {
             GeneralRegistry.GlobalListCommands.add(command.getCommand());
 
         }
-        for(GenericCommand command : GeneralRegistry.ChanOwnerCommands){
+        for (GenericCommand command : GeneralRegistry.ChanOwnerCommands) {
             GeneralRegistry.ChanOwnerListCommands.add(command.getCommand());
             GeneralRegistry.ChanFounderListCommands.add(command.getCommand());
             GeneralRegistry.ControllerListCommands.add(command.getCommand());
             GeneralRegistry.GlobalListCommands.add(command.getCommand());
         }
-        for(GenericCommand command : GeneralRegistry.ChanFounderCommands){
+        for (GenericCommand command : GeneralRegistry.ChanFounderCommands) {
             GeneralRegistry.ChanFounderListCommands.add(command.getCommand());
             GeneralRegistry.ControllerListCommands.add(command.getCommand());
             GeneralRegistry.GlobalListCommands.add(command.getCommand());
         }
-        for(GenericCommand command : GeneralRegistry.GlobalCommands){
+        for (GenericCommand command : GeneralRegistry.GlobalCommands) {
             GeneralRegistry.ControllerListCommands.add(command.getCommand());
             GeneralRegistry.GlobalListCommands.add(command.getCommand());
         }
-        for(GenericCommand command : GeneralRegistry.ControllerCommands){
+        for (GenericCommand command : GeneralRegistry.ControllerCommands) {
             GeneralRegistry.ControllerListCommands.add(command.getCommand());
         }
     }

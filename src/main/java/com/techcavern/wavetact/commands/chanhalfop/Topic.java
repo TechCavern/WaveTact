@@ -30,43 +30,44 @@ public class Topic extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate,int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         StringUtils.split(channel.getTopic(), args[0]);
         List<String> topic = new LinkedList(Arrays.asList(StringUtils.split(channel.getTopic(), args[0])));
         List<String> newtopic = new LinkedList(Arrays.asList(StringUtils.split(channel.getTopic(), args[0])));
-        if(args[1].equalsIgnoreCase("a")){
+        if (args[1].equalsIgnoreCase("a")) {
             channel.send().setTopic(channel.getTopic() + " " + args[0] + " " + GeneralUtils.buildMessage(2, args.length, args));
             saveTopic(channel, Bot);
-        }else if(args[1].startsWith("+")){
-            newtopic.set(Integer.parseInt(args[1].replaceFirst("\\+", ""))-1, " " + GeneralUtils.buildMessage(2,args.length, args) + " ");
+        } else if (args[1].startsWith("+")) {
+            newtopic.set(Integer.parseInt(args[1].replaceFirst("\\+", "")) - 1, " " + GeneralUtils.buildMessage(2, args.length, args) + " ");
             channel.send().setTopic(StringUtils.join(newtopic, args[0]));
             saveTopic(channel, Bot);
-        }else if(args[1].startsWith("-")){
-            newtopic.remove(Integer.parseInt(args[1].replaceFirst("\\-", ""))-1);
+        } else if (args[1].startsWith("-")) {
+            newtopic.remove(Integer.parseInt(args[1].replaceFirst("\\-", "")) - 1);
             channel.send().setTopic(StringUtils.join(newtopic, args[0]));
             saveTopic(channel, Bot);
-        }else if(args[1].equalsIgnoreCase("sw") || args[1].equalsIgnoreCase("swap")){
-            newtopic.set((Integer.parseInt(args[2])-1),topic.get(Integer.parseInt(args[3])-1));
-            newtopic.set((Integer.parseInt(args[3])-1),topic.get(Integer.parseInt(args[2])-1));
+        } else if (args[1].equalsIgnoreCase("sw") || args[1].equalsIgnoreCase("swap")) {
+            newtopic.set((Integer.parseInt(args[2]) - 1), topic.get(Integer.parseInt(args[3]) - 1));
+            newtopic.set((Integer.parseInt(args[3]) - 1), topic.get(Integer.parseInt(args[2]) - 1));
             channel.send().setTopic(StringUtils.join(newtopic, args[0]));
             saveTopic(channel, Bot);
-        }else if (args[1].equalsIgnoreCase("ss")) {
+        } else if (args[1].equalsIgnoreCase("ss")) {
             channel.send().setTopic(channel.getTopic().replace(args[0], args[2]));
             saveTopic(channel, Bot);
-        }else if (args[1].equalsIgnoreCase("r")){
+        } else if (args[1].equalsIgnoreCase("r")) {
             UTime oldTopic = GetUtils.getTopic(channel.getName(), Bot.getServerInfo().getNetwork());
-            if(oldTopic != null) {
+            if (oldTopic != null) {
                 channel.send().setTopic(oldTopic.getSomething());
                 GeneralRegistry.Topic.remove(oldTopic);
-            }else{
+            } else {
                 channel.send().message("Error: No Reversal Possible");
             }
-        }else{
+        } else {
             channel.send().setTopic(GeneralUtils.buildMessage(1, args.length, args));
             saveTopic(channel, Bot);
         }
     }
-    void saveTopic(Channel channel, PircBotX Bot){
+
+    void saveTopic(Channel channel, PircBotX Bot) {
         GeneralRegistry.Topic.add(new UTime(channel.getTopic(), Bot.getServerInfo().getNetwork(), "Topic", channel.getName(), GeneralUtils.getMilliSeconds("30s"), System.currentTimeMillis()));
     }
 }

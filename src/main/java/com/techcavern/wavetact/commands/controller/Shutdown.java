@@ -16,10 +16,10 @@ public class Shutdown extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate,int UserPermLevel, String... args) throws Exception {
-            GeneralRegistry.WaveTact.stop();
-            System.exit(0);
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+        GeneralRegistry.WaveTact.stop();
+        System.exit(0);
 
-        }
     }
+}
 

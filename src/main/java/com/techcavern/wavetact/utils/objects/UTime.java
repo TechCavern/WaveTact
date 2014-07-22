@@ -42,5 +42,7 @@ public class UTime {
         return this.type;
     }
 
-    public long getInit() {return this.init;}
+    public long getInit() {
+        return this.init;
+    }
 }

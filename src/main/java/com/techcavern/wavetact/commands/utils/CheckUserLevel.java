@@ -17,16 +17,16 @@ public class CheckUserLevel extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate,int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         User userObject;
         if (args.length < 1) {
             userObject = user;
         } else {
             userObject = GetUtils.getUserByNick(Bot, args[0]);
         }
-        if(channel == null){
+        if (channel == null) {
             user.send().notice("Channel must be specified as Argument #1");
-        }else {
+        } else {
             if (UserPermLevel >= 9001) {
                 IRCUtils.SendMessage(user, channel, userObject.getNick() + " is my Master!", isPrivate);
             } else if (UserPermLevel >= 20) {

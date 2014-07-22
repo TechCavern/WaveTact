@@ -20,19 +20,19 @@ public class AutoOp extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate,int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         String account;
-        if(args[0].startsWith("-")){
+        if (args[0].startsWith("-")) {
             account = PermUtils.getAccount(Bot, args[0].replaceFirst("-", ""));
-        }else{
+        } else {
             account = PermUtils.getAccount(Bot, args[0]);
         }
-        PermChannel PLChannel = PermChannelUtils.getPermLevelChannel(Bot.getServerInfo().getNetwork(),account, channel.getName() );
+        PermChannel PLChannel = PermChannelUtils.getPermLevelChannel(Bot.getServerInfo().getNetwork(), account, channel.getName());
         if (args[0].startsWith("-")) {
             if (PLChannel != null) {
                 PLChannel.setAuto(false);
                 PermChannelUtils.savePermChannels();
-                channel.send().message(account+" will no longer be auto-opped");
+                channel.send().message(account + " will no longer be auto-opped");
             } else {
                 user.send().notice("User is not found on channel access lists");
             }
@@ -40,7 +40,7 @@ public class AutoOp extends GenericCommand {
             if (PLChannel != null) {
                 PLChannel.setAuto(true);
                 PermChannelUtils.savePermChannels();
-                channel.send().message(account+" will henceforth be auto-opped");
+                channel.send().message(account + " will henceforth be auto-opped");
             } else {
                 user.send().notice("User is not found on channel access lists");
             }

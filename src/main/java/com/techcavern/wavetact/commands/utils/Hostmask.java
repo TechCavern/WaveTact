@@ -16,14 +16,14 @@ public class Hostmask extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate,int UserPermLevel, String... args) throws Exception {
-        if(IRCUtils.getHostmask(Bot, args[0].replaceFirst("\\$", ""), false) != null) {
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+        if (IRCUtils.getHostmask(Bot, args[0].replaceFirst("\\$", ""), false) != null) {
             if (args[0].startsWith("$")) {
                 IRCUtils.SendMessage(user, channel, IRCUtils.getHostmask(Bot, args[0].replaceFirst("\\$", ""), true), isPrivate);
             } else {
                 IRCUtils.SendMessage(user, channel, IRCUtils.getHostmask(Bot, args[0], false), isPrivate);
             }
-        }else{
+        } else {
             user.send().notice("User not found");
         }
 

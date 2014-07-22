@@ -13,7 +13,7 @@ public abstract class CommandLine {
 
     }
 
-    public boolean getIsPriority(){
+    public boolean getIsPriority() {
         return isPriority;
     }
 
