@@ -8,30 +8,35 @@ import com.techcavern.wavetact.commandline.utils.BasicCommands;
 import com.techcavern.wavetact.commandline.utils.Start;
 import com.techcavern.wavetact.commands.Anonymonity.Act;
 import com.techcavern.wavetact.commands.Anonymonity.Say;
-import com.techcavern.wavetact.commands.chanhalfop.*;
-import com.techcavern.wavetact.commands.chanop.*;
-import com.techcavern.wavetact.commands.chanop.AutoOp;
 import com.techcavern.wavetact.commands.chanfounder.CPermLevel;
+import com.techcavern.wavetact.commands.chanhalfop.*;
+import com.techcavern.wavetact.commands.chanop.AutoOp;
+import com.techcavern.wavetact.commands.chanop.HalfOp;
+import com.techcavern.wavetact.commands.chanop.Mode;
+import com.techcavern.wavetact.commands.chanop.Op;
 import com.techcavern.wavetact.commands.chanowner.Owner;
 import com.techcavern.wavetact.commands.chanowner.Protect;
 import com.techcavern.wavetact.commands.controller.*;
+import com.techcavern.wavetact.commands.controller.Shutdown;
 import com.techcavern.wavetact.commands.fun.Attack;
 import com.techcavern.wavetact.commands.fun.SomethingAwesome;
 import com.techcavern.wavetact.commands.fun.UrbanDictonary;
 import com.techcavern.wavetact.commands.global.Disconnect;
 import com.techcavern.wavetact.commands.global.Join;
-import com.techcavern.wavetact.commands.trusted.*;
+import com.techcavern.wavetact.commands.trusted.CustomCMD;
+import com.techcavern.wavetact.commands.trusted.WolframAlpha;
 import com.techcavern.wavetact.commands.utils.*;
-import com.techcavern.wavetact.commands.utils.Help;
 import com.techcavern.wavetact.utils.events.*;
-import com.techcavern.wavetact.utils.objects.*;
+import com.techcavern.wavetact.utils.objects.CommandLine;
+import com.techcavern.wavetact.utils.objects.FunObject;
+import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.thread.CheckTime;
 import org.pircbotx.Configuration;
 import org.pircbotx.Configuration.Builder;
 import org.pircbotx.PircBotX;
 
 import java.nio.charset.Charset;
-import java.util.*;
+import java.util.List;
 
 //import com.techcavern.wavetact.Commands.Commands.TestCommand;
 
@@ -41,7 +46,7 @@ public class LoadUtils {
 
     public static PircBotX createbot(String nickservPassword, String name, List<String> channels, String nick, String server) {
         System.out.println("Configuring " + name);
-        Builder<PircBotX> Net = new Configuration.Builder<PircBotX>();
+        Builder<PircBotX> Net = new Configuration.Builder<>();
         Net.setName(nick);
         Net.setLogin("WaveTact");
         Net.setEncoding(Charset.isSupported("UTF-8") ? Charset.forName("UTF-8") : Charset.defaultCharset());

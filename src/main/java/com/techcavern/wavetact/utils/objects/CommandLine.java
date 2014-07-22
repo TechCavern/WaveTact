@@ -1,7 +1,5 @@
 package com.techcavern.wavetact.utils.objects;
 
-import com.techcavern.wavetact.utils.GeneralRegistry;
-
 public abstract class CommandLine {
 
     private final String[] argument;

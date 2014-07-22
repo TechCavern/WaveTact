@@ -2,14 +2,13 @@ package com.techcavern.wavetact.commands.utils;
 
 import com.google.gson.JsonObject;
 import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
-import com.techcavern.wavetact.utils.GeneralUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
-import org.pircbotx.hooks.events.MessageEvent;
 
 
 public class FindIP extends GenericCommand {

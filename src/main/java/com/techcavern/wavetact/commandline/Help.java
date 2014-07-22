@@ -1,9 +1,9 @@
 package com.techcavern.wavetact.commandline;
 
 import com.techcavern.wavetact.annot.CMDLine;
-import com.techcavern.wavetact.utils.objects.CommandLine;
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GeneralUtils;
+import com.techcavern.wavetact.utils.objects.CommandLine;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;

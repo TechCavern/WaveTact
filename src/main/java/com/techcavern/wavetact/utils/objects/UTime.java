@@ -6,7 +6,7 @@ public class UTime {
     private final String networkName;
     private final String channelName;
     private final String type;
-    private long init;
+    private final long init;
     private long time;
 
     public UTime(String Something, String networkName, String type, String channelName, long time, long init) {

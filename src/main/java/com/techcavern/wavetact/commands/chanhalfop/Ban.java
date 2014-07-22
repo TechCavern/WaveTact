@@ -3,15 +3,13 @@ package com.techcavern.wavetact.commands.chanhalfop;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.databaseUtils.BanTimeUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.objects.UTime;
-import com.techcavern.wavetact.utils.databaseUtils.BanTimeUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
-import org.pircbotx.hooks.events.MessageEvent;
 
 public class Ban extends GenericCommand {
     @CMD

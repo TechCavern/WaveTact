@@ -6,14 +6,13 @@
 package com.techcavern.wavetact.commands.Anonymonity;
 
 import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
-import com.techcavern.wavetact.utils.GeneralUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
-import org.pircbotx.hooks.events.MessageEvent;
 
 /**
  * @author jztech101

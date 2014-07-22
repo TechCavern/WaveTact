@@ -1,9 +1,9 @@
 package com.techcavern.wavetact.commandline.utils;
 
 import com.techcavern.wavetact.annot.CMDLine;
-import com.techcavern.wavetact.utils.objects.CommandLine;
-import com.techcavern.wavetact.utils.fileUtils.Configuration;
 import com.techcavern.wavetact.utils.GeneralUtils;
+import com.techcavern.wavetact.utils.fileUtils.Configuration;
+import com.techcavern.wavetact.utils.objects.CommandLine;
 
 import java.io.File;
 import java.util.Scanner;

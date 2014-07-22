@@ -31,7 +31,7 @@ public class NetworkUtils {
         }
 
         PircBotX bot;
-        LinkedList<String> chans = new LinkedList<String>();
+        LinkedList<String> chans = new LinkedList<>();
         String nsPass;
         for (com.techcavern.wavetact.utils.fileUtils.Configuration c : GeneralRegistry.configs.values()) {
             chans.clear();

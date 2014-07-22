@@ -15,7 +15,6 @@ import org.apache.commons.lang3.RandomUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
-import org.pircbotx.hooks.events.MessageEvent;
 
 /**
  * @author jztech101

@@ -1,7 +1,5 @@
 package com.techcavern.wavetact.utils.objects;
 
-import java.util.List;
-
 /**
  * Created by jztech101 on 7/5/14.
  */

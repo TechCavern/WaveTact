@@ -5,10 +5,9 @@
  */
 package com.techcavern.wavetact.utils.events;
 
-import com.techcavern.wavetact.utils.objects.GenericCommand;
-import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.PermUtils;
+import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.apache.commons.lang3.ArrayUtils;
 import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.ListenerAdapter;

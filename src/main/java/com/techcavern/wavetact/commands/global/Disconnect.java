@@ -6,10 +6,7 @@
 package com.techcavern.wavetact.commands.global;
 
 import com.techcavern.wavetact.annot.CMD;
-import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.GetUtils;
-import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;

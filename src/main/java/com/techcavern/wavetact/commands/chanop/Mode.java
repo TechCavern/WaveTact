@@ -6,14 +6,11 @@
 package com.techcavern.wavetact.commands.chanop;
 
 import com.techcavern.wavetact.annot.CMD;
-import com.techcavern.wavetact.utils.GetUtils;
-import com.techcavern.wavetact.utils.PermUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
+import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
-import org.pircbotx.hooks.events.MessageEvent;
 
 /**
  * @author jztech101

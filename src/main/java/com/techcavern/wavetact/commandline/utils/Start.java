@@ -1,9 +1,9 @@
 package com.techcavern.wavetact.commandline.utils;
 
 import com.techcavern.wavetact.annot.CMDLine;
+import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.configurationUtils.NetworkUtils;
 import com.techcavern.wavetact.utils.objects.CommandLine;
-import com.techcavern.wavetact.utils.GeneralUtils;
 
 
 public class Start extends CommandLine {

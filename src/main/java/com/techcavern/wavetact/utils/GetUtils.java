@@ -1,6 +1,9 @@
 package com.techcavern.wavetact.utils;
 
-import com.techcavern.wavetact.utils.objects.*;
+import com.techcavern.wavetact.utils.objects.CommandChar;
+import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.Global;
+import com.techcavern.wavetact.utils.objects.UTime;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;

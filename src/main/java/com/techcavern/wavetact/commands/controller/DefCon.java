@@ -7,13 +7,12 @@ package com.techcavern.wavetact.commands.controller;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.utils.*;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleActionUtils;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleMessageUtils;
+import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
-import org.pircbotx.hooks.events.MessageEvent;
 
 
 /**
@@ -27,11 +26,29 @@ public class DefCon extends GenericCommand {
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate,int UserPermLevel, String... args) throws Exception {
-
-
-        if(args.length>=1 && args[0].equalsIgnoreCase("-")){
-            initializeCommands();
-            IRCUtils.SendMessage(user, channel, "DefCon OFF", isPrivate);
+        if(args.length>=1){
+            if(args[0].startsWith("-")) {
+                initializeCommands();
+                IRCUtils.SendMessage(user, channel, "DefCon OFF", isPrivate);
+            }
+            switch(Integer.parseInt(args[0])){
+                case 1:
+                    sPermLevel(5);
+                    break;
+                case 2:
+                    sPermLevel(10);
+                    break;
+                case 3:
+                    sPermLevel(18);
+                    break;
+                case 4:
+                    sPermLevel(20);
+                    break;
+                case 5:
+                    sPermLevel(9001);
+                    break;
+            }
+            IRCUtils.SendMessage(user, channel, "DefCon ON", isPrivate);
         }else{
             sPermLevel(9001);
             IRCUtils.SendMessage(user, channel, "DefCon ON", isPrivate);
