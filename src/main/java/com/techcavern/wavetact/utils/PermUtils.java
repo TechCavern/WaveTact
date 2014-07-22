@@ -66,8 +66,8 @@ public class PermUtils {
         if (channelObject != null) {
             int mpermlevel = getManualPermLevel(bot, userObject.getNick(), channelObject);
             int apermlevel = getAutomaticPermLevel(userObject, channelObject);
-            if (mpermlevel == -1) {
-                return -1;
+            if (mpermlevel < 0) {
+                return mpermlevel;
             } else if (apermlevel < mpermlevel) {
                 return mpermlevel;
             } else {
