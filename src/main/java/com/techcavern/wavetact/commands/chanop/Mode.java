@@ -6,6 +6,7 @@
 package com.techcavern.wavetact.commands.chanop;
 
 import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.ChanOPCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.pircbotx.Channel;
@@ -17,6 +18,8 @@ import org.pircbotx.User;
  */
 public class Mode extends GenericCommand {
     @CMD
+    @ChanOPCMD
+
     public Mode() {
         super(GeneralUtils.toArray("mode mo"), 9, "mode (channel) [modes to set]");
     }

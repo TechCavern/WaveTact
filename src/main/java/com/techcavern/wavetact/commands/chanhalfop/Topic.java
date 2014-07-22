@@ -5,6 +5,8 @@
  */
 package com.techcavern.wavetact.commands.chanhalfop;
 
+import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.ChanHOPCMD;
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
@@ -24,6 +26,9 @@ import java.util.List;
  */
 
 public class Topic extends GenericCommand {
+
+    @CMD
+    @ChanHOPCMD
 
     public Topic() {
         super(GeneralUtils.toArray("topic t"), 6, "Topic [Seperator] [a(add)/sw(switch)/+[topic #]/-[topic #]/(Insert message to replace whole topic)/ss(switch seperator)/r(revert)] (Messages to add)(Integer to swap)(seperator to change to) (Integer to swap)");

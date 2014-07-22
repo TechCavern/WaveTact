@@ -1,6 +1,7 @@
 package com.techcavern.wavetact.commands.utils;
 
 import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
@@ -14,6 +15,8 @@ import java.util.List;
 
 public class Weather extends GenericCommand {
     @CMD
+    @GenCMD
+
     public Weather() {
         super(GeneralUtils.toArray("weather temperature temp w"), 0, "weather [zipcode]");
     }

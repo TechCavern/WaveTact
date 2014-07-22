@@ -6,6 +6,7 @@
 package com.techcavern.wavetact.commands.controller;
 
 import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleActionUtils;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleMessageUtils;
@@ -20,6 +21,7 @@ import org.pircbotx.User;
  */
 public class DefCon extends GenericCommand {
     @CMD
+    @ConCMD
     public DefCon() {
         super(GeneralUtils.toArray("defcon"), 9001, "defcon (-)(1)(2)(3)(4)(5) locks down the bot");
     }
@@ -56,7 +58,9 @@ public class DefCon extends GenericCommand {
     }
 
     void initializeCommands() {
+        GeneralRegistry.AllCommands.clear();
         GeneralRegistry.GenericCommands.clear();
+        GeneralRegistry.FunCommands.clear();
         GeneralRegistry.SimpleActions.clear();
         GeneralRegistry.SimpleMessages.clear();
         GeneralRegistry.TrustedCommands.clear();
@@ -73,8 +77,7 @@ public class DefCon extends GenericCommand {
     }
 
     void sPermLevel(int PermLevel) {
-        for (String Com : GeneralRegistry.ControllerListCommands) {
-            GenericCommand Command = GetUtils.getCommand(Com);
+        for (GenericCommand Command : GeneralRegistry.AllCommands) {
             if (Command.getPermLevel() < PermLevel) {
                 Command.setPermLevel(PermLevel);
             }

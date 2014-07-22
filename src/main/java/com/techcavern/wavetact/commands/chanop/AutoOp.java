@@ -1,6 +1,7 @@
 package com.techcavern.wavetact.commands.chanop;
 
 import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.ChanOPCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.PermUtils;
 import com.techcavern.wavetact.utils.databaseUtils.PermChannelUtils;
@@ -15,6 +16,7 @@ import org.pircbotx.User;
  */
 public class AutoOp extends GenericCommand {
     @CMD
+    @ChanOPCMD
     public AutoOp() {
         super(GeneralUtils.toArray("autoop autop ap"), 10, "autoop (-)[user] - Define whether to autoop the user or not");
     }

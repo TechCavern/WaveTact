@@ -6,6 +6,7 @@
 package com.techcavern.wavetact.commands.trusted;
 
 import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.TruCMD;
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
@@ -30,6 +31,7 @@ import java.util.stream.Collectors;
 public class CustomCMD extends GenericCommand {
 
     @CMD
+    @TruCMD
     public CustomCMD() {
         super(GeneralUtils.toArray("customcmd cmd custom cc"), 5, "customcmd [type(m/a)] (+/-)[Command] [permlevel] [Response] Responses may contain $1, $2, etc which indicate the argument separated by a space. $* indicates all remaining arguments.");
     }

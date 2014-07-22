@@ -2,6 +2,7 @@ package com.techcavern.wavetact.commands.fun;
 
 import com.google.gson.JsonObject;
 import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.FunCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
@@ -12,6 +13,8 @@ import org.pircbotx.User;
 
 public class UrbanDictonary extends GenericCommand {
     @CMD
+    @FunCMD
+
     public UrbanDictonary() {
         super(GeneralUtils.toArray("urbandictionary ub urban urb ud"), 0, "urbandictionary [what to define]");
     }

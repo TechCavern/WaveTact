@@ -1,6 +1,7 @@
 package com.techcavern.wavetact.commands.utils;
 
 import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
@@ -17,6 +18,8 @@ import org.pircbotx.User;
 @SuppressWarnings("ALL")
 public class Commands extends GenericCommand {
     @CMD
+    @GenCMD
+
     public Commands() {
         super(GeneralUtils.toArray("commands list cmds coms"), 0, "Takes 0 arguments, returns list of Commands");
     }

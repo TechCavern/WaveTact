@@ -1,6 +1,7 @@
 package com.techcavern.wavetact.commands.utils;
 
 import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
@@ -14,6 +15,8 @@ import java.util.Arrays;
 
 public class Help extends GenericCommand {
     @CMD
+    @GenCMD
+
     public Help() {
         super(GeneralUtils.toArray("help h halp"), 0, "help (command)");
     }

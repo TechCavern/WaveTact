@@ -6,6 +6,7 @@
 package com.techcavern.wavetact.commands.controller;
 
 import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleActionUtils;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleMessageUtils;
@@ -19,6 +20,8 @@ import org.pircbotx.User;
  */
 public class Lock extends GenericCommand {
     @CMD
+    @ConCMD
+
     public Lock() {
         super(GeneralUtils.toArray("lock lo"), 9001, "lock [type(m/a)] [command]");
     }

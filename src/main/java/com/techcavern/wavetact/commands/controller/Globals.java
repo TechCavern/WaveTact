@@ -6,6 +6,7 @@
 package com.techcavern.wavetact.commands.controller;
 
 import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.databaseUtils.GlobalUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
@@ -20,6 +21,7 @@ import org.pircbotx.User;
  */
 public class Globals extends GenericCommand {
     @CMD
+    @ConCMD
     public Globals() {
         super(GeneralUtils.toArray("globals global gl"), 9001, "global (-)[user]");
     }

@@ -1,6 +1,7 @@
 package com.techcavern.wavetact.commands.utils;
 
 import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
@@ -16,6 +17,8 @@ import java.net.URL;
 
 public class MCStatus extends GenericCommand {
     @CMD
+    @GenCMD
+
     public MCStatus() {
         super(GeneralUtils.toArray("mcstatus mc"), 0, "mcstatus - takes zero arguments, checks status of MC servers");
     }

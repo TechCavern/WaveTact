@@ -1,6 +1,7 @@
 package com.techcavern.wavetact.commands.controller;
 
 import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
@@ -11,6 +12,8 @@ import org.pircbotx.User;
 
 public class Shutdown extends GenericCommand {
     @CMD
+    @ConCMD
+
     public Shutdown() {
         super(GeneralUtils.toArray("shutdown down"), 9001, "Shutdown");
     }

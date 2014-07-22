@@ -1,6 +1,7 @@
 package com.techcavern.wavetact.commands.trusted;
 
 import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.TruCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
@@ -14,6 +15,8 @@ import java.util.List;
 
 public class WolframAlpha extends GenericCommand {
     @CMD
+    @TruCMD
+
     public WolframAlpha() {
         super(GeneralUtils.toArray("wolframalpha wa wolfram"), 5, "wolframalpha [input] (return array value #)");
     }

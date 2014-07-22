@@ -83,8 +83,8 @@ public class LoadUtils {
         GeneralRegistry.ControllerCommands.add(new Join());
         GeneralRegistry.ControllerCommands.add(new Lock());
         GeneralRegistry.ControllerCommands.add(new Shutdown());
-        GeneralRegistry.GenericCommands.add(new SomethingAwesome());
-        GeneralRegistry.GenericCommands.add(new UrbanDictonary());
+        GeneralRegistry.FunCommands.add(new SomethingAwesome());
+        GeneralRegistry.FunCommands.add(new UrbanDictonary());
         GeneralRegistry.TrustedCommands.add(new Act());
         GeneralRegistry.TrustedCommands.add(new CustomCMD());
         GeneralRegistry.ChanHalfOpCommands.add(new Part());
@@ -101,7 +101,7 @@ public class LoadUtils {
         GeneralRegistry.GenericCommands.add(new Question());
         GeneralRegistry.GenericCommands.add(new Weather());
         GeneralRegistry.ChanHalfOpCommands.add(new Topic());
-        GeneralRegistry.GenericCommands.add(new Attack());
+        GeneralRegistry.FunCommands.add(new Attack());
         GeneralRegistry.ControllerCommands.add(new DefCon());
         GeneralRegistry.ChanFounderCommands.add(new CPermLevel());
         GeneralRegistry.ChanOpCommands.add(new AutoOp());
@@ -174,6 +174,17 @@ public class LoadUtils {
 
     public static void registerCommandList() {
         for (GenericCommand command : GeneralRegistry.GenericCommands) {
+            GeneralRegistry.GenericListCommands.add(command.getCommand());
+            GeneralRegistry.TrustedListCommands.add(command.getCommand());
+            GeneralRegistry.ChanHalfOpListCommands.add(command.getCommand());
+            GeneralRegistry.ChanOpListCommands.add(command.getCommand());
+            GeneralRegistry.ChanOwnerListCommands.add(command.getCommand());
+            GeneralRegistry.ChanFounderListCommands.add(command.getCommand());
+            GeneralRegistry.ControllerListCommands.add(command.getCommand());
+            GeneralRegistry.GlobalListCommands.add(command.getCommand());
+
+        }
+        for (GenericCommand command : GeneralRegistry.FunCommands) {
             GeneralRegistry.GenericListCommands.add(command.getCommand());
             GeneralRegistry.TrustedListCommands.add(command.getCommand());
             GeneralRegistry.ChanHalfOpListCommands.add(command.getCommand());

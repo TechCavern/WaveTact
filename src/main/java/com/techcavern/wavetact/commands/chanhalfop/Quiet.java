@@ -1,6 +1,7 @@
 package com.techcavern.wavetact.commands.chanhalfop;
 
 import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.ChanHOPCMD;
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
@@ -13,6 +14,8 @@ import org.pircbotx.User;
 
 public class Quiet extends GenericCommand {
     @CMD
+    @ChanHOPCMD
+
     public Quiet() {
         super(GeneralUtils.toArray("quiet mute m"), 6, "Quiet (-)[User][hostmask] (time)");
     }

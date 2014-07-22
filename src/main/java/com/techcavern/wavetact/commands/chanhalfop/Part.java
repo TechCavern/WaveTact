@@ -6,6 +6,7 @@
 package com.techcavern.wavetact.commands.chanhalfop;
 
 import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.ChanHOPCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.pircbotx.Channel;
@@ -18,6 +19,8 @@ import org.pircbotx.User;
 public class Part extends GenericCommand {
 
     @CMD
+    @ChanHOPCMD
+
     public Part() {
         super(GeneralUtils.toArray("part pa"), 7, "part [channel]");
     }

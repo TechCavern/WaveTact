@@ -6,6 +6,8 @@
 package com.techcavern.wavetact.commands.chanowner;
 
 import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.ChanOPCMD;
+import com.techcavern.wavetact.annot.ChanOWNCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
@@ -19,23 +21,29 @@ import org.pircbotx.User;
  */
 public class Protect extends GenericCommand {
     @CMD
+    @ChanOWNCMD
+
     public Protect() {
         super(GeneralUtils.toArray("protect prot pr sop"), 14, "protect (-)(User)");
     }
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        if (args.length >= 1) {
-            if (args[0].equalsIgnoreCase("-")) {
-                channel.send().deSuperOp(user);
-            } else if (args[0].startsWith("-")) {
-                channel.send().deSuperOp(GetUtils.getUserByNick(Bot, args[0].replaceFirst("-", "")));
-            } else {
-                channel.send().superOp(GetUtils.getUserByNick(Bot, args[0]));
+        if(Bot.getServerInfo().getPrefixes().contains("a")) {
+            if (args.length >= 1) {
+                if (args[0].equalsIgnoreCase("-")) {
+                    channel.send().deSuperOp(user);
+                } else if (args[0].startsWith("-")) {
+                    channel.send().deSuperOp(GetUtils.getUserByNick(Bot, args[0].replaceFirst("-", "")));
+                } else {
+                    channel.send().superOp(GetUtils.getUserByNick(Bot, args[0]));
 
+                }
+            } else {
+                channel.send().superOp(user);
             }
-        } else {
-            channel.send().superOp(user);
+        }else{
+            user.send().notice("This server does not support the protect prefix");
         }
     }
 }

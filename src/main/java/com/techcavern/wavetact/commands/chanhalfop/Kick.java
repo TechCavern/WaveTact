@@ -6,6 +6,7 @@
 package com.techcavern.wavetact.commands.chanhalfop;
 
 import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.ChanHOPCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
@@ -19,6 +20,8 @@ import org.pircbotx.UserLevel;
  */
 public class Kick extends GenericCommand {
     @CMD
+    @ChanHOPCMD
+
     public Kick() {
         super(GeneralUtils.toArray("kick k"), 6, "kick [user] (message)");
     }

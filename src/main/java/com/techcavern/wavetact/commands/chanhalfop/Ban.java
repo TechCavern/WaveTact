@@ -1,6 +1,7 @@
 package com.techcavern.wavetact.commands.chanhalfop;
 
 import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.ChanHOPCMD;
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
@@ -13,6 +14,7 @@ import org.pircbotx.User;
 
 public class Ban extends GenericCommand {
     @CMD
+    @ChanHOPCMD
     public Ban() {
         super(GeneralUtils.toArray("ban b"), 6, "Ban (-)(+)[User] (time)");
     }

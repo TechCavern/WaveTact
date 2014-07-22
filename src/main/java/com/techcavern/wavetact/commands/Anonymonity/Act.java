@@ -5,6 +5,7 @@
  */
 package com.techcavern.wavetact.commands.Anonymonity;
 
+import com.techcavern.wavetact.annot.AnonCMD;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
@@ -20,6 +21,7 @@ import org.pircbotx.User;
 public class Act extends GenericCommand {
 
     @CMD
+    @AnonCMD
     public Act() {
         super(GeneralUtils.toArray("act do"), 5, "act [something]");
     }

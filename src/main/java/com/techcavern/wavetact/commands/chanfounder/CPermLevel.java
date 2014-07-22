@@ -1,6 +1,7 @@
 package com.techcavern.wavetact.commands.chanfounder;
 
 import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.ChanFounderCMD;
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.PermUtils;
@@ -16,6 +17,7 @@ import org.pircbotx.User;
  */
 public class CPermLevel extends GenericCommand {
     @CMD
+    @ChanFounderCMD
     public CPermLevel() {
         super(GeneralUtils.toArray("permlevel pl cpermlevel"), 18, "permlevel (+)(-)[user] (permlevel) - adds, removes, modifies permissions");
     }

@@ -23,6 +23,7 @@ public class GeneralRegistry {
     public static final List<GenericCommand> GlobalCommands = new ArrayList<>();
     public static final List<GenericCommand> ChanOwnerCommands = new ArrayList<>();
     public static final List<GenericCommand> ChanHalfOpCommands = new ArrayList<>();
+    public static final List<GenericCommand> FunCommands = new ArrayList<>();
     public static final List<GenericCommand> AnonymonityCommands = new ArrayList<>();
     public static final List<FunObject> Attacks = new ArrayList<>();
     public static final List<GenericCommand> ChanOpCommands = new ArrayList<>();

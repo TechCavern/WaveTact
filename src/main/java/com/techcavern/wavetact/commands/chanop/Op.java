@@ -6,6 +6,7 @@
 package com.techcavern.wavetact.commands.chanop;
 
 import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.ChanOPCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
@@ -18,6 +19,8 @@ import org.pircbotx.User;
  */
 public class Op extends GenericCommand {
     @CMD
+    @ChanOPCMD
+
     public Op() {
         super(GeneralUtils.toArray("op aop"), 9, "op (-)(user to op)");
     }

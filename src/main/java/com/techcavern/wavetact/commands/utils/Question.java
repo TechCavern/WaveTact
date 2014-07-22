@@ -1,6 +1,7 @@
 package com.techcavern.wavetact.commands.utils;
 
 import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
@@ -14,6 +15,8 @@ import java.util.List;
 
 public class Question extends GenericCommand {
     @CMD
+    @GenCMD
+
     public Question() {
         super(GeneralUtils.toArray("question q"), 0, "question [Ask a Question]");
     }

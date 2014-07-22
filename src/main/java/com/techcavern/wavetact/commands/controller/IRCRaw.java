@@ -2,6 +2,7 @@ package com.techcavern.wavetact.commands.controller;
 
 
 import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.pircbotx.Channel;
@@ -10,6 +11,7 @@ import org.pircbotx.User;
 
 public class IRCRaw extends GenericCommand {
     @CMD
+    @ConCMD
     public IRCRaw() {
         super(GeneralUtils.toArray("ircraw raw quote"), 9001, "raw [to be sent to server]");
     }

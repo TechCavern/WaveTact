@@ -6,6 +6,7 @@
 package com.techcavern.wavetact.commands.fun;
 
 import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.FunCMD;
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
@@ -22,6 +23,7 @@ import org.pircbotx.User;
 public class Attack extends GenericCommand {
 
     @CMD
+    @FunCMD
     public Attack() {
         super(GeneralUtils.toArray("attack shoot a s"), 0, "attacks [something]");
     }

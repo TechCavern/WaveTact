@@ -1,6 +1,7 @@
 package com.techcavern.wavetact.commands.utils;
 
 import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
@@ -13,6 +14,8 @@ import java.util.List;
 
 public class MathC extends GenericCommand {
     @CMD
+    @GenCMD
+
     public MathC() {
         super(GeneralUtils.toArray("calculate calc c math"), 0, "calculate [What to Calculate]");
     }
