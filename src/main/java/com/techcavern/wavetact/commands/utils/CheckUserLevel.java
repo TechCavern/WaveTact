@@ -24,9 +24,6 @@ public class CheckUserLevel extends GenericCommand {
         } else {
             userObject = GetUtils.getUserByNick(Bot, args[0]);
         }
-        if (channel == null) {
-            user.send().notice("Channel must be specified as Argument #1");
-        } else {
             if (UserPermLevel >= 9001) {
                 IRCUtils.SendMessage(user, channel, userObject.getNick() + " is my Master!", isPrivate);
             } else if (UserPermLevel >= 20) {
@@ -46,7 +43,7 @@ public class CheckUserLevel extends GenericCommand {
             } else {
                 IRCUtils.SendMessage(user, channel, userObject.getNick() + " is a Regular User!", isPrivate);
             }
-        }
+
 
     }
 }

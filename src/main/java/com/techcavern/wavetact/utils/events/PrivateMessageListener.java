@@ -29,7 +29,7 @@ public class PrivateMessageListener extends ListenerAdapter<PircBotX> {
         }
         messageParts = ArrayUtils.remove(messageParts, 0);
         Channel channel = null;
-        if (messageParts.length > 1 && messageParts[0].startsWith("#")) {
+        if (messageParts.length >= 1 && messageParts[0].startsWith("#")) {
             channel = GetUtils.getChannelbyName(event.getBot(), messageParts[0]);
             messageParts = ArrayUtils.remove(messageParts, 0);
         }
