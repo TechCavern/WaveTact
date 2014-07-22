@@ -14,7 +14,7 @@ import java.util.List;
 public class MathC extends GenericCommand {
     @CMD
     public MathC() {
-        super(GeneralUtils.toArray("calculate calc c"), 0, "calculate [What to Calculate]");
+        super(GeneralUtils.toArray("calculate calc c math"), 0, "calculate [What to Calculate]");
     }
 
     @Override
