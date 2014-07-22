@@ -20,23 +20,26 @@ import org.pircbotx.UserLevel;
 public class Kick extends GenericCommand {
     @CMD
     public Kick() {
-        super(GeneralUtils.toArray("kick k"), 6, "kick [user]");
+        super(GeneralUtils.toArray("kick k"), 6, "kick [user] (message)");
     }
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-
+        String message = "Kicked by "+ user.getNick();
+        if(args.length > 1){
+            message = "Kicked by "+ user.getNick() + ": "+ GeneralUtils.buildMessage(1, args.length, args);
+        }
         if (channel.getUserLevels(Bot.getUserBot()).contains(UserLevel.HALFOP) && !channel.isOwner(GetUtils.getUserByNick(Bot, args[0])) && !channel.isSuperOp(GetUtils.getUserByNick(Bot, args[0]))) {
             if (channel.isHalfOp(GetUtils.getUserByNick(Bot, args[0])) || channel.isOp(GetUtils.getUserByNick(Bot, args[0]))) {
                 user.send().notice("Error: I must be at least opped to kick someone that is opped or halfopped");
             } else {
-                channel.send().kick(GetUtils.getUserByNick(Bot, args[0]));
+                channel.send().kick(GetUtils.getUserByNick(Bot, args[0]), message);
             }
         } else if (channel.getUserLevels(Bot.getUserBot()).contains(UserLevel.OP) && !channel.isOwner(GetUtils.getUserByNick(Bot, args[0])) && !channel.isSuperOp(GetUtils.getUserByNick(Bot, args[0]))) {
-            channel.send().kick(GetUtils.getUserByNick(Bot, args[0]));
+            channel.send().kick(GetUtils.getUserByNick(Bot, args[0]), message);
 
         } else if (channel.getUserLevels(Bot.getUserBot()).contains(UserLevel.OWNER)) {
-            channel.send().kick(GetUtils.getUserByNick(Bot, args[0]));
+            channel.send().kick(GetUtils.getUserByNick(Bot, args[0]), message);
 
         } else {
             user.send().notice("Error: I must be ownered in the channel to kick someone that is protected or ownered");
