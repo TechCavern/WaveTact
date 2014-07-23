@@ -1,6 +1,7 @@
 package com.techcavern.wavetact.commands.chanop;
 
 import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.ChanOPCMD;
 import com.techcavern.wavetact.annot.TruCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
@@ -15,7 +16,7 @@ import java.util.List;
 
 public class Notice extends GenericCommand {
     @CMD
-    @TruCMD
+    @ChanOPCMD
 
     public Notice() {
         super(GeneralUtils.toArray("notice not"), 10, "notice (message)");

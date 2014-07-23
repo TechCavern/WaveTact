@@ -6,6 +6,7 @@
 package com.techcavern.wavetact.commands.chanhalfop;
 
 import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.ChanHOPCMD;
 import com.techcavern.wavetact.annot.ChanOPCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
@@ -18,8 +19,7 @@ import org.pircbotx.User;
  */
 public class Invite extends GenericCommand {
     @CMD
-    @ChanOPCMD
-
+    @ChanHOPCMD
     public Invite() {
         super(GeneralUtils.toArray("invite inv"), 6, "invite (channel) [user]");
     }
