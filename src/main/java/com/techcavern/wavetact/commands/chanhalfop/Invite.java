@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.techcavern.wavetact.commands.chanop;
+package com.techcavern.wavetact.commands.chanhalfop;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ChanOPCMD;
@@ -16,21 +16,18 @@ import org.pircbotx.User;
 /**
  * @author jztech101
  */
-public class Mode extends GenericCommand {
+public class Invite extends GenericCommand {
     @CMD
     @ChanOPCMD
 
-    public Mode() {
-        super(GeneralUtils.toArray("mode mo"), 9, "mode (channel) [modes to set]");
+    public Invite() {
+        super(GeneralUtils.toArray("invite inv"), 6, "invite (channel) [user]");
     }
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        if (channel.isOp(Bot.getUserBot()) || channel.isSuperOp(Bot.getUserBot()) || channel.isOwner(Bot.getUserBot())) {
-            channel.send().setMode(args[0]);
-        } else {
-            channel.send().message("Error I must be at least op to perform the operation requested.");
-        }
+        Bot.sendRaw().rawLine("INVITE "+ args[0] + " " + channel.getName());
+        channel.send().notice(args[0] + "invited by " + user.getNick());
 
     }
 }

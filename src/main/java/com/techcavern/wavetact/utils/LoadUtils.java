@@ -12,7 +12,8 @@ import com.techcavern.wavetact.commands.chanfounder.CPermLevel;
 import com.techcavern.wavetact.commands.chanhalfop.*;
 import com.techcavern.wavetact.commands.chanop.AutoOp;
 import com.techcavern.wavetact.commands.chanop.HalfOp;
-import com.techcavern.wavetact.commands.chanop.Mode;
+import com.techcavern.wavetact.commands.chanhalfop.Mode;
+import com.techcavern.wavetact.commands.chanop.Notice;
 import com.techcavern.wavetact.commands.chanop.Op;
 import com.techcavern.wavetact.commands.chanowner.Owner;
 import com.techcavern.wavetact.commands.chanowner.Protect;
@@ -73,12 +74,14 @@ public class LoadUtils {
         GeneralRegistry.ChanHalfOpCommands.add(new Ban());
         GeneralRegistry.ChanOpCommands.add(new HalfOp());
         GeneralRegistry.ChanHalfOpCommands.add(new Kick());
-        GeneralRegistry.ChanOpCommands.add(new Mode());
+        GeneralRegistry.ChanHalfOpCommands.add(new Mode());
+        GeneralRegistry.ChanHalfOpCommands.add(new Invite());
         GeneralRegistry.ChanOwnerCommands.add(new Owner());
         GeneralRegistry.ChanOwnerCommands.add(new Protect());
         GeneralRegistry.ChanHalfOpCommands.add(new Quiet());
         GeneralRegistry.ChanHalfOpCommands.add(new Voice());
         GeneralRegistry.ChanOpCommands.add(new Op());
+        GeneralRegistry.ChanOpCommands.add(new Notice());
         GeneralRegistry.ControllerCommands.add(new IRCRaw());
         GeneralRegistry.ControllerCommands.add(new Join());
         GeneralRegistry.ControllerCommands.add(new Lock());
@@ -168,6 +171,7 @@ public class LoadUtils {
         GeneralRegistry.Attacks.add(new FunObject("eats $* up for breakfast", false, null));
         GeneralRegistry.Attacks.add(new FunObject("sends a flying desk at $*", false, null));
         GeneralRegistry.Attacks.add(new FunObject("swallows $* whole", false, null));
+        GeneralRegistry.Attacks.add(new FunObject("ties $* up and feeds it to a shark", false, null));
         GeneralRegistry.Attacks.add(new FunObject("runs over $*", true, "HEY! WATCH WHERE YOU'RE GOING!"));
         GeneralRegistry.Attacks.add(new FunObject("throws a racket at $*", false, null));
     }
