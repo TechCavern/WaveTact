@@ -34,7 +34,7 @@ public class PrivateMessageListener extends ListenerAdapter<PircBotX> {
             messageParts = ArrayUtils.remove(messageParts, 0);
         }
         if (Command != null) {
-            if ((Command.getPermLevel() == 9 || Command.getPermLevel() == 14 || Command.getPermLevel() == 6) || (channel != null)) {
+            if ((Command.getPermLevel() >= 0 && (Command.getPermLevel() <= 5 || Command.getPermLevel() > 18) || (channel != null))) {
                 int UserPermLevel = PermUtils.getPermLevel(event.getBot(), event.getUser(), channel);
                 if (UserPermLevel >= Command.getPermLevel()) {
                     if (Command.getPermLevel() == 9) {
