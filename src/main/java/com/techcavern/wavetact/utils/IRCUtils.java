@@ -22,70 +22,65 @@ public class IRCUtils {
         }
     }
 
+    public static WhoisEvent<PircBotX> WhoisEvent(PircBotX bot, String userObject) {
+        WhoisEvent<PircBotX> WhoisEvent;
+        if (userObject != null) {
+            bot.sendRaw().rawLineNow("WHOIS " + userObject);
+        } else {
+            WhoisEvent = null;
+        }
+        WaitForQueue waitForQueue = new WaitForQueue(bot);
+        try {
+            WhoisEvent = waitForQueue.waitFor(WhoisEvent.class);
+            waitForQueue.close();
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+            WhoisEvent = null;
+        }
+        return WhoisEvent;
+    }
+
     public static void SendNotice(PircBotX botObject, User userObject, String notice) {
         OutputUser x = new OutputUser(botObject, userObject);
         x.notice(notice);
     }
-    public static void SendMessage(User userObject, Channel channelObject, String message,boolean isPrivate ){
-        if(channelObject != null && !isPrivate){
+
+    public static void SendMessage(User userObject, Channel channelObject, String message, boolean isPrivate) {
+        if (channelObject != null && !isPrivate) {
             channelObject.send().message(message);
-        }else{
+        } else {
             userObject.send().message(message);
         }
     }
-    public static void SendAction(User userObject, Channel channelObject, String message, boolean isPrivate){
-        if(channelObject != null && !isPrivate){
+
+    public static void SendAction(User userObject, Channel channelObject, String message, boolean isPrivate) {
+        if (channelObject != null && !isPrivate) {
             channelObject.send().action(message);
-        }else{
+        } else {
             userObject.send().action(message);
         }
     }
-    public static String getBanmask(PircBotX bot, String userObject) {
-        String banmask;
-        if(userObject != null) {
-            bot.sendRaw().rawLineNow("WHOIS " + userObject);
-        }else{
-            banmask = null;
-        }
-        WaitForQueue waitForQueue = new WaitForQueue(bot);
-        WhoisEvent<PircBotX> test;
-        try {
-            test = waitForQueue.waitFor(WhoisEvent.class);
-            waitForQueue.close();
-            String hostname = test.getHostname();
-            String Login = test.getLogin();
-            if(!Login.startsWith("~")){
-                banmask = "*!" + Login+"@"+hostname;
-            }else{
-                banmask = "*!*@"+hostname;
-            }
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
-            banmask = null;
-        }
-        return banmask.replace(" ", "");
-    }
-    public static String getHostmask(PircBotX bot, String userObject) {
-        String hostmask;
-        if(userObject != null) {
-            bot.sendRaw().rawLineNow("WHOIS " + userObject);
-        }else{
-            hostmask = null;
-        }
-        WaitForQueue waitForQueue = new WaitForQueue(bot);
-        WhoisEvent<PircBotX> test;
-        try {
-            test = waitForQueue.waitFor(WhoisEvent.class);
-            waitForQueue.close();
-            String hostname = test.getHostname();
-            String Login = test.getLogin();
-        //    String Nick = test.getNick();
-            hostmask = userObject +"!" + Login+"@"+hostname;
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
-            hostmask = null;
-        }
 
-        return hostmask.replace(" ", "");
+    public static String getHostmask(PircBotX bot, String userObject, boolean isBanmask) {
+        String hostmask;
+        WhoisEvent whois = WhoisEvent(bot, userObject);
+        if (whois != null) {
+            String hostname = whois.getHostname();
+            String Login = whois.getLogin();
+            if (isBanmask) {
+                if (!Login.startsWith("~")) {
+                    hostmask = "*!" + Login + "@" + hostname;
+                } else {
+                    hostmask = "*!*@" + hostname;
+                }
+            } else {
+                hostmask = userObject + "!" + Login + "@" + hostname;
+            }
+            hostmask = hostmask.replace(" ", "");
+        } else {
+            hostmask = null;
+        }
+        return hostmask;
     }
+
 }

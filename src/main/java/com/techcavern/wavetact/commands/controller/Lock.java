@@ -6,26 +6,28 @@
 package com.techcavern.wavetact.commands.controller;
 
 import com.techcavern.wavetact.annot.CMD;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleActionUtils;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleMessageUtils;
+import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
-import org.pircbotx.hooks.events.MessageEvent;
 
 /**
  * @author jztech101
  */
 public class Lock extends GenericCommand {
     @CMD
+    @ConCMD
+
     public Lock() {
         super(GeneralUtils.toArray("lock lo"), 9001, "lock [type(m/a)] [command]");
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate,int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
 
         if (args[0].equalsIgnoreCase("a")) {
             if (args[1].startsWith("-")) {

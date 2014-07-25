@@ -27,6 +27,7 @@ PermLevels
 - 20 - Network Oper (Access to all commands below controller on a specific network)
 - 18 - Channel Founder (Access to all commands below controller on a specific channel and must be assigned by the controller per channel)
 - 15 - Channel Owner (Access to all commands below Founder on a specific channel and must be assigned by the controller per channel)
+- 13 - Channel Admin (Access to all commands below Owner on a specific channel)
 - 10 - Channel Operator (Access to all commands below Owner on a specific channel)
 - 7 - Channel Half-Operator (Access to all commands below Operator on a specific channel)
 - 5 - Channel Trusted (Access to all commands below Half-Operator on a specific channel)
@@ -35,7 +36,7 @@ PermLevels
 
 Running
 =======
-- Run `java -jar WaveTact.jar`
+- Run `java -jar WaveTact.jar -start`
 - WaveTact help is access by the -h or -help parameter
 - Adding and removing controllers is available via the -c or -controller parameter.
 - Make configuration by using the -addserver or -a parameter

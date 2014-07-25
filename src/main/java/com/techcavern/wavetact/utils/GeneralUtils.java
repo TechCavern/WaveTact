@@ -19,7 +19,7 @@ public class GeneralUtils {
         WAQuery query = engine.createQuery();
         query.setInput(input);
         WAQueryResult queryResult = engine.performQuery(query);
-        List<String> waResults = new ArrayList<String>();
+        List<String> waResults = new ArrayList<>();
         for (WAPod pod : queryResult.getPods()) {
             for (WASubpod spod : pod.getSubpods()) {
                 for (Object e : spod.getContents()) {

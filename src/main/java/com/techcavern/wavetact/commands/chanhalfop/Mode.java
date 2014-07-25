@@ -7,38 +7,26 @@ package com.techcavern.wavetact.commands.chanhalfop;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ChanHOPCMD;
+import com.techcavern.wavetact.annot.ChanOPCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-
 /**
  * @author jztech101
  */
-public class Voice extends GenericCommand {
+public class Mode extends GenericCommand {
     @CMD
     @ChanHOPCMD
-
-    public Voice() {
-        super(GeneralUtils.toArray("voice vo vop"), 6, "Voice (-)(User)");
+    public Mode() {
+        super(GeneralUtils.toArray("mode mo"), 6, "mode (channel) [modes to set]");
     }
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        if (args.length >= 1) {
-            if (args[0].equalsIgnoreCase("-")) {
-                channel.send().deVoice(user);
-            } else if (args[0].startsWith("-")) {
-                channel.send().deVoice(GetUtils.getUserByNick(Bot, args[0].replaceFirst("-", "")));
-            } else {
-                channel.send().voice(GetUtils.getUserByNick(Bot, args[0]));
+            channel.send().setMode(args[0]);
 
-            }
-        } else {
-            channel.send().voice(user);
-        }
     }
 }

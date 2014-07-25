@@ -5,7 +5,6 @@ import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.fileUtils.JSONFile;
 import com.techcavern.wavetact.utils.objects.Global;
-import com.techcavern.wavetact.utils.objects.PermChannel;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

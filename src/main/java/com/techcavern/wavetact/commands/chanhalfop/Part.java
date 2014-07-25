@@ -6,12 +6,12 @@
 package com.techcavern.wavetact.commands.chanhalfop;
 
 import com.techcavern.wavetact.annot.CMD;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.annot.ChanHOPCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
+import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
-import org.pircbotx.hooks.events.MessageEvent;
 
 /**
  * @author jztech101
@@ -19,12 +19,14 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class Part extends GenericCommand {
 
     @CMD
+    @ChanHOPCMD
+
     public Part() {
         super(GeneralUtils.toArray("part pa"), 7, "part [channel]");
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate,int UserPermLevel, String... args) throws Exception {
-       channel.send().part();
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+        channel.send().part();
     }
 }

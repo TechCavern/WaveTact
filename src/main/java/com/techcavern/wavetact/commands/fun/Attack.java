@@ -6,6 +6,7 @@
 package com.techcavern.wavetact.commands.fun;
 
 import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.FunCMD;
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
@@ -15,7 +16,6 @@ import org.apache.commons.lang3.RandomUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
-import org.pircbotx.hooks.events.MessageEvent;
 
 /**
  * @author jztech101
@@ -23,19 +23,20 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class Attack extends GenericCommand {
 
     @CMD
+    @FunCMD
     public Attack() {
         super(GeneralUtils.toArray("attack shoot a s"), 0, "attacks [something]");
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate,int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         String Something = GeneralUtils.buildMessage(0, args.length, args);
-        int randomint = RandomUtils.nextInt(0 , GeneralRegistry.Attacks.size());
+        int randomint = RandomUtils.nextInt(0, GeneralRegistry.Attacks.size());
         FunObject attack = GeneralRegistry.Attacks.get(randomint);
-        if(attack.getMessageExists()){
+        if (attack.getMessageExists()) {
             IRCUtils.SendAction(user, channel, attack.getAction().replace("$*", Something), isPrivate);
             IRCUtils.SendMessage(user, channel, attack.getMessage().replace("$*", Something), isPrivate);
-        }else{
+        } else {
             IRCUtils.SendAction(user, channel, attack.getAction().replace("$*", Something), isPrivate);
         }
 

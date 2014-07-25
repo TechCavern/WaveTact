@@ -1,34 +1,31 @@
 package com.techcavern.wavetact.commands.utils;
 
 import com.techcavern.wavetact.annot.CMD;
-import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
-import com.techcavern.wavetact.utils.PermUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
-import org.pircbotx.hooks.events.MessageEvent;
 
 public class CheckUserLevel extends GenericCommand {
 
     @CMD
+    @GenCMD
     public CheckUserLevel() {
         super(GeneralUtils.toArray("checkuserlevel level checklevel"), 0, "Checks User Level, 0 arguments");
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate,int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         User userObject;
         if (args.length < 1) {
             userObject = user;
         } else {
             userObject = GetUtils.getUserByNick(Bot, args[0]);
         }
-        if(channel == null){
-            user.send().notice("Channel must be specified as Argument #1");
-        }else {
             if (UserPermLevel >= 9001) {
                 IRCUtils.SendMessage(user, channel, userObject.getNick() + " is my Master!", isPrivate);
             } else if (UserPermLevel >= 20) {
@@ -48,7 +45,7 @@ public class CheckUserLevel extends GenericCommand {
             } else {
                 IRCUtils.SendMessage(user, channel, userObject.getNick() + " is a Regular User!", isPrivate);
             }
-        }
+
 
     }
 }

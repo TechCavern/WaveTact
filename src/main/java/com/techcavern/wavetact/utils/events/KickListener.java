@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class KickListener extends ListenerAdapter<PircBotX> {
     public void onKick(KickEvent<PircBotX> event) throws Exception {
-        if (event.getRecipient() == event.getBot().getUserBot()) {
+        if (event.getRecipient() == event.getBot().getUserBot() && !event.getReason().toLowerCase().contains("banned")) {
             event.getBot().sendIRC().joinChannel(event.getChannel().getName());
             TimeUnit.SECONDS.sleep(30);
             event.getBot().sendIRC().joinChannel(event.getChannel().getName());

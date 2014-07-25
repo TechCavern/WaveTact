@@ -5,15 +5,15 @@
  */
 package com.techcavern.wavetact.commands.Anonymonity;
 
+import com.techcavern.wavetact.annot.AnonCMD;
 import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
-import com.techcavern.wavetact.utils.GeneralUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
-import org.pircbotx.hooks.events.MessageEvent;
 
 /**
  * @author jztech101
@@ -21,13 +21,17 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class Say extends GenericCommand {
 
     @CMD
+    @AnonCMD
     public Say() {
         super(GeneralUtils.toArray("say msg"), 5, "say [something]");
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate,int UserPermLevel, String... args) throws Exception {
-        IRCUtils.SendMessage(user, channel,StringUtils.join(args, " ").replace("\n", " "), isPrivate);
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+        if (isPrivate && channel != null) {
+            isPrivate = false;
+        }
+        IRCUtils.SendMessage(user, channel, StringUtils.join(args, " ").replace("\n", " "), isPrivate);
 
     }
 }

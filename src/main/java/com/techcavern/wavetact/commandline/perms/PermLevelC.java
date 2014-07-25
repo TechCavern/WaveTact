@@ -3,8 +3,8 @@ package com.techcavern.wavetact.commandline.perms;
 import com.techcavern.wavetact.annot.CMDLine;
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.objects.*;
 import com.techcavern.wavetact.utils.databaseUtils.ControllerUtils;
+import com.techcavern.wavetact.utils.objects.CommandLine;
 
 /**
  * Created by jztech101 on 7/5/14.

@@ -12,7 +12,6 @@ public class Global {
     }
 
 
-
     public String getNetwork() {
         return this.Network;
     }
