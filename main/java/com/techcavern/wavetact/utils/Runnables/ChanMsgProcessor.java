@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.utils.Runnables;
+package com.techcavern.wavetact.utils.runnables;
 
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GetUtils;

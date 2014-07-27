@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.utils.Runnables;
+package com.techcavern.wavetact.utils.runnables;
 
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GetUtils;
@@ -7,7 +7,6 @@ import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.apache.commons.lang3.ArrayUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
-import org.pircbotx.hooks.events.MessageEvent;
 import org.pircbotx.hooks.events.PrivateMessageEvent;
 
 /**

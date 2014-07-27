@@ -17,9 +17,9 @@ public class GeneralRegistry {
 
     public static final List<PermChannel> PermChannels = new ArrayList<>();
     public static final List<UTime> Topic = new ArrayList<>();
-    public static final ThreadPoolExecutor threadPool = new ThreadPoolExecutor(10, 10, 1,
+    public static final ThreadPoolExecutor threadPool = new ThreadPoolExecutor(1, 100, 1,
             TimeUnit.SECONDS,
-            new LinkedBlockingQueue<Runnable>());
+            new LinkedBlockingQueue<>());
     public static final List<String> Controllers = new ArrayList<>();
     public static final List<Global> Globals = new ArrayList<>();
     public static final List<GenericCommand> AllCommands = new ArrayList<>();

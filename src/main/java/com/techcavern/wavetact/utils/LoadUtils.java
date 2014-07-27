@@ -103,6 +103,7 @@ public class LoadUtils {
         GeneralRegistry.ControllerCommands.add(new Globals());
         GeneralRegistry.GlobalCommands.add(new Disconnect());
         GeneralRegistry.GenericCommands.add(new MCStatus());
+        GeneralRegistry.ControllerCommands.add(new TestCommand());
 
 
     }

@@ -2,7 +2,7 @@ package com.techcavern.wavetact;
 
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.LoadUtils;
-import com.techcavern.wavetact.utils.Runnables.CheckTime;
+import com.techcavern.wavetact.utils.runnables.CheckTime;
 import com.techcavern.wavetact.utils.databaseUtils.*;
 import org.slf4j.impl.SimpleLogger;
 
