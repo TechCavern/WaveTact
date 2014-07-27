@@ -6,7 +6,6 @@
 package com.techcavern.wavetact.commands.chanowner;
 
 import com.techcavern.wavetact.annot.CMD;
-import com.techcavern.wavetact.annot.ChanOPCMD;
 import com.techcavern.wavetact.annot.ChanOWNCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
@@ -29,17 +28,17 @@ public class Protect extends GenericCommand {
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-            if (args.length >= 1) {
-                if (args[0].equalsIgnoreCase("-")) {
-                    channel.send().deSuperOp(user);
-                } else if (args[0].startsWith("-")) {
-                    channel.send().deSuperOp(GetUtils.getUserByNick(Bot, args[0].replaceFirst("-", "")));
-                } else {
-                    channel.send().superOp(GetUtils.getUserByNick(Bot, args[0]));
-
-                }
+        if (args.length >= 1) {
+            if (args[0].equalsIgnoreCase("-")) {
+                channel.send().deSuperOp(user);
+            } else if (args[0].startsWith("-")) {
+                channel.send().deSuperOp(GetUtils.getUserByNick(Bot, args[0].replaceFirst("-", "")));
             } else {
-                channel.send().superOp(user);
+                channel.send().superOp(GetUtils.getUserByNick(Bot, args[0]));
+
             }
+        } else {
+            channel.send().superOp(user);
+        }
     }
 }

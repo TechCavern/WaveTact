@@ -31,6 +31,9 @@ public class Attack extends GenericCommand {
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         String Something = GeneralUtils.buildMessage(0, args.length, args);
+        if (Something.toLowerCase().equalsIgnoreCase(Bot.getUserBot().getNick())) {
+            Something = user.getNick();
+        }
         int randomint = RandomUtils.nextInt(0, GeneralRegistry.Attacks.size());
         FunObject attack = GeneralRegistry.Attacks.get(randomint);
         if (attack.getMessageExists()) {

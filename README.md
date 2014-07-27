@@ -1,4 +1,4 @@
-WaveTact [![Build Status](https://travis-ci.org/TechCavern/WaveTact.svg?branch=master)](https://travis-ci.org/TechCavern/WaveTact)
+WaveTact [![Build Status](https://travis-ci.org/DirectMyFile/WaveTact.svg?branch=master)](https://travis-ci.org/DirectMyFile/WaveTact)
 --------
 An IRC bot that is based upon PircBotX and sits in #techcavern on the following networks:
 - ElectroCode (irc.electrocode.net)
@@ -36,7 +36,7 @@ PermLevels
 
 Running
 =======
-- Run `java -jar WaveTact.jar -start`
+- Run `java -jar WaveTact.jar`
 - WaveTact help is access by the -h or -help parameter
 - Adding and removing controllers is available via the -c or -controller parameter.
 - Make configuration by using the -addserver or -a parameter

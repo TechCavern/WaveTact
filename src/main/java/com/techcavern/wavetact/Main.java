@@ -2,6 +2,7 @@ package com.techcavern.wavetact;
 
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.LoadUtils;
+import com.techcavern.wavetact.utils.Runnables.CheckTime;
 import com.techcavern.wavetact.utils.databaseUtils.*;
 import org.slf4j.impl.SimpleLogger;
 
@@ -25,7 +26,7 @@ public class Main {
         PermChannelUtils.loadPermChannels();
         SimpleActionUtils.loadSimpleActions();
         SimpleMessageUtils.loadSimpleMessages();
-        LoadUtils.startThreads();
+        GeneralRegistry.threadPool.execute(new CheckTime());
         GeneralRegistry.WaveTact.start();
     }
 }

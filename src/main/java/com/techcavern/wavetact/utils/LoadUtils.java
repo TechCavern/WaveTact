@@ -12,7 +12,6 @@ import com.techcavern.wavetact.commands.chanfounder.CPermLevel;
 import com.techcavern.wavetact.commands.chanhalfop.*;
 import com.techcavern.wavetact.commands.chanop.AutoOp;
 import com.techcavern.wavetact.commands.chanop.HalfOp;
-import com.techcavern.wavetact.commands.chanhalfop.Mode;
 import com.techcavern.wavetact.commands.chanop.Notice;
 import com.techcavern.wavetact.commands.chanop.Op;
 import com.techcavern.wavetact.commands.chanowner.Owner;
@@ -27,19 +26,16 @@ import com.techcavern.wavetact.commands.global.Join;
 import com.techcavern.wavetact.commands.trusted.CustomCMD;
 import com.techcavern.wavetact.commands.trusted.WolframAlpha;
 import com.techcavern.wavetact.commands.utils.*;
-import com.techcavern.wavetact.utils.events.*;
+import com.techcavern.wavetact.utils.eventListeners.*;
 import com.techcavern.wavetact.utils.objects.CommandLine;
 import com.techcavern.wavetact.utils.objects.FunObject;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
-import com.techcavern.wavetact.utils.thread.CheckTime;
 import org.pircbotx.Configuration;
 import org.pircbotx.Configuration.Builder;
 import org.pircbotx.PircBotX;
 
 import java.nio.charset.Charset;
 import java.util.List;
-
-//import com.techcavern.wavetact.Commands.Commands.TestCommand;
 
 public class LoadUtils {
 
@@ -54,20 +50,16 @@ public class LoadUtils {
         Net.setServer(server, 6667);
         channels.forEach(Net::addAutoJoinChannel);
         Net.setRealName(nick);
-        Net.getListenerManager().addListener(new MessageListener());
+        Net.getListenerManager().addListener(new ChanMsgListener());
         Net.getListenerManager().addListener(new JoinListener());
         Net.getListenerManager().addListener(new CTCPListener());
         Net.getListenerManager().addListener(new KickListener());
-        Net.getListenerManager().addListener(new PrivateMessageListener());
+        Net.getListenerManager().addListener(new PrivMsgListener());
         Net.setAutoReconnect(true);
         if (nickservPassword != null) {
             Net.setNickservPassword(nickservPassword);
         }
         return new PircBotX(Net.buildConfiguration());
-    }
-
-    public static void startThreads() {
-        (new Thread(new CheckTime())).start();
     }
 
     public static void registerCommands() {

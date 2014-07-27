@@ -28,9 +28,9 @@ public class Kick extends GenericCommand {
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        String message = "Kicked by "+ user.getNick();
-        if(args.length > 1){
-            message = "Kicked by "+ user.getNick() + ": "+ GeneralUtils.buildMessage(1, args.length, args);
+        String message = "Kicked by " + user.getNick();
+        if (args.length > 1) {
+            message = "Kicked by " + user.getNick() + ": " + GeneralUtils.buildMessage(1, args.length, args);
         }
         if (channel.getUserLevels(Bot.getUserBot()).contains(UserLevel.HALFOP) && !channel.isOwner(GetUtils.getUserByNick(Bot, args[0])) && !channel.isSuperOp(GetUtils.getUserByNick(Bot, args[0]))) {
             if (channel.isHalfOp(GetUtils.getUserByNick(Bot, args[0])) || channel.isOp(GetUtils.getUserByNick(Bot, args[0]))) {

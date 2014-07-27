@@ -27,21 +27,21 @@ public class HalfOp extends GenericCommand {
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-      if(Bot.getServerInfo().getPrefixes().contains("h")) {
-          if (args.length >= 1) {
-              if (args[0].equalsIgnoreCase("-")) {
-                  channel.send().deHalfOp(user);
-              } else if (args[0].startsWith("-")) {
-                  channel.send().deHalfOp(GetUtils.getUserByNick(Bot, args[0].replaceFirst("-", "")));
-              } else {
-                  channel.send().halfOp(GetUtils.getUserByNick(Bot, args[0]));
+        if (Bot.getServerInfo().getPrefixes().contains("h")) {
+            if (args.length >= 1) {
+                if (args[0].equalsIgnoreCase("-")) {
+                    channel.send().deHalfOp(user);
+                } else if (args[0].startsWith("-")) {
+                    channel.send().deHalfOp(GetUtils.getUserByNick(Bot, args[0].replaceFirst("-", "")));
+                } else {
+                    channel.send().halfOp(GetUtils.getUserByNick(Bot, args[0]));
 
-              }
-          } else {
-              channel.send().halfOp(user);
-          }
-      }else{
-          user.send().notice("This server does not support HalfOps");
-      }
+                }
+            } else {
+                channel.send().halfOp(user);
+            }
+        } else {
+            user.send().notice("This server does not support HalfOps");
+        }
     }
 }
