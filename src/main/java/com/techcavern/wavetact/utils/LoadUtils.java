@@ -154,7 +154,6 @@ public class LoadUtils {
     }
 
     public static void registerAttacks() {
-
         GeneralRegistry.Attacks.add(new FunObject("sends a 53 inch monitor flying at $*", false, null));
         GeneralRegistry.Attacks.add(new FunObject("shoots a rocket at $*", false, null));
         GeneralRegistry.Attacks.add(new FunObject("punches $* right in the crotch", false, null));
