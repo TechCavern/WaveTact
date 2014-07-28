@@ -8,7 +8,7 @@ An IRC bot that is based upon PircBotZ and sits in #techcavern on the following 
 - Freenode (irc.freenode.net)
 - ObsidianIRC (irc.obsidianirc.net)
 
-WaveTact is under the GNU GPLv3 License (Per PircBotX Restrictions)
+WaveTact is under the GNU GPLv3 License (Per PircBot Restrictions)
 
 Building
 ========

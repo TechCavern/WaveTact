@@ -1,6 +1,6 @@
 package org.pircbotz;
 /*
-Fork of: https://github.com/AE97/PircBotY (7/28/14) which is Fork of https://code.google.com/p/pircbotx/ (Unknown Date)
+Fork of: https://github.com/AE97/PircBotY (7/28/14) which is Fork of https://code.google.com/p/pircbotx/ (Unknown Date) which in turn is Fork of PircBot
  */
 import com.google.common.collect.ImmutableMap;
 import java.io.BufferedReader;
