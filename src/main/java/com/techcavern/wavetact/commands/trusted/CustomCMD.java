@@ -109,7 +109,7 @@ public class CustomCMD extends GenericCommand {
             }
             IRCUtils.SendMessage(user, channel, "Command modified", isPrivate);
         } else {
-            IRCUtils.SendMessage(user, channel, "Permission Denied", isPrivate);
+            user.send().notice("Permission Denied");
         }
     }
 
@@ -138,7 +138,7 @@ public class CustomCMD extends GenericCommand {
                 IRCUtils.SendMessage(user, channel, "Command removed", isPrivate);
             }
         } else {
-            IRCUtils.SendMessage(user, channel, "Permission Denied", isPrivate);
+            user.send().notice("Permission Denied");
         }
     }
 }

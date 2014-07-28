@@ -62,7 +62,7 @@ public class ChanMsgProcessor {
                         }
 
                     } else {
-                        event.getChannel().send().message("Permission Denied");
+                        event.getUser().send().notice("Permission Denied");
 
                     }
                 }
