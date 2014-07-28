@@ -14,8 +14,8 @@ public class PermUtils {
         WhoisEvent whois = IRCUtils.WhoisEvent(bot, userObject);
         if (whois != null) {
             userString = whois.getRegisteredAs();
-            if (userString == null || userString.isEmpty()) {
-                if (GetUtils.getUserByNick(bot, userObject).isVerified()) {
+            if (userString.isEmpty()) {
+                if (userString != null) {
                     userString = userObject;
                 }
             }

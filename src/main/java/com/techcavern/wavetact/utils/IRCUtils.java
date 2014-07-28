@@ -31,8 +31,12 @@ public class IRCUtils {
         }
         WaitForQueue waitForQueue = new WaitForQueue(bot);
         try {
-            WhoisEvent = waitForQueue.waitFor(WhoisEvent.class);
-            waitForQueue.close();
+            while (true) {
+                WhoisEvent event = waitForQueue.waitFor(WhoisEvent.class);
+                if (!event.getNick().equals(userObject))
+                    continue;
+                waitForQueue.close();
+            }
         } catch (InterruptedException ex) {
             ex.printStackTrace();
             WhoisEvent = null;
