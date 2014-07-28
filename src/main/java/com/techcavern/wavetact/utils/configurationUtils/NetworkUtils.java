@@ -50,12 +50,12 @@ public class NetworkUtils {
 
     public static void registerDevServer() {
         List<String> Chans = Arrays.asList("#TechCavern");
-        PircBotZ Dev = LoadUtils.createbot(null, "SynIRC", Chans, "WaveTactDev", "irc.synirc.net");
-        PircBotZ Dev2 = LoadUtils.createbot(null, "EsperNet", Chans, "WaveTactDev", "irc.esper.net");
+        PircBotZ Dev = LoadUtils.createbot(null, "SynIRC", Chans, "WaveTactDev", "irc.electrocode.net");
+//        PircBotZ Dev2 = LoadUtils.createbot(null, "EsperNet", Chans, "WaveTactDev", "irc.xertion.org");
         GeneralRegistry.WaveTact.addBot(Dev);
-        GeneralRegistry.WaveTact.addBot(Dev2);
+//        GeneralRegistry.WaveTact.addBot(Dev2);
         GeneralRegistry.Controllers.add("JZTech101");
         new CommandChar("@", Dev);
-        new CommandChar("@", Dev2);
+//        new CommandChar("@", Dev2);
     }
 }
