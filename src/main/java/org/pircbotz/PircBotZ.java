@@ -1,5 +1,7 @@
 package org.pircbotz;
-
+/*
+Fork of: https://github.com/AE97/PircBotY (7/28/14) which is Fork of https://code.google.com/p/pircbotx/ (Unknown Date)
+ */
 import com.google.common.collect.ImmutableMap;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -28,7 +30,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class PircBotZ implements Comparable<PircBotZ> {
 
-    public static final String VERSION = "1.0.2";
+    public static final String VERSION = "1.1.0";
     private static final AtomicInteger BOT_COUNT = new AtomicInteger();
     private final int botId;
     private final Configuration<PircBotZ> configuration;
@@ -52,7 +54,6 @@ public class PircBotZ implements Comparable<PircBotZ> {
     private State state = State.INIT;
     private Exception disconnectException;
     private InputProcessor inputProcessor;
-    private IdentServer identServer;
 
 
     public PircBotZ(Configuration<PircBotZ> configuration) {
@@ -85,10 +86,6 @@ public class PircBotZ implements Comparable<PircBotZ> {
         this.dccHandler = configuration.getBotFactory().createDccHandler(this);
         this.inputParser = configuration.getBotFactory().createInputParser(this);
         enabledCapabilities.clear();
-        if (configuration.isIdentServerEnabled()) {
-            identServer = new IdentServer(configuration.getEncoding(), configuration.getIdentServerIP(), configuration.getIdentServerPort());
-            identServer.start();
-        }
         for (InetAddress curAddress : InetAddress.getAllByName(configuration.getServerHostname())) {
             try {
                 socket = configuration.getSocketFactory().createSocket(curAddress, configuration.getServerPort(), configuration.getLocalAddress(), 0);
@@ -104,9 +101,6 @@ public class PircBotZ implements Comparable<PircBotZ> {
         inputReader = new BufferedReader(new InputStreamReader(socket.getInputStream(), configuration.getEncoding()));
         outputWriter = new OutputStreamWriter(socket.getOutputStream(), configuration.getEncoding());
         configuration.getListenerManager().dispatchEvent(new SocketConnectEvent(this));
-        if (configuration.isIdentServerEnabled()) {
-            identServer.addIdentEntry(socket.getInetAddress(), socket.getPort(), socket.getLocalPort(), configuration.getLogin());
-        }
         if (configuration.isCapEnabled()) {
             sendCAP().requestSupported();
         }

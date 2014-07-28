@@ -51,9 +51,6 @@ public class Configuration<PircBotZ> {
     private final long messageDelay;
     private final boolean shutdownHookEnabled;
     private final Map<String, String> autoJoinChannels;
-    private final boolean identServerEnabled;
-    private final String identServerIP;
-    private final int identServerPort;
     private final String nickservPassword;
     private final boolean autoReconnect;
     private final ListenerManager listenerManager;
@@ -120,9 +117,6 @@ public class Configuration<PircBotZ> {
         this.autoSplitMessage = builder.isAutoSplitMessage();
         this.autoNickChange = builder.isAutoNickChange();
         this.messageDelay = builder.getMessageDelay();
-        this.identServerEnabled = builder.isIdentServerEnabled();
-        this.identServerPort = builder.getIdentServerPort();
-        this.identServerIP = builder.getIdentServerIP();
         this.nickservPassword = builder.getNickservPassword();
         this.autoReconnect = builder.isAutoReconnect();
         this.listenerManager = builder.getListenerManager();
@@ -265,18 +259,6 @@ public class Configuration<PircBotZ> {
         return autoJoinChannels;
     }
 
-    public boolean isIdentServerEnabled() {
-        return identServerEnabled;
-    }
-
-    public String getIdentServerIP() {
-        return identServerIP;
-    }
-
-    public int getIdentServerPort() {
-        return identServerPort;
-    }
-
     public String getNickservPassword() {
         return nickservPassword;
     }
@@ -339,9 +321,6 @@ public class Configuration<PircBotZ> {
         private long messageDelay = 1000;
         private boolean shutdownHookEnabled = true;
         private final Map<String, String> autoJoinChannels = new HashMap<>();
-        private boolean identServerEnabled = false;
-        private String identServerIP = "localhost";
-        private int identServerPort = 113;
         private String nickservPassword;
         private boolean autoReconnect = false;
         private ListenerManager listenerManager = null;
@@ -391,9 +370,6 @@ public class Configuration<PircBotZ> {
             this.nickservPassword = configuration.getNickservPassword();
             this.autoReconnect = configuration.isAutoReconnect();
             this.autoJoinChannels.putAll(configuration.getAutoJoinChannels());
-            this.identServerEnabled = configuration.isIdentServerEnabled();
-            this.identServerIP = configuration.getIdentServerIP();
-            this.identServerPort = configuration.getIdentServerPort();
             this.capEnabled = configuration.isCapEnabled();
             this.capHandlers.addAll(configuration.getCapHandlers());
             this.channelModeHandlers.addAll(configuration.getChannelModeHandlers().values());
@@ -436,9 +412,6 @@ public class Configuration<PircBotZ> {
             this.nickservPassword = otherBuilder.getNickservPassword();
             this.autoReconnect = otherBuilder.isAutoReconnect();
             this.autoJoinChannels.putAll(otherBuilder.getAutoJoinChannels());
-            this.identServerEnabled = otherBuilder.isIdentServerEnabled();
-            this.identServerIP = otherBuilder.getIdentServerIP();
-            this.identServerPort = otherBuilder.getIdentServerPort();
             this.capEnabled = otherBuilder.isCapEnabled();
             this.capHandlers.addAll(otherBuilder.getCapHandlers());
             this.channelModeHandlers.addAll(otherBuilder.getChannelModeHandlers());
@@ -601,21 +574,6 @@ public class Configuration<PircBotZ> {
             return this;
         }
 
-        public Builder<PircBotZ> setIdentServerEnabled(boolean identServerEnabled) {
-            this.identServerEnabled = identServerEnabled;
-            return this;
-        }
-
-        public Builder<PircBotZ> setIdentServerIP(String identServerIP) {
-            this.identServerIP = identServerIP;
-            return this;
-        }
-
-        public Builder<PircBotZ> setIdentServerPort(int identServerPort) {
-            this.identServerPort = identServerPort;
-            return this;
-        }
-
         public Builder<PircBotZ> setNickservPassword(String nickservPassword) {
             this.nickservPassword = nickservPassword;
             return this;
@@ -767,18 +725,6 @@ public class Configuration<PircBotZ> {
 
         public Map<String, String> getAutoJoinChannels() {
             return autoJoinChannels;
-        }
-
-        public boolean isIdentServerEnabled() {
-            return identServerEnabled;
-        }
-
-        public String getIdentServerIP() {
-            return identServerIP;
-        }
-
-        public int getIdentServerPort() {
-            return identServerPort;
         }
 
         public String getNickservPassword() {
