@@ -30,7 +30,7 @@ public class PrivMsgProcessor {
                 }
                 if (Command != null) {
                     if ((Command.getPermLevel() >= 0 && (Command.getPermLevel() <= 5 || Command.getPermLevel() > 18) || (channel != null))) {
-                        int UserPermLevel = PermUtils.getPermLevel(event.getBot(), event.getUser(), channel);
+                        int UserPermLevel = PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), channel);
                         if (UserPermLevel >= Command.getPermLevel()) {
                             if (Command.getPermLevel() == 9) {
                                 if (channel.isOp(event.getBot().getUserBot()) || channel.isOp(event.getBot().getUserBot()) || channel.isOwner(event.getBot().getUserBot())) {

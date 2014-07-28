@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.google.common.collect.Maps;
 import org.pircbotz.hooks.events.ActionEvent;
 import org.pircbotz.hooks.events.ChannelInfoEvent;
 import org.pircbotz.hooks.events.ConnectEvent;
@@ -237,7 +238,7 @@ public class InputParser implements Closeable {
     private final List<CapHandler> capHandlersFinished = new LinkedList<>();
     private boolean capEndSent = false;
     private BufferedReader inputReader;
-    private final Map<String, WhoisEvent.Builder> whoisBuilder = new ConcurrentHashMap<>();
+    private final Map<String, WhoisEvent.Builder> whoisBuilder = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
     private StringBuilder motdBuilder;
     private boolean channelListRunning = false;
     private List<ChannelListEntry> channelListBuilder;
@@ -617,6 +618,9 @@ public class InputParser implements Closeable {
                 case 330: {
                     whoisBuilder.get(parsedResponse.get(1)).setRegisteredAs(parsedResponse.get(2));
                     break;
+                }
+                case 307: {
+                    whoisBuilder.get(parsedResponse.get(1)).setRegisteredAs("");
                 }
                 case 4:
                 case 5: {

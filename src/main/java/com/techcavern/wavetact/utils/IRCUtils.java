@@ -23,7 +23,7 @@ public class IRCUtils {
     }
 
     public static WhoisEvent WhoisEvent(PircBotZ bot, String userObject) {
-        WhoisEvent WhoisEvent;
+        WhoisEvent WhoisEvent = null;
         if (userObject != null) {
             bot.sendRaw().rawLineNow("WHOIS " + userObject);
         } else {
@@ -31,10 +31,13 @@ public class IRCUtils {
         }
         WaitForQueue waitForQueue = new WaitForQueue(bot);
         try {
-            while (true) {
-                WhoisEvent event = waitForQueue.waitFor(WhoisEvent.class);
-                if (!event.getNick().equals(userObject))
+            boolean run = true;
+            while (run) {
+                WhoisEvent = waitForQueue.waitFor(WhoisEvent.class);
+                if (!WhoisEvent.getNick().equals(userObject))
                     continue;
+                else
+                    run = false;
                 waitForQueue.close();
             }
         } catch (InterruptedException ex) {

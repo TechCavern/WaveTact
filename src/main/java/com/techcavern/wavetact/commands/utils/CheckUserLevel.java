@@ -26,7 +26,7 @@ public class CheckUserLevel extends GenericCommand {
             nick=user.getNick();
         } else {
             nick = args[0];
-            UserPermLevel = PermUtils.getPermLevel(Bot, GetUtils.getUserByNick(Bot,args[0]), channel);
+            UserPermLevel = PermUtils.getPermLevel(Bot, args[0], channel);
         }
         if (UserPermLevel >= 9001) {
             IRCUtils.SendMessage(user, channel, nick + " is my Master!", isPrivate);

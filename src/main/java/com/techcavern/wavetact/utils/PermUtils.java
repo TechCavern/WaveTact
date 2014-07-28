@@ -14,10 +14,9 @@ public class PermUtils {
         WhoisEvent whois = IRCUtils.WhoisEvent(bot, userObject);
         if (whois != null) {
             userString = whois.getRegisteredAs();
-            if (userString.isEmpty()) {
-                if (userString != null) {
+            if (userString != null && userString.isEmpty()) {
                     userString = userObject;
-                }
+
             }
         } else {
             userString = null;
@@ -62,10 +61,10 @@ public class PermUtils {
         }
     }
 
-    public static int getPermLevel(PircBotZ bot, User userObject, Channel channelObject) {
+    public static int getPermLevel(PircBotZ bot, String userObject, Channel channelObject) {
         if (channelObject != null) {
-            int mpermlevel = getManualPermLevel(bot, userObject.getNick(), channelObject);
-            int apermlevel = getAutomaticPermLevel(userObject, channelObject);
+            int mpermlevel = getManualPermLevel(bot, userObject, channelObject);
+            int apermlevel = getAutomaticPermLevel(GetUtils.getUserByNick(bot, userObject), channelObject);
             if (mpermlevel < 0) {
                 return mpermlevel;
             } else if (apermlevel < mpermlevel) {
@@ -74,7 +73,7 @@ public class PermUtils {
                 return apermlevel;
             }
         } else {
-            String account = getAccount(bot, userObject.getNick());
+            String account = getAccount(bot, userObject);
             if (account != null) {
                 if (GetUtils.getControllerByNick(account) != null) {
                     return 9001;
