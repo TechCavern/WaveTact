@@ -5,9 +5,9 @@
  */
 package com.techcavern.wavetact.utils.eventListeners;
 
-import org.pircbotx.PircBotX;
-import org.pircbotx.hooks.ListenerAdapter;
-import org.pircbotx.hooks.events.KickEvent;
+import org.pircbotz.PircBotZ;
+import org.pircbotz.hooks.ListenerAdapter;
+import org.pircbotz.hooks.events.KickEvent;
 
 import java.util.concurrent.TimeUnit;
 
@@ -15,8 +15,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author jztech101
  */
-public class KickListener extends ListenerAdapter<PircBotX> {
-    public void onKick(KickEvent<PircBotX> event) throws Exception {
+public class KickListener extends ListenerAdapter {
+    public void onKick(KickEvent event) throws Exception {
         if (event.getRecipient() == event.getBot().getUserBot() && !event.getReason().toLowerCase().contains("banned")) {
             event.getBot().sendIRC().joinChannel(event.getChannel().getName());
             TimeUnit.SECONDS.sleep(30);

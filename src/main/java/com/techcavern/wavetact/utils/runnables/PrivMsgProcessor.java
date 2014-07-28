@@ -5,16 +5,15 @@ import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.PermUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.apache.commons.lang3.ArrayUtils;
-import org.pircbotx.Channel;
-import org.pircbotx.PircBotX;
-import org.pircbotx.hooks.events.PrivateMessageEvent;
+import org.pircbotz.Channel;
+import org.pircbotz.hooks.events.PrivateMessageEvent;
 
 /**
  * Created by jztech101 on 7/27/14.
  */
 public class PrivMsgProcessor {
 
-    public static void PrivMsgProcess(PrivateMessageEvent<PircBotX> event) {
+    public static void PrivMsgProcess(PrivateMessageEvent event) {
         class process implements Runnable {
             public void run() {
                 String[] messageParts = event.getMessage().split(" ");

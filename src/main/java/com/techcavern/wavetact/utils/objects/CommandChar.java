@@ -1,14 +1,14 @@
 package com.techcavern.wavetact.utils.objects;
 
 import com.techcavern.wavetact.utils.GeneralRegistry;
-import org.pircbotx.PircBotX;
+import org.pircbotz.PircBotZ;
 
 
 public class CommandChar {
     private final String chard;
-    private final PircBotX bot;
+    private final PircBotZ bot;
 
-    public CommandChar(String c, PircBotX d) {
+    public CommandChar(String c, PircBotZ d) {
         this.chard = c;
         this.bot = d;
         create();
@@ -22,7 +22,7 @@ public class CommandChar {
         return this.chard;
     }
 
-    public PircBotX getBot() {
+    public PircBotZ getBot() {
         return this.bot;
     }
 

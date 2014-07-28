@@ -7,9 +7,9 @@ import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.apache.commons.lang3.StringUtils;
-import org.pircbotx.Channel;
-import org.pircbotx.PircBotX;
-import org.pircbotx.User;
+import org.pircbotz.Channel;
+import org.pircbotz.PircBotZ;
+import org.pircbotz.User;
 
 /**
  * Created by jztech101 on 6/23/14.
@@ -25,7 +25,7 @@ public class Commands extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotZ Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
 
 
         if (UserPermLevel >= 9001) {

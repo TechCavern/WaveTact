@@ -13,9 +13,9 @@ import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.objects.UTime;
 import org.apache.commons.lang3.StringUtils;
-import org.pircbotx.Channel;
-import org.pircbotx.PircBotX;
-import org.pircbotx.User;
+import org.pircbotz.Channel;
+import org.pircbotz.PircBotZ;
+import org.pircbotz.User;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -35,7 +35,7 @@ public class Topic extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotZ Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         StringUtils.split(channel.getTopic(), args[0]);
         List<String> topic = new LinkedList(Arrays.asList(StringUtils.split(channel.getTopic(), args[0])));
         List<String> newtopic = new LinkedList(Arrays.asList(StringUtils.split(channel.getTopic(), args[0])));
@@ -72,7 +72,7 @@ public class Topic extends GenericCommand {
         }
     }
 
-    void saveTopic(Channel channel, PircBotX Bot) {
+    void saveTopic(Channel channel, PircBotZ Bot) {
         GeneralRegistry.Topic.add(new UTime(channel.getTopic(), Bot.getServerInfo().getNetwork(), "Topic", channel.getName(), GeneralUtils.getMilliSeconds("30s"), System.currentTimeMillis()));
     }
 }

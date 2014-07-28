@@ -10,10 +10,10 @@ import com.techcavern.wavetact.annot.ChanHOPCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
-import org.pircbotx.Channel;
-import org.pircbotx.PircBotX;
-import org.pircbotx.User;
-import org.pircbotx.UserLevel;
+import org.pircbotz.Channel;
+import org.pircbotz.PircBotZ;
+import org.pircbotz.User;
+import org.pircbotz.UserLevel;
 
 /**
  * @author jztech101
@@ -27,7 +27,7 @@ public class Kick extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotZ Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         String message = "Kicked by " + user.getNick();
         if (args.length > 1) {
             message = "Kicked by " + user.getNick() + ": " + GeneralUtils.buildMessage(1, args.length, args);

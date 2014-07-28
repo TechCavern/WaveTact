@@ -8,9 +8,9 @@ import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.databaseUtils.QuietTimeUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.objects.UTime;
-import org.pircbotx.Channel;
-import org.pircbotx.PircBotX;
-import org.pircbotx.User;
+import org.pircbotz.Channel;
+import org.pircbotz.PircBotZ;
+import org.pircbotz.User;
 
 public class Quiet extends GenericCommand {
     @CMD
@@ -21,7 +21,7 @@ public class Quiet extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotZ Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
 
         String ircd;
         if (Bot.getServerInfo().getChannelModes().contains("q")) {
@@ -111,7 +111,7 @@ public class Quiet extends GenericCommand {
     }
 
 
-    void quiet(String hostmask, String type, Channel channelName, PircBotX botObject) {
+    void quiet(String hostmask, String type, Channel channelName, PircBotZ botObject) {
         switch (type.toLowerCase()) {
             case "c":
                 IRCUtils.setMode(channelName, botObject, "+q ", hostmask);

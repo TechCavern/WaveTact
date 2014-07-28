@@ -1,15 +1,15 @@
 package com.techcavern.wavetact.utils;
 
 import com.techcavern.wavetact.utils.databaseUtils.PermChannelUtils;
-import org.pircbotx.Channel;
-import org.pircbotx.PircBotX;
-import org.pircbotx.User;
-import org.pircbotx.hooks.events.WhoisEvent;
+import org.pircbotz.Channel;
+import org.pircbotz.PircBotZ;
+import org.pircbotz.User;
+import org.pircbotz.hooks.events.WhoisEvent;
 
 public class PermUtils {
 
     @SuppressWarnings("unchecked")
-    public static String getAccount(PircBotX bot, String userObject) {
+    public static String getAccount(PircBotZ bot, String userObject) {
         String userString;
         WhoisEvent whois = IRCUtils.WhoisEvent(bot, userObject);
         if (whois != null) {
@@ -43,7 +43,7 @@ public class PermUtils {
         }
     }
 
-    private static int getManualPermLevel(PircBotX bot, String userObject, Channel channelObject) {
+    private static int getManualPermLevel(PircBotZ bot, String userObject, Channel channelObject) {
         String account = getAccount(bot, userObject);
         if (account != null) {
             if (GetUtils.getControllerByNick(account) != null) {
@@ -62,7 +62,7 @@ public class PermUtils {
         }
     }
 
-    public static int getPermLevel(PircBotX bot, User userObject, Channel channelObject) {
+    public static int getPermLevel(PircBotZ bot, User userObject, Channel channelObject) {
         if (channelObject != null) {
             int mpermlevel = getManualPermLevel(bot, userObject.getNick(), channelObject);
             int apermlevel = getAutomaticPermLevel(userObject, channelObject);

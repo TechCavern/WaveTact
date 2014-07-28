@@ -5,14 +5,13 @@ import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.PermUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.apache.commons.lang3.ArrayUtils;
-import org.pircbotx.PircBotX;
-import org.pircbotx.hooks.events.MessageEvent;
+import org.pircbotz.hooks.events.MessageEvent;
 
 /**
  * Created by jztech101 on 7/27/14.
  */
 public class ChanMsgProcessor {
-    public static void ChanMsgProcess(MessageEvent<PircBotX> event) {
+    public static void ChanMsgProcess(MessageEvent event) {
         class process implements Runnable {
             public void run() {
                 String[] messageParts = event.getMessage().split(" ");

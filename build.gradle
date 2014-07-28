@@ -18,8 +18,9 @@ dependencies {
     compile 'org.slf4j:slf4j-simple:1.7.7'
     compile 'org.apache.httpcomponents:httpclient:4.3.4'
     compile 'jp.freepress.repo:WolframAlpha:1.1'
-    provided "org.projectlombok:lombok:1.14.4"
-
+    compile 'com.google.collections:google-collections:1.0-rc2'
+    compile 'org.projectlombok:lombok:1.14.4'
+    compile 'com.google.guava:guava:17.0'
 }
 
 jar {

@@ -3,7 +3,7 @@ package com.techcavern.wavetact.utils.configurationUtils;
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.LoadUtils;
 import com.techcavern.wavetact.utils.objects.CommandChar;
-import org.pircbotx.PircBotX;
+import org.pircbotz.PircBotZ;
 
 import java.io.File;
 import java.util.Arrays;
@@ -30,7 +30,7 @@ public class NetworkUtils {
             }
         }
 
-        PircBotX bot;
+        PircBotZ bot;
         LinkedList<String> chans = new LinkedList<>();
         String nsPass;
         for (com.techcavern.wavetact.utils.fileUtils.Configuration c : GeneralRegistry.configs.values()) {
@@ -50,8 +50,8 @@ public class NetworkUtils {
 
     public static void registerDevServer() {
         List<String> Chans = Arrays.asList("#TechCavern");
-        PircBotX Dev = LoadUtils.createbot(null, "SynIRC", Chans, "WaveTactDev", "irc.synirc.net");
-        PircBotX Dev2 = LoadUtils.createbot(null, "EsperNet", Chans, "WaveTactDev", "irc.esper.net");
+        PircBotZ Dev = LoadUtils.createbot(null, "SynIRC", Chans, "WaveTactDev", "irc.synirc.net");
+        PircBotZ Dev2 = LoadUtils.createbot(null, "EsperNet", Chans, "WaveTactDev", "irc.esper.net");
         GeneralRegistry.WaveTact.addBot(Dev);
         GeneralRegistry.WaveTact.addBot(Dev2);
         GeneralRegistry.Controllers.add("JZTech101");

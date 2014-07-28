@@ -1,14 +1,14 @@
 package com.techcavern.wavetact.utils.eventListeners;
 
-import org.pircbotx.PircBotX;
-import org.pircbotx.hooks.ListenerAdapter;
-import org.pircbotx.hooks.types.GenericCTCPEvent;
+import org.pircbotz.PircBotZ;
+import org.pircbotz.hooks.ListenerAdapter;
+import org.pircbotz.generics.GenericCTCPEvent;
 
 
-public class CTCPListener extends ListenerAdapter<PircBotX> {
+public class CTCPListener extends ListenerAdapter {
 
     @Override
-    public void onGenericCTCP(GenericCTCPEvent<PircBotX> event) throws Exception {
+    public void onGenericCTCP(GenericCTCPEvent event) throws Exception {
         event.respond("Attempt Failed, Try Again!");
 
     }

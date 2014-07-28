@@ -8,9 +8,9 @@ import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.databaseUtils.BanTimeUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.objects.UTime;
-import org.pircbotx.Channel;
-import org.pircbotx.PircBotX;
-import org.pircbotx.User;
+import org.pircbotz.Channel;
+import org.pircbotz.PircBotZ;
+import org.pircbotz.User;
 
 public class Ban extends GenericCommand {
     @CMD
@@ -20,7 +20,7 @@ public class Ban extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotZ Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
 
         String hostmask;
         if (args[0].contains("!") && args[0].contains("@")) {
@@ -88,7 +88,7 @@ public class Ban extends GenericCommand {
         }
     }
 
-    void ban(String hostmask, Channel channel, PircBotX botObject) {
+    void ban(String hostmask, Channel channel, PircBotZ botObject) {
         IRCUtils.setMode(channel, botObject, "+b ", hostmask);
 
     }
