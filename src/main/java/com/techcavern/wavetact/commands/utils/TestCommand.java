@@ -3,14 +3,10 @@ package com.techcavern.wavetact.commands.utils;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
-import org.apache.commons.lang3.StringUtils;
 import org.pircbotz.Channel;
 import org.pircbotz.PircBotZ;
 import org.pircbotz.User;
-
-import java.util.List;
 
 
 public class TestCommand extends GenericCommand {

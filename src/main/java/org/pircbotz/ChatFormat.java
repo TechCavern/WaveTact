@@ -35,7 +35,7 @@ public enum ChatFormat {
         return code;
     }
 
-    public static String removeColors(String line) {
+    private static String removeColors(String line) {
         for (ChatFormat color : ChatFormat.values()) {
             if (color.style == Style.COLOR) {
                 line = line.replace(color.toString(), "");
@@ -44,7 +44,7 @@ public enum ChatFormat {
         return line;
     }
 
-    public static String removeFormatting(String line) {
+    private static String removeFormatting(String line) {
         for (ChatFormat color : ChatFormat.values()) {
             if (color.style == Style.FORMAT) {
                 line = line.replace(color.toString(), "");
@@ -59,6 +59,6 @@ public enum ChatFormat {
 
     public enum Style {
 
-        FORMAT, COLOR, RESET;
+        FORMAT, COLOR, RESET
     }
 }

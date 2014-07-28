@@ -13,7 +13,7 @@ import java.util.concurrent.FutureTask;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
-import java.util.logging.Level;
+
 import org.pircbotz.PircBotZ;
 import org.pircbotz.hooks.Event;
 import org.pircbotz.hooks.Listener;
@@ -24,7 +24,7 @@ public class ThreadedListenerManager implements ListenerManager {
     private static final AtomicInteger MANAGER_COUNT = new AtomicInteger();
     private final int managerNumber;
     private final ExecutorService pool;
-    private final Set<Listener> listeners = Collections.synchronizedSet(new HashSet<Listener>());
+    private final Set<Listener> listeners = Collections.synchronizedSet(new HashSet<>());
     private final AtomicLong currentId = new AtomicLong();
     private final Multimap<PircBotZ, ManagedFutureTask> runningListeners = MultimapBuilder.hashKeys().linkedListValues().build();
 
@@ -79,16 +79,13 @@ public class ThreadedListenerManager implements ListenerManager {
         }
     }
 
-    protected void submitEvent(ExecutorService es, final Listener listener, final Event event) {
-        es.execute(new ManagedFutureTask(listener, event, new Callable<Void>() {
-            @Override
-            public Void call() {
-                try {
-                    listener.onEvent(event);
-                } catch (Exception e) {
-                }
-                return null;
+    void submitEvent(ExecutorService es, final Listener listener, final Event event) {
+        es.execute(new ManagedFutureTask(listener, event, () -> {
+            try {
+                listener.onEvent(event);
+            } catch (Exception e) {
             }
+            return null;
         }));
     }
 
@@ -112,7 +109,7 @@ public class ThreadedListenerManager implements ListenerManager {
         return pool;
     }
 
-    public int getManagerNumber() {
+    int getManagerNumber() {
         return managerNumber;
     }
 

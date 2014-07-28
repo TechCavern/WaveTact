@@ -53,7 +53,7 @@ public class OutputRaw {
         rawLineNow(line, false);
     }
 
-    public void rawLineNow(String line, boolean resetDelay) {
+    void rawLineNow(String line, boolean resetDelay) {
         Validate.notNull(line, "Line cannot be null");
         if (!bot.isConnected()) {
             throw new RuntimeException("Not connected to server");

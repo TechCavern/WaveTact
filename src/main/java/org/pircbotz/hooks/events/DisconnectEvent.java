@@ -8,13 +8,10 @@ import org.pircbotz.hooks.Event;
 
 public class DisconnectEvent extends Event {
 
-    private final UserChannelDao<PircBotZ, ? extends User, ? extends Channel> daoSnapshot;
-    private final Exception disconnectException;
-
     public DisconnectEvent(PircBotZ bot, UserChannelDao<PircBotZ, ? extends User, ? extends Channel> daoSnapshot, Exception disconnectException) {
         super(bot);
-        this.daoSnapshot = daoSnapshot;
-        this.disconnectException = disconnectException;
+        UserChannelDao<PircBotZ, ? extends User, ? extends Channel> daoSnapshot1 = daoSnapshot;
+        Exception disconnectException1 = disconnectException;
     }
 
     @Override

@@ -59,11 +59,11 @@ public class OutputChannel {
         cycle("");
     }
 
-    public void cycle(final String key) {
+    void cycle(final String key) {
         final String channelName = channel.getName();
         bot.getConfiguration().getListenerManager().addListener(new ListenerAdapter() {
             @Override
-            public void onPart(PartEvent event) throws Exception {
+            public void onPart(PartEvent event) {
                 if (event.getBot() == bot) {
                     bot.sendIRC().joinChannel(channelName, key);
                     bot.getConfiguration().getListenerManager().removeListener(this);
@@ -88,7 +88,7 @@ public class OutputChannel {
         bot.sendIRC().mode(channel.getName(), mode);
     }
 
-    public void setMode(String mode, Object... args) {
+    void setMode(String mode, Object... args) {
         if (mode == null) {
             throw new IllegalArgumentException("Can't set mode on channel to null");
         }

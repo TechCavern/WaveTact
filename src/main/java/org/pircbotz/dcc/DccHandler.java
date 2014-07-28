@@ -43,7 +43,7 @@ public class DccHandler implements Closeable {
         this.bot = bot;
     }
 
-    public boolean processDcc(final User user, String request) throws IOException {
+    public boolean processDcc(final User user, String request) {
         List<String> requestParts = tokenizeDccRequest(request);
         String type = requestParts.get(1);
         switch (type) {
@@ -208,12 +208,10 @@ public class DccHandler implements Closeable {
         if (shuttingDown) {
             throw new DccException(DccException.Reason.FileTransferResumeCancelled, event.getUser(), "Transfer " + event + " canceled due to bot shutting down");
         }
-        if (pendingTransfer.getPosition() != startPosition) {
-        }
         return acceptFileTransfer(event, destination, pendingTransfer.getPosition());
     }
 
-    protected ReceiveFileTransfer acceptFileTransfer(IncomingFileTransferEvent event, File destination, long startPosition) throws IOException {
+    ReceiveFileTransfer acceptFileTransfer(IncomingFileTransferEvent event, File destination, long startPosition) throws IOException {
         Validate.notNull(event, "Event cannot be null");
         Validate.notNull(destination, "Destination file cannot be null");
         Validate.isTrue(startPosition >= 0, "Start position %s must be positive", startPosition);
@@ -309,12 +307,12 @@ public class DccHandler implements Closeable {
         }
     }
 
-    public InetAddress getRealDccAddress() {
+    InetAddress getRealDccAddress() {
         InetAddress address = bot.getConfiguration().getDccLocalAddress();
         return (address != null) ? address : bot.getLocalAddress();
     }
 
-    protected ServerSocket createServerSocket(User user) throws IOException, DccException {
+    ServerSocket createServerSocket(User user) throws IOException, DccException {
         InetAddress address = bot.getConfiguration().getDccLocalAddress();
         List<Integer> dccPorts = bot.getConfiguration().getDccPorts();
         if (address == null) {
@@ -338,7 +336,7 @@ public class DccHandler implements Closeable {
         return ss;
     }
 
-    protected static List<String> tokenizeDccRequest(String request) {
+    private static List<String> tokenizeDccRequest(String request) {
         int quotesIndexBegin = request.indexOf('"');
         if (quotesIndexBegin == -1) {
             return Utils.tokenizeLine(request);
@@ -378,7 +376,7 @@ public class DccHandler implements Closeable {
         return new BigInteger(1, address.getAddress()).toString();
     }
 
-    public static InetAddress integerToAddress(String rawInteger) {
+    private static InetAddress integerToAddress(String rawInteger) {
         BigInteger bigIp = new BigInteger(rawInteger);
         byte[] addressBytes = bigIp.toByteArray();
         if (addressBytes.length == 5) {

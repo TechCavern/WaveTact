@@ -32,13 +32,13 @@ public class UserChannelDao<P extends PircBotZ, U extends User, C extends Channe
     private final Class<C> channelClass;
 
     public UserChannelDao(P bot, BotFactory botFactory, Class<P> botClass, Class<U> userClass, Class<C> channelClass) {
-        this(bot, botFactory, bot.getConfiguration().getLocale(), new UserChannelMap<U, C>(), new EnumMap<UserLevel, UserChannelMap<U, C>>(UserLevel.class), new HashMap<String, U>(), new HashMap<String, C>(), new HashSet<U>(), botClass, userClass, channelClass);
+        this(bot, botFactory, bot.getConfiguration().getLocale(), new UserChannelMap<>(), new EnumMap<>(UserLevel.class), new HashMap<>(), new HashMap<>(), new HashSet<>(), botClass, userClass, channelClass);
         for (UserLevel level : UserLevel.values()) {
-            levelsMap.put(level, new UserChannelMap<U, C>());
+            levelsMap.put(level, new UserChannelMap<>());
         }
     }
 
-    public UserChannelDao(P bot, BotFactory botFactory, Locale locale, UserChannelMap<U, C> mainMap, EnumMap<UserLevel, UserChannelMap<U, C>> levelsMap, Map<String, U> userNickMap, Map<String, C> channelNameMap, Set<U> privateUsers, Class<P> botClass, Class<U> userClass, Class<C> channelClass) {
+    protected UserChannelDao(P bot, BotFactory botFactory, Locale locale, UserChannelMap<U, C> mainMap, EnumMap<UserLevel, UserChannelMap<U, C>> levelsMap, Map<String, U> userNickMap, Map<String, C> channelNameMap, Set<U> privateUsers, Class<P> botClass, Class<U> userClass, Class<C> channelClass) {
         this.bot = bot;
         this.botFactory = botFactory;
         this.locale = locale;
@@ -168,7 +168,7 @@ public class UserChannelDao<P extends PircBotZ, U extends User, C extends Channe
         privateUsers.remove(user);
     }
 
-    protected boolean levelContainsUser(UserLevel level, C channel, U user) {
+    boolean levelContainsUser(UserLevel level, C channel, U user) {
         return levelsMap.get(level).containsEntry(user, channel);
     }
 

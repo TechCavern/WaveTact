@@ -143,7 +143,7 @@ public enum ReplyConstants {
         this.code = code;
     }
 
-    public int getValue() {
+    int getValue() {
         return code;
     }
 

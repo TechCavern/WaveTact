@@ -7,7 +7,7 @@ import org.pircbotz.Configuration;
 import org.pircbotz.PircBotZ;
 import org.pircbotz.User;
 
-public abstract class FileTransfer {
+abstract class FileTransfer {
 
     private final Configuration<PircBotZ> configuration;
     private final Socket socket;
@@ -17,7 +17,7 @@ public abstract class FileTransfer {
     private DccState state = DccState.INIT;
     private final Object stateLock = new Object();
 
-    public FileTransfer(Configuration<PircBotZ> configuration, Socket socket, User user, File file, long startPosition) {
+    FileTransfer(Configuration<PircBotZ> configuration, Socket socket, User user, File file, long startPosition) {
         this.configuration = configuration;
         this.socket = socket;
         this.user = user;
@@ -40,18 +40,18 @@ public abstract class FileTransfer {
 
     protected abstract void transferFile() throws IOException;
 
-    protected void onAfterSend() {
+    void onAfterSend() {
     }
 
     public boolean isFinished() {
         return state == DccState.DONE;
     }
 
-    public Configuration<PircBotZ> getConfiguration() {
+    Configuration<PircBotZ> getConfiguration() {
         return configuration;
     }
 
-    public Socket getSocket() {
+    Socket getSocket() {
         return socket;
     }
 
@@ -59,11 +59,11 @@ public abstract class FileTransfer {
         return user;
     }
 
-    public File getFile() {
+    File getFile() {
         return file;
     }
 
-    public long getStartPosition() {
+    long getStartPosition() {
         return startPosition;
     }
 

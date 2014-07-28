@@ -9,7 +9,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import com.google.common.collect.Maps;
 import org.pircbotz.hooks.events.ActionEvent;
@@ -249,7 +248,7 @@ public class InputParser implements Closeable {
         this.configuration = bot.getConfiguration();
     }
 
-    protected void handleLine(String line) throws IOException, IrcException {
+    void handleLine(String line) throws IOException, IrcException {
         Validate.notNull(line);
         List<String> parsedLine = Utils.tokenizeLine(line);
         String senderInfo = "";
@@ -310,7 +309,7 @@ public class InputParser implements Closeable {
         processCommand(target, sourceNick, sourceLogin, sourceHostname, command, line, parsedLine);
     }
 
-    protected void processConnect(String rawLine, String code, String target, List<String> parsedLine) throws IrcException, IOException {
+    void processConnect(String rawLine, String code, String target, List<String> parsedLine) throws IrcException {
         if (CONNECT_CODES.contains(code)) {
             bot.loggedIn(configuration.getName() + (nickSuffix == 0 ? "" : nickSuffix));
             configuration.getListenerManager().dispatchEvent(new ConnectEvent(bot));
@@ -333,8 +332,6 @@ public class InputParser implements Closeable {
                 bot.sendIRC().changeNick(autoNewNick = configuration.getName() + nickSuffix);
             }
             configuration.getListenerManager().dispatchEvent(new NickAlreadyInUseEvent(bot, usedNick, autoNewNick, autoNickChange));
-        } else if (code.equals("439")) {
-        } else if (configuration.isCapEnabled() && code.equals("451") && target.equals("CAP")) {
         } else if (code.startsWith("5") || code.startsWith("4")) {
             throw new IrcException(IrcException.Reason.CannotLogin, "Received error: " + rawLine);
         } else if (code.equals("CAP")) {
@@ -384,7 +381,7 @@ public class InputParser implements Closeable {
         }
     }
 
-    protected void processCommand(String target, String sourceNick, String sourceLogin, String sourceHostname, String command, String line, List<String> parsedLine) throws IOException {
+    void processCommand(String target, String sourceNick, String sourceLogin, String sourceHostname, String command, String line, List<String> parsedLine) throws IOException {
         User source = bot.getUserChannelDao().getUser(sourceNick);
         Channel channel = (target.length() != 0 && configuration.getChannelPrefixes().indexOf(target.charAt(0)) >= 0) ? bot.getUserChannelDao().getChannel(target) : null;
         String message = parsedLine.size() >= 2 ? parsedLine.get(1) : "";
@@ -433,22 +430,20 @@ public class InputParser implements Closeable {
             }
             configuration.getListenerManager().dispatchEvent(new PartEvent(bot, daoSnapshot, channelSnapshot, sourceSnapshot, message));
         } else if (command.equals("NICK")) {
-            String newNick = target;
-            bot.getUserChannelDao().renameUser(source, newNick);
+            bot.getUserChannelDao().renameUser(source, target);
             if (sourceNick.equals(bot.getNick())) {
-                bot.setNick(newNick);
+                bot.setNick(target);
             }
-            configuration.getListenerManager().dispatchEvent(new NickChangeEvent(bot, sourceNick, newNick, source));
+            configuration.getListenerManager().dispatchEvent(new NickChangeEvent(bot, sourceNick, target, source));
         } else if (command.equals("NOTICE")) {
             configuration.getListenerManager().dispatchEvent(new NoticeEvent(bot, source, channel, message));
         } else if (command.equals("QUIT")) {
             UserChannelDaoSnapshot<PircBotZ> daoSnapshot = bot.getUserChannelDao().createSnapshot();
             UserSnapshot sourceSnapshot = daoSnapshot.getUser(source.getNick());
-            String reason = target;
             if (!sourceNick.equals(bot.getNick())) {
                 bot.getUserChannelDao().removeUser(source);
             }
-            configuration.getListenerManager().dispatchEvent(new QuitEvent(bot, daoSnapshot, sourceSnapshot, reason));
+            configuration.getListenerManager().dispatchEvent(new QuitEvent(bot, daoSnapshot, sourceSnapshot, target));
         } else if (command.equals("KICK")) {
             User recipient = bot.getUserChannelDao().getUser(message);
             if (recipient.getNick().equals(bot.getNick())) {
@@ -482,7 +477,7 @@ public class InputParser implements Closeable {
         }
     }
 
-    protected void processServerResponse(int code, String rawResponse, List<String> parsedResponseOrig) {
+    void processServerResponse(int code, String rawResponse, List<String> parsedResponseOrig) {
         List<String> parsedResponse = new ArrayList<>(parsedResponseOrig);
         ReplyConstants reply = ReplyConstants.getReplyConstant(code);
         if (reply != null) {
@@ -640,7 +635,7 @@ public class InputParser implements Closeable {
         configuration.getListenerManager().dispatchEvent(new ServerResponseEvent(bot, code, rawResponse, parsedResponse));
     }
 
-    protected void processMode(User user, String target, String mode) {
+    void processMode(User user, String target, String mode) {
         if (configuration.getChannelPrefixes().indexOf(target.charAt(0)) >= 0) {
             Channel channel = bot.getUserChannelDao().getChannel(target);
             channel.parseMode(mode);
@@ -667,7 +662,7 @@ public class InputParser implements Closeable {
         }
     }
 
-    protected void processUserStatus(Channel chan, User user, String prefix) {
+    void processUserStatus(Channel chan, User user, String prefix) {
         if (prefix.contains("@")) {
             bot.getUserChannelDao().addUserToLevel(UserLevel.OP, user, chan);
         }

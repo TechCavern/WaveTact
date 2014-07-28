@@ -11,7 +11,7 @@ public final class Utils {
     private Utils() {
     }
 
-    protected static void dispatchEvent(PircBotZ bot, Event event) {
+    static void dispatchEvent(PircBotZ bot, Event event) {
         bot.getConfiguration().getListenerManager().dispatchEvent(event);
     }
 
@@ -62,7 +62,7 @@ public final class Utils {
         return stringParts;
     }
 
-    public static <O extends Object> Set<O> castSet(Set<? extends O> list, Class<O> cl) {
+    public static <O> Set<O> castSet(Set<? extends O> list, Class<O> cl) {
         Set<O> casted = new LinkedHashSet<>();
         for (Object o : list) {
             try {

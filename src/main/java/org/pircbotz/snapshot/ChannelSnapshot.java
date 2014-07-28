@@ -13,12 +13,11 @@ public class ChannelSnapshot extends Channel {
 
     private UserChannelDaoSnapshot<? extends PircBotZ> dao;
     private final Channel generatedFrom;
-    private final String mode;
 
     public ChannelSnapshot(Channel channel, String mode) {
         super(channel.getBot(), null, channel.getName());
         this.generatedFrom = channel;
-        this.mode = mode;
+        String mode1 = mode;
         super.setCreateTimestamp(channel.getCreateTimestamp());
         super.setTopic(channel.getTopic());
         super.setTopicSetter(channel.getTopicSetter());
@@ -33,7 +32,7 @@ public class ChannelSnapshot extends Channel {
         super.setTopicProtection(channel.hasTopicProtection());
     }
 
-    public UserChannelDaoSnapshot<? extends PircBotZ> getSnapshotDao() {
+    UserChannelDaoSnapshot<? extends PircBotZ> getSnapshotDao() {
         return dao;
     }
 
@@ -49,37 +48,37 @@ public class ChannelSnapshot extends Channel {
 
     @Override
     public Set<User> getNormalUsers() {
-        return Utils.<User>castSet(getSnapshotDao().getNormalUsers(this), User.class);
+        return Utils.castSet(getSnapshotDao().getNormalUsers(this), User.class);
     }
 
     @Override
     public Set<User> getOps() {
-        return Utils.<User>castSet(getSnapshotDao().getUsers(this, UserLevel.OP), User.class);
+        return Utils.castSet(getSnapshotDao().getUsers(this, UserLevel.OP), User.class);
     }
 
     @Override
     public Set<User> getVoices() {
-        return Utils.<User>castSet(getSnapshotDao().getUsers(this, UserLevel.VOICE), User.class);
+        return Utils.castSet(getSnapshotDao().getUsers(this, UserLevel.VOICE), User.class);
     }
 
     @Override
     public Set<User> getOwners() {
-        return Utils.<User>castSet(getSnapshotDao().getUsers(this, UserLevel.OWNER), User.class);
+        return Utils.castSet(getSnapshotDao().getUsers(this, UserLevel.OWNER), User.class);
     }
 
     @Override
     public Set<User> getHalfOps() {
-        return Utils.<User>castSet(getSnapshotDao().getUsers(this, UserLevel.HALFOP), User.class);
+        return Utils.castSet(getSnapshotDao().getUsers(this, UserLevel.HALFOP), User.class);
     }
 
     @Override
     public Set<User> getSuperOps() {
-        return Utils.<User>castSet(getSnapshotDao().getUsers(this, UserLevel.SUPEROP), User.class);
+        return Utils.castSet(getSnapshotDao().getUsers(this, UserLevel.SUPEROP), User.class);
     }
 
     @Override
     public Set<User> getUsers() {
-        return Utils.<User>castSet(getSnapshotDao().getUsers(this), User.class);
+        return Utils.castSet(getSnapshotDao().getUsers(this), User.class);
     }
 
     @Override
@@ -148,7 +147,7 @@ public class ChannelSnapshot extends Channel {
     }
 
     @Override
-    protected void setMode(String mode, List<String> modeParsed) {
+    public void setMode(String mode, List<String> modeParsed) {
         throw new UnsupportedOperationException("Cannot change settings on snapshot");
     }
 

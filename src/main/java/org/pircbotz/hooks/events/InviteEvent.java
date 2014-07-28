@@ -19,7 +19,7 @@ public class InviteEvent extends Event {
         getBot().sendIRC().message(getUser(), response);
     }
 
-    public String getUser() {
+    String getUser() {
         return user;
     }
 

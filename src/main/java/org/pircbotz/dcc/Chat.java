@@ -7,12 +7,12 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.nio.charset.Charset;
-import org.pircbotz.PircBotZ;
+
 import org.pircbotz.User;
 import org.pircbotz.exception.DccException;
 import org.apache.commons.lang3.Validate;
 
-public class Chat {
+class Chat {
 
     private final User user;
     private final BufferedReader bufferedReader;
@@ -20,7 +20,7 @@ public class Chat {
     private final Socket socket;
     private boolean finished;
 
-    protected Chat(User user, Socket socket, Charset encoding) throws IOException {
+    Chat(User user, Socket socket, Charset encoding) throws IOException {
         Validate.notNull(user, "User cannot be null");
         Validate.notNull(socket, "Socket cannot be null");
         Validate.notNull(encoding, "Encoding cannot be null");
@@ -34,8 +34,7 @@ public class Chat {
         if (finished) {
             throw new DccException(DccException.Reason.ChatNotConnected, user, "Chat has already finished");
         }
-        String line = bufferedReader.readLine();
-        return line;
+        return bufferedReader.readLine();
     }
 
     public void sendLine(String line) throws IOException {

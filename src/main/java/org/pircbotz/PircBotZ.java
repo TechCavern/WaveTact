@@ -53,7 +53,6 @@ public class PircBotZ implements Comparable<PircBotZ> {
     private ImmutableMap<String, String> reconnectChannels;
     private State state = State.INIT;
     private Exception disconnectException;
-    private InputProcessor inputProcessor;
 
 
     public PircBotZ(Configuration<PircBotZ> configuration) {
@@ -70,7 +69,7 @@ public class PircBotZ implements Comparable<PircBotZ> {
         reconnectStopped = true;
     }
 
-    protected void connect() throws IOException, IrcException {
+    void connect() throws IOException, IrcException {
         if (isConnected()) {
             throw new IrcException(IrcException.Reason.AlreadyConnected, "Must disconnect from server before connecting again");
         }
@@ -115,11 +114,11 @@ public class PircBotZ implements Comparable<PircBotZ> {
         }
         sendRaw().rawLineNow("NICK " + configuration.getName());
         sendRaw().rawLineNow("USER " + configuration.getLogin() + " 8 * :" + configuration.getRealName());
-        inputProcessor = new InputProcessor();
+        InputProcessor inputProcessor = new InputProcessor();
         inputProcessor.start();
     }
 
-    protected void sendRawLineToServer(String line) {
+    void sendRawLineToServer(String line) {
         if (line.length() > configuration.getMaxLineLength() - 2) {
             line = line.substring(0, configuration.getMaxLineLength() - 2);
         }
@@ -131,7 +130,7 @@ public class PircBotZ implements Comparable<PircBotZ> {
         }
     }
 
-    protected void loggedIn(String nick) {
+    void loggedIn(String nick) {
         this.loggedIn = true;
         setNick(nick);
         if (configuration.isShutdownHookEnabled()) {
@@ -211,7 +210,7 @@ public class PircBotZ implements Comparable<PircBotZ> {
         return inputParser;
     }
 
-    protected void setNick(String nick) {
+    void setNick(String nick) {
         this.nick = nick;
     }
 
@@ -244,13 +243,13 @@ public class PircBotZ implements Comparable<PircBotZ> {
         return socket.getLocalAddress();
     }
 
-    protected ImmutableMap<String, String> reconnectChannels() {
+    ImmutableMap<String, String> reconnectChannels() {
         ImmutableMap<String, String> reconnectChannelsLocal = reconnectChannels;
         reconnectChannels = null;
         return reconnectChannelsLocal;
     }
 
-    public void shutdown() {
+    void shutdown() {
         shutdown(false);
     }
 
@@ -291,11 +290,11 @@ public class PircBotZ implements Comparable<PircBotZ> {
         return getBotId() - other.getBotId();
     }
 
-    public State getState() {
+    State getState() {
         return state;
     }
 
-    protected class InputProcessor extends Thread {
+    private class InputProcessor extends Thread {
 
         @Override
         public void run() {
@@ -335,9 +334,9 @@ public class PircBotZ implements Comparable<PircBotZ> {
         }
     }
 
-    protected static class BotShutdownHook extends Thread {
+    static class BotShutdownHook extends Thread {
 
-        protected final WeakReference<PircBotZ> thisBotRef;
+        final WeakReference<PircBotZ> thisBotRef;
 
         public BotShutdownHook(PircBotZ bot) {
             this.thisBotRef = new WeakReference<>(bot);

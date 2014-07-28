@@ -226,13 +226,13 @@ public abstract class ListenerAdapter implements Listener {
     public void onInvite(InviteEvent event) throws Exception {
     }
 
-    public void onJoin(JoinEvent event) throws Exception {
+    public void onJoin(JoinEvent event) {
     }
 
     public void onKick(KickEvent event) throws Exception {
     }
 
-    public void onMessage(MessageEvent event) throws Exception {
+    public void onMessage(MessageEvent event) {
     }
 
     public void onMode(ModeEvent event) throws Exception {
@@ -256,13 +256,13 @@ public abstract class ListenerAdapter implements Listener {
     public void onOwner(OwnerEvent event) throws Exception {
     }
 
-    public void onPart(PartEvent event) throws Exception {
+    public void onPart(PartEvent event) {
     }
 
     public void onPing(PingEvent event) throws Exception {
     }
 
-    public void onPrivateMessage(PrivateMessageEvent event) throws Exception {
+    public void onPrivateMessage(PrivateMessageEvent event) {
     }
 
     public void onQuit(QuitEvent event) throws Exception {
@@ -295,7 +295,7 @@ public abstract class ListenerAdapter implements Listener {
     public void onRemoveTopicProtection(RemoveTopicProtectionEvent event) throws Exception {
     }
 
-    public void onServerPing(ServerPingEvent event) throws Exception {
+    public void onServerPing(ServerPingEvent event) {
     }
 
     public void onServerResponse(ServerResponseEvent event) throws Exception {
@@ -358,7 +358,7 @@ public abstract class ListenerAdapter implements Listener {
     public void onWhois(WhoisEvent event) throws Exception {
     }
 
-    public void onGenericCTCP(GenericCTCPEvent event) throws Exception {
+    public void onGenericCTCP(GenericCTCPEvent event) {
     }
 
     public void onGenericUserMode(GenericUserModeEvent event) throws Exception {

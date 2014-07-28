@@ -30,7 +30,7 @@ public class Configuration {
         load();
     }
 
-    public void load() {
+    void load() {
         if (lock)
             return;
         pairs.clear();

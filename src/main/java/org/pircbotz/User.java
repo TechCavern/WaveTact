@@ -2,8 +2,7 @@ package org.pircbotz;
 
 import java.util.Set;
 import java.util.UUID;
-import org.pircbotz.hooks.WaitForQueue;
-import org.pircbotz.hooks.events.WhoisEvent;
+
 import org.pircbotz.output.OutputUser;
 import org.pircbotz.snapshot.UserSnapshot;
 import org.apache.commons.lang3.concurrent.AtomicSafeInitializer;
@@ -29,7 +28,7 @@ public class User implements Comparable<User> {
     private String server = "";
     private int hops = 0;
 
-    protected User(PircBotZ bot, UserChannelDao<PircBotZ, User, Channel> dao, String nick) {
+    public User(PircBotZ bot, UserChannelDao<PircBotZ, User, Channel> dao, String nick) {
         this.bot = bot;
         this.dao = dao;
         this.nick = nick;
@@ -134,35 +133,35 @@ public class User implements Comparable<User> {
         return ircop;
     }
 
-    protected void setNick(String nick) {
+    public void setNick(String nick) {
         this.nick = nick;
     }
 
-    protected void setRealName(String realName) {
+    public void setRealName(String realName) {
         this.realName = realName;
     }
 
-    protected void setLogin(String login) {
+    public void setLogin(String login) {
         this.login = login;
     }
 
-    protected void setHostmask(String hostmask) {
+    public void setHostmask(String hostmask) {
         this.hostmask = hostmask;
     }
 
-    protected void setAwayMessage(String awayMessage) {
+    public void setAwayMessage(String awayMessage) {
         this.awayMessage = awayMessage;
     }
 
-    protected void setIrcop(boolean ircop) {
+    public void setIrcop(boolean ircop) {
         this.ircop = ircop;
     }
 
-    protected void setServer(String server) {
+    public void setServer(String server) {
         this.server = server;
     }
 
-    protected void setHops(int hops) {
+    public void setHops(int hops) {
         this.hops = hops;
     }
 

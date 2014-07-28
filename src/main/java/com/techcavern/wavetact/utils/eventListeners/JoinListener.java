@@ -4,7 +4,6 @@ import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.PermUtils;
 import com.techcavern.wavetact.utils.databaseUtils.PermChannelUtils;
 import com.techcavern.wavetact.utils.objects.PermChannel;
-import org.pircbotz.PircBotZ;
 import org.pircbotz.hooks.ListenerAdapter;
 import org.pircbotz.hooks.events.JoinEvent;
 
@@ -12,7 +11,7 @@ import org.pircbotz.hooks.events.JoinEvent;
  * Created by jztech101 on 7/5/14.
  */
 public class JoinListener extends ListenerAdapter {
-    public void onJoin(JoinEvent event) throws Exception {
+    public void onJoin(JoinEvent event) {
         PermChannel PLChannel = PermChannelUtils.getPermLevelChannel(event.getBot().getServerInfo().getNetwork(), PermUtils.getAccount(event.getBot(), event.getUser().getNick()), event.getChannel().getName());
         if (PLChannel != null) {
             if (PLChannel.getAuto()) {

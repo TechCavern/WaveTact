@@ -10,20 +10,20 @@ import org.pircbotz.snapshot.UserSnapshot;
 
 public class UserChannelMap<U extends User, C extends Channel> {
 
-    protected final Multimap<U, C> userToChannelMap;
-    protected final Multimap<C, U> channelToUserMap;
+    private final Multimap<U, C> userToChannelMap;
+    private final Multimap<C, U> channelToUserMap;
 
     public UserChannelMap() {
         channelToUserMap = MultimapBuilder.hashKeys().linkedListValues().build();
         userToChannelMap = MultimapBuilder.hashKeys().linkedListValues().build();
     }
 
-    public UserChannelMap(Multimap<U, C> userToChannelMap, Multimap<C, U> channelToUserMap) {
+    protected UserChannelMap(Multimap<U, C> userToChannelMap, Multimap<C, U> channelToUserMap) {
         this.userToChannelMap = userToChannelMap;
         this.channelToUserMap = channelToUserMap;
     }
 
-    protected void addUserToChannel(U user, C channel) {
+    void addUserToChannel(U user, C channel) {
         userToChannelMap.put(user, channel);
         channelToUserMap.put(channel, user);
     }

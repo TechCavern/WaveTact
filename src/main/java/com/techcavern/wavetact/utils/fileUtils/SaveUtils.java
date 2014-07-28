@@ -18,7 +18,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
-public class SaveUtils {
+class SaveUtils {
 
     public static String readTextFile(String filename) {
         return readTextFile(new File(filename));

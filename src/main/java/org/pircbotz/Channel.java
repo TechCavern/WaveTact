@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
-import java.util.logging.Level;
+
 import org.pircbotz.output.OutputChannel;
 import org.pircbotz.snapshot.ChannelSnapshot;
 import org.apache.commons.lang3.concurrent.AtomicSafeInitializer;
@@ -39,7 +39,7 @@ public class Channel {
     private boolean modeStale = false;
     private CountDownLatch modeLatch = null;
 
-    protected Channel(PircBotZ bot, UserChannelDao<? extends PircBotZ, User, Channel> dao, String name) {
+    public Channel(PircBotZ bot, UserChannelDao<? extends PircBotZ, User, Channel> dao, String name) {
         this.bot = bot;
         this.dao = dao;
         this.name = name;
@@ -117,59 +117,59 @@ public class Channel {
         return modeLatch;
     }
 
-    protected void setTopic(String topic) {
+    public void setTopic(String topic) {
         this.topic = topic;
     }
 
-    protected void setTopicTimestamp(long topicTimestamp) {
+    public void setTopicTimestamp(long topicTimestamp) {
         this.topicTimestamp = topicTimestamp;
     }
 
-    protected void setCreateTimestamp(long createTimestamp) {
+    public void setCreateTimestamp(long createTimestamp) {
         this.createTimestamp = createTimestamp;
     }
 
-    protected void setTopicSetter(String topicSetter) {
+    public void setTopicSetter(String topicSetter) {
         this.topicSetter = topicSetter;
     }
 
-    protected void setModerated(boolean moderated) {
+    public void setModerated(boolean moderated) {
         this.moderated = moderated;
     }
 
-    protected void setNoExternalMessages(boolean noExternalMessages) {
+    public void setNoExternalMessages(boolean noExternalMessages) {
         this.noExternalMessages = noExternalMessages;
     }
 
-    protected void setInviteOnly(boolean inviteOnly) {
+    public void setInviteOnly(boolean inviteOnly) {
         this.inviteOnly = inviteOnly;
     }
 
-    protected void setSecret(boolean secret) {
+    public void setSecret(boolean secret) {
         this.secret = secret;
     }
 
-    protected void setChannelPrivate(boolean channelPrivate) {
+    public void setChannelPrivate(boolean channelPrivate) {
         this.channelPrivate = channelPrivate;
     }
 
-    protected void setTopicProtection(boolean topicProtection) {
+    public void setTopicProtection(boolean topicProtection) {
         this.topicProtection = topicProtection;
     }
 
-    protected void setChannelLimit(int channelLimit) {
+    public void setChannelLimit(int channelLimit) {
         this.channelLimit = channelLimit;
     }
 
-    protected void setModeStale(boolean modeStale) {
+    public void setModeStale(boolean modeStale) {
         this.modeStale = modeStale;
     }
 
-    protected void setModeLatch(CountDownLatch modeLatch) {
+    public void setModeLatch(CountDownLatch modeLatch) {
         this.modeLatch = modeLatch;
     }
 
-    protected void setChannelKey(String channelKey) {
+    public void setChannelKey(String channelKey) {
         this.channelKey = channelKey;
     }
 
@@ -181,7 +181,7 @@ public class Channel {
         }
     }
 
-    protected void parseMode(String rawMode) {
+    public void parseMode(String rawMode) {
         if (rawMode.contains(" ")) {
             modeStale = true;
             return;
@@ -248,7 +248,7 @@ public class Channel {
         return getDao().getUsers(this, UserLevel.SUPEROP);
     }
 
-    protected void setMode(String mode, List<String> modeParsed) {
+    public void setMode(String mode, List<String> modeParsed) {
         this.mode = mode;
         this.modeStale = false;
         if (modeLatch != null) {
@@ -301,8 +301,6 @@ public class Channel {
     }
 
     public ChannelSnapshot createSnapshot() {
-        if (modeStale) {
-        }
         return new ChannelSnapshot(this, mode);
     }
 

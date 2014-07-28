@@ -70,7 +70,7 @@ public class ServerInfo {
         this.bot = bot;
     }
 
-    protected void parse(int code, List<String> parsedLine) {
+    void parse(int code, List<String> parsedLine) {
         if (code == 004) {
             parse004(parsedLine);
         } else if (code == 005) {
@@ -572,7 +572,7 @@ public class ServerInfo {
         this.language = language;
     }
 
-    protected void setMotd(String motd) {
+    void setMotd(String motd) {
         this.motd = motd;
     }
 

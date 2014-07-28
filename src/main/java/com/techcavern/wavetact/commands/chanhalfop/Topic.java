@@ -37,8 +37,8 @@ public class Topic extends GenericCommand {
     @Override
     public void onCommand(User user, PircBotZ Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         StringUtils.split(channel.getTopic(), args[0]);
-        List<String> topic = new LinkedList(Arrays.asList(StringUtils.split(channel.getTopic(), args[0])));
-        List<String> newtopic = new LinkedList(Arrays.asList(StringUtils.split(channel.getTopic(), args[0])));
+        @SuppressWarnings("unchecked") List<String> topic = new LinkedList(Arrays.asList(StringUtils.split(channel.getTopic(), args[0])));
+        @SuppressWarnings("unchecked") List<String> newtopic = new LinkedList(Arrays.asList(StringUtils.split(channel.getTopic(), args[0])));
         if (args[1].equalsIgnoreCase("a")) {
             channel.send().setTopic(channel.getTopic() + " " + args[0] + " " + GeneralUtils.buildMessage(2, args.length, args));
             saveTopic(channel, Bot);
