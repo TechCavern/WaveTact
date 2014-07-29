@@ -15,7 +15,7 @@ public class ChanMsgProcessor {
     public static void ChanMsgProcess(MessageEvent<PircBotX> event) {
         class process implements Runnable {
             public void run() {
-                String[] messageParts = event.getMessage().split(" ");
+                String[] messageParts = event.getMessage().replaceAll("\\P{InBasic_Latin}", "").split(" ");
                 String m = messageParts[0].toLowerCase();
                 GenericCommand Command = GetUtils.getCommand(m.replaceFirst(GetUtils.getCommandChar(event.getBot()), ""));
                 if (Command != null && m.startsWith(GetUtils.getCommandChar(event.getBot()))) {

@@ -69,7 +69,7 @@ public class GetUtils {
 
     public static Global getGlobalByNick(String nick, String Network) {
         for (Global global : GeneralRegistry.Globals) {
-            if (global.getUser().equals(nick) && global.getNetwork().equalsIgnoreCase(Network)) {
+            if (global.getUser().equalsIgnoreCase(nick) && global.getNetwork().equalsIgnoreCase(Network)) {
                 return global;
             }
         }
@@ -78,7 +78,7 @@ public class GetUtils {
 
     public static String getControllerByNick(String Nick) {
         for (String c : GeneralRegistry.Controllers) {
-            if (c.equals(Nick)) {
+            if (c.equalsIgnoreCase(Nick)) {
                 return c;
             }
         }

@@ -33,7 +33,7 @@ public class IRCUtils {
         try {
             WhoisEvent = waitForQueue.waitFor(WhoisEvent.class);
             waitForQueue.close();
-        } catch (InterruptedException ex) {
+        } catch (InterruptedException | NullPointerException ex) {
             ex.printStackTrace();
             WhoisEvent = null;
         }

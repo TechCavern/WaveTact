@@ -48,7 +48,7 @@ public class PermChannelUtils {
 
     public static PermChannel getPermLevelChannel(String Network, String nick, String Channel) {
         for (PermChannel c : GeneralRegistry.PermChannels) {
-            if (c.getChannel().equals(Channel) && c.getPermUser().equals(nick) && c.getPermNetwork().equals(Network)) {
+            if (c.getChannel().equals(Channel) && c.getPermUser().equalsIgnoreCase(nick) && c.getPermNetwork().equals(Network)) {
                 return c;
             }
         }

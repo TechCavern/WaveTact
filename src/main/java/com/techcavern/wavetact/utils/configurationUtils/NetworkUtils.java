@@ -55,6 +55,6 @@ public class NetworkUtils {
         GeneralRegistry.WaveTact.addBot(Dev2);
         GeneralRegistry.Controllers.add("JZTech101");
         new CommandChar("@", Dev);
-        new CommandChar("@", Dev2);
+        new CommandChar("-", Dev2);
     }
 }

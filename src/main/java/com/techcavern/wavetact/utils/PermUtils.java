@@ -19,9 +19,9 @@ public class PermUtils {
         String userString;
         WhoisEvent whois = IRCUtils.WhoisEvent(bot, userObject);
         if (whois != null) {
-            userString = whois.getRegisteredAs();
-            if (userString !=null && userString.isEmpty()) {
-                    userString = userObject;
+            userString = whois.getRegisteredAs().toLowerCase();
+            if (userString !=null && userString.isEmpty()){
+                    userString = userObject.toLowerCase();
             }
         } else {
             userString = null;
@@ -65,7 +65,6 @@ public class PermUtils {
             return 0;
         }
     }
-
     public static int getPermLevel(PircBotX bot, String userObject, Channel channelObject) {
         if (channelObject != null) {
             int mpermlevel = getManualPermLevel(bot, userObject, channelObject);
