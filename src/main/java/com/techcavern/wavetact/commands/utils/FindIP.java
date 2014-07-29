@@ -7,9 +7,9 @@ import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
-import org.pircbotz.Channel;
-import org.pircbotz.PircBotZ;
-import org.pircbotz.User;
+import org.pircbotx.Channel;
+import org.pircbotx.PircBotX;
+import org.pircbotx.User;
 
 
 public class FindIP extends GenericCommand {
@@ -21,7 +21,7 @@ public class FindIP extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotZ Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         JsonObject objectJson;
         if (args[0].contains(".")) {
             objectJson = GeneralUtils.getJsonObject("http://freegeoip.net/json/" + args[0]);

@@ -11,9 +11,9 @@ import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.databaseUtils.GlobalUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.objects.Global;
-import org.pircbotz.Channel;
-import org.pircbotz.PircBotZ;
-import org.pircbotz.User;
+import org.pircbotx.Channel;
+import org.pircbotx.PircBotX;
+import org.pircbotx.User;
 
 
 /**
@@ -27,7 +27,7 @@ public class Globals extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotZ Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
 
         String account;
         if (args[0].startsWith("-")) {

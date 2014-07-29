@@ -18,9 +18,9 @@ import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.objects.SimpleAction;
 import com.techcavern.wavetact.utils.objects.SimpleMessage;
 import org.apache.commons.lang3.StringUtils;
-import org.pircbotz.Channel;
-import org.pircbotz.PircBotZ;
-import org.pircbotz.User;
+import org.pircbotx.Channel;
+import org.pircbotx.PircBotX;
+import org.pircbotx.User;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,7 +37,7 @@ public class CustomCMD extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotZ Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
 
         switch (args[0].toLowerCase()) {
             case "m": // message

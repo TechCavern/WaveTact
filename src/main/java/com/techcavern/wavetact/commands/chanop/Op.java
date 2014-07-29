@@ -10,9 +10,9 @@ import com.techcavern.wavetact.annot.ChanOPCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
-import org.pircbotz.Channel;
-import org.pircbotz.PircBotZ;
-import org.pircbotz.User;
+import org.pircbotx.Channel;
+import org.pircbotx.PircBotX;
+import org.pircbotx.User;
 
 /**
  * @author jztech101
@@ -26,7 +26,7 @@ public class Op extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotZ Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         if (args.length >= 1) {
             if (args[0].equalsIgnoreCase("-")) {
                 channel.send().deOp(user);

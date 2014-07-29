@@ -5,9 +5,9 @@ import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
-import org.pircbotz.Channel;
-import org.pircbotz.PircBotZ;
-import org.pircbotz.User;
+import org.pircbotx.Channel;
+import org.pircbotx.PircBotX;
+import org.pircbotx.User;
 
 public class IRCRaw extends GenericCommand {
     @CMD
@@ -17,7 +17,7 @@ public class IRCRaw extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotZ Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         Bot.sendRaw().rawLine(GeneralUtils.buildMessage(0, args.length, args));
     }
 }

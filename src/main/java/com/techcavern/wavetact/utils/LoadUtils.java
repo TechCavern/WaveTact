@@ -30,9 +30,9 @@ import com.techcavern.wavetact.utils.eventListeners.*;
 import com.techcavern.wavetact.utils.objects.CommandLine;
 import com.techcavern.wavetact.utils.objects.FunObject;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
-import org.pircbotz.Configuration;
-import org.pircbotz.Configuration.Builder;
-import org.pircbotz.PircBotZ;
+import org.pircbotx.Configuration;
+import org.pircbotx.Configuration.Builder;
+import org.pircbotx.PircBotX;
 
 import java.nio.charset.Charset;
 import java.util.List;
@@ -41,9 +41,9 @@ public class LoadUtils {
 
     public static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    public static PircBotZ createbot(String nickservPassword, String name, List<String> channels, String nick, String server) {
+    public static PircBotX createbot(String nickservPassword, String name, List<String> channels, String nick, String server) {
         System.out.println("Configuring " + name);
-        Builder<PircBotZ> Net = new Configuration.Builder<>();
+        Builder<PircBotX> Net = new Configuration.Builder<>();
         Net.setName(nick);
         Net.setLogin("WaveTact");
         Net.setEncoding(Charset.isSupported("UTF-8") ? Charset.forName("UTF-8") : Charset.defaultCharset());
@@ -54,14 +54,13 @@ public class LoadUtils {
         Net.getListenerManager().addListener(new JoinListener());
         Net.getListenerManager().addListener(new CTCPListener());
         Net.getListenerManager().addListener(new KickListener());
-        Net.getListenerManager().addListener(new QuitListener());
         Net.getListenerManager().addListener(new PrivMsgListener());
-        Net.getListenerManager().addListener(new DisconnectListener());
         Net.setMessageDelay(0);
+        Net.setAutoReconnect(true);
         if (nickservPassword != null) {
             Net.setNickservPassword(nickservPassword);
         }
-        return new PircBotZ(Net.buildConfiguration());
+        return new PircBotX(Net.buildConfiguration());
     }
 
     public static void registerCommands() {

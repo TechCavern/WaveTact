@@ -6,16 +6,16 @@
 package com.techcavern.wavetact.utils.eventListeners;
 
 import com.techcavern.wavetact.utils.runnables.ChanMsgProcessor;
-import org.pircbotz.PircBotZ;
-import org.pircbotz.hooks.ListenerAdapter;
-import org.pircbotz.hooks.events.MessageEvent;
+import org.pircbotx.PircBotX;
+import org.pircbotx.hooks.ListenerAdapter;
+import org.pircbotx.hooks.events.MessageEvent;
 
 /**
  * @author jztech101
  */
-public class ChanMsgListener extends ListenerAdapter {
+public class ChanMsgListener extends ListenerAdapter<PircBotX> {
     @Override
-    public void onMessage(MessageEvent event) throws Exception {
+    public void onMessage(MessageEvent<PircBotX> event) throws Exception {
         ChanMsgProcessor.ChanMsgProcess(event);
     }
 }

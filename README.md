@@ -1,6 +1,6 @@
 WaveTact [![Build Status](https://travis-ci.org/TechCavern/WaveTact.svg?branch=master)](https://travis-ci.org/DirectMyFile/WaveTact)
 --------
-An IRC bot that is based upon PircBotZ and sits in #techcavern on the following networks:
+An IRC bot that is based upon PircBotX and sits in #techcavern on the following networks:
 - ElectroCode (irc.electrocode.net)
 - EsperNET (irc.esper.net)
 - Xertion (irc.xertion.org)
@@ -8,7 +8,7 @@ An IRC bot that is based upon PircBotZ and sits in #techcavern on the following 
 - Freenode (irc.freenode.net)
 - ObsidianIRC (irc.obsidianirc.net)
 
-WaveTact is under the GNU GPLv3 License (Per PircBot Restrictions)
+WaveTact is under the GNU GPLv3 License
 
 Building
 ========
@@ -24,7 +24,7 @@ Permissions
 PermLevels
 ==========
 - 9001 - Bot Controller (Access to all commands everywhere)
-- 20 - Network Operator (Access to all commands below controller on a specific network)
+- 20 - Network Oper (Access to all commands below controller on a specific network)
 - 18 - Channel Founder (Access to all commands below controller on a specific channel and must be assigned by the controller per channel)
 - 15 - Channel Owner (Access to all commands below Founder on a specific channel and must be assigned by the controller per channel)
 - 13 - Channel Admin (Access to all commands below Owner on a specific channel)

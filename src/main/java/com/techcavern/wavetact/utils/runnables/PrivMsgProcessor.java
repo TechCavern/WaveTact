@@ -5,15 +5,16 @@ import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.PermUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.apache.commons.lang3.ArrayUtils;
-import org.pircbotz.Channel;
-import org.pircbotz.hooks.events.PrivateMessageEvent;
+import org.pircbotx.Channel;
+import org.pircbotx.PircBotX;
+import org.pircbotx.hooks.events.PrivateMessageEvent;
 
 /**
  * Created by jztech101 on 7/27/14.
  */
 public class PrivMsgProcessor {
 
-    public static void PrivMsgProcess(PrivateMessageEvent event) {
+    public static void PrivMsgProcess(PrivateMessageEvent<PircBotX> event) {
         class process implements Runnable {
             public void run() {
                 String[] messageParts = event.getMessage().split(" ");
@@ -30,7 +31,7 @@ public class PrivMsgProcessor {
                 }
                 if (Command != null) {
                     if ((Command.getPermLevel() >= 0 && (Command.getPermLevel() <= 5 || Command.getPermLevel() > 18) || (channel != null))) {
-                        int UserPermLevel = PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), channel);
+                        int UserPermLevel = PermUtils.getPermLevel(event.getBot(), event.getUser(), channel);
                         if (UserPermLevel >= Command.getPermLevel()) {
                             if (Command.getPermLevel() == 9) {
                                 if (channel.isOp(event.getBot().getUserBot()) || channel.isOp(event.getBot().getUserBot()) || channel.isOwner(event.getBot().getUserBot())) {

@@ -1,18 +1,18 @@
 package com.techcavern.wavetact.utils;
 
-import org.pircbotz.Channel;
-import org.pircbotz.PircBotZ;
-import org.pircbotz.User;
-import org.pircbotz.hooks.WaitForQueue;
-import org.pircbotz.hooks.events.WhoisEvent;
-import org.pircbotz.output.OutputChannel;
-import org.pircbotz.output.OutputUser;
+import org.pircbotx.Channel;
+import org.pircbotx.PircBotX;
+import org.pircbotx.User;
+import org.pircbotx.hooks.WaitForQueue;
+import org.pircbotx.hooks.events.WhoisEvent;
+import org.pircbotx.output.OutputChannel;
+import org.pircbotx.output.OutputUser;
 
 /**
  * Created by jztech101 on 7/4/14.
  */
 public class IRCUtils {
-    public static void setMode(Channel channelObject, PircBotZ botObject, String modeToSet, String hostmask) {
+    public static void setMode(Channel channelObject, PircBotX botObject, String modeToSet, String hostmask) {
         OutputChannel o = new OutputChannel(botObject, channelObject);
         if (hostmask != null) {
             modeToSet = modeToSet + hostmask;
@@ -22,8 +22,8 @@ public class IRCUtils {
         }
     }
 
-    public static WhoisEvent WhoisEvent(PircBotZ bot, String userObject) {
-        WhoisEvent WhoisEvent = null;
+    public static WhoisEvent<PircBotX> WhoisEvent(PircBotX bot, String userObject) {
+        WhoisEvent<PircBotX> WhoisEvent;
         if (userObject != null) {
             bot.sendRaw().rawLineNow("WHOIS " + userObject);
         } else {
@@ -31,15 +31,8 @@ public class IRCUtils {
         }
         WaitForQueue waitForQueue = new WaitForQueue(bot);
         try {
-            boolean run = true;
-            while (run) {
-                WhoisEvent = waitForQueue.waitFor(WhoisEvent.class);
-                if (!WhoisEvent.getNick().equals(userObject))
-                    continue;
-                else
-                    run = false;
-                waitForQueue.close();
-            }
+            WhoisEvent = waitForQueue.waitFor(WhoisEvent.class);
+            waitForQueue.close();
         } catch (InterruptedException ex) {
             ex.printStackTrace();
             WhoisEvent = null;
@@ -47,7 +40,7 @@ public class IRCUtils {
         return WhoisEvent;
     }
 
-    public static void SendNotice(PircBotZ botObject, User userObject, String notice) {
+    public static void SendNotice(PircBotX botObject, User userObject, String notice) {
         OutputUser x = new OutputUser(botObject, userObject);
         x.notice(notice);
     }
@@ -68,7 +61,7 @@ public class IRCUtils {
         }
     }
 
-    public static String getHostmask(PircBotZ bot, String userObject, boolean isBanmask) {
+    public static String getHostmask(PircBotX bot, String userObject, boolean isBanmask) {
         String hostmask;
         WhoisEvent whois = WhoisEvent(bot, userObject);
         if (whois != null) {

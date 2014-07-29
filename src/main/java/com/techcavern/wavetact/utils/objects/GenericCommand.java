@@ -6,9 +6,9 @@
 package com.techcavern.wavetact.utils.objects;
 
 import com.techcavern.wavetact.utils.GeneralRegistry;
-import org.pircbotz.Channel;
-import org.pircbotz.PircBotZ;
-import org.pircbotz.User;
+import org.pircbotx.Channel;
+import org.pircbotx.PircBotX;
+import org.pircbotx.User;
 
 /**
  * @author jztech101
@@ -26,7 +26,7 @@ public abstract class GenericCommand {
         GeneralRegistry.AllCommands.add(this);
     }
 
-    public abstract void onCommand(User user, PircBotZ Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception;
+    public abstract void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception;
 
     public boolean getLockedStatus() {
         return false;

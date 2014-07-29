@@ -7,9 +7,9 @@ import com.techcavern.wavetact.utils.PermUtils;
 import com.techcavern.wavetact.utils.databaseUtils.PermChannelUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.objects.PermChannel;
-import org.pircbotz.Channel;
-import org.pircbotz.PircBotZ;
-import org.pircbotz.User;
+import org.pircbotx.Channel;
+import org.pircbotx.PircBotX;
+import org.pircbotx.User;
 
 /**
  * Created by jztech101 on 7/5/14.
@@ -22,7 +22,7 @@ public class AutoOp extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotZ Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         String account;
         if (args[0].startsWith("-")) {
             account = PermUtils.getAccount(Bot, args[0].replaceFirst("-", ""));

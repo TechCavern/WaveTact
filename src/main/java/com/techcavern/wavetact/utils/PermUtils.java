@@ -1,22 +1,23 @@
 package com.techcavern.wavetact.utils;
 
 import com.techcavern.wavetact.utils.databaseUtils.PermChannelUtils;
-import org.pircbotz.Channel;
-import org.pircbotz.PircBotZ;
-import org.pircbotz.User;
-import org.pircbotz.hooks.events.WhoisEvent;
+import org.pircbotx.Channel;
+import org.pircbotx.PircBotX;
+import org.pircbotx.User;
+import org.pircbotx.hooks.events.WhoisEvent;
 
 public class PermUtils {
 
     @SuppressWarnings("unchecked")
-    public static String getAccount(PircBotZ bot, String userObject) {
+    public static String getAccount(PircBotX bot, String userObject) {
         String userString;
         WhoisEvent whois = IRCUtils.WhoisEvent(bot, userObject);
         if (whois != null) {
             userString = whois.getRegisteredAs();
-            if (userString != null && userString.isEmpty()) {
+            if (userString == null || userString.isEmpty()) {
+                if (GetUtils.getUserByNick(bot, userObject).isVerified()) {
                     userString = userObject;
-
+                }
             }
         } else {
             userString = null;
@@ -42,7 +43,7 @@ public class PermUtils {
         }
     }
 
-    private static int getManualPermLevel(PircBotZ bot, String userObject, Channel channelObject) {
+    private static int getManualPermLevel(PircBotX bot, String userObject, Channel channelObject) {
         String account = getAccount(bot, userObject);
         if (account != null) {
             if (GetUtils.getControllerByNick(account) != null) {
@@ -61,10 +62,10 @@ public class PermUtils {
         }
     }
 
-    public static int getPermLevel(PircBotZ bot, String userObject, Channel channelObject) {
+    public static int getPermLevel(PircBotX bot, User userObject, Channel channelObject) {
         if (channelObject != null) {
-            int mpermlevel = getManualPermLevel(bot, userObject, channelObject);
-            int apermlevel = getAutomaticPermLevel(GetUtils.getUserByNick(bot, userObject), channelObject);
+            int mpermlevel = getManualPermLevel(bot, userObject.getNick(), channelObject);
+            int apermlevel = getAutomaticPermLevel(userObject, channelObject);
             if (mpermlevel < 0) {
                 return mpermlevel;
             } else if (apermlevel < mpermlevel) {
@@ -73,7 +74,7 @@ public class PermUtils {
                 return apermlevel;
             }
         } else {
-            String account = getAccount(bot, userObject);
+            String account = getAccount(bot, userObject.getNick());
             if (account != null) {
                 if (GetUtils.getControllerByNick(account) != null) {
                     return 9001;

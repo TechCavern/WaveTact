@@ -2,8 +2,8 @@ package com.techcavern.wavetact.utils;
 
 import com.techcavern.wavetact.utils.fileUtils.Configuration;
 import com.techcavern.wavetact.utils.objects.*;
-import org.pircbotz.MultiBotManager;
-import org.pircbotz.PircBotZ;
+import org.pircbotx.MultiBotManager;
+import org.pircbotx.PircBotX;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,7 +36,7 @@ public class GeneralRegistry {
     public static final List<GenericCommand> ChanFounderCommands = new ArrayList<>();
     public static final List<SimpleMessage> SimpleMessages = new ArrayList<>();
     public static final List<SimpleAction> SimpleActions = new ArrayList<>();
-    public static final MultiBotManager WaveTact = new MultiBotManager();
+    public static final MultiBotManager<PircBotX> WaveTact = new MultiBotManager<>();
     public static final Map<String, Configuration> configs = new HashMap<>();
     public static final List<UTime> BanTimes = new ArrayList<>();
     public static final List<UTime> QuietTimes = new ArrayList<>();

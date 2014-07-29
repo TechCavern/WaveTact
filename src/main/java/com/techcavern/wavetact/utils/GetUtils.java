@@ -4,16 +4,16 @@ import com.techcavern.wavetact.utils.objects.CommandChar;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.objects.Global;
 import com.techcavern.wavetact.utils.objects.UTime;
-import org.pircbotz.Channel;
-import org.pircbotz.PircBotZ;
-import org.pircbotz.User;
+import org.pircbotx.Channel;
+import org.pircbotx.PircBotX;
+import org.pircbotx.User;
 
 /**
  * Created by jztech101 on 7/4/14.
  */
 public class GetUtils {
 
-    public static User getUserByNick(PircBotZ botObject, String Nick) {
+    public static User getUserByNick(PircBotX botObject, String Nick) {
         User userObject = botObject.getUserChannelDao().getUser(Nick);
         if (!userObject.getHostmask().isEmpty()) {
             return userObject;
@@ -22,13 +22,13 @@ public class GetUtils {
         }
     }
 
-    public static Channel getChannelbyName(PircBotZ botObject, String channelName) {
+    public static Channel getChannelbyName(PircBotX botObject, String channelName) {
         return botObject.getUserChannelDao().getChannel(channelName);
 
     }
 
-    public static PircBotZ getBotByNetwork(String network) {
-        for (PircBotZ c : GeneralRegistry.WaveTact.getBots()) {
+    public static PircBotX getBotByNetwork(String network) {
+        for (PircBotX c : GeneralRegistry.WaveTact.getBots()) {
             if (c.getServerInfo().getNetwork().equals(network)) {
                 return c;
             }
@@ -48,7 +48,7 @@ public class GetUtils {
 
     }
 
-    public static String getCommandChar(PircBotZ botObject) {
+    public static String getCommandChar(PircBotX botObject) {
         for (CommandChar d : GeneralRegistry.CommandChars) {
             if (d.getBot() == botObject) {
                 return d.getCommandChar();

@@ -6,7 +6,7 @@ import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.databaseUtils.BanTimeUtils;
 import com.techcavern.wavetact.utils.databaseUtils.QuietTimeUtils;
 import com.techcavern.wavetact.utils.objects.UTime;
-import org.pircbotz.PircBotZ;
+import org.pircbotx.PircBotX;
 
 import java.util.concurrent.TimeUnit;
 
@@ -28,7 +28,7 @@ public class CheckTime implements Runnable {
                     UTime utimeObject = GeneralRegistry.BanTimes.get(i);
                     try {
                         if (System.currentTimeMillis() >= utimeObject.getTime() + utimeObject.getInit()) {
-                            PircBotZ botObject = GetUtils.getBotByNetwork(utimeObject.getNetworkName());
+                            PircBotX botObject = GetUtils.getBotByNetwork(utimeObject.getNetworkName());
                             IRCUtils.setMode(GetUtils.getChannelbyName(botObject, utimeObject.getChannelName()), botObject, "-b ", utimeObject.getSomething());
                             GeneralRegistry.BanTimes.remove(i);
                             BanTimeUtils.saveBanTimes();
@@ -42,7 +42,7 @@ public class CheckTime implements Runnable {
                     UTime utimeObject = GeneralRegistry.QuietTimes.get(i);
                     try {
                         if (System.currentTimeMillis() >= utimeObject.getTime() + utimeObject.getInit()) {
-                            PircBotZ botObject = GetUtils.getBotByNetwork(utimeObject.getNetworkName());
+                            PircBotX botObject = GetUtils.getBotByNetwork(utimeObject.getNetworkName());
                             switch (utimeObject.getType().toLowerCase()) {
                                 case "u":
                                     IRCUtils.setMode(GetUtils.getChannelbyName(botObject, utimeObject.getChannelName()), botObject, "-b ~q:", utimeObject.getSomething());
