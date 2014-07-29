@@ -27,12 +27,9 @@ public class GeneralUtils {
                         waResults.add(((WAPlainText) e).getText().replaceAll("[|]", "").replaceAll("\n", ", ").replaceAll("  ", " "));
                     }
                 }
-
-
             }
         }
         return waResults;
-
     }
 
     public static String buildMessage(int startint, int finishint, String[] args) {

@@ -26,7 +26,7 @@ public class MathC extends GenericCommand {
         if (waResults.size() < 1 || waResults.get(1).isEmpty()) {
             user.send().notice("Unable to get response, try again or stop inputting gibberish");
         } else {
-            IRCUtils.SendMessage(user, channel, waResults.get(1), isPrivate);
+            IRCUtils.SendMessage(user, channel, StringUtils.substring(waResults.get(1), 0, 450), isPrivate);
         }
 
     }
