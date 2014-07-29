@@ -26,9 +26,7 @@ public class MCStatus extends GenericCommand {
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         String Result;
-        String Res;
-        URL url;
-        url = new URL("https://status.mojang.com/check");
+        URL url = new URL("https://status.mojang.com/check");
         BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
         Result = reader.readLine().replace("\"},{\"", " | ").replace("\":\"", ": ").replace("green", "Online").replace("red", "Offline").replace("[{\"", "").replace("\"}]", "").replace(".minecraft.net", "").replace(".mojang.com", "").replace("server", " Server").replace(".net", "");
         Result = WordUtils.capitalizeFully(Result);

@@ -29,7 +29,7 @@ public class WolframAlpha extends GenericCommand {
             IRCUtils.SendMessage(user, channel, waResults.get(Integer.parseInt(args[1])), isPrivate);
         } else {
             for (String waresult : waResults) {
-                IRCUtils.SendMessage(user, channel, waresult, isPrivate);
+                user.send().notice(waresult);
             }
         }
     }
