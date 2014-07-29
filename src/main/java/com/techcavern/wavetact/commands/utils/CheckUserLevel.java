@@ -5,6 +5,7 @@ import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.PermUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -25,6 +26,7 @@ public class CheckUserLevel extends GenericCommand {
             userObject = user;
         } else {
             userObject = GetUtils.getUserByNick(Bot, args[0]);
+            UserPermLevel = PermUtils.getPermLevel(Bot, userObject, channel);
         }
         if (UserPermLevel >= 9001) {
             IRCUtils.SendMessage(user, channel, userObject.getNick() + " is my Master!", isPrivate);

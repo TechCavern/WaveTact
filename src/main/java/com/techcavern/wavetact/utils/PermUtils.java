@@ -1,6 +1,7 @@
 package com.techcavern.wavetact.utils;
 
 import com.techcavern.wavetact.utils.databaseUtils.PermChannelUtils;
+import com.techcavern.wavetact.utils.objects.AuthedUser;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -8,16 +9,19 @@ import org.pircbotx.hooks.events.WhoisEvent;
 
 public class PermUtils {
 
+    public static AuthedUser getAuthedUser(PircBotX bot, String userObject){
+        //TODO: WaitForFix;
+        return null;
+    }
+
     @SuppressWarnings("unchecked")
     public static String getAccount(PircBotX bot, String userObject) {
         String userString;
         WhoisEvent whois = IRCUtils.WhoisEvent(bot, userObject);
         if (whois != null) {
             userString = whois.getRegisteredAs();
-            if (userString == null || userString.isEmpty()) {
-                if (GetUtils.getUserByNick(bot, userObject).isVerified()) {
+            if (userString !=null && userString.isEmpty()) {
                     userString = userObject;
-                }
             }
         } else {
             userString = null;
