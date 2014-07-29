@@ -24,7 +24,7 @@ public class PermUtils {
                     userString = userObject.toLowerCase();
             }
         } else {
-            userString = null;
+            userString = userObject;
         }
         return userString;
     }
