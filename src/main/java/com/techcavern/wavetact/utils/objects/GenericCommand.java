@@ -19,7 +19,7 @@ public abstract class GenericCommand {
     private final String Desc;
     private int PermLevel;
 
-    public GenericCommand(String[] comid, int PermLevel, String Desc) {
+    protected GenericCommand(String[] comid, int PermLevel, String Desc) {
         this.comid = comid;
         this.PermLevel = PermLevel;
         this.Desc = Desc;

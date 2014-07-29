@@ -10,7 +10,7 @@ public class CAPException extends RuntimeException {
         this(reason, detail, null);
     }
 
-    private CAPException(Reason reason, String detail, Throwable cause) {
+    public CAPException(Reason reason, String detail, Throwable cause) {
         super(reason + ": " + detail, cause);
         Validate.notNull(reason, "Reason cannot be null");
         Validate.notNull(detail, "Detail cannot be null");

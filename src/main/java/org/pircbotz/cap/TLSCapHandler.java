@@ -7,7 +7,7 @@ import org.pircbotz.exception.CAPException;
 
 public class TLSCapHandler extends EnableCapHandler {
 
-    private SSLSocketFactory sslSocketFactory;
+    protected SSLSocketFactory sslSocketFactory;
 
     public TLSCapHandler() {
         super("tls");

@@ -25,7 +25,7 @@ public class UserSnapshot extends User {
         super.setServer(user.getServer());
     }
 
-    UserChannelDaoSnapshot<? extends PircBotZ> getSnapshotDao() {
+    public UserChannelDaoSnapshot<? extends PircBotZ> getSnapshotDao() {
         return dao;
     }
 
@@ -41,32 +41,32 @@ public class UserSnapshot extends User {
 
     @Override
     public Set<Channel> getChannels() {
-        return Utils.castSet(getSnapshotDao().getChannels(this), Channel.class);
+        return Utils.<Channel>castSet(getSnapshotDao().getChannels(this), Channel.class);
     }
 
     @Override
     public Set<Channel> getChannelsOpIn() {
-        return Utils.castSet(getSnapshotDao().getChannels(this, UserLevel.OP), Channel.class);
+        return Utils.<Channel>castSet(getSnapshotDao().getChannels(this, UserLevel.OP), Channel.class);
     }
 
     @Override
     public Set<Channel> getChannelsVoiceIn() {
-        return Utils.castSet(getSnapshotDao().getChannels(this, UserLevel.VOICE), Channel.class);
+        return Utils.<Channel>castSet(getSnapshotDao().getChannels(this, UserLevel.VOICE), Channel.class);
     }
 
     @Override
     public Set<Channel> getChannelsOwnerIn() {
-        return Utils.castSet(getSnapshotDao().getChannels(this, UserLevel.OWNER), Channel.class);
+        return Utils.<Channel>castSet(getSnapshotDao().getChannels(this, UserLevel.OWNER), Channel.class);
     }
 
     @Override
     public Set<Channel> getChannelsHalfOpIn() {
-        return Utils.castSet(getSnapshotDao().getChannels(this, UserLevel.HALFOP), Channel.class);
+        return Utils.<Channel>castSet(getSnapshotDao().getChannels(this, UserLevel.HALFOP), Channel.class);
     }
 
     @Override
     public Set<Channel> getChannelsSuperOpIn() {
-        return Utils.castSet(getSnapshotDao().getChannels(this, UserLevel.SUPEROP), Channel.class);
+        return Utils.<Channel>castSet(getSnapshotDao().getChannels(this, UserLevel.SUPEROP), Channel.class);
     }
 
     @Override
@@ -80,42 +80,42 @@ public class UserSnapshot extends User {
     }
 
     @Override
-    public void setAwayMessage(String away) {
+    protected void setAwayMessage(String away) {
         throw new UnsupportedOperationException("Attempting to set field on user snapshot");
     }
 
     @Override
-    public void setHops(int hops) {
+    protected void setHops(int hops) {
         throw new UnsupportedOperationException("Attempting to set field on user snapshot");
     }
 
     @Override
-    public void setHostmask(String hostmask) {
+    protected void setHostmask(String hostmask) {
         throw new UnsupportedOperationException("Attempting to set field on user snapshot");
     }
 
     @Override
-    public void setIrcop(boolean ircop) {
+    protected void setIrcop(boolean ircop) {
         throw new UnsupportedOperationException("Attempting to set field on user snapshot");
     }
 
     @Override
-    public void setLogin(String login) {
+    protected void setLogin(String login) {
         throw new UnsupportedOperationException("Attempting to set field on user snapshot");
     }
 
     @Override
-    public void setNick(String nick) {
+    protected void setNick(String nick) {
         throw new UnsupportedOperationException("Attempting to set field on user snapshot");
     }
 
     @Override
-    public void setRealName(String realName) {
+    protected void setRealName(String realName) {
         throw new UnsupportedOperationException("Attempting to set field on user snapshot");
     }
 
     @Override
-    public void setServer(String server) {
+    protected void setServer(String server) {
         throw new UnsupportedOperationException("Attempting to set field on user snapshot");
     }
 

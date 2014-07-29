@@ -22,7 +22,7 @@ public class OutputIRC {
         joinChannel(channel + " " + key);
     }
 
-    void partChannel(String channel) {
+    public void partChannel(String channel) {
         Validate.notBlank(channel, "Channel '%s' is blank", channel);
         bot.sendRaw().rawLine("PART " + channel);
     }
@@ -37,7 +37,7 @@ public class OutputIRC {
         quitServer("");
     }
 
-    void quitServer(String reason) {
+    public void quitServer(String reason) {
         Validate.notNull(reason, "Reason cannot be null");
         bot.sendRaw().rawLine("QUIT :" + reason);
     }
@@ -83,7 +83,7 @@ public class OutputIRC {
         listChannels("");
     }
 
-    void listChannels(String parameters) {
+    public void listChannels(String parameters) {
         Validate.notNull(parameters, "Parameters cannot be null");
         if (!bot.getInputParser().isChannelListRunning()) {
             bot.sendRaw().rawLine("LIST " + parameters);

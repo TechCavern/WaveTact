@@ -6,7 +6,7 @@ public abstract class CommandLine {
     private final String helpString;
     private final boolean isPriority;
 
-    public CommandLine(String[] stringArray, String helpString, boolean isPriority) {
+    protected CommandLine(String[] stringArray, String helpString, boolean isPriority) {
         this.argument = stringArray;
         this.helpString = helpString;
         this.isPriority = isPriority;

@@ -5,6 +5,7 @@
  */
 package com.techcavern.wavetact.utils.eventListeners;
 
+import org.pircbotz.PircBotZ;
 import org.pircbotz.hooks.ListenerAdapter;
 import org.pircbotz.hooks.events.KickEvent;
 

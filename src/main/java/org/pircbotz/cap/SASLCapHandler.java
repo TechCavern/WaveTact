@@ -1,6 +1,7 @@
 package org.pircbotz.cap;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.List;
 import org.pircbotz.PircBotZ;
 import org.pircbotz.exception.CAPException;

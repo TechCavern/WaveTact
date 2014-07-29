@@ -9,7 +9,7 @@ public class DccException extends RuntimeException {
     private final Reason ourReason;
     private final User user;
 
-    private DccException(Reason reason, User user, String detail, Throwable cause) {
+    public DccException(Reason reason, User user, String detail, Throwable cause) {
         super(reason + " from user " + (user == null ? null : user.getNick()) + ": " + detail, cause);
         Validate.notNull(reason, "Reason cannot be null");
         Validate.notNull(user, "User cannot be null");

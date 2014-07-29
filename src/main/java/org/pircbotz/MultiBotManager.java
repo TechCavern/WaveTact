@@ -22,8 +22,9 @@ import java.util.concurrent.Future;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
-
+import java.util.logging.Level;
 import org.pircbotz.exception.IrcException;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
 public class MultiBotManager {
@@ -87,7 +88,7 @@ public class MultiBotManager {
         }
     }
 
-    Future<Void> startBot(final PircBotZ bot) {
+    protected Future<Void> startBot(final PircBotZ bot) {
         Validate.notNull(bot, "Bot cannot be null");
         ListenableFuture<Void> future = botPool.submit(new BotRunner(bot));
         synchronized (runningBotsLock) {
@@ -136,7 +137,7 @@ public class MultiBotManager {
 
     private class BotRunner implements Callable<Void> {
 
-        final PircBotZ bot;
+        protected final PircBotZ bot;
 
         public BotRunner(PircBotZ bot) {
             this.bot = bot;
@@ -150,9 +151,9 @@ public class MultiBotManager {
         }
     }
 
-    class BotFutureCallback implements FutureCallback<Void> {
+    protected class BotFutureCallback implements FutureCallback<Void> {
 
-        final PircBotZ bot;
+        protected final PircBotZ bot;
 
         public BotFutureCallback(PircBotZ bot) {
             this.bot = bot;
@@ -168,7 +169,7 @@ public class MultiBotManager {
             remove();
         }
 
-        void remove() {
+        protected void remove() {
             synchronized (runningBotsLock) {
                 runningBots.remove(bot);
                 runningBotsNumbers.remove(bot);

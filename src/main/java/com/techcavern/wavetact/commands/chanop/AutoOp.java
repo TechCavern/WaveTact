@@ -11,7 +11,9 @@ import org.pircbotz.Channel;
 import org.pircbotz.PircBotZ;
 import org.pircbotz.User;
 
-
+/**
+ * Created by jztech101 on 7/5/14.
+ */
 public class AutoOp extends GenericCommand {
     @CMD
     @ChanOPCMD

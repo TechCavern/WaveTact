@@ -11,7 +11,7 @@ public abstract class Event implements GenericEvent {
     private final PircBotZ bot;
     private final long id;
 
-    protected Event(PircBotZ bot) {
+    public Event(PircBotZ bot) {
         this(bot, bot.getConfiguration().getListenerManager());
     }
 
@@ -19,7 +19,7 @@ public abstract class Event implements GenericEvent {
         this(null, listenerManager);
     }
 
-    private Event(PircBotZ bot, ListenerManager listenerManager) {
+    public Event(PircBotZ bot, ListenerManager listenerManager) {
         this.timestamp = System.currentTimeMillis();
         this.bot = bot;
         this.id = listenerManager.incrementCurrentId();
@@ -35,7 +35,7 @@ public abstract class Event implements GenericEvent {
         return timestamp;
     }
 
-    long getId() {
+    public long getId() {
         return id;
     }
 

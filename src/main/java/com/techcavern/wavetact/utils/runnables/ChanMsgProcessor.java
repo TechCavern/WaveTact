@@ -7,7 +7,9 @@ import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.apache.commons.lang3.ArrayUtils;
 import org.pircbotz.hooks.events.MessageEvent;
 
-
+/**
+ * Created by jztech101 on 7/27/14.
+ */
 public class ChanMsgProcessor {
     public static void ChanMsgProcess(MessageEvent event) {
         class process implements Runnable {

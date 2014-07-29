@@ -53,7 +53,7 @@ public class UtilSSLSocketFactory extends SSLSocketFactory {
         return this;
     }
 
-    Socket prepare(Socket socket) {
+    protected Socket prepare(Socket socket) {
         SSLSocket sslSocket = (SSLSocket) socket;
         if (diffieHellmanDisabled) {
             List<String> limited = new LinkedList<>();

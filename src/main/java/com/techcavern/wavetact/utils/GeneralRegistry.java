@@ -3,6 +3,7 @@ package com.techcavern.wavetact.utils;
 import com.techcavern.wavetact.utils.fileUtils.Configuration;
 import com.techcavern.wavetact.utils.objects.*;
 import org.pircbotz.MultiBotManager;
+import org.pircbotz.PircBotZ;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -9,16 +9,20 @@ import org.pircbotz.generics.GenericChannelUserEvent;
 public class TopicEvent extends Event implements GenericChannelUserEvent {
 
     private final Channel channel;
+    private final String oldTopic;
+    private final String topic;
     private final User user;
+    private final boolean changed;
+    private final long date;
 
     public TopicEvent(PircBotZ bot, Channel channel, String oldTopic, String topic, User user, long date, boolean changed) {
         super(bot);
         this.channel = channel;
-        String oldTopic1 = oldTopic;
-        String topic1 = topic;
+        this.oldTopic = oldTopic;
+        this.topic = topic;
         this.user = user;
-        boolean changed1 = changed;
-        long date1 = date;
+        this.changed = changed;
+        this.date = date;
     }
 
     @Override

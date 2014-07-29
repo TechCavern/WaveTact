@@ -13,7 +13,7 @@ public class OutputDCC {
         this.bot = bot;
     }
 
-    void dcc(String target, String service, Object... parameters) {
+    public void dcc(String target, String service, Object... parameters) {
         bot.sendIRC().ctcpCommand(target, StringUtils.join(new Object[]{"DCC", service, parameters}, " "));
     }
 

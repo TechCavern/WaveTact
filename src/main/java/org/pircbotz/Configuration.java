@@ -163,7 +163,7 @@ public class Configuration<PircBotZ> {
         return version;
     }
 
-    String getFinger() {
+    public String getFinger() {
         return finger;
     }
 

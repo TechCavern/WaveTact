@@ -22,15 +22,14 @@ public class WaitForQueue implements Closeable {
     public <E extends Event> E waitFor(Class<E> eventClass) throws InterruptedException {
         List<Class<? extends Event>> eventList = new ArrayList<>();
         eventList.add(eventClass);
-        //noinspection unchecked
         return (E) waitFor(eventList);
     }
 
-    Event waitFor(List<Class<? extends Event>> eventClasses) throws InterruptedException {
+    public Event waitFor(List<Class<? extends Event>> eventClasses) throws InterruptedException {
         return waitFor(eventClasses, Long.MAX_VALUE, TimeUnit.MILLISECONDS);
     }
 
-    Event waitFor(List<Class<? extends Event>> eventClasses, long timeout, TimeUnit unit) throws InterruptedException {
+    public Event waitFor(List<Class<? extends Event>> eventClasses, long timeout, TimeUnit unit) throws InterruptedException {
         while (true) {
             Event curEvent = eventQueue.poll(timeout, unit);
             for (Class<? extends Event> curEventClass : eventClasses) {

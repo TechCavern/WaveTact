@@ -1,7 +1,7 @@
 package org.pircbotz.cap;
 
 import java.util.List;
-
+import java.util.logging.Level;
 import org.pircbotz.PircBotZ;
 import org.pircbotz.exception.CAPException;
 
@@ -10,7 +10,7 @@ public class EnableCapHandler implements CapHandler {
     private final String cap;
     private final boolean ignoreFail;
 
-    EnableCapHandler(String cap) {
+    public EnableCapHandler(String cap) {
         this.cap = cap;
         this.ignoreFail = false;
     }

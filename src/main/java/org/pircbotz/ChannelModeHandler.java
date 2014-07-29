@@ -2,7 +2,7 @@ package org.pircbotz;
 
 import java.util.Iterator;
 
-abstract class ChannelModeHandler {
+public abstract class ChannelModeHandler {
 
     private final char mode;
 
