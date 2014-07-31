@@ -26,12 +26,14 @@ public class FindIP extends GenericCommand {
         if (args[0].contains(".")) {
             objectJson = GeneralUtils.getJsonObject("http://freegeoip.net/json/" + args[0]);
         } else {
-            objectJson = GeneralUtils.getJsonObject("http://freegeoip.net/json/" + GetUtils.getUserByNick(Bot, args[0]).getHostmask());
+            objectJson = GeneralUtils.getJsonObject("http://freegeoip.net/json/" + IRCUtils.getHost(Bot, args[0]));
         }
         String location = objectJson.get("city").getAsString() + ", " + objectJson.get("region_name").getAsString() + ", " + objectJson.get("zipcode").getAsString();
         if (location.equalsIgnoreCase(", , ")) {
             user.send().notice("IP is Protected");
-        } else {
+        } else if (objectJson.isJsonNull()){
+            user.send().notice("Please input IPv4");
+    }else{
             IRCUtils.SendMessage(user, channel, location, isPrivate);
         }
 

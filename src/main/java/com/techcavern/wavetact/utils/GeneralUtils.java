@@ -1,5 +1,6 @@
 package com.techcavern.wavetact.utils;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.wolfram.alpha.*;
@@ -42,10 +43,26 @@ public class GeneralUtils {
     }
 
     public static JsonObject getJsonObject(String url) throws Exception {
-        URL h = new URL(url);
-        BufferedReader f = new BufferedReader(new InputStreamReader(h.openStream()));
-        String g = f.readLine().replaceAll("\n", " ");
-        return new JsonParser().parse(g).getAsJsonObject();
+        URL url1 = new URL(url);
+        String line;
+        String result = "";
+        BufferedReader buffereader = new BufferedReader(new InputStreamReader(url1.openStream()));
+       while ((line = buffereader.readLine()) != null) {
+            result += line.replaceAll("\n", " ") + "\n";
+        }
+        buffereader.close();
+        return new JsonParser().parse(result).getAsJsonObject();
+    }
+    public static JsonArray getJsonArray(String url) throws Exception {
+        URL url1 = new URL(url);
+        String line;
+        String result = "";
+        BufferedReader buffereader = new BufferedReader(new InputStreamReader(url1.openStream()));
+        while ((line = buffereader.readLine()) != null) {
+            result += line.replaceAll("\n", " ") + "\n";
+        }
+        buffereader.close();
+        return new JsonParser().parse(result).getAsJsonArray();
     }
 
     public static String getWADidYouMeans(String input) throws Exception {

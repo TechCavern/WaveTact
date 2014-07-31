@@ -82,5 +82,15 @@ public class IRCUtils {
         }
         return hostmask;
     }
+    public static String getHost(PircBotX bot, String userObject) {
+        String host;
+        WhoisEvent whois = WhoisEvent(bot, userObject);
+        if (whois != null) {
+            host = whois.getHostname();
+        } else {
+            host = null;
+        }
+        return host;
+    }
 
 }

@@ -55,6 +55,8 @@ public class LoadUtils {
         Net.getListenerManager().addListener(new CTCPListener());
         Net.getListenerManager().addListener(new KickListener());
         Net.getListenerManager().addListener(new PrivMsgListener());
+//        Net.getListenerManager().addListener(new PartListener());
+
         Net.setMessageDelay(0);
         Net.setAutoReconnect(true);
         if (nickservPassword != null) {
@@ -106,6 +108,8 @@ public class LoadUtils {
         GeneralRegistry.GenericCommands.add(new MCStatus());
      //   GeneralRegistry.ControllerCommands.add(new TestCommand());
         GeneralRegistry.GenericCommands.add(new Google());
+        GeneralRegistry.GenericCommands.add(new MCMods());
+
 
     }
 
