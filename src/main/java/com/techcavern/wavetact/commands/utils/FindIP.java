@@ -11,29 +11,43 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
+import java.net.InetAddress;
+import java.net.Socket;
+
 
 public class FindIP extends GenericCommand {
     @CMD
     @GenCMD
 
     public FindIP() {
-        super(GeneralUtils.toArray("findip locate find loc"), 0, "findip [ipv4][user]");
+        super(GeneralUtils.toArray("findip locate find loc geo geoip"), 0, "findip [ipv4][domain][user] - GeoIPs a user - IPv6 NOT supported");
     }
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        JsonObject objectJson;
-        if (args[0].contains(".")) {
-            objectJson = GeneralUtils.getJsonObject("http://freegeoip.net/json/" + args[0]);
+        String IP = "";
+        if (args[0].contains(".") || args[0].contains(":")) {
+            IP = args[0];
         } else {
-            objectJson = GeneralUtils.getJsonObject("http://freegeoip.net/json/" + IRCUtils.getHost(Bot, args[0]));
+            IP = IRCUtils.getHost(Bot, args[0]);
         }
+        if(IP.contains(":")){
+            user.send().notice("IPv6 is not supported");
+        }
+        Long time = System.currentTimeMillis();
+        IP = IP.replaceAll("http://|https://", "");
+        Socket socket = new Socket(InetAddress.getByName(IP), 80);
+        IP = socket.getInetAddress().getHostAddress();
+        socket.close();
+        if(IP.contains(":")){
+            user.send().notice("IPv6 is not supported");
+        }
+        JsonObject objectJson = GeneralUtils.getJsonObject("http://freegeoip.net/json/" + IP);
         String location = objectJson.get("city").getAsString() + ", " + objectJson.get("region_name").getAsString() + ", " + objectJson.get("zipcode").getAsString();
         if (location.equalsIgnoreCase(", , ")) {
             user.send().notice("IP is Protected");
-        } else if (objectJson.isJsonNull()){
-            user.send().notice("Please input IPv4");
-    }else{
+        }
+    else{
             IRCUtils.SendMessage(user, channel, location, isPrivate);
         }
 
