@@ -20,7 +20,7 @@ public class MCMods extends GenericCommand {
     @GenCMD
 
     public MCMods() {
-        super(GeneralUtils.toArray("mcmods mod mcmod mods"), 0, "mcmods [MC Version#] [Mod Name]");
+        super(GeneralUtils.toArray("mcmods mcmod"), 0, "mcmods [MC Version#] [Mod Name]");
     }
 
     @Override
@@ -28,13 +28,28 @@ public class MCMods extends GenericCommand {
         JsonArray versions = GeneralUtils.getJsonArray("http://bot.notenoughmods.com/?json");
         String version = "";
         for(int i = 0; i<versions.size(); i++){
-            if(args[0].equalsIgnoreCase(versions.get(i).getAsString()))
-                version = args[0];
+            String vers = versions.get(i).getAsString();
+            if(vers.contains(args[0]))
+                version = vers;
         }
         if(version == ""){
-            user.send().notice("Version should be inputted as argument 1. Versions below 1.4.6 is not supported.");
+            user.send().notice("Version not found. Versions below 1.4.5 is not supported.");
+        }else{
+            JsonArray mods = GeneralUtils.getJsonArray("http://bot.notenoughmods.com/" + version + ".json");
+            int total = 0;
+            for(int i = 0; i<mods.size(); i++){
+                JsonObject mod = mods.get(i).getAsJsonObject();
+                if(mod.get("name").getAsString().toLowerCase().contains(args[1].toLowerCase())){
+                    if(total < 3){
+                        IRCUtils.SendMessage(user, channel, mod.get("name").getAsString() + " - version: " + mod.get("version").getAsString() + " - link: " + mod.get("shorturl").getAsString(), isPrivate);
+                    }
+                    total++;
+                }
+            }
+            if(total == 0){
+                user.send().notice("No Mods Found");
+            }
         }
-        IRCUtils.SendMessage(user, channel, version, isPrivate);
     }
 }
 
