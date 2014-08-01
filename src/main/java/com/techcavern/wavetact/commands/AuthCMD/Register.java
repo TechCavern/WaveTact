@@ -20,6 +20,10 @@ public class Register extends GenericCommand {
     }
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+        if(!PermUtils.checkIfAccountEnabled(Bot)){
+            user.send().notice("This network is set to " + GetUtils.getAuthType(Bot) + " Authentication");
+            return;
+        }
         String userString;
         String password;
         if(args.length < 2){

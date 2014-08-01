@@ -37,18 +37,15 @@ public class CustomACT extends GenericCommand {
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-
         if (args[0].toLowerCase().equalsIgnoreCase("list")) {
-                List<String> SimpleCommands = GeneralRegistry.SimpleActions.stream().filter(g -> g.getPermLevel() <= UserPermLevel).map(GenericCommand::getCommand).collect(Collectors.toList());
-                IRCUtils.SendMessage(user, channel, StringUtils.join(SimpleCommands, ", "), isPrivate);
-        }else{
-                if (args[1].startsWith("-")) {
-                    removeCommand(user, channel, isPrivate, UserPermLevel, args[1].substring(1));
-                } else if (args[1].startsWith("+")) {
-                    modifyCommand(user, channel, Integer.parseInt(args[2]), isPrivate, args[1].substring(1), UserPermLevel, GeneralUtils.buildMessage(3, args.length, args).replace("\n", " "));
-                } else {
-                    addCommand(user, channel, Integer.parseInt(args[2]), isPrivate, args[1], GeneralUtils.buildMessage(3, args.length, args).replace("\n", " "));
-                }
+            List<String> SimpleCommands = GeneralRegistry.SimpleMessages.stream().filter(g -> g.getPermLevel() <= UserPermLevel).map(GenericCommand::getCommand).collect(Collectors.toList());
+            IRCUtils.SendMessage(user, channel, StringUtils.join(SimpleCommands, ", "), isPrivate);
+        }else if (args[0].startsWith("-")) {
+            removeCommand(user, channel, isPrivate, UserPermLevel, args[0].substring(1));
+        } else if (args[0].startsWith("+")) {
+            modifyCommand(user, channel, Integer.parseInt(args[1]), isPrivate, args[0].substring(1), UserPermLevel, GeneralUtils.buildMessage(2, args.length, args).replace("\n", " "));
+        } else {
+            addCommand(user, channel, Integer.parseInt(args[1]), isPrivate, args[0], GeneralUtils.buildMessage(2, args.length, args).replace("\n", " "));
         }
     }
 
@@ -73,12 +70,12 @@ public class CustomACT extends GenericCommand {
                 GeneralRegistry.SimpleActions.remove(cmd);
                 GeneralRegistry.SimpleActions.add(new SimpleAction(command, accessLevel, msg, false));
                 SimpleActionUtils.saveSimpleActions();
+                IRCUtils.SendMessage(user, channel, "Custom Action modified", isPrivate);
             } else if (cmd.getLockedStatus()) {
                 user.send().notice("Custom Action Locked");
             } else {
                 user.send().notice("Custom Action Does Not Exist");
             }
-            IRCUtils.SendMessage(user, channel, "Custom Action modified", isPrivate);
         } else {
             user.send().notice("Permission Denied");
         }

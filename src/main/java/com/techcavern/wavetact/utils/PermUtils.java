@@ -130,4 +130,11 @@ public class PermUtils {
             }
         }
     }
+    public static boolean checkIfAccountEnabled(PircBotX bot){
+        if(GetUtils.getAuthType(bot).equalsIgnoreCase("account")){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

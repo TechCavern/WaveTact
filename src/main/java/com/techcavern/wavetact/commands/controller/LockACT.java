@@ -29,12 +29,12 @@ public class LockACT extends GenericCommand {
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
 
-            if (args[1].startsWith("-")) {
-                SimpleActionUtils.getSimpleAction(args[1].replaceFirst("-", "")).unlock();
+            if (args[0].startsWith("-")) {
+                SimpleActionUtils.getSimpleAction(args[0].replaceFirst("-", "")).unlock();
                 SimpleActionUtils.saveSimpleActions();
                 user.send().notice("Simple Action Unlocked");
             } else {
-                SimpleActionUtils.getSimpleAction(args[1].replaceFirst("-", "")).lock();
+                SimpleActionUtils.getSimpleAction(args[0].replaceFirst("-", "")).lock();
                 SimpleActionUtils.saveSimpleActions();
                 user.send().notice("Simple Action locked");
 

@@ -3,10 +3,7 @@ package com.techcavern.wavetact.commands.controller;
 import com.techcavern.wavetact.annot.AuthCMD;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ConCMD;
-import com.techcavern.wavetact.utils.GeneralRegistry;
-import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.PermUtils;
+import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.databaseUtils.AccountUtils;
 import com.techcavern.wavetact.utils.objects.Account;
 import com.techcavern.wavetact.utils.objects.AuthedUser;
@@ -25,6 +22,10 @@ public class FDrop extends GenericCommand {
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+        if(!PermUtils.checkIfAccountEnabled(Bot)){
+            user.send().notice("This network is set to " + GetUtils.getAuthType(Bot) + " Authentication");
+            return;
+        }
         AuthedUser authedUser = PermUtils.getAuthUser(Bot, args[0]);
         if (authedUser != null) {
             GeneralRegistry.AuthedUsers.remove(authedUser);

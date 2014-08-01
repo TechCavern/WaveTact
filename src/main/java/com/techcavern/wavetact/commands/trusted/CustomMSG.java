@@ -39,15 +39,14 @@ public class CustomMSG extends GenericCommand {
         if (args[0].toLowerCase().equalsIgnoreCase("list")) {
                 List<String> SimpleCommands = GeneralRegistry.SimpleMessages.stream().filter(g -> g.getPermLevel() <= UserPermLevel).map(GenericCommand::getCommand).collect(Collectors.toList());
                 IRCUtils.SendMessage(user, channel, StringUtils.join(SimpleCommands, ", "), isPrivate);
-        }else{
-                if (args[1].startsWith("-")) {
-                    removeCommand(user, channel, isPrivate, UserPermLevel, args[1].substring(1));
-                } else if (args[1].startsWith("+")) {
-                    modifyCommand(user, channel, Integer.parseInt(args[2]), isPrivate, args[1].substring(1), UserPermLevel, GeneralUtils.buildMessage(3, args.length, args).replace("\n", " "));
+        }else if (args[0].startsWith("-")) {
+                    removeCommand(user, channel, isPrivate, UserPermLevel, args[0].substring(1));
+                } else if (args[0].startsWith("+")) {
+                    modifyCommand(user, channel, Integer.parseInt(args[1]), isPrivate, args[0].substring(1), UserPermLevel, GeneralUtils.buildMessage(2, args.length, args).replace("\n", " "));
                 } else {
-                    addCommand(user, channel, Integer.parseInt(args[2]), isPrivate, args[1], GeneralUtils.buildMessage(3, args.length, args).replace("\n", " "));
+                    addCommand(user, channel, Integer.parseInt(args[1]), isPrivate, args[0], GeneralUtils.buildMessage(2, args.length, args).replace("\n", " "));
                 }
-        }
+
     }
 
 
@@ -70,12 +69,12 @@ public class CustomMSG extends GenericCommand {
                 GeneralRegistry.SimpleMessages.remove(cmd);
                 GeneralRegistry.SimpleMessages.add(new SimpleMessage(command, accessLevel, msg, false));
                 SimpleMessageUtils.saveSimpleMessages();
+                IRCUtils.SendMessage(user, channel, "Custom Message modified", isPrivate);
             } else if (cmd.getLockedStatus()) {
                 user.send().notice("Custom Message Locked");
             } else {
                 user.send().notice("Custom Message Does Not Exist");
             }
-            IRCUtils.SendMessage(user, channel, "Custom Message modified", isPrivate);
         } else {
             user.send().notice("Permission Denied");
         }

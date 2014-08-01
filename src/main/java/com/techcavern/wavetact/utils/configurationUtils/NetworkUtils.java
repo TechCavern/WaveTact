@@ -63,7 +63,6 @@ public class NetworkUtils {
         GeneralRegistry.Controllers.add("JZTech101");
      //   new CommandChar("@", Dev);
         GeneralRegistry.CommandChars.add(new NetProperty("@", Dev2));
-        GeneralRegistry.AuthType.add(new NetProperty("nickserv", Dev2));
-
+        GeneralRegistry.AuthType.add(new NetProperty("nick", Dev2));
     }
 }

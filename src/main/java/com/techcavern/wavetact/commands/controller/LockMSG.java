@@ -8,6 +8,7 @@ package com.techcavern.wavetact.commands.controller;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleActionUtils;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleMessageUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
@@ -29,15 +30,15 @@ public class LockMSG extends GenericCommand {
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
 
-            if (args[1].startsWith("-")) {
-                SimpleMessageUtils.getSimpleMessage(args[1].replaceFirst("-", "")).unlock();
+            if (args[0].startsWith("-")) {
+                SimpleMessageUtils.getSimpleMessage(args[0].replaceFirst("-", "")).unlock();
                 SimpleMessageUtils.saveSimpleMessages();
-                user.send().notice("Simple Message Unlocked");
+                IRCUtils.SendMessage(user, channel, "Simple Message Unlocked", isPrivate);
 
             } else {
-                SimpleMessageUtils.getSimpleMessage(args[1].replaceFirst("-", "")).lock();
+                SimpleMessageUtils.getSimpleMessage(args[0]).lock();
                 SimpleMessageUtils.saveSimpleMessages();
-                user.send().notice("Simple Message locked");
+                IRCUtils.SendMessage(user, channel, "Simple Message Locked", isPrivate);
 
             }
         }
