@@ -18,7 +18,7 @@ public class Account {
     public String getAuthPassword(){
         return this.AuthPassword;
     }
-    public String setAuthPassword(String AuthPassword){
+    public void setAuthPassword(String AuthPassword){
         this.AuthPassword = AuthPassword;
     }
 

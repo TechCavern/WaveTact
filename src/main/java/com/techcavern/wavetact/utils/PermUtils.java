@@ -36,6 +36,15 @@ public class PermUtils {
         }
 
     }
+    public static AuthedUser getAuthUser(PircBotX bot, String userObject){
+        String hostmask = IRCUtils.getHostmask(bot, userObject, false);
+        for(AuthedUser user:GeneralRegistry.AuthedUsers){
+            if(user.getAuthHostmask().equals(hostmask) && user.getAuthNetwork().equals(bot.getServerInfo().getServerName())){
+                return user;
+            }
+        }
+        return null;
+    }
 
     @SuppressWarnings("unchecked")
     public static String getAccountName(PircBotX bot, String userObject) {

@@ -8,9 +8,7 @@ import com.techcavern.wavetact.commandline.utils.BasicCommands;
 import com.techcavern.wavetact.commandline.utils.Start;
 import com.techcavern.wavetact.commands.Anonymonity.Act;
 import com.techcavern.wavetact.commands.Anonymonity.Say;
-import com.techcavern.wavetact.commands.AuthCMD.Authenticate;
-import com.techcavern.wavetact.commands.AuthCMD.Register;
-import com.techcavern.wavetact.commands.AuthCMD.SetPass;
+import com.techcavern.wavetact.commands.AuthCMD.*;
 import com.techcavern.wavetact.commands.chanfounder.CPermLevel;
 import com.techcavern.wavetact.commands.chanhalfop.*;
 import com.techcavern.wavetact.commands.chanop.AutoOp;
@@ -118,6 +116,9 @@ public class LoadUtils {
         GeneralRegistry.ControllerCommands.add(new ResetPass());
         GeneralRegistry.AuthCommands.add(new Register());
         GeneralRegistry.AuthCommands.add(new SetPass());
+        GeneralRegistry.AuthCommands.add(new Drop());
+        GeneralRegistry.AuthCommands.add(new Logout());
+        GeneralRegistry.ControllerCommands.add(new FDrop());
 
 
     }
