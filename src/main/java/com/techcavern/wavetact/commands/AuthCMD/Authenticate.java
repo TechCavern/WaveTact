@@ -16,7 +16,7 @@ public class Authenticate extends GenericCommand {
     @CMD
     @AuthCMD
     public Authenticate() {
-        super(GeneralUtils.toArray("authenticate auth identify id"), 0, "identify (username) [password]", "identifies a user");
+        super(GeneralUtils.toArray("authenticate auth identify id login"), 0, "identify (username) [password]", "identifies a user");
     }
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
