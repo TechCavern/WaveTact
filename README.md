@@ -19,7 +19,7 @@ Building
 Permissions
 ===========
 - By default, everyone is given their permissions based on channel status. Voiced is representative of trusted
-- Permissions work in conjunction with NickServ. It has been tested to work with Anope & Atheme. Other services may work, but is not guaranteed.
+- Authentication can be done with NickServ, WaveTact's own authentication system or Nick. NickServ authentication has been tested with Anope and Atheme. Others can work, but its not guranteed.
 
 PermLevels
 ==========
