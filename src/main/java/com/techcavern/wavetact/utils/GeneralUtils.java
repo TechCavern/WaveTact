@@ -42,6 +42,7 @@ public class GeneralUtils {
         return builder.toString().trim();
     }
 
+
     public static JsonObject getJsonObject(String url) throws Exception {
         URL url1 = new URL(url);
         String line;
@@ -52,6 +53,14 @@ public class GeneralUtils {
         }
         buffereader.close();
         return new JsonParser().parse(result).getAsJsonObject();
+    }
+    public static boolean isInteger(String s) {
+        try {
+            Integer.parseInt(s);
+        } catch(NumberFormatException e) {
+            return false;
+        }
+        return true;
     }
     public static JsonArray getJsonArray(String url) throws Exception {
         URL url1 = new URL(url);

@@ -1,5 +1,6 @@
 package com.techcavern.wavetact.commands.utils;
 
+import com.google.gson.JsonObject;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
@@ -18,18 +19,22 @@ public class Weather extends GenericCommand {
     @GenCMD
 
     public Weather() {
-        super(GeneralUtils.toArray("weather temperature temp w"), 0, "weather [zipcode]", "gets weather in an area");
+        super(GeneralUtils.toArray("weather temperature temp w humid humidity wind"), 0, "weather [zipcode][city]", "gets weather in an area");
     }
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        List<String> waResults = GeneralUtils.getWAResult("Weather " + StringUtils.join(args, " "));
-        if (waResults.size() < 1 || waResults.get(1).isEmpty()) {
-            user.send().notice("Unable to get response, try again or stop inputting gibberish");
-        } else {
-            IRCUtils.SendMessage(user, channel, StringUtils.substring(waResults.get(1), 0, 100), isPrivate);
-
+        JsonObject weather = GeneralUtils.getJsonObject("http://api.wunderground.com/api/a5c6a328ada68dd5/conditions/q/" + StringUtils.join(args).replaceAll(" ", "%20") + ".json").getAsJsonObject("current_observation");
+        if(weather != null) {
+            String City = weather.get("display_location").getAsJsonObject().get("full").getAsString();
+            String Weather = weather.get("weather").getAsString();
+            String Temp = weather.get("temperature_string").getAsString();
+            String Humidity = weather.get("relative_humidity").getAsString() + " humidity";
+            String Wind = weather.get("wind_string").getAsString() + " " + weather.get("wind_gust_kph").getAsString() + " kph" + " " + weather.get("wind_dir").getAsString() + "winds";
+            IRCUtils.SendMessage(user, channel, City + ": " + Weather + " - " + Temp + " - " + Humidity + " - " + Wind + " - ", isPrivate);
+        }else{
+            user.send().notice("Requested location not found");
         }
-    }
+        }
 
 }
