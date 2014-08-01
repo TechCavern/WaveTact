@@ -13,7 +13,7 @@ public class IRCRaw extends GenericCommand {
     @CMD
     @ConCMD
     public IRCRaw() {
-        super(GeneralUtils.toArray("ircraw raw quote"), 9001, "raw [to be sent to server]");
+        super(GeneralUtils.toArray("ircraw raw quote"), 9001, "raw [to be sent to server]", "sends a raw msg to the server");
     }
 
     @Override

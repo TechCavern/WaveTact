@@ -18,7 +18,7 @@ public class Question extends GenericCommand {
     @GenCMD
 
     public Question() {
-        super(GeneralUtils.toArray("question q"), 0, "question [Ask a Question]");
+        super(GeneralUtils.toArray("question q"), 0, "question [Question]","ask us a question!");
     }
 
     @Override

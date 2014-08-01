@@ -19,7 +19,7 @@ public class TestCommand extends GenericCommand {
     @GenCMD
 
     public TestCommand() {
-        super(GeneralUtils.toArray("test"), 0, "question [Ask a Question]");
+        super(GeneralUtils.toArray("test"), 0, null, "debug command");
     }
 
     @Override

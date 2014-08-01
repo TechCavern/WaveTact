@@ -16,7 +16,7 @@ public class Ban extends GenericCommand {
     @CMD
     @ChanHOPCMD
     public Ban() {
-        super(GeneralUtils.toArray("ban b"), 6, "Ban (-)(+)[User] (time)");
+        super(GeneralUtils.toArray("ban b"), 6, "Ban (-)(+)[User] (time)", "bans a user for a specified period of time or 24 hours");
     }
 
     @Override
@@ -54,7 +54,7 @@ public class Ban extends GenericCommand {
 
                 } else if (args.length < 2) {
                     ban(hostmask, channel, Bot);
-                    UTime utimeObject = new UTime(hostmask, Bot.getServerInfo().getNetwork(), "b", channel.getName(), GeneralUtils.getMilliSeconds("7w"), System.currentTimeMillis());
+                    UTime utimeObject = new UTime(hostmask, Bot.getServerInfo().getNetwork(), "b", channel.getName(), GeneralUtils.getMilliSeconds("24h"), System.currentTimeMillis());
                     GeneralRegistry.BanTimes.add(utimeObject);
                     BanTimeUtils.saveBanTimes();
                 }

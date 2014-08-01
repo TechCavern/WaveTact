@@ -20,7 +20,7 @@ public class MCStatus extends GenericCommand {
     @GenCMD
 
     public MCStatus() {
-        super(GeneralUtils.toArray("mcstatus mc"), 0, "mcstatus - takes zero arguments, checks status of MC servers");
+        super(GeneralUtils.toArray("mcstatus mc"), 0, null,"checks status of MC servers");
     }
 
     @Override

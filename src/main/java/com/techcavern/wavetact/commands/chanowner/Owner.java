@@ -22,7 +22,7 @@ public class Owner extends GenericCommand {
     @ChanOWNCMD
 
     public Owner() {
-        super(GeneralUtils.toArray("owner own oop"), 14, "Owner (-)(User)");
+        super(GeneralUtils.toArray("owner own oop"), 14, "Owner (-)(User)", "sets owner mode if it exists on a user");
     }
 
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {

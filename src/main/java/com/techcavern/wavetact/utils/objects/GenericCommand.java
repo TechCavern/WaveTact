@@ -17,12 +17,15 @@ public abstract class GenericCommand {
 
     private final String[] comid;
     private final String Desc;
+    private final String Syntax;
+
     private int PermLevel;
 
-    protected GenericCommand(String[] comid, int PermLevel, String Desc) {
+    protected GenericCommand(String[] comid, int PermLevel, String Syntax, String Desc) {
         this.comid = comid;
         this.PermLevel = PermLevel;
         this.Desc = Desc;
+        this.Syntax = Syntax;
         GeneralRegistry.AllCommands.add(this);
     }
 
@@ -46,6 +49,14 @@ public abstract class GenericCommand {
 
     public String getCommand() {
         return comid[0];
+    }
+
+    public String getSyntax() {
+        if(Syntax != null) {
+            return Syntax;
+        }else{
+            return "";
+        }
     }
 
     public String getDesc() {

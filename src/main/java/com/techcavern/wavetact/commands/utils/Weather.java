@@ -18,7 +18,7 @@ public class Weather extends GenericCommand {
     @GenCMD
 
     public Weather() {
-        super(GeneralUtils.toArray("weather temperature temp w"), 0, "weather [zipcode]");
+        super(GeneralUtils.toArray("weather temperature temp w"), 0, "weather [zipcode]", "gets weather in an area");
     }
 
     @Override

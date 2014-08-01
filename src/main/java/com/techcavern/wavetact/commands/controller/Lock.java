@@ -23,7 +23,7 @@ public class Lock extends GenericCommand {
     @ConCMD
 
     public Lock() {
-        super(GeneralUtils.toArray("lock lo"), 9001, "lock [type(m/a)] [command]");
+        super(GeneralUtils.toArray("lock lo"), 9001, "lock [type(m/a)] [command]", "locks a custom command");
     }
 
     @Override

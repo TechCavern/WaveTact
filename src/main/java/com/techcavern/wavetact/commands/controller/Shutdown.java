@@ -15,7 +15,7 @@ public class Shutdown extends GenericCommand {
     @ConCMD
 
     public Shutdown() {
-        super(GeneralUtils.toArray("shutdown down"), 9001, "Shutdown");
+        super(GeneralUtils.toArray("shutdown down"), 9001, null, "Shutdown");
     }
 
     @Override

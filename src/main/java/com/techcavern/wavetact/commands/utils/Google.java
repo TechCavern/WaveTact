@@ -22,7 +22,7 @@ public class Google extends GenericCommand {
     @GenCMD
 
     public Google() {
-        super(GeneralUtils.toArray("google goo g"), 0, "google [string to google]");
+        super(GeneralUtils.toArray("google goo g"), 0, "google [string to google]" ,"googles something");
     }
 
     @Override

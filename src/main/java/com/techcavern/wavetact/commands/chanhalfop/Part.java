@@ -22,7 +22,7 @@ public class Part extends GenericCommand {
     @ChanHOPCMD
 
     public Part() {
-        super(GeneralUtils.toArray("part pa"), 7, "part [channel]");
+        super(GeneralUtils.toArray("part pa"), 7, "part [channel]", "parts a channel");
     }
 
     @Override

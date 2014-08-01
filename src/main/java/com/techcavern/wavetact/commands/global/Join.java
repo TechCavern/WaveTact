@@ -22,7 +22,7 @@ public class Join extends GenericCommand {
     @GloCMD
 
     public Join() {
-        super(GeneralUtils.toArray("join jo"), 20, "join [channel]");
+        super(GeneralUtils.toArray("join jo"), 20, "join [channel]","join a channel (not saved)");
     }
 
     @Override

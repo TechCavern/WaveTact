@@ -16,7 +16,7 @@ public class CheckUserLevel extends GenericCommand {
     @CMD
     @GenCMD
     public CheckUserLevel() {
-        super(GeneralUtils.toArray("checkuserlevel level checklevel"), 0, "Checks User Level, 0 arguments");
+        super(GeneralUtils.toArray("checkuserlevel level checklevel"), 0, "checkuserlevel (user)","Checks User Level of the specified user or yourself if unspecified");
     }
 
     @Override

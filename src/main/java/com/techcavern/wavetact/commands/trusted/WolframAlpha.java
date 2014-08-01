@@ -18,7 +18,7 @@ public class WolframAlpha extends GenericCommand {
     @TruCMD
 
     public WolframAlpha() {
-        super(GeneralUtils.toArray("wolframalpha wa wolfram"), 5, "wolframalpha [input] (return array value #)");
+        super(GeneralUtils.toArray("wolframalpha wa wolfram"), 5, "wolframalpha [input]","return array value # or notices the entire array");
     }
 
     @Override

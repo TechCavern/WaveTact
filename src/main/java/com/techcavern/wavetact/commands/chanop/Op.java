@@ -22,7 +22,7 @@ public class Op extends GenericCommand {
     @ChanOPCMD
 
     public Op() {
-        super(GeneralUtils.toArray("op aop"), 9, "op (-)(user to op)");
+        super(GeneralUtils.toArray("op aop"), 9, "op (-)(user to op)", "ops a user");
     }
 
     @Override

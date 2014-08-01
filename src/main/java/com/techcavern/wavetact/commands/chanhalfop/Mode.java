@@ -20,7 +20,7 @@ public class Mode extends GenericCommand {
     @CMD
     @ChanHOPCMD
     public Mode() {
-        super(GeneralUtils.toArray("mode mo"), 6, "mode (channel) [modes to set]");
+        super(GeneralUtils.toArray("mode mo"), 6, "mode [modes to set]", "sets a mode on the channel");
     }
 
     @Override

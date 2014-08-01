@@ -24,7 +24,7 @@ public class SomethingAwesome extends GenericCommand {
     @FunCMD
 
     public SomethingAwesome() {
-        super(GeneralUtils.toArray("somethingawesome sa awesome something"), 0, "somethingawesome");
+        super(GeneralUtils.toArray("somethingawesome sa awesome something"), 0, null, "Something AWESOME!");
     }
 
     @Override

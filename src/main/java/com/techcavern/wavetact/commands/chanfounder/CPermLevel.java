@@ -19,7 +19,7 @@ public class CPermLevel extends GenericCommand {
     @CMD
     @ChanFounderCMD
     public CPermLevel() {
-        super(GeneralUtils.toArray("permlevel pl cpermlevel"), 18, "permlevel (+)(-)[user] (permlevel) - adds, removes, modifies permissions");
+        super(GeneralUtils.toArray("permlevel pl cpermlevel"), 18, "permlevel (+)(-)[user] (permlevel)","adds, removes, modifies permissions");
     }
 
     @Override

@@ -15,7 +15,7 @@ public class Hostmask extends GenericCommand {
     @GenCMD
 
     public Hostmask() {
-        super(GeneralUtils.toArray("hostmask host mask"), 0, "Hostmask $[nick]");
+        super(GeneralUtils.toArray("hostmask host mask"), 0, "Hostmask $[nick]", "gets the hostmask of a user - $ before gets the ban mask of a user");
     }
 
     @Override

@@ -20,7 +20,7 @@ public class Invite extends GenericCommand {
     @CMD
     @ChanHOPCMD
     public Invite() {
-        super(GeneralUtils.toArray("invite inv"), 6, "invite (channel) [user]");
+        super(GeneralUtils.toArray("invite inv"), 6, "invite [user]", "invites a user to the channel");
     }
 
     @Override

@@ -23,7 +23,7 @@ public class Voice extends GenericCommand {
     @ChanHOPCMD
 
     public Voice() {
-        super(GeneralUtils.toArray("voice vo vop"), 6, "Voice (-)(User)");
+        super(GeneralUtils.toArray("voice vo vop"), 6, "Voice (-)(User)", "voices a user");
     }
 
     @Override

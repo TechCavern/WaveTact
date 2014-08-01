@@ -18,7 +18,7 @@ public class AutoOp extends GenericCommand {
     @CMD
     @ChanOPCMD
     public AutoOp() {
-        super(GeneralUtils.toArray("autoop autop ap"), 10, "autoop (-)[user] - Define whether to autoop the user or not");
+        super(GeneralUtils.toArray("autoop autop ap"), 10, "autoop (-)[user]","Define whether to autoop the user or not");
     }
 
     @Override

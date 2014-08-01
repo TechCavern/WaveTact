@@ -23,7 +23,7 @@ public class Globals extends GenericCommand {
     @CMD
     @ConCMD
     public Globals() {
-        super(GeneralUtils.toArray("globals global gl"), 9001, "global (-)[user]");
+        super(GeneralUtils.toArray("globals global gl"), 9001, "global (-)[user]", "adds a network admin to the bot");
     }
 
     @Override

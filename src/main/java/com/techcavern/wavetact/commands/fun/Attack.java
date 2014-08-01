@@ -25,7 +25,7 @@ public class Attack extends GenericCommand {
     @CMD
     @FunCMD
     public Attack() {
-        super(GeneralUtils.toArray("attack shoot a s"), 0, "attacks [something]");
+        super(GeneralUtils.toArray("attack shoot a s"), 0, "attacks [something]","attacks a user");
     }
 
     @Override

@@ -22,7 +22,7 @@ public class HalfOp extends GenericCommand {
     @ChanOPCMD
 
     public HalfOp() {
-        super(GeneralUtils.toArray("halfop hop"), 9, "halfop (-)(user to  halfop)");
+        super(GeneralUtils.toArray("halfop hop"), 9, "halfop (-)(user to  halfop)", "sets halfop mode on a user if it exists");
     }
 
     @Override

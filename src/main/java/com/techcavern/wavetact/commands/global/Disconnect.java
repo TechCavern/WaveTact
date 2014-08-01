@@ -20,7 +20,7 @@ public class Disconnect extends GenericCommand {
     @CMD
     @GloCMD
     public Disconnect() {
-        super(GeneralUtils.toArray("disconnect dc"), 20, "disconnect");
+        super(GeneralUtils.toArray("disconnect dc"), 20, "disconnect", "disconnects from the network");
     }
 
     @Override

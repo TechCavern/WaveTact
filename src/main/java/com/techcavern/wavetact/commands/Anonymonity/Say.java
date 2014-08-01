@@ -23,7 +23,7 @@ public class Say extends GenericCommand {
     @CMD
     @AnonCMD
     public Say() {
-        super(GeneralUtils.toArray("say msg"), 5, "say [something]");
+        super(GeneralUtils.toArray("say msg"), 5, "say [something]", "make the bot say something");
     }
 
     @Override

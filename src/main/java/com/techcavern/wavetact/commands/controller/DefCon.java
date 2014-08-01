@@ -26,7 +26,7 @@ public class DefCon extends GenericCommand {
     @CMD
     @ConCMD
     public DefCon() {
-        super(GeneralUtils.toArray("defcon"), 9001, "defcon (-)(1)(2)(3)(4)(5) locks down the bot");
+        super(GeneralUtils.toArray("defcon"), 9001, "defcon (-)(1)(2)(3)(4)(5)", "locks down the bot");
     }
 
     @Override
@@ -38,19 +38,19 @@ public class DefCon extends GenericCommand {
             }
             switch (Integer.parseInt(args[0])) {
                 case 1:
-                    sPermLevel(5);
+                    sPermLevel(9001);
                     break;
                 case 2:
-                    sPermLevel(10);
+                    sPermLevel(20);
                     break;
                 case 3:
                     sPermLevel(18);
                     break;
                 case 4:
-                    sPermLevel(20);
+                    sPermLevel(10);
                     break;
                 case 5:
-                    sPermLevel(9001);
+                    sPermLevel(5);
                     break;
             }
             IRCUtils.SendMessage(user, channel, "DefCon ON", isPrivate);

@@ -17,7 +17,7 @@ public class PingTime extends GenericCommand {
     @GenCMD
 
     public PingTime() {
-        super(GeneralUtils.toArray("checkping cping cpi"), 0, "checkping [website] (port)");
+        super(GeneralUtils.toArray("checkping cping cpi"), 0, "checkping [website] (port)"," checks pingtime to a certain domain/address/ip/etc (IPv6 NOT supported)");
     }
 
     @Override
@@ -27,6 +27,9 @@ public class PingTime extends GenericCommand {
             port = 80;
         } else {
             port = Integer.parseInt(args[1]);
+        }
+        if(args[0].replaceFirst(":", "").contains(":")){
+            user.send().notice("IPv6 is not supported");
         }
         Long time = System.currentTimeMillis();
         args[0] = args[0].replaceAll("http://|https://", "");

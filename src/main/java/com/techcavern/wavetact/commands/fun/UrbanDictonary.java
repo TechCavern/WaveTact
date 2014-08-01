@@ -16,7 +16,7 @@ public class UrbanDictonary extends GenericCommand {
     @FunCMD
 
     public UrbanDictonary() {
-        super(GeneralUtils.toArray("urbandictionary ub urban urb ud"), 0, "urbandictionary [what to define]");
+        super(GeneralUtils.toArray("urbandictionary ub urban urb ud"), 0, "urbandictionary [what to define]","defines a term in the urban dictionary");
     }
 
     @Override

@@ -17,7 +17,7 @@ public class MathC extends GenericCommand {
     @GenCMD
 
     public MathC() {
-        super(GeneralUtils.toArray("calculate calc c math"), 0, "calculate [What to Calculate]");
+        super(GeneralUtils.toArray("calculate calc c math"), 0, "calculate [What to Calculate]","does math calculations!");
     }
 
     @Override

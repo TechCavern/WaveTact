@@ -17,7 +17,7 @@ public class Quiet extends GenericCommand {
     @ChanHOPCMD
 
     public Quiet() {
-        super(GeneralUtils.toArray("quiet mute m"), 6, "Quiet (-)[User][hostmask] (time)");
+        super(GeneralUtils.toArray("quiet mute m"), 6, "Quiet (-)[User][hostmask] (time)", "quiets a user for the specified time or 24 hours");
     }
 
     @Override

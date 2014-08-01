@@ -33,7 +33,7 @@ public class CustomCMD extends GenericCommand {
     @CMD
     @TruCMD
     public CustomCMD() {
-        super(GeneralUtils.toArray("customcmd cmd custom cc"), 5, "customcmd [type(m/a)] (+/-)[Command] [permlevel] [Response] Responses may contain $1, $2, etc which indicate the argument separated by a space. $* indicates all remaining arguments.");
+        super(GeneralUtils.toArray("customcmd cmd custom cc"), 5, "customcmd [type(m/a)] (+/-)[Command] [permlevel] [Response]","Responses may contain $1, $2, etc which indicate the argument separated by a space. $* indicates all remaining arguments.");
     }
 
     @Override

@@ -23,7 +23,7 @@ public class Protect extends GenericCommand {
     @ChanOWNCMD
 
     public Protect() {
-        super(GeneralUtils.toArray("protect prot pr sop"), 14, "protect (-)(User)");
+        super(GeneralUtils.toArray("protect prot pr sop"), 14, "protect (-)(User)", "sets protect mode if it exists on a user");
     }
 
     @Override

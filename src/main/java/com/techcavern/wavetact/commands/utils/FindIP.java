@@ -20,7 +20,7 @@ public class FindIP extends GenericCommand {
     @GenCMD
 
     public FindIP() {
-        super(GeneralUtils.toArray("findip locate find loc geo geoip"), 0, "findip [ipv4][domain][user] - GeoIPs a user - IPv6 NOT supported");
+        super(GeneralUtils.toArray("findip locate find loc geo geoip"), 0, "findip [ipv4][domain][user]","GeoIPs a user - IPv6 NOT supported");
     }
 
     @Override
@@ -31,7 +31,7 @@ public class FindIP extends GenericCommand {
         } else {
             IP = IRCUtils.getHost(Bot, args[0]);
         }
-        if(IP.contains(":")){
+        if(IP.replaceFirst(":", "").contains(":")){
             user.send().notice("IPv6 is not supported");
         }
         Long time = System.currentTimeMillis();

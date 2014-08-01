@@ -18,7 +18,7 @@ public class Define extends GenericCommand {
     @GenCMD
 
     public Define() {
-        super(GeneralUtils.toArray("define whatis"), 0, "Define [word]");
+        super(GeneralUtils.toArray("define whatis"), 0, "Define [word]","defines a word");
     }
 
     @Override

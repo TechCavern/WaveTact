@@ -23,7 +23,7 @@ public class Kick extends GenericCommand {
     @ChanHOPCMD
 
     public Kick() {
-        super(GeneralUtils.toArray("kick k"), 6, "kick [user] (message)");
+        super(GeneralUtils.toArray("kick k"), 6, "kick [user] (message)", "kicks a user with specified message or none");
     }
 
     @Override

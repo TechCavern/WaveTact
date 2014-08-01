@@ -15,7 +15,7 @@ public class Notice extends GenericCommand {
     @ChanOPCMD
 
     public Notice() {
-        super(GeneralUtils.toArray("notice not"), 10, "notice (message)");
+        super(GeneralUtils.toArray("notice not"), 10, "notice (message)", "sends a notice to the channel");
     }
 
     @Override
