@@ -9,15 +9,38 @@ import org.pircbotx.hooks.events.WhoisEvent;
 
 public class PermUtils {
 
-    public static AuthedUser getAuthedUser(PircBotX bot, String userObject){
-        //TODO: WaitForFix;
-        return null;
+    public static String getAccount(PircBotX bot, String userObject){
+        String authtype = GetUtils.getAuthType(bot);
+        if(authtype.equals("nickserv"))
+        return getAccountName(bot, userObject);
+        else if(authtype.equals("account"))
+        return getAuthedUser(bot, userObject);
+        else{
+            return userObject;
+        }
+
+    }
+
+    public static String getAuthedUser(PircBotX bot, String userObject){
+        String userString = null;
+        String hostmask = IRCUtils.getHostmask(bot, userObject, false);
+        for(AuthedUser user:GeneralRegistry.AuthedUsers){
+                if(user.getAuthHostmask().equals(hostmask) && user.getAuthNetwork().equals(bot.getServerInfo().getServerName())){
+                    userString = user.getAuthAccount();
+                }
+            }
+        if(hostmask == null){
+            return userObject;
+        }else{
+            return userString;
+        }
+
     }
 
     @SuppressWarnings("unchecked")
-    public static String getAccount(PircBotX bot, String userObject) {
-        String userString;
+    public static String getAccountName(PircBotX bot, String userObject) {
         WhoisEvent whois = IRCUtils.WhoisEvent(bot, userObject);
+        String userString;
         if (whois != null) {
             userString = whois.getRegisteredAs();
             if(userString != null){

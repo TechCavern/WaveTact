@@ -20,7 +20,7 @@ dependencies {
     compile 'org.apache.httpcomponents:httpclient:4.3.4'
     compile 'jp.freepress.repo:WolframAlpha:1.1'
     compile 'org.pircbotx:pircbotx:2.1-SNAPSHOT'
-
+    compile 'org.jasypt:jasypt:1.9.2'
 }
 
 jar {

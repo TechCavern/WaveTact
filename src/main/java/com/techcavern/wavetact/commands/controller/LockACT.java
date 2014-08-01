@@ -18,40 +18,27 @@ import org.pircbotx.User;
 /**
  * @author jztech101
  */
-public class Lock extends GenericCommand {
+public class LockACT extends GenericCommand {
     @CMD
     @ConCMD
 
-    public Lock() {
-        super(GeneralUtils.toArray("lock lo"), 9001, "lock [type(m/a)] [command]", "locks a custom command");
+    public LockACT() {
+        super(GeneralUtils.toArray("lockaction loact locka loa"), 9001, "lockaction [command]", "locks a custom action");
     }
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
 
-        if (args[0].equalsIgnoreCase("a")) {
             if (args[1].startsWith("-")) {
                 SimpleActionUtils.getSimpleAction(args[1].replaceFirst("-", "")).unlock();
                 SimpleActionUtils.saveSimpleActions();
-                user.send().notice("Command Unlocked");
+                user.send().notice("Simple Action Unlocked");
             } else {
                 SimpleActionUtils.getSimpleAction(args[1].replaceFirst("-", "")).lock();
                 SimpleActionUtils.saveSimpleActions();
-                user.send().notice("Command locked");
+                user.send().notice("Simple Action locked");
 
             }
-        } else if (args[0].equalsIgnoreCase("m")) {
-            if (args[1].startsWith("-")) {
-                SimpleMessageUtils.getSimpleMessage(args[1].replaceFirst("-", "")).unlock();
-                SimpleMessageUtils.saveSimpleMessages();
-                user.send().notice("Command Unlocked");
 
-            } else {
-                SimpleMessageUtils.getSimpleMessage(args[1].replaceFirst("-", "")).lock();
-                SimpleMessageUtils.saveSimpleMessages();
-                user.send().notice("Command locked");
-
-            }
-        }
     }
 }

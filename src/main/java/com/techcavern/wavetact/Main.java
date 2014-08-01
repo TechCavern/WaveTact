@@ -20,6 +20,7 @@ public class Main {
         LoadUtils.registerCommands();
         LoadUtils.registerAttacks();
         LoadUtils.registerCommandList();
+        AccountUtils.loadAccounts();
         GlobalUtils.loadGlobals();
         BanTimeUtils.loadBanTimes();
         QuietTimeUtils.loadQuietTimes();

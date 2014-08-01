@@ -56,12 +56,12 @@ public class CustomACT extends GenericCommand {
 
     private void addCommand(User user, Channel channel, int accessLevel, boolean isPrivate, String cmd, String msg) {
         if (GetUtils.getCommand(cmd) != null) {
-            user.send().notice("Command already exists");
+            user.send().notice("Custom Action already exists");
             return;
         }else
             GeneralRegistry.SimpleActions.add(new SimpleAction(cmd, accessLevel, msg, false));
         SimpleActionUtils.saveSimpleActions();
-        IRCUtils.SendMessage(user, channel, "Command added", isPrivate);
+        IRCUtils.SendMessage(user, channel, "Custom Action added", isPrivate);
     }
 
 
@@ -74,12 +74,11 @@ public class CustomACT extends GenericCommand {
                 GeneralRegistry.SimpleActions.add(new SimpleAction(command, accessLevel, msg, false));
                 SimpleActionUtils.saveSimpleActions();
             } else if (cmd.getLockedStatus()) {
-                IRCUtils.SendMessage(user, channel, "Command Locked", isPrivate);
+                user.send().notice("Custom Action Locked");
             } else {
-                IRCUtils.SendMessage(user, channel, "Command Does Not Exist", isPrivate);
-
+                user.send().notice("Custom Action Does Not Exist");
             }
-            IRCUtils.SendMessage(user, channel, "Command modified", isPrivate);
+            IRCUtils.SendMessage(user, channel, "Custom Action modified", isPrivate);
         } else {
             user.send().notice("Permission Denied");
         }
@@ -90,13 +89,13 @@ public class CustomACT extends GenericCommand {
         SimpleAction cmd = SimpleActionUtils.getSimpleAction(command);
         if (cmd.getPermLevel() <= UserPermLevel) {
             if (cmd == null) {
-                user.send().notice("Command does not exist");
+                user.send().notice("Custom Action does not exist");
             } else if (cmd.getLockedStatus()) {
-                user.send().notice("Command is locked");
+                user.send().notice("Custom Action is locked");
             } else {
                 GeneralRegistry.SimpleActions.remove(cmd);
                 SimpleActionUtils.saveSimpleActions();
-                IRCUtils.SendMessage(user, channel, "Command removed", isPrivate);
+                IRCUtils.SendMessage(user, channel, "Custom Action removed", isPrivate);
             }
         } else {
             user.send().notice("Permission Denied");

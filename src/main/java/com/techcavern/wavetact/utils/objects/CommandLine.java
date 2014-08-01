@@ -17,7 +17,6 @@ public abstract class CommandLine {
         return isPriority;
     }
 
-
     public String[] getArgument() {
         return this.argument;
     }

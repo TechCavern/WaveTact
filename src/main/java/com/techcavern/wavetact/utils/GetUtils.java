@@ -1,9 +1,6 @@
 package com.techcavern.wavetact.utils;
 
-import com.techcavern.wavetact.utils.objects.CommandChar;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
-import com.techcavern.wavetact.utils.objects.Global;
-import com.techcavern.wavetact.utils.objects.UTime;
+import com.techcavern.wavetact.utils.objects.*;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -49,7 +46,15 @@ public class GetUtils {
     }
 
     public static String getCommandChar(PircBotX botObject) {
-        for (CommandChar d : GeneralRegistry.CommandChars) {
+        for (NetProperty d : GeneralRegistry.CommandChars) {
+            if (d.getBot() == botObject) {
+                return d.getCommandChar();
+            }
+        }
+        return null;
+    }
+    public static String getAuthType(PircBotX botObject) {
+        for (NetProperty d : GeneralRegistry.AuthType) {
             if (d.getBot() == botObject) {
                 return d.getCommandChar();
             }

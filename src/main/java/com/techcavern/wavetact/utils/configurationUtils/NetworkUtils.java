@@ -2,14 +2,13 @@ package com.techcavern.wavetact.utils.configurationUtils;
 
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.LoadUtils;
-import com.techcavern.wavetact.utils.objects.CommandChar;
+import com.techcavern.wavetact.utils.objects.NetProperty;
 import org.pircbotx.PircBotX;
 
 import java.io.File;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Created by jztech101 on 7/6/14.
@@ -44,7 +43,15 @@ public class NetworkUtils {
 
             bot = LoadUtils.createbot(nsPass, c.getString("name"), chans, c.getString("nick"), c.getString("server"));
             GeneralRegistry.WaveTact.addBot(bot);
-            new CommandChar(c.getString("prefix"), bot);
+            GeneralRegistry.CommandChars.add(new NetProperty(c.getString("prefix"), bot));
+            String authtype = c.getString("authtype").toLowerCase();
+            if(authtype.startsWith("n")) {
+                GeneralRegistry.AuthType.add(new NetProperty("nickserv", bot));
+            }else if(authtype.startsWith("a")){
+                GeneralRegistry.AuthType.add(new NetProperty("account", bot));
+            }else{
+                GeneralRegistry.AuthType.add(new NetProperty("nick", bot));
+            }
         }
     }
 
@@ -55,6 +62,8 @@ public class NetworkUtils {
         GeneralRegistry.WaveTact.addBot(Dev2);
         GeneralRegistry.Controllers.add("JZTech101");
      //   new CommandChar("@", Dev);
-        new CommandChar("@", Dev2);
+        GeneralRegistry.CommandChars.add(new NetProperty("@", Dev2));
+        GeneralRegistry.AuthType.add(new NetProperty("nickserv", Dev2));
+
     }
 }

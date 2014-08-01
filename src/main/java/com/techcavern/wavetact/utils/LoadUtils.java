@@ -8,6 +8,9 @@ import com.techcavern.wavetact.commandline.utils.BasicCommands;
 import com.techcavern.wavetact.commandline.utils.Start;
 import com.techcavern.wavetact.commands.Anonymonity.Act;
 import com.techcavern.wavetact.commands.Anonymonity.Say;
+import com.techcavern.wavetact.commands.AuthCMD.Authenticate;
+import com.techcavern.wavetact.commands.AuthCMD.Register;
+import com.techcavern.wavetact.commands.AuthCMD.SetPass;
 import com.techcavern.wavetact.commands.chanfounder.CPermLevel;
 import com.techcavern.wavetact.commands.chanhalfop.*;
 import com.techcavern.wavetact.commands.chanop.AutoOp;
@@ -57,7 +60,6 @@ public class LoadUtils {
         Net.getListenerManager().addListener(new KickListener());
         Net.getListenerManager().addListener(new PrivMsgListener());
 //        Net.getListenerManager().addListener(new PartListener());
-
         Net.setMessageDelay(0);
         Net.setAutoReconnect(true);
         if (nickservPassword != null) {
@@ -80,7 +82,7 @@ public class LoadUtils {
         GeneralRegistry.ChanOpCommands.add(new Notice());
         GeneralRegistry.ControllerCommands.add(new IRCRaw());
         GeneralRegistry.ControllerCommands.add(new Join());
-        GeneralRegistry.ControllerCommands.add(new Lock());
+        GeneralRegistry.ControllerCommands.add(new LockMSG());
         GeneralRegistry.ControllerCommands.add(new Shutdown());
         GeneralRegistry.FunCommands.add(new SomethingAwesome());
         GeneralRegistry.FunCommands.add(new UrbanDictonary());
@@ -111,6 +113,11 @@ public class LoadUtils {
      //   GeneralRegistry.ControllerCommands.add(new TestCommand());
         GeneralRegistry.GenericCommands.add(new Google());
         GeneralRegistry.GenericCommands.add(new MCMods());
+        GeneralRegistry.ControllerCommands.add(new LockACT());
+        GeneralRegistry.AuthCommands.add(new Authenticate());
+        GeneralRegistry.ControllerCommands.add(new ResetPass());
+        GeneralRegistry.AuthCommands.add(new Register());
+        GeneralRegistry.AuthCommands.add(new SetPass());
 
 
     }
@@ -125,14 +132,11 @@ public class LoadUtils {
     }
 
     public static void parseCommandLineArguments(String[] args) {
-        boolean exit = false;
         boolean invalid = true;
-
         if (args.length < 1) {
             com.techcavern.wavetact.commandline.Help c = new com.techcavern.wavetact.commandline.Help();
             c.doAction(args);
         }
-
         for (CommandLine c : GeneralRegistry.CommandLineArguments) {
             for (String b : c.getArgument()) {
                 for (String s : args) {
@@ -140,8 +144,6 @@ public class LoadUtils {
                     if (s.equalsIgnoreCase("-" + b)) {
                         c.doAction(args);
                         invalid = false;
-
-
                     }
                 }
             }
@@ -188,6 +190,17 @@ public class LoadUtils {
 
         }
         for (GenericCommand command : GeneralRegistry.FunCommands) {
+            GeneralRegistry.GenericListCommands.add(command.getCommand());
+            GeneralRegistry.TrustedListCommands.add(command.getCommand());
+            GeneralRegistry.ChanHalfOpListCommands.add(command.getCommand());
+            GeneralRegistry.ChanOpListCommands.add(command.getCommand());
+            GeneralRegistry.ChanOwnerListCommands.add(command.getCommand());
+            GeneralRegistry.ChanFounderListCommands.add(command.getCommand());
+            GeneralRegistry.ControllerListCommands.add(command.getCommand());
+            GeneralRegistry.GlobalListCommands.add(command.getCommand());
+
+        }
+        for (GenericCommand command : GeneralRegistry.AuthCommands) {
             GeneralRegistry.GenericListCommands.add(command.getCommand());
             GeneralRegistry.TrustedListCommands.add(command.getCommand());
             GeneralRegistry.ChanHalfOpListCommands.add(command.getCommand());
