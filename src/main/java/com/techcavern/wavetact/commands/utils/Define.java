@@ -6,7 +6,13 @@ import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.wordnik.client.api.WordApi;
+import com.wordnik.client.model.Definition;
+import com.wordnik.client.model.Example;
+import com.wordnik.client.model.ExampleUsage;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.text.WordUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -20,13 +26,39 @@ public class Define extends GenericCommand {
     @GenCMD
 
     public Define() {
-        super(GeneralUtils.toArray("define whatis"), 0, "Define [word]","defines a word");
+        super(GeneralUtils.toArray("define whatis"), 0, "Define (Def #) [word]","defines a word");
     }
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        Document doc = GeneralUtils.getDocument("http://www.dictionaryapi.com/api/v1/references/collegiate/xml/" +  StringUtils.join(args).replaceAll(" ", "%20")+ "?key=" + GeneralRegistry.dictionaryapikey);
-        String c = doc.toString();
+        if (GeneralRegistry.wordnikapikey == null) {
+            user.send().notice("Wordnik API key is null - Contact Bot Controller to fix");
+        }
+        int ArrayIndex = 0;
+        if (GeneralUtils.isInteger(args[0])) {
+            ArrayIndex = Integer.parseInt(args[0]) - 1;
+            args = ArrayUtils.remove(args, 0);
+        }
+        WordApi api = new WordApi();
+        api.getInvoker().addDefaultHeader("api_key", GeneralRegistry.wordnikapikey);
+        List<Definition> Defs = api.getDefinitions(args[0], null, null, null, null, null, null);
+        if (Defs.size() > 0) {
+            if(Defs.size() -1 >= ArrayIndex) {
+                String word = WordUtils.capitalizeFully(Defs.get(ArrayIndex).getWord());
+                String definition = Defs.get(ArrayIndex).getText();
+                List<ExampleUsage> examples = Defs.get(ArrayIndex).getExampleUses();
+                IRCUtils.SendMessage(user, channel, word + ": " + definition, isPrivate);
+                if (examples.size() > 0) {
+                    IRCUtils.SendMessage(user, channel, "Example: " + examples.get(0).getText(), isPrivate);
+                }
+            }else{
+                ArrayIndex = ArrayIndex + 1;
+                user.send().notice("Def #" + ArrayIndex + " does not exist");
+            }
+        } else{
+            user.send().notice("Not Defined");
+    }
+
     }
 
 }

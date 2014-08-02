@@ -8,6 +8,7 @@ import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.text.WordUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -30,11 +31,12 @@ public class UrbanDictonary extends GenericCommand {
         JsonObject objectJSON = GeneralUtils.getJsonObject("http://api.urbandictionary.com/v0/define?term=" + StringUtils.join(args).replaceAll(" ", "%20"));
         if (objectJSON.getAsJsonArray("list").size() > 0) {
            if(objectJSON.getAsJsonArray("list").size() - 1 >= ArrayIndex){
+               String Word = WordUtils.capitalizeFully(objectJSON.getAsJsonArray("list").get(ArrayIndex).getAsJsonObject().get("word").getAsString().replaceAll("\\n|\\r|\\t", " ").replaceAll("  ", " "));
                String Definition = objectJSON.getAsJsonArray("list").get(ArrayIndex).getAsJsonObject().get("definition").getAsString().replaceAll("\\n|\\r|\\t", " ").replaceAll("  ", " ");
                String Examples = objectJSON.getAsJsonArray("list").get(ArrayIndex).getAsJsonObject().get("example").getAsString().replaceAll("\\n|\\r|\\t", " ").replaceAll("  ", " ");
-               IRCUtils.SendMessage(user, channel,"Definition: "+ Definition , isPrivate);
+               IRCUtils.SendMessage(user, channel, Word +": "+ Definition , isPrivate);
                if(!Examples.isEmpty()) {
-                   IRCUtils.SendMessage(user, channel, "Examples: " + Examples, isPrivate);
+                   IRCUtils.SendMessage(user, channel, "Example: " + Examples, isPrivate);
                }
             }else{
                ArrayIndex = ArrayIndex + 1;

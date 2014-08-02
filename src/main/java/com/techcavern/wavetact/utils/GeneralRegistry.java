@@ -57,8 +57,7 @@ public class GeneralRegistry {
     public static final List<String> ChanOpListCommands = new ArrayList<>();
     public static final List<String> ChanFounderListCommands = new ArrayList<>();
     public static final StrongPasswordEncryptor encryptor = new StrongPasswordEncryptor();
-    public static String wundergroundapikey;
-    public static String wolframalphaapikey;
-    public static String dictionaryapikey;
-    public static String thesaurusapikey;
+    public static String wundergroundapikey = null;
+    public static String wolframalphaapikey = null;
+    public static String wordnikapikey = null;
 }

@@ -21,10 +21,8 @@ public class Config extends CommandLine {
             config.set("wolframapi", input.nextLine());
             System.out.print("Wunderground API Key: ");
             config.set("wundergroundapi", input.nextLine());
-            System.out.print("Dictionary API Key (dictionaryapi.com): ");
-            config.set("dictionaryapi", input.nextLine());
-            System.out.print("Thesaurus API Key (dictionaryapi.com): ");
-            config.set("thesaurusapi", input.nextLine());
+            System.out.print("Wordnik API Key: ");
+            config.set("wordnikapi", input.nextLine());
             config.save();
         System.exit(0);
     }

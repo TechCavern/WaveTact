@@ -76,14 +76,6 @@ public class GeneralUtils {
         String result = parseUrl(url);
         return new JsonParser().parse(result).getAsJsonArray();
     }
-    public static Document getDocument(String url) throws Exception {
-        String result = parseUrl(url);
-        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder dbuilder = dbFactory.newDocumentBuilder();
-        Document res = dbuilder.parse(new InputSource(new StringReader(result)));
-        res.normalize();
-        return res;
-    }
 
     public static String getWADidYouMeans(String input) throws Exception {
         WAEngine engine = new WAEngine();
