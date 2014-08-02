@@ -2,6 +2,7 @@ package com.techcavern.wavetact;
 
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.LoadUtils;
+import com.techcavern.wavetact.utils.configurationUtils.ConfigUtils;
 import com.techcavern.wavetact.utils.runnables.CheckTime;
 import com.techcavern.wavetact.utils.databaseUtils.*;
 import org.slf4j.impl.SimpleLogger;
@@ -21,6 +22,7 @@ public class Main {
         LoadUtils.registerAttacks();
         LoadUtils.registerCommandList();
         AccountUtils.loadAccounts();
+        ConfigUtils.registerConfigs();
         GlobalUtils.loadGlobals();
         BanTimeUtils.loadBanTimes();
         QuietTimeUtils.loadQuietTimes();

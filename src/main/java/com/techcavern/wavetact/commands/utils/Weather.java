@@ -3,6 +3,7 @@ package com.techcavern.wavetact.commands.utils;
 import com.google.gson.JsonObject;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
+import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
@@ -24,7 +25,7 @@ public class Weather extends GenericCommand {
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        JsonObject weather = GeneralUtils.getJsonObject("http://api.wunderground.com/api/a5c6a328ada68dd5/conditions/q/" + StringUtils.join(args).replaceAll(" ", "%20") + ".json").getAsJsonObject("current_observation");
+        JsonObject weather = GeneralUtils.getJsonObject("http://api.wunderground.com/api/" + GeneralRegistry.wundergroundapikey +"/conditions/q/" + StringUtils.join(args).replaceAll(" ", "%20") + ".json").getAsJsonObject("current_observation");
         if(weather != null) {
             String City = weather.get("display_location").getAsJsonObject().get("full").getAsString();
             String Weather = weather.get("weather").getAsString();

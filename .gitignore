@@ -19,3 +19,5 @@ databases/
 *.json
 classes/
 production/
+*.jar
+*.properties

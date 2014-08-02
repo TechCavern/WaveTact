@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.techcavern.wavetact.commandline.perms.PermLevelC;
 import com.techcavern.wavetact.commandline.utils.AddServer;
 import com.techcavern.wavetact.commandline.utils.BasicCommands;
+import com.techcavern.wavetact.commandline.utils.Config;
 import com.techcavern.wavetact.commandline.utils.Start;
 import com.techcavern.wavetact.commands.Anonymonity.Act;
 import com.techcavern.wavetact.commands.Anonymonity.Say;
@@ -129,7 +130,7 @@ public class LoadUtils {
         GeneralRegistry.CommandLines.add(new BasicCommands());
         GeneralRegistry.CommandLines.add(new Start());
         GeneralRegistry.CommandLines.add(new PermLevelC());
-
+        GeneralRegistry.CommandLines.add(new Config());
     }
 
     public static void parseCommandLineArguments(String[] args) {

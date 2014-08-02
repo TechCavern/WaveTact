@@ -53,6 +53,7 @@ public class NetworkUtils {
                 GeneralRegistry.AuthType.add(new NetProperty("nick", bot));
             }
         }
+        GeneralRegistry.configs.clear();
     }
 
     public static void registerDevServer() {

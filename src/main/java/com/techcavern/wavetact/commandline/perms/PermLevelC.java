@@ -12,7 +12,7 @@ import com.techcavern.wavetact.utils.objects.CommandLine;
 public class PermLevelC extends CommandLine {
     @CMDLine
     public PermLevelC() {
-        super(GeneralUtils.toArray("controller c"), "controller (-)[user] - adds or removes Controllers", false);
+        super(GeneralUtils.toArray("controller con"), "controller (-)[user] - adds or removes Controllers", false);
     }
 
     @Override

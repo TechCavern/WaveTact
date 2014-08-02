@@ -38,7 +38,8 @@ Running
 =======
 - Run `java -jar WaveTact.jar`
 - WaveTact help is access by the -h or -help parameter
-- Adding and removing controllers is available via the -c or -controller parameter.
-- Make configuration by using the -addserver or -a parameter
+- Adding and removing controllers is available via the -con or -controller parameter.
+- Make configuration by using the -config or -c parameter
+- Make server configs by using the -addserver or -a parameter
 - If you wish to populate the custom commands database with some prechosen commands use -addbasiccommands ONCE.
 

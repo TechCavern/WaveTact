@@ -5,7 +5,10 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.wolfram.alpha.*;
 import org.apache.commons.lang3.StringUtils;
+import org.w3c.dom.Document;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -15,7 +18,7 @@ import java.util.List;
 public class GeneralUtils {
     public static List<String> getWAResult(String input) throws Exception {
         WAEngine engine = new WAEngine();
-        engine.setAppID("H3G288-R6ULG68XJW");
+        engine.setAppID(GeneralRegistry.wolframalphaapikey);
         engine.addFormat("plaintext");
         WAQuery query = engine.createQuery();
         query.setInput(input);
@@ -44,14 +47,7 @@ public class GeneralUtils {
 
 
     public static JsonObject getJsonObject(String url) throws Exception {
-        URL url1 = new URL(url);
-        String line;
-        String result = "";
-        BufferedReader buffereader = new BufferedReader(new InputStreamReader(url1.openStream()));
-       while ((line = buffereader.readLine()) != null) {
-            result += line.replaceAll("\n", " ") + "\n";
-        }
-        buffereader.close();
+        String result = parseUrl(url);
         return new JsonParser().parse(result).getAsJsonObject();
     }
     public static boolean isInteger(String s) {
@@ -62,8 +58,8 @@ public class GeneralUtils {
         }
         return true;
     }
-    public static JsonArray getJsonArray(String url) throws Exception {
-        URL url1 = new URL(url);
+    public static String parseUrl(String Url) throws Exception{
+        URL url1 = new URL(Url);
         String line;
         String result = "";
         BufferedReader buffereader = new BufferedReader(new InputStreamReader(url1.openStream()));
@@ -71,7 +67,20 @@ public class GeneralUtils {
             result += line.replaceAll("\n", " ") + "\n";
         }
         buffereader.close();
+        return result;
+
+    }
+    public static JsonArray getJsonArray(String url) throws Exception {
+        String result = parseUrl(url);
         return new JsonParser().parse(result).getAsJsonArray();
+    }
+    public static Document getDocument(String url) throws Exception {
+        String result = parseUrl(url);
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dbuilder = dbFactory.newDocumentBuilder();
+        Document res = dbuilder.parse(result);
+        res.getDocumentElement().normalize();
+        return res;
     }
 
     public static String getWADidYouMeans(String input) throws Exception {
