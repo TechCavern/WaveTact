@@ -19,7 +19,7 @@ dependencies {
     compile 'org.slf4j:slf4j-simple:1.7.7'
     compile 'org.apache.httpcomponents:httpclient:4.3.4'
     compile 'jp.freepress.repo:WolframAlpha:1.1'
-    compile 'org.pircbotx:pircbotx:2.1-SNAPSHOT'
+    compile files("libs/pircbotx-2.1-SNAPSHOT.jar")
     compile 'org.jasypt:jasypt:1.9.2'
 }
 

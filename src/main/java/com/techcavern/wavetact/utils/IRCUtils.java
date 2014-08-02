@@ -64,7 +64,7 @@ public class IRCUtils {
     public static String getHostmask(PircBotX bot, String userObject, boolean isBanmask) {
         String hostmask;
         WhoisEvent whois = WhoisEvent(bot, userObject);
-        if (whois != null) {
+        if (whois.getNick() != null) {
             String hostname = whois.getHostname();
             String Login = whois.getLogin();
             if (isBanmask) {
@@ -85,7 +85,7 @@ public class IRCUtils {
     public static String getHost(PircBotX bot, String userObject) {
         String host;
         WhoisEvent whois = WhoisEvent(bot, userObject);
-        if (whois != null) {
+        if (whois.getNick() != null) {
             host = whois.getHostname();
         } else {
             host = null;

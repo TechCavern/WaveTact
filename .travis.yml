@@ -1,5 +1,5 @@
 language: java
-jdk: oraclejdk8
+jdk: oraclejdk5
 install:
   - "TERM=dumb ./gradlew tasks"
 script:

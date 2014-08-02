@@ -6,11 +6,13 @@ import com.google.gson.JsonParser;
 import com.wolfram.alpha.*;
 import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -78,14 +80,14 @@ public class GeneralUtils {
         String result = parseUrl(url);
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dbuilder = dbFactory.newDocumentBuilder();
-        Document res = dbuilder.parse(result);
-        res.getDocumentElement().normalize();
+        Document res = dbuilder.parse(new InputSource(new StringReader(result)));
+        res.normalize();
         return res;
     }
 
     public static String getWADidYouMeans(String input) throws Exception {
         WAEngine engine = new WAEngine();
-        engine.setAppID("H3G288-R6ULG68XJW");
+        engine.setAppID(GeneralRegistry.wolframalphaapikey);
         engine.addFormat("plaintext");
         WAQuery query = engine.createQuery();
         query.setInput(input);

@@ -26,6 +26,7 @@ public class Define extends GenericCommand {
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         Document doc = GeneralUtils.getDocument("http://www.dictionaryapi.com/api/v1/references/collegiate/xml/" +  StringUtils.join(args).replaceAll(" ", "%20")+ "?key=" + GeneralRegistry.dictionaryapikey);
+        String c = doc.toString();
     }
 
 }
