@@ -8,6 +8,7 @@ import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -38,8 +39,11 @@ public class Google extends GenericCommand {
         if(results.size()-1 > 0){
         if (results.size() >= ArrayIndex) {
             String title = results.get(ArrayIndex).getAsJsonObject().get("titleNoFormatting").getAsString();
+            String content = results.get(ArrayIndex).getAsJsonObject().get("content").getAsString().replaceAll("\\<.*?>","").replaceAll("\\&.*?;", "");
             String url = results.get(ArrayIndex).getAsJsonObject().get("unescapedUrl").getAsString();
-            IRCUtils.SendMessage(user, channel, title + " - " + url, isPrivate);
+            IRCUtils.SendMessage(user, channel, title + " - " + content, isPrivate);
+            IRCUtils.SendMessage(user, channel, url, isPrivate);
+
         }else{
             ArrayIndex = ArrayIndex + 1;
             user.send().notice("Search #" + ArrayIndex + " does not exist");
