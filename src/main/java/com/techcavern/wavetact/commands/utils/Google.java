@@ -1,11 +1,13 @@
 package com.techcavern.wavetact.commands.utils;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -27,9 +29,21 @@ public class Google extends GenericCommand {
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        JsonObject results = GeneralUtils.getJsonObject("https://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=" + URLEncoder.encode(StringUtils.join(args, " "), "UTF-8")).getAsJsonObject("responseData").getAsJsonArray("results").get(0).getAsJsonObject();
-        if (results != null || !results.isJsonNull()) {
-            IRCUtils.SendMessage(user, channel, results.get("titleNoFormatting").getAsString() + " - " + results.get("unescapedUrl").getAsString(), isPrivate);
+        int ArrayIndex = 0;
+        if(GeneralUtils.isInteger(args[0])){
+            ArrayIndex = Integer.parseInt(args[0])-1;
+            args = ArrayUtils.remove(args, 0);
+        }
+        JsonArray results = GeneralUtils.getJsonObject("https://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=" + URLEncoder.encode(StringUtils.join(args, " "), "UTF-8")).getAsJsonObject("responseData").getAsJsonArray("results");
+        if(results.size()-1 > 0){
+        if (results.size() >= ArrayIndex) {
+            String title = results.get(ArrayIndex).getAsJsonObject().get("titleNoFormatting").getAsString();
+            String url = results.get(ArrayIndex).getAsJsonObject().get("unescapedUrl").getAsString();
+            IRCUtils.SendMessage(user, channel, title + " - " + url, isPrivate);
+        }else{
+            ArrayIndex = ArrayIndex + 1;
+            user.send().notice("Search #" + ArrayIndex + " does not exist");
+        }
         } else {
             user.send().notice("Search returned no results");
         }
