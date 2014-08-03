@@ -33,7 +33,7 @@ public class IRCBLModify extends GenericCommand {
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         if (args[0] != null) {
             if (args[0].startsWith("-")) {
-                String Domain = GetUtils.getIRCDNSBLbyDomain(args[0]).replaceFirst("-", "");
+                String Domain = GetUtils.getIRCDNSBLbyDomain(args[0].replaceFirst("-", ""));
                 if(Domain != null){
                     GeneralRegistry.IRCBLs.remove(Domain);
                     IRCBLUtils.saveIRCBLs();

@@ -34,7 +34,7 @@ public class DNSBLModify extends GenericCommand {
 
         if (args[0] != null) {
             if (args[0].startsWith("-")) {
-                String Domain = GetUtils.getDNSBLbyDomain(args[0]).replaceFirst("-", "");
+                String Domain = GetUtils.getDNSBLbyDomain(args[0].replaceFirst("-", ""));
                 if(Domain != null){
                     GeneralRegistry.DNSBLs.remove(Domain);
                     DNSBLUtils.saveDNSBLs();
