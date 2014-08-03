@@ -42,6 +42,5 @@ public class Attack extends GenericCommand {
         } else {
             IRCUtils.SendAction(user, channel, attack.getAction().replace("$*", Something), isPrivate);
         }
-
     }
 }

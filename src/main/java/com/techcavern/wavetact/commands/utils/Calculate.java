@@ -6,26 +6,25 @@ import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
-import org.apache.commons.lang3.StringUtils;
+import net.objecthunter.exp4j.Expression;
+import net.objecthunter.exp4j.ExpressionBuilder;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-import java.util.List;
 
-
-public class TestCommand extends GenericCommand {
+public class Calculate extends GenericCommand {
     @CMD
     @GenCMD
 
-    public TestCommand() {
-        super(GeneralUtils.toArray("test"), 0, null, "debug command");
+    public Calculate() {
+        super(GeneralUtils.toArray("calculate calc c math"), 0, "calculate [expression]", "calculates a math expression");
     }
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        User c = GetUtils.getUserByNick(Bot, args[0]);
-        user.send().notice(c.toString());
+        ExpressionBuilder expr = new ExpressionBuilder(args[0]);
+        IRCUtils.SendMessage(user, channel, Double.toString(expr.build().evaluate()), isPrivate);
     }
 
 }
