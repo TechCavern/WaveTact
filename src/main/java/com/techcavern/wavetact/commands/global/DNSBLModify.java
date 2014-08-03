@@ -44,7 +44,11 @@ public class DNSBLModify extends GenericCommand {
                     user.send().notice("Spam DNSBL does not exist on list");
                 }
             } else if(args[0].equalsIgnoreCase("list")){
-                IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.DNSBLs, ", "), isPrivate);
+                if(!GeneralRegistry.DNSBLs.isEmpty()) {
+                    IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.DNSBLs, ", "), isPrivate);
+                }else{
+                    user.send().notice("Spam DNS Blacklist is Empty");
+                }
             }else{
                 String Domain = GetUtils.getDNSBLbyDomain(args[0]);
                 if(Domain == null){

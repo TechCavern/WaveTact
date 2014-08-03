@@ -5,6 +5,7 @@
  */
 package com.techcavern.wavetact.commands.controller;
 
+import com.sun.deploy.util.StringUtils;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.utils.*;
@@ -45,7 +46,21 @@ public class Globals extends GenericCommand {
                 } else {
                     user.send().notice("User does not existing in Globals");
                 }
-            } else {
+            }else if(args[0].equalsIgnoreCase("list")){
+                String Globals = "";
+                for(Global global: GeneralRegistry.Globals){
+                    if(Globals.isEmpty()){
+                        Globals = global.getUser();
+                    }else{
+                        Globals += ", " + global.getUser();
+                    }
+                }
+                if(!Globals.isEmpty()) {
+                    IRCUtils.SendMessage(user, channel, Globals, isPrivate);
+                }else{
+                    user.send().notice("No Globals Exist");
+                }
+            }else {
                 if (GetUtils.getGlobalByNick(account, Bot.getServerInfo().getNetwork()) != null) {
                     user.send().notice("User is already in database");
                 } else {

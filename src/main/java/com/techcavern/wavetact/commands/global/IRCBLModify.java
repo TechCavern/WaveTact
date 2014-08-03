@@ -43,7 +43,11 @@ public class IRCBLModify extends GenericCommand {
                     user.send().notice("IRC DNSBL does not exist on list");
                 }
             } else if(args[0].equalsIgnoreCase("list")){
-                IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.IRCBLs, ", "), isPrivate);
+                if(!GeneralRegistry.IRCBLs.isEmpty()) {
+                    IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.IRCBLs, ", "), isPrivate);
+                }else{
+                    user.send().notice("IRC DNS Blacklist is Empty");
+                }
             }else {
                 String Domain = GetUtils.getIRCDNSBLbyDomain(args[0]);
                 if(Domain == null){
