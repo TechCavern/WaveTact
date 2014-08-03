@@ -40,6 +40,10 @@ public class DNSBL extends GenericCommand {
             user.send().notice("IPv6 is not supported");
             return;
         }
+        if(BeforeIP.isEmpty()){
+            user.send().notice("argument #1 should be the IP");
+            return;
+        }
         String[] IPString = StringUtils.split(BeforeIP, ".");
         String IP = "";
         for(int i = IPString.length-1; i > -1; i--){
@@ -61,7 +65,7 @@ public class DNSBL extends GenericCommand {
             lookup.setCache(null);
             Record[] records = lookup.run();
             if (lookup.getResult() == lookup.SUCCESSFUL) {
-                IRCUtils.SendMessage(user, channel, IP + " found in " + Domain, isPrivate);
+                IRCUtils.SendMessage(user, channel, BeforeIP + " found in " + Domain, isPrivate);
                 sent = true;
                 for (Record rec : records) {
                     if (rec instanceof TXTRecord) {
