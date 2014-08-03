@@ -18,26 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GeneralUtils {
-    public static List<String> getWAResult(String input) throws Exception {
-        WAEngine engine = new WAEngine();
-        engine.setAppID(GeneralRegistry.wolframalphaapikey);
-        engine.addFormat("plaintext");
-        WAQuery query = engine.createQuery();
-        query.setInput(input);
-        WAQueryResult queryResult = engine.performQuery(query);
-        List<String> waResults = new ArrayList<>();
-        for (WAPod pod : queryResult.getPods()) {
-            for (WASubpod spod : pod.getSubpods()) {
-                for (Object e : spod.getContents()) {
-                    if (e instanceof WAPlainText) {
-                        waResults.add(((WAPlainText) e).getText().replaceAll("[|]", "").replaceAll("\n", ", ").replaceAll("  ", " "));
-                    }
-                }
-            }
-        }
-        return waResults;
-    }
-
     public static String buildMessage(int startint, int finishint, String[] args) {
         StringBuilder builder = new StringBuilder();
         for (int i = startint; i < finishint; i++) {
@@ -76,17 +56,6 @@ public class GeneralUtils {
         String result = parseUrl(url);
         return new JsonParser().parse(result).getAsJsonArray();
     }
-
-    public static String getWADidYouMeans(String input) throws Exception {
-        WAEngine engine = new WAEngine();
-        engine.setAppID(GeneralRegistry.wolframalphaapikey);
-        engine.addFormat("plaintext");
-        WAQuery query = engine.createQuery();
-        query.setInput(input);
-        WAQueryResult queryResult = engine.performQuery(query);
-        return StringUtils.join(queryResult.getDidYouMeans(), ",");
-    }
-
     public static long getMilliSeconds(String input) {
         if (input.toLowerCase().endsWith("h")) {
             return Long.parseLong(input.replace("h", "")) * 60 * 60 * 1000;
