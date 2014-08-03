@@ -27,6 +27,7 @@ import com.techcavern.wavetact.commands.global.Disconnect;
 import com.techcavern.wavetact.commands.global.Join;
 import com.techcavern.wavetact.commands.trusted.CustomACT;
 import com.techcavern.wavetact.commands.trusted.CustomMSG;
+import com.techcavern.wavetact.commands.trusted.DNSInfo;
 import com.techcavern.wavetact.commands.utils.*;
 import com.techcavern.wavetact.utils.eventListeners.*;
 import com.techcavern.wavetact.utils.objects.CommandLine;
@@ -118,7 +119,7 @@ public class LoadUtils {
         GeneralRegistry.AuthCommands.add(new Drop());
         GeneralRegistry.AuthCommands.add(new Logout());
         GeneralRegistry.ControllerCommands.add(new FDrop());
-
+        GeneralRegistry.TrustedCommands.add(new DNSInfo());
 
     }
 
@@ -167,7 +168,6 @@ public class LoadUtils {
         GeneralRegistry.Attacks.add(new FunObject("shoots a rocket at $*", false, null));
         GeneralRegistry.Attacks.add(new FunObject("punches $* right in the crotch", false, null));
         GeneralRegistry.Attacks.add(new FunObject("places a bomb near $* set for 2 seconds", true, "BANG!"));
-        GeneralRegistry.Attacks.add(new FunObject("drops a 2000 pound object on $*", false, null));
         GeneralRegistry.Attacks.add(new FunObject("packs $* up and ships it off to another galaxy", false, null));
         GeneralRegistry.Attacks.add(new FunObject("eats $* up for breakfast", false, null));
         GeneralRegistry.Attacks.add(new FunObject("sends a flying desk at $*", false, null));
