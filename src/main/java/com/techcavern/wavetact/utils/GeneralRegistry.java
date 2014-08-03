@@ -5,6 +5,8 @@ import com.techcavern.wavetact.utils.objects.*;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 import org.pircbotx.MultiBotManager;
 import org.pircbotx.PircBotX;
+import org.xbill.DNS.Resolver;
+import org.xbill.DNS.SimpleResolver;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,6 +24,7 @@ public class GeneralRegistry {
             TimeUnit.SECONDS,
             new LinkedBlockingQueue<>());
     public static final List<String> Controllers = new ArrayList<>();
+    public static final List<String> IRCBLs = new ArrayList<>();
     public static final List<Global> Globals = new ArrayList<>();
     public static final List<GenericCommand> AllCommands = new ArrayList<>();
     public static final List<GenericCommand> GenericCommands = new ArrayList<>();

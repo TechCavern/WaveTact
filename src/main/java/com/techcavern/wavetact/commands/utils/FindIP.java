@@ -33,6 +33,7 @@ public class FindIP extends GenericCommand {
         }
         if(IP.replaceFirst(":", "").contains(":")){
             user.send().notice("IPv6 is not supported");
+            return;
         }
         Long time = System.currentTimeMillis();
         IP = IP.replaceAll("http://|https://", "");

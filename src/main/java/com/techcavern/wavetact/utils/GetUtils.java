@@ -89,5 +89,13 @@ public class GetUtils {
         }
         return null;
     }
+    public static String getDNSBLbyDomain(String Domain){
+        for(String d : GeneralRegistry.IRCBLs){
+            if(d.equalsIgnoreCase(Domain)){
+                return d;
+            }
+        }
+        return null;
+    }
 
 }

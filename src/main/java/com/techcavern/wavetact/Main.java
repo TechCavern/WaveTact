@@ -25,6 +25,7 @@ public class Main {
         ConfigUtils.registerConfigs();
         GlobalUtils.loadGlobals();
         BanTimeUtils.loadBanTimes();
+        IRCBLUtils.loadIRCBLs();
         QuietTimeUtils.loadQuietTimes();
         PermChannelUtils.loadPermChannels();
         SimpleActionUtils.loadSimpleActions();

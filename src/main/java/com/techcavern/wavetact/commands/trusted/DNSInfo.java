@@ -36,12 +36,12 @@ public class DNSInfo extends GenericCommand {
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-       String domain = args[0];
+        Resolver resolver = new SimpleResolver();
+        String domain = args[0];
         if(args[0].contains("http")){
             domain.replace("http://", "");
         }
         Lookup lookup = new Lookup(domain, Type.ANY);
-        Resolver resolver = new SimpleResolver();
         lookup.setResolver(resolver);
         lookup.setCache(null);
         Record[] records = lookup.run();
@@ -59,13 +59,13 @@ public class DNSInfo extends GenericCommand {
                     IRCUtils.SendMessage(user, channel, Type.string(rec.getType()) + " - " + ((AAAARecord) rec).getAddress(), isPrivate);
                 } else if(rec instanceof  CNAMERecord){
                     CNAMERecord c = (CNAMERecord) rec;
-                IRCUtils.SendMessage(user, channel, Type.string(rec.getType()) + " - " + ((CNAMERecord) rec).getTarget() , isPrivate );
+                IRCUtils.SendMessage(user, channel, Type.string(rec.getType()) + " - " + ((CNAMERecord) rec).getAlias() + ((CNAMERecord) rec).getTarget() , isPrivate );
             }else if(rec instanceof  TXTRecord){
                     TXTRecord c = (TXTRecord) rec;
-                    IRCUtils.SendMessage(user, channel, Type.string(rec.getType()) + " - " + ((TXTRecord) rec).toString() , isPrivate );
+                    IRCUtils.SendMessage(user, channel, Type.string(rec.getType()) + " - " + StringUtils.join((TXTRecord) rec, "") , isPrivate );
             }else if(rec instanceof  MXRecord){
                     MXRecord c = (MXRecord) rec;
-            IRCUtils.SendMessage(user, channel, Type.string(rec.getType()) + " - " + ((MXRecord) rec).getTarget() , isPrivate );
+            IRCUtils.SendMessage(user, channel, Type.string(rec.getType()) + " - " + ((MXRecord) rec).getPriority() +  ((MXRecord) rec).getTarget() , isPrivate );
         }
     }
             isSuccesful = true;
