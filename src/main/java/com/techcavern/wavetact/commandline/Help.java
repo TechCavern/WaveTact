@@ -18,7 +18,7 @@ public class Help extends CommandLine {
     public void doAction(String[] args) {
         System.out.println("Help");
         for (CommandLine c : GeneralRegistry.CommandLines) {
-            System.out.println("-" + StringUtils.join(Arrays.asList(c.getArgument()), ", ") +  " " + c.getHelpString());
+            System.out.println("-" + StringUtils.join(Arrays.asList(c.getArgument()), ", ") +  " - " + c.getHelpString());
         }
         System.exit(0);
     }
