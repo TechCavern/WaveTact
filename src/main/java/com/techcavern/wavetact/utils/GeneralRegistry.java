@@ -25,6 +25,7 @@ public class GeneralRegistry {
             new LinkedBlockingQueue<>());
     public static final List<String> Controllers = new ArrayList<>();
     public static final List<String> IRCBLs = new ArrayList<>();
+    public static final List<String> DNSBLs = new ArrayList<>();
     public static final List<Global> Globals = new ArrayList<>();
     public static final List<GenericCommand> AllCommands = new ArrayList<>();
     public static final List<GenericCommand> GenericCommands = new ArrayList<>();

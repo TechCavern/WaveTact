@@ -17,17 +17,15 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 import org.xbill.DNS.*;
 
-import java.util.List;
-
 /**
  * @author jztech101
  */
-public class IRCBL extends GenericCommand {
+public class DNSBL extends GenericCommand {
 
     @CMD
     @TruCMD
-    public IRCBL() {
-        super(GeneralUtils.toArray("ircbl"), 5, "ircbl [domain]", "looks up a domain or IP to see if its in a drone blacklist");
+    public DNSBL() {
+        super(GeneralUtils.toArray("dnsbl"), 5, "dnsbl [domain]", "looks up a domain or IP to see if its in a spam blacklist");
     }
 
     @Override
@@ -53,11 +51,11 @@ public class IRCBL extends GenericCommand {
         }
         Boolean sent = false;
         Resolver resolver = new SimpleResolver();
-        if (GeneralRegistry.IRCBLs.isEmpty()) {
-            user.send().notice("No IRC BLs found in Database");
+        if (GeneralRegistry.DNSBLs.isEmpty()) {
+            user.send().notice("No DNS BLs found in Database");
             return;
         }
-        for (String Domain : GeneralRegistry.IRCBLs) {
+        for (String Domain : GeneralRegistry.DNSBLs) {
             Lookup lookup = new Lookup(IP + "." + Domain, Type.ANY);
             lookup.setResolver(resolver);
             lookup.setCache(null);
@@ -81,7 +79,7 @@ public class IRCBL extends GenericCommand {
 
         }
         if(!sent){
-            IRCUtils.SendMessage(user, channel, args[0] + " not found in IRC BLs", isPrivate);
+            IRCUtils.SendMessage(user, channel, args[0] + " not found in DNSBLs", isPrivate);
         }
 
     }

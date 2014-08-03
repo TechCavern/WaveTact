@@ -26,6 +26,7 @@ public class Main {
         GlobalUtils.loadGlobals();
         BanTimeUtils.loadBanTimes();
         IRCBLUtils.loadIRCBLs();
+        DNSBLUtils.loadDNSBLs();
         QuietTimeUtils.loadQuietTimes();
         PermChannelUtils.loadPermChannels();
         SimpleActionUtils.loadSimpleActions();

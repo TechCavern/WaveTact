@@ -23,13 +23,11 @@ import com.techcavern.wavetact.commands.controller.Shutdown;
 import com.techcavern.wavetact.commands.fun.Attack;
 import com.techcavern.wavetact.commands.fun.SomethingAwesome;
 import com.techcavern.wavetact.commands.fun.UrbanDictonary;
+import com.techcavern.wavetact.commands.global.DNSBLModify;
 import com.techcavern.wavetact.commands.global.Disconnect;
 import com.techcavern.wavetact.commands.global.IRCBLModify;
 import com.techcavern.wavetact.commands.global.Join;
-import com.techcavern.wavetact.commands.trusted.CustomACT;
-import com.techcavern.wavetact.commands.trusted.CustomMSG;
-import com.techcavern.wavetact.commands.trusted.DNSInfo;
-import com.techcavern.wavetact.commands.trusted.IRCBL;
+import com.techcavern.wavetact.commands.trusted.*;
 import com.techcavern.wavetact.commands.utils.*;
 import com.techcavern.wavetact.utils.eventListeners.*;
 import com.techcavern.wavetact.utils.objects.CommandLine;
@@ -124,6 +122,8 @@ public class LoadUtils {
         GeneralRegistry.TrustedCommands.add(new DNSInfo());
         GeneralRegistry.GlobalCommands.add(new IRCBLModify());
         GeneralRegistry.TrustedCommands.add(new IRCBL());
+        GeneralRegistry.TrustedCommands.add(new DNSBL());
+        GeneralRegistry.GlobalCommands.add(new DNSBLModify());
     }
 
     public static void initializeCommandlines() {
