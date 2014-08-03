@@ -5,7 +5,7 @@
  */
 package com.techcavern.wavetact.commands.global;
 
-import com.sun.deploy.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GloCMD;
 import com.techcavern.wavetact.utils.GeneralRegistry;
