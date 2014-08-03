@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.commands.AuthCMD;
+package com.techcavern.wavetact.commands.auth;
 
 import com.techcavern.wavetact.annot.AuthCMD;
 import com.techcavern.wavetact.annot.CMD;

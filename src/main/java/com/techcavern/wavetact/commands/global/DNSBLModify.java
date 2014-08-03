@@ -27,7 +27,7 @@ public class DNSBLModify extends GenericCommand {
     @GloCMD
 
     public DNSBLModify() {
-        super(GeneralUtils.toArray("dnsblm dnsblmodify"), 20, "DNSBLModify [IRC DNSBL]","Adds/Removes Domains from Spam DNS Blacklists");
+        super(GeneralUtils.toArray("dnsblm dnsblmodify"), 20, "DNSBLModify (-)[IRC DNSBL]","Adds/Removes Domains from Spam DNS Blacklists");
     }
 
     @Override

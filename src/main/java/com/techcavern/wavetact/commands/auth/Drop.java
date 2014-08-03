@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.commands.AuthCMD;
+package com.techcavern.wavetact.commands.auth;
 
 import com.techcavern.wavetact.annot.AuthCMD;
 import com.techcavern.wavetact.annot.CMD;
@@ -12,11 +12,11 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
 
-public class Logout extends GenericCommand {
+public class Drop extends GenericCommand {
     @CMD
     @AuthCMD
-    public Logout() {
-        super(GeneralUtils.toArray("logout"), 0, "logout", "logs out a user");
+    public Drop() {
+        super(GeneralUtils.toArray("drop"), 0, "drop [password]", "drops a user");
     }
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
@@ -28,8 +28,15 @@ public class Logout extends GenericCommand {
         if(authedUser == null){
             user.send().notice("Error, you are not logged in");
         }else{
-            GeneralRegistry.AuthedUsers.remove(authedUser);
-            IRCUtils.SendMessage(user, channel, "You are now logged out", isPrivate);
+            Account account = AccountUtils.getAccount(authedUser.getAuthAccount());
+            if(GeneralRegistry.encryptor.checkPassword(args[0], account.getAuthPassword())) {
+                GeneralRegistry.AuthedUsers.remove(authedUser);
+                GeneralRegistry.Accounts.remove(account);
+                AccountUtils.saveAccounts();
+                IRCUtils.SendMessage(user, channel, "Your account is now dropped", isPrivate);
+            }else{
+                user.send().notice("Incorrect Password");
+            }
         }
         }
     }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.techcavern.wavetact.commands.Anonymonity;
+package com.techcavern.wavetact.commands.anonymonity;
 
 import com.techcavern.wavetact.annot.AnonCMD;
 import com.techcavern.wavetact.annot.CMD;
@@ -18,12 +18,12 @@ import org.pircbotx.User;
 /**
  * @author jztech101
  */
-public class Say extends GenericCommand {
+public class Act extends GenericCommand {
 
     @CMD
     @AnonCMD
-    public Say() {
-        super(GeneralUtils.toArray("say msg"), 5, "say [something]", "make the bot say something");
+    public Act() {
+        super(GeneralUtils.toArray("act do"), 5, "act [something]","make the bot do something");
     }
 
     @Override
@@ -31,7 +31,6 @@ public class Say extends GenericCommand {
         if (isPrivate && channel != null) {
             isPrivate = false;
         }
-        IRCUtils.SendMessage(user, channel, StringUtils.join(args, " ").replace("\n", " "), isPrivate);
-
+        IRCUtils.SendAction(user, channel, StringUtils.join(args, " ").replace("\n", " "), isPrivate);
     }
 }

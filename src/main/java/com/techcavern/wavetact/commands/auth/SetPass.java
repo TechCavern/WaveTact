@@ -1,11 +1,10 @@
-package com.techcavern.wavetact.commands.AuthCMD;
+package com.techcavern.wavetact.commands.auth;
 
 import com.techcavern.wavetact.annot.AuthCMD;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.databaseUtils.AccountUtils;
 import com.techcavern.wavetact.utils.objects.Account;
-import com.techcavern.wavetact.utils.objects.AuthedUser;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;

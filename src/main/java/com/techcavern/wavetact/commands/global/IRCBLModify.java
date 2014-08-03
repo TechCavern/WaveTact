@@ -27,7 +27,7 @@ public class IRCBLModify extends GenericCommand {
     @GloCMD
 
     public IRCBLModify() {
-        super(GeneralUtils.toArray("ircblm ircblmodify"), 20, "IRCBLModify [IRC DNSBL]","Adds/Removes Domains from IRCBL");
+        super(GeneralUtils.toArray("ircblm ircblmodify"), 20, "IRCBLModify (-)[IRC DNSBL]","Adds/Removes Domains from IRCBL");
     }
 
     @Override
