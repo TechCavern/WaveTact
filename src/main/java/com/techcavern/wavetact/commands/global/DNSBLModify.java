@@ -31,10 +31,10 @@ public class DNSBLModify extends GenericCommand {
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        String Domain = GetUtils.getDNSBLbyDomain(args[0]);
 
         if (args[0] != null) {
             if (args[0].startsWith("-")) {
+                String Domain = GetUtils.getDNSBLbyDomain(args[0]).replaceFirst("-", "");
                 if(Domain != null){
                     GeneralRegistry.DNSBLs.remove(Domain);
                     DNSBLUtils.saveDNSBLs();
@@ -43,6 +43,7 @@ public class DNSBLModify extends GenericCommand {
                     user.send().notice("Spam DNSBL does not exist on list");
                 }
             } else {
+                String Domain = GetUtils.getDNSBLbyDomain(args[0]);
                 if(Domain == null){
                     GeneralRegistry.DNSBLs.add(args[0]);
                     DNSBLUtils.saveDNSBLs();

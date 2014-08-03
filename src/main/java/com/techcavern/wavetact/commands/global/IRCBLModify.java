@@ -31,9 +31,9 @@ public class IRCBLModify extends GenericCommand {
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        String Domain = GetUtils.getIRCDNSBLbyDomain(args[0]);
         if (args[0] != null) {
             if (args[0].startsWith("-")) {
+                String Domain = GetUtils.getIRCDNSBLbyDomain(args[0]).replaceFirst("-", "");
                 if(Domain != null){
                     GeneralRegistry.IRCBLs.remove(Domain);
                     IRCBLUtils.saveIRCBLs();
@@ -42,6 +42,7 @@ public class IRCBLModify extends GenericCommand {
                     user.send().notice("IRC DNSBL does not exist on list");
                 }
             } else {
+                String Domain = GetUtils.getIRCDNSBLbyDomain(args[0]);
                 if(Domain == null){
                     GeneralRegistry.IRCBLs.add(args[0]);
                     IRCBLUtils.saveIRCBLs();
