@@ -71,12 +71,6 @@ public class DNSBL extends GenericCommand {
                     if (rec instanceof TXTRecord) {
                         TXTRecord c = (TXTRecord) rec;
                         IRCUtils.SendMessage(user, channel, Type.string(rec.getType()) + " - " + StringUtils.join((TXTRecord) rec, ""), isPrivate);
-                    } else if (rec instanceof ARecord) {
-                        ARecord c = (ARecord) rec;
-                        IRCUtils.SendMessage(user, channel, Type.string(rec.getType()) + " - " + ((ARecord) rec).getAddress(), isPrivate);
-                    } else if (rec instanceof AAAARecord) {
-                        AAAARecord c = (AAAARecord) rec;
-                        IRCUtils.SendMessage(user, channel, Type.string(rec.getType()) + " - " + ((AAAARecord) rec).getAddress(), isPrivate);
                     }
                 }
             }
