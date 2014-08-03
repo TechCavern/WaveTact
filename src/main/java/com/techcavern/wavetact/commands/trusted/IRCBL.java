@@ -79,7 +79,7 @@ public class IRCBL extends GenericCommand {
 
         }
         if(!sent){
-            IRCUtils.SendMessage(user, channel, args[0] + " not found in IRC BLs", isPrivate);
+            IRCUtils.SendMessage(user, channel, BeforeIP + " not found in IRC BLs", isPrivate);
         }
 
     }
