@@ -5,6 +5,7 @@
  */
 package com.techcavern.wavetact.commands.global;
 
+import com.sun.deploy.util.StringUtils;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GloCMD;
 import com.techcavern.wavetact.utils.GeneralRegistry;
@@ -42,7 +43,9 @@ public class DNSBLModify extends GenericCommand {
                 }else{
                     user.send().notice("Spam DNSBL does not exist on list");
                 }
-            } else {
+            } else if(args[0].equalsIgnoreCase("list")){
+                IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.DNSBLs, ", "), isPrivate);
+            }else{
                 String Domain = GetUtils.getDNSBLbyDomain(args[0]);
                 if(Domain == null){
                     GeneralRegistry.DNSBLs.add(args[0]);
