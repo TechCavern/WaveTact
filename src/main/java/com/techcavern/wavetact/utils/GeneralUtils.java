@@ -5,15 +5,20 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.wolfram.alpha.*;
 import org.apache.commons.lang3.StringUtils;
+import org.pircbotx.PircBotX;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringReader;
+import java.net.InetAddress;
+import java.net.Socket;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,6 +60,31 @@ public class GeneralUtils {
     public static JsonArray getJsonArray(String url) throws Exception {
         String result = parseUrl(url);
         return new JsonParser().parse(result).getAsJsonArray();
+    }
+    public static String getIP(String input, PircBotX Bot){
+        String IP = "";
+        if (input.contains(".") || input.contains(":")) {
+            IP = input;
+        } else {
+            IP = IRCUtils.getHost(Bot, input);
+        }
+        if(IP == null || IP.replaceFirst(":", "").contains(":")){
+           IP = null;
+        }else {
+            Long time = System.currentTimeMillis();
+            IP = IP.replaceAll("http://|https://", "");
+            try {
+                Socket socket = new Socket(InetAddress.getByName(IP), 80);
+                IP = socket.getInetAddress().getHostAddress();
+                socket.close();
+                if(IP.contains(":")){
+                    return null;
+                }
+            }catch(Exception e){
+                IP = null;
+            }
+        }
+        return IP;
     }
     public static long getMilliSeconds(String input) {
         if (input.toLowerCase().endsWith("h")) {

@@ -32,18 +32,9 @@ public class IRCBL extends GenericCommand {
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        String BeforeIP = "";
-        if (args[0].contains(".") || args[0].contains(":")) {
-            BeforeIP = args[0];
-        } else {
-            BeforeIP = IRCUtils.getHost(Bot, args[0]);
-        }
-        if(BeforeIP.replaceFirst(":", "").contains(":")){
-            user.send().notice("IPv6 is not supported");
-            return;
-        }
-        if(BeforeIP.isEmpty()){
-           user.send().notice("argument #1 should be the IP");
+        String BeforeIP = GeneralUtils.getIP(args[0], Bot);
+        if(BeforeIP == null){
+            user.send().notice("Invalid IP/User");
             return;
         }
         String[] IPString = StringUtils.split(BeforeIP, ".");
