@@ -1,5 +1,6 @@
 package com.techcavern.wavetact.utils;
 
+import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -91,6 +92,50 @@ public class IRCUtils {
             host = null;
         }
         return host;
+    }
+    public static void processMessage(GenericCommand Command, PircBotX Bot, Channel channel, User User, int UserPermLevel, String[] messageParts, boolean isPrivate){
+        if (Command.getPermLevel() == 9) {
+            if (channel.isOp(Bot.getUserBot()) || channel.isOp(Bot.getUserBot()) || channel.isOwner(Bot.getUserBot())) {
+                try {
+                    Command.onCommand(User, Bot, channel, isPrivate, UserPermLevel, messageParts);
+                } catch (Exception e) {
+                    User.send().notice("Unable to perform command - please make sure are using the correct syntax");
+                }
+            } else {
+                User.send().notice("Error: I must be at op or higher to perform the operation requested");
+            }
+        } else if (Command.getPermLevel() == 14) {
+
+            if (channel.isOwner(Bot.getUserBot())) {
+                try {
+                    Command.onCommand(User, Bot, channel, isPrivate, UserPermLevel, messageParts);
+                } catch (Exception e) {
+                    User.send().notice("Unable to perform command - please make sure are using the correct syntax");
+                }
+            } else {
+                User.send().notice("Error: I must be owner to perform the operation requested");
+            }
+        } else if (Command.getPermLevel() == 6) {
+            if (channel.isOwner(Bot.getUserBot()) || channel.isOp(Bot.getUserBot()) || channel.isHalfOp(Bot.getUserBot()) || channel.isSuperOp(Bot.getUserBot())) {
+                try {
+                    Command.onCommand(User, Bot, channel, isPrivate, UserPermLevel, messageParts);
+                } catch (Exception e) {
+                    User.send().notice("Unable to perform command - please make sure are using the correct syntax");
+                }
+            } else {
+                if (Bot.getServerInfo().getPrefixes().contains("h")) {
+                    User.send().notice("Error: I must be half-op or higher to perform the operation requested");
+                } else {
+                    User.send().notice("Error: I must be op or higher to perform the operation requested");
+                }
+            }
+        } else {
+            try {
+                Command.onCommand(User, Bot, channel, isPrivate, UserPermLevel, messageParts);
+            } catch (Exception e) {
+                User.send().notice("Unable to perform command - please make sure are using the correct syntax");
+            }
+        }
     }
 
 }

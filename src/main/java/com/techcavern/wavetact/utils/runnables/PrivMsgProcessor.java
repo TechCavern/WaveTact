@@ -2,6 +2,7 @@ package com.techcavern.wavetact.utils.runnables;
 
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GetUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.PermUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.apache.commons.lang3.ArrayUtils;
@@ -33,49 +34,7 @@ public class PrivMsgProcessor {
                     if ((Command.getPermLevel() >= 0 && (Command.getPermLevel() <= 5 || Command.getPermLevel() > 18) || (channel != null))) {
                         int UserPermLevel = PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), channel);
                         if (UserPermLevel >= Command.getPermLevel()) {
-                            if (Command.getPermLevel() == 9) {
-                                if (channel.isOp(event.getBot().getUserBot()) || channel.isOp(event.getBot().getUserBot()) || channel.isOwner(event.getBot().getUserBot())) {
-                                    try {
-                                        Command.onCommand(event.getUser(), event.getBot(), channel, true, UserPermLevel, messageParts);
-                                    } catch (Exception e) {
-
-                                    }
-                                } else {
-                                    event.getUser().send().notice("Error: I must be at op or higher to perform the operation requested");
-                                }
-                            } else if (Command.getPermLevel() == 14) {
-
-                                if (channel.isOwner(event.getBot().getUserBot())) {
-                                    try {
-                                        Command.onCommand(event.getUser(), event.getBot(), channel, true, UserPermLevel, messageParts);
-                                    } catch (Exception e) {
-
-                                    }
-                                } else {
-                                    event.getUser().send().notice("Error: I must be owner to perform the operation requested");
-                                }
-                            } else if (Command.getPermLevel() == 6) {
-                                if (channel.isOwner(event.getBot().getUserBot()) || channel.isOp(event.getBot().getUserBot()) || channel.isHalfOp(event.getBot().getUserBot()) || channel.isSuperOp(event.getBot().getUserBot())) {
-                                    try {
-                                        Command.onCommand(event.getUser(), event.getBot(), channel, true, UserPermLevel, messageParts);
-                                    } catch (Exception e) {
-
-                                    }
-                                } else {
-                                    if (event.getBot().getServerInfo().getPrefixes().contains("h")) {
-                                        event.getUser().send().notice("Error: I must be half-op or higher to perform the operation requested");
-                                    } else {
-                                        event.getUser().send().notice("Error: I must be op or higher to perform the operation requested");
-                                    }
-                                }
-                            } else {
-                                try {
-                                    Command.onCommand(event.getUser(), event.getBot(), channel, true, UserPermLevel, messageParts);
-                                } catch (Exception e) {
-
-                                }
-                            }
-
+                            IRCUtils.processMessage(Command, event.getBot(), channel, event.getUser(), UserPermLevel, messageParts, true);
                         } else {
                             event.getUser().send().message("Permission Denied");
                         }
