@@ -60,6 +60,11 @@ public class PrivMsgProcessor {
                     }
                 }else if(Command.getCommand().equalsIgnoreCase("checkuserlevel")){
                     if(IRCUtils.getIRCHostmask(event.getBot(), event.getUser().getNick()) != null){
+                            Channel channel = null;
+                                if (messageParts.length >= 1 && messageParts[0].startsWith("#")) {
+                                    channel = GetUtils.getChannelbyName(event.getBot(), messageParts[0]);
+                                    messageParts = ArrayUtils.remove(messageParts, 0);
+                                }
                         IRCUtils.processMessage(Command, event.getBot(), null, event.getUser(), PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), null, true), messageParts, true);
                     }else{
                         IRCUtils.processMessage(Command, event.getBot(), null, event.getUser(), 3, messageParts, true);
