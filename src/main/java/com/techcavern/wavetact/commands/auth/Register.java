@@ -33,7 +33,7 @@ public class Register extends GenericCommand {
             userString = args[0];
             password = args[1];
         }
-        if(AccountUtils.getAccount(userString) != null && PermUtils.getAccount(Bot, user.getNick()) != null){
+        if(AccountUtils.getAccount(userString) != null || PermUtils.getAuthedAccount(Bot, user.getNick()) != null){
             user.send().notice("Error, you are already registered");
         }else{
             GeneralRegistry.Accounts.add(new Account(userString, GeneralRegistry.encryptor.encryptPassword(password)));

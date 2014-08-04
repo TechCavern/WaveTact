@@ -31,10 +31,13 @@ public class Globals extends GenericCommand {
 
         String account;
         if (args[0].startsWith("-")) {
-            account = PermUtils.getAccount(Bot, args[0].replace("-", ""));
+            account = args[0].replaceFirst("-", "");
         } else {
-            account = PermUtils.getAccount(Bot, args[0]);
-
+            account = args[0];
+        }
+        String auth = PermUtils.getAuthedAccount(Bot, account);
+        if(auth != null){
+            account = auth;
         }
         if (account != null) {
             if (args[0].startsWith("-")) {

@@ -19,20 +19,12 @@ public class PermUtils {
         return userObject;
         }
     }
-    public static String getAuthedAccount(PircBotX bot, String userObject, boolean isPrivate){
-        String hostmask = null;
-        if(!isPrivate)
-        hostmask = IRCUtils.getIRCHostmask(bot, userObject);
-        else
-        hostmask = IRCUtils.getHostmask(bot, userObject, false);
+    public static String getAuthedAccount(PircBotX bot, String userObject){
+        String hostmask = IRCUtils.getIRCHostmask(bot, userObject);
         if(hostmask != null)
         return getPrivateAccount(bot, userObject, hostmask);
         else
-         return null;
-    }
-    public static String getAccount(PircBotX bot, String userObject){
-        String hostmask = IRCUtils.getHostmask(bot, userObject, false);
-        return getPrivateAccount(bot, userObject, hostmask);
+        return null;
     }
     public static String getAuthedNickServUser(PircBotX bot, String userObject, String hostmask){
         String userString = getAuthedUser(bot, userObject, hostmask);
@@ -80,7 +72,7 @@ public class PermUtils {
                 }
             }
         } else {
-            userString = userObject;
+            userString = null;
         }
         return userString;
     }
@@ -103,8 +95,7 @@ public class PermUtils {
         }
     }
 
-    private static int getManualPermLevel(PircBotX bot, String userObject, Channel channelObject, boolean isPrivate) {
-        String account = getAuthedAccount(bot, userObject, isPrivate);
+    private static int getManualPermLevel(PircBotX bot, String userObject, Channel channelObject, String account) {
         if (account != null) {
             if (GetUtils.getControllerByNick(account) != null) {
                 return 9001;
@@ -121,9 +112,17 @@ public class PermUtils {
             return 0;
         }
     }
-    public static int getPermLevel(PircBotX bot, String userObject, Channel channelObject, boolean isPrivate) {
+    public static int getPermLevel(PircBotX bot, String userObject, Channel channelObject){
+        String auth = PermUtils.getAuthedAccount(bot, userObject);
+        if(auth != null){
+            return getAuthPermLevel(bot, userObject, channelObject, auth);
+        }else{
+            return getAuthPermLevel(bot, userObject, channelObject, userObject);
+        }
+    }
+    public static int getAuthPermLevel(PircBotX bot, String userObject, Channel channelObject, String account) {
         if (channelObject != null) {
-            int mpermlevel = getManualPermLevel(bot, userObject, channelObject, isPrivate);
+            int mpermlevel = getManualPermLevel(bot, userObject, channelObject, account);
             User user = GetUtils.getUserByNick(bot,userObject);
             int apermlevel = 0;
             if(user != null) {
@@ -137,7 +136,6 @@ public class PermUtils {
                 return apermlevel;
             }
         } else {
-            String account = getAuthedAccount(bot, userObject, isPrivate);
             if (account != null) {
                 if (GetUtils.getControllerByNick(account) != null) {
                     return 9001;

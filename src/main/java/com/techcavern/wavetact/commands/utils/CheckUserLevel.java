@@ -3,7 +3,6 @@ package com.techcavern.wavetact.commands.utils;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.PermUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
@@ -26,7 +25,7 @@ public class CheckUserLevel extends GenericCommand {
             userObject = user.getNick();
         } else {
             userObject = args[0];
-            UserPermLevel = PermUtils.getPermLevel(Bot, userObject, channel, isPrivate);
+            UserPermLevel = PermUtils.getPermLevel(Bot, userObject, channel);
         }
         if(userObject == null){
             user.send().notice("User does not exist");

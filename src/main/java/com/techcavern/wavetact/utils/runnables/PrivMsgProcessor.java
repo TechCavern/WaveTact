@@ -31,7 +31,7 @@ public class PrivMsgProcessor {
                     } else {
                         if (IRCUtils.getIRCHostmask(event.getBot(), event.getUser().getNick()) != null) {
                             if (Command.getPermLevel() > 18) {
-                                int UserPermLevel = PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), null, true);
+                                int UserPermLevel = PermUtils.getAuthPermLevel(event.getBot(), event.getUser().getNick(), null, PermUtils.getAuthedAccount(event.getBot(), event.getUser().getNick()));
                                 if (UserPermLevel >= Command.getPermLevel()) {
                                     IRCUtils.processMessage(Command, event.getBot(), null, event.getUser(), UserPermLevel, messageParts, true);
                                 } else {
@@ -44,7 +44,7 @@ public class PrivMsgProcessor {
                                     messageParts = ArrayUtils.remove(messageParts, 0);
                                 }
                                 if (channel != null || Command.getPermLevel() == 5) {
-                                    int UserPermLevel = PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), null, true);
+                                    int UserPermLevel = PermUtils.getAuthPermLevel(event.getBot(), event.getUser().getNick(), null, PermUtils.getAuthedAccount(event.getBot(), event.getUser().getNick()));
                                     if (UserPermLevel >= Command.getPermLevel()) {
                                         IRCUtils.processMessage(Command, event.getBot(), channel, event.getUser(), UserPermLevel, messageParts, true);
                                     } else {
@@ -60,7 +60,7 @@ public class PrivMsgProcessor {
                     }
                 }else if(Command.getCommand().equalsIgnoreCase("checkuserlevel")){
                     if(IRCUtils.getIRCHostmask(event.getBot(), event.getUser().getNick()) != null){
-                        IRCUtils.processMessage(Command, event.getBot(), null, event.getUser(), PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), null, true), messageParts, true);
+                        IRCUtils.processMessage(Command, event.getBot(), null, event.getUser(), PermUtils.getAuthPermLevel(event.getBot(), event.getUser().getNick(), null, PermUtils.getAuthedAccount(event.getBot(), event.getUser().getNick())), messageParts, true);
                     }else{
                         IRCUtils.processMessage(Command, event.getBot(), null, event.getUser(), 3, messageParts, true);
                     }

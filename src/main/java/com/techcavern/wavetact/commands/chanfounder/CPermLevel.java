@@ -32,11 +32,15 @@ public class CPermLevel extends GenericCommand {
         if (c <= 18) {
             String account;
             if (args[0].startsWith("-")) {
-                account = PermUtils.getAccount(Bot, args[0].replaceFirst("-", ""));
+                account = args[0].replaceFirst("-", "");
             } else if (args[0].startsWith("+")) {
-                account = PermUtils.getAccount(Bot, args[0].replaceFirst("\\+", ""));
+                account = args[0].replaceFirst("\\+", "");
             } else {
-                account = PermUtils.getAccount(Bot, args[0]);
+                account = args[0];
+            }
+            String auth = PermUtils.getAuthedAccount(Bot, account);
+            if(auth != null){
+                account = auth;
             }
             PermChannel PLChannel = PermChannelUtils.getPermLevelChannel(Bot.getServerInfo().getNetwork(), account, channel.getName());
             if (account != null) {

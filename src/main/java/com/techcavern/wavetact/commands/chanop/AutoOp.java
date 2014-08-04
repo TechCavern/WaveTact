@@ -25,9 +25,13 @@ public class AutoOp extends GenericCommand {
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         String account;
         if (args[0].startsWith("-")) {
-            account = PermUtils.getAccount(Bot, args[0].replaceFirst("-", ""));
+            account = args[0].replaceFirst("-", "");
         } else {
-            account = PermUtils.getAccount(Bot, args[0]);
+            account = args[0];
+        }
+        String auth = PermUtils.getAuthedAccount(Bot, account);
+        if(auth != null){
+            account = auth;
         }
         PermChannel PLChannel = PermChannelUtils.getPermLevelChannel(Bot.getServerInfo().getNetwork(), account, channel.getName());
         if (args[0].startsWith("-")) {
