@@ -13,7 +13,7 @@ import org.pircbotx.hooks.events.JoinEvent;
  */
 public class JoinListener extends ListenerAdapter<PircBotX> {
     public void onJoin(JoinEvent<PircBotX> event) throws Exception {
-        PermChannel PLChannel = PermChannelUtils.getPermLevelChannel(event.getBot().getServerInfo().getNetwork(), PermUtils.getAuthAccount(event.getBot(), event.getUser().getNick(), false), event.getChannel().getName());
+        PermChannel PLChannel = PermChannelUtils.getPermLevelChannel(event.getBot().getServerInfo().getNetwork(), PermUtils.getAuthedAccount(event.getBot(), event.getUser().getNick(), false), event.getChannel().getName());
         if (PLChannel != null) {
             if (PLChannel.getAuto()) {
                 int i = PLChannel.getPermLevel();
