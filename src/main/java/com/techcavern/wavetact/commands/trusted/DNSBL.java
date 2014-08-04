@@ -25,7 +25,7 @@ public class DNSBL extends GenericCommand {
     @CMD
     @TruCMD
     public DNSBL() {
-        super(GeneralUtils.toArray("dnsbl"), 5, "dnsbl [IPv4/Domain/User]", "looks up a domain or IP to see if its in a spam blacklist");
+        super(GeneralUtils.toArray("dnsbl"), 3, "dnsbl [IPv4/Domain/User]", "looks up a domain or IP to see if its in a spam blacklist");
     }
 
     @Override

@@ -31,7 +31,7 @@ public class DNSInfo extends GenericCommand {
     @CMD
     @TruCMD
     public DNSInfo() {
-        super(GeneralUtils.toArray("dnsinfo dns"), 5, "dns [domain]" , "looks up a domain for information");
+        super(GeneralUtils.toArray("dnsinfo dns"), 3, "dns [domain]" , "looks up a domain for information");
     }
 
     @Override

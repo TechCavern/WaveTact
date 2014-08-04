@@ -110,7 +110,6 @@ public class LoadUtils {
    //     GeneralRegistry.ControllerCommands.add(new TestCommand());
         GeneralRegistry.GenericCommands.add(new Google());
         GeneralRegistry.GenericCommands.add(new FMyLife());
-
         GeneralRegistry.GenericCommands.add(new MCMods());
         GeneralRegistry.GenericCommands.add(new Calculate());
         GeneralRegistry.ControllerCommands.add(new LockACT());

@@ -123,10 +123,10 @@ public class PermUtils {
                 } else if (GetUtils.getGlobalByNick(account, bot.getServerInfo().getServerName()) != null) {
                     return 20;
                 } else {
-                    return 2;
+                    return 3;
                 }
             } else {
-                return 2;
+                return 3;
             }
         }
     }
