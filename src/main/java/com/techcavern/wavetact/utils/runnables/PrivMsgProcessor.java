@@ -25,30 +25,44 @@ public class PrivMsgProcessor {
                     Command = GetUtils.getCommand(m.replaceFirst(GetUtils.getCommandChar(event.getBot()), ""));
                 }
                 messageParts = ArrayUtils.remove(messageParts, 0);
-                if (Command != null) {
-                    if ((Command.getPermLevel() >= 0 && (Command.getPermLevel() <= 3 || Command.getPermLevel() > 18))) {
-                        int UserPermLevel = PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), null);
-                        if (UserPermLevel >= Command.getPermLevel()) {
-                            IRCUtils.processMessage(Command, event.getBot(), null, event.getUser(), UserPermLevel, messageParts, true);
-                        } else {
-                            event.getUser().send().message("Permission Denied");
-                        }
-                    } else{
-                        Channel channel = null;
-                        if (messageParts.length >= 1 && messageParts[0].startsWith("#")) {
-                            channel = GetUtils.getChannelbyName(event.getBot(), messageParts[0]);
-                            messageParts = ArrayUtils.remove(messageParts, 0);
-                        }
-                        if (channel != null || Command.getPermLevel() == 5) {
-                            int UserPermLevel = PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), null);
-                            if (UserPermLevel >= Command.getPermLevel()) {
-                                IRCUtils.processMessage(Command, event.getBot(), channel, event.getUser(), UserPermLevel, messageParts, true);
+                if (Command != null && !Command.getCommand().equalsIgnoreCase("checkuserlevel")) {
+                    if (Command.getPermLevel() >= 0 && Command.getPermLevel() <= 3) {
+                        IRCUtils.processMessage(Command, event.getBot(), null, event.getUser(), 3, messageParts, true);
+                    } else {
+                        if (IRCUtils.getIRCHostmask(event.getBot(), event.getUser().getNick(), false) != null) {
+                            if (Command.getPermLevel() > 18) {
+                                int UserPermLevel = PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), null, true);
+                                if (UserPermLevel >= Command.getPermLevel()) {
+                                    IRCUtils.processMessage(Command, event.getBot(), null, event.getUser(), UserPermLevel, messageParts, true);
+                                } else {
+                                    event.getUser().send().message("Permission Denied");
+                                }
                             } else {
-                                event.getUser().send().message("Permission Denied");
+                                Channel channel = null;
+                                if (messageParts.length >= 1 && messageParts[0].startsWith("#")) {
+                                    channel = GetUtils.getChannelbyName(event.getBot(), messageParts[0]);
+                                    messageParts = ArrayUtils.remove(messageParts, 0);
+                                }
+                                if (channel != null || Command.getPermLevel() == 5) {
+                                    int UserPermLevel = PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), null, true);
+                                    if (UserPermLevel >= Command.getPermLevel()) {
+                                        IRCUtils.processMessage(Command, event.getBot(), channel, event.getUser(), UserPermLevel, messageParts, true);
+                                    } else {
+                                        event.getUser().send().message("Permission Denied");
+                                    }
+                                } else {
+                                    event.getUser().send().message("Channel Must be Specified as argument #1");
+                                }
                             }
                         } else {
-                            event.getUser().send().message("Channel Must be Specified as argument #1");
+                            event.getUser().send().message("Error, you must be in a channel the bot is in to authenticate");
+                        }
                     }
+                }else if(Command.getCommand().equalsIgnoreCase("checkuserlevel")){
+                    if(IRCUtils.getIRCHostmask(event.getBot(), event.getUser().getNick(), false) != null){
+                        IRCUtils.processMessage(Command, event.getBot(), null, event.getUser(), PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), null, true), messageParts, true);
+                    }else{
+                        IRCUtils.processMessage(Command, event.getBot(), null, event.getUser(), 3, messageParts, true);
                     }
                 }
             }

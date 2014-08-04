@@ -23,7 +23,7 @@ public class SetPass extends GenericCommand {
             user.send().notice("This network is set to " + GetUtils.getAuthType(Bot) + " Authentication");
             return;
         }
-        String AuthUser = PermUtils.getAuthedUser(Bot, user.getNick());
+        String AuthUser = PermUtils.getAccount(Bot, user.getNick());
         if(AuthUser != null){
             Account acc = AccountUtils.getAccount(AuthUser);
             if(GeneralRegistry.encryptor.checkPassword(args[0], acc.getAuthPassword())){

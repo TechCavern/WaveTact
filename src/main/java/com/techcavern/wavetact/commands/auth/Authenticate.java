@@ -33,7 +33,7 @@ public class Authenticate extends GenericCommand {
             userString = args[0];
             password = args[1];
         }
-        if(PermUtils.getAuthedUser(Bot, user.getNick()) != null){
+        if(PermUtils.getAccount(Bot, user.getNick()) != null){
             user.send().notice("Error, you are already identified");
         }else{
             Account acc = AccountUtils.getAccount(userString);

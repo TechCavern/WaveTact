@@ -26,7 +26,7 @@ public class CheckUserLevel extends GenericCommand {
             userObject = user.getNick();
         } else {
             userObject = args[0];
-            UserPermLevel = PermUtils.getPermLevel(Bot, userObject, channel);
+            UserPermLevel = PermUtils.getPermLevel(Bot, userObject, channel, isPrivate);
         }
         if(userObject == null){
             user.send().notice("User does not exist");

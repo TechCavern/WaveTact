@@ -9,21 +9,42 @@ import org.pircbotx.hooks.events.WhoisEvent;
 
 public class PermUtils {
 
-    public static String getAccount(PircBotX bot, String userObject){
+    public static String getPrivateAccount(PircBotX bot, String userObject, String hostmask){
         String authtype = GetUtils.getAuthType(bot);
         if(authtype.equals("nickserv"))
-        return getAccountName(bot, userObject);
+        return getAuthedNickServUser(bot, userObject, hostmask);
         else if(authtype.equals("account"))
-        return getAuthedUser(bot, userObject);
+        return getAuthedUser(bot, userObject, hostmask);
         else{
-            return userObject;
+        return userObject;
         }
-
+    }
+    public static String getAuthAccount(PircBotX bot, String userObject, boolean isPrivate){
+        String hostmask = null;
+        if(!isPrivate)
+        hostmask = IRCUtils.getIRCHostmask(bot, userObject, false);
+        else
+        hostmask = IRCUtils.getHostmask(bot, userObject, false);
+        if(hostmask != null)
+        return getPrivateAccount(bot, userObject, hostmask);
+        else
+         return null;
+    }
+    public static String getAccount(PircBotX bot, String userObject){
+        String hostmask = IRCUtils.getHostmask(bot, userObject, false);
+        return getPrivateAccount(bot, userObject, hostmask);
+    }
+    public static String getAuthedNickServUser(PircBotX bot, String userObject, String hostmask){
+        String userString = getAuthedUser(bot, userObject, hostmask);
+        if(userString == null){
+            userString = getAccountName(bot, userObject);
+            GeneralRegistry.AuthedUsers.add(new AuthedUser(bot.getServerInfo().getServerName(),userString, hostmask ));
+        }
+        return userString;
     }
 
-    public static String getAuthedUser(PircBotX bot, String userObject){
+    public static String getAuthedUser(PircBotX bot, String userObject, String hostmask){
         String userString = null;
-        String hostmask = IRCUtils.getHostmask(bot, userObject, false);
         for(AuthedUser user:GeneralRegistry.AuthedUsers){
                 if(user.getAuthHostmask().equals(hostmask) && user.getAuthNetwork().equals(bot.getServerInfo().getServerName())){
                     userString = user.getAuthAccount();
@@ -37,7 +58,7 @@ public class PermUtils {
 
     }
     public static AuthedUser getAuthUser(PircBotX bot, String userObject){
-        String hostmask = IRCUtils.getHostmask(bot, userObject, false);
+        String hostmask = IRCUtils.getIRCHostmask(bot, userObject, false);
         for(AuthedUser user:GeneralRegistry.AuthedUsers){
             if(user.getAuthHostmask().equals(hostmask) && user.getAuthNetwork().equals(bot.getServerInfo().getServerName())){
                 return user;
@@ -82,8 +103,8 @@ public class PermUtils {
         }
     }
 
-    private static int getManualPermLevel(PircBotX bot, String userObject, Channel channelObject) {
-        String account = getAccount(bot, userObject);
+    private static int getManualPermLevel(PircBotX bot, String userObject, Channel channelObject, boolean isPrivate) {
+        String account = getAuthAccount(bot, userObject, isPrivate);
         if (account != null) {
             if (GetUtils.getControllerByNick(account) != null) {
                 return 9001;
@@ -100,9 +121,9 @@ public class PermUtils {
             return 0;
         }
     }
-    public static int getPermLevel(PircBotX bot, String userObject, Channel channelObject) {
+    public static int getPermLevel(PircBotX bot, String userObject, Channel channelObject, boolean isPrivate) {
         if (channelObject != null) {
-            int mpermlevel = getManualPermLevel(bot, userObject, channelObject);
+            int mpermlevel = getManualPermLevel(bot, userObject, channelObject, isPrivate);
             User user = GetUtils.getUserByNick(bot,userObject);
             int apermlevel = 0;
             if(user != null) {
@@ -116,7 +137,7 @@ public class PermUtils {
                 return apermlevel;
             }
         } else {
-            String account = getAccount(bot, userObject);
+            String account = getAuthAccount(bot, userObject, isPrivate);
             if (account != null) {
                 if (GetUtils.getControllerByNick(account) != null) {
                     return 9001;

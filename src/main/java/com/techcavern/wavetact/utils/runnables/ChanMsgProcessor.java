@@ -21,7 +21,7 @@ public class ChanMsgProcessor {
                 messageParts = ArrayUtils.remove(messageParts, 0);
                 GenericCommand Command = GetUtils.getCommand(m.replaceFirst(GetUtils.getCommandChar(event.getBot()), ""));
                 if (Command != null && m.startsWith(GetUtils.getCommandChar(event.getBot()))) {
-                    int UserPermLevel = PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel());
+                    int UserPermLevel = PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel(), false);
                     if (UserPermLevel >= Command.getPermLevel()) {
                         IRCUtils.processMessage(Command, event.getBot(), event.getChannel(), event.getUser(), UserPermLevel, messageParts, false);
                     } else {

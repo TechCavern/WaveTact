@@ -83,6 +83,27 @@ public class IRCUtils {
         }
         return hostmask;
     }
+    public static String getIRCHostmask(PircBotX bot, String userObject, boolean isBanmask) {
+        User whois = GetUtils.getUserByNick(bot, userObject);
+        String hostmask = "";
+        if (whois != null) {
+            String hostname = whois.getHostmask();
+            String Login = whois.getLogin();
+            if (isBanmask) {
+                if (!Login.startsWith("~")) {
+                    hostmask = "*!" + Login + "@" + hostname;
+                } else {
+                    hostmask = "*!*@" + hostname;
+                }
+            } else {
+                hostmask = userObject + "!" + Login + "@" + hostname;
+            }
+            hostmask = hostmask.replace(" ", "");
+        } else {
+            hostmask = null;
+        }
+        return hostmask;
+    }
     public static String getHost(PircBotX bot, String userObject) {
         String host;
         WhoisEvent whois = WhoisEvent(bot, userObject);
