@@ -21,6 +21,7 @@ import com.techcavern.wavetact.commands.chanowner.Protect;
 import com.techcavern.wavetact.commands.controller.*;
 import com.techcavern.wavetact.commands.controller.Shutdown;
 import com.techcavern.wavetact.commands.fun.Attack;
+import com.techcavern.wavetact.commands.fun.FMyLife;
 import com.techcavern.wavetact.commands.fun.SomethingAwesome;
 import com.techcavern.wavetact.commands.fun.UrbanDictonary;
 import com.techcavern.wavetact.commands.global.DNSBLModify;
@@ -108,6 +109,8 @@ public class LoadUtils {
         GeneralRegistry.GenericCommands.add(new MCStatus());
    //     GeneralRegistry.ControllerCommands.add(new TestCommand());
         GeneralRegistry.GenericCommands.add(new Google());
+        GeneralRegistry.GenericCommands.add(new FMyLife());
+
         GeneralRegistry.GenericCommands.add(new MCMods());
         GeneralRegistry.GenericCommands.add(new Calculate());
         GeneralRegistry.ControllerCommands.add(new LockACT());

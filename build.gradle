@@ -24,6 +24,7 @@ dependencies {
     compile files("libs/pircbotx-2.1-SNAPSHOT.jar")
     compile 'org.jasypt:jasypt:1.9.2'
     compile 'com.wordnik:wordnik-java-client:1.0.0'
+    compile 'org.jsoup:jsoup:1.7.3'
 }
 
 jar {

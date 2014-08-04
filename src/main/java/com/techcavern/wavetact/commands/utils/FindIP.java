@@ -13,6 +13,8 @@ import org.pircbotx.User;
 
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class FindIP extends GenericCommand {
@@ -20,22 +22,54 @@ public class FindIP extends GenericCommand {
     @GenCMD
 
     public FindIP() {
-        super(GeneralUtils.toArray("findip locate find loc geo geoip"), 0, "findip [ipv4][domain][user]", "GeoIPs a user - IPv6 NOT supported");
+        super(GeneralUtils.toArray("findip locate find loc geo geoip"), 0, "findip [IP][domain][user]", "GeoIPs a user - IPv6 NOT supported");
     }
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        String IP = GeneralUtils.getIP(args[0], Bot);
-        if(IP == null){
-            user.send().notice("Invalid IP/User");
-            return;
-        }
-            JsonObject objectJson = GeneralUtils.getJsonObject("http://freegeoip.net/json/" + IP);
-            String location = objectJson.get("city").getAsString() + ", " + objectJson.get("region_name").getAsString() + ", " + objectJson.get("zipcode").getAsString();
-            if (location.equalsIgnoreCase(", , ")) {
-                user.send().notice("IP is Protected");
-            } else {
-                IRCUtils.SendMessage(user, channel, location, isPrivate);
+            String IP;
+            if(args.length > 0) {
+                if (args[0].contains(".") || args[0].contains(":")) {
+                    IP = args[0].replace("http://", "").replace("https://", "");
+                } else {
+                    IP = IRCUtils.getHost(Bot, args[0]);
+                }
+            }else{
+                IP = IRCUtils.getHost(Bot, user.getNick());
             }
+            if (IP == null) {
+                user.send().notice("Please Enter in an IP/User/Domain as argument #1");
+                return;
+            }
+
+            JsonObject objectJson = GeneralUtils.getJsonObject("http://ip-api.com/json/" + IP);
+            List<String> results = new ArrayList<>();
+            if(objectJson.get("status").getAsString().equalsIgnoreCase("success")){
+            results.add(objectJson.get("city").getAsString());
+            results.add(objectJson.get("regionName").getAsString());
+            results.add(objectJson.get("country").getAsString());
+            results.add(objectJson.get("zip").getAsString());
+            results.add(objectJson.get("isp").getAsString());
+            results.add(objectJson.get("timezone").getAsString());
+            String fin = "";
+            for(String res : results){
+                if(!res.isEmpty()){
+                    if(fin.isEmpty()){
+                        fin = res;
+                    }else{
+                        fin += ", " + res;
+                    }
+                }
+            }
+            if(!fin.isEmpty()) {
+                IRCUtils.SendMessage(user, channel, fin, isPrivate);
+            }else {
+                user.send().notice("Unable to Determine Location (Or you entered an invalid IP)");
+            }
+            }else{
+                user.send().notice("Unable to Determine Location (Or you entered an invalid IP)");
+            }
+
+
     }
 }

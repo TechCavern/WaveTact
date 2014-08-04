@@ -58,12 +58,12 @@ public class NetworkUtils {
 
     public static void registerDevServer() {
  //       PircBotX Dev = LoadUtils.createbot(null, "SynIRC", Arrays.asList("##powder-bots"), "WaveTactDev", "irc.freenode.net");
-        PircBotX Dev2 = LoadUtils.createbot(null, "EsperNet", Arrays.asList("#techcavern"), "WaveTactDev", "irc.freenode.net");
+        PircBotX Dev2 = LoadUtils.createbot(null, "EsperNet", Arrays.asList("#batbot"), "WaveTactDev", "irc.esper.net");
    //     GeneralRegistry.WaveTact.addBot(Dev);
         GeneralRegistry.WaveTact.addBot(Dev2);
         GeneralRegistry.Controllers.add("JZTech101");
      //   new CommandChar("@", Dev);
-        GeneralRegistry.CommandChars.add(new NetProperty("-", Dev2));
+        GeneralRegistry.CommandChars.add(new NetProperty("@", Dev2));
         GeneralRegistry.AuthType.add(new NetProperty("nick", Dev2));
     }
 }
