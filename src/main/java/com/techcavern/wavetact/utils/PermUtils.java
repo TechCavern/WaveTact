@@ -22,7 +22,7 @@ public class PermUtils {
     public static String getAuthedAccount(PircBotX bot, String userObject, boolean isPrivate){
         String hostmask = null;
         if(!isPrivate)
-        hostmask = IRCUtils.getIRCHostmask(bot, userObject, false);
+        hostmask = IRCUtils.getIRCHostmask(bot, userObject);
         else
         hostmask = IRCUtils.getHostmask(bot, userObject, false);
         if(hostmask != null)
@@ -58,7 +58,7 @@ public class PermUtils {
 
     }
     public static AuthedUser getAuthUser(PircBotX bot, String userObject){
-        String hostmask = IRCUtils.getIRCHostmask(bot, userObject, false);
+        String hostmask = IRCUtils.getIRCHostmask(bot, userObject);
         for(AuthedUser user:GeneralRegistry.AuthedUsers){
             if(user.getAuthHostmask().equals(hostmask) && user.getAuthNetwork().equals(bot.getServerInfo().getServerName())){
                 return user;

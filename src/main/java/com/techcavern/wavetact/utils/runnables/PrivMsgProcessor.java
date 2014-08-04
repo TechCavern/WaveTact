@@ -29,7 +29,7 @@ public class PrivMsgProcessor {
                     if (Command.getPermLevel() >= 0 && Command.getPermLevel() <= 3) {
                         IRCUtils.processMessage(Command, event.getBot(), null, event.getUser(), 3, messageParts, true);
                     } else {
-                        if (IRCUtils.getIRCHostmask(event.getBot(), event.getUser().getNick(), false) != null) {
+                        if (IRCUtils.getIRCHostmask(event.getBot(), event.getUser().getNick()) != null) {
                             if (Command.getPermLevel() > 18) {
                                 int UserPermLevel = PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), null, true);
                                 if (UserPermLevel >= Command.getPermLevel()) {
@@ -59,7 +59,7 @@ public class PrivMsgProcessor {
                         }
                     }
                 }else if(Command.getCommand().equalsIgnoreCase("checkuserlevel")){
-                    if(IRCUtils.getIRCHostmask(event.getBot(), event.getUser().getNick(), false) != null){
+                    if(IRCUtils.getIRCHostmask(event.getBot(), event.getUser().getNick()) != null){
                         IRCUtils.processMessage(Command, event.getBot(), null, event.getUser(), PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), null, true), messageParts, true);
                     }else{
                         IRCUtils.processMessage(Command, event.getBot(), null, event.getUser(), 3, messageParts, true);
@@ -68,8 +68,6 @@ public class PrivMsgProcessor {
             }
         }
         GeneralRegistry.threadPool.execute(new process());
-
-
     }
 
 }

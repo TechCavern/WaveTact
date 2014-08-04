@@ -75,7 +75,7 @@ public class IRCUtils {
                     hostmask = "*!*@" + hostname;
                 }
             } else {
-                hostmask = userObject + "!" + Login + "@" + hostname;
+                hostmask = "*!" + Login + "@" + hostname;
             }
             hostmask = hostmask.replace(" ", "");
         } else {
@@ -83,21 +83,13 @@ public class IRCUtils {
         }
         return hostmask;
     }
-    public static String getIRCHostmask(PircBotX bot, String userObject, boolean isBanmask) {
+    public static String getIRCHostmask(PircBotX bot, String userObject) {
         User whois = GetUtils.getUserByNick(bot, userObject);
         String hostmask = "";
         if (whois != null) {
             String hostname = whois.getHostmask();
             String Login = whois.getLogin();
-            if (isBanmask) {
-                if (!Login.startsWith("~")) {
-                    hostmask = "*!" + Login + "@" + hostname;
-                } else {
-                    hostmask = "*!*@" + hostname;
-                }
-            } else {
-                hostmask = userObject + "!" + Login + "@" + hostname;
-            }
+                hostmask = "*!" + Login + "@" + hostname;
             hostmask = hostmask.replace(" ", "");
         } else {
             hostmask = null;
