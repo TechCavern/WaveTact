@@ -59,8 +59,6 @@ public class LoadUtils {
         Net.getListenerManager().addListener(new CTCPListener());
         Net.getListenerManager().addListener(new KickListener());
         Net.getListenerManager().addListener(new PrivMsgListener());
-        Net.getListenerManager().addListener(new PartListener());
-        Net.getListenerManager().addListener(new QuitListener());
         Net.setAutoReconnect(true);
         if (nickservPassword != null) {
             Net.setNickservPassword(nickservPassword);
