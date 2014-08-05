@@ -12,6 +12,7 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
+import java.net.URLEncoder;
 import java.util.List;
 
 
@@ -29,13 +30,13 @@ public class Weather extends GenericCommand {
             user.send().notice("Wunderground API key is null - Contact Bot Controller to fix");
             return;
         }
-        JsonObject weather = GeneralUtils.getJsonObject("http://api.wunderground.com/api/" + GeneralRegistry.wundergroundapikey +"/conditions/q/" + StringUtils.join(args, "%20") + ".json").getAsJsonObject("current_observation");
+        JsonObject weather = GeneralUtils.getJsonObject("http://api.wunderground.com/api/" + GeneralRegistry.wundergroundapikey +"/conditions/q/" + URLEncoder.encode(StringUtils.join(args, " "),  "UTF-8") + ".json").getAsJsonObject("current_observation");
         if(weather != null) {
             String City = weather.get("display_location").getAsJsonObject().get("full").getAsString();
             String Weather = weather.get("weather").getAsString();
             String Temp = weather.get("temperature_string").getAsString();
             String Humidity = weather.get("relative_humidity").getAsString() + " humidity";
-            String Wind = weather.get("wind_string").getAsString() + " " + weather.get("wind_gust_kph").getAsString() + " kph" + " " + weather.get("wind_dir").getAsString() + "winds";
+            String Wind = weather.get("wind_string").getAsString();
             IRCUtils.SendMessage(user, channel, City + ": " + Weather + " - " + Temp + " - " + Humidity + " - " + Wind + " - ", isPrivate);
         }else{
             user.send().notice("Requested location not found");

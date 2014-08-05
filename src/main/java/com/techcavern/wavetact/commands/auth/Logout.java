@@ -18,10 +18,6 @@ public class Logout extends GenericCommand {
     }
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        if(!PermUtils.checkIfAccountEnabled(Bot)){
-            user.send().notice("This network is set to " + GetUtils.getAuthType(Bot) + " Authentication");
-            return;
-        }
         AuthedUser authedUser = PermUtils.getAuthUser(Bot, user.getNick());
         if(authedUser == null){
             user.send().notice("Error, you are not logged in");

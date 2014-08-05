@@ -63,7 +63,7 @@ public class IRCBL extends GenericCommand {
                 for (Record rec : records) {
                     if (rec instanceof TXTRecord) {
                         TXTRecord c = (TXTRecord) rec;
-                        IRCUtils.SendMessage(user, channel, Type.string(rec.getType()) + " - " + StringUtils.join((TXTRecord) rec, ""), isPrivate);
+                        IRCUtils.SendMessage(user, channel, Type.string(rec.getType()) + " - " + StringUtils.join((TXTRecord) rec, " "), isPrivate);
                     }
                 }
             }

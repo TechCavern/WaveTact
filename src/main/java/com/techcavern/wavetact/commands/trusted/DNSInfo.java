@@ -62,7 +62,7 @@ public class DNSInfo extends GenericCommand {
                 IRCUtils.SendMessage(user, channel, Type.string(rec.getType()) + " - " + ((CNAMERecord) rec).getAlias() + ((CNAMERecord) rec).getTarget() , isPrivate );
             }else if(rec instanceof  TXTRecord){
                     TXTRecord c = (TXTRecord) rec;
-                    IRCUtils.SendMessage(user, channel, Type.string(rec.getType()) + " - " + StringUtils.join((TXTRecord) rec, "") , isPrivate );
+                    IRCUtils.SendMessage(user, channel, Type.string(rec.getType()) + " - " + StringUtils.join((TXTRecord) rec, " ") , isPrivate );
             }else if(rec instanceof  MXRecord){
                     MXRecord c = (MXRecord) rec;
             IRCUtils.SendMessage(user, channel, Type.string(rec.getType()) + " - " + ((MXRecord) rec).getPriority() +  ((MXRecord) rec).getTarget() , isPrivate );
