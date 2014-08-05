@@ -21,10 +21,16 @@ public class PermUtils {
     }
     public static String getAuthedAccount(PircBotX bot, String userObject){
         String hostmask = IRCUtils.getIRCHostmask(bot, userObject);
-        if(hostmask != null)
-        return getPrivateAccount(bot, userObject, hostmask);
-        else
-        return null;
+        if(hostmask != null) {
+            return getPrivateAccount(bot, userObject, hostmask);
+        }else{
+            hostmask = IRCUtils.getHostmask(bot, userObject, false);
+            if(hostmask != null){
+                return getPrivateAccount(bot, userObject, hostmask);
+            }else{
+                return null;
+            }
+        }
     }
     public static String getAuthedNickServUser(PircBotX bot, String userObject, String hostmask){
         String userString = getAuthedUser(bot, userObject, hostmask);

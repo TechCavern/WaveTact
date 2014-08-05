@@ -30,7 +30,7 @@ public class Weather extends GenericCommand {
             user.send().notice("Wunderground API key is null - Contact Bot Controller to fix");
             return;
         }
-        JsonObject weather = GeneralUtils.getJsonObject("http://api.wunderground.com/api/" + GeneralRegistry.wundergroundapikey +"/conditions/q/" + URLEncoder.encode(StringUtils.join(args, " "),  "UTF-8") + ".json").getAsJsonObject("current_observation");
+        JsonObject weather = GeneralUtils.getJsonObject("http://api.wunderground.com/api/" + GeneralRegistry.wundergroundapikey +"/conditions/q/" + StringUtils.join(args, "%20") + ".json").getAsJsonObject("current_observation");
         if(weather != null) {
             String City = weather.get("display_location").getAsJsonObject().get("full").getAsString();
             String Weather = weather.get("weather").getAsString();

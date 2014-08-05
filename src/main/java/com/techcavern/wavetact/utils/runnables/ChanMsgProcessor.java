@@ -6,6 +6,7 @@ import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.PermUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.apache.commons.lang3.ArrayUtils;
+import org.pircbotx.Colors;
 import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.events.MessageEvent;
 
@@ -16,7 +17,7 @@ public class ChanMsgProcessor {
     public static void ChanMsgProcess(MessageEvent<PircBotX> event) {
         class process implements Runnable {
             public void run() {
-                String[] messageParts = event.getMessage().replaceAll("\\P{InBasic_Latin}", "").split(" ");
+                String[] messageParts = Colors.removeFormattingAndColors(event.getMessage()).replaceAll("\\P{InBasic_Latin}", "").split(" ");
                 String m = messageParts[0].toLowerCase();
                 messageParts = ArrayUtils.remove(messageParts, 0);
                 GenericCommand Command = GetUtils.getCommand(m.replaceFirst(GetUtils.getCommandChar(event.getBot()), ""));

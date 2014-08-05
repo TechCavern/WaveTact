@@ -3,24 +3,16 @@ package com.techcavern.wavetact.utils;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.wolfram.alpha.*;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.conn.util.InetAddressUtils;
 import org.pircbotx.PircBotX;
-import org.w3c.dom.Document;
-import org.xml.sax.InputSource;
+import sun.net.util.IPAddressUtil;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.StringReader;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.URL;
-import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class GeneralUtils {
     public static String buildMessage(int startint, int finishint, String[] args) {
@@ -61,17 +53,18 @@ public class GeneralUtils {
         String result = parseUrl(url);
         return new JsonParser().parse(result).getAsJsonArray();
     }
-    public static String getIP(String input, PircBotX Bot){
+    public static String getIP(String input, PircBotX Bot) {
         String IP = "";
         if (input.contains(".") || input.contains(":")) {
             IP = input;
         } else {
             IP = IRCUtils.getHost(Bot, input);
         }
-        if(IP == null || IP.replaceFirst(":", "").contains(":")){
-           IP = null;
+        if (IP == null || IP.replaceFirst(":", "").contains(":")) {
+            return null;
+        } else if (InetAddressUtils.isIPv4Address(IP)){
+           return IP;
         }else {
-            Long time = System.currentTimeMillis();
             IP = IP.replaceAll("http://|https://", "");
             try {
                 Socket socket = new Socket(InetAddress.getByName(IP), 80);
@@ -79,12 +72,13 @@ public class GeneralUtils {
                 socket.close();
                 if(IP.contains(":")){
                     return null;
+                }else{
+                    return IP;
                 }
             }catch(Exception e){
-                IP = null;
+                return null;
             }
         }
-        return IP;
     }
     public static long getMilliSeconds(String input) {
         if (input.toLowerCase().endsWith("h")) {

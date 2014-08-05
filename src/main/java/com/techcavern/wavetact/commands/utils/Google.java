@@ -35,7 +35,7 @@ public class Google extends GenericCommand {
             ArrayIndex = Integer.parseInt(args[0])-1;
             args = ArrayUtils.remove(args, 0);
         }
-        JsonArray results = GeneralUtils.getJsonObject("https://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=" + URLEncoder.encode(StringUtils.join(args, " "), "UTF-8")).getAsJsonObject("responseData").getAsJsonArray("results");
+        JsonArray results = GeneralUtils.getJsonObject("https://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=" + StringUtils.join(args, "%20")).getAsJsonObject("responseData").getAsJsonArray("results");
         if(results.size()-1 > 0){
         if (results.size() >= ArrayIndex) {
             String title = results.get(ArrayIndex).getAsJsonObject().get("titleNoFormatting").getAsString();

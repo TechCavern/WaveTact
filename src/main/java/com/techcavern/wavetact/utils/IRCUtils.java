@@ -24,12 +24,9 @@ public class IRCUtils {
     }
 
     public static WhoisEvent<PircBotX> WhoisEvent(PircBotX bot, String userObject) {
+
         WhoisEvent<PircBotX> WhoisEvent;
-        if (userObject != null) {
-            bot.sendRaw().rawLineNow("WHOIS " + userObject);
-        } else {
-            WhoisEvent = null;
-        }
+        bot.sendIRC().whois(userObject);
         WaitForQueue waitForQueue = new WaitForQueue(bot);
         try {
             WhoisEvent = waitForQueue.waitFor(WhoisEvent.class);
