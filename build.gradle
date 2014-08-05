@@ -15,7 +15,6 @@ dependencies {
     compile 'junit:junit:4.11'
     compile 'org.apache.commons:commons-lang3:3.3.2'
     compile 'net.objecthunter:exp4j:0.4.0.ALPHA-3'
-    compile 'org.pircbotx:pircbotx:2.1-SNAPSHOT'
     compile 'dnsjava:dnsjava:2.1.6'
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'org.slf4j:slf4j-simple:1.7.7'
