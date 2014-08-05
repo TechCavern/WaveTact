@@ -30,6 +30,7 @@ public class PermUtils {
         String userString = getAuthedUser(bot, userObject, hostmask);
         if(userString == null){
             userString = getAccountName(bot, userObject);
+            if(userString != null)
             GeneralRegistry.AuthedUsers.add(new AuthedUser(bot.getServerInfo().getServerName(),userString, hostmask ));
         }
         return userString;
@@ -70,6 +71,8 @@ public class PermUtils {
                 if (userString.isEmpty()){
                     userString = userObject.toLowerCase();
                 }
+            }else{
+                userString = null;
             }
         } else {
             userString = null;
