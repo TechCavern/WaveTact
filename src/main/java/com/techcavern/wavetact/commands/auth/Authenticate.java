@@ -38,7 +38,7 @@ public class Authenticate extends GenericCommand {
         }else{
             Account acc = AccountUtils.getAccount(userString);
             if(acc != null && GeneralRegistry.encryptor.checkPassword(password, acc.getAuthPassword())){
-                    GeneralRegistry.AuthedUsers.add(new AuthedUser(Bot.getServerInfo().getServerName(), userString, IRCUtils.getHostmask(Bot, user.getNick(), false)));
+                    GeneralRegistry.AuthedUsers.add(new AuthedUser(Bot.getServerInfo().getNetwork(), userString, IRCUtils.getHostmask(Bot, user.getNick(), false)));
                     IRCUtils.SendMessage(user, channel, "Identification Successful", isPrivate);
             }else{
                 user.send().notice("Unable to identify (Incorrect User/Password Combination)");

@@ -31,7 +31,7 @@ public class PermUtils {
         if(userString == null){
             userString = getAccountName(bot, userObject);
             if(userString != null)
-            GeneralRegistry.AuthedUsers.add(new AuthedUser(bot.getServerInfo().getServerName(),userString, hostmask ));
+            GeneralRegistry.AuthedUsers.add(new AuthedUser(Bot.getServerInfo().getNetwork(),userString, hostmask ));
         }
         return userString;
     }
@@ -39,7 +39,7 @@ public class PermUtils {
     public static String getAuthedUser(PircBotX bot, String userObject, String hostmask){
         String userString = null;
         for(AuthedUser user:GeneralRegistry.AuthedUsers){
-                if(user.getAuthHostmask().equals(hostmask) && user.getAuthNetwork().equals(bot.getServerInfo().getServerName())){
+                if(user.getAuthHostmask().equals(hostmask) && user.getAuthNetwork().equals(Bot.getServerInfo().getNetwork())){
                     userString = user.getAuthAccount();
                 }
             }
@@ -53,7 +53,7 @@ public class PermUtils {
     public static AuthedUser getAuthUser(PircBotX bot, String userObject){
         String hostmask = IRCUtils.getIRCHostmask(bot, userObject);
         for(AuthedUser user:GeneralRegistry.AuthedUsers){
-            if(user.getAuthHostmask().equals(hostmask) && user.getAuthNetwork().equals(bot.getServerInfo().getServerName())){
+            if(user.getAuthHostmask().equals(hostmask) && user.getAuthNetwork().equals(Bot.getServerInfo().getNetwork())){
                 return user;
             }
         }
@@ -103,7 +103,7 @@ public class PermUtils {
             if (GetUtils.getControllerByNick(account) != null) {
                 return 9001;
             }
-            if (GetUtils.getGlobalByNick(account, bot.getServerInfo().getServerName()) != null) {
+            if (GetUtils.getGlobalByNick(account, Bot.getServerInfo().getNetwork()) != null) {
                 return 20;
             }
             if (PermChannelUtils.getPermLevelChannel(bot.getServerInfo().getNetwork(), account, channelObject.getName()) != null) {
@@ -142,7 +142,7 @@ public class PermUtils {
             if (account != null) {
                 if (GetUtils.getControllerByNick(account) != null) {
                     return 9001;
-                } else if (GetUtils.getGlobalByNick(account, bot.getServerInfo().getServerName()) != null) {
+                } else if (GetUtils.getGlobalByNick(account, Bot.getServerInfo().getNetwork()) != null) {
                     return 20;
                 } else {
                     return 3;

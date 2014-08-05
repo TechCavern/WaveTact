@@ -38,7 +38,7 @@ public class Register extends GenericCommand {
         }else{
             GeneralRegistry.Accounts.add(new Account(userString, GeneralRegistry.encryptor.encryptPassword(password)));
             AccountUtils.saveAccounts();
-            GeneralRegistry.AuthedUsers.add(new AuthedUser(Bot.getServerInfo().getServerName(), userString, IRCUtils.getHostmask(Bot, user.getNick(), false)));
+            GeneralRegistry.AuthedUsers.add(new AuthedUser(Bot.getServerInfo().getNetwork(), userString, IRCUtils.getHostmask(Bot, user.getNick(), false)));
             IRCUtils.SendMessage(user, channel, "You are now registered", isPrivate);
         }
         }
