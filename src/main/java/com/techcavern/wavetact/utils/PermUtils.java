@@ -70,7 +70,7 @@ public class PermUtils {
     public static String getAccountName(PircBotX bot, String userObject) {
         WhoisEvent whois = IRCUtils.WhoisEvent(bot, userObject);
         String userString;
-        if (whois.getNick() != null) {
+        if (whois != null) {
             userString = whois.getRegisteredAs();
             if(userString != null){
                 userString = userString.toLowerCase();

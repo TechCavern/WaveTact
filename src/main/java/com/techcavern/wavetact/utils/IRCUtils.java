@@ -35,6 +35,9 @@ public class IRCUtils {
             ex.printStackTrace();
             WhoisEvent = null;
         }
+        if(!WhoisEvent.isExists()){
+            return null;
+        }
         return WhoisEvent;
     }
 
@@ -62,7 +65,7 @@ public class IRCUtils {
     public static String getHostmask(PircBotX bot, String userObject, boolean isBanmask) {
         String hostmask;
         WhoisEvent whois = WhoisEvent(bot, userObject);
-        if (whois.getNick() != null) {
+        if (whois != null) {
             String hostname = whois.getHostname();
             String Login = whois.getLogin();
             if (isBanmask) {
@@ -96,7 +99,7 @@ public class IRCUtils {
     public static String getHost(PircBotX bot, String userObject) {
         String host;
         WhoisEvent whois = WhoisEvent(bot, userObject);
-        if (whois.getNick() != null) {
+        if (whois != null) {
             host = whois.getHostname();
         } else {
             host = null;
