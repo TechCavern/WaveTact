@@ -67,6 +67,7 @@ public class CustomMSG extends GenericCommand {
         if (cmd.getPermLevel() <= UserPermLevel) {
             if (cmd != null && !cmd.getLockedStatus()) {
                 GeneralRegistry.SimpleMessages.remove(cmd);
+                GeneralRegistry.AllCommands.remove(cmd);
                 GeneralRegistry.SimpleMessages.add(new SimpleMessage(command, accessLevel, msg, false));
                 SimpleMessageUtils.saveSimpleMessages();
                 IRCUtils.SendMessage(user, channel, "Custom Message modified", isPrivate);
@@ -89,6 +90,7 @@ public class CustomMSG extends GenericCommand {
                 user.send().notice("Custom Message is locked");
             } else {
                 GeneralRegistry.SimpleMessages.remove(cmd);
+                GeneralRegistry.AllCommands.remove(cmd);
                 SimpleMessageUtils.saveSimpleMessages();
                 IRCUtils.SendMessage(user, channel, "Custom Message removed", isPrivate);
             }

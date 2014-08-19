@@ -146,6 +146,7 @@ public class IRCUtils {
             try {
                 Command.onCommand(User, Bot, channel, isPrivate, UserPermLevel, messageParts);
             } catch (Exception e) {
+                e.printStackTrace();
                 User.send().notice("Unable to perform command - please make sure are using the correct syntax");
             }
         }

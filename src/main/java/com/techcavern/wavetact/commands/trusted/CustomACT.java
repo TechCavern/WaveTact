@@ -68,6 +68,7 @@ public class CustomACT extends GenericCommand {
         if (cmd.getPermLevel() <= UserPermLevel) {
             if (cmd != null && !cmd.getLockedStatus()) {
                 GeneralRegistry.SimpleActions.remove(cmd);
+                GeneralRegistry.AllCommands.remove(cmd);
                 GeneralRegistry.SimpleActions.add(new SimpleAction(command, accessLevel, msg, false));
                 SimpleActionUtils.saveSimpleActions();
                 IRCUtils.SendMessage(user, channel, "Custom Action modified", isPrivate);
@@ -91,6 +92,7 @@ public class CustomACT extends GenericCommand {
                 user.send().notice("Custom Action is locked");
             } else {
                 GeneralRegistry.SimpleActions.remove(cmd);
+                GeneralRegistry.AllCommands.remove(cmd);
                 SimpleActionUtils.saveSimpleActions();
                 IRCUtils.SendMessage(user, channel, "Custom Action removed", isPrivate);
             }
