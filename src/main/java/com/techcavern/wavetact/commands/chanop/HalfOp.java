@@ -9,6 +9,7 @@ import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ChanOPCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -41,7 +42,7 @@ public class HalfOp extends GenericCommand {
                 channel.send().halfOp(user);
             }
         } else {
-            user.send().notice("This server does not support HalfOps");
+            IRCUtils.sendError(user, "This server does not support HalfOps");
         }
     }
 }

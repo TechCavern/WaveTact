@@ -40,10 +40,10 @@ public class UrbanDictonary extends GenericCommand {
                }
             }else{
                ArrayIndex = ArrayIndex + 1;
-                user.send().notice("Def #" + ArrayIndex + " does not exist");
+                IRCUtils.sendError(user, "Def #" + ArrayIndex + " does not exist");
             }
             } else {
-            user.send().notice("Not Defined in the Urban Dictionary");
+            IRCUtils.sendError(user, "Not Defined in the Urban Dictionary");
         }
 
     }

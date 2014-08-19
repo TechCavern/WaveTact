@@ -26,13 +26,6 @@ public class FMyLife extends GenericCommand {
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        /**
-        int ArrayIndex = 0;
-        if(GeneralUtils.isInteger(args[0])){
-            ArrayIndex = Integer.parseInt(args[0])-1;
-            args = ArrayUtils.remove(args, 0);
-        }
-         **/
         Document doc = Jsoup.connect("http://m.fmylife.com/random").get();
         Elements FML = doc.select(".text");
         String c = FML.get(0).toString().replaceAll("\\<.*?>","").replaceAll("\\&.*?;", "");

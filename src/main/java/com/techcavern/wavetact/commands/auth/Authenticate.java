@@ -21,7 +21,7 @@ public class Authenticate extends GenericCommand {
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         if(!PermUtils.checkIfAccountEnabled(Bot)){
-            user.send().notice("This network is set to " + GetUtils.getAuthType(Bot) + " Authentication");
+            IRCUtils.sendError(user, "This network is set to " + GetUtils.getAuthType(Bot) + " Authentication");
             return;
         }
         String userString;
@@ -34,14 +34,15 @@ public class Authenticate extends GenericCommand {
             password = args[1];
         }
         if(PermUtils.getAuthedAccount(Bot, user.getNick()) != null){
-            user.send().notice("Error, you are already identified");
+            IRCUtils.sendError(user, "Error, you are already identified");
+
         }else{
             Account acc = AccountUtils.getAccount(userString);
             if(acc != null && GeneralRegistry.encryptor.checkPassword(password, acc.getAuthPassword())){
                     GeneralRegistry.AuthedUsers.add(new AuthedUser(Bot.getServerInfo().getNetwork(), userString, IRCUtils.getHostmask(Bot, user.getNick(), false)));
                     IRCUtils.SendMessage(user, channel, "Identification Successful", isPrivate);
             }else{
-                user.send().notice("Unable to identify (Incorrect User/Password Combination)");
+IRCUtils.sendError(user, "Unable to identify (Incorrect User/Password Combination)");
             }
         }
         }

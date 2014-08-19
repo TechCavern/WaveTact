@@ -29,7 +29,7 @@ public class PingTime extends GenericCommand {
             port = Integer.parseInt(args[1]);
         }
         if(args[0].replaceFirst(":", "").contains(":")){
-            user.send().notice("IPv6 is not supported");
+            IRCUtils.sendError(user, "IPv6 is not supported");
         }
         Long time = System.currentTimeMillis();
         args[0] = args[0].replaceAll("http://|https://", "");

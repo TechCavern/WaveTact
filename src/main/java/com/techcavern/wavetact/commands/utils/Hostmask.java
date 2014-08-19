@@ -27,7 +27,7 @@ public class Hostmask extends GenericCommand {
                 IRCUtils.SendMessage(user, channel, IRCUtils.getHostmask(Bot, args[0], false), isPrivate);
             }
         } else {
-            user.send().notice("User not found");
+            IRCUtils.sendError(user, "User not found");
         }
 
     }

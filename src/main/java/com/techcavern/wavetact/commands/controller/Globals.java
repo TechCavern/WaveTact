@@ -46,7 +46,7 @@ public class Globals extends GenericCommand {
                     GlobalUtils.saveGlobals();
                     IRCUtils.SendMessage(user, channel, "Global Removed", isPrivate);
                 } else {
-                    user.send().notice("User does not existing in Globals");
+                    IRCUtils.sendError(user, "User does not existing in Globals");
                 }
             }else if(args[0].equalsIgnoreCase("list")){
                 String Globals = "";
@@ -60,11 +60,11 @@ public class Globals extends GenericCommand {
                 if(!Globals.isEmpty()) {
                     IRCUtils.SendMessage(user, channel, Globals, isPrivate);
                 }else{
-                    user.send().notice("No Globals Exist");
+                    IRCUtils.sendError(user, "No Globals Exist");
                 }
             }else {
                 if (GetUtils.getGlobalByNick(account, Bot.getServerInfo().getNetwork()) != null) {
-                    user.send().notice("User is already in database");
+                    IRCUtils.sendError(user, "User is already in database");
                 } else {
                     GeneralRegistry.Globals.add(new Global(Bot.getServerInfo().getNetwork(), account));
                     GlobalUtils.saveGlobals();
@@ -74,7 +74,7 @@ public class Globals extends GenericCommand {
         } else {
 
 
-            user.send().notice("User is not registered with Nickserv or not loggedin");
+            IRCUtils.sendError(user, "User is not registered with Nickserv or not loggedin");
         }
     }
 }

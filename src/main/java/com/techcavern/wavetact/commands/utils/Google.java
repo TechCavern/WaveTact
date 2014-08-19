@@ -46,10 +46,10 @@ public class Google extends GenericCommand {
 
         }else{
             ArrayIndex = ArrayIndex + 1;
-            user.send().notice("Search #" + ArrayIndex + " does not exist");
+            IRCUtils.sendError(user, "Search #" + ArrayIndex + " does not exist");
         }
         } else {
-            user.send().notice("Search returned no results");
+            IRCUtils.sendError(user, "Search returned no results");
         }
     }
 }

@@ -33,7 +33,7 @@ public class MCMods extends GenericCommand {
                 version = vers;
         }
         if(version == ""){
-            user.send().notice("Version not found. Versions below 1.4.5 is not supported.");
+            IRCUtils.sendError(user, "Version not found. Versions below 1.4.5 is not supported.");
         }else{
             JsonArray mods = GeneralUtils.getJsonArray("http://bot.notenoughmods.com/" + version + ".json");
             int total = 0;
@@ -47,7 +47,7 @@ public class MCMods extends GenericCommand {
                 }
             }
             if(total == 0){
-                user.send().notice("No Mods Found");
+                IRCUtils.sendError(user, "No Mods Found");
             }
         }
     }

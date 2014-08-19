@@ -27,7 +27,7 @@ public class Weather extends GenericCommand {
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         if(GeneralRegistry.wundergroundapikey == null){
-            user.send().notice("Wunderground API key is null - Contact Bot Controller to fix");
+            IRCUtils.sendError(user, "Wunderground API key is null - Contact Bot Controller to fix");
             return;
         }
         JsonObject weather = GeneralUtils.getJsonObject("http://api.wunderground.com/api/" + GeneralRegistry.wundergroundapikey +"/conditions/q/" + StringUtils.join(args, "%20") + ".json").getAsJsonObject("current_observation");
@@ -39,7 +39,7 @@ public class Weather extends GenericCommand {
             String Wind = weather.get("wind_string").getAsString();
             IRCUtils.SendMessage(user, channel, City + ": " + Weather + " - " + Temp + " - " + Humidity + " - " + Wind + " - ", isPrivate);
         }else{
-            user.send().notice("Requested location not found");
+            IRCUtils.sendError(user, "Requested location not found");
         }
         }
 

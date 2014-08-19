@@ -21,12 +21,12 @@ public class Drop extends GenericCommand {
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         if(!PermUtils.checkIfAccountEnabled(Bot)){
-            user.send().notice("This network is set to " + GetUtils.getAuthType(Bot) + " Authentication");
+            IRCUtils.sendError(user, "This network is set to " + GetUtils.getAuthType(Bot) + " Authentication");
             return;
         }
         AuthedUser authedUser = PermUtils.getAuthUser(Bot, user.getNick());
         if(authedUser == null){
-            user.send().notice("Error, you are not logged in");
+            IRCUtils.sendError(user, "Error, you are not logged in");
         }else{
             Account account = AccountUtils.getAccount(authedUser.getAuthAccount());
             if(GeneralRegistry.encryptor.checkPassword(args[0], account.getAuthPassword())) {
@@ -35,7 +35,7 @@ public class Drop extends GenericCommand {
                 AccountUtils.saveAccounts();
                 IRCUtils.SendMessage(user, channel, "Your account is now dropped", isPrivate);
             }else{
-                user.send().notice("Incorrect Password");
+                IRCUtils.sendError(user, "Incorrect Password");
             }
         }
         }

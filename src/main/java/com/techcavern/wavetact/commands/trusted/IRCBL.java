@@ -34,7 +34,7 @@ public class IRCBL extends GenericCommand {
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         String BeforeIP = GeneralUtils.getIP(args[0], Bot);
         if(BeforeIP == null){
-            user.send().notice("Invalid IP/User");
+            IRCUtils.sendError(user, "Invalid IP/User");
             return;
         }
         String[] IPString = StringUtils.split(BeforeIP, ".");
@@ -49,7 +49,7 @@ public class IRCBL extends GenericCommand {
         Boolean sent = false;
         Resolver resolver = new SimpleResolver();
         if (GeneralRegistry.IRCBLs.isEmpty()) {
-            user.send().notice("No IRC BLs found in Database");
+            IRCUtils.sendError(user, "No IRC BLs found in Database");
             return;
         }
         for (String Domain : GeneralRegistry.IRCBLs) {

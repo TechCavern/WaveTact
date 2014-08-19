@@ -32,7 +32,7 @@ public class Define extends GenericCommand {
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         if (GeneralRegistry.wordnikapikey == null) {
-            user.send().notice("Wordnik API key is null - Contact Bot Controller to fix");
+            IRCUtils.sendError(user, "Wordnik API key is null - Contact Bot Controller to fix");
         }
         int ArrayIndex = 0;
         if (GeneralUtils.isInteger(args[0])) {
@@ -53,10 +53,10 @@ public class Define extends GenericCommand {
                 }
             }else{
                 ArrayIndex = ArrayIndex + 1;
-                user.send().notice("Def #" + ArrayIndex + " does not exist");
+                IRCUtils.sendError(user, "Def #" + ArrayIndex + " does not exist");
             }
         } else{
-            user.send().notice("Not Defined");
+            IRCUtils.sendError(user, "Not Defined");
     }
 
     }

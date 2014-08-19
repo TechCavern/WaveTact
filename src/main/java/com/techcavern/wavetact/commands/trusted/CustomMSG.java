@@ -52,7 +52,7 @@ public class CustomMSG extends GenericCommand {
 
     private void addCommand(User user, Channel channel, int accessLevel, boolean isPrivate, String cmd, String msg) {
         if (GetUtils.getCommand(cmd) != null) {
-            user.send().notice("Custom Message already exists");
+            IRCUtils.sendError(user, "Custom Message already exists");
             return;
         }else
             GeneralRegistry.SimpleMessages.add(new SimpleMessage(cmd, accessLevel, msg, false));
@@ -72,12 +72,12 @@ public class CustomMSG extends GenericCommand {
                 SimpleMessageUtils.saveSimpleMessages();
                 IRCUtils.SendMessage(user, channel, "Custom Message modified", isPrivate);
             } else if (cmd.getLockedStatus()) {
-                user.send().notice("Custom Message Locked");
+                IRCUtils.sendError(user, "Custom Message Locked");
             } else {
-                user.send().notice("Custom Message Does Not Exist");
+                IRCUtils.sendError(user, "Custom Message Does Not Exist");
             }
         } else {
-            user.send().notice("Permission Denied");
+            IRCUtils.sendError(user, "Permission Denied");
         }
     }
     @SuppressWarnings({"SuspiciousMethodCalls", "ConstantConditions"})
@@ -85,9 +85,9 @@ public class CustomMSG extends GenericCommand {
         SimpleMessage cmd = SimpleMessageUtils.getSimpleMessage(command);
         if (cmd.getPermLevel() <= UserPermLevel) {
             if (cmd == null) {
-                user.send().notice("Custom Message does not exist");
+                IRCUtils.sendError(user, "Custom Message does not exist");
             } else if (cmd.getLockedStatus()) {
-                user.send().notice("Custom Message is locked");
+                IRCUtils.sendError(user, "Custom Message is locked");
             } else {
                 GeneralRegistry.SimpleMessages.remove(cmd);
                 GeneralRegistry.AllCommands.remove(cmd);
@@ -95,7 +95,7 @@ public class CustomMSG extends GenericCommand {
                 IRCUtils.SendMessage(user, channel, "Custom Message removed", isPrivate);
             }
         } else {
-            user.send().notice("Permission Denied");
+            IRCUtils.sendError(user, "Permission Denied");
         }
     }
 }

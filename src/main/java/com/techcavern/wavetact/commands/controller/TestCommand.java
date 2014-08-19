@@ -15,8 +15,8 @@ import java.util.List;
 
 
 public class TestCommand extends GenericCommand {
-    @CMD
-    @GenCMD
+ //   @CMD
+ //   @GenCMD
 
     public TestCommand() {
         super(GeneralUtils.toArray("test"), 9001, null, "debug command");
@@ -25,7 +25,7 @@ public class TestCommand extends GenericCommand {
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         User c = GetUtils.getUserByNick(Bot, args[0]);
-        user.send().notice(c.toString());
+        IRCUtils.sendError(user, c.toString());
     }
 
 }

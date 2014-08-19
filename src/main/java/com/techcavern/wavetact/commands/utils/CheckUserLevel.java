@@ -35,7 +35,7 @@ public class CheckUserLevel extends GenericCommand {
             }
 
         if(userObject == null){
-            user.send().notice("User does not exist");
+            IRCUtils.sendError(user, "User does not exist");
         }else if (UserPermLevel >= 9001) {
             IRCUtils.SendMessage(user, channel, userObject + " is my Master!", isPrivate);
         } else if (UserPermLevel >= 20) {

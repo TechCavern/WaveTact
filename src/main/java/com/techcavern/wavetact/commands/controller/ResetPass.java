@@ -21,7 +21,7 @@ public class ResetPass extends GenericCommand {
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         if(!PermUtils.checkIfAccountEnabled(Bot)){
-            user.send().notice("This network is set to " + GetUtils.getAuthType(Bot) + " Authentication");
+            IRCUtils.sendError(user, "This network is set to " + GetUtils.getAuthType(Bot) + " Authentication");
             return;
         }
         Account acc = AccountUtils.getAccount(args[0]);
@@ -30,7 +30,7 @@ public class ResetPass extends GenericCommand {
             AccountUtils.saveAccounts();
             IRCUtils.SendMessage(user, channel, "Password Changed Successfully", isPrivate);
         }else{
-            user.send().notice("User does not exist");
+            IRCUtils.sendError(user, "User does not exist");
         }
 
         }

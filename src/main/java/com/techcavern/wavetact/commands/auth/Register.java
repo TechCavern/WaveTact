@@ -21,7 +21,7 @@ public class Register extends GenericCommand {
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         if(!PermUtils.checkIfAccountEnabled(Bot)){
-            user.send().notice("This network is set to " + GetUtils.getAuthType(Bot) + " Authentication");
+            IRCUtils.sendError(user, "This network is set to " + GetUtils.getAuthType(Bot) + " Authentication");
             return;
         }
         String userString;
@@ -34,7 +34,8 @@ public class Register extends GenericCommand {
             password = args[1];
         }
         if(AccountUtils.getAccount(userString) != null || PermUtils.getAuthedAccount(Bot, user.getNick()) != null){
-            user.send().notice("Error, you are already registered");
+            IRCUtils.sendError(user, "Error, you are already registered");
+
         }else{
             GeneralRegistry.Accounts.add(new Account(userString, GeneralRegistry.encryptor.encryptPassword(password)));
             AccountUtils.saveAccounts();

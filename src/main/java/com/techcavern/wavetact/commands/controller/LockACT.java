@@ -8,6 +8,7 @@ package com.techcavern.wavetact.commands.controller;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleActionUtils;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleMessageUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
@@ -32,11 +33,11 @@ public class LockACT extends GenericCommand {
             if (args[0].startsWith("-")) {
                 SimpleActionUtils.getSimpleAction(args[0].replaceFirst("-", "")).unlock();
                 SimpleActionUtils.saveSimpleActions();
-                user.send().notice("Simple Action Unlocked");
+                IRCUtils.SendMessage(user, channel, "Simple Action Unlocked", isPrivate);
             } else {
                 SimpleActionUtils.getSimpleAction(args[0].replaceFirst("-", "")).lock();
                 SimpleActionUtils.saveSimpleActions();
-                user.send().notice("Simple Action locked");
+                IRCUtils.SendMessage(user, channel, "Simple Action Unlocked", isPrivate);
 
             }
 

@@ -9,6 +9,7 @@ import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ChanHOPCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -34,7 +35,7 @@ public class Kick extends GenericCommand {
         }
         if (channel.getUserLevels(Bot.getUserBot()).contains(UserLevel.HALFOP) && !channel.isOwner(GetUtils.getUserByNick(Bot, args[0])) && !channel.isSuperOp(GetUtils.getUserByNick(Bot, args[0]))) {
             if (channel.isHalfOp(GetUtils.getUserByNick(Bot, args[0])) || channel.isOp(GetUtils.getUserByNick(Bot, args[0]))) {
-                user.send().notice("Error: I must be at least opped to kick someone that is opped or halfopped");
+                IRCUtils.sendError(user, "Error: I must be at least opped to kick someone that is opped or halfopped");
             } else {
                 channel.send().kick(GetUtils.getUserByNick(Bot, args[0]), message);
             }
@@ -45,7 +46,7 @@ public class Kick extends GenericCommand {
             channel.send().kick(GetUtils.getUserByNick(Bot, args[0]), message);
 
         } else {
-            user.send().notice("Error: I must be ownered in the channel to kick someone that is protected or ownered");
+            IRCUtils.sendError(user, "Error: I must be ownered in the channel to kick someone that is protected or ownered");
         }
     }
 

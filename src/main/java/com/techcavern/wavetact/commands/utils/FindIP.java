@@ -38,7 +38,7 @@ public class FindIP extends GenericCommand {
                 IP = IRCUtils.getHost(Bot, user.getNick());
             }
             if (IP == null) {
-                user.send().notice("Please Enter in an IP/User/Domain as argument #1");
+                IRCUtils.sendError(user, "Please Enter in an IP/User/Domain as argument #1");
                 return;
             }
 
@@ -64,10 +64,10 @@ public class FindIP extends GenericCommand {
             if(!fin.isEmpty()) {
                 IRCUtils.SendMessage(user, channel, fin, isPrivate);
             }else {
-                user.send().notice("Unable to Determine Location (Or you entered an invalid IP)");
+                IRCUtils.sendError(user, "Unable to Determine Location (Or you entered an invalid IP)");
             }
             }else{
-                user.send().notice("Unable to Determine Location (Or you entered an invalid IP)");
+                IRCUtils.sendError(user, "Unable to Determine Location (Or you entered an invalid IP)");
             }
 
 

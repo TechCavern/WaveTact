@@ -3,6 +3,7 @@ package com.techcavern.wavetact.commands.chanop;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ChanOPCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.PermUtils;
 import com.techcavern.wavetact.utils.databaseUtils.PermChannelUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
@@ -40,7 +41,7 @@ public class AutoOp extends GenericCommand {
                 PermChannelUtils.savePermChannels();
                 channel.send().message(account + " will no longer be auto-opped");
             } else {
-                user.send().notice("User is not found on channel access lists");
+                IRCUtils.sendError(user, "User is not found on channel access lists");
             }
         } else {
             if (PLChannel != null) {
@@ -48,7 +49,7 @@ public class AutoOp extends GenericCommand {
                 PermChannelUtils.savePermChannels();
                 channel.send().message(account + " will henceforth be auto-opped");
             } else {
-                user.send().notice("User is not found on channel access lists");
+                IRCUtils.sendError(user, "User is not found on channel access lists");
             }
         }
     }

@@ -4,6 +4,7 @@ import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ChanFounderCMD;
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GeneralUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.PermUtils;
 import com.techcavern.wavetact.utils.databaseUtils.PermChannelUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
@@ -50,7 +51,7 @@ public class CPermLevel extends GenericCommand {
                         PermChannelUtils.savePermChannels();
                         channel.send().message(args[0].replaceFirst("-", "") + " Removed from access lists");
                     } else {
-                        user.send().notice("User is not found on channel access lists");
+                        IRCUtils.sendError(user, "User is not found on channel access lists");
                     }
                 } else if (args[0].startsWith("+")) {
                     if (PLChannel != null) {
@@ -58,7 +59,7 @@ public class CPermLevel extends GenericCommand {
                         PermChannelUtils.savePermChannels();
                         channel.send().message(args[0].replaceFirst("\\+", "") + " Modified in access lists");
                     } else {
-                        user.send().notice("User is not found on channel access lists");
+                        IRCUtils.sendError(user, "User is not found on channel access lists");
                     }
 
 
@@ -70,14 +71,14 @@ public class CPermLevel extends GenericCommand {
 
 
                     } else {
-                        user.send().notice("User is already in channel access lists!");
+                        IRCUtils.sendError(user, "User is already in channel access lists!");
                     }
                 }
             } else {
-                user.send().notice("User is not registered");
+                IRCUtils.sendError(user, "User is not registered");
             }
         } else {
-            user.send().notice("Globals & Controllers must be registered by the controller");
+            IRCUtils.sendError(user, "Globals & Controllers must be registered by the controller");
         }
     }
 }

@@ -35,7 +35,7 @@ public class Help extends GenericCommand {
                         IRCUtils.SendMessage(user, channel, "syntax: " + syntax, isPrivate);
                     IRCUtils.SendMessage(user, channel, GetUtils.getCommand(args[0]).getDesc(), isPrivate);
                 } else {
-                    user.send().notice("Command does not exist");
+                    IRCUtils.sendError(user, "Command does not exist");
                 }
             }
         } else {

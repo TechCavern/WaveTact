@@ -53,7 +53,7 @@ public class CustomACT extends GenericCommand {
 
     private void addCommand(User user, Channel channel, int accessLevel, boolean isPrivate, String cmd, String msg) {
         if (GetUtils.getCommand(cmd) != null) {
-            user.send().notice("Custom Action already exists");
+            IRCUtils.sendError(user, "Custom Action already exists");
             return;
         }else
             GeneralRegistry.SimpleActions.add(new SimpleAction(cmd, accessLevel, msg, false));
@@ -73,12 +73,12 @@ public class CustomACT extends GenericCommand {
                 SimpleActionUtils.saveSimpleActions();
                 IRCUtils.SendMessage(user, channel, "Custom Action modified", isPrivate);
             } else if (cmd.getLockedStatus()) {
-                user.send().notice("Custom Action Locked");
+                IRCUtils.sendError(user, "Custom Action Locked");
             } else {
-                user.send().notice("Custom Action Does Not Exist");
+                IRCUtils.sendError(user, "Custom Action Does Not Exist");
             }
         } else {
-            user.send().notice("Permission Denied");
+            IRCUtils.sendError(user, "Permission Denied");
         }
     }
 
@@ -87,9 +87,9 @@ public class CustomACT extends GenericCommand {
         SimpleAction cmd = SimpleActionUtils.getSimpleAction(command);
         if (cmd.getPermLevel() <= UserPermLevel) {
             if (cmd == null) {
-                user.send().notice("Custom Action does not exist");
+                IRCUtils.sendError(user, "Custom Action does not exist");
             } else if (cmd.getLockedStatus()) {
-                user.send().notice("Custom Action is locked");
+                IRCUtils.sendError(user, "Custom Action is locked");
             } else {
                 GeneralRegistry.SimpleActions.remove(cmd);
                 GeneralRegistry.AllCommands.remove(cmd);
@@ -97,7 +97,7 @@ public class CustomACT extends GenericCommand {
                 IRCUtils.SendMessage(user, channel, "Custom Action removed", isPrivate);
             }
         } else {
-            user.send().notice("Permission Denied");
+            IRCUtils.sendError(user, "Permission Denied");
         }
     }
 }

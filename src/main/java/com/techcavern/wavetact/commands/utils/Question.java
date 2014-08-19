@@ -54,10 +54,10 @@ public class Question extends GenericCommand {
 
             } else {
                 ArrayIndex = ArrayIndex -1;
-                user.send().notice("Answer #" + ArrayIndex + " does not exist");
+                IRCUtils.sendError(user, "Answer #" + ArrayIndex + " does not exist");
             }
         } else {
-            user.send().notice("Question returned no answers");
+            IRCUtils.sendError(user, "Question returned no answers");
         }
     }
 

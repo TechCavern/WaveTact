@@ -71,7 +71,7 @@ public class DNSInfo extends GenericCommand {
             isSuccesful = true;
         }
         if(!isSuccesful){
-            user.send().notice("Invalid Domain");
+            IRCUtils.sendError(user, "Invalid Domain");
         }
 
     }

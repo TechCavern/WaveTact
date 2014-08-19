@@ -59,7 +59,7 @@ public class Ban extends GenericCommand {
                     BanTimeUtils.saveBanTimes();
                 }
             } else {
-                user.send().notice("Ban already exists!");
+                IRCUtils.sendError(user, "Ban already exists!");
             }
         } else if (args[0].startsWith("-")) {
             if (BanTimeUtils.getBanTime(hostmask) != null) {

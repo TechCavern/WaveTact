@@ -33,7 +33,7 @@ public class MCStatus extends GenericCommand {
         if (Result != null) {
             IRCUtils.SendMessage(user, channel, Result, isPrivate);
         } else {
-            user.send().notice("MC Status Currently Unavailable");
+            IRCUtils.sendError(user, "MC Status Currently Unavailable");
         }
     }
 
