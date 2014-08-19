@@ -23,6 +23,8 @@ public class Config extends CommandLine {
             config.set("wundergroundapi", input.nextLine());
             System.out.print("Wordnik API Key: ");
             config.set("wordnikapi", input.nextLine());
+        System.out.print("Minecraft API Key (http://theminecraftapi.com/): ");
+        config.set("minecraftapi", input.nextLine());
             config.save();
         System.exit(0);
     }

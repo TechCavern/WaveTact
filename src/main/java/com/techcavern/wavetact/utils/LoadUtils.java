@@ -95,6 +95,7 @@ public class LoadUtils {
         GeneralRegistry.GenericCommands.add(new FindIP());
         GeneralRegistry.GenericCommands.add(new Help());
         GeneralRegistry.GenericCommands.add(new Hostmask());
+        GeneralRegistry.GenericCommands.add(new MCAccountInfo());
         GeneralRegistry.GenericCommands.add(new PingTime());
         GeneralRegistry.GenericCommands.add(new Question());
         GeneralRegistry.GenericCommands.add(new Weather());

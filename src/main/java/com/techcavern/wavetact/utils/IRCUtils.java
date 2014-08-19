@@ -107,7 +107,7 @@ public class IRCUtils {
         return host;
     }
     public static void sendError(User user, String error){
-        IRCUtils.sendError(user, error);
+        user.send().notice(error);
     }
     public static void processMessage(GenericCommand Command, PircBotX Bot, Channel channel, User user, int UserPermLevel, String[] messageParts, boolean isPrivate){
         if (Command.getPermLevel() == 9) {
