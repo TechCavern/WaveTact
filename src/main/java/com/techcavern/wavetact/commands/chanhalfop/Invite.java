@@ -26,7 +26,7 @@ public class Invite extends GenericCommand {
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         channel.send().invite(args[0]);
-        channel.send().notice(args[0] + "invited by " + user.getNick());
+        channel.send().notice(args[0] + " invited by " + user.getNick());
 
     }
 }
