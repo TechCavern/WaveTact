@@ -32,7 +32,7 @@ public class CustomACT extends GenericCommand {
     @CMD
     @TruCMD
     public CustomACT() {
-        super(GeneralUtils.toArray("customaction cact customact"), 3, "custommsg (+/-)[Command] [permlevel] [Response]","Responses may contain $1, $2, etc which indicate the argument separated by a space. $* indicates all remaining arguments.");
+        super(GeneralUtils.toArray("customaction cact customact"), 3, "customaction (+/-)[Command] [permlevel] [Response]","Responses may contain $1, $2, etc which indicate the argument separated by a space. $* indicates all remaining arguments.");
     }
 
     @Override
