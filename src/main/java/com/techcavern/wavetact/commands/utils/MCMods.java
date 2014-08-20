@@ -20,7 +20,7 @@ public class MCMods extends GenericCommand {
     @GenCMD
 
     public MCMods() {
-        super(GeneralUtils.toArray("mcmods mcmod"), 0, "mcmods [MC Version#] [Mod Name]"," gets info on a minecraft mod");
+        super(GeneralUtils.toArray("mcmods mcmod"), 0, "mcmods (MC Version#) [Mod Name]","gets info on a minecraft mod");
     }
 
     @Override
