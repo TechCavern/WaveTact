@@ -92,7 +92,7 @@ public class IRCUtils {
                 hostmask = "*!" + Login + "@" + hostname;
             hostmask = hostmask.replace(" ", "");
         } else {
-            hostmask = null;
+            hostmask = userObject+"!*@*";
         }
         return hostmask;
     }

@@ -36,6 +36,9 @@ public class IRCBL extends GenericCommand {
         if(BeforeIP == null){
             IRCUtils.sendError(user, "Invalid IP/User");
             return;
+        }else if (BeforeIP.contains(":")){
+            IRCUtils.sendError(user, "IPv6 is Not supported");
+            return;
         }
         String[] IPString = StringUtils.split(BeforeIP, ".");
         String IP = "";

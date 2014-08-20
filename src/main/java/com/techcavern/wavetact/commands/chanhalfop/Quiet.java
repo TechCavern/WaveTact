@@ -55,7 +55,6 @@ public class Quiet extends GenericCommand {
         }
         if ((!args[0].startsWith("-")) && (!args[0].startsWith("+"))) {
             if (QuietTimeUtils.getQuietTime(hostmask) == null) {
-
                 if (args.length == 2) {
                     quiet(hostmask, ircd,
                             channel, Bot);

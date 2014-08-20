@@ -62,7 +62,7 @@ public class GeneralUtils {
         }
         if (IP == null || IP.replaceFirst(":", "").contains(":")) {
             return null;
-        } else if (InetAddressUtils.isIPv4Address(IP)){
+        } else if (InetAddressUtils.isIPv4Address(IP) || InetAddressUtils.isIPv6Address(IP)){
            return IP;
         }else {
             IP = IP.replaceAll("http://|https://", "");
@@ -70,11 +70,7 @@ public class GeneralUtils {
                 Socket socket = new Socket(InetAddress.getByName(IP), 80);
                 IP = socket.getInetAddress().getHostAddress();
                 socket.close();
-                if(IP.contains(":")){
-                    return null;
-                }else{
                     return IP;
-                }
             }catch(Exception e){
                 return null;
             }
