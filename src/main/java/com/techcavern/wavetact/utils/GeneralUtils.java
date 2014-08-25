@@ -10,9 +10,11 @@ import sun.net.util.IPAddressUtil;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.lang.annotation.Annotation;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.URL;
+import java.util.List;
 
 public class GeneralUtils {
     public static String buildMessage(int startint, int finishint, String[] args) {
@@ -98,6 +100,14 @@ public class GeneralUtils {
 
     public static String[] toArray(String input) {
         return StringUtils.split(input, " ");
+    }
+
+    public static void addToArray(List<?> list, Class<? extends Annotation> cl){
+        io.github.asyncronous.mirrors.Package pkg = new io.github.asyncronous.mirrors.Package("io.github.asyncronous.mirrors");
+        List<Class<?>> classes = pkg.getClasses(cl);
+        for(Class<?> clss: classes){
+            list.add(clss.newInstance());
+        }
     }
 
 }

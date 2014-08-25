@@ -26,6 +26,8 @@ dependencies {
     compile 'com.wordnik:wordnik-java-client:1.0.0'
     compile 'org.jsoup:jsoup:1.7.3'
     compile 'com.sun.jersey:jersey-bundle:1.18.1'
+    compile files('libs/MC-Ping.jar')
+    compile files('libs/Mirrors.jar')
 }
 
 jar {
