@@ -1,5 +1,6 @@
 package com.techcavern.wavetact.utils;
 
+import com.techcavern.wavetact.annot.CMDLine;
 import com.techcavern.wavetact.commandline.perms.PermLevelC;
 import com.techcavern.wavetact.commandline.utils.AddServer;
 import com.techcavern.wavetact.commandline.utils.BasicCommands;
@@ -169,12 +170,7 @@ public class LoadUtils {
     }
 
     public static void initializeCommandlines() {
-        GeneralRegistry.CommandLines.add(new AddServer());
-        GeneralRegistry.CommandLines.add(new com.techcavern.wavetact.commandline.Help());
-        GeneralRegistry.CommandLines.add(new BasicCommands());
-        GeneralRegistry.CommandLines.add(new Start());
-        GeneralRegistry.CommandLines.add(new PermLevelC());
-        GeneralRegistry.CommandLines.add(new Config());
+        GeneralUtils.addToArray(GeneralRegistry.CommandLines, CMDLine.class);
     }
 
     public static void parseCommandLineArguments(String[] args) {
