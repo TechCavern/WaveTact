@@ -1,12 +1,12 @@
 package com.techcavern.wavetact.utils;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.conn.util.InetAddressUtils;
 import org.pircbotx.PircBotX;
-import sun.net.util.IPAddressUtil;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -102,11 +102,15 @@ public class GeneralUtils {
         return StringUtils.split(input, " ");
     }
 
-    public static void addToArray(List<?> list, Class<? extends Annotation> cl){
+    public static void addToArray(List<Object> list, Class<? extends Annotation> cl){
         io.github.asyncronous.mirrors.Package pkg = new io.github.asyncronous.mirrors.Package("io.github.asyncronous.mirrors");
         List<Class<?>> classes = pkg.getClasses(cl);
         for(Class<?> clss: classes){
-            list.add(clss.newInstance());
+            try{
+                list.add(clss.newInstance());
+            } catch(Exception e){
+                e.printStackTrace();
+            }
         }
     }
 
