@@ -102,17 +102,6 @@ public class GeneralUtils {
         return StringUtils.split(input, " ");
     }
 
-    public static void addToArray(List<Object> list, Class<? extends Annotation> cl){
-        io.github.asyncronous.mirrors.Package pkg = new io.github.asyncronous.mirrors.Package("io.github.asyncronous.mirrors");
-        List<Class<?>> classes = pkg.getClasses(cl);
-        for(Class<?> clss: classes){
-            try{
-                list.add(clss.newInstance());
-            } catch(Exception e){
-                e.printStackTrace();
-            }
-        }
-    }
 
 }
 

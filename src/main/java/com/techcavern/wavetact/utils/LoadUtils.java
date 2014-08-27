@@ -1,69 +1,6 @@
 package com.techcavern.wavetact.utils;
 
-import com.techcavern.wavetact.annot.CMDLine;
-import com.techcavern.wavetact.commandline.perms.PermLevelC;
-import com.techcavern.wavetact.commandline.utils.AddServer;
-import com.techcavern.wavetact.commandline.utils.BasicCommands;
-import com.techcavern.wavetact.commandline.utils.Config;
-import com.techcavern.wavetact.commandline.utils.Start;
-import com.techcavern.wavetact.commands.anonymonity.Act;
-import com.techcavern.wavetact.commands.anonymonity.Say;
-import com.techcavern.wavetact.commands.auth.Authenticate;
-import com.techcavern.wavetact.commands.auth.Drop;
-import com.techcavern.wavetact.commands.auth.Logout;
-import com.techcavern.wavetact.commands.auth.Register;
-import com.techcavern.wavetact.commands.auth.SetPass;
-import com.techcavern.wavetact.commands.chanfounder.CPermLevel;
-import com.techcavern.wavetact.commands.chanhalfop.Ban;
-import com.techcavern.wavetact.commands.chanhalfop.Cycle;
-import com.techcavern.wavetact.commands.chanhalfop.Invite;
-import com.techcavern.wavetact.commands.chanhalfop.Kick;
-import com.techcavern.wavetact.commands.chanhalfop.Mode;
-import com.techcavern.wavetact.commands.chanhalfop.Part;
-import com.techcavern.wavetact.commands.chanhalfop.Quiet;
-import com.techcavern.wavetact.commands.chanhalfop.Topic;
-import com.techcavern.wavetact.commands.chanhalfop.Voice;
-import com.techcavern.wavetact.commands.chanop.AutoOp;
-import com.techcavern.wavetact.commands.chanop.HalfOp;
-import com.techcavern.wavetact.commands.chanop.Notice;
-import com.techcavern.wavetact.commands.chanop.Op;
-import com.techcavern.wavetact.commands.chanowner.Owner;
-import com.techcavern.wavetact.commands.chanowner.Protect;
-import com.techcavern.wavetact.commands.controller.DefCon;
-import com.techcavern.wavetact.commands.controller.FDrop;
-import com.techcavern.wavetact.commands.controller.Globals;
-import com.techcavern.wavetact.commands.controller.IRCRaw;
-import com.techcavern.wavetact.commands.controller.LockACT;
-import com.techcavern.wavetact.commands.controller.LockMSG;
-import com.techcavern.wavetact.commands.controller.ResetPass;
-import com.techcavern.wavetact.commands.controller.Shutdown;
-import com.techcavern.wavetact.commands.fun.Attack;
-import com.techcavern.wavetact.commands.fun.FMyLife;
-import com.techcavern.wavetact.commands.fun.SomethingAwesome;
-import com.techcavern.wavetact.commands.fun.UrbanDictonary;
-import com.techcavern.wavetact.commands.global.DNSBLModify;
-import com.techcavern.wavetact.commands.global.Disconnect;
-import com.techcavern.wavetact.commands.global.IRCBLModify;
-import com.techcavern.wavetact.commands.global.Join;
-import com.techcavern.wavetact.commands.trusted.CustomACT;
-import com.techcavern.wavetact.commands.trusted.CustomMSG;
-import com.techcavern.wavetact.commands.trusted.DNSBL;
-import com.techcavern.wavetact.commands.trusted.DNSInfo;
-import com.techcavern.wavetact.commands.trusted.IRCBL;
-import com.techcavern.wavetact.commands.utils.Calculate;
-import com.techcavern.wavetact.commands.utils.CheckUserLevel;
-import com.techcavern.wavetact.commands.utils.Commands;
-import com.techcavern.wavetact.commands.utils.Define;
-import com.techcavern.wavetact.commands.utils.FindIP;
-import com.techcavern.wavetact.commands.utils.Google;
-import com.techcavern.wavetact.commands.utils.Help;
-import com.techcavern.wavetact.commands.utils.Hostmask;
-import com.techcavern.wavetact.commands.utils.MCAccountInfo;
-import com.techcavern.wavetact.commands.utils.MCMods;
-import com.techcavern.wavetact.commands.utils.MCStatus;
-import com.techcavern.wavetact.commands.utils.PingTime;
-import com.techcavern.wavetact.commands.utils.Question;
-import com.techcavern.wavetact.commands.utils.Weather;
+import com.techcavern.wavetact.annot.*;
 import com.techcavern.wavetact.utils.eventListeners.CTCPListener;
 import com.techcavern.wavetact.utils.eventListeners.ChanMsgListener;
 import com.techcavern.wavetact.utils.eventListeners.JoinListener;
@@ -79,6 +16,7 @@ import org.pircbotx.PircBotX;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.lang.annotation.Annotation;
 import java.nio.charset.Charset;
 import java.util.List;
 
@@ -108,69 +46,20 @@ public class LoadUtils {
     }
 
     public static void registerCommands() {
-        GeneralRegistry.ChanHalfOpCommands.add(new Ban());
-        GeneralRegistry.ChanOpCommands.add(new HalfOp());
-        GeneralRegistry.ChanHalfOpCommands.add(new Kick());
-        GeneralRegistry.ChanHalfOpCommands.add(new Mode());
-        GeneralRegistry.ChanHalfOpCommands.add(new Invite());
-        GeneralRegistry.ChanOwnerCommands.add(new Owner());
-        GeneralRegistry.ChanOwnerCommands.add(new Protect());
-        GeneralRegistry.ChanHalfOpCommands.add(new Quiet());
-        GeneralRegistry.ChanHalfOpCommands.add(new Voice());
-        GeneralRegistry.ChanOpCommands.add(new Op());
-        GeneralRegistry.ChanOpCommands.add(new Notice());
-        GeneralRegistry.ControllerCommands.add(new IRCRaw());
-        GeneralRegistry.ControllerCommands.add(new Join());
-        GeneralRegistry.ControllerCommands.add(new LockMSG());
-        GeneralRegistry.ControllerCommands.add(new Shutdown());
-        GeneralRegistry.FunCommands.add(new SomethingAwesome());
-        GeneralRegistry.FunCommands.add(new UrbanDictonary());
-        GeneralRegistry.TrustedCommands.add(new Act());
-        GeneralRegistry.TrustedCommands.add(new CustomMSG());
-        GeneralRegistry.TrustedCommands.add(new CustomACT());
-        GeneralRegistry.ChanHalfOpCommands.add(new Part());
-        GeneralRegistry.TrustedCommands.add(new Say());
-        GeneralRegistry.GenericCommands.add(new CheckUserLevel());
-        GeneralRegistry.GenericCommands.add(new Commands());
-        GeneralRegistry.GenericCommands.add(new Define());
-        GeneralRegistry.GenericCommands.add(new FindIP());
-        GeneralRegistry.GenericCommands.add(new Help());
-        GeneralRegistry.GenericCommands.add(new Hostmask());
-        GeneralRegistry.GenericCommands.add(new MCAccountInfo());
-        GeneralRegistry.GenericCommands.add(new PingTime());
-        GeneralRegistry.GenericCommands.add(new Question());
-        GeneralRegistry.GenericCommands.add(new Weather());
-        GeneralRegistry.ChanHalfOpCommands.add(new Topic());
-        GeneralRegistry.FunCommands.add(new Attack());
-        GeneralRegistry.ControllerCommands.add(new DefCon());
-        GeneralRegistry.ChanFounderCommands.add(new CPermLevel());
-        GeneralRegistry.ChanOpCommands.add(new AutoOp());
-        GeneralRegistry.ControllerCommands.add(new Globals());
-        GeneralRegistry.GlobalCommands.add(new Disconnect());
-        GeneralRegistry.GenericCommands.add(new MCStatus());
-   //     GeneralRegistry.ControllerCommands.add(new TestCommand());
-        GeneralRegistry.GenericCommands.add(new Google());
-        GeneralRegistry.ChanHalfOpCommands.add(new Cycle());
-        GeneralRegistry.GenericCommands.add(new FMyLife());
-        GeneralRegistry.GenericCommands.add(new MCMods());
-        GeneralRegistry.GenericCommands.add(new Calculate());
-        GeneralRegistry.ControllerCommands.add(new LockACT());
-        GeneralRegistry.AuthCommands.add(new Authenticate());
-        GeneralRegistry.ControllerCommands.add(new ResetPass());
-        GeneralRegistry.AuthCommands.add(new Register());
-        GeneralRegistry.AuthCommands.add(new SetPass());
-        GeneralRegistry.AuthCommands.add(new Drop());
-        GeneralRegistry.AuthCommands.add(new Logout());
-        GeneralRegistry.ControllerCommands.add(new FDrop());
-        GeneralRegistry.TrustedCommands.add(new DNSInfo());
-        GeneralRegistry.GlobalCommands.add(new IRCBLModify());
-        GeneralRegistry.TrustedCommands.add(new IRCBL());
-        GeneralRegistry.TrustedCommands.add(new DNSBL());
-        GeneralRegistry.GlobalCommands.add(new DNSBLModify());
+        addCommands(GeneralRegistry.AnonymonityCommands, AnonCMD.class);
+        addCommands(GeneralRegistry.AuthCommands, AuthCMD.class);
+        addCommands(GeneralRegistry.ChanFounderCommands, ChanFounderCMD.class);
+        addCommands(GeneralRegistry.ChanHalfOpCommands, ChanHOPCMD.class);
+        addCommands(GeneralRegistry.ChanOwnerCommands, ChanOWNCMD.class);
+        addCommands(GeneralRegistry.ControllerCommands, ConCMD.class);
+        addCommands(GeneralRegistry.FunCommands, FunCMD.class);
+        addCommands(GeneralRegistry.GenericCommands, GenCMD.class);
+        addCommands(GeneralRegistry.GlobalCommands, GloCMD.class);
+        addCommands(GeneralRegistry.TrustedCommands, TruCMD.class);
     }
 
     public static void initializeCommandlines() {
-        GeneralUtils.addToArray(GeneralRegistry.CommandLines, CMDLine.class);
+        addCommandLines(GeneralRegistry.CommandLines, CMDLine.class);
     }
 
     public static void parseCommandLineArguments(String[] args) {
@@ -202,6 +91,28 @@ public class LoadUtils {
             }
         }
         if (invalid) System.exit(0);
+    }
+    public static void addCommands(List<GenericCommand> list, Class<? extends Annotation> cl){
+        io.github.asyncronous.mirrors.Package pkg = new io.github.asyncronous.mirrors.Package("io.github.asyncronous.mirrors");
+        List<Class<?>> classes = pkg.getClasses(cl);
+        for(Class<?> clss: classes){
+            try{
+                list.add(((GenericCommand) clss.newInstance()));
+            } catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
+    public static void addCommandLines(List<CommandLine> list, Class<? extends Annotation> cl){
+        io.github.asyncronous.mirrors.Package pkg = new io.github.asyncronous.mirrors.Package("io.github.asyncronous.mirrors");
+        List<Class<?>> classes = pkg.getClasses(cl);
+        for(Class<?> clss: classes){
+            try{
+                list.add(((CommandLine) clss.newInstance()));
+            } catch(Exception e){
+                e.printStackTrace();
+            }
+        }
     }
 
     public static void registerAttacks() {
