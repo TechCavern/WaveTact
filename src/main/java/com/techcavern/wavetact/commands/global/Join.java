@@ -17,9 +17,9 @@ import org.pircbotx.User;
 /**
  * @author jztech101
  */
+@CMD
+@GloCMD
 public class Join extends GenericCommand {
-    @CMD
-    @GloCMD
 
     public Join() {
         super(GeneralUtils.toArray("join jo"), 20, "join [channel]","join a channel (not saved)");

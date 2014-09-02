@@ -12,10 +12,10 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-
+@CMD
+@ConCMD
 public class FDrop extends GenericCommand {
-    @CMD
-    @ConCMD
+
     public FDrop() {
         super(GeneralUtils.toArray("fdrop"), 9001, "fdrop [user]", "forcefully drops a user");
     }

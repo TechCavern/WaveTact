@@ -22,9 +22,10 @@ import org.pircbotx.User;
 /**
  * @author jztech101
  */
+@CMD
+@GloCMD
 public class IRCBLModify extends GenericCommand {
-    @CMD
-    @GloCMD
+
 
     public IRCBLModify() {
         super(GeneralUtils.toArray("ircblm ircblmodify"), 20, "IRCBLModify (-)[IRC DNSBL]","Adds/Removes Domains from IRCBL");

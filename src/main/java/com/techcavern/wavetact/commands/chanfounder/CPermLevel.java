@@ -13,12 +13,10 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-/**
- * Created by jztech101 on 7/5/14.
- */
+@CMD
+@ChanFounderCMD
 public class CPermLevel extends GenericCommand {
-    @CMD
-    @ChanFounderCMD
+
     public CPermLevel() {
         super(GeneralUtils.toArray("permlevel pl cpermlevel"), 18, "permlevel (+)(-)[user] (permlevel)","adds, removes, modifies permissions");
     }

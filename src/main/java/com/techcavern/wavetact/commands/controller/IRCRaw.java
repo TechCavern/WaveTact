@@ -9,9 +9,10 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
+@CMD
+@ConCMD
 public class IRCRaw extends GenericCommand {
-    @CMD
-    @ConCMD
+
     public IRCRaw() {
         super(GeneralUtils.toArray("ircraw raw quote"), 9001, "raw [to be sent to server]", "sends a raw msg to the server");
     }

@@ -12,10 +12,10 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
+@CMD
+@GenCMD
 public class CheckUserLevel extends GenericCommand {
 
-    @CMD
-    @GenCMD
     public CheckUserLevel() {
         super(GeneralUtils.toArray("checkuserlevel level checklevel"), 0, "checkuserlevel (user)","Checks User Level of the specified user or yourself if unspecified");
     }

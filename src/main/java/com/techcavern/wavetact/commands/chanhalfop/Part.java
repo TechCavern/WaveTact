@@ -16,10 +16,9 @@ import org.pircbotx.User;
 /**
  * @author jztech101
  */
+@CMD
+@ChanHOPCMD
 public class Part extends GenericCommand {
-
-    @CMD
-    @ChanHOPCMD
 
     public Part() {
         super(GeneralUtils.toArray("part pa"), 7, "part [channel]", "parts a channel");

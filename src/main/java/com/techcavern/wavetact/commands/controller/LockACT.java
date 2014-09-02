@@ -19,9 +19,10 @@ import org.pircbotx.User;
 /**
  * @author jztech101
  */
+@CMD
+@ConCMD
 public class LockACT extends GenericCommand {
-    @CMD
-    @ConCMD
+
 
     public LockACT() {
         super(GeneralUtils.toArray("lockaction loact locka loa"), 9001, "lockaction [command]", "locks a custom action");

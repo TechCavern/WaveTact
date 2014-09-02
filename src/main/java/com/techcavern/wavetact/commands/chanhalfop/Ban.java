@@ -12,9 +12,10 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
+@CMD
+@ChanHOPCMD
 public class Ban extends GenericCommand {
-    @CMD
-    @ChanHOPCMD
+
     public Ban() {
         super(GeneralUtils.toArray("ban b"), 6, "Ban (-)(+)[User] (time)", "bans a user for a specified period of time or 24 hours");
     }

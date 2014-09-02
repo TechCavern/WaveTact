@@ -16,10 +16,9 @@ import org.pircbotx.User;
 /**
  * @author jztech101
  */
+@CMD
+@ChanHOPCMD
 public class Cycle extends GenericCommand {
-
-    @CMD
-    @ChanHOPCMD
 
     public Cycle() {
         super(GeneralUtils.toArray("cycle cl"), 7, "cycle [channel]", "cycle (parts/join) a channel");

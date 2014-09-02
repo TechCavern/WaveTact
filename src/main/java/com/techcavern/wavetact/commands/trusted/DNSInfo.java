@@ -26,10 +26,10 @@ import java.util.stream.Collectors;
 /**
  * @author jztech101
  */
+@CMD
+@TruCMD
 public class DNSInfo extends GenericCommand {
 
-    @CMD
-    @TruCMD
     public DNSInfo() {
         super(GeneralUtils.toArray("dnsinfo dns"), 3, "dns [domain]" , "looks up a domain for information");
     }

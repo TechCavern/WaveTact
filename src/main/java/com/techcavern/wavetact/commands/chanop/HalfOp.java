@@ -18,9 +18,9 @@ import org.pircbotx.User;
 /**
  * @author jztech101
  */
+@CMD
+@ChanOPCMD
 public class HalfOp extends GenericCommand {
-    @CMD
-    @ChanOPCMD
 
     public HalfOp() {
         super(GeneralUtils.toArray("halfop hop"), 9, "halfop (-)(user to  halfop)", "sets halfop mode on a user if it exists");

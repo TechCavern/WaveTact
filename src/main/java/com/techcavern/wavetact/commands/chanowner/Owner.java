@@ -17,9 +17,9 @@ import org.pircbotx.User;
 /**
  * @author jztech101
  */
+@CMD
+@ChanOWNCMD
 public class Owner extends GenericCommand {
-    @CMD
-    @ChanOWNCMD
 
     public Owner() {
         super(GeneralUtils.toArray("owner own oop"), 14, "Owner (-)(User)", "sets owner mode if it exists on a user");

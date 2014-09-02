@@ -13,9 +13,9 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
+@CMD
+@FunCMD
 public class UrbanDictonary extends GenericCommand {
-    @CMD
-    @FunCMD
 
     public UrbanDictonary() {
         super(GeneralUtils.toArray("urbandictionary ub urban urb ud"), 0, "urbandictionary (def #) [what to define]","defines a term in the urban dictionary");

@@ -8,8 +8,9 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
 
+@CMDLine
 public class Help extends CommandLine {
-    @CMDLine
+
     public Help() {
         super(GeneralUtils.toArray("h help"), "Prints this help screen", false);
     }

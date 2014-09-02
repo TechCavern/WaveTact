@@ -14,10 +14,9 @@ import org.pircbotx.User;
 
 import java.net.URLEncoder;
 
-
+@CMD
+@GenCMD
 public class MCMods extends GenericCommand {
-    @CMD
-    @GenCMD
 
     public MCMods() {
         super(GeneralUtils.toArray("mcmods mcmod"), 0, "mcmods (MC Version#) [Mod Name]","gets info on a minecraft mod");

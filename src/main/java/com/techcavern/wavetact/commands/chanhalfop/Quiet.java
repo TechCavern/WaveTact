@@ -12,9 +12,9 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
+@CMD
+@ChanHOPCMD
 public class Quiet extends GenericCommand {
-    @CMD
-    @ChanHOPCMD
 
     public Quiet() {
         super(GeneralUtils.toArray("quiet mute m"), 6, "Quiet (-)[User][hostmask] (time)", "quiets a user for the specified time or 24 hours");

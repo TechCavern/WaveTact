@@ -12,9 +12,9 @@ import org.pircbotx.User;
 import java.net.InetAddress;
 import java.net.Socket;
 
+@CMD
+@GenCMD
 public class PingTime extends GenericCommand {
-    @CMD
-    @GenCMD
 
     public PingTime() {
         super(GeneralUtils.toArray("checkping cping cpi"), 0, "checkping [website] (port)"," checks pingtime to a certain domain/address/ip/etc (IPv6 NOT supported)");

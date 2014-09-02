@@ -19,9 +19,9 @@ import org.pircbotx.UserLevel;
 /**
  * @author jztech101
  */
+@CMD
+@ChanHOPCMD
 public class Kick extends GenericCommand {
-    @CMD
-    @ChanHOPCMD
 
     public Kick() {
         super(GeneralUtils.toArray("kick k"), 6, "kick [user] (message)", "kicks a user with specified message or none");

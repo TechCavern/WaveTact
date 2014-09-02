@@ -15,10 +15,12 @@ import org.pircbotx.PircBotX;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.reflections.Reflections;
 
 import java.lang.annotation.Annotation;
 import java.nio.charset.Charset;
 import java.util.List;
+import java.util.Set;
 
 public class LoadUtils {
 
@@ -93,8 +95,8 @@ public class LoadUtils {
         if (invalid) System.exit(0);
     }
     public static void addCommands(List<GenericCommand> list, Class<? extends Annotation> cl){
-        io.github.asyncronous.mirrors.Package pkg = new io.github.asyncronous.mirrors.Package("io.github.asyncronous.mirrors");
-        List<Class<?>> classes = pkg.getClasses(cl);
+        Reflections reflections = new Reflections("com.techcavern.wavetact");
+        Set<Class<?>> classes = reflections.getTypesAnnotatedWith(cl);
         for(Class<?> clss: classes){
             try{
                 list.add(((GenericCommand) clss.newInstance()));
@@ -103,10 +105,10 @@ public class LoadUtils {
             }
         }
     }
-    public static void addCommandLines(List<CommandLine> list, Class<? extends Annotation> cl){
-        io.github.asyncronous.mirrors.Package pkg = new io.github.asyncronous.mirrors.Package("io.github.asyncronous.mirrors");
-        List<Class<?>> classes = pkg.getClasses(cl);
-        for(Class<?> clss: classes){
+    public static void addCommandLines(List<CommandLine> list, Class<? extends Annotation> cl) {
+        Reflections reflections = new Reflections("com.techcavern.wavetact");
+        Set<Class<?>> classes = reflections.getTypesAnnotatedWith(cl);
+        for(Class<?> clss : classes) {
             try{
                 list.add(((CommandLine) clss.newInstance()));
             } catch(Exception e){

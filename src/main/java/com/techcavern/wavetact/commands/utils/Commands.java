@@ -16,9 +16,9 @@ import org.pircbotx.User;
  */
 
 @SuppressWarnings("ALL")
+@CMD
+@GenCMD
 public class Commands extends GenericCommand {
-    @CMD
-    @GenCMD
 
     public Commands() {
         super(GeneralUtils.toArray("commands list cmds coms"), 0, null, "takes 0 arguments, returns list of Commands");

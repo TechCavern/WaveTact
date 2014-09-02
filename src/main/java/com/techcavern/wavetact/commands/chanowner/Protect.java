@@ -18,9 +18,9 @@ import org.pircbotx.User;
 /**
  * @author jztech101
  */
+@CMD
+@ChanOWNCMD
 public class Protect extends GenericCommand {
-    @CMD
-    @ChanOWNCMD
 
     public Protect() {
         super(GeneralUtils.toArray("protect prot pr sop"), 14, "protect (-)(User)", "sets protect mode if it exists on a user");

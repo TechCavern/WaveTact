@@ -14,10 +14,9 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 
-
+@CMD
+@GenCMD
 public class MCStatus extends GenericCommand {
-    @CMD
-    @GenCMD
 
     public MCStatus() {
         super(GeneralUtils.toArray("mcstatus mc"), 0, null,"checks status of MC servers");

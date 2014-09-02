@@ -12,12 +12,10 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-/**
- * Created by jztech101 on 7/5/14.
- */
+@CMD
+@ChanOPCMD
 public class AutoOp extends GenericCommand {
-    @CMD
-    @ChanOPCMD
+
     public AutoOp() {
         super(GeneralUtils.toArray("autoop autop ap"), 10, "autoop (-)[user]","Define whether to autoop the user or not");
     }

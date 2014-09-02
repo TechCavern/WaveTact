@@ -24,11 +24,9 @@ import java.util.List;
 /**
  * @author jztech101
  */
-
+@CMD
+@ChanHOPCMD
 public class Topic extends GenericCommand {
-
-    @CMD
-    @ChanHOPCMD
 
     public Topic() {
         super(GeneralUtils.toArray("topic t"), 6, "Topic [Seperator] [a(add)/sw(switch)/+[topic #]/-[topic #]/(Insert message to replace whole topic)/ss(switch seperator)/r(revert)] (Messages to add)(Integer to swap)(seperator to change to) (Integer to swap)", "manages the topic");

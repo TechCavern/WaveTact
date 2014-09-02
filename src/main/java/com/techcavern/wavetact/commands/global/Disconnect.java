@@ -16,9 +16,10 @@ import org.pircbotx.User;
 /**
  * @author jztech101
  */
+@CMD
+@GloCMD
 public class Disconnect extends GenericCommand {
-    @CMD
-    @GloCMD
+
     public Disconnect() {
         super(GeneralUtils.toArray("disconnect dc"), 20, "disconnect", "disconnects from the network");
     }

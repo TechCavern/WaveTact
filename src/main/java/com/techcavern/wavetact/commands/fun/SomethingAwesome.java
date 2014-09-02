@@ -18,10 +18,9 @@ import org.pircbotx.UserLevel;
 /**
  * @author jztech101
  */
+@CMD
+@FunCMD
 public class SomethingAwesome extends GenericCommand {
-
-    @CMD
-    @FunCMD
 
     public SomethingAwesome() {
         super(GeneralUtils.toArray("somethingawesome sa awesome something"), 0, null, "Something AWESOME!");

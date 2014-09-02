@@ -11,10 +11,10 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-
+@CMD
+@ConCMD
 public class ResetPass extends GenericCommand {
-    @CMD
-    @ConCMD
+
     public ResetPass() {
         super(GeneralUtils.toArray("resetpassword resetpass"), 9001, "setpass [user] [newpass]", "resets Password");
     }

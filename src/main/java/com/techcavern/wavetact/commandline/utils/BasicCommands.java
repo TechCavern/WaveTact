@@ -9,9 +9,9 @@ import com.techcavern.wavetact.utils.objects.CommandLine;
 import com.techcavern.wavetact.utils.objects.SimpleAction;
 import com.techcavern.wavetact.utils.objects.SimpleMessage;
 
-
+@CMDLine
 public class BasicCommands extends CommandLine {
-    @CMDLine
+
     public BasicCommands() {
         super(GeneralUtils.toArray("addbasiccommands"), "No Arguments, Use it ONCE and ONLY ONCE to populate the Basic Commands", false);
     }

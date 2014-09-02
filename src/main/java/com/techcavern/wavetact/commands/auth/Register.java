@@ -11,10 +11,10 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-
+@CMD
+@AuthCMD
 public class Register extends GenericCommand {
-    @CMD
-    @AuthCMD
+
     public Register() {
         super(GeneralUtils.toArray("register reg"), 0, "register (username) [password]", "registers a user");
     }
