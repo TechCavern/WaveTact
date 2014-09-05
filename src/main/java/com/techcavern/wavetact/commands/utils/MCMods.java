@@ -34,7 +34,7 @@ public class MCMods extends GenericCommand {
                 modname = args[1].toLowerCase();
             }
         }
-        if(version.equals("")){
+        if(version.isEmpty()){
             version = versions.get(versions.size()-1).getAsString();
             modname = args[0].toLowerCase();
         }

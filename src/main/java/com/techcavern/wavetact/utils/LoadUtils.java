@@ -18,6 +18,7 @@ import com.google.gson.GsonBuilder;
 import org.reflections.Reflections;
 
 import java.lang.annotation.Annotation;
+import java.nio.channels.Channels;
 import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Set;
@@ -33,7 +34,10 @@ public class LoadUtils {
         Net.setLogin("WaveTact");
         Net.setEncoding(Charset.isSupported("UTF-8") ? Charset.forName("UTF-8") : Charset.defaultCharset());
         Net.setServer(server, 6667);
-        channels.forEach(Net::addAutoJoinChannel);
+        for(String channel: channels){
+            if(!channel.isEmpty())
+                Net.addAutoJoinChannel(channel);
+        }
         Net.setRealName(nick);
         Net.getListenerManager().addListener(new ChanMsgListener());
         Net.getListenerManager().addListener(new JoinListener());
