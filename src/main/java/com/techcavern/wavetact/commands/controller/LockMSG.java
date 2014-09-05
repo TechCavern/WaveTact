@@ -19,9 +19,9 @@ import org.pircbotx.User;
 /**
  * @author jztech101
  */
+@CMD
+@ConCMD
 public class LockMSG extends GenericCommand {
-    @CMD
-    @ConCMD
 
     public LockMSG() {
         super(GeneralUtils.toArray("lockmessage lomsg lockm lom"), 9001, "lockmessage [command]", "locks a custom message");

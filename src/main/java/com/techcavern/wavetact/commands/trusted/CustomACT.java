@@ -27,10 +27,10 @@ import java.util.stream.Collectors;
 /**
  * @author jztech101
  */
+@CMD
+@TruCMD
 public class CustomACT extends GenericCommand {
 
-    @CMD
-    @TruCMD
     public CustomACT() {
         super(GeneralUtils.toArray("customaction cact customact"), 3, "customaction (+/-)[Command] [permlevel] [Response]","Responses may contain $1, $2, etc which indicate the argument separated by a space. $* indicates all remaining arguments.");
     }

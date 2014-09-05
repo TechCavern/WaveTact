@@ -16,10 +16,9 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@CMD
+@GenCMD
 public class FindIP extends GenericCommand {
-    @CMD
-    @GenCMD
 
     public FindIP() {
         super(GeneralUtils.toArray("findip locate find loc geo geoip"), 0, "findip [IP][domain][user]", "GeoIPs a user - IPv6 NOT supported");

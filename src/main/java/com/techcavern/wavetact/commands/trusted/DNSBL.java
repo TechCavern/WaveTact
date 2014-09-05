@@ -20,10 +20,10 @@ import org.xbill.DNS.*;
 /**
  * @author jztech101
  */
+@CMD
+@TruCMD
 public class DNSBL extends GenericCommand {
 
-    @CMD
-    @TruCMD
     public DNSBL() {
         super(GeneralUtils.toArray("dnsbl"), 3, "dnsbl [IPv4/Domain/User]", "looks up a domain or IP to see if its in a spam blacklist");
     }

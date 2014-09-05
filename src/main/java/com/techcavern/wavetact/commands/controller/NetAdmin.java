@@ -19,13 +19,14 @@ import org.pircbotx.User;
 /**
  * @author jztech101
  */
+@CMD
+@ConCMD
 public class NetAdmin extends GenericCommand {
-    @CMD
-    @ConCMD
+
     public NetAdmin() {
         super(GeneralUtils.toArray("networkadministrator netadmin networkadmin"), 9001, "networkadministrator (-)[user]", "adds a network admin to the bot");
-    }
 
+    }
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
 

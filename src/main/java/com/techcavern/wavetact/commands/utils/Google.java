@@ -19,10 +19,9 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLEncoder;
 
-
+@CMD
+@GenCMD
 public class Google extends GenericCommand {
-    @CMD
-    @GenCMD
 
     public Google() {
         super(GeneralUtils.toArray("google goo g"), 0, "google [string to google]" ,"googles something");

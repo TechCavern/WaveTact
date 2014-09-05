@@ -13,9 +13,9 @@ import org.pircbotx.User;
 
 import java.util.Arrays;
 
+@CMD
+@GenCMD
 public class Help extends GenericCommand {
-    @CMD
-    @GenCMD
 
     public Help() {
         super(GeneralUtils.toArray("help h halp"), 0, "help (command)", "gets help on a command");

@@ -10,10 +10,10 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-
+@CMD
+@AuthCMD
 public class SetPass extends GenericCommand {
-    @CMD
-    @AuthCMD
+
     public SetPass() {
         super(GeneralUtils.toArray("setpassword setpass changepassword changepass"), 0, "setpass [oldpass] [newpass]", "Sets Password");
     }

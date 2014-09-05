@@ -9,10 +9,9 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-
+@CMD
+@ConCMD
 public class Shutdown extends GenericCommand {
-    @CMD
-    @ConCMD
 
     public Shutdown() {
         super(GeneralUtils.toArray("shutdown down"), 9001, null, "Shutdown");

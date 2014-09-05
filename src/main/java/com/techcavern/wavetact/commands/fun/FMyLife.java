@@ -16,9 +16,9 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
+@CMD
+@FunCMD
 public class FMyLife extends GenericCommand {
-    @CMD
-    @FunCMD
 
     public FMyLife() {
         super(GeneralUtils.toArray("fmylife fml"), 0, "fmylife (def #)","Random FML");

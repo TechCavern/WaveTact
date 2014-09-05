@@ -9,13 +9,14 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-
+@CMD
+@AuthCMD
 public class Logout extends GenericCommand {
-    @CMD
-    @AuthCMD
+
     public Logout() {
         super(GeneralUtils.toArray("logout"), 0, "logout", "logs out a user");
     }
+
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         AuthedUser authedUser = PermUtils.getAuthUser(Bot, user.getNick());

@@ -20,10 +20,9 @@ import org.w3c.dom.Document;
 
 import java.util.List;
 
-
+@CMD
+@GenCMD
 public class Define extends GenericCommand {
-    @CMD
-    @GenCMD
 
     public Define() {
         super(GeneralUtils.toArray("define whatis"), 0, "Define (Def #) [word]","defines a word");

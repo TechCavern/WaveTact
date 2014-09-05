@@ -17,9 +17,9 @@ import org.pircbotx.User;
 /**
  * @author jztech101
  */
+@CMD
+@ChanOPCMD
 public class Op extends GenericCommand {
-    @CMD
-    @ChanOPCMD
 
     public Op() {
         super(GeneralUtils.toArray("op aop"), 9, "op (-)(user to op)", "ops a user");

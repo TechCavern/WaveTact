@@ -16,10 +16,9 @@ import org.pircbotx.User;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@CMD
+@GenCMD
 public class Question extends GenericCommand {
-    @CMD
-    @GenCMD
 
     public Question() {
         super(GeneralUtils.toArray("question q"), 0, "question (Answer #) [Question]", "ask us a question!");

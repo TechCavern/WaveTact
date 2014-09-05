@@ -12,9 +12,9 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
+@CMD
+@ChanHOPCMD
 public class Quiet extends GenericCommand {
-    @CMD
-    @ChanHOPCMD
 
     public Quiet() {
         super(GeneralUtils.toArray("quiet mute m"), 6, "Quiet (-)[User][hostmask] (time)", "quiets a user for the specified time or 24 hours");
@@ -31,7 +31,8 @@ public class Quiet extends GenericCommand {
         } else if (Bot.getServerInfo().getServerVersion().contains("Unreal")) {
             ircd = "u";
         } else {
-            ircd = null;
+            IRCUtils.sendError(user, "This networks ircd is not supported for quiets.");
+            return;
         }
         String hostmask;
         if (args[0].contains("!") && args[0].contains("@")) {

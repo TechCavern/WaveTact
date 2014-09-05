@@ -25,10 +25,10 @@ import java.util.stream.Collectors;
 /**
  * @author jztech101
  */
+@CMD
+@TruCMD
 public class CustomMSG extends GenericCommand {
 
-    @CMD
-    @TruCMD
     public CustomMSG() {
         super(GeneralUtils.toArray("custommessage cmsg custommsg customsg"), 3, "custommessage (+/-)[Command] [permlevel] [Response]","Responses may contain $1, $2, etc which indicate the argument separated by a space. $* indicates all remaining arguments.");
     }

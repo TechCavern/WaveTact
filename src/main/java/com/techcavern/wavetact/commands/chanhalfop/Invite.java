@@ -16,9 +16,10 @@ import org.pircbotx.User;
 /**
  * @author jztech101
  */
+@CMD
+@ChanHOPCMD
 public class Invite extends GenericCommand {
-    @CMD
-    @ChanHOPCMD
+
     public Invite() {
         super(GeneralUtils.toArray("invite inv"), 6, "invite [user]", "invites a user to the channel");
     }

@@ -11,10 +11,10 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-
+@CMD
+@AuthCMD
 public class Authenticate extends GenericCommand {
-    @CMD
-    @AuthCMD
+
     public Authenticate() {
         super(GeneralUtils.toArray("authenticate auth identify id login"), 0, "identify (username) [password]", "identifies a user");
     }

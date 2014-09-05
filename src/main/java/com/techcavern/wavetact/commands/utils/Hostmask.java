@@ -9,10 +9,9 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-
+@CMD
+@GenCMD
 public class Hostmask extends GenericCommand {
-    @CMD
-    @GenCMD
 
     public Hostmask() {
         super(GeneralUtils.toArray("hostmask host mask"), 0, "Hostmask $[nick]", "gets the hostmask of a user - $ before gets the ban mask of a user");

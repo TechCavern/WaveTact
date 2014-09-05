@@ -22,9 +22,9 @@ import org.pircbotx.User;
 /**
  * @author jztech101
  */
+@CMD
+@GloCMD
 public class DNSBLModify extends GenericCommand {
-    @CMD
-    @GloCMD
 
     public DNSBLModify() {
         super(GeneralUtils.toArray("dnsblm dnsblmodify"), 20, "DNSBLModify (-)[IRC DNSBL]","Adds/Removes Domains from Spam DNS Blacklists");

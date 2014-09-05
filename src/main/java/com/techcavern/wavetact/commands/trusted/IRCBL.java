@@ -22,10 +22,10 @@ import java.util.List;
 /**
  * @author jztech101
  */
+@CMD
+@TruCMD
 public class IRCBL extends GenericCommand {
 
-    @CMD
-    @TruCMD
     public IRCBL() {
         super(GeneralUtils.toArray("ircbl"), 3, "ircbl [IPv4/Domain/User]", "looks up a domain or IP to see if its in a drone blacklist");
     }

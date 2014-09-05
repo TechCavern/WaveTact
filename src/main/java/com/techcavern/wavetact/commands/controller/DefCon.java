@@ -22,9 +22,10 @@ import org.pircbotx.User;
 /**
  * @author jztech101
  */
+@CMD
+@ConCMD
 public class DefCon extends GenericCommand {
-    @CMD
-    @ConCMD
+
     public DefCon() {
         super(GeneralUtils.toArray("defcon"), 9001, "defcon (-)(1)(2)(3)(4)(5)", "locks down the bot");
     }

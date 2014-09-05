@@ -12,10 +12,9 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-
+@CMD
+@GenCMD
 public class Calculate extends GenericCommand {
-    @CMD
-    @GenCMD
 
     public Calculate() {
         super(GeneralUtils.toArray("calculate calc c math"), 0, "calculate [expression]", "calculates a math expression");

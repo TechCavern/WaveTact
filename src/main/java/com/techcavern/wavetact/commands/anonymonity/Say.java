@@ -18,10 +18,10 @@ import org.pircbotx.User;
 /**
  * @author jztech101
  */
+@CMD
+@AnonCMD
 public class Say extends GenericCommand {
 
-    @CMD
-    @AnonCMD
     public Say() {
         super(GeneralUtils.toArray("say msg"), 5, "say [something]", "make the bot say something");
     }

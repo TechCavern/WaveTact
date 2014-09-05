@@ -26,10 +26,10 @@ import java.util.stream.Collectors;
 /**
  * @author jztech101
  */
+@CMD
+@TruCMD
 public class DNSInfo extends GenericCommand {
 
-    @CMD
-    @TruCMD
     public DNSInfo() {
         super(GeneralUtils.toArray("dnsinfo dns"), 3, "dns [domain]" , "looks up a domain for information");
     }
@@ -39,7 +39,7 @@ public class DNSInfo extends GenericCommand {
         Resolver resolver = new SimpleResolver();
         String domain = args[0];
         if(args[0].contains("http")){
-            domain.replace("http://", "");
+            domain = domain.replace("http://", "");
         }
         Lookup lookup = new Lookup(domain, Type.ANY);
         lookup.setResolver(resolver);
@@ -49,22 +49,16 @@ public class DNSInfo extends GenericCommand {
         if(lookup.getResult() == lookup.SUCCESSFUL){
             for(Record  rec: records){
                 if(rec instanceof  ARecord){
-                    ARecord c = (ARecord) rec;
                     IRCUtils.SendMessage(user, channel, Type.string(rec.getType()) + " - " + ((ARecord) rec).getAddress() , isPrivate );
                 }else if(rec instanceof  NSRecord){
-                    NSRecord c = (NSRecord) rec;
                     IRCUtils.SendMessage(user, channel, Type.string(rec.getType()) + " - " + ((NSRecord) rec).getTarget() , isPrivate );
                 }else if(rec instanceof  AAAARecord) {
-                    AAAARecord c = (AAAARecord) rec;
                     IRCUtils.SendMessage(user, channel, Type.string(rec.getType()) + " - " + ((AAAARecord) rec).getAddress(), isPrivate);
                 } else if(rec instanceof  CNAMERecord){
-                    CNAMERecord c = (CNAMERecord) rec;
                 IRCUtils.SendMessage(user, channel, Type.string(rec.getType()) + " - " + ((CNAMERecord) rec).getAlias() + ((CNAMERecord) rec).getTarget() , isPrivate );
             }else if(rec instanceof  TXTRecord){
-                    TXTRecord c = (TXTRecord) rec;
                     IRCUtils.SendMessage(user, channel, Type.string(rec.getType()) + " - " + StringUtils.join((TXTRecord) rec, " ") , isPrivate );
             }else if(rec instanceof  MXRecord){
-                    MXRecord c = (MXRecord) rec;
             IRCUtils.SendMessage(user, channel, Type.string(rec.getType()) + " - " + ((MXRecord) rec).getPriority() +  ((MXRecord) rec).getTarget() , isPrivate );
         }
     }

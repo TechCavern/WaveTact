@@ -12,10 +12,9 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-
+@CMD
+@GenCMD
 public class MCAccountInfo extends GenericCommand {
-    @CMD
-    @GenCMD
 
     public MCAccountInfo() {
         super(GeneralUtils.toArray("mcaccountinfo mcuserinfo mcainfo mcuuid mcispremium mcmigrated mcuinfo mcpremium mcismigrated"), 0, "mcaccountinfo [user]", "Gets Info on a Minecraft Account");

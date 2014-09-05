@@ -18,9 +18,9 @@ import org.pircbotx.User;
 /**
  * @author jztech101
  */
+@CMD
+@ChanHOPCMD
 public class Voice extends GenericCommand {
-    @CMD
-    @ChanHOPCMD
 
     public Voice() {
         super(GeneralUtils.toArray("voice vo vop"), 6, "Voice (-)(User)", "voices a user");

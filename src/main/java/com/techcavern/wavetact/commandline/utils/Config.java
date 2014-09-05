@@ -7,8 +7,9 @@ import com.techcavern.wavetact.utils.objects.CommandLine;
 import java.io.File;
 import java.util.Scanner;
 
+@CMDLine
 public class Config extends CommandLine {
-    @CMDLine
+
     public Config() {
         super(GeneralUtils.toArray("config c"), "Create a server configuration file", false);
     }

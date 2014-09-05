@@ -8,8 +8,9 @@ import com.techcavern.wavetact.utils.objects.CommandLine;
 import java.io.File;
 import java.util.Scanner;
 
+@CMDLine
 public class AddServer extends CommandLine {
-    @CMDLine
+
     public AddServer() {
         super(GeneralUtils.toArray("addserver a"), "Create a server configuration file", false);
     }

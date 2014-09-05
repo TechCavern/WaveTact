@@ -11,13 +11,14 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-
+@CMD
+@AuthCMD
 public class Drop extends GenericCommand {
-    @CMD
-    @AuthCMD
+
     public Drop() {
         super(GeneralUtils.toArray("drop"), 0, "drop [password]", "drops a user");
     }
+
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         if(!PermUtils.checkIfAccountEnabled(Bot)){

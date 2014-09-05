@@ -15,10 +15,9 @@ import org.pircbotx.User;
 import java.net.URLEncoder;
 import java.util.List;
 
-
+@CMD
+@GenCMD
 public class Weather extends GenericCommand {
-    @CMD
-    @GenCMD
 
     public Weather() {
         super(GeneralUtils.toArray("weather temperature temp w humid humidity wind"), 0, "weather [zipcode][city]", "gets weather in an area");

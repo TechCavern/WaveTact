@@ -5,9 +5,9 @@ import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.configurationUtils.NetworkUtils;
 import com.techcavern.wavetact.utils.objects.CommandLine;
 
-
+@CMDLine
 public class Start extends CommandLine {
-    @CMDLine
+
     public Start() {
         super(GeneralUtils.toArray("start"), "starts the bot", false);
     }

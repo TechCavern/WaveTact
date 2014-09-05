@@ -9,10 +9,9 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-
+@CMD
+@ChanOPCMD
 public class Notice extends GenericCommand {
-    @CMD
-    @ChanOPCMD
 
     public Notice() {
         super(GeneralUtils.toArray("notice not"), 10, "notice (message)", "sends a notice to the channel");
