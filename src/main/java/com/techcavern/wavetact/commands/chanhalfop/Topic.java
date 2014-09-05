@@ -37,7 +37,7 @@ public class Topic extends GenericCommand {
         StringUtils.split(channel.getTopic(), args[0]);
         List<String> topic = new LinkedList(Arrays.asList(StringUtils.split(channel.getTopic(), args[0])));
         List<String> newtopic = new LinkedList(Arrays.asList(StringUtils.split(channel.getTopic(), args[0])));
-        if (args[1].equalsIgnoreCase("a")) {
+        if (args[1].equalsIgnoreCase("a") || args[1].equalsIgnoreCase("add")) {
             channel.send().setTopic(channel.getTopic() + " " + args[0] + " " + GeneralUtils.buildMessage(2, args.length, args));
             saveTopic(channel, Bot);
         } else if (args[1].startsWith("+")) {
@@ -48,15 +48,15 @@ public class Topic extends GenericCommand {
             newtopic.remove(Integer.parseInt(args[1].replaceFirst("\\-", "")) - 1);
             channel.send().setTopic(StringUtils.join(newtopic, args[0]));
             saveTopic(channel, Bot);
-        } else if (args[1].equalsIgnoreCase("sw") || args[1].equalsIgnoreCase("swap")) {
+        } else if (args[1].equalsIgnoreCase("sw") || args[1].equalsIgnoreCase("swap") || args[1].equalsIgnoreCase("switch")) {
             newtopic.set((Integer.parseInt(args[2]) - 1), topic.get(Integer.parseInt(args[3]) - 1));
             newtopic.set((Integer.parseInt(args[3]) - 1), topic.get(Integer.parseInt(args[2]) - 1));
             channel.send().setTopic(StringUtils.join(newtopic, args[0]));
             saveTopic(channel, Bot);
-        } else if (args[1].equalsIgnoreCase("ss")) {
+        } else if (args[1].equalsIgnoreCase("ss") || args[1].equalsIgnoreCase("switchseperator")) {
             channel.send().setTopic(channel.getTopic().replace(args[0], args[2]));
             saveTopic(channel, Bot);
-        } else if (args[1].equalsIgnoreCase("r")) {
+        } else if (args[1].equalsIgnoreCase("r")||args[1].equalsIgnoreCase("revert")) {
             UTime oldTopic = GetUtils.getTopic(channel.getName(), Bot.getServerInfo().getNetwork());
             if (oldTopic != null) {
                 channel.send().setTopic(oldTopic.getSomething());
