@@ -78,7 +78,7 @@ public class CPermLevel extends GenericCommand {
                 IRCUtils.sendError(user, "User is not registered");
             }
         } else {
-            IRCUtils.sendError(user, "Globals & Controllers must be registered by the controller");
+            IRCUtils.sendError(user, "NetworkAdmins & Controllers must be registered by the controller");
         }
     }
 }

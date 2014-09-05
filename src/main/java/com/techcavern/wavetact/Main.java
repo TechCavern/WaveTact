@@ -23,7 +23,7 @@ public class Main {
         LoadUtils.registerCommandList();
         AccountUtils.loadAccounts();
         ConfigUtils.registerConfigs();
-        GlobalUtils.loadGlobals();
+        NetAdminUtils.loadNetworkAdmins();
         BanTimeUtils.loadBanTimes();
         IRCBLUtils.loadIRCBLs();
         DNSBLUtils.loadDNSBLs();

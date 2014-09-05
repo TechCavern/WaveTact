@@ -1,11 +1,11 @@
 package com.techcavern.wavetact.utils.objects;
 
-public class Global {
+public class NetworkAdmin {
 
     private final String Network;
     private final String user;
 
-    public Global(String Network, String user) {
+    public NetworkAdmin(String Network, String user) {
         this.Network = Network;
         this.user = user;
 

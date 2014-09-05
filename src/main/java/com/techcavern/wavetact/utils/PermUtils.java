@@ -109,7 +109,7 @@ public class PermUtils {
             if (GetUtils.getControllerByNick(account) != null) {
                 return 9001;
             }
-            if (GetUtils.getGlobalByNick(account, bot.getServerInfo().getNetwork()) != null) {
+            if (GetUtils.getNetworkAdminByNick(account, bot.getServerInfo().getNetwork()) != null) {
                 return 20;
             }
             if (PermChannelUtils.getPermLevelChannel(bot.getServerInfo().getNetwork(), account, channelObject.getName()) != null) {
@@ -148,7 +148,7 @@ public class PermUtils {
             if (account != null) {
                 if (GetUtils.getControllerByNick(account) != null) {
                     return 9001;
-                } else if (GetUtils.getGlobalByNick(account, bot.getServerInfo().getNetwork()) != null) {
+                } else if (GetUtils.getNetworkAdminByNick(account, bot.getServerInfo().getNetwork()) != null) {
                     return 20;
                 } else {
                     return 3;

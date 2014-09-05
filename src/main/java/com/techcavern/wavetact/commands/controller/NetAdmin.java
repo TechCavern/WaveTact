@@ -8,9 +8,9 @@ package com.techcavern.wavetact.commands.controller;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.utils.*;
-import com.techcavern.wavetact.utils.databaseUtils.GlobalUtils;
+import com.techcavern.wavetact.utils.databaseUtils.NetAdminUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
-import com.techcavern.wavetact.utils.objects.Global;
+import com.techcavern.wavetact.utils.objects.NetworkAdmin;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -19,11 +19,11 @@ import org.pircbotx.User;
 /**
  * @author jztech101
  */
-public class Globals extends GenericCommand {
+public class NetAdmin extends GenericCommand {
     @CMD
     @ConCMD
-    public Globals() {
-        super(GeneralUtils.toArray("globals global gl"), 9001, "global (-)[user]", "adds a network admin to the bot");
+    public NetAdmin() {
+        super(GeneralUtils.toArray("networkadministrator netadmin networkadmin"), 9001, "networkadministrator (-)[user]", "adds a network admin to the bot");
     }
 
     @Override
@@ -41,33 +41,33 @@ public class Globals extends GenericCommand {
         }
         if (account != null) {
             if (args[0].startsWith("-")) {
-                if (GetUtils.getGlobalByNick(account, Bot.getServerInfo().getNetwork()) != null) {
-                    GeneralRegistry.Globals.remove(GetUtils.getGlobalByNick(account, Bot.getServerInfo().getNetwork()));
-                    GlobalUtils.saveGlobals();
+                if (GetUtils.getNetworkAdminByNick(account, Bot.getServerInfo().getNetwork()) != null) {
+                    GeneralRegistry.NetworkAdmins.remove(GetUtils.getNetworkAdminByNick(account, Bot.getServerInfo().getNetwork()));
+                    NetAdminUtils.saveNetworkAdmins();
                     IRCUtils.SendMessage(user, channel, "Global Removed", isPrivate);
                 } else {
-                    IRCUtils.sendError(user, "User does not existing in Globals");
+                    IRCUtils.sendError(user, "User does not existing in NetworkAdmins");
                 }
             }else if(args[0].equalsIgnoreCase("list")){
-                String Globals = "";
-                for(Global global: GeneralRegistry.Globals){
-                    if(Globals.isEmpty()){
-                        Globals = global.getUser();
+                String netAdmins = "";
+                for(NetworkAdmin netAdmin : GeneralRegistry.NetworkAdmins){
+                    if(netAdmins.isEmpty()){
+                        netAdmins = netAdmin.getUser();
                     }else{
-                        Globals += ", " + global.getUser();
+                        netAdmins += ", " + netAdmin.getUser();
                     }
                 }
-                if(!Globals.isEmpty()) {
-                    IRCUtils.SendMessage(user, channel, Globals, isPrivate);
+                if(!netAdmins.isEmpty()) {
+                    IRCUtils.SendMessage(user, channel, netAdmins, isPrivate);
                 }else{
-                    IRCUtils.sendError(user, "No Globals Exist");
+                    IRCUtils.sendError(user, "No NetworkAdmins Exist");
                 }
             }else {
-                if (GetUtils.getGlobalByNick(account, Bot.getServerInfo().getNetwork()) != null) {
+                if (GetUtils.getNetworkAdminByNick(account, Bot.getServerInfo().getNetwork()) != null) {
                     IRCUtils.sendError(user, "User is already in database");
                 } else {
-                    GeneralRegistry.Globals.add(new Global(Bot.getServerInfo().getNetwork(), account));
-                    GlobalUtils.saveGlobals();
+                    GeneralRegistry.NetworkAdmins.add(new NetworkAdmin(Bot.getServerInfo().getNetwork(), account));
+                    NetAdminUtils.saveNetworkAdmins();
                     IRCUtils.SendMessage(user, channel, "Global Added", isPrivate);
                 }
             }

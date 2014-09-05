@@ -5,8 +5,6 @@ import com.techcavern.wavetact.utils.objects.*;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 import org.pircbotx.MultiBotManager;
 import org.pircbotx.PircBotX;
-import org.xbill.DNS.Resolver;
-import org.xbill.DNS.SimpleResolver;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,7 +13,6 @@ import java.util.Map;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-import java.util.regex.Pattern;
 
 public class GeneralRegistry {
 
@@ -27,7 +24,7 @@ public class GeneralRegistry {
     public static final List<String> Controllers = new ArrayList<>();
     public static final List<String> IRCBLs = new ArrayList<>();
     public static final List<String> DNSBLs = new ArrayList<>();
-    public static final List<Global> Globals = new ArrayList<>();
+    public static final List<NetworkAdmin> NetworkAdmins = new ArrayList<>();
     public static final List<GenericCommand> AllCommands = new ArrayList<>();
     public static final List<GenericCommand> GenericCommands = new ArrayList<>();
     public static final List<GenericCommand> TrustedCommands = new ArrayList<>();

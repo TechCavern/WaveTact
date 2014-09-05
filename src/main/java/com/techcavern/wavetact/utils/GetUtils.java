@@ -72,10 +72,10 @@ public class GetUtils {
         return null;
     }
 
-    public static Global getGlobalByNick(String nick, String Network) {
-        for (Global global : GeneralRegistry.Globals) {
-            if (global.getUser().equalsIgnoreCase(nick) && global.getNetwork().equalsIgnoreCase(Network)) {
-                return global;
+    public static NetworkAdmin getNetworkAdminByNick(String nick, String Network) {
+        for (NetworkAdmin networkAdmin : GeneralRegistry.NetworkAdmins) {
+            if (networkAdmin.getUser().equalsIgnoreCase(nick) && networkAdmin.getNetwork().equalsIgnoreCase(Network)) {
+                return networkAdmin;
             }
         }
         return null;
