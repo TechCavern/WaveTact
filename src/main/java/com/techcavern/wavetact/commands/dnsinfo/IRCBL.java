@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.techcavern.wavetact.commands.trusted;
+package com.techcavern.wavetact.commands.dnsinfo;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.TruCMD;
@@ -17,15 +17,17 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 import org.xbill.DNS.*;
 
+import java.util.List;
+
 /**
  * @author jztech101
  */
 @CMD
 @TruCMD
-public class DNSBL extends GenericCommand {
+public class IRCBL extends GenericCommand {
 
-    public DNSBL() {
-        super(GeneralUtils.toArray("dnsbl"), 3, "dnsbl [IPv4/Domain/User]", "looks up a domain or IP to see if its in a spam blacklist");
+    public IRCBL() {
+        super(GeneralUtils.toArray("ircbl"), 3, "ircbl [IPv4/Domain/User]", "looks up a domain or IP to see if its in a drone blacklist");
     }
 
     @Override
@@ -49,11 +51,11 @@ public class DNSBL extends GenericCommand {
         }
         Boolean sent = false;
         Resolver resolver = new SimpleResolver();
-        if (GeneralRegistry.DNSBLs.isEmpty()) {
-            IRCUtils.sendError(user, "No DNS BLs found in Database");
+        if (GeneralRegistry.IRCBLs.isEmpty()) {
+            IRCUtils.sendError(user, "No IRC BLs found in Database");
             return;
         }
-        for (String Domain : GeneralRegistry.DNSBLs) {
+        for (String Domain : GeneralRegistry.IRCBLs) {
             Lookup lookup = new Lookup(IP + "." + Domain, Type.ANY);
             lookup.setResolver(resolver);
             lookup.setCache(null);
@@ -71,7 +73,7 @@ public class DNSBL extends GenericCommand {
 
         }
         if(!sent){
-            IRCUtils.SendMessage(user, channel, BeforeIP + " not found in DNSBLs", isPrivate);
+            IRCUtils.SendMessage(user, channel, BeforeIP + " not found in IRC BLs", isPrivate);
         }
 
     }

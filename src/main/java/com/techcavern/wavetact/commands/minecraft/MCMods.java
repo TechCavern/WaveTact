@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.commands.utils;
+package com.techcavern.wavetact.commands.minecraft;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;

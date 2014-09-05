@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.techcavern.wavetact.commands.trusted;
+package com.techcavern.wavetact.commands.dnsinfo;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.TruCMD;
@@ -45,7 +45,7 @@ public class DNSInfo extends GenericCommand {
         lookup.setResolver(resolver);
         lookup.setCache(null);
         Record[] records = lookup.run();
-        boolean isSuccesful = false;
+        boolean isSuccessful = false;
         if(lookup.getResult() == lookup.SUCCESSFUL){
             for(Record  rec: records){
                 if(rec instanceof  ARecord){
@@ -62,9 +62,9 @@ public class DNSInfo extends GenericCommand {
             IRCUtils.SendMessage(user, channel, Type.string(rec.getType()) + " - " + ((MXRecord) rec).getPriority() +  ((MXRecord) rec).getTarget() , isPrivate );
         }
     }
-            isSuccesful = true;
+            isSuccessful = true;
         }
-        if(!isSuccesful){
+        if(!isSuccessful){
             IRCUtils.sendError(user, "Invalid Domain");
         }
 
