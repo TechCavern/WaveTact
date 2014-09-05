@@ -5,6 +5,7 @@ import com.techcavern.wavetact.utils.objects.*;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 import org.pircbotx.MultiBotManager;
 import org.pircbotx.PircBotX;
+import org.reflections.Reflections;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,6 +39,7 @@ public class GeneralRegistry {
     public static final List<Account> Accounts = new ArrayList<>();
     public static final List<GenericCommand> AnonymonityCommands = new ArrayList<>();
     public static final List<FunObject> Attacks = new ArrayList<>();
+    public static final List<String> Eightball = new ArrayList<>();
     public static final List<GenericCommand> ChanOpCommands = new ArrayList<>();
     public static final List<GenericCommand> ChanFounderCommands = new ArrayList<>();
     public static final List<SimpleMessage> SimpleMessages = new ArrayList<>();
@@ -59,6 +61,7 @@ public class GeneralRegistry {
     public static final List<String> ChanOpListCommands = new ArrayList<>();
     public static final List<String> ChanFounderListCommands = new ArrayList<>();
     public static final StrongPasswordEncryptor encryptor = new StrongPasswordEncryptor();
+    public static final Reflections wavetactreflection = new Reflections("com.techcavern.wavetact");
     public static String wundergroundapikey = null;
     public static String wolframalphaapikey = null;
     public static String wordnikapikey = null;

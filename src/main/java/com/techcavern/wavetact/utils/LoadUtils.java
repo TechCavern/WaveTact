@@ -28,7 +28,6 @@ public class LoadUtils {
     public static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     public static PircBotX createbot(String nickservPassword, String name, List<String> channels, String nick, String server) {
-        System.out.println("Configuring " + name);
         Builder<PircBotX> Net = new Configuration.Builder<>();
         Net.setName(nick);
         Net.setLogin("WaveTact");
@@ -99,8 +98,7 @@ public class LoadUtils {
         if (invalid) System.exit(0);
     }
     public static void addCommands(List<GenericCommand> list, Class<? extends Annotation> cl){
-        Reflections reflections = new Reflections("com.techcavern.wavetact");
-        Set<Class<?>> classes = reflections.getTypesAnnotatedWith(cl);
+        Set<Class<?>> classes = GeneralRegistry.wavetactreflection.getTypesAnnotatedWith(cl);
         for(Class<?> clss: classes){
             try{
                 list.add(((GenericCommand) clss.newInstance()));
@@ -110,8 +108,7 @@ public class LoadUtils {
         }
     }
     public static void addCommandLines(List<CommandLine> list, Class<? extends Annotation> cl) {
-        Reflections reflections = new Reflections("com.techcavern.wavetact");
-        Set<Class<?>> classes = reflections.getTypesAnnotatedWith(cl);
+        Set<Class<?>> classes = GeneralRegistry.wavetactreflection.getTypesAnnotatedWith(cl);
         for(Class<?> clss : classes) {
             try{
                 list.add(((CommandLine) clss.newInstance()));
@@ -133,6 +130,24 @@ public class LoadUtils {
         GeneralRegistry.Attacks.add(new FunObject("ties $* up and feeds it to a shark", false, null));
         GeneralRegistry.Attacks.add(new FunObject("runs over $*", true, "HEY! WATCH WHERE YOU'RE GOING!"));
         GeneralRegistry.Attacks.add(new FunObject("throws a racket at $*", false, null));
+    }
+    public static void registerEightball(){
+        GeneralRegistry.Eightball.add("Hmm.. not today");
+        GeneralRegistry.Eightball.add("YES!");
+        GeneralRegistry.Eightball.add("Maybe");
+        GeneralRegistry.Eightball.add("Nope.");
+        GeneralRegistry.Eightball.add("Sources say no.");
+        GeneralRegistry.Eightball.add("Definitely");
+        GeneralRegistry.Eightball.add("I have my doubts");
+        GeneralRegistry.Eightball.add("Signs say yes");
+        GeneralRegistry.Eightball.add("Cannot predict now");
+        GeneralRegistry.Eightball.add("It is certain");
+        GeneralRegistry.Eightball.add("Outlook decent");
+        GeneralRegistry.Eightball.add("Very doubtful");
+        GeneralRegistry.Eightball.add("Perhaps now is not a good time to tell you");
+        GeneralRegistry.Eightball.add("Concentrate and ask again");
+        GeneralRegistry.Eightball.add("Forget about it");
+        GeneralRegistry.Eightball.add("Don't count on it");
     }
 
     public static void registerCommandList() {

@@ -7,6 +7,7 @@ import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.WordUtils;
 import org.pircbotx.Channel;
@@ -36,7 +37,7 @@ public class Xkcd extends GenericCommand {
             }
         }else{
             Random random = new Random();
-            comicnumber = random.nextInt(latest-1)+1;
+            comicnumber = RandomUtils.nextInt(1, latest);
         }
         JsonObject comic = GeneralUtils.getJsonObject("http://xkcd.com/" + comicnumber + "/info.0.json");
         String date = "Date: " + comic.get("day") + "/" + comic.get("month") + "/" + comic.get("year");

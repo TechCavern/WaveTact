@@ -15,23 +15,30 @@ public class Main {
         System.setProperty(SimpleLogger.SHOW_DATE_TIME_KEY, "true");
         System.setProperty(SimpleLogger.DATE_TIME_FORMAT_KEY, "[yyyy/MM/dd HH:mm:ss]");
         System.setProperty(SimpleLogger.LEVEL_IN_BRACKETS_KEY, "true");
+
         ControllerUtils.loadControllers();
         LoadUtils.initializeCommandlines();
         LoadUtils.parseCommandLineArguments(args);
-        LoadUtils.registerCommands();
-        LoadUtils.registerAttacks();
-        LoadUtils.registerCommandList();
+
         AccountUtils.loadAccounts();
-        ConfigUtils.registerConfigs();
         NetAdminUtils.loadNetworkAdmins();
-        BanTimeUtils.loadBanTimes();
-        IRCBLUtils.loadIRCBLs();
-        DNSBLUtils.loadDNSBLs();
-        QuietTimeUtils.loadQuietTimes();
         PermChannelUtils.loadPermChannels();
+
+        ConfigUtils.registerConfigs();
+        LoadUtils.registerCommands();
+        LoadUtils.registerCommandList();
         SimpleActionUtils.loadSimpleActions();
         SimpleMessageUtils.loadSimpleMessages();
+
+        LoadUtils.registerAttacks();
+        LoadUtils.registerEightball();
+        IRCBLUtils.loadIRCBLs();
+        DNSBLUtils.loadDNSBLs();
+
+        BanTimeUtils.loadBanTimes();
+        QuietTimeUtils.loadQuietTimes();
         GeneralRegistry.threadPool.execute(new CheckTime());
+
         GeneralRegistry.WaveTact.start();
     }
 }
