@@ -19,7 +19,7 @@ import java.net.URL;
 public class MCStatus extends GenericCommand {
 
     public MCStatus() {
-        super(GeneralUtils.toArray("mcstatus mc"), 0, null,"checks status of MC servers");
+        super(GeneralUtils.toArray("mcstatus"), 0, null,"checks status of MC servers");
     }
 
     @Override
