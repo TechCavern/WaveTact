@@ -28,12 +28,8 @@ public class PingTime extends GenericCommand {
         } else {
             port = Integer.parseInt(args[1]);
         }
-        if(args[0].replaceFirst(":", "").contains(":")){
-            IRCUtils.sendError(user, "IPv6 is not supported");
-        }
         Long time = System.currentTimeMillis();
-        args[0] = args[0].replaceAll("http://|https://", "");
-        Socket socket = new Socket(InetAddress.getByName(args[0]), port);
+        Socket socket = new Socket(GeneralUtils.getIP(args[0], Bot), port);
         socket.close();
         time = System.currentTimeMillis() - time;
         IRCUtils.SendMessage(user, channel, "Ping Time: " + time + " milliseconds", isPrivate);

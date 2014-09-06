@@ -38,9 +38,7 @@ public class DNSInfo extends GenericCommand {
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         Resolver resolver = new SimpleResolver();
         String domain = args[0];
-        if(args[0].contains("http")){
-            domain = domain.replace("http://", "");
-        }
+       domain = domain.replace("http://", "").replace("https://", "");
         Lookup lookup = new Lookup(domain, Type.ANY);
         lookup.setResolver(resolver);
         lookup.setCache(null);

@@ -69,10 +69,7 @@ public class GeneralUtils {
         }else {
             IP = IP.replaceAll("http://|https://", "");
             try {
-                Socket socket = new Socket(InetAddress.getByName(IP), 80);
-                IP = socket.getInetAddress().getHostAddress();
-                socket.close();
-                    return IP;
+              return InetAddress.getByName(IP).getHostAddress();
             }catch(Exception e){
                 return null;
             }

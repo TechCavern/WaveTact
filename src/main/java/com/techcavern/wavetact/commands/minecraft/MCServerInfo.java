@@ -35,12 +35,11 @@ public class MCServerInfo extends GenericCommand {
         }else{
             port = 25565;
         }
-        String address = args[0].replace("http://", "").replace("https://", "");
-        MCServer server = StandardMCVersions.MC_18.ping(new InetSocketAddress(InetAddress.getByName(address), port));
+        MCServer server = StandardMCVersions.MC_18.ping(new InetSocketAddress(GeneralUtils.getIP(args[0], Bot), port));
         String gameVersion = "Version: " + server.gameVersion;
         String motd = "MOTD: " + server.motd;
         String playercount = "Players: " +  Integer.toString(server.players) + "/" + Integer.toString(server.maxPlayers);
-        IRCUtils.SendMessage(user,channel,address + ":" + port + " - " + gameVersion + " - " + motd + " - " + playercount, isPrivate );
+        IRCUtils.SendMessage(user,channel,args[0] + ":" + port + " - " + gameVersion + " - " + motd + " - " + playercount, isPrivate );
 
     }
 
