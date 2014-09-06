@@ -17,7 +17,7 @@ import java.net.Socket;
 public class PingTime extends GenericCommand {
 
     public PingTime() {
-        super(GeneralUtils.toArray("checkping chping"), 0, "checkping [website] (port)"," checks pingtime to a certain domain/address/ip/etc (IPv6 NOT supported)");
+        super(GeneralUtils.toArray("pingtime checkping chping ptime"), 0, "pingtime [website] (port)"," checks pingtime to a certain domain/address/ip/etc (IPv6 NOT supported)");
     }
 
     @Override
