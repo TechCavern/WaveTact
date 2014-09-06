@@ -22,10 +22,10 @@ import org.xbill.DNS.*;
  */
 @CMD
 @TruCMD
-public class DNSBL extends GenericCommand {
+public class DNSBlacklistLookup extends GenericCommand {
 
-    public DNSBL() {
-        super(GeneralUtils.toArray("dnsbl"), 3, "dnsbl [IPv4/Domain/User]", "looks up a domain or IP to see if its in a spam blacklist");
+    public DNSBlacklistLookup() {
+        super(GeneralUtils.toArray("dnsblacklistlookup dbl"), 3, "dnsblacklistlookup [IPv4/Domain/User]", "looks up a domain or IP to see if its in a spam blacklist");
     }
 
     @Override

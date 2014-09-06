@@ -29,7 +29,7 @@ import java.util.List;
 public class Topic extends GenericCommand {
 
     public Topic() {
-        super(GeneralUtils.toArray("topic t"), 6, "Topic [Seperator] [a(add)/sw(switch)/+[topic #]/-[topic #]/(Insert message to replace whole topic)/ss(switch seperator)/r(revert)] (Messages to add)(Integer to swap)(seperator to change to) (Integer to swap)", "manages the topic");
+        super(GeneralUtils.toArray("topic"), 6, "Topic [Seperator] [a(add)/sw(switch)/+[topic #]/-[topic #]/(Insert message to replace whole topic)/ss(switch seperator)/r(revert)] (Messages to add)(Integer to swap)(seperator to change to) (Integer to swap)", "manages the topic");
     }
 
     @Override

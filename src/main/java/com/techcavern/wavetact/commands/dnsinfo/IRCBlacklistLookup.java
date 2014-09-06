@@ -24,10 +24,10 @@ import java.util.List;
  */
 @CMD
 @TruCMD
-public class IRCBL extends GenericCommand {
+public class IRCBlacklistLookup extends GenericCommand {
 
-    public IRCBL() {
-        super(GeneralUtils.toArray("ircbl"), 3, "ircbl [IPv4/Domain/User]", "looks up a domain or IP to see if its in a drone blacklist");
+    public IRCBlacklistLookup() {
+        super(GeneralUtils.toArray("ircblacklistlookup ibl"), 3, "ircblacklistlookup [IPv4/Domain/User]", "looks up a domain or IP to see if its in a drone blacklist");
     }
 
     @Override

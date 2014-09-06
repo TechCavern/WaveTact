@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class AddServer extends CommandLine {
 
     public AddServer() {
-        super(GeneralUtils.toArray("addserver a"), "Create a server configuration file", false);
+        super(GeneralUtils.toArray("addserver as"), "Create a server configuration file", false);
     }
 
     @Override

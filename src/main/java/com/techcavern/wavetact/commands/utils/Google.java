@@ -24,7 +24,7 @@ import java.net.URLEncoder;
 public class Google extends GenericCommand {
 
     public Google() {
-        super(GeneralUtils.toArray("google goo g"), 0, "google [string to google]" ,"googles something");
+        super(GeneralUtils.toArray("google gsearch"), 0, "google [string to google]" ,"googles something");
     }
 
     @Override

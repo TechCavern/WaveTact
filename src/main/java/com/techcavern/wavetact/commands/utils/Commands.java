@@ -21,7 +21,7 @@ import org.pircbotx.User;
 public class Commands extends GenericCommand {
 
     public Commands() {
-        super(GeneralUtils.toArray("commands list cmds coms"), 0, null, "takes 0 arguments, returns list of Commands");
+        super(GeneralUtils.toArray("commands list cmds"), 0, null, "takes 0 arguments, returns list of Commands");
     }
 
     @Override

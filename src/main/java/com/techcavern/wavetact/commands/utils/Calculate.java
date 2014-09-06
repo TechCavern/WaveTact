@@ -17,7 +17,7 @@ import org.pircbotx.User;
 public class Calculate extends GenericCommand {
 
     public Calculate() {
-        super(GeneralUtils.toArray("calculate calc c math"), 0, "calculate [expression]", "calculates a math expression");
+        super(GeneralUtils.toArray("calculate calc math"), 0, "calculate [expression]", "calculates a math expression");
     }
 
     @Override

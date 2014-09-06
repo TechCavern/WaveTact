@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class Config extends CommandLine {
 
     public Config() {
-        super(GeneralUtils.toArray("config c"), "Create a server configuration file", false);
+        super(GeneralUtils.toArray("config conf"), "Create a server configuration file", false);
     }
 
     @Override

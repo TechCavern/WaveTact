@@ -25,7 +25,7 @@ import org.pircbotx.User;
 public class Attack extends GenericCommand {
 
     public Attack() {
-        super(GeneralUtils.toArray("attack shoot a s"), 0, "attacks [something]","attacks a user");
+        super(GeneralUtils.toArray("attack shoot"), 0, "attacks [something]","attacks a user");
     }
 
     @Override

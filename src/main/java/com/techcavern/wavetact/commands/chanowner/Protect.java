@@ -23,7 +23,7 @@ import org.pircbotx.User;
 public class Protect extends GenericCommand {
 
     public Protect() {
-        super(GeneralUtils.toArray("protect prot pr sop"), 14, "protect (-)(User)", "sets protect mode if it exists on a user");
+        super(GeneralUtils.toArray("protect prot sop"), 14, "protect (-)(User)", "sets protect mode if it exists on a user");
     }
 
     @Override

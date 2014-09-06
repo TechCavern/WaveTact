@@ -25,7 +25,7 @@ public class LockACT extends GenericCommand {
 
 
     public LockACT() {
-        super(GeneralUtils.toArray("lockaction loact locka loa"), 9001, "lockaction [command]", "locks a custom action");
+        super(GeneralUtils.toArray("lockaction lockact"), 9001, "lockaction [command]", "locks a custom action");
     }
 
     @Override

@@ -14,7 +14,7 @@ import org.pircbotx.User;
 public class Notice extends GenericCommand {
 
     public Notice() {
-        super(GeneralUtils.toArray("notice not"), 10, "notice (message)", "sends a notice to the channel");
+        super(GeneralUtils.toArray("notice"), 10, "notice (message)", "sends a notice to the channel");
     }
 
     @Override

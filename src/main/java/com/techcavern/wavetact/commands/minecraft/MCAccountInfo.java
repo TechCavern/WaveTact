@@ -17,7 +17,7 @@ import org.pircbotx.User;
 public class MCAccountInfo extends GenericCommand {
 
     public MCAccountInfo() {
-        super(GeneralUtils.toArray("mcaccountinfo mcuserinfo mcainfo mcuuid mcispremium mcmigrated mcuinfo mcpremium mcismigrated"), 0, "mcaccountinfo [user]", "Gets Info on a Minecraft Account");
+        super(GeneralUtils.toArray("mcaccountinfo mcuserinfo mcpremium mcuuid mcmigrated"), 0, "mcaccountinfo [user]", "Gets Info on a Minecraft Account");
     }
 
     @Override

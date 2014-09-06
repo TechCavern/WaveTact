@@ -15,10 +15,10 @@ import org.pircbotx.User;
 
 @CMD
 @ChanFounderCMD
-public class CPermLevel extends GenericCommand {
+public class ChannelPermLevel extends GenericCommand {
 
-    public CPermLevel() {
-        super(GeneralUtils.toArray("permlevel pl cpermlevel"), 18, "permlevel (+)(-)[user] (permlevel)","adds, removes, modifies permissions");
+    public ChannelPermLevel() {
+        super(GeneralUtils.toArray("channelpermlevel chanpermlevel cpl cpermlevel"), 18, "channelpermlevel (+)(-)[user] (permlevel)","adds, removes, modifies permissions");
     }
 
     @Override

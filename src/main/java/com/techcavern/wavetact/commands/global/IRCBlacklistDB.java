@@ -24,11 +24,11 @@ import org.pircbotx.User;
  */
 @CMD
 @GloCMD
-public class IRCBLModify extends GenericCommand {
+public class IRCBlacklistDB extends GenericCommand {
 
 
-    public IRCBLModify() {
-        super(GeneralUtils.toArray("ircblm ircblmodify"), 20, "IRCBLModify (-)[IRC DNSBL]","Adds/Removes Domains from IRCBL");
+    public IRCBlacklistDB() {
+        super(GeneralUtils.toArray("ircblacklistdb ircbldb"), 20, "ircblacklistdb (-)[IRC DNSBL]","Adds/Removes Domains from IRCBL");
     }
 
     @Override

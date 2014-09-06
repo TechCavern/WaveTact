@@ -14,7 +14,7 @@ import org.pircbotx.User;
 public class Shutdown extends GenericCommand {
 
     public Shutdown() {
-        super(GeneralUtils.toArray("shutdown down"), 9001, null, "Shutdown");
+        super(GeneralUtils.toArray("shutdown stop"), 9001, null, "Shutdown");
     }
 
     @Override

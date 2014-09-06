@@ -20,7 +20,7 @@ import java.util.List;
 public class Weather extends GenericCommand {
 
     public Weather() {
-        super(GeneralUtils.toArray("weather temperature temp w humid humidity wind"), 0, "weather [zipcode][city]", "gets weather in an area");
+        super(GeneralUtils.toArray("weather temperature temp humid humidity wind"), 0, "weather [zipcode][city]", "gets weather in an area");
     }
 
     @Override

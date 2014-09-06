@@ -24,7 +24,7 @@ import org.pircbotx.UserLevel;
 public class Kick extends GenericCommand {
 
     public Kick() {
-        super(GeneralUtils.toArray("kick k"), 6, "kick [user] (message)", "kicks a user with specified message or none");
+        super(GeneralUtils.toArray("kick"), 6, "kick [user] (message)", "kicks a user with specified message or none");
     }
 
     @Override

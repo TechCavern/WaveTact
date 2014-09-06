@@ -23,7 +23,7 @@ import org.pircbotx.UserLevel;
 public class SomethingAwesome extends GenericCommand {
 
     public SomethingAwesome() {
-        super(GeneralUtils.toArray("somethingawesome sa awesome something"), 0, null, "Something AWESOME!");
+        super(GeneralUtils.toArray("somethingawesome awesome something"), 0, null, "Something AWESOME!");
     }
 
     @Override

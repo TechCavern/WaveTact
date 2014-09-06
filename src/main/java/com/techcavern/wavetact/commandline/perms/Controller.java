@@ -7,9 +7,9 @@ import com.techcavern.wavetact.utils.databaseUtils.ControllerUtils;
 import com.techcavern.wavetact.utils.objects.CommandLine;
 
 @CMDLine
-public class PermLevelC extends CommandLine {
+public class Controller extends CommandLine {
 
-    public PermLevelC() {
+    public Controller() {
         super(GeneralUtils.toArray("controller con"), "controller (-)[user] - adds or removes Controllers", false);
     }
 

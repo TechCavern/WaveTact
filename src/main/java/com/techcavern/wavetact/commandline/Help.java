@@ -12,7 +12,7 @@ import java.util.Arrays;
 public class Help extends CommandLine {
 
     public Help() {
-        super(GeneralUtils.toArray("h help"), "Prints this help screen", false);
+        super(GeneralUtils.toArray("help"), "Prints this help screen", false);
     }
 
     @Override

@@ -18,7 +18,7 @@ import java.util.Arrays;
 public class Help extends GenericCommand {
 
     public Help() {
-        super(GeneralUtils.toArray("help h halp"), 0, "help (command)", "gets help on a command");
+        super(GeneralUtils.toArray("help halp"), 0, "help (command)", "gets help on a command");
     }
 
     @Override

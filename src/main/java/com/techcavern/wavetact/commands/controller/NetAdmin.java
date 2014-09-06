@@ -24,7 +24,7 @@ import org.pircbotx.User;
 public class NetAdmin extends GenericCommand {
 
     public NetAdmin() {
-        super(GeneralUtils.toArray("networkadministrator netadmin networkadmin"), 9001, "networkadministrator (-)[user]", "adds a network admin to the bot");
+        super(GeneralUtils.toArray("networkadministrator netadmin"), 9001, "networkadministrator (-)[user]", "adds a network admin to the bot");
 
     }
     @Override
