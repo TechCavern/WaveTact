@@ -33,7 +33,6 @@ public class Global extends GenericCommand {
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         if(args[0].equalsIgnoreCase("net") || args[0].equalsIgnoreCase("network")){
-            ImmutableSortedSet<Channel> c = Bot.getUserBot().getChannels();
             for(Channel chan : Bot.getUserBot().getChannels()){
                 chan.send().notice("Global [" + user.getNick() + "]:" +  GeneralUtils.buildMessage(1, args.length, args) );
             }
