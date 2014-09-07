@@ -10,7 +10,6 @@ import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleActionUtils;
-import com.techcavern.wavetact.utils.databaseUtils.SimpleMessageUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -31,16 +30,16 @@ public class LockACT extends GenericCommand {
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
 
-            if (args[0].startsWith("-")) {
-                SimpleActionUtils.getSimpleAction(args[0].replaceFirst("-", "")).unlock();
-                SimpleActionUtils.saveSimpleActions();
-                IRCUtils.SendMessage(user, channel, "Simple Action Unlocked", isPrivate);
-            } else {
-                SimpleActionUtils.getSimpleAction(args[0].replaceFirst("-", "")).lock();
-                SimpleActionUtils.saveSimpleActions();
-                IRCUtils.SendMessage(user, channel, "Simple Action Unlocked", isPrivate);
+        if (args[0].startsWith("-")) {
+            SimpleActionUtils.getSimpleAction(args[0].replaceFirst("-", "")).unlock();
+            SimpleActionUtils.saveSimpleActions();
+            IRCUtils.SendMessage(user, channel, "Simple Action Unlocked", isPrivate);
+        } else {
+            SimpleActionUtils.getSimpleAction(args[0].replaceFirst("-", "")).lock();
+            SimpleActionUtils.saveSimpleActions();
+            IRCUtils.SendMessage(user, channel, "Simple Action Unlocked", isPrivate);
 
-            }
+        }
 
     }
 }

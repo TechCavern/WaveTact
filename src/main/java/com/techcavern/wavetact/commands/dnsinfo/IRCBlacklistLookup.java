@@ -17,8 +17,6 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 import org.xbill.DNS.*;
 
-import java.util.List;
-
 /**
  * @author jztech101
  */
@@ -33,19 +31,19 @@ public class IRCBlacklistLookup extends GenericCommand {
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         String BeforeIP = GeneralUtils.getIP(args[0], Bot);
-        if(BeforeIP == null){
+        if (BeforeIP == null) {
             IRCUtils.sendError(user, "Invalid IP/User");
             return;
-        }else if (BeforeIP.contains(":")){
+        } else if (BeforeIP.contains(":")) {
             IRCUtils.sendError(user, "IPv6 is Not supported");
             return;
         }
         String[] IPString = StringUtils.split(BeforeIP, ".");
         String IP = "";
-        for(int i = IPString.length-1; i > -1; i--){
-            if(IP.isEmpty()){
+        for (int i = IPString.length - 1; i > -1; i--) {
+            if (IP.isEmpty()) {
                 IP = IPString[i];
-            }else{
+            } else {
                 IP += "." + IPString[i];
             }
         }
@@ -60,7 +58,7 @@ public class IRCBlacklistLookup extends GenericCommand {
             lookup.setResolver(resolver);
             lookup.setCache(null);
             Record[] records = lookup.run();
-            if (lookup.getResult() == lookup.SUCCESSFUL) {
+            if (lookup.getResult() == Lookup.SUCCESSFUL) {
                 IRCUtils.SendMessage(user, channel, BeforeIP + " found in " + Domain, isPrivate);
                 sent = true;
                 for (Record rec : records) {
@@ -72,7 +70,7 @@ public class IRCBlacklistLookup extends GenericCommand {
             }
 
         }
-        if(!sent){
+        if (!sent) {
             IRCUtils.SendMessage(user, channel, BeforeIP + " not found in IRC BLs", isPrivate);
         }
 

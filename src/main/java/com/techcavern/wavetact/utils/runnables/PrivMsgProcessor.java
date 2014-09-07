@@ -11,9 +11,7 @@ import org.pircbotx.Colors;
 import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.events.PrivateMessageEvent;
 
-/**
- * Created by jztech101 on 7/27/14.
- */
+
 public class PrivMsgProcessor {
 
     public static void PrivMsgProcess(PrivateMessageEvent<PircBotX> event) {
@@ -28,13 +26,13 @@ public class PrivMsgProcessor {
                 messageParts = ArrayUtils.remove(messageParts, 0);
                 if (Command != null) {
                     if ((Command.getPermLevel() >= 0 && (Command.getPermLevel() <= 3 || Command.getPermLevel() > 18))) {
-                        int UserPermLevel = PermUtils.getAuthPermLevel(event.getBot(), event.getUser().getNick(), null,PermUtils.getAuthedAccount(event.getBot(), event.getUser().getNick()));
+                        int UserPermLevel = PermUtils.getAuthPermLevel(event.getBot(), event.getUser().getNick(), null, PermUtils.getAuthedAccount(event.getBot(), event.getUser().getNick()));
                         if (UserPermLevel >= Command.getPermLevel()) {
                             IRCUtils.processMessage(Command, event.getBot(), null, event.getUser(), UserPermLevel, messageParts, true);
                         } else {
                             event.getUser().send().message("Permission Denied");
                         }
-                    } else{
+                    } else {
                         Channel channel = null;
                         if (messageParts.length >= 1 && messageParts[0].startsWith("#")) {
                             channel = GetUtils.getChannelbyName(event.getBot(), messageParts[0]);

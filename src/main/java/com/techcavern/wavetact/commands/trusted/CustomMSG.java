@@ -30,22 +30,22 @@ import java.util.stream.Collectors;
 public class CustomMSG extends GenericCommand {
 
     public CustomMSG() {
-        super(GeneralUtils.toArray("custommessage cmsg custommsg customsg"), 3, "custommessage (+/-)[Command] [permlevel] [Response]","Responses may contain $1, $2, etc which indicate the argument separated by a space. $* indicates all remaining arguments.");
+        super(GeneralUtils.toArray("custommessage cmsg custommsg customsg"), 3, "custommessage (+/-)[Command] [permlevel] [Response]", "Responses may contain $1, $2, etc which indicate the argument separated by a space. $* indicates all remaining arguments.");
     }
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
 
         if (args[0].toLowerCase().equalsIgnoreCase("list")) {
-                List<String> SimpleCommands = GeneralRegistry.SimpleMessages.stream().filter(g -> g.getPermLevel() <= UserPermLevel).map(GenericCommand::getCommand).collect(Collectors.toList());
-                IRCUtils.SendMessage(user, channel, StringUtils.join(SimpleCommands, ", "), isPrivate);
-        }else if (args[0].startsWith("-")) {
-                    removeCommand(user, channel, isPrivate, UserPermLevel, args[0].substring(1));
-                } else if (args[0].startsWith("+")) {
-                    modifyCommand(user, channel, Integer.parseInt(args[1]), isPrivate, args[0].substring(1), UserPermLevel, GeneralUtils.buildMessage(2, args.length, args).replace("\n", " "));
-                } else {
-                    addCommand(user, channel, Integer.parseInt(args[1]), isPrivate, args[0], GeneralUtils.buildMessage(2, args.length, args).replace("\n", " "));
-                }
+            List<String> SimpleCommands = GeneralRegistry.SimpleMessages.stream().filter(g -> g.getPermLevel() <= UserPermLevel).map(GenericCommand::getCommand).collect(Collectors.toList());
+            IRCUtils.SendMessage(user, channel, StringUtils.join(SimpleCommands, ", "), isPrivate);
+        } else if (args[0].startsWith("-")) {
+            removeCommand(user, channel, isPrivate, UserPermLevel, args[0].substring(1));
+        } else if (args[0].startsWith("+")) {
+            modifyCommand(user, channel, Integer.parseInt(args[1]), isPrivate, args[0].substring(1), UserPermLevel, GeneralUtils.buildMessage(2, args.length, args).replace("\n", " "));
+        } else {
+            addCommand(user, channel, Integer.parseInt(args[1]), isPrivate, args[0], GeneralUtils.buildMessage(2, args.length, args).replace("\n", " "));
+        }
 
     }
 
@@ -54,7 +54,7 @@ public class CustomMSG extends GenericCommand {
         if (GetUtils.getCommand(cmd) != null) {
             IRCUtils.sendError(user, "Custom Message already exists");
             return;
-        }else
+        } else
             GeneralRegistry.SimpleMessages.add(new SimpleMessage(cmd, accessLevel, msg, false));
         SimpleMessageUtils.saveSimpleMessages();
         IRCUtils.SendMessage(user, channel, "Custom Message added", isPrivate);
@@ -80,6 +80,7 @@ public class CustomMSG extends GenericCommand {
             IRCUtils.sendError(user, "Permission Denied");
         }
     }
+
     @SuppressWarnings({"SuspiciousMethodCalls", "ConstantConditions"})
     private void removeCommand(User user, Channel channel, boolean isPrivate, int UserPermLevel, String command) {
         SimpleMessage cmd = SimpleMessageUtils.getSimpleMessage(command);

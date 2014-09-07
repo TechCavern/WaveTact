@@ -1,8 +1,5 @@
 package com.techcavern.wavetact.utils.objects;
 
-/**
- * Created by jztech101 on 7/5/14.
- */
 public class Account {
     private final String AuthAccount;
     private String AuthPassword;
@@ -12,13 +9,15 @@ public class Account {
         this.AuthPassword = AuthPassword;
     }
 
-    public String getAuthAccount(){
+    public String getAuthAccount() {
         return this.AuthAccount;
     }
-    public String getAuthPassword(){
+
+    public String getAuthPassword() {
         return this.AuthPassword;
     }
-    public void setAuthPassword(String AuthPassword){
+
+    public void setAuthPassword(String AuthPassword) {
         this.AuthPassword = AuthPassword;
     }
 

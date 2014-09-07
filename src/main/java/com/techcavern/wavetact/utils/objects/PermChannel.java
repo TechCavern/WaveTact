@@ -1,8 +1,6 @@
 package com.techcavern.wavetact.utils.objects;
 
-/**
- * Created by jztech101 on 7/5/14.
- */
+
 public class PermChannel {
     private final String Channel;
     private final String PermNetwork;

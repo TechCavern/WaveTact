@@ -1,20 +1,16 @@
 package com.techcavern.wavetact.utils;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.conn.util.InetAddressUtils;
 import org.pircbotx.PircBotX;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.lang.annotation.Annotation;
 import java.net.InetAddress;
-import java.net.Socket;
 import java.net.URL;
-import java.util.List;
 
 public class GeneralUtils {
     public static String buildMessage(int startint, int finishint, String[] args) {
@@ -31,15 +27,17 @@ public class GeneralUtils {
         String result = parseUrl(url);
         return new JsonParser().parse(result).getAsJsonObject();
     }
+
     public static boolean isInteger(String s) {
         try {
             Integer.parseInt(s);
-        } catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             return false;
         }
         return true;
     }
-    public static String parseUrl(String Url) throws Exception{
+
+    public static String parseUrl(String Url) throws Exception {
         URL url1 = new URL(Url);
         String line;
         String result = "";
@@ -51,10 +49,12 @@ public class GeneralUtils {
         return result;
 
     }
+
     public static JsonArray getJsonArray(String url) throws Exception {
         String result = parseUrl(url);
         return new JsonParser().parse(result).getAsJsonArray();
     }
+
     public static String getIP(String input, PircBotX Bot) {
         String IP = "";
         if (input.contains(".") || input.contains(":")) {
@@ -64,17 +64,18 @@ public class GeneralUtils {
         }
         if (IP == null || IP.replaceFirst(":", "").contains(":")) {
             return null;
-        } else if (InetAddressUtils.isIPv4Address(IP) || InetAddressUtils.isIPv6Address(IP)){
-           return IP;
-        }else {
+        } else if (InetAddressUtils.isIPv4Address(IP) || InetAddressUtils.isIPv6Address(IP)) {
+            return IP;
+        } else {
             IP = IP.replaceAll("http://|https://", "");
             try {
-              return InetAddress.getByName(IP).getHostAddress();
-            }catch(Exception e){
+                return InetAddress.getByName(IP).getHostAddress();
+            } catch (Exception e) {
                 return null;
             }
         }
     }
+
     public static long getMilliSeconds(String input) {
         if (input.toLowerCase().endsWith("h")) {
             return Long.parseLong(input.replace("h", "")) * 60 * 60 * 1000;

@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.techcavern.wavetact.commands.global;
+package com.techcavern.wavetact.commands.netadmin;
 
-import org.apache.commons.lang3.StringUtils;
 import com.techcavern.wavetact.annot.CMD;
-import com.techcavern.wavetact.annot.GloCMD;
+import com.techcavern.wavetact.annot.NAdmCMD;
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.databaseUtils.IRCBLUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
+import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -23,12 +23,12 @@ import org.pircbotx.User;
  * @author jztech101
  */
 @CMD
-@GloCMD
+@NAdmCMD
 public class IRCBlacklistDB extends GenericCommand {
 
 
     public IRCBlacklistDB() {
-        super(GeneralUtils.toArray("ircblacklistdb ircbldb"), 20, "ircblacklistdb (-)[IRC DNSBL]","Adds/Removes Domains from IRCBL");
+        super(GeneralUtils.toArray("ircblacklistdb ircbldb"), 20, "ircblacklistdb (-)[IRC DNSBL]", "Adds/Removes Domains from IRCBL");
     }
 
     @Override
@@ -36,26 +36,26 @@ public class IRCBlacklistDB extends GenericCommand {
         if (args.length > 0) {
             if (args[0].startsWith("-")) {
                 String Domain = GetUtils.getIRCDNSBLbyDomain(args[0].replaceFirst("-", ""));
-                if(Domain != null){
+                if (Domain != null) {
                     GeneralRegistry.IRCBLs.remove(Domain);
                     IRCBLUtils.saveIRCBLs();
                     IRCUtils.SendMessage(user, channel, "IRC DNSBL Removed", isPrivate);
-                }else{
+                } else {
                     IRCUtils.sendError(user, "IRC DNSBL does not exist on list");
                 }
-            } else if(args[0].equalsIgnoreCase("list")){
-                if(!GeneralRegistry.IRCBLs.isEmpty()) {
+            } else if (args[0].equalsIgnoreCase("list")) {
+                if (!GeneralRegistry.IRCBLs.isEmpty()) {
                     IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.IRCBLs, ", "), isPrivate);
-                }else{
+                } else {
                     IRCUtils.sendError(user, "IRC DNS Blacklist is Empty");
                 }
-            }else {
+            } else {
                 String Domain = GetUtils.getIRCDNSBLbyDomain(args[0]);
-                if(Domain == null){
+                if (Domain == null) {
                     GeneralRegistry.IRCBLs.add(args[0]);
                     IRCBLUtils.saveIRCBLs();
                     IRCUtils.SendMessage(user, channel, "IRC DNSBL Added", isPrivate);
-                }else{
+                } else {
                     IRCUtils.sendError(user, "IRC DNSBL already listed");
                 }
             }

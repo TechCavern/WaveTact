@@ -48,11 +48,11 @@ public class Question extends GenericCommand {
             }
         }
         if (waResults.size() > 0) {
-            if (waResults.size()-1 >= ArrayIndex && !waResults.get(ArrayIndex).isEmpty()) {
+            if (waResults.size() - 1 >= ArrayIndex && !waResults.get(ArrayIndex).isEmpty()) {
                 IRCUtils.SendMessage(user, channel, waResults.get(0) + ": " + StringUtils.substring(waResults.get(ArrayIndex), 0, 750), isPrivate);
 
             } else {
-                ArrayIndex = ArrayIndex -1;
+                ArrayIndex = ArrayIndex - 1;
                 IRCUtils.sendError(user, "Answer #" + ArrayIndex + " does not exist");
             }
         } else {

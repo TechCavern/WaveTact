@@ -8,15 +8,12 @@ import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.wordnik.client.api.WordApi;
 import com.wordnik.client.model.Definition;
-import com.wordnik.client.model.Example;
 import com.wordnik.client.model.ExampleUsage;
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.WordUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
-import org.w3c.dom.Document;
 
 import java.util.List;
 
@@ -25,7 +22,7 @@ import java.util.List;
 public class Define extends GenericCommand {
 
     public Define() {
-        super(GeneralUtils.toArray("define whatis"), 0, "Define (Def #) [word]","defines a word");
+        super(GeneralUtils.toArray("define whatis"), 0, "Define (Def #) [word]", "defines a word");
     }
 
     @Override
@@ -42,7 +39,7 @@ public class Define extends GenericCommand {
         api.getInvoker().addDefaultHeader("api_key", GeneralRegistry.wordnikapikey);
         List<Definition> Defs = api.getDefinitions(args[0], null, null, null, null, null, null);
         if (Defs.size() > 0) {
-            if(Defs.size() -1 >= ArrayIndex) {
+            if (Defs.size() - 1 >= ArrayIndex) {
                 String word = WordUtils.capitalizeFully(Defs.get(ArrayIndex).getWord());
                 String definition = Defs.get(ArrayIndex).getText();
                 List<ExampleUsage> examples = Defs.get(ArrayIndex).getExampleUses();
@@ -50,13 +47,13 @@ public class Define extends GenericCommand {
                 if (examples.size() > 0) {
                     IRCUtils.SendMessage(user, channel, "Example: " + examples.get(0).getText(), isPrivate);
                 }
-            }else{
+            } else {
                 ArrayIndex = ArrayIndex + 1;
                 IRCUtils.sendError(user, "Def #" + ArrayIndex + " does not exist");
             }
-        } else{
+        } else {
             IRCUtils.sendError(user, "Not Defined");
-    }
+        }
 
     }
 

@@ -1,8 +1,6 @@
 package com.techcavern.wavetact.utils.objects;
 
-/**
- * Created by jztech101 on 7/8/14.
- */
+
 public class FunObject {
 
     private final String Action;

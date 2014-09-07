@@ -12,9 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Created by jztech101 on 7/4/14.
- */
+
 public class SimpleActionUtils {
     @SuppressWarnings("unchecked")
     public static void loadSimpleActions() {

@@ -31,19 +31,19 @@ public class DNSBlacklistLookup extends GenericCommand {
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         String BeforeIP = GeneralUtils.getIP(args[0], Bot);
-        if(BeforeIP == null){
+        if (BeforeIP == null) {
             IRCUtils.sendError(user, "Invalid IP/User");
             return;
-        }else if (BeforeIP.contains(":")){
+        } else if (BeforeIP.contains(":")) {
             IRCUtils.sendError(user, "IPv6 is Not supported");
             return;
         }
         String[] IPString = StringUtils.split(BeforeIP, ".");
         String IP = "";
-        for(int i = IPString.length-1; i > -1; i--){
-            if(IP.isEmpty()){
+        for (int i = IPString.length - 1; i > -1; i--) {
+            if (IP.isEmpty()) {
                 IP = IPString[i];
-            }else{
+            } else {
                 IP += "." + IPString[i];
             }
         }
@@ -63,14 +63,13 @@ public class DNSBlacklistLookup extends GenericCommand {
                 sent = true;
                 for (Record rec : records) {
                     if (rec instanceof TXTRecord) {
-                        TXTRecord c = (TXTRecord) rec;
                         IRCUtils.SendMessage(user, channel, Type.string(rec.getType()) + " - " + StringUtils.join((TXTRecord) rec, " "), isPrivate);
                     }
                 }
             }
 
         }
-        if(!sent){
+        if (!sent) {
             IRCUtils.SendMessage(user, channel, BeforeIP + " not found in DNSBLs", isPrivate);
         }
 

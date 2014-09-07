@@ -6,7 +6,7 @@
 package com.techcavern.wavetact.commands.fun;
 
 import com.techcavern.wavetact.annot.CMD;
-import com.techcavern.wavetact.annot.FunCMD;
+import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
@@ -19,7 +19,7 @@ import org.pircbotx.UserLevel;
  * @author jztech101
  */
 @CMD
-@FunCMD
+@GenCMD
 public class SomethingAwesome extends GenericCommand {
 
     public SomethingAwesome() {

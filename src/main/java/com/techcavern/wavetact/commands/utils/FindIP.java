@@ -4,15 +4,12 @@ import com.google.gson.JsonObject;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-import java.net.InetAddress;
-import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,24 +23,24 @@ public class FindIP extends GenericCommand {
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-            String IP;
-            if(args.length > 0) {
-                if (args[0].contains(".") || args[0].contains(":")) {
-                    IP = args[0].replace("http://", "").replace("https://", "");
-                } else {
-                    IP = IRCUtils.getHost(Bot, args[0]);
-                }
-            }else{
-                IP = IRCUtils.getHost(Bot, user.getNick());
+        String IP;
+        if (args.length > 0) {
+            if (args[0].contains(".") || args[0].contains(":")) {
+                IP = args[0].replace("http://", "").replace("https://", "");
+            } else {
+                IP = IRCUtils.getHost(Bot, args[0]);
             }
-            if (IP == null) {
-                IRCUtils.sendError(user, "Please Enter in an IP/User/Domain as argument #1");
-                return;
-            }
+        } else {
+            IP = IRCUtils.getHost(Bot, user.getNick());
+        }
+        if (IP == null) {
+            IRCUtils.sendError(user, "Please Enter in an IP/User/Domain as argument #1");
+            return;
+        }
 
-            JsonObject objectJson = GeneralUtils.getJsonObject("http://ip-api.com/json/" + IP);
-            List<String> results = new ArrayList<>();
-            if(objectJson.get("status").getAsString().equalsIgnoreCase("success")){
+        JsonObject objectJson = GeneralUtils.getJsonObject("http://ip-api.com/json/" + IP);
+        List<String> results = new ArrayList<>();
+        if (objectJson.get("status").getAsString().equalsIgnoreCase("success")) {
             results.add(objectJson.get("city").getAsString());
             results.add(objectJson.get("regionName").getAsString());
             results.add(objectJson.get("country").getAsString());
@@ -51,23 +48,23 @@ public class FindIP extends GenericCommand {
             results.add(objectJson.get("isp").getAsString());
             results.add(objectJson.get("timezone").getAsString());
             String fin = "";
-            for(String res : results){
-                if(!res.isEmpty()){
-                    if(fin.isEmpty()){
+            for (String res : results) {
+                if (!res.isEmpty()) {
+                    if (fin.isEmpty()) {
                         fin = res;
-                    }else{
+                    } else {
                         fin += ", " + res;
                     }
                 }
             }
-            if(!fin.isEmpty()) {
+            if (!fin.isEmpty()) {
                 IRCUtils.SendMessage(user, channel, fin, isPrivate);
-            }else {
+            } else {
                 IRCUtils.sendError(user, "Unable to Determine Location (Or you entered an invalid IP)");
             }
-            }else{
-                IRCUtils.sendError(user, "Unable to Determine Location (Or you entered an invalid IP)");
-            }
+        } else {
+            IRCUtils.sendError(user, "Unable to Determine Location (Or you entered an invalid IP)");
+        }
 
 
     }

@@ -1,6 +1,5 @@
 package com.techcavern.wavetact.utils.objects;
 
-import com.techcavern.wavetact.utils.GeneralRegistry;
 import org.pircbotx.PircBotX;
 
 

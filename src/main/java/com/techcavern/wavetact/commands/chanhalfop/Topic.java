@@ -56,7 +56,7 @@ public class Topic extends GenericCommand {
         } else if (args[1].equalsIgnoreCase("ss") || args[1].equalsIgnoreCase("switchseperator")) {
             channel.send().setTopic(channel.getTopic().replace(args[0], args[2]));
             saveTopic(channel, Bot);
-        } else if (args[1].equalsIgnoreCase("r")||args[1].equalsIgnoreCase("revert")) {
+        } else if (args[1].equalsIgnoreCase("r") || args[1].equalsIgnoreCase("revert")) {
             UTime oldTopic = GetUtils.getTopic(channel.getName(), Bot.getServerInfo().getNetwork());
             if (oldTopic != null) {
                 channel.send().setTopic(oldTopic.getSomething());

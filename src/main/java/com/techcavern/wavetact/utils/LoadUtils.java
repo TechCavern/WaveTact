@@ -1,11 +1,9 @@
 package com.techcavern.wavetact.utils;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.techcavern.wavetact.annot.*;
-import com.techcavern.wavetact.utils.eventListeners.CTCPListener;
-import com.techcavern.wavetact.utils.eventListeners.ChanMsgListener;
-import com.techcavern.wavetact.utils.eventListeners.JoinListener;
-import com.techcavern.wavetact.utils.eventListeners.KickListener;
-import com.techcavern.wavetact.utils.eventListeners.PrivMsgListener;
+import com.techcavern.wavetact.utils.eventListeners.*;
 import com.techcavern.wavetact.utils.objects.CommandLine;
 import com.techcavern.wavetact.utils.objects.FunObject;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
@@ -13,12 +11,7 @@ import org.pircbotx.Configuration;
 import org.pircbotx.Configuration.Builder;
 import org.pircbotx.PircBotX;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import org.reflections.Reflections;
-
 import java.lang.annotation.Annotation;
-import java.nio.channels.Channels;
 import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Set;
@@ -33,8 +26,8 @@ public class LoadUtils {
         Net.setLogin("WaveTact");
         Net.setEncoding(Charset.isSupported("UTF-8") ? Charset.forName("UTF-8") : Charset.defaultCharset());
         Net.setServer(server, 6667);
-        for(String channel: channels){
-            if(!channel.isEmpty())
+        for (String channel : channels) {
+            if (!channel.isEmpty())
                 Net.addAutoJoinChannel(channel);
         }
         Net.setRealName(nick);
@@ -57,9 +50,8 @@ public class LoadUtils {
         addCommands(GeneralRegistry.ChanHalfOpCommands, ChanHOPCMD.class);
         addCommands(GeneralRegistry.ChanOwnerCommands, ChanOWNCMD.class);
         addCommands(GeneralRegistry.ControllerCommands, ConCMD.class);
-        addCommands(GeneralRegistry.FunCommands, FunCMD.class);
         addCommands(GeneralRegistry.GenericCommands, GenCMD.class);
-        addCommands(GeneralRegistry.GlobalCommands, GloCMD.class);
+        addCommands(GeneralRegistry.GlobalCommands, NAdmCMD.class);
         addCommands(GeneralRegistry.TrustedCommands, TruCMD.class);
     }
 
@@ -97,22 +89,24 @@ public class LoadUtils {
         }
         if (invalid) System.exit(0);
     }
-    public static void addCommands(List<GenericCommand> list, Class<? extends Annotation> cl){
+
+    public static void addCommands(List<GenericCommand> list, Class<? extends Annotation> cl) {
         Set<Class<?>> classes = GeneralRegistry.wavetactreflection.getTypesAnnotatedWith(cl);
-        for(Class<?> clss: classes){
-            try{
+        for (Class<?> clss : classes) {
+            try {
                 list.add(((GenericCommand) clss.newInstance()));
-            } catch(Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
+
     public static void addCommandLines(List<CommandLine> list, Class<? extends Annotation> cl) {
         Set<Class<?>> classes = GeneralRegistry.wavetactreflection.getTypesAnnotatedWith(cl);
-        for(Class<?> clss : classes) {
-            try{
+        for (Class<?> clss : classes) {
+            try {
                 list.add(((CommandLine) clss.newInstance()));
-            } catch(Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -131,7 +125,8 @@ public class LoadUtils {
         GeneralRegistry.Attacks.add(new FunObject("runs over $*", true, "HEY! WATCH WHERE YOU'RE GOING!"));
         GeneralRegistry.Attacks.add(new FunObject("throws a racket at $*", false, null));
     }
-    public static void registerEightball(){
+
+    public static void registerEightball() {
         GeneralRegistry.Eightball.add("Hmm.. not today");
         GeneralRegistry.Eightball.add("YES!");
         GeneralRegistry.Eightball.add("Maybe");
@@ -152,17 +147,6 @@ public class LoadUtils {
 
     public static void registerCommandList() {
         for (GenericCommand command : GeneralRegistry.GenericCommands) {
-            GeneralRegistry.GenericListCommands.add(command.getCommand());
-            GeneralRegistry.TrustedListCommands.add(command.getCommand());
-            GeneralRegistry.ChanHalfOpListCommands.add(command.getCommand());
-            GeneralRegistry.ChanOpListCommands.add(command.getCommand());
-            GeneralRegistry.ChanOwnerListCommands.add(command.getCommand());
-            GeneralRegistry.ChanFounderListCommands.add(command.getCommand());
-            GeneralRegistry.ControllerListCommands.add(command.getCommand());
-            GeneralRegistry.GlobalListCommands.add(command.getCommand());
-
-        }
-        for (GenericCommand command : GeneralRegistry.FunCommands) {
             GeneralRegistry.GenericListCommands.add(command.getCommand());
             GeneralRegistry.TrustedListCommands.add(command.getCommand());
             GeneralRegistry.ChanHalfOpListCommands.add(command.getCommand());

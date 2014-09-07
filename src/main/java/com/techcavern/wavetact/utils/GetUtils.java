@@ -1,13 +1,14 @@
 package com.techcavern.wavetact.utils;
 
-import com.techcavern.wavetact.utils.objects.*;
+import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.NetProperty;
+import com.techcavern.wavetact.utils.objects.NetworkAdmin;
+import com.techcavern.wavetact.utils.objects.UTime;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-/**
- * Created by jztech101 on 7/4/14.
- */
+
 public class GetUtils {
 
     public static User getUserByNick(PircBotX botObject, String Nick) {
@@ -53,6 +54,7 @@ public class GetUtils {
         }
         return null;
     }
+
     public static String getAuthType(PircBotX botObject) {
         for (NetProperty d : GeneralRegistry.AuthType) {
             if (d.getBot() == botObject) {
@@ -89,17 +91,19 @@ public class GetUtils {
         }
         return null;
     }
-    public static String getIRCDNSBLbyDomain(String Domain){
-        for(String d : GeneralRegistry.IRCBLs){
-            if(d.equalsIgnoreCase(Domain)){
+
+    public static String getIRCDNSBLbyDomain(String Domain) {
+        for (String d : GeneralRegistry.IRCBLs) {
+            if (d.equalsIgnoreCase(Domain)) {
                 return d;
             }
         }
         return null;
     }
-    public static String getDNSBLbyDomain(String Domain){
-        for(String d : GeneralRegistry.DNSBLs){
-            if(d.equalsIgnoreCase(Domain)){
+
+    public static String getDNSBLbyDomain(String Domain) {
+        for (String d : GeneralRegistry.DNSBLs) {
+            if (d.equalsIgnoreCase(Domain)) {
                 return d;
             }
         }

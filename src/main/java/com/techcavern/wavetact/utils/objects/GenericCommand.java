@@ -52,9 +52,9 @@ public abstract class GenericCommand {
     }
 
     public String getSyntax() {
-        if(Syntax != null) {
+        if (Syntax != null) {
             return Syntax;
-        }else{
+        } else {
             return "";
         }
     }

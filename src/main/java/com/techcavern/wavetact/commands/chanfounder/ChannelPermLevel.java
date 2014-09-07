@@ -18,7 +18,7 @@ import org.pircbotx.User;
 public class ChannelPermLevel extends GenericCommand {
 
     public ChannelPermLevel() {
-        super(GeneralUtils.toArray("channelpermlevel chanpermlevel cpl cpermlevel"), 18, "channelpermlevel (+)(-)[user] (permlevel)","adds, removes, modifies permissions");
+        super(GeneralUtils.toArray("channelpermlevel chanpermlevel cpl cpermlevel"), 18, "channelpermlevel (+)(-)[user] (permlevel)", "adds, removes, modifies permissions");
     }
 
     @Override
@@ -38,7 +38,7 @@ public class ChannelPermLevel extends GenericCommand {
                 account = args[0];
             }
             String auth = PermUtils.getAuthedAccount(Bot, account);
-            if(auth != null){
+            if (auth != null) {
                 account = auth;
             }
             PermChannel PLChannel = PermChannelUtils.getPermLevelChannel(Bot.getServerInfo().getNetwork(), account, channel.getName());

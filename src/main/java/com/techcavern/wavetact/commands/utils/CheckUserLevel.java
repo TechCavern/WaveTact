@@ -17,26 +17,26 @@ import org.pircbotx.User;
 public class CheckUserLevel extends GenericCommand {
 
     public CheckUserLevel() {
-        super(GeneralUtils.toArray("checkuserlevel level checklevel"), 0, "checkuserlevel (user)","Checks User Level of the specified user or yourself if unspecified");
+        super(GeneralUtils.toArray("checkuserlevel level checklevel"), 0, "checkuserlevel (user)", "Checks User Level of the specified user or yourself if unspecified");
     }
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         String userObject;
-            if (args.length > 1 && args[0].startsWith("#")) {
-                channel = GetUtils.getChannelbyName(Bot, args[0]);
-                args = ArrayUtils.remove(args, 0);
-            }
+        if (args.length > 1 && args[0].startsWith("#")) {
+            channel = GetUtils.getChannelbyName(Bot, args[0]);
+            args = ArrayUtils.remove(args, 0);
+        }
         if (args.length < 1) {
             userObject = user.getNick();
-        }else{
-                userObject = args[0];
-                UserPermLevel = PermUtils.getPermLevel(Bot, userObject, channel);
-            }
+        } else {
+            userObject = args[0];
+            UserPermLevel = PermUtils.getPermLevel(Bot, userObject, channel);
+        }
 
-        if(userObject == null){
+        if (userObject == null) {
             IRCUtils.sendError(user, "User does not exist");
-        }else if (UserPermLevel >= 9001) {
+        } else if (UserPermLevel >= 9001) {
             IRCUtils.SendMessage(user, channel, userObject + " is my Master!", isPrivate);
         } else if (UserPermLevel >= 20) {
             IRCUtils.SendMessage(user, channel, userObject + " is a Network Administrator!", isPrivate);

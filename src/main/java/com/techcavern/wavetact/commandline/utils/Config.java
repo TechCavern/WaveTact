@@ -16,17 +16,17 @@ public class Config extends CommandLine {
 
     @Override
     public void doAction(String[] args) {
-            Scanner input = new Scanner(System.in);
-            com.techcavern.wavetact.utils.fileUtils.Configuration config = new com.techcavern.wavetact.utils.fileUtils.Configuration(new File("config.properties"));
-            System.out.print("Wolfram API Key: ");
-            config.set("wolframapi", input.nextLine());
-            System.out.print("Wunderground API Key: ");
-            config.set("wundergroundapi", input.nextLine());
-            System.out.print("Wordnik API Key: ");
-            config.set("wordnikapi", input.nextLine());
+        Scanner input = new Scanner(System.in);
+        com.techcavern.wavetact.utils.fileUtils.Configuration config = new com.techcavern.wavetact.utils.fileUtils.Configuration(new File("config.properties"));
+        System.out.print("Wolfram API Key: ");
+        config.set("wolframapi", input.nextLine());
+        System.out.print("Wunderground API Key: ");
+        config.set("wundergroundapi", input.nextLine());
+        System.out.print("Wordnik API Key: ");
+        config.set("wordnikapi", input.nextLine());
         System.out.print("Minecraft API Key (http://theminecraftapi.com/): ");
         config.set("minecraftapi", input.nextLine());
-            config.save();
+        config.save();
         System.exit(0);
     }
 }

@@ -10,9 +10,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 
-/**
- * Created by jztech101 on 7/6/14.
- */
+
 public class NetworkUtils {
     public static void registerNetworks() {
         File serversFolder = new File("servers/");
@@ -45,11 +43,11 @@ public class NetworkUtils {
             GeneralRegistry.WaveTact.addBot(bot);
             GeneralRegistry.CommandChars.add(new NetProperty(c.getString("prefix"), bot));
             String authtype = c.getString("authtype").toLowerCase();
-            if(authtype.startsWith("n")) {
+            if (authtype.startsWith("n")) {
                 GeneralRegistry.AuthType.add(new NetProperty("nickserv", bot));
-            }else if(authtype.startsWith("a")){
+            } else if (authtype.startsWith("a")) {
                 GeneralRegistry.AuthType.add(new NetProperty("account", bot));
-            }else{
+            } else {
                 GeneralRegistry.AuthType.add(new NetProperty("nick", bot));
             }
         }
@@ -57,12 +55,12 @@ public class NetworkUtils {
     }
 
     public static void registerDevServer() {
- //       PircBotX Dev = LoadUtils.createbot(null, "SynIRC", Arrays.asList("##powder-bots"), "WaveTactDev", "irc.freenode.net");
+        //       PircBotX Dev = LoadUtils.createbot(null, "SynIRC", Arrays.asList("##powder-bots"), "WaveTactDev", "irc.freenode.net");
         PircBotX Dev2 = LoadUtils.createbot(null, "EsperNet", Arrays.asList(""), "WaveTactDev", "irc.esper.net");
-   //     GeneralRegistry.WaveTact.addBot(Dev);
+        //     GeneralRegistry.WaveTact.addBot(Dev);
         GeneralRegistry.WaveTact.addBot(Dev2);
         GeneralRegistry.Controllers.add("JZTech101");
-     //   new CommandChar("@", Dev);
+        //   new CommandChar("@", Dev);
         GeneralRegistry.CommandChars.add(new NetProperty("@", Dev2));
         GeneralRegistry.AuthType.add(new NetProperty("nickserv", Dev2));
     }

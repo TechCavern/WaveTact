@@ -11,9 +11,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Created by jztech101 on 7/4/14.
- */
+
 public class QuietTimeUtils {
     @SuppressWarnings("unchecked")
     public static void loadQuietTimes() {

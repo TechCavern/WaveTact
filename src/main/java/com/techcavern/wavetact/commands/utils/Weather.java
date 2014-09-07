@@ -12,9 +12,6 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-import java.net.URLEncoder;
-import java.util.List;
-
 @CMD
 @GenCMD
 public class Weather extends GenericCommand {
@@ -25,21 +22,21 @@ public class Weather extends GenericCommand {
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        if(GeneralRegistry.wundergroundapikey == null){
+        if (GeneralRegistry.wundergroundapikey == null) {
             IRCUtils.sendError(user, "Wunderground API key is null - Contact Bot Controller to fix");
             return;
         }
-        JsonObject weather = GeneralUtils.getJsonObject("http://api.wunderground.com/api/" + GeneralRegistry.wundergroundapikey +"/conditions/q/" + StringUtils.join(args, "%20") + ".json").getAsJsonObject("current_observation");
-        if(weather != null) {
+        JsonObject weather = GeneralUtils.getJsonObject("http://api.wunderground.com/api/" + GeneralRegistry.wundergroundapikey + "/conditions/q/" + StringUtils.join(args, "%20") + ".json").getAsJsonObject("current_observation");
+        if (weather != null) {
             String City = weather.get("display_location").getAsJsonObject().get("full").getAsString();
             String Weather = weather.get("weather").getAsString();
             String Temp = weather.get("temperature_string").getAsString();
             String Humidity = weather.get("relative_humidity").getAsString() + " humidity";
             String Wind = weather.get("wind_string").getAsString();
             IRCUtils.SendMessage(user, channel, City + ": " + Weather + " - " + Temp + " - " + Humidity + " - " + Wind + " - ", isPrivate);
-        }else{
+        } else {
             IRCUtils.sendError(user, "Requested location not found");
         }
-        }
+    }
 
 }

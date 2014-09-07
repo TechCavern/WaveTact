@@ -9,9 +9,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Created by jztech101 on 7/5/14.
- */
+
 public class ControllerUtils {
     public static void loadControllers() {
         JSONFile file = new JSONFile("Controllers.json");

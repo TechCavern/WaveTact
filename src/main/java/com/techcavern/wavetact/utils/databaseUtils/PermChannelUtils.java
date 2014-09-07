@@ -11,9 +11,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Created by jztech101 on 7/4/14.
- */
+
 public class PermChannelUtils {
     @SuppressWarnings("unchecked")
     public static void loadPermChannels() {
@@ -47,14 +45,14 @@ public class PermChannelUtils {
     }
 
     public static PermChannel getPermLevelChannel(String Network, String nick, String Channel) {
-        if(nick != null) {
+        if (nick != null) {
             for (PermChannel c : GeneralRegistry.PermChannels) {
                 if (c.getChannel().equals(Channel) && c.getPermUser().equalsIgnoreCase(nick) && c.getPermNetwork().equals(Network)) {
                     return c;
                 }
             }
             return null;
-        }else {
+        } else {
             return null;
         }
     }

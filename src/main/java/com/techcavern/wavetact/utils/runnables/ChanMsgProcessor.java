@@ -10,9 +10,7 @@ import org.pircbotx.Colors;
 import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.events.MessageEvent;
 
-/**
- * Created by jztech101 on 7/27/14.
- */
+
 public class ChanMsgProcessor {
     public static void ChanMsgProcess(MessageEvent<PircBotX> event) {
         class process implements Runnable {

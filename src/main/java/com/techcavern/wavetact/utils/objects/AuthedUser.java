@@ -1,8 +1,6 @@
 package com.techcavern.wavetact.utils.objects;
 
-/**
- * Created by jztech101 on 7/5/14.
- */
+
 public class AuthedUser {
     private final String AuthNetwork;
     private final String AuthAccount;
@@ -14,13 +12,15 @@ public class AuthedUser {
         this.AuthHostmask = AuthHostmask;
     }
 
-    public String getAuthAccount(){
+    public String getAuthAccount() {
         return this.AuthAccount;
     }
-    public String getAuthNetwork(){
+
+    public String getAuthNetwork() {
         return this.AuthNetwork;
     }
-    public String getAuthHostmask(){
+
+    public String getAuthHostmask() {
         return this.AuthHostmask;
     }
 }

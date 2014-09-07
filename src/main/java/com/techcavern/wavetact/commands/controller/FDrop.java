@@ -1,6 +1,5 @@
 package com.techcavern.wavetact.commands.controller;
 
-import com.techcavern.wavetact.annot.AuthCMD;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.utils.*;
@@ -22,7 +21,7 @@ public class FDrop extends GenericCommand {
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        if(!PermUtils.checkIfAccountEnabled(Bot)){
+        if (!PermUtils.checkIfAccountEnabled(Bot)) {
             IRCUtils.sendError(user, "This network is set to " + GetUtils.getAuthType(Bot) + " Authentication");
             return;
         }

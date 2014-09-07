@@ -44,7 +44,7 @@ public class SimpleMessage extends GenericCommand {
         dresponse = dresponse.replace("$*", GeneralUtils.buildMessage(i, args.length, args));
         String prefix = GetUtils.getCommandChar(Bot);
         if (dresponse.startsWith(prefix)) {
-            dresponse.replace(prefix, "");
+            dresponse = dresponse.replace(prefix, "");
         }
         IRCUtils.SendMessage(user, channel, dresponse, isPrivate);
     }

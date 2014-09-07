@@ -7,19 +7,16 @@ import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
-import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
-
-import java.net.URLEncoder;
 
 @CMD
 @GenCMD
 public class MCMods extends GenericCommand {
 
     public MCMods() {
-        super(GeneralUtils.toArray("mcmods mcmod"), 0, "mcmods (MC Version#) [Mod Name]","gets info on a minecraft mod");
+        super(GeneralUtils.toArray("mcmods mcmod"), 0, "mcmods (MC Version#) [Mod Name]", "gets info on a minecraft mod");
     }
 
     @Override
@@ -27,35 +24,35 @@ public class MCMods extends GenericCommand {
         JsonArray versions = GeneralUtils.getJsonArray("http://bot.notenoughmods.com/?json");
         String version = "";
         String modname = "";
-        for(int i = 0; i<versions.size(); i++){
+        for (int i = 0; i < versions.size(); i++) {
             String vers = versions.get(i).getAsString();
-            if(vers.contains(args[0])) {
+            if (vers.contains(args[0])) {
                 version = vers;
                 modname = args[1].toLowerCase();
             }
         }
-        if(version.isEmpty()){
-            version = versions.get(versions.size()-1).getAsString();
+        if (version.isEmpty()) {
+            version = versions.get(versions.size() - 1).getAsString();
             modname = args[0].toLowerCase();
         }
         JsonArray mods = GeneralUtils.getJsonArray("http://bot.notenoughmods.com/" + version + ".json");
-            int total = 0;
-            for(int i = 0; i<mods.size(); i++) {
-                JsonObject mod = mods.get(i).getAsJsonObject();
-                if (mod.get("name").getAsString().toLowerCase().contains(modname)) {
-                    String Version = mod.get("version").getAsString();
-                    String Name = mod.get("name").getAsString();
-                    String Link = mod.get("shorturl").getAsString();
-                    if (total < 3) {
-                        IRCUtils.SendMessage(user, channel, "[" + Version + "]" + Name + " - " + Link, isPrivate);
-                    }
-                    total++;
+        int total = 0;
+        for (int i = 0; i < mods.size(); i++) {
+            JsonObject mod = mods.get(i).getAsJsonObject();
+            if (mod.get("name").getAsString().toLowerCase().contains(modname)) {
+                String Version = mod.get("version").getAsString();
+                String Name = mod.get("name").getAsString();
+                String Link = mod.get("shorturl").getAsString();
+                if (total < 3) {
+                    IRCUtils.SendMessage(user, channel, "[" + Version + "]" + Name + " - " + Link, isPrivate);
                 }
-            }
-            if(total == 0){
-                IRCUtils.sendError(user, "No Mods Found");
+                total++;
             }
         }
+        if (total == 0) {
+            IRCUtils.sendError(user, "No Mods Found");
+        }
     }
+}
 
 

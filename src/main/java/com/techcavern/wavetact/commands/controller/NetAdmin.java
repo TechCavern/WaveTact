@@ -27,6 +27,7 @@ public class NetAdmin extends GenericCommand {
         super(GeneralUtils.toArray("networkadministrator netadmin"), 9001, "networkadministrator (-)[user]", "adds a network admin to the bot");
 
     }
+
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
 
@@ -37,7 +38,7 @@ public class NetAdmin extends GenericCommand {
             account = args[0];
         }
         String auth = PermUtils.getAuthedAccount(Bot, account);
-        if(auth != null){
+        if (auth != null) {
             account = auth;
         }
         if (account != null) {
@@ -49,21 +50,21 @@ public class NetAdmin extends GenericCommand {
                 } else {
                     IRCUtils.sendError(user, "User does not existing in NetworkAdmins");
                 }
-            }else if(args[0].equalsIgnoreCase("list")){
+            } else if (args[0].equalsIgnoreCase("list")) {
                 String netAdmins = "";
-                for(NetworkAdmin netAdmin : GeneralRegistry.NetworkAdmins){
-                    if(netAdmins.isEmpty()){
+                for (NetworkAdmin netAdmin : GeneralRegistry.NetworkAdmins) {
+                    if (netAdmins.isEmpty()) {
                         netAdmins = netAdmin.getUser();
-                    }else{
+                    } else {
                         netAdmins += ", " + netAdmin.getUser();
                     }
                 }
-                if(!netAdmins.isEmpty()) {
+                if (!netAdmins.isEmpty()) {
                     IRCUtils.SendMessage(user, channel, netAdmins, isPrivate);
-                }else{
+                } else {
                     IRCUtils.sendError(user, "No NetworkAdmins Exist");
                 }
-            }else {
+            } else {
                 if (GetUtils.getNetworkAdminByNick(account, Bot.getServerInfo().getNetwork()) != null) {
                     IRCUtils.sendError(user, "User is already in database");
                 } else {

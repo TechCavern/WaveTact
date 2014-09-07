@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.techcavern.wavetact.commands.global;
+package com.techcavern.wavetact.commands.netadmin;
 
 import com.techcavern.wavetact.annot.CMD;
-import com.techcavern.wavetact.annot.GloCMD;
+import com.techcavern.wavetact.annot.NAdmCMD;
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
@@ -23,11 +23,11 @@ import org.pircbotx.User;
  * @author jztech101
  */
 @CMD
-@GloCMD
+@NAdmCMD
 public class DNSBlacklistDB extends GenericCommand {
 
     public DNSBlacklistDB() {
-        super(GeneralUtils.toArray("dnsblacklistdb dnsbldb"), 20, "dnsblacklistdb (-)[Spam DNSBL]","Adds/Removes Domains from Spam DNS Blacklists");
+        super(GeneralUtils.toArray("dnsblacklistdb dnsbldb"), 20, "dnsblacklistdb (-)[Spam DNSBL]", "Adds/Removes Domains from Spam DNS Blacklists");
     }
 
     @Override
@@ -36,26 +36,26 @@ public class DNSBlacklistDB extends GenericCommand {
         if (args.length > 0) {
             if (args[0].startsWith("-")) {
                 String Domain = GetUtils.getDNSBLbyDomain(args[0].replaceFirst("-", ""));
-                if(Domain != null){
+                if (Domain != null) {
                     GeneralRegistry.DNSBLs.remove(Domain);
                     DNSBLUtils.saveDNSBLs();
                     IRCUtils.SendMessage(user, channel, "Spam DNSBL Removed", isPrivate);
-                }else{
+                } else {
                     IRCUtils.sendError(user, "Spam DNSBL does not exist on list");
                 }
-            } else if(args[0].equalsIgnoreCase("list")){
-                if(!GeneralRegistry.DNSBLs.isEmpty()) {
+            } else if (args[0].equalsIgnoreCase("list")) {
+                if (!GeneralRegistry.DNSBLs.isEmpty()) {
                     IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.DNSBLs, ", "), isPrivate);
-                }else{
+                } else {
                     IRCUtils.sendError(user, "Spam DNS Blacklist is Empty");
                 }
-            }else{
+            } else {
                 String Domain = GetUtils.getDNSBLbyDomain(args[0]);
-                if(Domain == null){
+                if (Domain == null) {
                     GeneralRegistry.DNSBLs.add(args[0]);
                     DNSBLUtils.saveDNSBLs();
                     IRCUtils.SendMessage(user, channel, "Spam DNSBL Added", isPrivate);
-                }else{
+                } else {
                     IRCUtils.sendError(user, "Spam DNSBL already listed");
                 }
             }

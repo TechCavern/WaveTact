@@ -3,33 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.techcavern.wavetact.commands.fun;
+package com.techcavern.wavetact.commands.netadmin;
 
 import com.techcavern.wavetact.annot.CMD;
-import com.techcavern.wavetact.annot.GenCMD;
-import com.techcavern.wavetact.utils.GeneralRegistry;
+import com.techcavern.wavetact.annot.NAdmCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
-import org.apache.commons.lang3.RandomUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
+
 
 /**
  * @author jztech101
  */
 @CMD
-@GenCMD
-public class Eightball extends GenericCommand {
+@NAdmCMD
+public class Join extends GenericCommand {
 
-    public Eightball() {
-        super(GeneralUtils.toArray("eightball 8ball 8b"), 0, "eightball [question]", "eightball");
+    public Join() {
+        super(GeneralUtils.toArray("join jo"), 20, "join [channel]", "join a channel (not saved)");
     }
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        int randomint = RandomUtils.nextInt(0, GeneralRegistry.Eightball.size());
-        IRCUtils.SendMessage(user, channel, GeneralRegistry.Eightball.get(randomint), isPrivate);
+        Bot.sendIRC().joinChannel(args[0]);
     }
 }

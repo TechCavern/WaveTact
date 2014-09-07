@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.techcavern.wavetact.commands.global;
+package com.techcavern.wavetact.commands.netadmin;
 
 import com.techcavern.wavetact.annot.CMD;
-import com.techcavern.wavetact.annot.GloCMD;
+import com.techcavern.wavetact.annot.NAdmCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.pircbotx.Channel;
@@ -17,7 +17,7 @@ import org.pircbotx.User;
  * @author jztech101
  */
 @CMD
-@GloCMD
+@NAdmCMD
 public class Disconnect extends GenericCommand {
 
     public Disconnect() {

@@ -17,7 +17,7 @@ import org.pircbotx.User;
 public class AutoOp extends GenericCommand {
 
     public AutoOp() {
-        super(GeneralUtils.toArray("autoop autop ap"), 10, "autoop (-)[user]","Define whether to autoop the user or not");
+        super(GeneralUtils.toArray("autoop autop ap"), 10, "autoop (-)[user]", "Define whether to autoop the user or not");
     }
 
     @Override
@@ -29,7 +29,7 @@ public class AutoOp extends GenericCommand {
             account = args[0];
         }
         String auth = PermUtils.getAuthedAccount(Bot, account);
-        if(auth != null){
+        if (auth != null) {
             account = auth;
         }
         PermChannel PLChannel = PermChannelUtils.getPermLevelChannel(Bot.getServerInfo().getNetwork(), account, channel.getName());

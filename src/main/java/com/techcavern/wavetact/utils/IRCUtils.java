@@ -9,9 +9,7 @@ import org.pircbotx.hooks.events.WhoisEvent;
 import org.pircbotx.output.OutputChannel;
 import org.pircbotx.output.OutputUser;
 
-/**
- * Created by jztech101 on 7/4/14.
- */
+
 public class IRCUtils {
     public static void setMode(Channel channelObject, PircBotX botObject, String modeToSet, String hostmask) {
         OutputChannel o = new OutputChannel(botObject, channelObject);
@@ -35,7 +33,7 @@ public class IRCUtils {
             ex.printStackTrace();
             WhoisEvent = null;
         }
-        if(!WhoisEvent.isExists()){
+        if (!WhoisEvent.isExists()) {
             return null;
         }
         return WhoisEvent;
@@ -83,19 +81,21 @@ public class IRCUtils {
         }
         return hostmask;
     }
+
     public static String getIRCHostmask(PircBotX bot, String userObject) {
         User whois = GetUtils.getUserByNick(bot, userObject);
         String hostmask = "";
         if (whois != null) {
             String hostname = whois.getHostmask();
             String Login = whois.getLogin();
-                hostmask = "*!" + Login + "@" + hostname;
+            hostmask = "*!" + Login + "@" + hostname;
             hostmask = hostmask.replace(" ", "");
         } else {
-            hostmask = userObject+"!*@*";
+            hostmask = userObject + "!*@*";
         }
         return hostmask;
     }
+
     public static String getHost(PircBotX bot, String userObject) {
         String host;
         WhoisEvent whois = WhoisEvent(bot, userObject);
@@ -106,10 +106,12 @@ public class IRCUtils {
         }
         return host;
     }
-    public static void sendError(User user, String error){
+
+    public static void sendError(User user, String error) {
         user.send().notice(error);
     }
-    public static void processMessage(GenericCommand Command, PircBotX Bot, Channel channel, User user, int UserPermLevel, String[] messageParts, boolean isPrivate){
+
+    public static void processMessage(GenericCommand Command, PircBotX Bot, Channel channel, User user, int UserPermLevel, String[] messageParts, boolean isPrivate) {
         if (Command.getPermLevel() == 9) {
             if (channel.isOp(Bot.getUserBot()) || channel.isOp(Bot.getUserBot()) || channel.isOwner(Bot.getUserBot())) {
                 try {

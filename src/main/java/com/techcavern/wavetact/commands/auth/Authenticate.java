@@ -18,33 +18,34 @@ public class Authenticate extends GenericCommand {
     public Authenticate() {
         super(GeneralUtils.toArray("authenticate auth identify id login"), 0, "identify (username) [password]", "identifies a user");
     }
+
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        if(!PermUtils.checkIfAccountEnabled(Bot)){
+        if (!PermUtils.checkIfAccountEnabled(Bot)) {
             IRCUtils.sendError(user, "This network is set to " + GetUtils.getAuthType(Bot) + " Authentication");
             return;
         }
         String userString;
         String password;
-        if(args.length < 2){
+        if (args.length < 2) {
             userString = user.getNick();
             password = args[0];
-        }else{
+        } else {
             userString = args[0];
             password = args[1];
         }
-        if(PermUtils.getAuthedAccount(Bot, user.getNick()) != null){
+        if (PermUtils.getAuthedAccount(Bot, user.getNick()) != null) {
             IRCUtils.sendError(user, "Error, you are already identified");
 
-        }else{
+        } else {
             Account acc = AccountUtils.getAccount(userString);
-            if(acc != null && GeneralRegistry.encryptor.checkPassword(password, acc.getAuthPassword())){
-                    GeneralRegistry.AuthedUsers.add(new AuthedUser(Bot.getServerInfo().getNetwork(), userString, IRCUtils.getHostmask(Bot, user.getNick(), false)));
-                    IRCUtils.SendMessage(user, channel, "Identification Successful", isPrivate);
-            }else{
-IRCUtils.sendError(user, "Unable to identify (Incorrect User/Password Combination)");
+            if (acc != null && GeneralRegistry.encryptor.checkPassword(password, acc.getAuthPassword())) {
+                GeneralRegistry.AuthedUsers.add(new AuthedUser(Bot.getServerInfo().getNetwork(), userString, IRCUtils.getHostmask(Bot, user.getNick(), false)));
+                IRCUtils.SendMessage(user, channel, "Identification Successful", isPrivate);
+            } else {
+                IRCUtils.sendError(user, "Unable to identify (Incorrect User/Password Combination)");
             }
         }
-        }
     }
+}
 

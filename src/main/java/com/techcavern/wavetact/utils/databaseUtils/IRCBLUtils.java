@@ -9,9 +9,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Created by jztech101 on 7/5/14.
- */
+
 public class IRCBLUtils {
     public static void loadIRCBLs() {
         JSONFile file = new JSONFile("IRCBLs.json");

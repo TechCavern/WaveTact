@@ -64,7 +64,6 @@ public class DefCon extends GenericCommand {
     void initializeCommands() {
         GeneralRegistry.AllCommands.clear();
         GeneralRegistry.GenericCommands.clear();
-        GeneralRegistry.FunCommands.clear();
         GeneralRegistry.SimpleActions.clear();
         GeneralRegistry.SimpleMessages.clear();
         GeneralRegistry.TrustedCommands.clear();

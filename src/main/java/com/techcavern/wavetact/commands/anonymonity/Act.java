@@ -23,7 +23,7 @@ import org.pircbotx.User;
 public class Act extends GenericCommand {
 
     public Act() {
-        super(GeneralUtils.toArray("act do"), 5, "act [something]","make the bot do something");
+        super(GeneralUtils.toArray("act do"), 5, "act [something]", "make the bot do something");
     }
 
     @Override
