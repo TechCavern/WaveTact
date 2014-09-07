@@ -50,8 +50,8 @@ public class CheckUserLevel extends GenericCommand {
             IRCUtils.SendMessage(user, channel, userObject + " is a Channel Operator!", isPrivate);
         } else if (UserPermLevel >= 7) {
             IRCUtils.SendMessage(user, channel, userObject + " is a Channel Half-Operator", isPrivate);
-        } else if (UserPermLevel >= 5) {
-            IRCUtils.SendMessage(user, channel, userObject + " is a Trusted User!", isPrivate);
+        } else if (UserPermLevel >= 5 && !isPrivate) {
+            IRCUtils.SendMessage(user, channel, userObject + " is a Channel Trusted User!", isPrivate);
         } else {
             IRCUtils.SendMessage(user, channel, userObject + " is a Regular User!", isPrivate);
         }

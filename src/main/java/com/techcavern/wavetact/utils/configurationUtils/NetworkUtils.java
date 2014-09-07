@@ -1,6 +1,7 @@
 package com.techcavern.wavetact.utils.configurationUtils;
 
 import com.techcavern.wavetact.utils.GeneralRegistry;
+import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.LoadUtils;
 import com.techcavern.wavetact.utils.objects.NetProperty;
 import org.pircbotx.PircBotX;
@@ -55,12 +56,12 @@ public class NetworkUtils {
     }
 
     public static void registerDevServer() {
-        //       PircBotX Dev = LoadUtils.createbot(null, "SynIRC", Arrays.asList("##powder-bots"), "WaveTactDev", "irc.freenode.net");
-        PircBotX Dev2 = LoadUtils.createbot(null, "EsperNet", Arrays.asList(""), "WaveTactDev", "irc.esper.net");
-        //     GeneralRegistry.WaveTact.addBot(Dev);
+        PircBotX Dev = LoadUtils.createbot(null, "SynIRC", Arrays.asList("#techcavern"), "WaveTactDev", "irc.synirc.net");
+        PircBotX Dev2 = LoadUtils.createbot(null, "EsperNet", Arrays.asList(GeneralUtils.toArray("#techcavern #batbot")), "WaveTactDev", "irc.esper.net");
+        GeneralRegistry.WaveTact.addBot(Dev);
         GeneralRegistry.WaveTact.addBot(Dev2);
         GeneralRegistry.Controllers.add("JZTech101");
-        //   new CommandChar("@", Dev);
+        GeneralRegistry.CommandChars.add(new NetProperty("@", Dev));
         GeneralRegistry.CommandChars.add(new NetProperty("@", Dev2));
         GeneralRegistry.AuthType.add(new NetProperty("nickserv", Dev2));
     }

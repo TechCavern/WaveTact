@@ -11,6 +11,9 @@ public class PermUtils {
 
     public static String getPrivateAccount(PircBotX bot, String userObject, String hostmask) {
         String authtype = GetUtils.getAuthType(bot);
+        if(authtype == null) {
+            return userObject;
+        }
         switch (authtype) {
             case "nickserv":
                 return getAuthedNickServUser(bot, userObject, hostmask);

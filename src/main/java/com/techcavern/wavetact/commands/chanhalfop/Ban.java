@@ -17,7 +17,7 @@ import org.pircbotx.User;
 public class Ban extends GenericCommand {
 
     public Ban() {
-        super(GeneralUtils.toArray("ban b"), 6, "ban (-)(+)[User] (time)", "bans a user for a specified period of time or 24 hours");
+        super(GeneralUtils.toArray("ban b"), 6, "ban (-)(+)[User][hostmask] (time)", "bans a user for a specified period of time or 24 hours");
     }
 
     @Override
