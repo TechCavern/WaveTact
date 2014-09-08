@@ -8,8 +8,6 @@ An IRC bot that is based upon PircBotX and sits in #techcavern on the following 
 - Freenode (irc.freenode.net)
 - ObsidianIRC (irc.obsidianirc.net)
 
-WaveTact is under the DWTFPL - (But I do ask that you not sell it)
-
 Building
 ========
 - Run `./gradlew jar`
@@ -36,7 +34,7 @@ PermLevels
 
 Running
 =======
-- Run `java -jar WaveTact.jar`
+- Run `java -jar WaveTact.jar -start`
 - WaveTact help is access by the -h or -help parameter
 - Adding and removing controllers is available via the -con or -controller parameter.
 - Make configuration by using the -config or -c parameter
