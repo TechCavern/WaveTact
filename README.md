@@ -34,7 +34,7 @@ PermLevels
 
 Running
 =======
-- Run `java -jar WaveTact.jar`
+- Run `java -jar WaveTact.jar -start`
 - WaveTact help is access by the -h or -help parameter
 - Adding and removing controllers is available via the -con or -controller parameter.
 - Make configuration by using the -config or -c parameter
