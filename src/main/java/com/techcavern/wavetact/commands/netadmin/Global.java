@@ -37,7 +37,7 @@ public class Global extends GenericCommand {
                 chan.send().notice("Global [" + user.getNick() + "]:" +  GeneralUtils.buildMessage(1, args.length, args) );
             }
         }else{
-            if(UserPermLevel == 9001){
+            if(UserPermLevel >= 9001){
                 for(PircBotX botx : GeneralRegistry.WaveTact.getBots()){
                     for(Channel chan : botx.getUserBot().getChannels()){
                         chan.send().notice("Global [" + user.getNick() + "]:" +  GeneralUtils.buildMessage(0, args.length, args) );
