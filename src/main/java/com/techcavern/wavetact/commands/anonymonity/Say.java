@@ -31,7 +31,7 @@ public class Say extends GenericCommand {
         if (isPrivate && channel != null) {
             isPrivate = false;
         }
-        IRCUtils.SendMessage(user, channel, StringUtils.join(args, " ").replace("\n", " "), isPrivate);
+        IRCUtils.sendMessage(user, channel, StringUtils.join(args, " ").replace("\n", " "), isPrivate);
 
     }
 }

@@ -23,6 +23,6 @@ public class MCDrama extends GenericCommand {
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         Document doc = Jsoup.connect("http://asie.pl/drama.php?plain").get();
         String c = doc.body().text();
-        IRCUtils.SendMessage(user, channel, c, isPrivate);
+        IRCUtils.sendMessage(user, channel, c, isPrivate);
     }
 }

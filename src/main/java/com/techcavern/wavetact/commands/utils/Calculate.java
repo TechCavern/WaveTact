@@ -21,7 +21,7 @@ public class Calculate extends GenericCommand {
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         ExpressionBuilder expr = new ExpressionBuilder(args[0]);
-        IRCUtils.SendMessage(user, channel, Double.toString(expr.build().evaluate()), isPrivate);
+        IRCUtils.sendMessage(user, channel, Double.toString(expr.build().evaluate()), isPrivate);
     }
 
 }

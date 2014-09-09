@@ -43,9 +43,9 @@ public class Define extends GenericCommand {
                 String word = WordUtils.capitalizeFully(Defs.get(ArrayIndex).getWord());
                 String definition = Defs.get(ArrayIndex).getText();
                 List<ExampleUsage> examples = Defs.get(ArrayIndex).getExampleUses();
-                IRCUtils.SendMessage(user, channel, word + ": " + definition, isPrivate);
+                IRCUtils.sendMessage(user, channel, word + ": " + definition, isPrivate);
                 if (examples.size() > 0) {
-                    IRCUtils.SendMessage(user, channel, "Example: " + examples.get(0).getText(), isPrivate);
+                    IRCUtils.sendMessage(user, channel, "Example: " + examples.get(0).getText(), isPrivate);
                 }
             } else {
                 ArrayIndex = ArrayIndex + 1;

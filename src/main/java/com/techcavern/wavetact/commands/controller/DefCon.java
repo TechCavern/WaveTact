@@ -35,7 +35,7 @@ public class DefCon extends GenericCommand {
         if (args.length >= 1) {
             if (args[0].startsWith("-")) {
                 initializeCommands();
-                IRCUtils.SendMessage(user, channel, "DefCon OFF", isPrivate);
+                IRCUtils.sendMessage(user, channel, "DefCon OFF", isPrivate);
             }
             switch (Integer.parseInt(args[0])) {
                 case 1:
@@ -54,10 +54,10 @@ public class DefCon extends GenericCommand {
                     sPermLevel(5);
                     break;
             }
-            IRCUtils.SendMessage(user, channel, "DefCon ON", isPrivate);
+            IRCUtils.sendMessage(user, channel, "DefCon ON", isPrivate);
         } else {
             sPermLevel(9001);
-            IRCUtils.SendMessage(user, channel, "DefCon ON", isPrivate);
+            IRCUtils.sendMessage(user, channel, "DefCon ON", isPrivate);
         }
     }
 

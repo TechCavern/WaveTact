@@ -34,7 +34,7 @@ public class Drop extends GenericCommand {
                 GeneralRegistry.AuthedUsers.remove(authedUser);
                 GeneralRegistry.Accounts.remove(account);
                 AccountUtils.saveAccounts();
-                IRCUtils.SendMessage(user, channel, "Your account is now dropped", isPrivate);
+                IRCUtils.sendMessage(user, channel, "Your account is now dropped", isPrivate);
             } else {
                 IRCUtils.sendError(user, "Incorrect Password");
             }

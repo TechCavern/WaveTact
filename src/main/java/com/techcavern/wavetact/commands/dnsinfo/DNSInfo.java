@@ -40,17 +40,17 @@ public class DNSInfo extends GenericCommand {
         if (lookup.getResult() == Lookup.SUCCESSFUL) {
             for (Record rec : records) {
                 if (rec instanceof ARecord) {
-                    IRCUtils.SendMessage(user, channel, Type.string(rec.getType()) + " - " + ((ARecord) rec).getAddress(), isPrivate);
+                    IRCUtils.sendMessage(user, channel, Type.string(rec.getType()) + " - " + ((ARecord) rec).getAddress(), isPrivate);
                 } else if (rec instanceof NSRecord) {
-                    IRCUtils.SendMessage(user, channel, Type.string(rec.getType()) + " - " + ((NSRecord) rec).getTarget(), isPrivate);
+                    IRCUtils.sendMessage(user, channel, Type.string(rec.getType()) + " - " + ((NSRecord) rec).getTarget(), isPrivate);
                 } else if (rec instanceof AAAARecord) {
-                    IRCUtils.SendMessage(user, channel, Type.string(rec.getType()) + " - " + ((AAAARecord) rec).getAddress(), isPrivate);
+                    IRCUtils.sendMessage(user, channel, Type.string(rec.getType()) + " - " + ((AAAARecord) rec).getAddress(), isPrivate);
                 } else if (rec instanceof CNAMERecord) {
-                    IRCUtils.SendMessage(user, channel, Type.string(rec.getType()) + " - " + ((CNAMERecord) rec).getAlias() + ((CNAMERecord) rec).getTarget(), isPrivate);
+                    IRCUtils.sendMessage(user, channel, Type.string(rec.getType()) + " - " + ((CNAMERecord) rec).getAlias() + ((CNAMERecord) rec).getTarget(), isPrivate);
                 } else if (rec instanceof TXTRecord) {
-                    IRCUtils.SendMessage(user, channel, Type.string(rec.getType()) + " - " + StringUtils.join((TXTRecord) rec, " "), isPrivate);
+                    IRCUtils.sendMessage(user, channel, Type.string(rec.getType()) + " - " + StringUtils.join((TXTRecord) rec, " "), isPrivate);
                 } else if (rec instanceof MXRecord) {
-                    IRCUtils.SendMessage(user, channel, Type.string(rec.getType()) + " - " + ((MXRecord) rec).getPriority() + ((MXRecord) rec).getTarget(), isPrivate);
+                    IRCUtils.sendMessage(user, channel, Type.string(rec.getType()) + " - " + ((MXRecord) rec).getPriority() + ((MXRecord) rec).getTarget(), isPrivate);
                 }
             }
             isSuccessful = true;

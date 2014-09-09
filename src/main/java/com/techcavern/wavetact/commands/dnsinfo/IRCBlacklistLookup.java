@@ -59,19 +59,19 @@ public class IRCBlacklistLookup extends GenericCommand {
             lookup.setCache(null);
             Record[] records = lookup.run();
             if (lookup.getResult() == Lookup.SUCCESSFUL) {
-                IRCUtils.SendMessage(user, channel, BeforeIP + " found in " + Domain, isPrivate);
+                IRCUtils.sendMessage(user, channel, BeforeIP + " found in " + Domain, isPrivate);
                 sent = true;
                 for (Record rec : records) {
                     if (rec instanceof TXTRecord) {
                         TXTRecord c = (TXTRecord) rec;
-                        IRCUtils.SendMessage(user, channel, Type.string(rec.getType()) + " - " + StringUtils.join((TXTRecord) rec, " "), isPrivate);
+                        IRCUtils.sendMessage(user, channel, Type.string(rec.getType()) + " - " + StringUtils.join((TXTRecord) rec, " "), isPrivate);
                     }
                 }
             }
 
         }
         if (!sent) {
-            IRCUtils.SendMessage(user, channel, BeforeIP + " not found in IRC BLs", isPrivate);
+            IRCUtils.sendMessage(user, channel, BeforeIP + " not found in IRC BLs", isPrivate);
         }
 
     }

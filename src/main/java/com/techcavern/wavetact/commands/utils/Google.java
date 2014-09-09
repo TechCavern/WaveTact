@@ -17,7 +17,7 @@ import org.pircbotx.User;
 public class Google extends GenericCommand {
 
     public Google() {
-        super(GeneralUtils.toArray("google gsearch"), 0, "google [string to google]", "googles something");
+        super(GeneralUtils.toArray("google gsearch"), 0, "google (result #) [string to google]", "googles something");
     }
 
     @Override
@@ -33,8 +33,8 @@ public class Google extends GenericCommand {
                 String title = results.get(ArrayIndex).getAsJsonObject().get("titleNoFormatting").getAsString();
                 String content = results.get(ArrayIndex).getAsJsonObject().get("content").getAsString().replaceAll("<.*?>", "").replaceAll("&.*?;", "");
                 String url = results.get(ArrayIndex).getAsJsonObject().get("unescapedUrl").getAsString();
-                IRCUtils.SendMessage(user, channel, title + " - " + content, isPrivate);
-                IRCUtils.SendMessage(user, channel, url, isPrivate);
+                IRCUtils.sendMessage(user, channel, title + " - " + content, isPrivate);
+                IRCUtils.sendMessage(user, channel, url, isPrivate);
 
             } else {
                 ArrayIndex = ArrayIndex + 1;

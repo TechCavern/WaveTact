@@ -58,7 +58,7 @@ public class FindIP extends GenericCommand {
                 }
             }
             if (!fin.isEmpty()) {
-                IRCUtils.SendMessage(user, channel, fin, isPrivate);
+                IRCUtils.sendMessage(user, channel, fin, isPrivate);
             } else {
                 IRCUtils.sendError(user, "Unable to Determine Location (Or you entered an invalid IP)");
             }

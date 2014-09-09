@@ -30,7 +30,7 @@ public class MCStatus extends GenericCommand {
         Result = reader.readLine().replace("\"},{\"", " | ").replace("\":\"", ": ").replace("green", "Online").replace("red", "Offline").replace("[{\"", "").replace("\"}]", "").replace(".minecraft.net", "").replace(".mojang.com", "").replace("server", " Server").replace(".net", "");
         Result = WordUtils.capitalizeFully(Result);
         if (Result != null) {
-            IRCUtils.SendMessage(user, channel, Result, isPrivate);
+            IRCUtils.sendMessage(user, channel, Result, isPrivate);
         } else {
             IRCUtils.sendError(user, "MC Status Currently Unavailable");
         }

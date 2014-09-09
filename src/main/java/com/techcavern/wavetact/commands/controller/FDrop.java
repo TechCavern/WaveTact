@@ -33,7 +33,7 @@ public class FDrop extends GenericCommand {
         if (account != null) {
             GeneralRegistry.Accounts.remove(account);
             AccountUtils.saveAccounts();
-            IRCUtils.SendMessage(user, channel, "Account dropped", isPrivate);
+            IRCUtils.sendMessage(user, channel, "Account dropped", isPrivate);
         } else {
             IRCUtils.sendError(user, "account does not exist");
         }

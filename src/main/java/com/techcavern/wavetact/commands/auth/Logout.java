@@ -27,7 +27,7 @@ public class Logout extends GenericCommand {
             IRCUtils.sendError(user, "Error, you are not logged in");
         } else {
             GeneralRegistry.AuthedUsers.remove(authedUser);
-            IRCUtils.SendMessage(user, channel, "You are now logged out", isPrivate);
+            IRCUtils.sendMessage(user, channel, "You are now logged out", isPrivate);
         }
     }
 }

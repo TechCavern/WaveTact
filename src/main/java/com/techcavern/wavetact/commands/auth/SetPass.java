@@ -30,7 +30,7 @@ public class SetPass extends GenericCommand {
             if (GeneralRegistry.encryptor.checkPassword(args[0], acc.getAuthPassword())) {
                 acc.setAuthPassword(GeneralRegistry.encryptor.encryptPassword(args[1]));
                 AccountUtils.saveAccounts();
-                IRCUtils.SendMessage(user, channel, "Password Changed Successfully", isPrivate);
+                IRCUtils.sendMessage(user, channel, "Password Changed Successfully", isPrivate);
             } else {
                 IRCUtils.sendError(user, "Incorrect password");
             }

@@ -39,13 +39,13 @@ public class DNSBlacklistDB extends GenericCommand {
                 if (Domain != null) {
                     GeneralRegistry.DNSBLs.remove(Domain);
                     DNSBLUtils.saveDNSBLs();
-                    IRCUtils.SendMessage(user, channel, "Spam DNSBL Removed", isPrivate);
+                    IRCUtils.sendMessage(user, channel, "Spam DNSBL Removed", isPrivate);
                 } else {
                     IRCUtils.sendError(user, "Spam DNSBL does not exist on list");
                 }
             } else if (args[0].equalsIgnoreCase("list")) {
                 if (!GeneralRegistry.DNSBLs.isEmpty()) {
-                    IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.DNSBLs, ", "), isPrivate);
+                    IRCUtils.sendMessage(user, channel, StringUtils.join(GeneralRegistry.DNSBLs, ", "), isPrivate);
                 } else {
                     IRCUtils.sendError(user, "Spam DNS Blacklist is Empty");
                 }
@@ -54,7 +54,7 @@ public class DNSBlacklistDB extends GenericCommand {
                 if (Domain == null) {
                     GeneralRegistry.DNSBLs.add(args[0]);
                     DNSBLUtils.saveDNSBLs();
-                    IRCUtils.SendMessage(user, channel, "Spam DNSBL Added", isPrivate);
+                    IRCUtils.sendMessage(user, channel, "Spam DNSBL Added", isPrivate);
                 } else {
                     IRCUtils.sendError(user, "Spam DNSBL already listed");
                 }

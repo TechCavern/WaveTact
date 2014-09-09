@@ -25,6 +25,6 @@ public class FMyLife extends GenericCommand {
         Document doc = Jsoup.connect("http://m.fmylife.com/random").get();
         Elements FML = doc.select(".text");
         String c = FML.get(0).toString().replaceAll("<.*?>", "").replaceAll("&.*?;", "");
-        IRCUtils.SendMessage(user, channel, c, isPrivate);
+        IRCUtils.sendMessage(user, channel, c, isPrivate);
     }
 }

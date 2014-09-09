@@ -34,9 +34,9 @@ public class UrbanDictonary extends GenericCommand {
                 String Word = WordUtils.capitalizeFully(objectJSON.getAsJsonArray("list").get(ArrayIndex).getAsJsonObject().get("word").getAsString().replaceAll("\\n|\\r|\\t", " ").replaceAll("  ", " "));
                 String Definition = objectJSON.getAsJsonArray("list").get(ArrayIndex).getAsJsonObject().get("definition").getAsString().replaceAll("\\n|\\r|\\t", " ").replaceAll("  ", " ");
                 String Examples = objectJSON.getAsJsonArray("list").get(ArrayIndex).getAsJsonObject().get("example").getAsString().replaceAll("\\n|\\r|\\t", " ").replaceAll("  ", " ");
-                IRCUtils.SendMessage(user, channel, Word + ": " + Definition, isPrivate);
+                IRCUtils.sendMessage(user, channel, Word + ": " + Definition, isPrivate);
                 if (!Examples.isEmpty()) {
-                    IRCUtils.SendMessage(user, channel, "Example: " + Examples, isPrivate);
+                    IRCUtils.sendMessage(user, channel, "Example: " + Examples, isPrivate);
                 }
             } else {
                 ArrayIndex = ArrayIndex + 1;

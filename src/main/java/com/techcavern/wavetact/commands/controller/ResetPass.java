@@ -28,7 +28,7 @@ public class ResetPass extends GenericCommand {
         if (acc != null) {
             acc.setAuthPassword(GeneralRegistry.encryptor.encryptPassword(args[1]));
             AccountUtils.saveAccounts();
-            IRCUtils.SendMessage(user, channel, "Password Changed Successfully", isPrivate);
+            IRCUtils.sendMessage(user, channel, "Password Changed Successfully", isPrivate);
         } else {
             IRCUtils.sendError(user, "User does not exist");
         }

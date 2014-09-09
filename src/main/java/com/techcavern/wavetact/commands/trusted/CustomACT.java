@@ -37,7 +37,7 @@ public class CustomACT extends GenericCommand {
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         if (args[0].toLowerCase().equalsIgnoreCase("list")) {
             List<String> SimpleCommands = GeneralRegistry.SimpleMessages.stream().filter(g -> g.getPermLevel() <= UserPermLevel).map(GenericCommand::getCommand).collect(Collectors.toList());
-            IRCUtils.SendMessage(user, channel, StringUtils.join(SimpleCommands, ", "), isPrivate);
+            IRCUtils.sendMessage(user, channel, StringUtils.join(SimpleCommands, ", "), isPrivate);
         } else if (args[0].startsWith("-")) {
             removeCommand(user, channel, isPrivate, UserPermLevel, args[0].substring(1));
         } else if (args[0].startsWith("+")) {
@@ -55,7 +55,7 @@ public class CustomACT extends GenericCommand {
         } else
             GeneralRegistry.SimpleActions.add(new SimpleAction(cmd, accessLevel, msg, false));
         SimpleActionUtils.saveSimpleActions();
-        IRCUtils.SendMessage(user, channel, "Custom Action added", isPrivate);
+        IRCUtils.sendMessage(user, channel, "Custom Action added", isPrivate);
     }
 
 
@@ -68,7 +68,7 @@ public class CustomACT extends GenericCommand {
                 GeneralRegistry.AllCommands.remove(cmd);
                 GeneralRegistry.SimpleActions.add(new SimpleAction(command, accessLevel, msg, false));
                 SimpleActionUtils.saveSimpleActions();
-                IRCUtils.SendMessage(user, channel, "Custom Action modified", isPrivate);
+                IRCUtils.sendMessage(user, channel, "Custom Action modified", isPrivate);
             } else if (cmd.getLockedStatus()) {
                 IRCUtils.sendError(user, "Custom Action Locked");
             } else {
@@ -91,7 +91,7 @@ public class CustomACT extends GenericCommand {
                 GeneralRegistry.SimpleActions.remove(cmd);
                 GeneralRegistry.AllCommands.remove(cmd);
                 SimpleActionUtils.saveSimpleActions();
-                IRCUtils.SendMessage(user, channel, "Custom Action removed", isPrivate);
+                IRCUtils.sendMessage(user, channel, "Custom Action removed", isPrivate);
             }
         } else {
             IRCUtils.sendError(user, "Permission Denied");

@@ -32,12 +32,12 @@ public class LockMSG extends GenericCommand {
         if (args[0].startsWith("-")) {
             SimpleMessageUtils.getSimpleMessage(args[0].replaceFirst("-", "")).unlock();
             SimpleMessageUtils.saveSimpleMessages();
-            IRCUtils.SendMessage(user, channel, "Simple Message Unlocked", isPrivate);
+            IRCUtils.sendMessage(user, channel, "Simple Message Unlocked", isPrivate);
 
         } else {
             SimpleMessageUtils.getSimpleMessage(args[0]).lock();
             SimpleMessageUtils.saveSimpleMessages();
-            IRCUtils.SendMessage(user, channel, "Simple Message Locked", isPrivate);
+            IRCUtils.sendMessage(user, channel, "Simple Message Locked", isPrivate);
 
         }
     }

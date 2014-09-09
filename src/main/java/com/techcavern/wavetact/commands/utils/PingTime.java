@@ -31,7 +31,7 @@ public class PingTime extends GenericCommand {
         Socket socket = new Socket(GeneralUtils.getIP(args[0], Bot), port);
         socket.close();
         time = System.currentTimeMillis() - time;
-        IRCUtils.SendMessage(user, channel, "Ping Time: " + time + " milliseconds", isPrivate);
+        IRCUtils.sendMessage(user, channel, "Ping Time: " + time + " milliseconds", isPrivate);
 
     }
 }

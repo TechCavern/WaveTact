@@ -57,7 +57,7 @@ public class MCMods extends GenericCommand {
                     Link = mod.get("longurl").getAsString();
                 }
                 if (total < 3) {
-                    IRCUtils.SendMessage(user, channel, "[" + Version + "] " + Name + " - " + Link, isPrivate);
+                    IRCUtils.sendMessage(user, channel, "[" + Version + "] " + Name + " - " + Link, isPrivate);
                 }
                 total++;
             }

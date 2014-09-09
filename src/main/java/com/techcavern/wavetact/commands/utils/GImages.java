@@ -17,7 +17,7 @@ import org.pircbotx.User;
 public class GImages extends GenericCommand {
 
     public GImages() {
-        super(GeneralUtils.toArray("googleimages gimages gimage"), 0, "googleimages [string to google]", "googles something");
+        super(GeneralUtils.toArray("googleimages gimages gimage"), 0, "googleimages (result #) [string to google]", "googles something");
     }
 
     @Override
@@ -33,8 +33,8 @@ public class GImages extends GenericCommand {
                 String title = results.get(ArrayIndex).getAsJsonObject().get("titleNoFormatting").getAsString();
                 String size = results.get(ArrayIndex).getAsJsonObject().get("width").getAsString() + "x" + results.get(ArrayIndex).getAsJsonObject().get("height").getAsString();
                 String url = results.get(ArrayIndex).getAsJsonObject().get("unescapedUrl").getAsString();
-                IRCUtils.SendMessage(user, channel, title + " - " + size, isPrivate);
-                IRCUtils.SendMessage(user, channel, url, isPrivate);
+                IRCUtils.sendMessage(user, channel, title + " - " + size, isPrivate);
+                IRCUtils.sendMessage(user, channel, url, isPrivate);
 
             } else {
                 ArrayIndex = ArrayIndex + 1;

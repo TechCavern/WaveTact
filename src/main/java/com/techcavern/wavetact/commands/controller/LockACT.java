@@ -33,11 +33,11 @@ public class LockACT extends GenericCommand {
         if (args[0].startsWith("-")) {
             SimpleActionUtils.getSimpleAction(args[0].replaceFirst("-", "")).unlock();
             SimpleActionUtils.saveSimpleActions();
-            IRCUtils.SendMessage(user, channel, "Simple Action Unlocked", isPrivate);
+            IRCUtils.sendMessage(user, channel, "Simple Action Unlocked", isPrivate);
         } else {
             SimpleActionUtils.getSimpleAction(args[0].replaceFirst("-", "")).lock();
             SimpleActionUtils.saveSimpleActions();
-            IRCUtils.SendMessage(user, channel, "Simple Action Unlocked", isPrivate);
+            IRCUtils.sendMessage(user, channel, "Simple Action Unlocked", isPrivate);
 
         }
 

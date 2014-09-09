@@ -11,8 +11,6 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-import java.util.Random;
-
 @CMD
 @GenCMD
 public class Xkcd extends GenericCommand {
@@ -39,6 +37,6 @@ public class Xkcd extends GenericCommand {
         String date = "Date: " + comic.get("day") + "/" + comic.get("month") + "/" + comic.get("year");
         String num = comic.get("num").getAsString();
         String title = comic.get("title").getAsString();
-        IRCUtils.SendMessage(user, channel, num + " - " + date + " - " + title + " - " + "http://xkcd.com/" + num, isPrivate);
+        IRCUtils.sendMessage(user, channel, num + " - " + date + " - " + title + " - " + "http://xkcd.com/" + num, isPrivate);
     }
 }

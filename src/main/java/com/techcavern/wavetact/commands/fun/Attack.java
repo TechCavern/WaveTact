@@ -38,7 +38,7 @@ public class Attack extends GenericCommand {
         FunObject attack = GeneralRegistry.Attacks.get(randomint);
         if (attack.getMessageExists()) {
             IRCUtils.SendAction(user, channel, attack.getAction().replace("$*", Something), isPrivate);
-            IRCUtils.SendMessage(user, channel, attack.getMessage().replace("$*", Something), isPrivate);
+            IRCUtils.sendMessage(user, channel, attack.getMessage().replace("$*", Something), isPrivate);
         } else {
             IRCUtils.SendAction(user, channel, attack.getAction().replace("$*", Something), isPrivate);
         }

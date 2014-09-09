@@ -30,6 +30,6 @@ public class Eightball extends GenericCommand {
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         int randomint = RandomUtils.nextInt(0, GeneralRegistry.Eightball.size());
-        IRCUtils.SendMessage(user, channel, GeneralRegistry.Eightball.get(randomint), isPrivate);
+        IRCUtils.sendMessage(user, channel, GeneralRegistry.Eightball.get(randomint), isPrivate);
     }
 }

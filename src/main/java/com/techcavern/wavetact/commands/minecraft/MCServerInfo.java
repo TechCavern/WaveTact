@@ -33,7 +33,7 @@ public class MCServerInfo extends GenericCommand {
         String gameVersion = "Version: " + server.gameVersion;
         String motd = "MOTD: " + server.motd;
         String playercount = "Players: " + Integer.toString(server.players) + "/" + Integer.toString(server.maxPlayers);
-        IRCUtils.SendMessage(user, channel, args[0] + ":" + port + " - " + gameVersion + " - " + motd + " - " + playercount, isPrivate);
+        IRCUtils.sendMessage(user, channel, args[0] + ":" + port + " - " + gameVersion + " - " + motd + " - " + playercount, isPrivate);
 
     }
 

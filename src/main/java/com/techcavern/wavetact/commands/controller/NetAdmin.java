@@ -46,7 +46,7 @@ public class NetAdmin extends GenericCommand {
                 if (GetUtils.getNetworkAdminByNick(account, Bot.getServerInfo().getNetwork()) != null) {
                     GeneralRegistry.NetworkAdmins.remove(GetUtils.getNetworkAdminByNick(account, Bot.getServerInfo().getNetwork()));
                     NetAdminUtils.saveNetworkAdmins();
-                    IRCUtils.SendMessage(user, channel, "Global Removed", isPrivate);
+                    IRCUtils.sendMessage(user, channel, "Global Removed", isPrivate);
                 } else {
                     IRCUtils.sendError(user, "User does not existing in NetworkAdmins");
                 }
@@ -60,7 +60,7 @@ public class NetAdmin extends GenericCommand {
                     }
                 }
                 if (!netAdmins.isEmpty()) {
-                    IRCUtils.SendMessage(user, channel, netAdmins, isPrivate);
+                    IRCUtils.sendMessage(user, channel, netAdmins, isPrivate);
                 } else {
                     IRCUtils.sendError(user, "No NetworkAdmins Exist");
                 }
@@ -70,7 +70,7 @@ public class NetAdmin extends GenericCommand {
                 } else {
                     GeneralRegistry.NetworkAdmins.add(new NetworkAdmin(Bot.getServerInfo().getNetwork(), account));
                     NetAdminUtils.saveNetworkAdmins();
-                    IRCUtils.SendMessage(user, channel, "Global Added", isPrivate);
+                    IRCUtils.sendMessage(user, channel, "Global Added", isPrivate);
                 }
             }
         } else {

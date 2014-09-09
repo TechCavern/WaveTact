@@ -31,7 +31,7 @@ public class MCAccountInfo extends GenericCommand {
             String UUID = mcapi.get("uuid").getAsString();
             String Premium = mcapi.get("premium").getAsString();
             String Migrated = mcapi.get("migrated").getAsString();
-            IRCUtils.SendMessage(user, channel, User + ": " + "UUID: " + UUID + " - " + "Paid: " + Premium + " - " + "Mojang Account: " + Migrated, isPrivate);
+            IRCUtils.sendMessage(user, channel, User + ": " + "UUID: " + UUID + " - " + "Paid: " + Premium + " - " + "Mojang Account: " + Migrated, isPrivate);
         } else {
             IRCUtils.sendError(user, "user does not exist");
         }

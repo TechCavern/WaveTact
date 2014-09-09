@@ -49,7 +49,11 @@ public class Question extends GenericCommand {
         }
         if (waResults.size() > 0) {
             if (waResults.size() - 1 >= ArrayIndex && !waResults.get(ArrayIndex).isEmpty()) {
-                IRCUtils.SendMessage(user, channel, waResults.get(0) + ": " + StringUtils.substring(waResults.get(ArrayIndex), 0, 750), isPrivate);
+                String result = waResults.get(ArrayIndex);
+                if(result.length() > 750){
+                    result = StringUtils.substring(result, 0, 750) + "...";
+                }
+                IRCUtils.sendMessage(user, channel, waResults.get(0) + ": " +  result, isPrivate);
 
             } else {
                 ArrayIndex = ArrayIndex - 1;

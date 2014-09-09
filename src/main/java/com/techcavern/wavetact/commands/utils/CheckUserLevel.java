@@ -37,23 +37,23 @@ public class CheckUserLevel extends GenericCommand {
         if (userObject == null) {
             IRCUtils.sendError(user, "User does not exist");
         } else if (UserPermLevel >= 9001) {
-            IRCUtils.SendMessage(user, channel, userObject + " is my Master!", isPrivate);
+            IRCUtils.sendMessage(user, channel, userObject + " is my Master!", isPrivate);
         } else if (UserPermLevel >= 20) {
-            IRCUtils.SendMessage(user, channel, userObject + " is a Network Administrator!", isPrivate);
+            IRCUtils.sendMessage(user, channel, userObject + " is a Network Administrator!", isPrivate);
         } else if (UserPermLevel >= 18) {
-            IRCUtils.SendMessage(user, channel, userObject + " is a Channel Founder!", isPrivate);
+            IRCUtils.sendMessage(user, channel, userObject + " is a Channel Founder!", isPrivate);
         } else if (UserPermLevel >= 15) {
-            IRCUtils.SendMessage(user, channel, userObject + " is a Channel Owner!", isPrivate);
+            IRCUtils.sendMessage(user, channel, userObject + " is a Channel Owner!", isPrivate);
         } else if (UserPermLevel >= 13) {
-            IRCUtils.SendMessage(user, channel, userObject + " is a Channel Admin!", isPrivate);
+            IRCUtils.sendMessage(user, channel, userObject + " is a Channel Admin!", isPrivate);
         } else if (UserPermLevel >= 10) {
-            IRCUtils.SendMessage(user, channel, userObject + " is a Channel Operator!", isPrivate);
+            IRCUtils.sendMessage(user, channel, userObject + " is a Channel Operator!", isPrivate);
         } else if (UserPermLevel >= 7) {
-            IRCUtils.SendMessage(user, channel, userObject + " is a Channel Half-Operator", isPrivate);
+            IRCUtils.sendMessage(user, channel, userObject + " is a Channel Half-Operator", isPrivate);
         } else if (UserPermLevel >= 5 && !isPrivate) {
-            IRCUtils.SendMessage(user, channel, userObject + " is a Channel Trusted User!", isPrivate);
+            IRCUtils.sendMessage(user, channel, userObject + " is a Channel Trusted User!", isPrivate);
         } else {
-            IRCUtils.SendMessage(user, channel, userObject + " is a Regular User!", isPrivate);
+            IRCUtils.sendMessage(user, channel, userObject + " is a Regular User!", isPrivate);
         }
 
 

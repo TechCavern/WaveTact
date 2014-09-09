@@ -39,13 +39,13 @@ public class IRCBlacklistDB extends GenericCommand {
                 if (Domain != null) {
                     GeneralRegistry.IRCBLs.remove(Domain);
                     IRCBLUtils.saveIRCBLs();
-                    IRCUtils.SendMessage(user, channel, "IRC DNSBL Removed", isPrivate);
+                    IRCUtils.sendMessage(user, channel, "IRC DNSBL Removed", isPrivate);
                 } else {
                     IRCUtils.sendError(user, "IRC DNSBL does not exist on list");
                 }
             } else if (args[0].equalsIgnoreCase("list")) {
                 if (!GeneralRegistry.IRCBLs.isEmpty()) {
-                    IRCUtils.SendMessage(user, channel, StringUtils.join(GeneralRegistry.IRCBLs, ", "), isPrivate);
+                    IRCUtils.sendMessage(user, channel, StringUtils.join(GeneralRegistry.IRCBLs, ", "), isPrivate);
                 } else {
                     IRCUtils.sendError(user, "IRC DNS Blacklist is Empty");
                 }
@@ -54,7 +54,7 @@ public class IRCBlacklistDB extends GenericCommand {
                 if (Domain == null) {
                     GeneralRegistry.IRCBLs.add(args[0]);
                     IRCBLUtils.saveIRCBLs();
-                    IRCUtils.SendMessage(user, channel, "IRC DNSBL Added", isPrivate);
+                    IRCUtils.sendMessage(user, channel, "IRC DNSBL Added", isPrivate);
                 } else {
                     IRCUtils.sendError(user, "IRC DNSBL already listed");
                 }

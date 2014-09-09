@@ -38,7 +38,7 @@ public class CustomMSG extends GenericCommand {
 
         if (args[0].toLowerCase().equalsIgnoreCase("list")) {
             List<String> SimpleCommands = GeneralRegistry.SimpleMessages.stream().filter(g -> g.getPermLevel() <= UserPermLevel).map(GenericCommand::getCommand).collect(Collectors.toList());
-            IRCUtils.SendMessage(user, channel, StringUtils.join(SimpleCommands, ", "), isPrivate);
+            IRCUtils.sendMessage(user, channel, StringUtils.join(SimpleCommands, ", "), isPrivate);
         } else if (args[0].startsWith("-")) {
             removeCommand(user, channel, isPrivate, UserPermLevel, args[0].substring(1));
         } else if (args[0].startsWith("+")) {
@@ -57,7 +57,7 @@ public class CustomMSG extends GenericCommand {
         } else
             GeneralRegistry.SimpleMessages.add(new SimpleMessage(cmd, accessLevel, msg, false));
         SimpleMessageUtils.saveSimpleMessages();
-        IRCUtils.SendMessage(user, channel, "Custom Message added", isPrivate);
+        IRCUtils.sendMessage(user, channel, "Custom Message added", isPrivate);
     }
 
 
@@ -70,7 +70,7 @@ public class CustomMSG extends GenericCommand {
                 GeneralRegistry.AllCommands.remove(cmd);
                 GeneralRegistry.SimpleMessages.add(new SimpleMessage(command, accessLevel, msg, false));
                 SimpleMessageUtils.saveSimpleMessages();
-                IRCUtils.SendMessage(user, channel, "Custom Message modified", isPrivate);
+                IRCUtils.sendMessage(user, channel, "Custom Message modified", isPrivate);
             } else if (cmd.getLockedStatus()) {
                 IRCUtils.sendError(user, "Custom Message Locked");
             } else {
@@ -93,7 +93,7 @@ public class CustomMSG extends GenericCommand {
                 GeneralRegistry.SimpleMessages.remove(cmd);
                 GeneralRegistry.AllCommands.remove(cmd);
                 SimpleMessageUtils.saveSimpleMessages();
-                IRCUtils.SendMessage(user, channel, "Custom Message removed", isPrivate);
+                IRCUtils.sendMessage(user, channel, "Custom Message removed", isPrivate);
             }
         } else {
             IRCUtils.sendError(user, "Permission Denied");

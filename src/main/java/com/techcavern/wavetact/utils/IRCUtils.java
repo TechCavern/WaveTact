@@ -44,7 +44,7 @@ public class IRCUtils {
         x.notice(notice);
     }
 
-    public static void SendMessage(User userObject, Channel channelObject, String message, boolean isPrivate) {
+    public static void sendMessage(User userObject, Channel channelObject, String message, boolean isPrivate) {
         if (channelObject != null && !isPrivate) {
             channelObject.send().message(message);
         } else {

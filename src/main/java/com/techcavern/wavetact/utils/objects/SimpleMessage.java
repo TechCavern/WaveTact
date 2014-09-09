@@ -46,7 +46,7 @@ public class SimpleMessage extends GenericCommand {
         if (dresponse.startsWith(prefix)) {
             dresponse = dresponse.replace(prefix, "");
         }
-        IRCUtils.SendMessage(user, channel, dresponse, isPrivate);
+        IRCUtils.sendMessage(user, channel, dresponse, isPrivate);
     }
 
 
