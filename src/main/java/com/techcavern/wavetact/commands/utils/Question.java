@@ -50,8 +50,8 @@ public class Question extends GenericCommand {
         if (waResults.size() > 0) {
             if (waResults.size() - 1 >= ArrayIndex && !waResults.get(ArrayIndex).isEmpty()) {
                 String result = waResults.get(ArrayIndex);
-                if(result.length() > 750){
-                    result = StringUtils.substring(result, 0, 750) + "...";
+                if(result.length() > 350){
+                    result = StringUtils.substring(result, 0, 350) + "...";
                 }
                 IRCUtils.sendMessage(user, channel, waResults.get(0) + ": " +  result, isPrivate);
 
