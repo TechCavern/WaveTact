@@ -17,7 +17,7 @@ public class PrivMsgProcessor {
     public static void PrivMsgProcess(PrivateMessageEvent<PircBotX> event) {
         class process implements Runnable {
             public void run() {
-                String[] messageParts = Colors.removeFormattingAndColors(event.getMessage()).replaceAll("\\P{InBasic_Latin}", "").split(" ");
+                String[] messageParts = Colors.removeFormattingAndColors(event.getMessage()).split(" ");
                 String m = messageParts[0].toLowerCase();
                 GenericCommand Command = GetUtils.getCommand(m);
                 if (Command == null) {

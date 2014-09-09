@@ -8,6 +8,9 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class GetUtils {
 
@@ -36,6 +39,7 @@ public class GetUtils {
 
     public static GenericCommand getCommand(String Command) {
         for (GenericCommand g : GeneralRegistry.AllCommands) {
+            List<GenericCommand> b = GeneralRegistry.AllCommands;
             for (String commandid : g.getCommandID()) {
                 if (commandid.equalsIgnoreCase(Command)) {
                     return g;

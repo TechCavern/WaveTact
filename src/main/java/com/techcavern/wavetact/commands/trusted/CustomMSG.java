@@ -32,10 +32,8 @@ public class CustomMSG extends GenericCommand {
     public CustomMSG() {
         super(GeneralUtils.toArray("custommessage cmsg custommsg customsg"), 3, "custommessage (+/-)[Command] [permlevel] [Response]", "Responses may contain $1, $2, etc which indicate the argument separated by a space. $* indicates all remaining arguments.");
     }
-
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-
         if (args[0].toLowerCase().equalsIgnoreCase("list")) {
             List<String> SimpleCommands = GeneralRegistry.SimpleMessages.stream().filter(g -> g.getPermLevel() <= UserPermLevel).map(GenericCommand::getCommand).collect(Collectors.toList());
             IRCUtils.sendMessage(user, channel, StringUtils.join(SimpleCommands, ", "), isPrivate);

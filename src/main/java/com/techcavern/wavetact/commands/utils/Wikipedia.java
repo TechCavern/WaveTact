@@ -1,6 +1,7 @@
 package com.techcavern.wavetact.commands.utils;
 
 import com.google.gson.JsonObject;
+import com.google.gson.internal.LinkedTreeMap;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
@@ -15,6 +16,8 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
+import java.util.Iterator;
+
 @CMD
 @GenCMD
 public class Wikipedia extends GenericCommand {
@@ -25,21 +28,16 @@ public class Wikipedia extends GenericCommand {
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        Document doc = null;
-        String url = "http://en.wikipedia.org/wiki/" + StringUtils.join(args, "%20");
-        try {
-            doc = Jsoup.connect(url).get();
-        }catch (HttpStatusException e){
+        JsonObject result = GeneralUtils.getJsonObject("http://en.wikipedia.org/w/api.php?action=query&prop=extracts&explaintext&exsectionformat=plain&exchars=700&titles=" + StringUtils.join(args, "%20").toLowerCase() + "&format=json").getAsJsonObject("query").getAsJsonObject("pages");
+        String key = result.entrySet().iterator().next().getKey();
+        String title = result.getAsJsonObject(key).get("title").getAsString();
+        String text = result.getAsJsonObject(key).get("extract").getAsString();
+        if(text.equalsIgnoreCase("missing")){
             IRCUtils.sendError(user, "Query returned no results");
-            return;
+        }else {
+            String plainurl = "http://en.wikipedia.org/" + StringUtils.join(args, "%20").toLowerCase();
+            IRCUtils.sendMessage(user, channel, title + ": " + text.replaceAll("\n", ""), isPrivate);
+            IRCUtils.sendMessage(user, channel, plainurl, isPrivate);
         }
-        Elements content = doc.select("#mw-content-text").select("p");
-        String title = doc.title().toString().replace(" - Wikipedia, the free encyclopedia", "");
-        String text = content.get(0).toString().replaceAll("<.*?>", "").replaceAll("&.*?;", "").replaceAll("\\[.*\\]", "");
-        if(text.length() > 700){
-            text = StringUtils.substring(text, 0, 700) + "...";
-        }
-        IRCUtils.sendMessage(user, channel, title + ": " + text, isPrivate);
-        IRCUtils.sendMessage(user, channel, url, isPrivate);
     }
 }

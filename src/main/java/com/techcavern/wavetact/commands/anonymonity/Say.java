@@ -5,8 +5,8 @@
  */
 package com.techcavern.wavetact.commands.anonymonity;
 
-import com.techcavern.wavetact.annot.AnonCMD;
 import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.TruCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
@@ -19,7 +19,7 @@ import org.pircbotx.User;
  * @author jztech101
  */
 @CMD
-@AnonCMD
+@TruCMD
 public class Say extends GenericCommand {
 
     public Say() {

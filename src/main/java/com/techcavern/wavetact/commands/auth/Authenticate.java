@@ -1,7 +1,7 @@
 package com.techcavern.wavetact.commands.auth;
 
-import com.techcavern.wavetact.annot.AuthCMD;
 import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.databaseUtils.AccountUtils;
 import com.techcavern.wavetact.utils.objects.Account;
@@ -12,7 +12,7 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
 @CMD
-@AuthCMD
+@GenCMD
 public class Authenticate extends GenericCommand {
 
     public Authenticate() {

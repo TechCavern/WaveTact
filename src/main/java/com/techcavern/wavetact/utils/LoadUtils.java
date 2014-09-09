@@ -10,6 +10,7 @@ import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.pircbotx.Configuration;
 import org.pircbotx.Configuration.Builder;
 import org.pircbotx.PircBotX;
+import com.techcavern.wavetact.commands.trusted.*;
 
 import java.lang.annotation.Annotation;
 import java.nio.charset.Charset;
@@ -19,15 +20,13 @@ import java.util.Set;
 public class LoadUtils {
 
     public static void registerCommands() {
-        addCommands(GeneralRegistry.AnonymonityCommands, AnonCMD.class);
-        addCommands(GeneralRegistry.AuthCommands, AuthCMD.class);
         addCommands(GeneralRegistry.ChanFounderCommands, ChanFounderCMD.class);
         addCommands(GeneralRegistry.ChanHalfOpCommands, ChanHOPCMD.class);
         addCommands(GeneralRegistry.ChanOwnerCommands, ChanOWNCMD.class);
         addCommands(GeneralRegistry.ControllerCommands, ConCMD.class);
-        addCommands(GeneralRegistry.GenericCommands, GenCMD.class);
-        addCommands(GeneralRegistry.GlobalCommands, NAdmCMD.class);
+          addCommands(GeneralRegistry.GenericCommands, GenCMD.class);
         addCommands(GeneralRegistry.TrustedCommands, TruCMD.class);
+        addCommands(GeneralRegistry.GlobalCommands, NAdmCMD.class);
     }
 
     public static void initializeCommandlines() {
@@ -132,17 +131,6 @@ public class LoadUtils {
             GeneralRegistry.GlobalListCommands.add(command.getCommand());
 
         }
-        for (GenericCommand command : GeneralRegistry.AuthCommands) {
-            GeneralRegistry.GenericListCommands.add(command.getCommand());
-            GeneralRegistry.TrustedListCommands.add(command.getCommand());
-            GeneralRegistry.ChanHalfOpListCommands.add(command.getCommand());
-            GeneralRegistry.ChanOpListCommands.add(command.getCommand());
-            GeneralRegistry.ChanOwnerListCommands.add(command.getCommand());
-            GeneralRegistry.ChanFounderListCommands.add(command.getCommand());
-            GeneralRegistry.ControllerListCommands.add(command.getCommand());
-            GeneralRegistry.GlobalListCommands.add(command.getCommand());
-
-        }
         for (GenericCommand command : GeneralRegistry.TrustedCommands) {
             GeneralRegistry.TrustedListCommands.add(command.getCommand());
             GeneralRegistry.ChanHalfOpListCommands.add(command.getCommand());
@@ -151,16 +139,6 @@ public class LoadUtils {
             GeneralRegistry.ChanFounderListCommands.add(command.getCommand());
             GeneralRegistry.ControllerListCommands.add(command.getCommand());
             GeneralRegistry.GlobalListCommands.add(command.getCommand());
-        }
-        for (GenericCommand command : GeneralRegistry.AnonymonityCommands) {
-            GeneralRegistry.TrustedListCommands.add(command.getCommand());
-            GeneralRegistry.ChanHalfOpListCommands.add(command.getCommand());
-            GeneralRegistry.ChanOpListCommands.add(command.getCommand());
-            GeneralRegistry.ChanOwnerListCommands.add(command.getCommand());
-            GeneralRegistry.ChanFounderListCommands.add(command.getCommand());
-            GeneralRegistry.ControllerListCommands.add(command.getCommand());
-            GeneralRegistry.GlobalListCommands.add(command.getCommand());
-
         }
         for (GenericCommand command : GeneralRegistry.ChanHalfOpCommands) {
             GeneralRegistry.ChanHalfOpListCommands.add(command.getCommand());

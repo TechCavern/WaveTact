@@ -1,7 +1,7 @@
 package com.techcavern.wavetact.commands.auth;
 
-import com.techcavern.wavetact.annot.AuthCMD;
 import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
@@ -13,7 +13,7 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
 @CMD
-@AuthCMD
+@GenCMD
 public class Logout extends GenericCommand {
 
     public Logout() {

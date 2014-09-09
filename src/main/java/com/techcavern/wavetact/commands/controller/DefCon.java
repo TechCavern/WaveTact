@@ -73,7 +73,6 @@ public class DefCon extends GenericCommand {
         GeneralRegistry.GlobalCommands.clear();
         GeneralRegistry.ChanOpCommands.clear();
         GeneralRegistry.ChanFounderCommands.clear();
-        GeneralRegistry.AnonymonityCommands.clear();
         SimpleActionUtils.loadSimpleActions();
         SimpleMessageUtils.loadSimpleMessages();
         LoadUtils.registerCommands();
