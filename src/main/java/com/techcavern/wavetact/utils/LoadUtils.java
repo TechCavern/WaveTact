@@ -18,31 +18,6 @@ import java.util.Set;
 
 public class LoadUtils {
 
-    public static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
-    public static PircBotX createbot(String nickservPassword, String name, List<String> channels, String nick, String server) {
-        Builder<PircBotX> Net = new Configuration.Builder<>();
-        Net.setName(nick);
-        Net.setLogin("WaveTact");
-        Net.setEncoding(Charset.isSupported("UTF-8") ? Charset.forName("UTF-8") : Charset.defaultCharset());
-        Net.setServer(server, 6667);
-        for (String channel : channels) {
-            if (!channel.isEmpty())
-                Net.addAutoJoinChannel(channel);
-        }
-        Net.setRealName(nick);
-        Net.getListenerManager().addListener(new ChanMsgListener());
-        Net.getListenerManager().addListener(new JoinListener());
-        Net.getListenerManager().addListener(new CTCPListener());
-        Net.getListenerManager().addListener(new KickListener());
-        Net.getListenerManager().addListener(new PrivMsgListener());
-        Net.setAutoReconnect(true);
-        if (nickservPassword != null) {
-            Net.setNickservPassword(nickservPassword);
-        }
-        return new PircBotX(Net.buildConfiguration());
-    }
-
     public static void registerCommands() {
         addCommands(GeneralRegistry.AnonymonityCommands, AnonCMD.class);
         addCommands(GeneralRegistry.AuthCommands, AuthCMD.class);

@@ -1,13 +1,18 @@
 package com.techcavern.wavetact.utils;
 
+import com.techcavern.wavetact.utils.eventListeners.*;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.pircbotx.Channel;
+import org.pircbotx.Configuration;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 import org.pircbotx.hooks.WaitForQueue;
 import org.pircbotx.hooks.events.WhoisEvent;
 import org.pircbotx.output.OutputChannel;
 import org.pircbotx.output.OutputUser;
+
+import java.nio.charset.Charset;
+import java.util.List;
 
 
 public class IRCUtils {
@@ -39,7 +44,7 @@ public class IRCUtils {
         return WhoisEvent;
     }
 
-    public static void SendNotice(PircBotX botObject, User userObject, String notice) {
+    public static void sendNotice(PircBotX botObject, User userObject, String notice) {
         OutputUser x = new OutputUser(botObject, userObject);
         x.notice(notice);
     }
@@ -157,4 +162,26 @@ public class IRCUtils {
         }
     }
 
+    public static PircBotX createBot(String nickservPassword, String name, List<String> channels, String nick, String server) {
+        Configuration.Builder<PircBotX> Net = new Configuration.Builder<>();
+        Net.setName(nick);
+        Net.setLogin("WaveTact");
+        Net.setEncoding(Charset.isSupported("UTF-8") ? Charset.forName("UTF-8") : Charset.defaultCharset());
+        Net.setServer(server, 6667);
+        for (String channel : channels) {
+            if (!channel.isEmpty())
+                Net.addAutoJoinChannel(channel);
+        }
+        Net.setRealName(nick);
+        Net.getListenerManager().addListener(new ChanMsgListener());
+        Net.getListenerManager().addListener(new JoinListener());
+        Net.getListenerManager().addListener(new CTCPListener());
+        Net.getListenerManager().addListener(new KickListener());
+        Net.getListenerManager().addListener(new PrivMsgListener());
+        Net.setAutoReconnect(true);
+        if (nickservPassword != null) {
+            Net.setNickservPassword(nickservPassword);
+        }
+        return new PircBotX(Net.buildConfiguration());
+    }
 }
