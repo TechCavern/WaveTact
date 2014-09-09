@@ -1,19 +1,11 @@
 package com.techcavern.wavetact.utils;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.techcavern.wavetact.annot.*;
-import com.techcavern.wavetact.utils.eventListeners.*;
 import com.techcavern.wavetact.utils.objects.CommandLine;
 import com.techcavern.wavetact.utils.objects.FunObject;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
-import org.pircbotx.Configuration;
-import org.pircbotx.Configuration.Builder;
-import org.pircbotx.PircBotX;
-import com.techcavern.wavetact.commands.trusted.*;
 
 import java.lang.annotation.Annotation;
-import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Set;
 
@@ -26,7 +18,7 @@ public class LoadUtils {
         addCommands(GeneralRegistry.ControllerCommands, ConCMD.class);
         addCommands(GeneralRegistry.GenericCommands, GenCMD.class);
         addCommands(GeneralRegistry.TrustedCommands, TruCMD.class);
-        addCommands(GeneralRegistry.GlobalCommands, NAdmCMD.class);
+        addCommands(GeneralRegistry.NetAdminCommands, NAdmCMD.class);
     }
 
     public static void initializeCommandlines() {
@@ -122,55 +114,24 @@ public class LoadUtils {
     public static void registerCommandList() {
         for (GenericCommand command : GeneralRegistry.GenericCommands) {
             GeneralRegistry.GenericListCommands.add(command.getCommand());
-            GeneralRegistry.TrustedListCommands.add(command.getCommand());
-            GeneralRegistry.ChanHalfOpListCommands.add(command.getCommand());
-            GeneralRegistry.ChanOpListCommands.add(command.getCommand());
-            GeneralRegistry.ChanOwnerListCommands.add(command.getCommand());
-            GeneralRegistry.ChanFounderListCommands.add(command.getCommand());
-            GeneralRegistry.ControllerListCommands.add(command.getCommand());
-            GeneralRegistry.GlobalListCommands.add(command.getCommand());
-
         }
         for (GenericCommand command : GeneralRegistry.TrustedCommands) {
             GeneralRegistry.TrustedListCommands.add(command.getCommand());
-            GeneralRegistry.ChanHalfOpListCommands.add(command.getCommand());
-            GeneralRegistry.ChanOpListCommands.add(command.getCommand());
-            GeneralRegistry.ChanOwnerListCommands.add(command.getCommand());
-            GeneralRegistry.ChanFounderListCommands.add(command.getCommand());
-            GeneralRegistry.ControllerListCommands.add(command.getCommand());
-            GeneralRegistry.GlobalListCommands.add(command.getCommand());
         }
         for (GenericCommand command : GeneralRegistry.ChanHalfOpCommands) {
             GeneralRegistry.ChanHalfOpListCommands.add(command.getCommand());
-            GeneralRegistry.ChanOpListCommands.add(command.getCommand());
-            GeneralRegistry.ChanOwnerListCommands.add(command.getCommand());
-            GeneralRegistry.ChanFounderListCommands.add(command.getCommand());
-            GeneralRegistry.ControllerListCommands.add(command.getCommand());
-            GeneralRegistry.GlobalListCommands.add(command.getCommand());
-
         }
         for (GenericCommand command : GeneralRegistry.ChanOpCommands) {
             GeneralRegistry.ChanOpListCommands.add(command.getCommand());
-            GeneralRegistry.ChanOwnerListCommands.add(command.getCommand());
-            GeneralRegistry.ChanFounderListCommands.add(command.getCommand());
-            GeneralRegistry.ControllerListCommands.add(command.getCommand());
-            GeneralRegistry.GlobalListCommands.add(command.getCommand());
-
         }
         for (GenericCommand command : GeneralRegistry.ChanOwnerCommands) {
             GeneralRegistry.ChanOwnerListCommands.add(command.getCommand());
-            GeneralRegistry.ChanFounderListCommands.add(command.getCommand());
-            GeneralRegistry.ControllerListCommands.add(command.getCommand());
-            GeneralRegistry.GlobalListCommands.add(command.getCommand());
         }
         for (GenericCommand command : GeneralRegistry.ChanFounderCommands) {
             GeneralRegistry.ChanFounderListCommands.add(command.getCommand());
-            GeneralRegistry.ControllerListCommands.add(command.getCommand());
-            GeneralRegistry.GlobalListCommands.add(command.getCommand());
         }
-        for (GenericCommand command : GeneralRegistry.GlobalCommands) {
-            GeneralRegistry.ControllerListCommands.add(command.getCommand());
-            GeneralRegistry.GlobalListCommands.add(command.getCommand());
+        for (GenericCommand command : GeneralRegistry.NetAdminCommands) {
+            GeneralRegistry.NetAdminListCommands.add(command.getCommand());
         }
         for (GenericCommand command : GeneralRegistry.ControllerCommands) {
             GeneralRegistry.ControllerListCommands.add(command.getCommand());

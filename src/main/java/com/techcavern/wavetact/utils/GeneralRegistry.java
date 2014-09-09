@@ -30,7 +30,7 @@ public class GeneralRegistry {
     public static final List<GenericCommand> GenericCommands = new ArrayList<>();
     public static final List<GenericCommand> TrustedCommands = new ArrayList<>();
     public static final List<GenericCommand> ControllerCommands = new ArrayList<>();
-    public static final List<GenericCommand> GlobalCommands = new ArrayList<>();
+    public static final List<GenericCommand> NetAdminCommands = new ArrayList<>();
     public static final List<GenericCommand> ChanOwnerCommands = new ArrayList<>();
     public static final List<GenericCommand> ChanHalfOpCommands = new ArrayList<>();
     public static final List<AuthedUser> AuthedUsers = new ArrayList<>();
@@ -53,7 +53,7 @@ public class GeneralRegistry {
     public static final List<String> TrustedListCommands = new ArrayList<>();
     public static final List<String> ControllerListCommands = new ArrayList<>();
     public static final List<String> ChanOwnerListCommands = new ArrayList<>();
-    public static final List<String> GlobalListCommands = new ArrayList<>();
+    public static final List<String> NetAdminListCommands = new ArrayList<>();
     public static final List<String> ChanHalfOpListCommands = new ArrayList<>();
     public static final List<String> ChanOpListCommands = new ArrayList<>();
     public static final List<String> ChanFounderListCommands = new ArrayList<>();

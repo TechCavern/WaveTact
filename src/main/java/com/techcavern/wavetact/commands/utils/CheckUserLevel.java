@@ -37,23 +37,23 @@ public class CheckUserLevel extends GenericCommand {
         if (userObject == null) {
             IRCUtils.sendError(user, "User does not exist");
         } else if (UserPermLevel >= 9001) {
-            IRCUtils.sendMessage(user, channel, userObject + " is my Master!", isPrivate);
+            IRCUtils.sendMessage(user, channel, userObject + " is a Bot Controller!" + " (" + UserPermLevel+ ")", isPrivate);
         } else if (UserPermLevel >= 20) {
-            IRCUtils.sendMessage(user, channel, userObject + " is a Network Administrator!", isPrivate);
+            IRCUtils.sendMessage(user, channel, userObject + " is a Network Administrator!" + " (" + UserPermLevel+ ")", isPrivate);
         } else if (UserPermLevel >= 18) {
-            IRCUtils.sendMessage(user, channel, userObject + " is a Channel Founder!", isPrivate);
+            IRCUtils.sendMessage(user, channel, userObject + " is a Channel Founder!" + " (" + UserPermLevel+ ")", isPrivate);
         } else if (UserPermLevel >= 15) {
-            IRCUtils.sendMessage(user, channel, userObject + " is a Channel Owner!", isPrivate);
+            IRCUtils.sendMessage(user, channel, userObject + " is a Channel Owner!" + " (" + UserPermLevel+ ")", isPrivate);
         } else if (UserPermLevel >= 13) {
-            IRCUtils.sendMessage(user, channel, userObject + " is a Channel Admin!", isPrivate);
+            IRCUtils.sendMessage(user, channel, userObject + " is a Channel Admin!" + " (" + UserPermLevel+ ")", isPrivate);
         } else if (UserPermLevel >= 10) {
-            IRCUtils.sendMessage(user, channel, userObject + " is a Channel Operator!", isPrivate);
+            IRCUtils.sendMessage(user, channel, userObject + " is a Channel Operator!" + " (" + UserPermLevel+ ")", isPrivate);
         } else if (UserPermLevel >= 7) {
-            IRCUtils.sendMessage(user, channel, userObject + " is a Channel Half-Operator", isPrivate);
+            IRCUtils.sendMessage(user, channel, userObject + " is a Channel Half-Operator" + " (" + UserPermLevel+ ")", isPrivate);
         } else if (UserPermLevel >= 5 && !isPrivate) {
-            IRCUtils.sendMessage(user, channel, userObject + " is a Channel Trusted User!", isPrivate);
+            IRCUtils.sendMessage(user, channel, userObject + " is a Channel Trusted User!" + " (" + UserPermLevel+ ")", isPrivate);
         } else {
-            IRCUtils.sendMessage(user, channel, userObject + " is a Regular User!", isPrivate);
+            IRCUtils.sendMessage(user, channel, userObject + " is a Regular User!" + " (" + UserPermLevel+ ")", isPrivate);
         }
 
 

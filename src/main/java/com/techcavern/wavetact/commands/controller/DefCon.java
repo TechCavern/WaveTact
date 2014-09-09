@@ -70,7 +70,7 @@ public class DefCon extends GenericCommand {
         GeneralRegistry.ChanHalfOpCommands.clear();
         GeneralRegistry.ControllerCommands.clear();
         GeneralRegistry.ChanOwnerCommands.clear();
-        GeneralRegistry.GlobalCommands.clear();
+        GeneralRegistry.NetAdminCommands.clear();
         GeneralRegistry.ChanOpCommands.clear();
         GeneralRegistry.ChanFounderCommands.clear();
         SimpleActionUtils.loadSimpleActions();
