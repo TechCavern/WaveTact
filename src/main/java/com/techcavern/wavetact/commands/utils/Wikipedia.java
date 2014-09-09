@@ -28,13 +28,13 @@ public class Wikipedia extends GenericCommand {
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        JsonObject result = GeneralUtils.getJsonObject("http://en.wikipedia.org/w/api.php?action=query&prop=extracts&explaintext&exsectionformat=plain&exchars=700&titles=" + StringUtils.join(args, "%20").toLowerCase() + "&format=json").getAsJsonObject("query").getAsJsonObject("pages");
+        JsonObject result = GeneralUtils.getJsonObject("http://en.wikipedia.org/w/api.php?action=query&prop=extracts&explaintext&exsectionformat=plain&exchars=350&titles=" + StringUtils.join(args, "%20").toLowerCase() + "&format=json").getAsJsonObject("query").getAsJsonObject("pages");
         String key = result.entrySet().iterator().next().getKey();
-        String title = result.getAsJsonObject(key).get("title").getAsString();
-        String text = result.getAsJsonObject(key).get("extract").getAsString();
-        if(text.equalsIgnoreCase("missing")){
+        if(result.getAsJsonObject(key).get("missing") != null){
             IRCUtils.sendError(user, "Query returned no results");
         }else {
+            String title = result.getAsJsonObject(key).get("title").getAsString();
+            String text = result.getAsJsonObject(key).get("extract").getAsString();
             String plainurl = "http://en.wikipedia.org/" + StringUtils.join(args, "%20").toLowerCase();
             IRCUtils.sendMessage(user, channel, title + ": " + text.replaceAll("\n", ""), isPrivate);
             IRCUtils.sendMessage(user, channel, plainurl, isPrivate);

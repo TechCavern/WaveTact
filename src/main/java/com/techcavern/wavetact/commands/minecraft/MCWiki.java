@@ -45,8 +45,8 @@ public class MCWiki extends GenericCommand {
            text = content.get(i).toString().replaceAll("<.*?>", "").replaceAll("&.*?;", "").replaceAll("\\[.*\\]", "");
            i++;
         }
-        if(text.length() > 700){
-            text = StringUtils.substring(text, 0, 700) + "...";
+        if(text.length() > 350){
+            text = StringUtils.substring(text, 0, 350) + "...";
         }
         IRCUtils.sendMessage(user, channel, title + ": " + text, isPrivate);
         IRCUtils.sendMessage(user, channel, url, isPrivate);

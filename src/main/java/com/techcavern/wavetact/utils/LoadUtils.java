@@ -24,7 +24,7 @@ public class LoadUtils {
         addCommands(GeneralRegistry.ChanHalfOpCommands, ChanHOPCMD.class);
         addCommands(GeneralRegistry.ChanOwnerCommands, ChanOWNCMD.class);
         addCommands(GeneralRegistry.ControllerCommands, ConCMD.class);
-          addCommands(GeneralRegistry.GenericCommands, GenCMD.class);
+        addCommands(GeneralRegistry.GenericCommands, GenCMD.class);
         addCommands(GeneralRegistry.TrustedCommands, TruCMD.class);
         addCommands(GeneralRegistry.GlobalCommands, NAdmCMD.class);
     }
