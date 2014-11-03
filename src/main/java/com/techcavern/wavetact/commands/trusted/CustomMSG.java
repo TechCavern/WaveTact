@@ -35,7 +35,7 @@ public class CustomMSG extends GenericCommand {
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         if (args[0].toLowerCase().equalsIgnoreCase("list")) {
-            List<String> SimpleCommands = GeneralRegistry.SimpleMessages.stream().filter(g -> g.getPermLevel() <= UserPermLevel).map(GenericCommand::getCommand).collect(Collectors.toList());
+            List<String> SimpleCommands = GetUtils.getMessagesList(UserPermLevel);
             IRCUtils.sendMessage(user, channel, StringUtils.join(SimpleCommands, ", "), isPrivate);
         } else if (args[0].startsWith("-")) {
             removeCommand(user, channel, isPrivate, UserPermLevel, args[0].substring(1));

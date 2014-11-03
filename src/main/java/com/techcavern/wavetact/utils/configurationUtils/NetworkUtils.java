@@ -57,7 +57,7 @@ public class NetworkUtils {
 
     public static void registerDevServer() {
       //  PircBotX Dev = LoadUtils.createBot(null, "SynIRC", Arrays.asList("#techcavern"), "WaveTactDev", "irc.synirc.net");
-        PircBotX Dev2 = IRCUtils.createBot(null, "EsperNet", Arrays.asList(GeneralUtils.toArray("#batbot")), "WaveTactDev", "irc.esper.net");
+        PircBotX Dev2 = IRCUtils.createBot(null, "EsperNet", Arrays.asList(GeneralUtils.toArray("##neobotwar")), "WaveTactDev", "irc.freenode.net");
   //      GeneralRegistry.WaveTact.addBot(Dev);
         GeneralRegistry.WaveTact.addBot(Dev2);
         GeneralRegistry.Controllers.add("JZTech101");

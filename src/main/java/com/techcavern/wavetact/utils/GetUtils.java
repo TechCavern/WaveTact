@@ -10,6 +10,7 @@ import org.pircbotx.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class GetUtils {
@@ -112,6 +113,12 @@ public class GetUtils {
             }
         }
         return null;
+    }
+    public static List<String> getActionsList(int UserPermLevel){
+        return GeneralRegistry.SimpleActions.stream().filter(g -> g.getPermLevel() <= UserPermLevel).map(GenericCommand::getCommand).collect(Collectors.toList());
+    }
+    public static List<String> getMessagesList(int UserPermLevel){
+        return GeneralRegistry.SimpleMessages.stream().filter(g -> g.getPermLevel() <= UserPermLevel).map(GenericCommand::getCommand).collect(Collectors.toList());
     }
 
 }

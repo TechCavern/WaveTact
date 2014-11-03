@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.commands.utils;
+package com.techcavern.wavetact.commands.dnsinfo;
 
 import com.google.gson.JsonObject;
 import com.techcavern.wavetact.annot.CMD;
