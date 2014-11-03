@@ -123,6 +123,7 @@ public class IRCUtils {
                     Command.onCommand(user, Bot, channel, isPrivate, UserPermLevel, messageParts);
                 } catch (Exception e) {
                     IRCUtils.sendError(user, "Unable to perform command - please make sure are using the correct syntax");
+                    IRCUtils.sendError(user, Command.getSyntax());
                 }
             } else {
                 IRCUtils.sendError(user, "Error: I must be at op or higher to perform the operation requested");
@@ -134,6 +135,7 @@ public class IRCUtils {
                     Command.onCommand(user, Bot, channel, isPrivate, UserPermLevel, messageParts);
                 } catch (Exception e) {
                     IRCUtils.sendError(user, "Unable to perform command - please make sure are using the correct syntax");
+                    IRCUtils.sendError(user, Command.getSyntax());
                 }
             } else {
                 IRCUtils.sendError(user, "Error: I must be owner to perform the operation requested");
@@ -144,6 +146,7 @@ public class IRCUtils {
                     Command.onCommand(user, Bot, channel, isPrivate, UserPermLevel, messageParts);
                 } catch (Exception e) {
                     IRCUtils.sendError(user, "Unable to perform command - please make sure are using the correct syntax");
+                    IRCUtils.sendError(user, Command.getSyntax());
                 }
             } else {
                 if (Bot.getServerInfo().getPrefixes().contains("h")) {
@@ -158,6 +161,7 @@ public class IRCUtils {
             } catch (Exception e) {
                 e.printStackTrace();
                 IRCUtils.sendError(user, "Unable to perform command - please make sure are using the correct syntax");
+                IRCUtils.sendError(user, Command.getSyntax());
             }
         }
     }
