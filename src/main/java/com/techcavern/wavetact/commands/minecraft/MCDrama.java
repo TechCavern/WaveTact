@@ -21,8 +21,8 @@ public class MCDrama extends GenericCommand {
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        Document doc = Jsoup.connect("http://asie.pl/drama.php?plain").get();
-        String c = doc.body().text();
+        Document doc = Jsoup.connect("http://asie.pl/drama.php?2").get();
+        String c = doc.select("h1").text();
         IRCUtils.sendMessage(user, channel, c, isPrivate);
     }
 }
