@@ -34,7 +34,7 @@ public class Authenticate extends GenericCommand {
             userString = args[0];
             password = args[1];
         }
-        if (PermUtils.getAuthedAccount(Bot, user.getNick()) != null) {
+        if (PermUtils.authUser(Bot, user.getNick()) != null) {
             IRCUtils.sendError(user, "Error, you are already identified");
 
         } else {

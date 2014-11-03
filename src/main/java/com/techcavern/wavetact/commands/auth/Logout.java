@@ -22,7 +22,7 @@ public class Logout extends GenericCommand {
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        AuthedUser authedUser = PermUtils.getAuthUser(Bot, user.getNick());
+        AuthedUser authedUser = PermUtils.getAuthedUser(Bot, user.getNick());
         if (authedUser == null) {
             IRCUtils.sendError(user, "Error, you are not logged in");
         } else {

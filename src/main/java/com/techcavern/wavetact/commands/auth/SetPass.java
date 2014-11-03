@@ -24,7 +24,7 @@ public class SetPass extends GenericCommand {
             IRCUtils.sendError(user, "This network is set to " + GetUtils.getAuthType(Bot) + " Authentication");
             return;
         }
-        String AuthUser = PermUtils.getAuthedAccount(Bot, user.getNick());
+        String AuthUser = PermUtils.authUser(Bot, user.getNick());
         if (AuthUser != null) {
             Account acc = AccountUtils.getAccount(AuthUser);
             if (GeneralRegistry.encryptor.checkPassword(args[0], acc.getAuthPassword())) {

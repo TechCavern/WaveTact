@@ -91,12 +91,12 @@ public class IRCUtils {
         User whois = GetUtils.getUserByNick(bot, userObject);
         String hostmask = "";
         if (whois != null) {
-            String hostname = whois.getHostmask();
+            String hostname = whois.getHostname();
             String Login = whois.getLogin();
             hostmask = "*!" + Login + "@" + hostname;
             hostmask = hostmask.replace(" ", "");
         } else {
-            hostmask = userObject + "!*@*";
+            hostmask = null;
         }
         return hostmask;
     }

@@ -28,7 +28,7 @@ public class AutoOp extends GenericCommand {
         } else {
             account = args[0];
         }
-        String auth = PermUtils.getAuthedAccount(Bot, account);
+        String auth = PermUtils.authUser(Bot, account);
         if (auth != null) {
             account = auth;
         }

@@ -9,14 +9,14 @@ import org.pircbotx.hooks.events.WhoisEvent;
 
 public class PermUtils {
 
-    public static String getPrivateAccount(PircBotX bot, String userObject, String hostmask) {
+    public static String getAccount(PircBotX bot, String userObject, String hostmask) {
         String authtype = GetUtils.getAuthType(bot);
         if(authtype == null) {
             return userObject;
         }
         switch (authtype) {
             case "nickserv":
-                return getAuthedNickServUser(bot, userObject, hostmask);
+                return getNickServAccountName(bot, userObject, hostmask);
             case "account":
                 return getAuthedUser(bot, userObject, hostmask);
             default:
@@ -24,21 +24,21 @@ public class PermUtils {
         }
     }
 
-    public static String getAuthedAccount(PircBotX bot, String userObject) {
+    public static String authUser(PircBotX bot, String userObject) {
         String hostmask = IRCUtils.getIRCHostmask(bot, userObject);
         if (hostmask != null) {
-            return getPrivateAccount(bot, userObject, hostmask);
+            return getAccount(bot, userObject, hostmask);
         } else {
             hostmask = IRCUtils.getHostmask(bot, userObject, false);
             if (hostmask != null) {
-                return getPrivateAccount(bot, userObject, hostmask);
+                return getAccount(bot, userObject, hostmask);
             } else {
                 return null;
             }
         }
     }
 
-    public static String getAuthedNickServUser(PircBotX bot, String userObject, String hostmask) {
+    public static String getNickServAccountName(PircBotX bot, String userObject, String hostmask) {
         String userString = getAuthedUser(bot, userObject, hostmask);
         if (userString == null) {
             userString = getAccountName(bot, userObject);
@@ -63,7 +63,7 @@ public class PermUtils {
 
     }
 
-    public static AuthedUser getAuthUser(PircBotX bot, String userObject) {
+    public static AuthedUser getAuthedUser(PircBotX bot, String userObject) {
         String hostmask = IRCUtils.getIRCHostmask(bot, userObject);
         for (AuthedUser user : GeneralRegistry.AuthedUsers) {
             if (user.getAuthHostmask().equals(hostmask) && user.getAuthNetwork().equals(bot.getServerInfo().getNetwork())) {
@@ -130,15 +130,15 @@ public class PermUtils {
     }
 
     public static int getPermLevel(PircBotX bot, String userObject, Channel channelObject) {
-        String auth = PermUtils.getAuthedAccount(bot, userObject);
+        String auth = PermUtils.authUser(bot, userObject);
         if (auth != null) {
-            return getAuthPermLevel(bot, userObject, channelObject, auth);
+            return getLevel(bot, userObject, channelObject, auth);
         } else {
-            return getAuthPermLevel(bot, userObject, channelObject, userObject);
+            return getLevel(bot, userObject, channelObject, userObject);
         }
     }
 
-    public static int getAuthPermLevel(PircBotX bot, String userObject, Channel channelObject, String account) {
+    public static int getLevel(PircBotX bot, String userObject, Channel channelObject, String account) {
         if (channelObject != null) {
             int mpermlevel = getManualPermLevel(bot, channelObject, account);
             User user = GetUtils.getUserByNick(bot, userObject);

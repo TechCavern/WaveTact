@@ -25,7 +25,7 @@ public class FDrop extends GenericCommand {
             IRCUtils.sendError(user, "This network is set to " + GetUtils.getAuthType(Bot) + " Authentication");
             return;
         }
-        AuthedUser authedUser = PermUtils.getAuthUser(Bot, args[0]);
+        AuthedUser authedUser = PermUtils.getAuthedUser(Bot, args[0]);
         if (authedUser != null) {
             GeneralRegistry.AuthedUsers.remove(authedUser);
         }

@@ -34,7 +34,7 @@ public class Register extends GenericCommand {
             userString = args[0];
             password = args[1];
         }
-        if (AccountUtils.getAccount(userString) != null || PermUtils.getAuthedAccount(Bot, user.getNick()) != null) {
+        if (AccountUtils.getAccount(userString) != null || PermUtils.authUser(Bot, user.getNick()) != null) {
             IRCUtils.sendError(user, "Error, you are already registered");
 
         } else {

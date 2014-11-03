@@ -25,7 +25,7 @@ public class Drop extends GenericCommand {
             IRCUtils.sendError(user, "This network is set to " + GetUtils.getAuthType(Bot) + " Authentication");
             return;
         }
-        AuthedUser authedUser = PermUtils.getAuthUser(Bot, user.getNick());
+        AuthedUser authedUser = PermUtils.getAuthedUser(Bot, user.getNick());
         if (authedUser == null) {
             IRCUtils.sendError(user, "Error, you are not logged in");
         } else {
