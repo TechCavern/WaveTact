@@ -21,14 +21,19 @@ import org.pircbotx.User;
 public class Commands extends GenericCommand {
 
     public Commands() {
-        super(GeneralUtils.toArray("commands list cmds"), 0, "commands [permlevel]", "returns list of Commands specific to that permlevel");
+        super(GeneralUtils.toArray("commands list cmds"), 0, "commands [permlevel/all]", "returns list of Commands specific to that permlevel");
     }
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         int permlevel = 0;
         if(args.length > 0) {
-            permlevel = Integer.parseInt(args[0]);
+            try {
+                permlevel = Integer.parseInt(args[0]);
+            }catch(NumberFormatException e){
+                IRCUtils.sendMessage(user, channel, StringUtils.join(GeneralRegistry.AllListCommands, ", "), isPrivate);
+                return;
+            }
         }
          if (permlevel >= 9001) {
             IRCUtils.sendMessage(user, channel, StringUtils.join(GeneralRegistry.ControllerListCommands, ", "), isPrivate);

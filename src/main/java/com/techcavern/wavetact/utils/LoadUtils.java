@@ -120,27 +120,35 @@ public class LoadUtils {
     public static void registerCommandList() {
         for (GenericCommand command : GeneralRegistry.GenericCommands) {
             GeneralRegistry.GenericListCommands.add(command.getCommand());
+            GeneralRegistry.AllListCommands.add(command.getCommand());
         }
         for (GenericCommand command : GeneralRegistry.TrustedCommands) {
             GeneralRegistry.TrustedListCommands.add(command.getCommand());
+            GeneralRegistry.AllListCommands.add(command.getCommand());
         }
         for (GenericCommand command : GeneralRegistry.ChanHalfOpCommands) {
             GeneralRegistry.ChanHalfOpListCommands.add(command.getCommand());
+            GeneralRegistry.AllListCommands.add(command.getCommand());
         }
         for (GenericCommand command : GeneralRegistry.ChanOpCommands) {
             GeneralRegistry.ChanOpListCommands.add(command.getCommand());
+            GeneralRegistry.AllListCommands.add(command.getCommand());
         }
         for (GenericCommand command : GeneralRegistry.ChanOwnerCommands) {
             GeneralRegistry.ChanOwnerListCommands.add(command.getCommand());
+            GeneralRegistry.AllListCommands.add(command.getCommand());
         }
         for (GenericCommand command : GeneralRegistry.ChanFounderCommands) {
             GeneralRegistry.ChanFounderListCommands.add(command.getCommand());
+            GeneralRegistry.AllListCommands.add(command.getCommand());
         }
         for (GenericCommand command : GeneralRegistry.NetAdminCommands) {
             GeneralRegistry.NetAdminListCommands.add(command.getCommand());
+            GeneralRegistry.AllListCommands.add(command.getCommand());
         }
         for (GenericCommand command : GeneralRegistry.ControllerCommands) {
             GeneralRegistry.ControllerListCommands.add(command.getCommand());
+            GeneralRegistry.AllListCommands.add(command.getCommand());
         }
     }
 }

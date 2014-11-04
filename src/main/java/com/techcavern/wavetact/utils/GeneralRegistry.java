@@ -54,6 +54,7 @@ public class GeneralRegistry {
     public static final List<String> GenericListCommands = new ArrayList<>();
     public static final List<String> TrustedListCommands = new ArrayList<>();
     public static final List<String> ControllerListCommands = new ArrayList<>();
+    public static final List<String> AllListCommands = new ArrayList<>();
     public static final List<String> ChanOwnerListCommands = new ArrayList<>();
     public static final List<String> NetAdminListCommands = new ArrayList<>();
     public static final List<String> ChanHalfOpListCommands = new ArrayList<>();
