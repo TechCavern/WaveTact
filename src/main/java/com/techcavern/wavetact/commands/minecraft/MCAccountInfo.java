@@ -1,6 +1,8 @@
 package com.techcavern.wavetact.commands.minecraft;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.GeneralRegistry;
@@ -10,6 +12,12 @@ import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 @CMD
 @GenCMD
@@ -21,17 +29,39 @@ public class MCAccountInfo extends GenericCommand {
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        if (GeneralRegistry.minecraftapikey == null) {
-            IRCUtils.sendError(user, "Minecraft API key is null - Contact Bot Controller to fix");
-            return;
+        URL url = new URL("https://api.mojang.com/profiles/minecraft");
+
+        String payload="[\"" + args[0] +"\",\"egewewhewhwe\"]";
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setDoInput(true);
+        connection.setDoOutput(true);
+        connection.setRequestMethod("POST");
+        connection.setRequestProperty("Content-Type", "application/json");
+        OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream(), "UTF-8");
+        writer.write(payload);
+        writer.close();
+        BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        String result = "";
+        String line = "";
+        while ((line = br.readLine()) != null) {
+            result += line.replaceAll("\n", " ") + "\n";
         }
-        JsonObject mcapi = GeneralUtils.getJsonObject("http://theminecraftapi.com/v1/?user=" + args[0] + "&apiKey=" + GeneralRegistry.minecraftapikey);
-        if (mcapi.get("user") != null) {
-            String User = mcapi.get("user").getAsString();
-            String UUID = mcapi.get("uuid").getAsString();
-            String Premium = mcapi.get("premium").getAsString();
-            String Migrated = mcapi.get("migrated").getAsString();
-            IRCUtils.sendMessage(user, channel, User + ": " + "UUID: " + UUID + " - " + "Paid: " + Premium + " - " + "Mojang Account: " + Migrated, isPrivate);
+        br.close();
+        connection.disconnect();
+        JsonArray mcapipre = new JsonParser().parse(result).getAsJsonArray();
+        if (mcapipre.size() > 0) {
+            JsonObject mcapi = mcapipre.get(0).getAsJsonObject();
+            String User = mcapi.get("name").getAsString();
+            String UUID = mcapi.get("id").getAsString();
+            String Premium = "True";
+            if(mcapi.get("demo")!= null && mcapi.get("legacy").getAsString().equalsIgnoreCase("True")) {
+                Premium = "False";
+            }
+            String Migrated = "True";
+            if(mcapi.get("legacy")!= null && mcapi.get("legacy").getAsString().equalsIgnoreCase("True")) {
+                Migrated = "False";
+            }
+            IRCUtils.sendMessage(user, channel, User + " - " + "UUID: " + UUID + " - " + "Paid: " + Premium + " - " + "Mojang Account: " + Migrated, isPrivate);
         } else {
             IRCUtils.sendError(user, "user does not exist");
         }

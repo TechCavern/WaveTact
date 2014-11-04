@@ -65,5 +65,4 @@ public class GeneralRegistry {
     public static String wundergroundapikey = null;
     public static String wolframalphaapikey = null;
     public static String wordnikapikey = null;
-    public static String minecraftapikey = null;
 }

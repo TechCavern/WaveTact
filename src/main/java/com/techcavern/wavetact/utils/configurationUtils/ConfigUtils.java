@@ -11,6 +11,5 @@ public class ConfigUtils {
         GeneralRegistry.wolframalphaapikey = config.getString("wolframapi");
         GeneralRegistry.wundergroundapikey = config.getString("wundergroundapi");
         GeneralRegistry.wordnikapikey = config.getString("wordnikapi");
-        GeneralRegistry.minecraftapikey = config.getString("minecraftapi");
     }
 }
