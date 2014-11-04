@@ -17,7 +17,7 @@ import org.pircbotx.User;
 public class Ban extends GenericCommand {
 
     public Ban() {
-        super(GeneralUtils.toArray("ban b"), 6, "ban (-)(+)[User][hostmask] (time)", "bans a user for a specified period of time or 24 hours");
+        super(GeneralUtils.toArray("ban b"), 6, "ban (-)(+)[User][hostmask] (-)(+)(time)", "bans a user for a specified period of time or 24 hours");
     }
 
     @Override
@@ -43,26 +43,8 @@ public class Ban extends GenericCommand {
 
             }
         }
-        if ((!args[0].startsWith("-")) && (!args[0].startsWith("+"))) {
 
-            if (BanTimeUtils.getBanTime(hostmask) == null) {
-
-                if (args.length == 2) {
-                    ban(hostmask, channel, Bot);
-                    UTime utimeObject = new UTime(hostmask, Bot.getServerInfo().getNetwork(), "b", channel.getName(), GeneralUtils.getMilliSeconds(args[1]), System.currentTimeMillis());
-                    GeneralRegistry.BanTimes.add(utimeObject);
-                    BanTimeUtils.saveBanTimes();
-
-                } else if (args.length < 2) {
-                    ban(hostmask, channel, Bot);
-                    UTime utimeObject = new UTime(hostmask, Bot.getServerInfo().getNetwork(), "b", channel.getName(), GeneralUtils.getMilliSeconds("24h"), System.currentTimeMillis());
-                    GeneralRegistry.BanTimes.add(utimeObject);
-                    BanTimeUtils.saveBanTimes();
-                }
-            } else {
-                IRCUtils.sendError(user, "Ban already exists!");
-            }
-        } else if (args[0].startsWith("-")) {
+       if (args[0].startsWith("-")) {
             if (BanTimeUtils.getBanTime(hostmask) != null) {
                 BanTimeUtils.getBanTime(hostmask).setTime(0);
                 BanTimeUtils.saveBanTimes();
@@ -70,7 +52,7 @@ public class Ban extends GenericCommand {
                 IRCUtils.setMode(channel, Bot, "-b ", hostmask);
             }
 
-        } else {
+        } else if (args[0].startsWith("+")){
             if (BanTimeUtils.getBanTime(hostmask) != null) {
                 if (args[0].startsWith("+")) {
                     if (args[1].startsWith("+")) {
@@ -86,7 +68,25 @@ public class Ban extends GenericCommand {
             } else {
                 channel.send().message("Ban does not exist!");
             }
-        }
+        }else{
+               if (BanTimeUtils.getBanTime(hostmask) == null) {
+
+                   if (args.length == 2) {
+                       ban(hostmask, channel, Bot);
+                       UTime utimeObject = new UTime(hostmask, Bot.getServerInfo().getNetwork(), "b", channel.getName(), GeneralUtils.getMilliSeconds(args[1]), System.currentTimeMillis());
+                       GeneralRegistry.BanTimes.add(utimeObject);
+                       BanTimeUtils.saveBanTimes();
+
+                   } else if (args.length < 2) {
+                       ban(hostmask, channel, Bot);
+                       UTime utimeObject = new UTime(hostmask, Bot.getServerInfo().getNetwork(), "b", channel.getName(), GeneralUtils.getMilliSeconds("24h"), System.currentTimeMillis());
+                       GeneralRegistry.BanTimes.add(utimeObject);
+                       BanTimeUtils.saveBanTimes();
+                   }
+               } else {
+                   IRCUtils.sendError(user, "Ban already exists!");
+               }
+       }
     }
 
     void ban(String hostmask, Channel channel, PircBotX botObject) {

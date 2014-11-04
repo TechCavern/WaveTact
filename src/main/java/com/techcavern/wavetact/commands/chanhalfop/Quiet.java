@@ -17,7 +17,7 @@ import org.pircbotx.User;
 public class Quiet extends GenericCommand {
 
     public Quiet() {
-        super(GeneralUtils.toArray("quiet mute"), 6, "Quiet (-)[User][hostmask] (time)", "quiets a user for the specified time or 24 hours");
+        super(GeneralUtils.toArray("quiet mute"), 6, "Quiet (-)[User][hostmask] (-)(+)(time)", "quiets a user for the specified time or 24 hours");
     }
 
     @Override
@@ -26,10 +26,10 @@ public class Quiet extends GenericCommand {
         String ircd;
         if (Bot.getServerInfo().getChannelModes().contains("q")) {
             ircd = "c";
-        } else if (Bot.getServerInfo().getServerVersion().contains("InspIRCd")) {
-            ircd = "i";
-        } else if (Bot.getServerInfo().getServerVersion().contains("Unreal")) {
+        } else if (Bot.getServerInfo().getExtBanPrefix().equalsIgnoreCase("~") && Bot.getServerInfo().getExtBanList() != null && Bot.getServerInfo().getExtBanList().contains("q")) {
             ircd = "u";
+        } else if (Bot.getServerInfo().getExtBanPrefix().contains("m") && Bot.getServerInfo().getExtBanList() == null) {
+            ircd = "i";
         } else {
             IRCUtils.sendError(user, "This networks ircd is not supported for quiets.");
             return;
@@ -54,43 +54,7 @@ public class Quiet extends GenericCommand {
             }
 
         }
-        if ((!args[0].startsWith("-")) && (!args[0].startsWith("+"))) {
-            if (QuietTimeUtils.getQuietTime(hostmask) == null) {
-                if (args.length == 2) {
-                    quiet(hostmask, ircd,
-                            channel, Bot);
-                    UTime c = new UTime(hostmask, Bot.getServerInfo().getNetwork(), ircd, channel.getName(), GeneralUtils.getMilliSeconds(args[1]), System.currentTimeMillis());
-                    GeneralRegistry.QuietTimes.add(c);
-                    QuietTimeUtils.saveQuietTimes();
-
-                } else if (args.length < 2) {
-                    quiet(hostmask, ircd, channel, Bot);
-                    UTime c = new UTime(hostmask, Bot.getServerInfo().getNetwork(), ircd, channel.getName(), GeneralUtils.getMilliSeconds("24h"), System.currentTimeMillis());
-                    GeneralRegistry.QuietTimes.add(c);
-                    QuietTimeUtils.saveQuietTimes();
-
-                }
-            } else {
-                channel.send().message("Quiet already exists!");
-            }
-        } else if (args[0].startsWith("-")) {
-            if (QuietTimeUtils.getQuietTime(hostmask) != null) {
-                QuietTimeUtils.getQuietTime(hostmask).setTime(0);
-                QuietTimeUtils.saveQuietTimes();
-            } else {
-                switch (ircd.toLowerCase()) {
-                    case "c":
-                        IRCUtils.setMode(channel, Bot, "-q ", hostmask);
-                        break;
-                    case "u":
-                        IRCUtils.setMode(channel, Bot, "-b ~q:", hostmask);
-                        break;
-                    case "i":
-                        IRCUtils.setMode(channel, Bot, "-b m:", hostmask);
-                        break;
-                }
-            }
-        } else {
+        if (args[0].startsWith("+")) {
             if (QuietTimeUtils.getQuietTime(hostmask) != null) {
                 if (args[0].startsWith("+")) {
                     if (args[1].startsWith("+")) {
@@ -107,21 +71,35 @@ public class Quiet extends GenericCommand {
             } else {
                 channel.send().message("Quiet does not exist!");
             }
+        } else if (args[0].startsWith("-")) {
+            if (QuietTimeUtils.getQuietTime(hostmask) != null) {
+                QuietTimeUtils.getQuietTime(hostmask).setTime(0);
+                QuietTimeUtils.saveQuietTimes();
+            } else {
+                IRCUtils.setMode(channel, Bot, "-"+GeneralRegistry.QuietBans.get(ircd), hostmask);
+            }
+        } else {
+
+            if (QuietTimeUtils.getQuietTime(hostmask) == null) {
+                if (args.length == 2) {
+                    IRCUtils.setMode(channel, Bot, "+" +GeneralRegistry.QuietBans.get(ircd), hostmask);
+                    UTime c = new UTime(hostmask, Bot.getServerInfo().getNetwork(), ircd, channel.getName(), GeneralUtils.getMilliSeconds(args[1]), System.currentTimeMillis());
+                    GeneralRegistry.QuietTimes.add(c);
+                    QuietTimeUtils.saveQuietTimes();
+
+                } else if (args.length < 2) {
+                    IRCUtils.setMode(channel, Bot, "+" +GeneralRegistry.QuietBans.get(ircd), hostmask);
+                    UTime c = new UTime(hostmask, Bot.getServerInfo().getNetwork(), ircd, channel.getName(), GeneralUtils.getMilliSeconds("24h"), System.currentTimeMillis());
+                    GeneralRegistry.QuietTimes.add(c);
+                    QuietTimeUtils.saveQuietTimes();
+
+                }
+            } else {
+                channel.send().message("Quiet already exists!");
+            }
         }
     }
 
 
-    void quiet(String hostmask, String type, Channel channelName, PircBotX botObject) {
-        switch (type.toLowerCase()) {
-            case "c":
-                IRCUtils.setMode(channelName, botObject, "+q ", hostmask);
-                break;
-            case "u":
-                IRCUtils.setMode(channelName, botObject, "+b ~q:", hostmask);
-                break;
-            case "i":
-                IRCUtils.setMode(channelName, botObject, "+b m:", hostmask);
-                break;
-        }
-    }
+
 }

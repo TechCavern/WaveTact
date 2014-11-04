@@ -27,6 +27,7 @@ public class Main {
         ConfigUtils.registerConfigs();
         LoadUtils.registerCommands();
         LoadUtils.registerCommandList();
+        LoadUtils.registerQuiets();
         SimpleActionUtils.loadSimpleActions();
         SimpleMessageUtils.loadSimpleMessages();
 

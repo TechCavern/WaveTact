@@ -43,7 +43,7 @@ public class BanTimeUtils {
 
     public static UTime getBanTime(String hostmask) {
         for (UTime x : GeneralRegistry.BanTimes) {
-            if (x.getSomething().equals(hostmask)) {
+            if (x.getHostmask().equals(hostmask)) {
                 return x;
             }
         }

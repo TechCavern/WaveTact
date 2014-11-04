@@ -43,7 +43,7 @@ public class QuietTimeUtils {
 
     public static UTime getQuietTime(String hostmask) {
         for (UTime x : GeneralRegistry.QuietTimes) {
-            if (x.getSomething().equals(hostmask)) {
+            if (x.getHostmask().equals(hostmask)) {
                 return x;
             }
         }

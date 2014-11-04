@@ -92,6 +92,12 @@ public class LoadUtils {
         GeneralRegistry.Attacks.add(new FunObject("throws a racket at $*", false, null));
     }
 
+    public static void registerQuiets(){
+        GeneralRegistry.QuietBans.put("u", "b ~q:");
+        GeneralRegistry.QuietBans.put("c", "q ");
+        GeneralRegistry.QuietBans.put("i", "b m:");
+    }
+
     public static void registerEightball() {
         GeneralRegistry.Eightball.add("Hmm.. not today");
         GeneralRegistry.Eightball.add("YES!");

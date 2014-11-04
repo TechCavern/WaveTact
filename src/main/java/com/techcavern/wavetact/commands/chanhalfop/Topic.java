@@ -59,7 +59,7 @@ public class Topic extends GenericCommand {
         } else if (args[1].equalsIgnoreCase("r") || args[1].equalsIgnoreCase("revert")) {
             UTime oldTopic = GetUtils.getTopic(channel.getName(), Bot.getServerInfo().getNetwork());
             if (oldTopic != null) {
-                channel.send().setTopic(oldTopic.getSomething());
+                channel.send().setTopic(oldTopic.getHostmask());
                 GeneralRegistry.Topic.remove(oldTopic);
             } else {
                 channel.send().message("Error: No Reversal Possible");
