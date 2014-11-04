@@ -27,7 +27,7 @@ public class PartListener extends ListenerAdapter<PircBotX> {
                 event.getBot().sendIRC().joinChannel(event.getChannel().getName());
                 tries++;
                 TimeUnit.SECONDS.sleep(30);
-            }while(tries < 30 && !event.getBot().getUserBot().getChannels().contains(event.getChannel()));
+            }while(tries < 60 && !event.getBot().getUserBot().getChannels().contains(event.getChannel()));
         }
     }
 }

@@ -20,13 +20,13 @@ import java.util.concurrent.TimeUnit;
  */
 public class KickListener extends ListenerAdapter<PircBotX> {
     public void onKick(KickEvent<PircBotX> event) throws Exception {
-        if (event.getRecipient.getNick().equals(event.getBot().getNick())) {
+        if (event.getRecipient().getNick().equals(event.getBot().getNick())) {
             int tries = 0;
             do{
                 event.getBot().sendIRC().joinChannel(event.getChannel().getName());
                 tries++;
                 TimeUnit.SECONDS.sleep(30);
-            }while(tries < 30 && !event.getBot().getUserBot().getChannels().contains(event.getChannel()));
+            }while(tries < 60 && !event.getBot().getUserBot().getChannels().contains(event.getChannel()));
         }
     }
 }
