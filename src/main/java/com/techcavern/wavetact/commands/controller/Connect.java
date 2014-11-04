@@ -26,15 +26,19 @@ import java.util.concurrent.TimeUnit;
 public class Connect extends GenericCommand {
 
     public Connect() {
-        super(GeneralUtils.toArray("connect"), 9001, "connect (%)[networkname]", "connects or reconnects a bot from a predefined network");
+        super(GeneralUtils.toArray("connect"), 9001, "connect (%)(-)[networkname] (Reason)", "connects, reconnects or disconnects a bot from a predefined network");
     }
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         boolean reconnect = false;
+        boolean disconnect = false;
         if(args[0].startsWith("%")){
             reconnect=true;
-            args[0].replaceFirst("\\%", "");
+            args[0] = args[0].replaceFirst("\\%", "");
+        }else if(args[0].startsWith("-")){
+            disconnect=true;
+            args[0] = args[0].replaceFirst("\\-", "");
         }
         PircBotX workingbot = GetUtils.getBotByNetworkName(args[0]);
         if(workingbot == null){
@@ -42,18 +46,19 @@ public class Connect extends GenericCommand {
             return;
         }
         if(reconnect){
-           workingbot.stopBotReconnect();
-           workingbot.sendIRC().quitServer("Reconnecting");
+           workingbot.sendIRC().quitServer(GeneralUtils.buildMessage(1, args.length, args));
            do{
                 TimeUnit.SECONDS.sleep(5);
             }while(workingbot.getState().equals(PircBotX.State.CONNECTED));
-        }else{
+        }else if(disconnect){
+            workingbot.sendIRC().quitServer(GeneralUtils.buildMessage(1, args.length, args));
+            return;
+        }
             if(workingbot.getState().equals(PircBotX.State.CONNECTED)){
                 IRCUtils.sendError(user, "Bot Currently Connected");
             }else{
                 workingbot.startBot();
             }
-        }
 
     }
 }
