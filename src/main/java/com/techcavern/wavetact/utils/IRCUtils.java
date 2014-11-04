@@ -180,8 +180,9 @@ public class IRCUtils {
         Net.getListenerManager().addListener(new ChanMsgListener());
         Net.getListenerManager().addListener(new JoinListener());
         Net.getListenerManager().addListener(new CTCPListener());
-        Net.getListenerManager().addListener(new KickListener());
+        Net.getListenerManager().addListener(new PartListener());
         Net.getListenerManager().addListener(new PrivMsgListener());
+        Net.getListenerManager().addListener(new KickListener());
         Net.setAutoReconnect(true);
         Net.setMaxLineLength(350);
         if (nickservPassword != null) {

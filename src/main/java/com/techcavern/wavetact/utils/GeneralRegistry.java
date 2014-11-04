@@ -17,6 +17,7 @@ import java.util.concurrent.TimeUnit;
 
 public class GeneralRegistry {
 
+    public static String LastLeftChannel = "";
     public static final List<PermChannel> PermChannels = new ArrayList<>();
     public static final List<UTime> Topic = new ArrayList<>();
     public static final ThreadPoolExecutor threadPool = new ThreadPoolExecutor(10, 100, 1,

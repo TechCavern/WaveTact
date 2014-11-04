@@ -5,7 +5,6 @@
  */
 package com.techcavern.wavetact.utils.eventListeners;
 
-import com.techcavern.wavetact.commands.chanhalfop.Kick;
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.ListenerAdapter;
@@ -18,9 +17,11 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author jztech101
  */
-public class KickListener extends ListenerAdapter<PircBotX> {
-    public void onKick(KickEvent<PircBotX> event) throws Exception {
-        if (event.getUser().getNick().equals(event.getBot().getNick())) {
+public class PartListener extends ListenerAdapter<PircBotX> {
+    public void onPart(PartEvent<PircBotX> event) throws Exception {
+        if(GeneralRegistry.LastLeftChannel.equals(event.getChannel().getName())) {
+            GeneralRegistry.LastLeftChannel = "";
+        }else if (event.getUser().getNick().equals(event.getBot().getNick())){
             int tries = 0;
             do{
                 event.getBot().sendIRC().joinChannel(event.getChannel().getName());
