@@ -28,12 +28,12 @@ public class MCWiki extends GenericCommand {
         String url = "http://wiki.feed-the-beast.com/" + StringUtils.join(args, "%20");
         try {
             doc = Jsoup.connect(url).get();
-        }catch (HttpStatusException e){
+        }catch (Exception e){
             try{
                 url = "http://ftbwiki.org/" + StringUtils.join(args, "%20");
                 doc = Jsoup.connect(url).get();
-            }catch (HttpStatusException ee) {
-                IRCUtils.sendError(user, "Query returned no results");
+            }catch (Exception ee) {
+                IRCUtils.sendError(user, "Query returned no results Or Wikis are Down");
                 return;
             }
         }
