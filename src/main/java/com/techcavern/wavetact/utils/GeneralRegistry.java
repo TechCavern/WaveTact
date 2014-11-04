@@ -59,6 +59,7 @@ public class GeneralRegistry {
     public static final List<String> ChanFounderListCommands = new ArrayList<>();
     public static final StrongPasswordEncryptor encryptor = new StrongPasswordEncryptor();
     public static final Reflections wavetactreflection = new Reflections("com.techcavern.wavetact");
+    public static final List<NetProperty> NetworkName = new ArrayList<>();
     public static String wundergroundapikey = null;
     public static String wolframalphaapikey = null;
     public static String wordnikapikey = null;

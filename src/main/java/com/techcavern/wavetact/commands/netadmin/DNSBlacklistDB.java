@@ -27,7 +27,7 @@ import org.pircbotx.User;
 public class DNSBlacklistDB extends GenericCommand {
 
     public DNSBlacklistDB() {
-        super(GeneralUtils.toArray("dnsblacklistdb dnsbldb"), 20, "dnsblacklistdb (-)[Spam DNSBL]", "Adds/Removes Domains from Spam DNS Blacklists");
+        super(GeneralUtils.toArray("dnsblacklistdb dnsbldb"), 20, "dnsblacklistdb (-)[Spam DNSBL Url]", "Adds/Removes Domains from Spam DNS Blacklists");
     }
 
     @Override
@@ -35,7 +35,7 @@ public class DNSBlacklistDB extends GenericCommand {
 
         if (args.length > 0) {
             if (args[0].startsWith("-")) {
-                String Domain = GetUtils.getDNSBLbyDomain(args[0].replaceFirst("-", ""));
+                String Domain = GetUtils.getDNSBLbyDomain(args[0].replaceFirst("-", "")).replaceAll("http://|https://", "");
                 if (Domain != null) {
                     GeneralRegistry.DNSBLs.remove(Domain);
                     DNSBLUtils.saveDNSBLs();

@@ -12,7 +12,7 @@ public class NetProperty {
         this.bot = d;
     }
 
-    public String getCommandChar() {
+    public String getProperty() {
         return this.chard;
     }
 

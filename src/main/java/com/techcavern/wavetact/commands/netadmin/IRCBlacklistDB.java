@@ -28,14 +28,14 @@ public class IRCBlacklistDB extends GenericCommand {
 
 
     public IRCBlacklistDB() {
-        super(GeneralUtils.toArray("ircblacklistdb ircbldb"), 20, "ircblacklistdb (-)[IRC DNSBL]", "Adds/Removes Domains from IRCBL");
+        super(GeneralUtils.toArray("ircblacklistdb ircbldb"), 20, "ircblacklistdb (-)[IRC DNSBL Url]", "Adds/Removes Domains from IRCBL");
     }
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         if (args.length > 0) {
             if (args[0].startsWith("-")) {
-                String Domain = GetUtils.getIRCDNSBLbyDomain(args[0].replaceFirst("-", ""));
+                String Domain = GetUtils.getIRCDNSBLbyDomain(args[0].replaceFirst("-", "")).replaceAll("http://|https://", "");
                 if (Domain != null) {
                     GeneralRegistry.IRCBLs.remove(Domain);
                     IRCBLUtils.saveIRCBLs();

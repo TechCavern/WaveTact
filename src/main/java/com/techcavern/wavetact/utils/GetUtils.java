@@ -8,7 +8,6 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,7 +53,16 @@ public class GetUtils {
     public static String getCommandChar(PircBotX botObject) {
         for (NetProperty d : GeneralRegistry.CommandChars) {
             if (d.getBot() == botObject) {
-                return d.getCommandChar();
+                return d.getProperty();
+            }
+        }
+        return null;
+    }
+
+    public static PircBotX getBotByNetworkName(String name) {
+        for (NetProperty d : GeneralRegistry.NetworkName) {
+            if (d.getProperty().equalsIgnoreCase(name)) {
+                return d.getBot();
             }
         }
         return null;
@@ -63,7 +71,7 @@ public class GetUtils {
     public static String getAuthType(PircBotX botObject) {
         for (NetProperty d : GeneralRegistry.AuthType) {
             if (d.getBot() == botObject) {
-                return d.getCommandChar();
+                return d.getProperty();
             }
         }
         return null;

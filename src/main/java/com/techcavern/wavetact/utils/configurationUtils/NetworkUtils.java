@@ -40,7 +40,7 @@ public class NetworkUtils {
                 nsPass = c.getString("nickserv");
             }
 
-            bot = IRCUtils.createBot(nsPass, c.getString("name"), chans, c.getString("nick"), c.getString("server"));
+            bot = IRCUtils.createBot(nsPass, chans, c.getString("nick"), c.getString("server"));
             GeneralRegistry.WaveTact.addBot(bot);
             GeneralRegistry.CommandChars.add(new NetProperty(c.getString("prefix"), bot));
             String authtype = c.getString("authtype").toLowerCase();
@@ -51,18 +51,21 @@ public class NetworkUtils {
             } else {
                 GeneralRegistry.AuthType.add(new NetProperty("nick", bot));
             }
+            GeneralRegistry.NetworkName.add(new NetProperty(c.getString("name"), bot));
         }
         GeneralRegistry.configs.clear();
     }
 
     public static void registerDevServer() {
-      //  PircBotX Dev = LoadUtils.createBot(null, "SynIRC", Arrays.asList("#techcavern"), "WaveTactDev", "irc.synirc.net");
-        PircBotX Dev2 = IRCUtils.createBot(null, "EsperNet", Arrays.asList(GeneralUtils.toArray("#techcavern")), "WaveTactDev", "irc.electrocode.net");
-  //      GeneralRegistry.WaveTact.addBot(Dev);
+        PircBotX Dev = IRCUtils.createBot(null, Arrays.asList(GeneralUtils.toArray("#techcavern #testing")), "WaveTactDev", "irc.synirc.net");
+        PircBotX Dev2 = IRCUtils.createBot(null, Arrays.asList(GeneralUtils.toArray("#techcavern #batbot")), "WaveTactDev", "irc.esper.net");
+         GeneralRegistry.WaveTact.addBot(Dev);
         GeneralRegistry.WaveTact.addBot(Dev2);
         GeneralRegistry.Controllers.add("JZTech101");
-   //     GeneralRegistry.CommandChars.add(new NetProperty("@", Dev));
+        GeneralRegistry.CommandChars.add(new NetProperty("@", Dev));
         GeneralRegistry.CommandChars.add(new NetProperty("@", Dev2));
         GeneralRegistry.AuthType.add(new NetProperty("nickserv", Dev2));
+        GeneralRegistry.NetworkName.add(new NetProperty("dev2", Dev2));
+        GeneralRegistry.NetworkName.add(new NetProperty("dev1", Dev));
     }
 }

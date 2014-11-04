@@ -166,7 +166,7 @@ public class IRCUtils {
         }
     }
 
-    public static PircBotX createBot(String nickservPassword, String name, List<String> channels, String nick, String server) {
+    public static PircBotX createBot(String nickservPassword, List<String> channels, String nick, String server) {
         Configuration.Builder<PircBotX> Net = new Configuration.Builder<>();
         Net.setName(nick);
         Net.setLogin("WaveTact");
