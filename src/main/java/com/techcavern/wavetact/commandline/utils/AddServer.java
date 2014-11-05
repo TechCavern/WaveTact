@@ -36,6 +36,8 @@ public class AddServer extends CommandLine {
             config.set("prefix", input.nextLine());
             System.out.print("AuthType (nickserv/account): ");
             config.set("authtype", input.nextLine());
+            System.out.print("Auto Allow Network Operators NetAdmin Level Access? (True/False): ");
+            config.set("netadminaccess", input.nextLine());
             config.save();
             System.out.print("Add another? [y/n]");
             char ans = input.next().charAt(0);

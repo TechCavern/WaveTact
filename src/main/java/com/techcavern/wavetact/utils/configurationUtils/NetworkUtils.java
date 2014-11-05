@@ -54,6 +54,7 @@ public class NetworkUtils {
                 GeneralRegistry.AuthType.add(new NetProperty("nick", bot));
             }
             GeneralRegistry.NetworkName.add(new NetProperty(c.getString("name"), bot));
+            GeneralRegistry.NetAdminAccess.add(new NetProperty(c.getString("netadminaccess"), bot));
         }
         GeneralRegistry.configs.clear();
     }
@@ -68,6 +69,7 @@ public class NetworkUtils {
         GeneralRegistry.CommandChars.add(new NetProperty("@", Dev2));
         GeneralRegistry.AuthType.add(new NetProperty("nickserv", Dev2));
         GeneralRegistry.NetworkName.add(new NetProperty("dev2", Dev2));
+        GeneralRegistry.NetAdminAccess.add(new NetProperty("True", Dev2));
    //     GeneralRegistry.NetworkName.add(new NetProperty("dev1", Dev));
     }
 

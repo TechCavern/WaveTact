@@ -11,8 +11,5 @@ public class ConfigUtils {
         GeneralRegistry.wolframalphaapikey = config.getString("wolframapi");
         GeneralRegistry.wundergroundapikey = config.getString("wundergroundapi");
         GeneralRegistry.wordnikapikey = config.getString("wordnikapi");
-        if(config.getString("netadminaccess").equalsIgnoreCase("true")){
-            GeneralRegistry.allownetadminaccess = true;
-        }
     }
 }

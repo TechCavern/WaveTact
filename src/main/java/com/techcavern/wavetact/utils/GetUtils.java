@@ -15,10 +15,14 @@ import java.util.stream.Collectors;
 public class GetUtils {
 
     public static User getUserByNick(PircBotX botObject, String Nick) {
-        User userObject = botObject.getUserChannelDao().getUser(Nick);
-        if (!userObject.getHostmask().isEmpty()) {
-            return userObject;
-        } else {
+        try {
+            User userObject = botObject.getUserChannelDao().getUser(Nick);
+            if (!userObject.getHostmask().isEmpty()) {
+                return userObject;
+            } else {
+                return null;
+            }
+        }catch(Exception e){
             return null;
         }
     }
@@ -52,6 +56,14 @@ public class GetUtils {
 
     public static String getCommandChar(PircBotX botObject) {
         for (NetProperty d : GeneralRegistry.CommandChars) {
+            if (d.getBot() == botObject) {
+                return d.getProperty();
+            }
+        }
+        return null;
+    }
+    public static String getNetAdminAccess(PircBotX botObject) {
+        for (NetProperty d : GeneralRegistry.NetAdminAccess) {
             if (d.getBot() == botObject) {
                 return d.getProperty();
             }

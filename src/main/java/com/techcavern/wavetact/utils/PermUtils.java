@@ -94,7 +94,7 @@ public class PermUtils {
     }
 
     private static int getAutomaticPermLevel(User userObject, Channel channelObject) {
-        if (userObject.isIrcop() && GeneralRegistry.allownetadminaccess) {
+        if (userObject.isIrcop() && GetUtils.getNetAdminAccess(userObject.getBot()).equalsIgnoreCase("true")) {
             return 20;
         } else if (channelObject.isOwner(userObject)) {
             return 15;
