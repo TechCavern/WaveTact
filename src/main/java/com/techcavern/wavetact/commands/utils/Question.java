@@ -26,9 +26,9 @@ public class Question extends GenericCommand {
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        int ArrayIndex = 1;
+        int ArrayIndex = 0;
         if (GeneralUtils.isInteger(args[0])) {
-            ArrayIndex = Integer.parseInt(args[0]) + 1;
+            ArrayIndex = Integer.parseInt(args[0]) - 1;
             args = ArrayUtils.remove(args, 0);
         }
         WAEngine engine = new WAEngine();
