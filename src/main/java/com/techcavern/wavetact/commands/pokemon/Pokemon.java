@@ -3,6 +3,7 @@ package com.techcavern.wavetact.commands.pokemon;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.sun.deploy.util.StringUtils;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
@@ -19,52 +20,55 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 @CMD
 @GenCMD
 public class Pokemon extends GenericCommand {
 
     public Pokemon() {
-        super(GeneralUtils.toArray("pokemon pkm"), 0, "pokemon [name]", "Displays info on a pokemon");
+        super(GeneralUtils.toArray("pokemon pkm"), 0, "pokemon [name][ID]", "Displays info on a pokemon");
     }
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        URL url = new URL("https://api.mojang.com/profiles/minecraft");
+        JsonObject pokemon = GeneralUtils.getJsonObject("http://pokeapi.co/api/v1/pokemon/" + args[0]);
+        String name = pokemon.get("name").getAsString();
+        String id = pokemon.get("national_id").getAsString();
+        List<String> response = new ArrayList<>();
+        response.add(name + "(" + id + ")");
+        String description = pokemon.get("species").getAsString();
+        if(!description.isEmpty())
+        response.add(description);
+        String height = pokemon.get("height").getAsString();
+        if(!height.isEmpty())
+        response.add((Integer.parseInt(height)*0.1) + "m");
+        String weight = pokemon.get("weight").getAsString();
+        if(!weight.isEmpty())
+            response.add((Integer.parseInt(weight)*0.1) + "kg");
+        String types = "";
+        JsonArray pretypes = pokemon.getAsJsonArray("types");
+        for(int i = 0; i < pretypes.size(); i++){
+            if(i == 0 ){
+                types = pretypes.get(i).getAsJsonObject().get("name").getAsString();
+            }else{
+                types += ", " +pretypes.get(i).getAsJsonObject().get("name").getAsString();
+            }
+        }
+        response.add(types);
+        String abilities = "";
+        JsonArray preabilities = pokemon.getAsJsonArray("abilities");
+        for(int i = 0; i < preabilities.size(); i++){
+            if(i == 0 ){
+                abilities = preabilities.get(i).getAsJsonObject().get("name").getAsString();
+            }else{
+                abilities += ", " +preabilities.get(i).getAsJsonObject().get("name").getAsString();
+            }
+        }
+        if(!abilities.isEmpty())
+        response.add(abilities);
+        IRCUtils.sendMessage(user, channel, StringUtils.join(response, " - "), isPrivate);
 
-        String payload="[\"" + args[0] +"\",\"egewewhewhwe\"]";
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setDoInput(true);
-        connection.setDoOutput(true);
-        connection.setRequestMethod("POST");
-        connection.setRequestProperty("Content-Type", "application/json");
-        OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream(), "UTF-8");
-        writer.write(payload);
-        writer.close();
-        BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-        String result = "";
-        String line = "";
-        while ((line = br.readLine()) != null) {
-            result += line.replaceAll("\n", " ") + "\n";
-        }
-        br.close();
-        connection.disconnect();
-        JsonArray mcapipre = new JsonParser().parse(result).getAsJsonArray();
-        if (mcapipre.size() > 0) {
-            JsonObject mcapi = mcapipre.get(0).getAsJsonObject();
-            String User = mcapi.get("name").getAsString();
-            String UUID = mcapi.get("id").getAsString();
-            String Premium = "True";
-            if(mcapi.get("demo")!= null && mcapi.get("legacy").getAsString().equalsIgnoreCase("True")) {
-                Premium = "False";
-            }
-            String Migrated = "True";
-            if(mcapi.get("legacy")!= null && mcapi.get("legacy").getAsString().equalsIgnoreCase("True")) {
-                Migrated = "False";
-            }
-            IRCUtils.sendMessage(user, channel, User + " - " + "UUID: " + UUID + " - " + "Paid: " + Premium + " - " + "Mojang Account: " + Migrated, isPrivate);
-        } else {
-            IRCUtils.sendError(user, "user does not exist");
-        }
     }
 }
