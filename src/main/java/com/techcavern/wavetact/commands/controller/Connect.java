@@ -45,14 +45,21 @@ public class Connect extends GenericCommand {
             IRCUtils.sendError(user, "Network does not exist");
             return;
         }
-        if(reconnect){
-           workingbot.sendIRC().quitServer(GeneralUtils.buildMessage(1, args.length, args));
-           do{
+        if(reconnect || disconnect){
+            if(workingbot.getState().equals(PircBotX.State.DISCONNECTED)){
+                IRCUtils.sendError(user, "Bot Currently Disonnected");
+                return;
+            }else{
+                workingbot.sendIRC().quitServer(GeneralUtils.buildMessage(1, args.length, args));
+                workingbot.stopBotReconnect();
+            }
+        }
+        if(disconnect){
+            return;
+        }else if(reconnect){
+            do{
                 TimeUnit.SECONDS.sleep(5);
             }while(workingbot.getState().equals(PircBotX.State.CONNECTED));
-        }else if(disconnect){
-            workingbot.sendIRC().quitServer(GeneralUtils.buildMessage(1, args.length, args));
-            return;
         }
             if(workingbot.getState().equals(PircBotX.State.CONNECTED)){
                 IRCUtils.sendError(user, "Bot Currently Connected");
