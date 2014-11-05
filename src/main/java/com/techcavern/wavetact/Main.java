@@ -38,8 +38,15 @@ public class Main {
 
         BanTimeUtils.loadBanTimes();
         QuietTimeUtils.loadQuietTimes();
-        GeneralRegistry.threadPool.execute(new CheckTime());
-
-        GeneralRegistry.WaveTact.start();
+        if(GeneralRegistry.WaveTact.getBots().isEmpty()){
+            System.out.println("No Servers Found, Please add one using -addserver");
+            System.exit(0);
+        }else if(GeneralRegistry.Controllers.isEmpty()){
+            System.out.println("No Controllers Found, Please add one using -controller");
+            System.exit(0);
+        }else{
+            GeneralRegistry.threadPool.execute(new CheckTime());
+            GeneralRegistry.WaveTact.start();
+        }
     }
 }

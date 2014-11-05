@@ -53,7 +53,7 @@ public class Networks extends GenericCommand {
             netcount++;
         }
         if(networks.isEmpty())
-            IRCUtils.sendMessage(user, channel, "No networks found " +networks , isPrivate);
+            IRCUtils.sendMessage(user, channel, "No networks found" +networks , isPrivate);
         else
         IRCUtils.sendMessage(user, channel, netcount + " network(s) found with those network(s) being " +networks , isPrivate);
     }
