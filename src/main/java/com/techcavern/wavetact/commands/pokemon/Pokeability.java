@@ -10,9 +10,8 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-//@CMD
-//@GenCMD
-//Deregistered due to lack of usefulness with missing descriptions and all
+@CMD
+@GenCMD
 public class Pokeability extends GenericCommand {
 
     public Pokeability() {
@@ -24,7 +23,6 @@ public class Pokeability extends GenericCommand {
         JsonObject pokemon = GeneralUtils.getJsonObject("http://pokeapi.co/api/v1/ability/" + args[0]);
         String name = pokemon.get("name").getAsString();
         String id = pokemon.get("id").getAsString();
-        String description = pokemon.get("description").getAsString().replace("\n", " ");
-        IRCUtils.sendMessage(user,channel,name + "(" + id + "): " + description ,isPrivate);
+        IRCUtils.sendMessage(user,channel,name + "(" + id + ")",isPrivate);
     }
 }

@@ -33,7 +33,7 @@ public class Weather extends GenericCommand {
             String Temp = weather.get("temperature_string").getAsString();
             String Humidity = weather.get("relative_humidity").getAsString() + " humidity";
             String Wind = weather.get("wind_string").getAsString();
-            IRCUtils.sendMessage(user, channel, City + ": " + Weather + " - " + Temp + " - " + Humidity + " - " + Wind + " - ", isPrivate);
+            IRCUtils.sendMessage(user, channel, City + ": " + Weather + " - " + Temp + " - " + Humidity + " - " + Wind, isPrivate);
         } else {
             IRCUtils.sendError(user, "Requested location not found");
         }
