@@ -57,15 +57,15 @@ public class NetworkUtils {
     }
 
     public static void registerDevServer() {
-       // PircBotX Dev = IRCUtils.createBot(null, Arrays.asList(GeneralUtils.toArray("#techcavern #testing")), "WaveTactDev", "irc.synirc.net");
+        PircBotX Dev = IRCUtils.createBot(null, Arrays.asList(GeneralUtils.toArray("#techcavern #testing")), "WaveTactDev", "irc.synirc.net");
         PircBotX Dev2 = IRCUtils.createBot(null, Arrays.asList(GeneralUtils.toArray("#techcavern")), "WaveTactDev", "irc.esper.net");
-        // GeneralRegistry.WaveTact.addBot(Dev);
+        GeneralRegistry.WaveTact.addBot(Dev);
        GeneralRegistry.WaveTact.addBot(Dev2);
         GeneralRegistry.Controllers.add("JZTech101");
-      //  GeneralRegistry.CommandChars.add(new NetProperty("@", Dev));
+       GeneralRegistry.CommandChars.add(new NetProperty("@", Dev));
         GeneralRegistry.CommandChars.add(new NetProperty("@", Dev2));
         GeneralRegistry.AuthType.add(new NetProperty("nickserv", Dev2));
         GeneralRegistry.NetworkName.add(new NetProperty("dev2", Dev2));
-     //   GeneralRegistry.NetworkName.add(new NetProperty("dev1", Dev));
+        GeneralRegistry.NetworkName.add(new NetProperty("dev1", Dev));
     }
 }
