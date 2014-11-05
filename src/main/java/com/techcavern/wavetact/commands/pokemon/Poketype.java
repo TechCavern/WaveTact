@@ -2,7 +2,7 @@ package com.techcavern.wavetact.commands.pokemon;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.sun.deploy.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
@@ -17,9 +17,9 @@ import java.util.List;
 
 @CMD
 @GenCMD
-public class Poketypes extends GenericCommand {
+public class Poketype extends GenericCommand {
 
-    public Poketypes() {
+    public Poketype() {
         super(GeneralUtils.toArray("poketype pkt"), 0, "poketype [ID]", "Displays info on a type");
     }
 
