@@ -9,10 +9,10 @@ import java.io.File;
 import java.util.Scanner;
 
 @CMDLine
-public class AddServer extends CommandLine {
+public class AddNetwork extends CommandLine {
 
-    public AddServer() {
-        super(GeneralUtils.toArray("addserver as"), "Create a server configuration file", false);
+    public AddNetwork() {
+        super(GeneralUtils.toArray("addnetwork anet"), "Create a network configuration file", false);
     }
 
     @Override

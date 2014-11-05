@@ -44,7 +44,7 @@ public class Main {
         }else{
             GeneralRegistry.WaveTact.start();
             if(GeneralRegistry.WaveTact.getBots().isEmpty()) {
-                System.out.println("No Servers Found, Please add one using -addserver");
+                System.out.println("No Networks Found, Please add one using -addnetwork");
                 System.exit(0);
             }
             GeneralRegistry.threadPool.execute(new BanTimer());
