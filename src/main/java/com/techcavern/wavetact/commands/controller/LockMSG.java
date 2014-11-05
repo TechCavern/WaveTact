@@ -23,7 +23,7 @@ import org.pircbotx.User;
 public class LockMSG extends GenericCommand {
 
     public LockMSG() {
-        super(GeneralUtils.toArray("lockmessage lockmsg"), 9001, "lockmessage [command]", "locks a custom message");
+        super(GeneralUtils.toArray("lockmessage lcmsg lockmsg"), 9001, "lockmessage [command]", "locks a custom message");
     }
 
     @Override

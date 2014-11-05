@@ -24,6 +24,8 @@ public class Config extends CommandLine {
         config.set("wundergroundapi", input.nextLine());
         System.out.print("Wordnik API Key: ");
         config.set("wordnikapi", input.nextLine());
+        System.out.print("Auto Allow Network Operators NetAdmin Level Access? (True/False): ");
+        config.set("netadminaccess", input.nextLine());
         config.save();
         System.exit(0);
     }
