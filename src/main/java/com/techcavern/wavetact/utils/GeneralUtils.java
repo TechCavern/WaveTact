@@ -27,7 +27,17 @@ public class GeneralUtils {
         String result = parseUrl(url);
         return new JsonParser().parse(result).getAsJsonObject();
     }
-
+    public static String getJsonString(JsonArray array, String name){
+        String returning = "";
+        for(int i = 0; i < array.size(); i++){
+            if(i == 0 ){
+                returning = array.get(i).getAsJsonObject().get(name).getAsString();
+            }else{
+                returning += ", " +array.get(i).getAsJsonObject().get(name).getAsString();
+            }
+        }
+        return returning;
+    }
     public static boolean isInteger(String s) {
         try {
             Integer.parseInt(s);

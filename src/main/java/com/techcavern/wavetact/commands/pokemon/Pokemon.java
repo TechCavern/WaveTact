@@ -46,27 +46,13 @@ public class Pokemon extends GenericCommand {
         response.add((Double.parseDouble(height)/10) + "m");
         String weight = pokemon.get("weight").getAsString();
         if(!weight.isEmpty())
-            response.add((Double.parseDouble(weight)/10) + "kg");
-        String types = "";
+        response.add((Double.parseDouble(weight)/10) + "kg");
         JsonArray pretypes = pokemon.getAsJsonArray("types");
-        for(int i = 0; i < pretypes.size(); i++){
-            if(i == 0 ){
-                types = pretypes.get(i).getAsJsonObject().get("name").getAsString();
-            }else{
-                types += ", " +pretypes.get(i).getAsJsonObject().get("name").getAsString();
-            }
-        }
-        response.add(types);
-        String abilities = "";
+        response.add(GeneralUtils.getJsonString(pretypes, "name"));
         JsonArray preabilities = pokemon.getAsJsonArray("abilities");
-        for(int i = 0; i < preabilities.size(); i++){
-            if(i == 0 ){
-                abilities = preabilities.get(i).getAsJsonObject().get("name").getAsString();
-            }else{
-                abilities += ", " +preabilities.get(i).getAsJsonObject().get("name").getAsString();
-            }
-        }
-        if(!abilities.isEmpty())
+        String abilities = GeneralUtils.getJsonString(preabilities, "name");
+        if(abilities.isEmpty())
+            abilities = "No Abilities";
         response.add(abilities);
         IRCUtils.sendMessage(user, channel, StringUtils.join(response, " - "), isPrivate);
 
