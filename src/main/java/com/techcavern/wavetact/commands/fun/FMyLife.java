@@ -22,7 +22,7 @@ public class FMyLife extends GenericCommand {
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        Document doc = Jsoup.connect("http://m.fmylife.com/random").get();
+        Document doc = Jsoup.connect("http://m.fmylife.com/random").userAgent("Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.57 Safari/537.17").get();
         Elements FML = doc.select(".text");
         String c = FML.get(0).toString().replaceAll("<.*?>", "").replaceAll("&.*?;", "");
         IRCUtils.sendMessage(user, channel, c, isPrivate);

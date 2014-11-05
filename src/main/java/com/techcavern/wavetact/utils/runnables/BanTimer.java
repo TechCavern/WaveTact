@@ -10,7 +10,7 @@ import org.pircbotx.PircBotX;
 
 import java.util.concurrent.TimeUnit;
 
-public class CheckTime implements Runnable {
+public class BanTimer implements Runnable {
 
     @Override
     public void run() {

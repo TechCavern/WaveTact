@@ -25,20 +25,29 @@ public class MCWiki extends GenericCommand {
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         Document doc = null;
-        String url = "http://wiki.feed-the-beast.com/" + StringUtils.join(args, "%20");
-        try {
-            doc = Jsoup.connect(url).get();
-        }catch (Exception e){
-            try{
-                url = "http://ftbwiki.org/" + StringUtils.join(args, "%20");
-                doc = Jsoup.connect(url).get();
-            }catch (Exception ee) {
-                IRCUtils.sendError(user, "Query returned no results Or Wikis are Down");
-                return;
+        Elements content = null;
+        String url = "http://minecraft.gamepedia.com/" + StringUtils.join(args, "%20");
+        try{
+            doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.57 Safari/537.17").get();
+        }catch (Exception eee) {
+            url = "http://wiki.feed-the-beast.com/" + StringUtils.join(args, "%20");
+            try {
+                doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.57 Safari/537.17").get();
+            } catch (Exception e) {
+                try {
+                    url = "http://ftbwiki.org/" + StringUtils.join(args, "%20");
+                    doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.57 Safari/537.17").get();
+                } catch (Exception ee) {
+                    IRCUtils.sendError(user, "Query returned no results Or Wikis are Down");
+                    return;
+                }
             }
         }
-        Elements content = doc.select("#mw-content-text").select("p");
-        String title = doc.title().toString().replace(" - Feed The Beast wiki", "").replace(" - Feed The Beast Wiki", "");
+        content = doc.select("#mw-content-text");
+        content.select(".notaninfobox").remove();
+        content.select(".infobox").remove();
+        content = content.select("p");
+        String title = doc.title().toString().replace(" - Feed The Beast wiki", "").replace(" - Feed The Beast Wiki", "").replace(" - Minecraft Wiki", "");
         String text = "";
         int i = 0;
         while(text.replaceAll(" ","").isEmpty() && i <= content.size()){

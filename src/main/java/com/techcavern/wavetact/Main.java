@@ -4,7 +4,7 @@ import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.LoadUtils;
 import com.techcavern.wavetact.utils.configurationUtils.ConfigUtils;
 import com.techcavern.wavetact.utils.databaseUtils.*;
-import com.techcavern.wavetact.utils.runnables.CheckTime;
+import com.techcavern.wavetact.utils.runnables.BanTimer;
 import org.slf4j.impl.SimpleLogger;
 
 @SuppressWarnings("ConstantConditions")
@@ -38,15 +38,16 @@ public class Main {
 
         BanTimeUtils.loadBanTimes();
         QuietTimeUtils.loadQuietTimes();
-        if(GeneralRegistry.WaveTact.getBots().isEmpty()){
-            System.out.println("No Servers Found, Please add one using -addserver");
-            System.exit(0);
-        }else if(GeneralRegistry.Controllers.isEmpty()){
+        if(GeneralRegistry.Controllers.isEmpty()){
             System.out.println("No Controllers Found, Please add one using -controller");
             System.exit(0);
         }else{
-            GeneralRegistry.threadPool.execute(new CheckTime());
             GeneralRegistry.WaveTact.start();
+            if(GeneralRegistry.WaveTact.getBots().isEmpty()) {
+                System.out.println("No Servers Found, Please add one using -addserver");
+                System.exit(0);
+            }
+            GeneralRegistry.threadPool.execute(new BanTimer());
         }
     }
 }
