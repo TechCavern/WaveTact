@@ -43,10 +43,10 @@ public class Pokemon extends GenericCommand {
         response.add(description);
         String height = pokemon.get("height").getAsString();
         if(!height.isEmpty())
-        response.add((Integer.parseInt(height)*0.1) + "m");
+        response.add((Double.parseDouble(height)/10) + "m");
         String weight = pokemon.get("weight").getAsString();
         if(!weight.isEmpty())
-            response.add((Integer.parseInt(weight)*0.1) + "kg");
+            response.add((Double.parseDouble(weight)/10) + "kg");
         String types = "";
         JsonArray pretypes = pokemon.getAsJsonArray("types");
         for(int i = 0; i < pretypes.size(); i++){
