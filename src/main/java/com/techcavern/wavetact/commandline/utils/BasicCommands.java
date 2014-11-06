@@ -21,15 +21,19 @@ public class BasicCommands extends CommandLine {
         SimpleAction potato = new SimpleAction("potato", 0, "is a potato", true);
         SimpleMessage ping = new SimpleMessage("ping", 0, "pong", true);
         SimpleMessage pong = new SimpleMessage("pong", 0, "ping", true);
+        SimpleMessage releases = new SimpleMessage("releases", 0, "https://github.com/TechCavern/WaveTact/releases", true);
+        SimpleMessage license = new SimpleMessage("license", 0, "MIT (Do What The Fuck You Want, We take ZERO liability)", true);
         SimpleMessage source = new SimpleMessage("source", 0,
                 "http://github.com/TechCavern/WaveTact", true);
         SimpleMessage authors = new SimpleMessage("authors", 0, "Julian (JZTech101), Logan", true);
-        SimpleMessage contributors = new SimpleMessage("contributors", 0, "Kenneth (kaendfinger), Sam (samrg472), Leah", true);
+        SimpleMessage contributors = new SimpleMessage("contributors", 0, "Kenneth (kaendfinger), Sam (samrg472), Laceh", true);
         SimpleAction nom = new SimpleAction("nom", 0, "noms on $*", true);
         GeneralRegistry.SimpleActions.add(potato);
         GeneralRegistry.SimpleMessages.add(ping);
         GeneralRegistry.SimpleMessages.add(pong);
         GeneralRegistry.SimpleMessages.add(source);
+        GeneralRegistry.SimpleMessages.add(license);
+        GeneralRegistry.SimpleMessages.add(releases);
         GeneralRegistry.SimpleMessages.add(authors);
         GeneralRegistry.SimpleMessages.add(contributors);
         GeneralRegistry.SimpleActions.add(nom);
