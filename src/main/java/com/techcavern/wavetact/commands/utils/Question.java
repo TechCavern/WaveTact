@@ -21,7 +21,7 @@ import java.util.List;
 public class Question extends GenericCommand {
 
     public Question() {
-        super(GeneralUtils.toArray("question"), 0, "question (Answer #) [Question]", "ask us a question!");
+        super(GeneralUtils.toArray("question wa wolframalpha"), 0, "question (Answer #) [Question]", "ask wolfram alpha a question!");
     }
 
     @Override

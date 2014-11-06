@@ -17,7 +17,7 @@ import org.pircbotx.User;
 public class Weather extends GenericCommand {
 
     public Weather() {
-        super(GeneralUtils.toArray("weather temperature temp humid humidity wind"), 0, "weather [zipcode][city]", "gets weather in an area");
+        super(GeneralUtils.toArray("weather temperature temp humid humidity wind wunderground wunder"), 0, "weather [zipcode][city]", "gets weather in an area from wunderground");
     }
 
     @Override

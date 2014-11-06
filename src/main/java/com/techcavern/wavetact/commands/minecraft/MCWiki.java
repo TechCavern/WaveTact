@@ -19,7 +19,7 @@ import org.pircbotx.User;
 public class MCWiki extends GenericCommand {
 
     public MCWiki() {
-        super(GeneralUtils.toArray("mcwiki mwiki"), 0, "mcwiki [string to search minecraft wikis]", "searches FTB-Wiki & FTBWiki for something");
+        super(GeneralUtils.toArray("mcwiki mwiki"), 0, "mcwiki [string to search minecraft wikis]", "searches Official Minecraft Wiki & FTB-Wiki & FTBWiki");
     }
 
     @Override

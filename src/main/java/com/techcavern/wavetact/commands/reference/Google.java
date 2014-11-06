@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.commands.utils;
+package com.techcavern.wavetact.commands.reference;
 
 import com.google.gson.JsonArray;
 import com.techcavern.wavetact.annot.CMD;
@@ -14,10 +14,10 @@ import org.pircbotx.User;
 
 @CMD
 @GenCMD
-public class GImages extends GenericCommand {
+public class Google extends GenericCommand {
 
-    public GImages() {
-        super(GeneralUtils.toArray("googleimages gimages gimage"), 0, "googleimages (result #) [string to google]", "googles something");
+    public Google() {
+        super(GeneralUtils.toArray("google gsearch"), 0, "google (result #) [string to google]", "googles something");
     }
 
     @Override
@@ -27,13 +27,13 @@ public class GImages extends GenericCommand {
             ArrayIndex = Integer.parseInt(args[0]) - 1;
             args = ArrayUtils.remove(args, 0);
         }
-        JsonArray results = GeneralUtils.getJsonObject("https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + StringUtils.join(args, "%20")).getAsJsonObject("responseData").getAsJsonArray("results");
-        if (results.size() - 1 > 0) {
-            if (results.size() >= ArrayIndex) {
+        JsonArray results = GeneralUtils.getJsonObject("https://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=" + StringUtils.join(args, "%20")).getAsJsonObject("responseData").getAsJsonArray("results");
+        if (results.size() > 0) {
+            if (results.size()-1 >= ArrayIndex) {
                 String title = results.get(ArrayIndex).getAsJsonObject().get("titleNoFormatting").getAsString();
-                String size = results.get(ArrayIndex).getAsJsonObject().get("width").getAsString() + "x" + results.get(ArrayIndex).getAsJsonObject().get("height").getAsString();
+                String content = results.get(ArrayIndex).getAsJsonObject().get("content").getAsString().replaceAll("<.*?>", "").replaceAll("&.*?;", "");
                 String url = results.get(ArrayIndex).getAsJsonObject().get("unescapedUrl").getAsString();
-                IRCUtils.sendMessage(user, channel, title + " - " + size, isPrivate);
+                IRCUtils.sendMessage(user, channel, title + " - " + content, isPrivate);
                 IRCUtils.sendMessage(user, channel, url, isPrivate);
 
             } else {

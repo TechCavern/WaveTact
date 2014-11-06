@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.commands.utils;
+package com.techcavern.wavetact.commands.media;
 
 import com.google.api.client.http.HttpRequestInitializer;
 import com.google.api.services.youtube.model.SearchListResponse;
@@ -25,10 +25,10 @@ import java.util.List;
 
 @CMD
 @GenCMD
-public class YoutubeCMD extends GenericCommand {
+public class Video extends GenericCommand {
 
-    public YoutubeCMD() {
-        super(GeneralUtils.toArray("youtube yt"), 0, "youtube (result #) [string to search youtube]", "searches youtube for videos");
+    public Video() {
+        super(GeneralUtils.toArray("video vid youtube yt"), 0, "video (result #) [string to search for]", "searches youtube for videos");
     }
 
     @Override
@@ -55,10 +55,16 @@ public class YoutubeCMD extends GenericCommand {
         if (results.size() > 0) {
             if (results.size() >= ArrayIndex) {
                 SearchResult result = results.get(ArrayIndex-1);
-                String url = "http://youtube.com/watch?v=" + result.getId().getVideoId();
+                String url = "";
+                if(result.getId().getKind().equalsIgnoreCase("youtube#video")) {
+                    url = "http://youtube.com/watch?v=" + result.getId().getVideoId();
+                }else if(result.getId().getKind().equalsIgnoreCase("youtube#channel")){
+                    url = "http://youtube.com/" + result.getSnippet().getChannelTitle();
+                }
                 String title = result.getSnippet().getTitle();
                 String content = result.getSnippet().getDescription();
                 IRCUtils.sendMessage(user, channel, title + " - " + content, isPrivate);
+                if(!url.isEmpty())
                 IRCUtils.sendMessage(user, channel, url, isPrivate);
             } else {
                 IRCUtils.sendError(user, "Search #" + ArrayIndex + " does not exist");

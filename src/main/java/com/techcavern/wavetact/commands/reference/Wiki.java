@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.commands.utils;
+package com.techcavern.wavetact.commands.reference;
 
 import com.google.gson.JsonObject;
 import com.google.gson.internal.LinkedTreeMap;
@@ -20,10 +20,10 @@ import java.util.Iterator;
 
 @CMD
 @GenCMD
-public class Wikipedia extends GenericCommand {
+public class Wiki extends GenericCommand {
 
-    public Wikipedia() {
-        super(GeneralUtils.toArray("wikipedia wiki"), 0, "wikipedia [string to search wikipedia]", "searchs wikipedia for something");
+    public Wiki() {
+        super(GeneralUtils.toArray("wiki wikipedia"), 0, "wiki [string to search wiki]", "searches wikipedia for something");
     }
 
     @Override
