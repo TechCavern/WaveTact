@@ -24,6 +24,8 @@ public class Config extends CommandLine {
         config.set("wundergroundapi", input.nextLine());
         System.out.print("Wordnik API Key: ");
         config.set("wordnikapi", input.nextLine());
+        System.out.print("Google API Key: ");
+        config.set("googleapi", input.nextLine());
         config.save();
         System.exit(0);
     }

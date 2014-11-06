@@ -28,8 +28,8 @@ public class Google extends GenericCommand {
             args = ArrayUtils.remove(args, 0);
         }
         JsonArray results = GeneralUtils.getJsonObject("https://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=" + StringUtils.join(args, "%20")).getAsJsonObject("responseData").getAsJsonArray("results");
-        if (results.size() - 1 > 0) {
-            if (results.size() >= ArrayIndex) {
+        if (results.size() > 0) {
+            if (results.size()-1 >= ArrayIndex) {
                 String title = results.get(ArrayIndex).getAsJsonObject().get("titleNoFormatting").getAsString();
                 String content = results.get(ArrayIndex).getAsJsonObject().get("content").getAsString().replaceAll("<.*?>", "").replaceAll("&.*?;", "");
                 String url = results.get(ArrayIndex).getAsJsonObject().get("unescapedUrl").getAsString();

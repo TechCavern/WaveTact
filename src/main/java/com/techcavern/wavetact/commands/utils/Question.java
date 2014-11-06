@@ -26,6 +26,11 @@ public class Question extends GenericCommand {
 
     @Override
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+
+        if (GeneralRegistry.wolframalphaapikey == null) {
+            IRCUtils.sendError(user, "Wolfram Alpha API key is null - Contact Bot Controller to fix");
+            return;
+        }
         int ArrayIndex = 0;
         if (GeneralUtils.isInteger(args[0])) {
             ArrayIndex = Integer.parseInt(args[0]) - 1;

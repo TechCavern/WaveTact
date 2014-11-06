@@ -27,6 +27,7 @@ dependencies {
     compile 'org.jsoup:jsoup:1.7.3'
     compile 'com.sun.jersey:jersey-bundle:1.18.1'
     compile 'org.reflections:reflections:0.9.9-RC1'
+    compile 'com.google.apis:google-api-services-youtube:v3-rev120-1.19.0'
     compile files('libs/MC-Ping.jar')
 }
 
