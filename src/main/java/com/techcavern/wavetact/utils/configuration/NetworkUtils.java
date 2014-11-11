@@ -1,8 +1,8 @@
-package com.techcavern.wavetact.utils.configurationUtils;
+package com.techcavern.wavetact.utils.configuration;
 
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.eventListeners.*;
+import com.techcavern.wavetact.utils.event.*;
 import com.techcavern.wavetact.utils.objects.NetProperty;
 import org.pircbotx.Configuration;
 import org.pircbotx.PircBotX;
@@ -21,22 +21,26 @@ public class NetworkUtils {
         serversFolder.mkdir();
         File[] files = serversFolder.listFiles();
         String name;
-        com.techcavern.wavetact.utils.fileUtils.Configuration config;
+        com.techcavern.wavetact.utils.file.Configuration config;
         for (File f : files) {
             if (!f.isDirectory()) {
                 name = f.getName();
                 name = name.substring(0, f.getName().lastIndexOf('.'));
-                config = new com.techcavern.wavetact.utils.fileUtils.Configuration(f);
-                GeneralRegistry.configs.put(name, config);
+                try {
+                    config = new com.techcavern.wavetact.utils.file.Configuration(f);
+                    GeneralRegistry.configs.put(name, config);
+                } catch (com.techcavern.wavetact.utils.file.Configuration.ConfigurationException e) {
+                    e.printStackTrace();
+                }
             }
         }
         PircBotX bot;
         LinkedList<String> chans = new LinkedList<>();
         String nsPass;
-        for (com.techcavern.wavetact.utils.fileUtils.Configuration c : GeneralRegistry.configs.values()) {
+        for (com.techcavern.wavetact.utils.file.Configuration c : GeneralRegistry.configs.values()) {
             chans.clear();
             Collections.addAll(chans, c.getString("channels").split(", "));
-            if (c.getString("nickserv").equalsIgnoreCase("False")) {
+            if (c.getString("nickserv") == null || c.getString("nickserv").equalsIgnoreCase("false")) {
                 nsPass = null;
             } else {
                 nsPass = c.getString("nickserv");
@@ -45,11 +49,16 @@ public class NetworkUtils {
             bot = createBot(nsPass, chans, c.getString("nick"), c.getString("server"));
             GeneralRegistry.WaveTact.addBot(bot);
             GeneralRegistry.CommandChars.add(new NetProperty(c.getString("prefix"), bot));
-            String authtype = c.getString("authtype").toLowerCase();
-            if (authtype.startsWith("n")) {
-                GeneralRegistry.AuthType.add(new NetProperty("nickserv", bot));
-            } else if (authtype.startsWith("a")) {
-                GeneralRegistry.AuthType.add(new NetProperty("account", bot));
+
+            if (c.exists("authtype")) {
+                String authtype = c.getString("authtype").toLowerCase();
+                if (authtype.startsWith("n")) {
+                    GeneralRegistry.AuthType.add(new NetProperty("nickserv", bot));
+                } else if (authtype.startsWith("a")) {
+                    GeneralRegistry.AuthType.add(new NetProperty("account", bot));
+                } else {
+                    GeneralRegistry.AuthType.add(new NetProperty("nick", bot));
+                }
             } else {
                 GeneralRegistry.AuthType.add(new NetProperty("nick", bot));
             }

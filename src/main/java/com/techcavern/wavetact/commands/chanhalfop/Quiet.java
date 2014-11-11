@@ -5,7 +5,7 @@ import com.techcavern.wavetact.annot.ChanHOPCMD;
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.databaseUtils.QuietTimeUtils;
+import com.techcavern.wavetact.utils.database.QuietTimeUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.objects.UTime;
 import org.pircbotx.Channel;

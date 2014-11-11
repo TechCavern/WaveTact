@@ -2,6 +2,7 @@ package com.techcavern.wavetact.commandline.utils;
 
 import com.techcavern.wavetact.annot.CMDLine;
 import com.techcavern.wavetact.utils.GeneralUtils;
+import com.techcavern.wavetact.utils.file.Configuration;
 import com.techcavern.wavetact.utils.objects.CommandLine;
 
 import java.io.File;
@@ -17,16 +18,21 @@ public class Config extends CommandLine {
     @Override
     public void doAction(String[] args) {
         Scanner input = new Scanner(System.in);
-        com.techcavern.wavetact.utils.fileUtils.Configuration config = new com.techcavern.wavetact.utils.fileUtils.Configuration(new File("config.properties"));
-        System.out.print("Wolfram API Key: ");
-        config.set("wolframapi", input.nextLine());
-        System.out.print("Wunderground API Key: ");
-        config.set("wundergroundapi", input.nextLine());
-        System.out.print("Wordnik API Key: ");
-        config.set("wordnikapi", input.nextLine());
-        System.out.print("Google API Key: ");
-        config.set("googleapi", input.nextLine());
-        config.save();
-        System.exit(0);
+        Configuration config;
+        try {
+            config = new Configuration(new File("config.properties"));
+            System.out.print("Wolfram API Key: ");
+            config.set("wolframapi", input.nextLine());
+            System.out.print("Wunderground API Key: ");
+            config.set("wundergroundapi", input.nextLine());
+            System.out.print("Wordnik API Key: ");
+            config.set("wordnikapi", input.nextLine());
+            System.out.print("Google API Key: ");
+            config.set("googleapi", input.nextLine());
+            config.save();
+            System.exit(0);
+        } catch (Configuration.ConfigurationException e) {
+            e.printStackTrace();
+        }
     }
 }

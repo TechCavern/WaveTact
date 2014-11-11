@@ -1,8 +1,8 @@
-package com.techcavern.wavetact.utils.databaseUtils;
+package com.techcavern.wavetact.utils.database;
 
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralRegistry;
-import com.techcavern.wavetact.utils.fileUtils.JSONFile;
+import com.techcavern.wavetact.utils.file.JSONFile;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -10,24 +10,24 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-public class DNSBLUtils {
-    public static void loadDNSBLs() {
-        JSONFile file = new JSONFile("DNSBLs.json");
+public class IRCBLUtils {
+    public static void loadIRCBLs() {
+        JSONFile file = new JSONFile("IRCBLs.json");
         if (file.exists()) {
             try {
                 List<String> controllers = file.read();
-                GeneralRegistry.DNSBLs.clear();
-                GeneralRegistry.DNSBLs.addAll(controllers.stream().collect(Collectors.toList()));
+                GeneralRegistry.IRCBLs.clear();
+                GeneralRegistry.IRCBLs.addAll(controllers.stream().collect(Collectors.toList()));
             } catch (FileNotFoundException e) {
                 ErrorUtils.handleException(e);
             }
         }
     }
 
-    public static void saveDNSBLs() {
-        JSONFile file = new JSONFile("DNSBLs.json");
+    public static void saveIRCBLs() {
+        JSONFile file = new JSONFile("IRCBLs.json");
         try {
-            file.write(GeneralRegistry.DNSBLs);
+            file.write(GeneralRegistry.IRCBLs);
         } catch (IOException e) {
             ErrorUtils.handleException(e);
         }

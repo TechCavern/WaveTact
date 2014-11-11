@@ -9,7 +9,7 @@ import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.databaseUtils.SimpleMessageUtils;
+import com.techcavern.wavetact.utils.database.SimpleMessageUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;

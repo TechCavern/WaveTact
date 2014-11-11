@@ -1,8 +1,8 @@
-package com.techcavern.wavetact.utils.databaseUtils;
+package com.techcavern.wavetact.utils.database;
 
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralRegistry;
-import com.techcavern.wavetact.utils.fileUtils.JSONFile;
+import com.techcavern.wavetact.utils.file.JSONFile;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

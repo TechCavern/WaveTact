@@ -3,7 +3,7 @@ package com.techcavern.wavetact.commands.auth;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.*;
-import com.techcavern.wavetact.utils.databaseUtils.AccountUtils;
+import com.techcavern.wavetact.utils.database.AccountUtils;
 import com.techcavern.wavetact.utils.objects.Account;
 import com.techcavern.wavetact.utils.objects.AuthedUser;
 import com.techcavern.wavetact.utils.objects.GenericCommand;

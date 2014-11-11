@@ -11,7 +11,7 @@ import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.databaseUtils.SimpleActionUtils;
+import com.techcavern.wavetact.utils.database.SimpleActionUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.objects.SimpleAction;
 import org.apache.commons.lang3.StringUtils;
@@ -20,7 +20,6 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author jztech101

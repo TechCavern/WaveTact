@@ -11,7 +11,7 @@ import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.databaseUtils.DNSBLUtils;
+import com.techcavern.wavetact.utils.database.DNSBLUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;

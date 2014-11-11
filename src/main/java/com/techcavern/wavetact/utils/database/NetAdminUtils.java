@@ -1,9 +1,9 @@
-package com.techcavern.wavetact.utils.databaseUtils;
+package com.techcavern.wavetact.utils.database;
 
 import com.google.gson.internal.LinkedTreeMap;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralRegistry;
-import com.techcavern.wavetact.utils.fileUtils.JSONFile;
+import com.techcavern.wavetact.utils.file.JSONFile;
 import com.techcavern.wavetact.utils.objects.NetworkAdmin;
 
 import java.io.FileNotFoundException;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.techcavern.wavetact.utils.eventListeners;
+package com.techcavern.wavetact.utils.event;
 
 import com.techcavern.wavetact.utils.runnables.ChanMsgProcessor;
 import org.pircbotx.PircBotX;
