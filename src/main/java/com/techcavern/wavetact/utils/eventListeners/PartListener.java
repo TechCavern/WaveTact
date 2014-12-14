@@ -16,8 +16,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author jztech101
  */
-public class PartListener extends ListenerAdapter<PircBotX> {
-    public void onPart(PartEvent<PircBotX> event) throws Exception {
+public class PartListener extends ListenerAdapter {
+    public void onPart(PartEvent event) throws Exception {
         if (GeneralRegistry.LastLeftChannel.equals(event.getChannel().getName())) {
             GeneralRegistry.LastLeftChannel = "";
         } else if (event.getUser().getNick().equals(event.getBot().getNick())) {

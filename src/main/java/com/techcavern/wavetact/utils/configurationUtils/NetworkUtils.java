@@ -101,7 +101,9 @@ public class NetworkUtils {
         }
         Net.setRealName(nick);
         Net.getListenerManager().addListener(new ChanMsgListener());
-        Net.getListenerManager().addListener(new JoinListener());
+        Net.setAutoReconnect(true);
+        Net.setAutoReconnectAttempts(5);
+        Net.setAutoReconnectDelay(20000);
         Net.getListenerManager().addListener(new PartListener());
         Net.getListenerManager().addListener(new PrivMsgListener());
         Net.getListenerManager().addListener(new KickListener());
