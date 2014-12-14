@@ -22,7 +22,7 @@ public class MCMods extends GenericCommand {
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        JsonArray versions = GeneralUtils.getJsonArray("http://network.notenoughmods.com/?json");
+        JsonArray versions = GeneralUtils.getJsonArray("http://bot.notenoughmods.com/?json");
         String version = "";
         String modname = "";
         JsonArray mods = null;
@@ -40,12 +40,12 @@ public class MCMods extends GenericCommand {
             while (arraysize <= 20) {
                 versionsize = versionsize - 1;
                 version = versions.get(versionsize).getAsString();
-                mods = GeneralUtils.getJsonArray("http://network.notenoughmods.com/" + version + ".json");
+                mods = GeneralUtils.getJsonArray("http://bot.notenoughmods.com/" + version + ".json");
                 arraysize = mods.size();
             }
             modname = args[0].toLowerCase();
         } else {
-            mods = GeneralUtils.getJsonArray("http://network.notenoughmods.com/" + version + ".json");
+            mods = GeneralUtils.getJsonArray("http://bot.notenoughmods.com/" + version + ".json");
         }
         int total = 0;
         for (int i = 0; i < mods.size(); i++) {
@@ -54,11 +54,12 @@ public class MCMods extends GenericCommand {
                 String Version = mod.get("version").getAsString();
                 String Name = mod.get("name").getAsString();
                 String Link = mod.get("shorturl").getAsString();
+                String Author = mod.get("author").getAsString();
                 if (Link.isEmpty()) {
                     Link = mod.get("longurl").getAsString();
                 }
                 if (total < 3) {
-                    IRCUtils.sendMessage(user, network, channel, "[" + Version + "] " + Name + " - " + Link, prefix);
+                    IRCUtils.sendMessage(user, network, channel, "[" + Version + "] " + Name + " by " + Author + " - " + Link, prefix);
                 }
                 total++;
             }
