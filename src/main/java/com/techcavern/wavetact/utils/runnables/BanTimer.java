@@ -1,6 +1,6 @@
 package com.techcavern.wavetact.utils.runnables;
 
-import com.techcavern.wavetact.utils.GeneralRegistry;
+import com.techcavern.wavetact.utils.Constants;
 import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.databaseUtils.BanTimeUtils;
@@ -22,13 +22,13 @@ public class BanTimer implements Runnable {
         while (true) {
             try {
                 TimeUnit.SECONDS.sleep(5);
-                for (int i = 0; i < GeneralRegistry.BanTimes.size(); i++) {
-                    UTime utimeObject = GeneralRegistry.BanTimes.get(i);
+                for (int i = 0; i < Constants.BanTimes.size(); i++) {
+                    UTime utimeObject = Constants.BanTimes.get(i);
                     try {
                         if (System.currentTimeMillis() >= utimeObject.getTime() + utimeObject.getInit()) {
                             PircBotX networkObject = GetUtils.getBotByNetwork(utimeObject.getNetworkName());
                             IRCUtils.setMode(GetUtils.getChannelbyName(networkObject, utimeObject.getChannelName()), networkObject, "-b ", utimeObject.getHostmask());
-                            GeneralRegistry.BanTimes.remove(i);
+                            Constants.BanTimes.remove(i);
                             BanTimeUtils.saveBanTimes();
                         }
                     } catch (IllegalArgumentException | NullPointerException e) {
@@ -36,13 +36,13 @@ public class BanTimer implements Runnable {
                     }
                 }
 
-                for (int i = 0; i < GeneralRegistry.QuietTimes.size(); i++) {
-                    UTime utimeObject = GeneralRegistry.QuietTimes.get(i);
+                for (int i = 0; i < Constants.QuietTimes.size(); i++) {
+                    UTime utimeObject = Constants.QuietTimes.get(i);
                     try {
                         if (System.currentTimeMillis() >= utimeObject.getTime() + utimeObject.getInit()) {
                             PircBotX networkObject = GetUtils.getBotByNetwork(utimeObject.getNetworkName());
-                            IRCUtils.setMode(GetUtils.getChannelbyName(networkObject, utimeObject.getChannelName()), networkObject, "-" + GeneralRegistry.QuietBans.get(utimeObject.getType().toLowerCase()), utimeObject.getHostmask());
-                            GeneralRegistry.QuietTimes.remove(i);
+                            IRCUtils.setMode(GetUtils.getChannelbyName(networkObject, utimeObject.getChannelName()), networkObject, "-" + Constants.QuietBans.get(utimeObject.getType().toLowerCase()), utimeObject.getHostmask());
+                            Constants.QuietTimes.remove(i);
                             QuietTimeUtils.saveQuietTimes();
                         }
                     } catch (IllegalArgumentException | NullPointerException e) {

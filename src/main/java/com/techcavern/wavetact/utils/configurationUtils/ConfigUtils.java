@@ -1,6 +1,6 @@
 package com.techcavern.wavetact.utils.configurationUtils;
 
-import com.techcavern.wavetact.utils.GeneralRegistry;
+import com.techcavern.wavetact.utils.Constants;
 
 import java.io.File;
 
@@ -8,9 +8,9 @@ public class ConfigUtils {
     public static void registerConfigs() {
         File configfile = new File("config.properties");
         com.techcavern.wavetact.utils.fileUtils.Configuration config = new com.techcavern.wavetact.utils.fileUtils.Configuration(configfile);
-        GeneralRegistry.wolframalphaapikey = config.getString("wolframapi");
-        GeneralRegistry.wundergroundapikey = config.getString("wundergroundapi");
-        GeneralRegistry.wordnikapikey = config.getString("wordnikapi");
-        GeneralRegistry.googleapikey = config.getString("googleapi");
+        Constants.wolframalphaapikey = config.getString("wolframapi");
+        Constants.wundergroundapikey = config.getString("wundergroundapi");
+        Constants.wordnikapikey = config.getString("wordnikapi");
+        Constants.googleapikey = config.getString("googleapi");
     }
 }

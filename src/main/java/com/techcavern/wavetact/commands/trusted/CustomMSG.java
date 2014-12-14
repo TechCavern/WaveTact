@@ -7,10 +7,7 @@ package com.techcavern.wavetact.commands.trusted;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.TruCMD;
-import com.techcavern.wavetact.utils.GeneralRegistry;
-import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.GetUtils;
-import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleMessageUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.objects.SimpleMessage;
@@ -50,10 +47,10 @@ public class CustomMSG extends GenericCommand {
 
     private void addCommand(User user, PircBotX network, Channel channel, int accessLevel, boolean isPrivate, String cmd, String msg, String prefix) {
         if (GetUtils.getCommand(cmd) != null) {
-            IRCUtils.sendError(user, "Custom Message already exists");
+            ErrorUtils.sendError(user, "Custom Message already exists");
             return;
         } else
-            GeneralRegistry.SimpleMessages.add(new SimpleMessage(cmd, accessLevel, msg, false));
+            Constants.SimpleMessages.add(new SimpleMessage(cmd, accessLevel, msg, false));
         SimpleMessageUtils.saveSimpleMessages();
         IRCUtils.sendMessage(user, network, channel, "Custom Message added", prefix);
     }
@@ -64,18 +61,18 @@ public class CustomMSG extends GenericCommand {
         SimpleMessage cmd = SimpleMessageUtils.getSimpleMessage(command);
         if (cmd.getPermLevel() <= UserPermLevel) {
             if (cmd != null && !cmd.getLockedStatus()) {
-                GeneralRegistry.SimpleMessages.remove(cmd);
-                GeneralRegistry.AllCommands.remove(cmd);
-                GeneralRegistry.SimpleMessages.add(new SimpleMessage(command, accessLevel, msg, false));
+                Constants.SimpleMessages.remove(cmd);
+                Constants.AllCommands.remove(cmd);
+                Constants.SimpleMessages.add(new SimpleMessage(command, accessLevel, msg, false));
                 SimpleMessageUtils.saveSimpleMessages();
                 IRCUtils.sendMessage(user, network, channel, "Custom Message modified", prefix);
             } else if (cmd.getLockedStatus()) {
-                IRCUtils.sendError(user, "Custom Message Locked");
+                ErrorUtils.sendError(user, "Custom Message Locked");
             } else {
-                IRCUtils.sendError(user, "Custom Message Does Not Exist");
+                ErrorUtils.sendError(user, "Custom Message Does Not Exist");
             }
         } else {
-            IRCUtils.sendError(user, "Permission Denied");
+            ErrorUtils.sendError(user, "Permission Denied");
         }
     }
 
@@ -84,17 +81,17 @@ public class CustomMSG extends GenericCommand {
         SimpleMessage cmd = SimpleMessageUtils.getSimpleMessage(command);
         if (cmd.getPermLevel() <= UserPermLevel) {
             if (cmd == null) {
-                IRCUtils.sendError(user, "Custom Message does not exist");
+                ErrorUtils.sendError(user, "Custom Message does not exist");
             } else if (cmd.getLockedStatus()) {
-                IRCUtils.sendError(user, "Custom Message is locked");
+                ErrorUtils.sendError(user, "Custom Message is locked");
             } else {
-                GeneralRegistry.SimpleMessages.remove(cmd);
-                GeneralRegistry.AllCommands.remove(cmd);
+                Constants.SimpleMessages.remove(cmd);
+                Constants.AllCommands.remove(cmd);
                 SimpleMessageUtils.saveSimpleMessages();
                 IRCUtils.sendMessage(user, network, channel, "Custom Message removed", prefix);
             }
         } else {
-            IRCUtils.sendError(user, "Permission Denied");
+            ErrorUtils.sendError(user, "Permission Denied");
         }
     }
 }

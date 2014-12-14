@@ -2,7 +2,8 @@ package com.techcavern.wavetact.commands.utils;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
-import com.techcavern.wavetact.utils.GeneralRegistry;
+import com.techcavern.wavetact.utils.ErrorUtils;
+import com.techcavern.wavetact.utils.Constants;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
@@ -27,8 +28,8 @@ public class Question extends GenericCommand {
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
 
-        if (GeneralRegistry.wolframalphaapikey == null) {
-            IRCUtils.sendError(user, "Wolfram Alpha API key is null - Contact Bot Controller to fix");
+        if (Constants.wolframalphaapikey == null) {
+            ErrorUtils.sendError(user, "Wolfram Alpha API key is null - Contact Bot Controller to fix");
             return;
         }
         int ArrayIndex = 0;
@@ -37,7 +38,7 @@ public class Question extends GenericCommand {
             args = ArrayUtils.remove(args, 0);
         }
         WAEngine engine = new WAEngine();
-        engine.setAppID(GeneralRegistry.wolframalphaapikey);
+        engine.setAppID(Constants.wolframalphaapikey);
         engine.addFormat("plaintext");
         WAQuery query = engine.createQuery();
         query.setInput(StringUtils.join(args, " "));
@@ -62,10 +63,10 @@ public class Question extends GenericCommand {
 
             } else {
                 ArrayIndex = ArrayIndex - 1;
-                IRCUtils.sendError(user, "Answer #" + ArrayIndex + " does not exist");
+                ErrorUtils.sendError(user, "Answer #" + ArrayIndex + " does not exist");
             }
         } else {
-            IRCUtils.sendError(user, "Question returned no answers");
+            ErrorUtils.sendError(user, "Question returned no answers");
         }
     }
 

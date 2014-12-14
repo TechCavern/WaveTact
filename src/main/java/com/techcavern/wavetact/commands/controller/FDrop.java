@@ -22,20 +22,20 @@ public class FDrop extends GenericCommand {
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (!PermUtils.checkIfAccountEnabled(network)) {
-            IRCUtils.sendError(user, "This network is set to " + GetUtils.getAuthType(network) + " Authentication");
+            ErrorUtils.sendError(user, "This network is set to " + GetUtils.getAuthType(network) + " Authentication");
             return;
         }
         AuthedUser authedUser = PermUtils.getAuthedUser(network, args[0]);
         if (authedUser != null) {
-            GeneralRegistry.AuthedUsers.remove(authedUser);
+            Constants.AuthedUsers.remove(authedUser);
         }
         Account account = AccountUtils.getAccount(args[0]);
         if (account != null) {
-            GeneralRegistry.Accounts.remove(account);
+            Constants.Accounts.remove(account);
             AccountUtils.saveAccounts();
             IRCUtils.sendMessage(user, network, channel, "Account dropped", prefix);
         } else {
-            IRCUtils.sendError(user, "account does not exist");
+            ErrorUtils.sendError(user, "account does not exist");
         }
     }
 }

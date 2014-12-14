@@ -3,6 +3,7 @@ package com.techcavern.wavetact.commands.dnsinfo;
 import com.google.gson.JsonObject;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
+import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
@@ -34,7 +35,7 @@ public class FindIP extends GenericCommand {
             IP = IRCUtils.getHost(network, user.getNick());
         }
         if (IP == null) {
-            IRCUtils.sendError(user, "Please Enter in an IP/User/Domain as argument #1");
+            ErrorUtils.sendError(user, "Please Enter in an IP/User/Domain as argument #1");
             return;
         }
 
@@ -60,10 +61,10 @@ public class FindIP extends GenericCommand {
             if (!message.isEmpty()) {
                 IRCUtils.sendMessage(user, network, channel, message, prefix);
             } else {
-                IRCUtils.sendError(user, "Unable to Determine Location (Or you entered an invalid IP)");
+                ErrorUtils.sendError(user, "Unable to Determine Location (Or you entered an invalid IP)");
             }
         } else {
-            IRCUtils.sendError(user, "Unable to Determine Location (Or you entered an invalid IP)");
+            ErrorUtils.sendError(user, "Unable to Determine Location (Or you entered an invalid IP)");
         }
 
 

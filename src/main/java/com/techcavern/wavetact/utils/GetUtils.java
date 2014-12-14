@@ -33,7 +33,7 @@ public class GetUtils {
     }
 
     public static PircBotX getBotByNetwork(String network) {
-        for (PircBotX c : GeneralRegistry.WaveTact.getBots()) {
+        for (PircBotX c : Constants.WaveTact.getBots()) {
             if (c.getServerInfo().getNetwork().equals(network)) {
                 return c;
             }
@@ -42,8 +42,8 @@ public class GetUtils {
     }
 
     public static GenericCommand getCommand(String Command) {
-        for (GenericCommand g : GeneralRegistry.AllCommands) {
-            List<GenericCommand> b = GeneralRegistry.AllCommands;
+        for (GenericCommand g : Constants.AllCommands) {
+            List<GenericCommand> b = Constants.AllCommands;
             for (String commandid : g.getCommandID()) {
                 if (commandid.equalsIgnoreCase(Command)) {
                     return g;
@@ -55,7 +55,7 @@ public class GetUtils {
     }
 
     public static String getCommandChar(PircBotX networkObject) {
-        for (NetProperty d : GeneralRegistry.CommandChars) {
+        for (NetProperty d : Constants.CommandChars) {
             if (d.getBot() == networkObject) {
                 return d.getProperty();
             }
@@ -64,7 +64,7 @@ public class GetUtils {
     }
 
     public static String getNetAdminAccess(PircBotX networkObject) {
-        for (NetProperty d : GeneralRegistry.NetAdminAccess) {
+        for (NetProperty d : Constants.NetAdminAccess) {
             if (d.getBot() == networkObject) {
                 return d.getProperty();
             }
@@ -73,7 +73,7 @@ public class GetUtils {
     }
 
     public static PircBotX getBotByNetworkName(String name) {
-        for (NetProperty d : GeneralRegistry.NetworkName) {
+        for (NetProperty d : Constants.NetworkName) {
             if (d.getProperty().equalsIgnoreCase(name)) {
                 return d.getBot();
             }
@@ -82,7 +82,7 @@ public class GetUtils {
     }
 
     public static String getAuthType(PircBotX networkObject) {
-        for (NetProperty d : GeneralRegistry.AuthType) {
+        for (NetProperty d : Constants.AuthType) {
             if (d.getBot() == networkObject) {
                 return d.getProperty();
             }
@@ -91,8 +91,8 @@ public class GetUtils {
     }
 
     public static UTime getTopic(String channelName, String networkName) {
-        for (int i = GeneralRegistry.Topic.size() - 1; i > -1; i--) {
-            UTime x = GeneralRegistry.Topic.get(i);
+        for (int i = Constants.Topic.size() - 1; i > -1; i--) {
+            UTime x = Constants.Topic.get(i);
             if (x.getChannelName().equalsIgnoreCase(channelName) && x.getNetworkName().equalsIgnoreCase(networkName)) {
                 return x;
             }
@@ -101,7 +101,7 @@ public class GetUtils {
     }
 
     public static NetworkAdmin getNetworkAdminByNick(String nick, String Network) {
-        for (NetworkAdmin networkAdmin : GeneralRegistry.NetworkAdmins) {
+        for (NetworkAdmin networkAdmin : Constants.NetworkAdmins) {
             if (networkAdmin.getUser().equalsIgnoreCase(nick) && networkAdmin.getNetwork().equalsIgnoreCase(Network)) {
                 return networkAdmin;
             }
@@ -110,7 +110,7 @@ public class GetUtils {
     }
 
     public static String getControllerByNick(String Nick) {
-        for (String c : GeneralRegistry.Controllers) {
+        for (String c : Constants.Controllers) {
             if (c.equalsIgnoreCase(Nick)) {
                 return c;
             }
@@ -119,7 +119,7 @@ public class GetUtils {
     }
 
     public static String getIRCDNSBLbyDomain(String Domain) {
-        for (String d : GeneralRegistry.IRCBLs) {
+        for (String d : Constants.IRCBLs) {
             if (d.equalsIgnoreCase(Domain)) {
                 return d;
             }
@@ -128,7 +128,7 @@ public class GetUtils {
     }
 
     public static String getDNSBLbyDomain(String Domain) {
-        for (String d : GeneralRegistry.DNSBLs) {
+        for (String d : Constants.DNSBLs) {
             if (d.equalsIgnoreCase(Domain)) {
                 return d;
             }
@@ -137,11 +137,11 @@ public class GetUtils {
     }
 
     public static List<String> getActionsList(int UserPermLevel) {
-        return GeneralRegistry.SimpleActions.stream().filter(g -> g.getPermLevel() <= UserPermLevel).map(GenericCommand::getCommand).collect(Collectors.toList());
+        return Constants.SimpleActions.stream().filter(g -> g.getPermLevel() <= UserPermLevel).map(GenericCommand::getCommand).collect(Collectors.toList());
     }
 
     public static List<String> getMessagesList(int UserPermLevel) {
-        return GeneralRegistry.SimpleMessages.stream().filter(g -> g.getPermLevel() <= UserPermLevel).map(GenericCommand::getCommand).collect(Collectors.toList());
+        return Constants.SimpleMessages.stream().filter(g -> g.getPermLevel() <= UserPermLevel).map(GenericCommand::getCommand).collect(Collectors.toList());
     }
 
 }

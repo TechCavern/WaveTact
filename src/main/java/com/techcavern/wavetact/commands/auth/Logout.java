@@ -2,10 +2,7 @@ package com.techcavern.wavetact.commands.auth;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
-import com.techcavern.wavetact.utils.GeneralRegistry;
-import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.PermUtils;
+import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.objects.AuthedUser;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.pircbotx.Channel;
@@ -24,9 +21,9 @@ public class Logout extends GenericCommand {
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         AuthedUser authedUser = PermUtils.getAuthedUser(network, user.getNick());
         if (authedUser == null) {
-            IRCUtils.sendError(user, "Error, you are not logged in");
+            ErrorUtils.sendError(user, "Error, you are not logged in");
         } else {
-            GeneralRegistry.AuthedUsers.remove(authedUser);
+            Constants.AuthedUsers.remove(authedUser);
             IRCUtils.sendMessage(user, network, channel, "You are now logged out", prefix);
         }
     }

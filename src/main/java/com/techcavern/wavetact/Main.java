@@ -1,6 +1,6 @@
 package com.techcavern.wavetact;
 
-import com.techcavern.wavetact.utils.GeneralRegistry;
+import com.techcavern.wavetact.utils.Constants;
 import com.techcavern.wavetact.utils.LoadUtils;
 import com.techcavern.wavetact.utils.configurationUtils.ConfigUtils;
 import com.techcavern.wavetact.utils.databaseUtils.*;
@@ -38,16 +38,16 @@ public class Main {
 
         BanTimeUtils.loadBanTimes();
         QuietTimeUtils.loadQuietTimes();
-        if (GeneralRegistry.Controllers.isEmpty()) {
+        if (Constants.Controllers.isEmpty()) {
             System.out.println("No Controllers Found, Please add one using -controller");
             System.exit(0);
         } else {
-            GeneralRegistry.WaveTact.start();
-            if (GeneralRegistry.WaveTact.getBots().isEmpty()) {
+            Constants.WaveTact.start();
+            if (Constants.WaveTact.getBots().isEmpty()) {
                 System.out.println("No Networks Found, Please add one using -addnetwork");
                 System.exit(0);
             }
-            GeneralRegistry.threadPool.execute(new BanTimer());
+            Constants.threadPool.execute(new BanTimer());
         }
     }
 }

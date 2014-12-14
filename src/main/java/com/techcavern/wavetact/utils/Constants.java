@@ -1,5 +1,7 @@
 package com.techcavern.wavetact.utils;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.techcavern.wavetact.utils.fileUtils.Configuration;
 import com.techcavern.wavetact.utils.objects.*;
 import org.jasypt.util.password.StrongPasswordEncryptor;
@@ -12,8 +14,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ForkJoinPool;
 
-public class GeneralRegistry {
+public class Constants {
 
+    public static final Gson GSON = new GsonBuilder().create();
+    public static final Gson GSON_PRETTY_PRINT = new GsonBuilder().setPrettyPrinting().create();
     public static String LastLeftChannel = "";
     public static HashMap<String, String> QuietBans = new HashMap<>();
     public static final List<PermChannel> PermChannels = new ArrayList<>();

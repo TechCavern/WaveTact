@@ -7,6 +7,7 @@ package com.techcavern.wavetact.commands.controller;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ConCMD;
+import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
@@ -41,12 +42,12 @@ public class Connect extends GenericCommand {
         }
         PircBotX workingnetwork = GetUtils.getBotByNetworkName(args[0]);
         if (workingnetwork == null) {
-            IRCUtils.sendError(user, "Network does not exist");
+            ErrorUtils.sendError(user, "Network does not exist");
             return;
         }
         if (reconnect || disconnect) {
             if (workingnetwork.getState().equals(PircBotX.State.DISCONNECTED)) {
-                IRCUtils.sendError(user, "Bot Currently Disonnected");
+                ErrorUtils.sendError(user, "Bot Currently Disonnected");
                 return;
             } else {
                 IRCUtils.sendMessage(user, network, channel, "Disconnecting...", prefix);
@@ -62,7 +63,7 @@ public class Connect extends GenericCommand {
             } while (workingnetwork.getState().equals(PircBotX.State.CONNECTED));
         }
         if (workingnetwork.getState().equals(PircBotX.State.CONNECTED)) {
-            IRCUtils.sendError(user, "Bot Currently Connected");
+            ErrorUtils.sendError(user, "Bot Currently Connected");
         } else {
             workingnetwork.startBot();
         }

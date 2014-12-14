@@ -1,7 +1,7 @@
 package com.techcavern.wavetact.utils.databaseUtils;
 
 import com.techcavern.wavetact.utils.ErrorUtils;
-import com.techcavern.wavetact.utils.GeneralRegistry;
+import com.techcavern.wavetact.utils.Constants;
 import com.techcavern.wavetact.utils.fileUtils.JSONFile;
 
 import java.io.FileNotFoundException;
@@ -16,8 +16,8 @@ public class DNSBLUtils {
         if (file.exists()) {
             try {
                 List<String> controllers = file.read();
-                GeneralRegistry.DNSBLs.clear();
-                GeneralRegistry.DNSBLs.addAll(controllers.stream().collect(Collectors.toList()));
+                Constants.DNSBLs.clear();
+                Constants.DNSBLs.addAll(controllers.stream().collect(Collectors.toList()));
             } catch (FileNotFoundException e) {
                 ErrorUtils.handleException(e);
             }
@@ -27,7 +27,7 @@ public class DNSBLUtils {
     public static void saveDNSBLs() {
         JSONFile file = new JSONFile("DNSBLs.json");
         try {
-            file.write(GeneralRegistry.DNSBLs);
+            file.write(Constants.DNSBLs);
         } catch (IOException e) {
             ErrorUtils.handleException(e);
         }

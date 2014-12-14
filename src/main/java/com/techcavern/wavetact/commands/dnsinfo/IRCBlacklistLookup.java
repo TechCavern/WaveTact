@@ -7,7 +7,8 @@ package com.techcavern.wavetact.commands.dnsinfo;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.TruCMD;
-import com.techcavern.wavetact.utils.GeneralRegistry;
+import com.techcavern.wavetact.utils.ErrorUtils;
+import com.techcavern.wavetact.utils.Constants;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
@@ -32,10 +33,10 @@ public class IRCBlacklistLookup extends GenericCommand {
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         String BeforeIP = GeneralUtils.getIP(args[0], network);
         if (BeforeIP == null) {
-            IRCUtils.sendError(user, "Invalid IP/User");
+            ErrorUtils.sendError(user, "Invalid IP/User");
             return;
         } else if (BeforeIP.contains(":")) {
-            IRCUtils.sendError(user, "IPv6 is Not supported");
+            ErrorUtils.sendError(user, "IPv6 is Not supported");
             return;
         }
         String[] IPString = StringUtils.split(BeforeIP, ".");
@@ -49,11 +50,11 @@ public class IRCBlacklistLookup extends GenericCommand {
         }
         Boolean sent = false;
         Resolver resolver = new SimpleResolver();
-        if (GeneralRegistry.IRCBLs.isEmpty()) {
-            IRCUtils.sendError(user, "No IRC BLs found in Database");
+        if (Constants.IRCBLs.isEmpty()) {
+            ErrorUtils.sendError(user, "No IRC BLs found in Database");
             return;
         }
-        for (String Domain : GeneralRegistry.IRCBLs) {
+        for (String Domain : Constants.IRCBLs) {
             Lookup lookup = new Lookup(IP + "." + Domain, Type.ANY);
             lookup.setResolver(resolver);
             lookup.setCache(null);

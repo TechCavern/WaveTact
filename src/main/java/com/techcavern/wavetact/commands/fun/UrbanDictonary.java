@@ -3,6 +3,7 @@ package com.techcavern.wavetact.commands.fun;
 import com.google.gson.JsonObject;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
+import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
@@ -40,10 +41,10 @@ public class UrbanDictonary extends GenericCommand {
                 }
             } else {
                 ArrayIndex = ArrayIndex + 1;
-                IRCUtils.sendError(user, "Def #" + ArrayIndex + " does not exist");
+                ErrorUtils.sendError(user, "Def #" + ArrayIndex + " does not exist");
             }
         } else {
-            IRCUtils.sendError(user, "Not Defined in the Urban Dictionary");
+            ErrorUtils.sendError(user, "Not Defined in the Urban Dictionary");
         }
 
     }

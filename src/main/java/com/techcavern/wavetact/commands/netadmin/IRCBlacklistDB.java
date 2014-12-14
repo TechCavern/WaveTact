@@ -7,10 +7,7 @@ package com.techcavern.wavetact.commands.netadmin;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.NAdmCMD;
-import com.techcavern.wavetact.utils.GeneralRegistry;
-import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.GetUtils;
-import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.databaseUtils.IRCBLUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.apache.commons.lang3.StringUtils;
@@ -37,30 +34,30 @@ public class IRCBlacklistDB extends GenericCommand {
             if (args[0].startsWith("-")) {
                 String Domain = GetUtils.getIRCDNSBLbyDomain(args[0].replaceFirst("-", "")).replaceAll("http://|https://", "");
                 if (Domain != null) {
-                    GeneralRegistry.IRCBLs.remove(Domain);
+                    Constants.IRCBLs.remove(Domain);
                     IRCBLUtils.saveIRCBLs();
                     IRCUtils.sendMessage(user, network, channel, "IRC DNSBL Removed", prefix);
                 } else {
-                    IRCUtils.sendError(user, "IRC DNSBL does not exist on list");
+                    ErrorUtils.sendError(user, "IRC DNSBL does not exist on list");
                 }
             } else if (args[0].equalsIgnoreCase("list")) {
-                if (!GeneralRegistry.IRCBLs.isEmpty()) {
-                    IRCUtils.sendMessage(user, network, channel, StringUtils.join(GeneralRegistry.IRCBLs, ", "), prefix);
+                if (!Constants.IRCBLs.isEmpty()) {
+                    IRCUtils.sendMessage(user, network, channel, StringUtils.join(Constants.IRCBLs, ", "), prefix);
                 } else {
-                    IRCUtils.sendError(user, "IRC DNS Blacklist is Empty");
+                    ErrorUtils.sendError(user, "IRC DNS Blacklist is Empty");
                 }
             } else {
                 String Domain = GetUtils.getIRCDNSBLbyDomain(args[0]);
                 if (Domain == null) {
-                    GeneralRegistry.IRCBLs.add(args[0]);
+                    Constants.IRCBLs.add(args[0]);
                     IRCBLUtils.saveIRCBLs();
                     IRCUtils.sendMessage(user, network, channel, "IRC DNSBL Added", prefix);
                 } else {
-                    IRCUtils.sendError(user, "IRC DNSBL already listed");
+                    ErrorUtils.sendError(user, "IRC DNSBL already listed");
                 }
             }
         } else {
-            IRCUtils.sendError(user, "Please Specifiy an IRC DNBL");
+            ErrorUtils.sendError(user, "Please Specifiy an IRC DNBL");
         }
     }
 }

@@ -5,8 +5,7 @@
  */
 package com.techcavern.wavetact.utils.eventListeners;
 
-import com.techcavern.wavetact.utils.GeneralRegistry;
-import org.pircbotx.PircBotX;
+import com.techcavern.wavetact.utils.Constants;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.PartEvent;
 
@@ -18,8 +17,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class PartListener extends ListenerAdapter {
     public void onPart(PartEvent event) throws Exception {
-        if (GeneralRegistry.LastLeftChannel.equals(event.getChannel().getName())) {
-            GeneralRegistry.LastLeftChannel = "";
+        if (Constants.LastLeftChannel.equals(event.getChannel().getName())) {
+            Constants.LastLeftChannel = "";
         } else if (event.getUser().getNick().equals(event.getBot().getNick())) {
             int tries = 0;
             do {

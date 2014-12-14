@@ -15,8 +15,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author jztech101
  */
-public class KickListener extends ListenerAdapter<PircBotX> {
-    public void onKick(KickEvent<PircBotX> event) throws Exception {
+public class KickListener extends ListenerAdapter {
+    public void onKick(KickEvent event) throws Exception {
         if (event.getRecipient().getNick().equals(event.getBot().getNick())) {
             int tries = 0;
             do {

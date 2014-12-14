@@ -7,6 +7,7 @@ package com.techcavern.wavetact.commands.netadmin;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.NAdmCMD;
+import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
@@ -32,7 +33,7 @@ public class Global extends GenericCommand {
         if (!args[0].equalsIgnoreCase("all")) {
             PircBotX workingnetwork = GetUtils.getBotByNetworkName(args[0]);
             if (workingnetwork == null) {
-                IRCUtils.sendError(user, "Network does not exist");
+                ErrorUtils.sendError(user, "Network does not exist");
                 return;
             }
             if (workingnetwork == network) {
@@ -41,7 +42,7 @@ public class Global extends GenericCommand {
                 if (userPermLevel >= 9001) {
                     IRCUtils.sendNetworkGlobal(GeneralUtils.buildMessage(1, args.length, args), workingnetwork, user);
                 } else {
-                    IRCUtils.sendError(user, "Permission Denied");
+                    ErrorUtils.sendError(user, "Permission Denied");
                 }
             }
         } else if (args[0].equalsIgnoreCase("all") && userPermLevel >= 9001) {

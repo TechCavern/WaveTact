@@ -1,7 +1,7 @@
 package com.techcavern.wavetact.commandline.perms;
 
 import com.techcavern.wavetact.annot.CMDLine;
-import com.techcavern.wavetact.utils.GeneralRegistry;
+import com.techcavern.wavetact.utils.Constants;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.databaseUtils.ControllerUtils;
 import com.techcavern.wavetact.utils.objects.CommandLine;
@@ -16,10 +16,10 @@ public class Controller extends CommandLine {
     @Override
     public void doAction(String[] args) {
         if (args[1].startsWith("-")) {
-            GeneralRegistry.Controllers.remove(args[1].replace("-", ""));
+            Constants.Controllers.remove(args[1].replace("-", ""));
             ControllerUtils.saveControllers();
         } else {
-            GeneralRegistry.Controllers.add(args[1]);
+            Constants.Controllers.add(args[1]);
             ControllerUtils.saveControllers();
         }
         System.exit(0);

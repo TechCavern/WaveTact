@@ -89,7 +89,7 @@ public class IRCUtils {
     }
 
     public static void sendGlobal(String message, User user) {
-        for (PircBotX network : GeneralRegistry.WaveTact.getBots()) {
+        for (PircBotX network : Constants.WaveTact.getBots()) {
             sendNetworkGlobal(message, network, user);
         }
 
@@ -124,10 +124,6 @@ public class IRCUtils {
             host = null;
         }
         return host;
-    }
-
-    public static void sendError(User user, String error) {
-        user.send().notice(error);
     }
 
 }

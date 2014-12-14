@@ -43,14 +43,14 @@ public class PermUtils {
         if (userString == null) {
             userString = getAccountName(network, userObject);
             if (userString != null)
-                GeneralRegistry.AuthedUsers.add(new AuthedUser(network.getServerInfo().getNetwork(), userString, hostmask));
+                Constants.AuthedUsers.add(new AuthedUser(network.getServerInfo().getNetwork(), userString, hostmask));
         }
         return userString;
     }
 
     public static String getAuthedUser(PircBotX network, String userObject, String hostmask) {
         String userString = null;
-        for (AuthedUser user : GeneralRegistry.AuthedUsers) {
+        for (AuthedUser user : Constants.AuthedUsers) {
             if (user.getAuthHostmask().equals(hostmask) && user.getAuthNetwork().equals(network.getServerInfo().getNetwork())) {
                 userString = user.getAuthAccount();
             }
@@ -65,7 +65,7 @@ public class PermUtils {
 
     public static AuthedUser getAuthedUser(PircBotX network, String userObject) {
         String hostmask = IRCUtils.getIRCHostmask(network, userObject);
-        for (AuthedUser user : GeneralRegistry.AuthedUsers) {
+        for (AuthedUser user : Constants.AuthedUsers) {
             if (user.getAuthHostmask().equals(hostmask) && user.getAuthNetwork().equals(network.getServerInfo().getNetwork())) {
                 return user;
             }

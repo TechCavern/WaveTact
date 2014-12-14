@@ -3,6 +3,7 @@ package com.techcavern.wavetact.commands.fun;
 import com.google.gson.JsonObject;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
+import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
@@ -27,7 +28,7 @@ public class Xkcd extends GenericCommand {
         if (args.length > 0) {
             comicnumber = Integer.parseInt(args[0]);
             if (latest < comicnumber) {
-                IRCUtils.sendError(user, "comic does not exist");
+                ErrorUtils.sendError(user, "comic does not exist");
                 return;
             }
         } else {

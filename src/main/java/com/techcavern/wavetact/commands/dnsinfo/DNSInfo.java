@@ -7,6 +7,7 @@ package com.techcavern.wavetact.commands.dnsinfo;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.TruCMD;
+import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
@@ -56,7 +57,7 @@ public class DNSInfo extends GenericCommand {
             isSuccessful = true;
         }
         if (!isSuccessful) {
-            IRCUtils.sendError(user, "Invalid Domain");
+            ErrorUtils.sendError(user, "Invalid Domain");
         }
 
     }

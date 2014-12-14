@@ -7,7 +7,7 @@ package com.techcavern.wavetact.commands.fun;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
-import com.techcavern.wavetact.utils.GeneralRegistry;
+import com.techcavern.wavetact.utils.Constants;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.FunObject;
@@ -34,8 +34,8 @@ public class Attack extends GenericCommand {
         if (Something.toLowerCase().equalsIgnoreCase(network.getUserBot().getNick())) {
             Something = user.getNick();
         }
-        int randomint = RandomUtils.nextInt(0, GeneralRegistry.Attacks.size());
-        FunObject attack = GeneralRegistry.Attacks.get(randomint);
+        int randomint = RandomUtils.nextInt(0, Constants.Attacks.size());
+        FunObject attack = Constants.Attacks.get(randomint);
         if (attack.getMessageExists()) {
             IRCUtils.sendAction(user, network, channel, attack.getAction().replace("$*", Something), prefix);
             IRCUtils.sendMessage(user, network, channel, attack.getMessage().replace("$*", Something), prefix);

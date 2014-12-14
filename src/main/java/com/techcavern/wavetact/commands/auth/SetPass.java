@@ -21,21 +21,21 @@ public class SetPass extends GenericCommand {
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (!PermUtils.checkIfAccountEnabled(network)) {
-            IRCUtils.sendError(user, "This network is set to " + GetUtils.getAuthType(network) + " Authentication");
+            ErrorUtils.sendError(user, "This network is set to " + GetUtils.getAuthType(network) + " Authentication");
             return;
         }
         String AuthUser = PermUtils.authUser(network, user.getNick());
         if (AuthUser != null) {
             Account acc = AccountUtils.getAccount(AuthUser);
-            if (GeneralRegistry.encryptor.checkPassword(args[0], acc.getAuthPassword())) {
-                acc.setAuthPassword(GeneralRegistry.encryptor.encryptPassword(args[1]));
+            if (Constants.encryptor.checkPassword(args[0], acc.getAuthPassword())) {
+                acc.setAuthPassword(Constants.encryptor.encryptPassword(args[1]));
                 AccountUtils.saveAccounts();
                 IRCUtils.sendMessage(user, network, channel, "Password Changed Successfully", prefix);
             } else {
-                IRCUtils.sendError(user, "Incorrect password");
+                ErrorUtils.sendError(user, "Incorrect password");
             }
         } else {
-            IRCUtils.sendError(user, "Error - You must be identified to use this command");
+            ErrorUtils.sendError(user, "Error - You must be identified to use this command");
         }
     }
 }

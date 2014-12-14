@@ -7,7 +7,7 @@ package com.techcavern.wavetact.commands.chanhalfop;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ChanHOPCMD;
-import com.techcavern.wavetact.utils.GeneralRegistry;
+import com.techcavern.wavetact.utils.Constants;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.pircbotx.Channel;
@@ -28,6 +28,6 @@ public class Part extends GenericCommand {
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         channel.send().part();
-        GeneralRegistry.LastLeftChannel = channel.getName();
+        Constants.LastLeftChannel = channel.getName();
     }
 }

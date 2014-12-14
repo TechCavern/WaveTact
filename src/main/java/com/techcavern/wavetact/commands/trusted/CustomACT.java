@@ -7,10 +7,7 @@ package com.techcavern.wavetact.commands.trusted;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.TruCMD;
-import com.techcavern.wavetact.utils.GeneralRegistry;
-import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.GetUtils;
-import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleActionUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.objects.SimpleAction;
@@ -49,10 +46,10 @@ public class CustomACT extends GenericCommand {
 
     private void addCommand(User user, PircBotX network, Channel channel, int accessLevel, boolean isPrivate, String cmd, String msg, String prefix) {
         if (GetUtils.getCommand(cmd) != null) {
-            IRCUtils.sendError(user, "Custom Action already exists");
+            ErrorUtils.sendError(user, "Custom Action already exists");
             return;
         } else
-            GeneralRegistry.SimpleActions.add(new SimpleAction(cmd, accessLevel, msg, false));
+            Constants.SimpleActions.add(new SimpleAction(cmd, accessLevel, msg, false));
         SimpleActionUtils.saveSimpleActions();
         IRCUtils.sendMessage(user, network, channel, "Custom Action added", prefix);
     }
@@ -63,18 +60,18 @@ public class CustomACT extends GenericCommand {
         SimpleAction cmd = SimpleActionUtils.getSimpleAction(command);
         if (cmd.getPermLevel() <= UserPermLevel) {
             if (cmd != null && !cmd.getLockedStatus()) {
-                GeneralRegistry.SimpleActions.remove(cmd);
-                GeneralRegistry.AllCommands.remove(cmd);
-                GeneralRegistry.SimpleActions.add(new SimpleAction(command, accessLevel, msg, false));
+                Constants.SimpleActions.remove(cmd);
+                Constants.AllCommands.remove(cmd);
+                Constants.SimpleActions.add(new SimpleAction(command, accessLevel, msg, false));
                 SimpleActionUtils.saveSimpleActions();
                 IRCUtils.sendMessage(user, network, channel, "Custom Action modified", prefix);
             } else if (cmd.getLockedStatus()) {
-                IRCUtils.sendError(user, "Custom Action Locked");
+                ErrorUtils.sendError(user, "Custom Action Locked");
             } else {
-                IRCUtils.sendError(user, "Custom Action Does Not Exist");
+                ErrorUtils.sendError(user, "Custom Action Does Not Exist");
             }
         } else {
-            IRCUtils.sendError(user, "Permission Denied");
+            ErrorUtils.sendError(user, "Permission Denied");
         }
     }
 
@@ -83,17 +80,17 @@ public class CustomACT extends GenericCommand {
         SimpleAction cmd = SimpleActionUtils.getSimpleAction(command);
         if (cmd.getPermLevel() <= UserPermLevel) {
             if (cmd == null) {
-                IRCUtils.sendError(user, "Custom Action does not exist");
+                ErrorUtils.sendError(user, "Custom Action does not exist");
             } else if (cmd.getLockedStatus()) {
-                IRCUtils.sendError(user, "Custom Action is locked");
+                ErrorUtils.sendError(user, "Custom Action is locked");
             } else {
-                GeneralRegistry.SimpleActions.remove(cmd);
-                GeneralRegistry.AllCommands.remove(cmd);
+                Constants.SimpleActions.remove(cmd);
+                Constants.AllCommands.remove(cmd);
                 SimpleActionUtils.saveSimpleActions();
                 IRCUtils.sendMessage(user, network, channel, "Custom Action removed", prefix);
             }
         } else {
-            IRCUtils.sendError(user, "Permission Denied");
+            ErrorUtils.sendError(user, "Permission Denied");
         }
     }
 }

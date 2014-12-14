@@ -3,6 +3,7 @@ package com.techcavern.wavetact.commands.reference;
 import com.google.gson.JsonObject;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
+import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
@@ -24,7 +25,7 @@ public class Wiki extends GenericCommand {
         JsonObject result = GeneralUtils.getJsonObject("http://en.wikipedia.org/w/api.php?action=query&prop=extracts&explaintext&exsectionformat=plain&exchars=700&titles=" + StringUtils.join(args, "%20").toLowerCase() + "&format=json").getAsJsonObject("query").getAsJsonObject("pages");
         String key = result.entrySet().iterator().next().getKey();
         if (result.getAsJsonObject(key).get("missing") != null) {
-            IRCUtils.sendError(user, "Query returned no results");
+            ErrorUtils.sendError(user, "Query returned no results");
         } else {
             String title = result.getAsJsonObject(key).get("title").getAsString();
             String text = result.getAsJsonObject(key).get("extract").getAsString();

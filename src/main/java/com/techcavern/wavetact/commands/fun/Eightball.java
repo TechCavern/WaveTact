@@ -7,7 +7,7 @@ package com.techcavern.wavetact.commands.fun;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
-import com.techcavern.wavetact.utils.GeneralRegistry;
+import com.techcavern.wavetact.utils.Constants;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
@@ -29,7 +29,7 @@ public class Eightball extends GenericCommand {
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        int randomint = RandomUtils.nextInt(0, GeneralRegistry.Eightball.size());
-        IRCUtils.sendMessage(user, network, channel, GeneralRegistry.Eightball.get(randomint), prefix);
+        int randomint = RandomUtils.nextInt(0, Constants.Eightball.size());
+        IRCUtils.sendMessage(user, network, channel, Constants.Eightball.get(randomint), prefix);
     }
 }

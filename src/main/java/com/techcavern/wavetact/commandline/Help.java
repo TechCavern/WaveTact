@@ -1,7 +1,7 @@
 package com.techcavern.wavetact.commandline;
 
 import com.techcavern.wavetact.annot.CMDLine;
-import com.techcavern.wavetact.utils.GeneralRegistry;
+import com.techcavern.wavetact.utils.Constants;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.objects.CommandLine;
 import org.apache.commons.lang3.StringUtils;
@@ -18,7 +18,7 @@ public class Help extends CommandLine {
     @Override
     public void doAction(String[] args) {
         System.out.println("Help");
-        for (CommandLine c : GeneralRegistry.CommandLines) {
+        for (CommandLine c : Constants.CommandLines) {
             System.out.println("-" + StringUtils.join(Arrays.asList(c.getArgument()), ", ") + " - " + c.getHelpString());
         }
         System.exit(0);

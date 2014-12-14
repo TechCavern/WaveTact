@@ -22,7 +22,7 @@ public class Register extends GenericCommand {
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (!PermUtils.checkIfAccountEnabled(network)) {
-            IRCUtils.sendError(user, "This network is set to " + GetUtils.getAuthType(network) + " Authentication");
+            ErrorUtils.sendError(user, "This network is set to " + GetUtils.getAuthType(network) + " Authentication");
             return;
         }
         String userString;
@@ -35,12 +35,12 @@ public class Register extends GenericCommand {
             password = args[1];
         }
         if (AccountUtils.getAccount(userString) != null || PermUtils.authUser(network, user.getNick()) != null) {
-            IRCUtils.sendError(user, "Error, you are already registered");
+            ErrorUtils.sendError(user, "Error, you are already registered");
 
         } else {
-            GeneralRegistry.Accounts.add(new Account(userString, GeneralRegistry.encryptor.encryptPassword(password)));
+            Constants.Accounts.add(new Account(userString, Constants.encryptor.encryptPassword(password)));
             AccountUtils.saveAccounts();
-            GeneralRegistry.AuthedUsers.add(new AuthedUser(network.getServerInfo().getNetwork(), userString, IRCUtils.getHostmask(network, user.getNick(), false)));
+            Constants.AuthedUsers.add(new AuthedUser(network.getServerInfo().getNetwork(), userString, IRCUtils.getHostmask(network, user.getNick(), false)));
             IRCUtils.sendMessage(user, network, channel, "You are now registered", prefix);
         }
     }

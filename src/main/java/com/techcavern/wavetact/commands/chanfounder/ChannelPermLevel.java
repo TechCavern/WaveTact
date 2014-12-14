@@ -2,10 +2,7 @@ package com.techcavern.wavetact.commands.chanfounder;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ChanFounderCMD;
-import com.techcavern.wavetact.utils.GeneralRegistry;
-import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.PermUtils;
+import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.databaseUtils.PermChannelUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.objects.PermChannel;
@@ -27,7 +24,7 @@ public class ChannelPermLevel extends GenericCommand {
         if (args.length > 1) {
             c = Integer.parseInt(args[1]);
         } else {
-            IRCUtils.sendError(user, "Failed to parse permission level: " + ChannelPermLevel.super.getSyntax());
+            ErrorUtils.sendError(user, "Failed to parse permission level: " + ChannelPermLevel.super.getSyntax());
             return;
         }
         if (c <= 18) {
@@ -47,11 +44,11 @@ public class ChannelPermLevel extends GenericCommand {
             if (account != null) {
                 if (args[0].startsWith("-")) {
                     if (PLChannel != null) {
-                        GeneralRegistry.PermChannels.remove(PLChannel);
+                        Constants.PermChannels.remove(PLChannel);
                         PermChannelUtils.savePermChannels();
                         IRCUtils.sendNotice(user, network, channel, args[0].replaceFirst("-", "") + " removed from access lists", "");
                     } else {
-                        IRCUtils.sendError(user, "User is not found on channel access lists");
+                        ErrorUtils.sendError(user, "User is not found on channel access lists");
                     }
                 } else if (args[0].startsWith("+")) {
                     if (PLChannel != null) {
@@ -59,24 +56,24 @@ public class ChannelPermLevel extends GenericCommand {
                         PermChannelUtils.savePermChannels();
                         IRCUtils.sendNotice(user, network, channel, args[0].replaceFirst("-", "") + " modified from access lists", "");
                     } else {
-                        IRCUtils.sendError(user, "User is not found on channel access lists");
+                        ErrorUtils.sendError(user, "User is not found on channel access lists");
                     }
 
 
                 } else {
                     if (PLChannel == null) {
-                        GeneralRegistry.PermChannels.add(new PermChannel(channel.getName(), Integer.parseInt(args[1]), false, network.getServerInfo().getNetwork(), account));
+                        Constants.PermChannels.add(new PermChannel(channel.getName(), Integer.parseInt(args[1]), false, network.getServerInfo().getNetwork(), account));
                         PermChannelUtils.savePermChannels();
                         IRCUtils.sendNotice(user, network, channel, args[0].replaceFirst("-", "") + " added from access lists", "");
                     } else {
-                        IRCUtils.sendError(user, "User is already in channel access lists!");
+                        ErrorUtils.sendError(user, "User is already in channel access lists!");
                     }
                 }
             } else {
-                IRCUtils.sendError(user, "User is not registered");
+                ErrorUtils.sendError(user, "User is not registered");
             }
         } else {
-            IRCUtils.sendError(user, "NetworkAdmins & Controllers must be registered by the controller");
+            ErrorUtils.sendError(user, "NetworkAdmins & Controllers must be registered by the controller");
         }
     }
 }

@@ -2,10 +2,7 @@ package com.techcavern.wavetact.commands.utils;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
-import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.GetUtils;
-import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.PermUtils;
+import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.apache.commons.lang3.ArrayUtils;
 import org.pircbotx.Channel;
@@ -34,7 +31,7 @@ public class CheckUserLevel extends GenericCommand {
             userPermLevel = PermUtils.getPermLevel(network, userObject, channel);
         }
         if (userObject == null) {
-            IRCUtils.sendError(user, "User does not exist");
+            ErrorUtils.sendError(user, "User does not exist");
         } else if (userPermLevel >= 9001) {
             IRCUtils.sendMessage(user, network, channel, userObject + " is a Bot Controller!" + " (" + userPermLevel + ")", prefix);
         } else if (userPermLevel >= 20) {

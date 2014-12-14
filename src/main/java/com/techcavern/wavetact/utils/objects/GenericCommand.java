@@ -5,7 +5,7 @@
  */
 package com.techcavern.wavetact.utils.objects;
 
-import com.techcavern.wavetact.utils.GeneralRegistry;
+import com.techcavern.wavetact.utils.Constants;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -28,7 +28,7 @@ public abstract class GenericCommand {
         this.desc = desc;
         this.Syntax = syntax;
         this.channelRequired = channelRequired;
-        GeneralRegistry.AllCommands.add(this);
+        Constants.AllCommands.add(this);
     }
 
     public abstract void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception;

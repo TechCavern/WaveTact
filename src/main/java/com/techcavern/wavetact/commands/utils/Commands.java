@@ -2,7 +2,7 @@ package com.techcavern.wavetact.commands.utils;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
-import com.techcavern.wavetact.utils.GeneralRegistry;
+import com.techcavern.wavetact.utils.Constants;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
@@ -31,28 +31,28 @@ public class Commands extends GenericCommand {
             try {
                 permlevel = Integer.parseInt(args[0]);
             } catch (NumberFormatException e) {
-                IRCUtils.sendMessage(user, network, channel, StringUtils.join(GeneralRegistry.AllListCommands, ", "), prefix);
+                IRCUtils.sendMessage(user, network, channel, StringUtils.join(Constants.AllListCommands, ", "), prefix);
                 return;
             }
         }
         if (permlevel >= 9001) {
-            IRCUtils.sendMessage(user, network, channel, StringUtils.join(GeneralRegistry.ControllerListCommands, ", "), prefix);
+            IRCUtils.sendMessage(user, network, channel, StringUtils.join(Constants.ControllerListCommands, ", "), prefix);
         } else if (permlevel >= 20) {
-            IRCUtils.sendMessage(user, network, channel, StringUtils.join(GeneralRegistry.NetAdminListCommands, ", "), prefix);
+            IRCUtils.sendMessage(user, network, channel, StringUtils.join(Constants.NetAdminListCommands, ", "), prefix);
         } else if (permlevel >= 18) {
-            IRCUtils.sendMessage(user, network, channel, StringUtils.join(GeneralRegistry.ChanFounderListCommands, ", "), prefix);
+            IRCUtils.sendMessage(user, network, channel, StringUtils.join(Constants.ChanFounderListCommands, ", "), prefix);
         } else if (permlevel >= 15) {
-            IRCUtils.sendMessage(user, network, channel, StringUtils.join(GeneralRegistry.ChanOwnerListCommands, ", "), prefix);
+            IRCUtils.sendMessage(user, network, channel, StringUtils.join(Constants.ChanOwnerListCommands, ", "), prefix);
         } else if (permlevel >= 13) {
-            IRCUtils.sendMessage(user, network, channel, StringUtils.join(GeneralRegistry.ChanOpListCommands, ", "), prefix);
+            IRCUtils.sendMessage(user, network, channel, StringUtils.join(Constants.ChanOpListCommands, ", "), prefix);
         } else if (permlevel >= 10) {
-            IRCUtils.sendMessage(user, network, channel, StringUtils.join(GeneralRegistry.ChanOpListCommands, ", "), prefix);
+            IRCUtils.sendMessage(user, network, channel, StringUtils.join(Constants.ChanOpListCommands, ", "), prefix);
         } else if (permlevel >= 7) {
-            IRCUtils.sendMessage(user, network, channel, StringUtils.join(GeneralRegistry.ChanHalfOpListCommands, ", "), prefix);
+            IRCUtils.sendMessage(user, network, channel, StringUtils.join(Constants.ChanHalfOpListCommands, ", "), prefix);
         } else if (permlevel >= 5) {
-            IRCUtils.sendMessage(user, network, channel, StringUtils.join(GeneralRegistry.TrustedListCommands, ", "), prefix);
+            IRCUtils.sendMessage(user, network, channel, StringUtils.join(Constants.TrustedListCommands, ", "), prefix);
         } else {
-            IRCUtils.sendMessage(user, network, channel, StringUtils.join(GeneralRegistry.GenericListCommands, ", "), prefix);
+            IRCUtils.sendMessage(user, network, channel, StringUtils.join(Constants.GenericListCommands, ", "), prefix);
         }
 
     }

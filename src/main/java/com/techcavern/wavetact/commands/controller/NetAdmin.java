@@ -44,15 +44,15 @@ public class NetAdmin extends GenericCommand {
         if (account != null) {
             if (args[0].startsWith("-")) {
                 if (GetUtils.getNetworkAdminByNick(account, network.getServerInfo().getNetwork()) != null) {
-                    GeneralRegistry.NetworkAdmins.remove(GetUtils.getNetworkAdminByNick(account, network.getServerInfo().getNetwork()));
+                    Constants.NetworkAdmins.remove(GetUtils.getNetworkAdminByNick(account, network.getServerInfo().getNetwork()));
                     NetAdminUtils.saveNetworkAdmins();
                     IRCUtils.sendMessage(user, network, channel, "Network Admin removed", prefix);
                 } else {
-                    IRCUtils.sendError(user, "User does not exist in Network Admin List");
+                    ErrorUtils.sendError(user, "User does not exist in Network Admin List");
                 }
             } else if (args[0].equalsIgnoreCase("list")) {
                 String netAdmins = "";
-                for (NetworkAdmin netAdmin : GeneralRegistry.NetworkAdmins) {
+                for (NetworkAdmin netAdmin : Constants.NetworkAdmins) {
                     if (netAdmins.isEmpty()) {
                         netAdmins = netAdmin.getUser();
                     } else {
@@ -62,19 +62,19 @@ public class NetAdmin extends GenericCommand {
                 if (!netAdmins.isEmpty()) {
                     IRCUtils.sendMessage(user, network, channel, netAdmins, prefix);
                 } else {
-                    IRCUtils.sendError(user, "No Network Admins Exist");
+                    ErrorUtils.sendError(user, "No Network Admins Exist");
                 }
             } else {
                 if (GetUtils.getNetworkAdminByNick(account, network.getServerInfo().getNetwork()) != null) {
-                    IRCUtils.sendError(user, "User is already in database");
+                    ErrorUtils.sendError(user, "User is already in database");
                 } else {
-                    GeneralRegistry.NetworkAdmins.add(new NetworkAdmin(network.getServerInfo().getNetwork(), account));
+                    Constants.NetworkAdmins.add(new NetworkAdmin(network.getServerInfo().getNetwork(), account));
                     NetAdminUtils.saveNetworkAdmins();
                     IRCUtils.sendMessage(user, network, channel, "Network Admin added", prefix);
                 }
             }
         } else {
-            IRCUtils.sendError(user, "User is not registered with Nickserv or not logged in");
+            ErrorUtils.sendError(user, "User is not registered with Nickserv or not logged in");
         }
     }
 }

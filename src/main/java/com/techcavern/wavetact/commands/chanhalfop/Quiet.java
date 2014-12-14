@@ -2,7 +2,8 @@ package com.techcavern.wavetact.commands.chanhalfop;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ChanHOPCMD;
-import com.techcavern.wavetact.utils.GeneralRegistry;
+import com.techcavern.wavetact.utils.ErrorUtils;
+import com.techcavern.wavetact.utils.Constants;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.databaseUtils.QuietTimeUtils;
@@ -28,10 +29,10 @@ public class Quiet extends GenericCommand {
             ircd = "c";
         } else if (network.getServerInfo().getExtBanPrefix().equalsIgnoreCase("~") && network.getServerInfo().getExtBanList() != null && network.getServerInfo().getExtBanList().contains("q")) {
             ircd = "u";
-        } else if (network.getServerInfo().getExtBanPrefix().contains("m") && network.getServerInfo().getExtBanList() == null) {
+        } else if (network.getServerInfo().getExtBanList().contains("m") && network.getServerInfo().getExtBanPrefix() == null) {
             ircd = "i";
         } else {
-            IRCUtils.sendError(user, "This networks ircd is not supported for quiets.");
+            ErrorUtils.sendError(user, "This networks ircd is not supported for quiets.");
             return;
         }
         String hostmask;
@@ -69,33 +70,33 @@ public class Quiet extends GenericCommand {
                     QuietTimeUtils.saveQuietTimes();
                 }
             } else {
-                IRCUtils.sendError(user, "Quiet does not exist!");
+                ErrorUtils.sendError(user, "Quiet does not exist!");
             }
         } else if (args[0].startsWith("-")) {
             if (QuietTimeUtils.getQuietTime(hostmask) != null) {
                 QuietTimeUtils.getQuietTime(hostmask).setTime(0);
                 QuietTimeUtils.saveQuietTimes();
             } else {
-                IRCUtils.setMode(channel, network, "-" + GeneralRegistry.QuietBans.get(ircd), hostmask);
+                IRCUtils.setMode(channel, network, "-" + Constants.QuietBans.get(ircd), hostmask);
             }
         } else {
 
             if (QuietTimeUtils.getQuietTime(hostmask) == null) {
                 if (args.length == 2) {
-                    IRCUtils.setMode(channel, network, "+" + GeneralRegistry.QuietBans.get(ircd), hostmask);
+                    IRCUtils.setMode(channel, network, "+" + Constants.QuietBans.get(ircd), hostmask);
                     UTime c = new UTime(hostmask, network.getServerInfo().getNetwork(), ircd, channel.getName(), GeneralUtils.getMilliSeconds(args[1]), System.currentTimeMillis());
-                    GeneralRegistry.QuietTimes.add(c);
+                    Constants.QuietTimes.add(c);
                     QuietTimeUtils.saveQuietTimes();
 
                 } else if (args.length < 2) {
-                    IRCUtils.setMode(channel, network, "+" + GeneralRegistry.QuietBans.get(ircd), hostmask);
+                    IRCUtils.setMode(channel, network, "+" + Constants.QuietBans.get(ircd), hostmask);
                     UTime c = new UTime(hostmask, network.getServerInfo().getNetwork(), ircd, channel.getName(), GeneralUtils.getMilliSeconds("24h"), System.currentTimeMillis());
-                    GeneralRegistry.QuietTimes.add(c);
+                    Constants.QuietTimes.add(c);
                     QuietTimeUtils.saveQuietTimes();
 
                 }
             } else {
-                IRCUtils.sendError(user, "Quiet already exists!");
+                ErrorUtils.sendError(user, "Quiet already exists!");
             }
         }
     }

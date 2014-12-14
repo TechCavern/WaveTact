@@ -2,7 +2,7 @@ package com.techcavern.wavetact.utils.databaseUtils;
 
 import com.google.gson.internal.LinkedTreeMap;
 import com.techcavern.wavetact.utils.ErrorUtils;
-import com.techcavern.wavetact.utils.GeneralRegistry;
+import com.techcavern.wavetact.utils.Constants;
 import com.techcavern.wavetact.utils.fileUtils.JSONFile;
 import com.techcavern.wavetact.utils.objects.UTime;
 
@@ -19,8 +19,8 @@ public class BanTimeUtils {
         if (file.exists()) {
             try {
                 List<LinkedTreeMap> bantimes = file.read(List.class);
-                GeneralRegistry.BanTimes.clear();
-                GeneralRegistry.BanTimes.addAll(bantimes.stream().map(bans -> new UTime((String) bans.get("Something"),
+                Constants.BanTimes.clear();
+                Constants.BanTimes.addAll(bantimes.stream().map(bans -> new UTime((String) bans.get("Something"),
                         (String) bans.get("networkName"),
                         (String) bans.get("type"),
                         (String) bans.get("channelName"),
@@ -35,14 +35,14 @@ public class BanTimeUtils {
     public static void saveBanTimes() {
         JSONFile file = new JSONFile("BanTimes.json");
         try {
-            file.write(GeneralRegistry.BanTimes);
+            file.write(Constants.BanTimes);
         } catch (IOException e) {
             ErrorUtils.handleException(e);
         }
     }
 
     public static UTime getBanTime(String hostmask) {
-        for (UTime x : GeneralRegistry.BanTimes) {
+        for (UTime x : Constants.BanTimes) {
             if (x.getHostmask().equals(hostmask)) {
                 return x;
             }

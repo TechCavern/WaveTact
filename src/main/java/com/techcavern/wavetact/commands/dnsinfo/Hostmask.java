@@ -2,6 +2,7 @@ package com.techcavern.wavetact.commands.dnsinfo;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
+import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
@@ -26,7 +27,7 @@ public class Hostmask extends GenericCommand {
                 IRCUtils.sendMessage(user, network, channel, IRCUtils.getHostmask(network, args[0], false), prefix);
             }
         } else {
-            IRCUtils.sendError(user, "User not found");
+            ErrorUtils.sendError(user, "User not found");
         }
 
     }

@@ -3,6 +3,7 @@ package com.techcavern.wavetact.commands.reference;
 import com.google.gson.JsonArray;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
+import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
@@ -38,10 +39,10 @@ public class Google extends GenericCommand {
 
             } else {
                 ArrayIndex = ArrayIndex + 1;
-                IRCUtils.sendError(user, "Search #" + ArrayIndex + " does not exist");
+                ErrorUtils.sendError(user, "Search #" + ArrayIndex + " does not exist");
             }
         } else {
-            IRCUtils.sendError(user, "Search returned no results");
+            ErrorUtils.sendError(user, "Search returned no results");
         }
     }
 }

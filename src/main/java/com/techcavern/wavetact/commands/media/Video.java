@@ -8,7 +8,8 @@ import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.SearchResult;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
-import com.techcavern.wavetact.utils.GeneralRegistry;
+import com.techcavern.wavetact.utils.ErrorUtils;
+import com.techcavern.wavetact.utils.Constants;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
@@ -31,8 +32,8 @@ public class Video extends GenericCommand {
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        if (GeneralRegistry.googleapikey == null) {
-            IRCUtils.sendError(user, "Google API key is null - Contact Bot Controller to fix");
+        if (Constants.googleapikey == null) {
+            ErrorUtils.sendError(user, "Google API key is null - Contact Bot Controller to fix");
             return;
         }
         int ArrayIndex = 1;
@@ -46,7 +47,7 @@ public class Video extends GenericCommand {
 
         }).setApplicationName("youtubesearch").build();
         YouTube.Search.List search = yt.search().list("id,snippet");
-        search.setKey(GeneralRegistry.googleapikey);
+        search.setKey(Constants.googleapikey);
         search.setQ(StringUtils.join(args, " "));
         search.setMaxResults(Integer.toUnsignedLong(ArrayIndex));
         List<SearchResult> results = search.execute().getItems();
@@ -65,10 +66,10 @@ public class Video extends GenericCommand {
                 if (!url.isEmpty())
                     IRCUtils.sendMessage(user, network, channel, url, prefix);
             } else {
-                IRCUtils.sendError(user, "Search #" + ArrayIndex + " does not exist");
+                ErrorUtils.sendError(user, "Search #" + ArrayIndex + " does not exist");
             }
         } else {
-            IRCUtils.sendError(user, "Search returned no results");
+            ErrorUtils.sendError(user, "Search returned no results");
         }
     }
 }

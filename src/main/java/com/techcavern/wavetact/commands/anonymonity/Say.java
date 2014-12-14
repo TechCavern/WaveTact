@@ -7,10 +7,7 @@ package com.techcavern.wavetact.commands.anonymonity;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.TruCMD;
-import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.GetUtils;
-import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.PermUtils;
+import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
@@ -40,7 +37,7 @@ public class Say extends GenericCommand {
                 if (PermUtils.getPermLevel(network, user.getNick(), chan) >= 5) {
                     IRCUtils.sendMessage(user, network, chan, StringUtils.join(args, " ").replace("\n", " "), IRCUtils.getPrefix(args[0]));
                 } else {
-                    IRCUtils.sendError(user, "Permission Denied");
+                    ErrorUtils.sendError(user, "Permission Denied");
                 }
             }
         }

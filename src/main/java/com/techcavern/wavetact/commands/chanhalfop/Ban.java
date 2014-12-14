@@ -2,7 +2,8 @@ package com.techcavern.wavetact.commands.chanhalfop;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ChanHOPCMD;
-import com.techcavern.wavetact.utils.GeneralRegistry;
+import com.techcavern.wavetact.utils.ErrorUtils;
+import com.techcavern.wavetact.utils.Constants;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.databaseUtils.BanTimeUtils;
@@ -66,7 +67,7 @@ public class Ban extends GenericCommand {
                     BanTimeUtils.saveBanTimes();
                 }
             } else {
-                IRCUtils.sendError(user, "Ban does not exist!");
+                ErrorUtils.sendError(user, "Ban does not exist!");
             }
         } else {
             if (BanTimeUtils.getBanTime(hostmask) == null) {
@@ -74,17 +75,17 @@ public class Ban extends GenericCommand {
                 if (args.length == 2) {
                     ban(hostmask, channel, network);
                     UTime utimeObject = new UTime(hostmask, network.getServerInfo().getNetwork(), "b", channel.getName(), GeneralUtils.getMilliSeconds(args[1]), System.currentTimeMillis());
-                    GeneralRegistry.BanTimes.add(utimeObject);
+                    Constants.BanTimes.add(utimeObject);
                     BanTimeUtils.saveBanTimes();
 
                 } else if (args.length < 2) {
                     ban(hostmask, channel, network);
                     UTime utimeObject = new UTime(hostmask, network.getServerInfo().getNetwork(), "b", channel.getName(), GeneralUtils.getMilliSeconds("24h"), System.currentTimeMillis());
-                    GeneralRegistry.BanTimes.add(utimeObject);
+                    Constants.BanTimes.add(utimeObject);
                     BanTimeUtils.saveBanTimes();
                 }
             } else {
-                IRCUtils.sendError(user, "Ban already exists!");
+                ErrorUtils.sendError(user, "Ban already exists!");
             }
         }
     }

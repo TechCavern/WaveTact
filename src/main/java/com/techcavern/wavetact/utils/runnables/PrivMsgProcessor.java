@@ -1,9 +1,6 @@
 package com.techcavern.wavetact.utils.runnables;
 
-import com.techcavern.wavetact.utils.GeneralRegistry;
-import com.techcavern.wavetact.utils.GetUtils;
-import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.PermUtils;
+import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -34,13 +31,13 @@ public class PrivMsgProcessor {
                                 try {
                                     Command.onCommand(event.getUser(), event.getBot(), prefix + channel.getName(), channel, true, userPermLevel, ArrayUtils.remove(message, 0));
                                 } catch (Exception e) {
-                                    IRCUtils.sendError(event.getUser(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")");
+                                    ErrorUtils.sendError(event.getUser(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")");
                                 }
                             } else {
-                                IRCUtils.sendError(event.getUser(), "Permission Denied");
+                                ErrorUtils.sendError(event.getUser(), "Permission Denied");
                             }
                         } else {
-                            IRCUtils.sendError(event.getUser(), "Please specify channel as argument #1 in front of all the other arguments");
+                            ErrorUtils.sendError(event.getUser(), "Please specify channel as argument #1 in front of all the other arguments");
                         }
                     } else {
                         int userPermLevel = PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), null);
@@ -48,22 +45,22 @@ public class PrivMsgProcessor {
                             try {
                                 Command.onCommand(event.getUser(), event.getBot(), null, null, true, 5, ArrayUtils.remove(message, 0));
                             } catch (Exception e) {
-                                IRCUtils.sendError(event.getUser(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")");
+                                ErrorUtils.sendError(event.getUser(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")");
                             }
                         } else {
                             if (userPermLevel >= Command.getPermLevel()) {
                                 try {
                                     Command.onCommand(event.getUser(), event.getBot(), null, null, true, 5, ArrayUtils.remove(message, 0));
                                 } catch (Exception e) {
-                                    IRCUtils.sendError(event.getUser(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")");
+                                    ErrorUtils.sendError(event.getUser(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")");
                                 }
                             } else {
-                                IRCUtils.sendError(event.getUser(), "Permission Denied");
+                                ErrorUtils.sendError(event.getUser(), "Permission Denied");
                             }
                         }
                     }
                 }
-                GeneralRegistry.threadPool.execute(new process());
+                Constants.threadPool.execute(new process());
             }
 
         }

@@ -1,7 +1,6 @@
 package com.techcavern.wavetact.utils.configurationUtils;
 
-import com.sun.org.apache.bcel.internal.classfile.Unknown;
-import com.techcavern.wavetact.utils.GeneralRegistry;
+import com.techcavern.wavetact.utils.Constants;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.eventListeners.*;
 import com.techcavern.wavetact.utils.objects.NetProperty;
@@ -30,13 +29,13 @@ public class NetworkUtils {
                 name = f.getName();
                 name = name.substring(0, f.getName().lastIndexOf('.'));
                 config = new com.techcavern.wavetact.utils.fileUtils.Configuration(f);
-                GeneralRegistry.configs.put(name, config);
+                Constants.configs.put(name, config);
             }
         }
         PircBotX network;
         LinkedList<String> chans = new LinkedList<>();
         String nsPass;
-        for (com.techcavern.wavetact.utils.fileUtils.Configuration c : GeneralRegistry.configs.values()) {
+        for (com.techcavern.wavetact.utils.fileUtils.Configuration c : Constants.configs.values()) {
             chans.clear();
             Collections.addAll(chans, c.getString("channels").split(", "));
             if (c.getString("nickserv").equalsIgnoreCase("False")) {
@@ -51,33 +50,32 @@ public class NetworkUtils {
                 bindhost = c.getString("bindhost");
             }
             network = createBot(nsPass, chans, c.getString("nick"), c.getString("server"), c.getInteger("port"), bindhost, c.getString("name"));
-            GeneralRegistry.WaveTact.addBot(network);
-            GeneralRegistry.CommandChars.add(new NetProperty(c.getString("prefix"), network));
+            Constants.WaveTact.addBot(network);
+            Constants.CommandChars.add(new NetProperty(c.getString("prefix"), network));
             String authtype = c.getString("authtype").toLowerCase();
             if (authtype.startsWith("n")) {
-                GeneralRegistry.AuthType.add(new NetProperty("nickserv", network));
+                Constants.AuthType.add(new NetProperty("nickserv", network));
             } else if (authtype.startsWith("a")) {
-                GeneralRegistry.AuthType.add(new NetProperty("account", network));
+                Constants.AuthType.add(new NetProperty("account", network));
             } else {
-                GeneralRegistry.AuthType.add(new NetProperty("nick", network));
+                Constants.AuthType.add(new NetProperty("nick", network));
             }
-            GeneralRegistry.NetworkName.add(new NetProperty(c.getString("name"), network));
-            GeneralRegistry.NetAdminAccess.add(new NetProperty(c.getString("netadminaccess"), network));
+            Constants.NetworkName.add(new NetProperty(c.getString("name"), network));
+            Constants.NetAdminAccess.add(new NetProperty(c.getString("netadminaccess"), network));
         }
-        GeneralRegistry.configs.clear();
     }
 
     public static void registerDevServer() {
         //      PircBotX Dev = createBot(null, Arrays.asList(GeneralUtils.toArray("#techcavern #testing")), "WaveTactDev", "irc.synirc.net");
         PircBotX Dev2 = createBot(null, Arrays.asList(GeneralUtils.toArray("")), "WaveTactDev", "irc.esper.net", 6667, null, "Esper");
         //      GeneralRegistry.WaveTact.addBot(Dev);
-        GeneralRegistry.WaveTact.addBot(Dev2);
-        GeneralRegistry.Controllers.add("JZTech101");
+        Constants.WaveTact.addBot(Dev2);
+        Constants.Controllers.add("JZTech101");
         //      GeneralRegistry.CommandChars.add(new NetProperty("@", Dev));
-        GeneralRegistry.CommandChars.add(new NetProperty("@", Dev2));
-        GeneralRegistry.AuthType.add(new NetProperty("nickserv", Dev2));
-        GeneralRegistry.NetworkName.add(new NetProperty("dev2", Dev2));
-        GeneralRegistry.NetAdminAccess.add(new NetProperty("True", Dev2));
+        Constants.CommandChars.add(new NetProperty("@", Dev2));
+        Constants.AuthType.add(new NetProperty("nickserv", Dev2));
+        Constants.NetworkName.add(new NetProperty("dev2", Dev2));
+        Constants.NetAdminAccess.add(new NetProperty("True", Dev2));
         //     GeneralRegistry.NetworkName.add(new NetProperty("dev1", Dev));
     }
 

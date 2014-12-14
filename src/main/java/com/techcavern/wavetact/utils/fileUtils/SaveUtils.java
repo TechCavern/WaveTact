@@ -5,10 +5,7 @@
  */
 package com.techcavern.wavetact.utils.fileUtils;
 
-/**
- *
- * @author jztech101
- */
+
 
 import java.io.File;
 import java.io.FileWriter;

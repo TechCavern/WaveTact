@@ -1,9 +1,6 @@
 package com.techcavern.wavetact.utils.runnables;
 
-import com.techcavern.wavetact.utils.GeneralRegistry;
-import com.techcavern.wavetact.utils.GetUtils;
-import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.PermUtils;
+import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -25,15 +22,15 @@ public class ChanMsgProcessor {
                         try {
                             Command.onCommand(event.getUser(), event.getBot(), IRCUtils.getPrefix(event.getChannelSource()), event.getChannel(), false, userPermLevel, message);
                         } catch (Exception e) {
-                            IRCUtils.sendError(event.getUser(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")");
+                            ErrorUtils.sendError(event.getUser(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")");
                         }
                     } else {
-                        IRCUtils.sendError(event.getUser(), "Permission Denied");
+                        ErrorUtils.sendError(event.getUser(), "Permission Denied");
                     }
                 }
             }
         }
-        GeneralRegistry.threadPool.execute(new process());
+        Constants.threadPool.execute(new process());
     }
 
 }

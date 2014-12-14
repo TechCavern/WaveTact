@@ -2,7 +2,7 @@ package com.techcavern.wavetact.commands.utils;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
-import com.techcavern.wavetact.utils.GeneralRegistry;
+import com.techcavern.wavetact.utils.Constants;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
@@ -28,17 +28,17 @@ public class Networks extends GenericCommand {
         int netcount = 0;
         List<NetProperty> bufferlist = new ArrayList<>();
         if (args[0].equalsIgnoreCase("connected")) {
-            for (NetProperty netprop : GeneralRegistry.NetworkName) {
+            for (NetProperty netprop : Constants.NetworkName) {
                 if (netprop.getBot().getState().equals(PircBotX.State.CONNECTED))
                     bufferlist.add(netprop);
             }
         } else if (args[0].equalsIgnoreCase("disconnected")) {
-            for (NetProperty netprop : GeneralRegistry.NetworkName) {
+            for (NetProperty netprop : Constants.NetworkName) {
                 if (netprop.getBot().getState().equals(PircBotX.State.DISCONNECTED))
                     bufferlist.add(netprop);
             }
         } else {
-            for (NetProperty netprop : GeneralRegistry.NetworkName) {
+            for (NetProperty netprop : Constants.NetworkName) {
                 bufferlist.add(netprop);
             }
         }

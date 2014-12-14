@@ -2,7 +2,8 @@ package com.techcavern.wavetact.commands.utils;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
-import com.techcavern.wavetact.utils.GeneralRegistry;
+import com.techcavern.wavetact.utils.ErrorUtils;
+import com.techcavern.wavetact.utils.Constants;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
@@ -27,8 +28,8 @@ public class Define extends GenericCommand {
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        if (GeneralRegistry.wordnikapikey == null) {
-            IRCUtils.sendError(user, "Wordnik API key is null - Contact Bot Controller to fix");
+        if (Constants.wordnikapikey == null) {
+            ErrorUtils.sendError(user, "Wordnik API key is null - Contact Bot Controller to fix");
         }
         int ArrayIndex = 0;
         if (GeneralUtils.isInteger(args[0])) {
@@ -36,7 +37,7 @@ public class Define extends GenericCommand {
             args = ArrayUtils.remove(args, 0);
         }
         WordApi api = new WordApi();
-        api.getInvoker().addDefaultHeader("api_key", GeneralRegistry.wordnikapikey);
+        api.getInvoker().addDefaultHeader("api_key", Constants.wordnikapikey);
         List<Definition> Defs = api.getDefinitions(args[0], null, null, null, null, null, null);
         if (Defs.size() > 0) {
             if (Defs.size() - 1 >= ArrayIndex) {
@@ -49,10 +50,10 @@ public class Define extends GenericCommand {
                 }
             } else {
                 ArrayIndex = ArrayIndex + 1;
-                IRCUtils.sendError(user, "Def #" + ArrayIndex + " does not exist");
+                ErrorUtils.sendError(user, "Def #" + ArrayIndex + " does not exist");
             }
         } else {
-            IRCUtils.sendError(user, "Not Defined");
+            ErrorUtils.sendError(user, "Not Defined");
         }
 
     }

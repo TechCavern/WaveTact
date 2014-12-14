@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
+import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
@@ -63,7 +64,7 @@ public class MCMods extends GenericCommand {
             }
         }
         if (total == 0) {
-            IRCUtils.sendError(user, "No Mods Found");
+            ErrorUtils.sendError(user, "No Mods Found");
         }
     }
 }

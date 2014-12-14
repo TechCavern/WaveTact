@@ -22,7 +22,7 @@ public class Authenticate extends GenericCommand {
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (!PermUtils.checkIfAccountEnabled(network)) {
-            IRCUtils.sendError(user, "This network is set to " + GetUtils.getAuthType(network) + " Authentication");
+            ErrorUtils.sendError(user, "This network is set to " + GetUtils.getAuthType(network) + " Authentication");
             return;
         }
         String userString;
@@ -35,15 +35,15 @@ public class Authenticate extends GenericCommand {
             password = args[1];
         }
         if (PermUtils.authUser(network, user.getNick()) != null) {
-            IRCUtils.sendError(user, "Error, you are already identified");
+            ErrorUtils.sendError(user, "Error, you are already identified");
 
         } else {
             Account acc = AccountUtils.getAccount(userString);
-            if (acc != null && GeneralRegistry.encryptor.checkPassword(password, acc.getAuthPassword())) {
-                GeneralRegistry.AuthedUsers.add(new AuthedUser(network.getServerInfo().getNetwork(), userString, IRCUtils.getHostmask(network, user.getNick(), false)));
+            if (acc != null && Constants.encryptor.checkPassword(password, acc.getAuthPassword())) {
+                Constants.AuthedUsers.add(new AuthedUser(network.getServerInfo().getNetwork(), userString, IRCUtils.getHostmask(network, user.getNick(), false)));
                 IRCUtils.sendMessage(user, network, channel, "Identification Successful", prefix);
             } else {
-                IRCUtils.sendError(user, "Unable to identify (Incorrect User/Password Combination)");
+                ErrorUtils.sendError(user, "Unable to identify (Incorrect User/Password Combination)");
             }
         }
     }
