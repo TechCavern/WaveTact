@@ -55,7 +55,7 @@ public class IRCUtils {
 
     public static void sendAction(User userObject, PircBotX networkObject, Channel channelObject, String message, String prefix) {
         if (channelObject != null) {
-            networkObject.sendRaw().rawLine("PRIVMSG " + prefix + channelObject.getName() + " :" + (char) 1 + message + (char) 1);
+            networkObject.sendRaw().rawLine("PRIVMSG " + prefix + channelObject.getName() + " :\u0001ACTION " + message + "\u0001");
         } else {
             userObject.send().action(message);
         }
@@ -127,3 +127,4 @@ public class IRCUtils {
     }
 
 }
+
