@@ -19,6 +19,7 @@ public class AddNetwork extends CommandLine {
     public void doAction(String[] args) {
         boolean loop = true;
         while (loop) {
+            new File("servers/").mkdir();
             Scanner input = new Scanner(System.in);
             System.out.print("Server name: ");
             String name = input.nextLine();

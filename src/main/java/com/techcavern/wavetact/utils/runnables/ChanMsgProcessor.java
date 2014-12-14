@@ -15,7 +15,7 @@ public class ChanMsgProcessor {
                 String[] message = StringUtils.split(Colors.removeFormattingAndColors(event.getMessage()), " ");
                 String command = message[0].toLowerCase();
                 message = ArrayUtils.remove(message, 0);
-                GenericCommand Command = GetUtils.getCommand(command.replaceFirst(GetUtils.getCommandChar(event.getBot()), ""));
+                GenericCommand Command = GetUtils.getCommand(command.replace(GetUtils.getCommandChar(event.getBot()), ""));
                 if (Command != null && command.startsWith(GetUtils.getCommandChar(event.getBot()))) {
                     int userPermLevel = PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel());
                     if (userPermLevel >= Command.getPermLevel()) {
@@ -23,6 +23,7 @@ public class ChanMsgProcessor {
                             Command.onCommand(event.getUser(), event.getBot(), IRCUtils.getPrefix(event.getChannelSource()), event.getChannel(), false, userPermLevel, message);
                         } catch (Exception e) {
                             ErrorUtils.sendError(event.getUser(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")");
+                            e.printStackTrace();
                         }
                     } else {
                         ErrorUtils.sendError(event.getUser(), "Permission Denied");

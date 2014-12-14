@@ -22,8 +22,8 @@ public class SimpleActionUtils {
                 List<LinkedTreeMap> actions = file.read(List.class);
                 Constants.SimpleActions.clear();
                 Constants.SimpleActions.addAll(actions.stream().map(act -> new SimpleAction(
-                        ((ArrayList<String>) act.get("comid")).get(0),
-                        ((Double) act.get("PermLevel")).intValue(),
+                        ((ArrayList<String>) act.get("comID")).get(0),
+                        ((Double) act.get("permLevel")).intValue(),
                         (String) act.get("action"),
                         (Boolean) act.get("locked"))).collect(Collectors.toList()));
             } catch (FileNotFoundException e) {

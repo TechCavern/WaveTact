@@ -18,7 +18,7 @@ public class PrivMsgProcessor {
                 String m = message[0].toLowerCase();
                 GenericCommand Command = GetUtils.getCommand(m);
                 if (Command == null) {
-                    Command = GetUtils.getCommand(m.replaceFirst(GetUtils.getCommandChar(event.getBot()), ""));
+                    Command = GetUtils.getCommand(m.replace(GetUtils.getCommandChar(event.getBot()), ""));
                 }
                 message = ArrayUtils.remove(message, 0);
                 if (Command != null) {
@@ -53,6 +53,7 @@ public class PrivMsgProcessor {
                                     Command.onCommand(event.getUser(), event.getBot(), null, null, true, 5, ArrayUtils.remove(message, 0));
                                 } catch (Exception e) {
                                     ErrorUtils.sendError(event.getUser(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")");
+                                    e.printStackTrace();
                                 }
                             } else {
                                 ErrorUtils.sendError(event.getUser(), "Permission Denied");

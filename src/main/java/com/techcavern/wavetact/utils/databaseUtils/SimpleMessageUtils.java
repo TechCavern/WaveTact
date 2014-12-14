@@ -23,8 +23,8 @@ public class SimpleMessageUtils {
                 Constants.SimpleMessages.clear();
 
                 Constants.SimpleMessages.addAll(messages.stream().map(msg -> new SimpleMessage(
-                        ((ArrayList<String>) msg.get("comid")).get(0),
-                        ((Double) msg.get("PermLevel")).intValue(),
+                        ((ArrayList<String>) msg.get("comID")).get(0),
+                        ((Double) msg.get("permLevel")).intValue(),
                         (String) msg.get("message"),
                         (Boolean) msg.get("locked"))).collect(Collectors.toList()));
             } catch (FileNotFoundException e) {

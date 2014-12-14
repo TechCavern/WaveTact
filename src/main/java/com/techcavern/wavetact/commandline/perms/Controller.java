@@ -18,9 +18,11 @@ public class Controller extends CommandLine {
         if (args[1].startsWith("-")) {
             Constants.Controllers.remove(args[1].replace("-", ""));
             ControllerUtils.saveControllers();
+            System.out.println("removed " + args[1]);
         } else {
             Constants.Controllers.add(args[1]);
             ControllerUtils.saveControllers();
+            System.out.println("added " + args[1]);
         }
         System.exit(0);
 

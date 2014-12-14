@@ -27,7 +27,7 @@ public class Quiet extends GenericCommand {
         String ircd;
         if (network.getServerInfo().getChannelModes().contains("q")) {
             ircd = "c";
-        } else if (network.getServerInfo().getExtBanPrefix().equalsIgnoreCase("~") && network.getServerInfo().getExtBanList() != null && network.getServerInfo().getExtBanList().contains("q")) {
+        } else if (network.getServerInfo().getExtBanPrefix() != null && network.getServerInfo().getExtBanPrefix().equalsIgnoreCase("~") && network.getServerInfo().getExtBanList() != null && network.getServerInfo().getExtBanList().contains("q")) {
             ircd = "u";
         } else if (network.getServerInfo().getExtBanList().contains("m") && network.getServerInfo().getExtBanPrefix() == null) {
             ircd = "i";
