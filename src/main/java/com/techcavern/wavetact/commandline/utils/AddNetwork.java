@@ -26,12 +26,16 @@ public class AddNetwork extends CommandLine {
             config.set("name", name);
             System.out.print("Server host: ");
             config.set("server", input.nextLine());
+            System.out.print("Server Port(Enter 6667 to use Default): ");
+            config.set("port", input.nextLine());
             System.out.print("Server nick: ");
             config.set("nick", input.nextLine());
             System.out.print("Channels(#chan1, #chan2): ");
             config.set("channels", input.nextLine());
-            System.out.print("Nickserv Pass(False to disable): ");
+            System.out.print("Nickserv Pass(Enter False to disable): ");
             config.set("nickserv", input.nextLine());
+            System.out.print("Bindhost(Enter None to use Default): ");
+            config.set("bindhost", input.nextLine());
             System.out.print("Command Prefix: ");
             config.set("prefix", input.nextLine());
             System.out.print("AuthType (nickserv/account): ");
