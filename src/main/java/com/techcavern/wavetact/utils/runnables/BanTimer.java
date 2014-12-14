@@ -3,8 +3,8 @@ package com.techcavern.wavetact.utils.runnables;
 import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.database.BanTimeUtils;
-import com.techcavern.wavetact.utils.database.QuietTimeUtils;
+import com.techcavern.wavetact.utils.databaseUtils.BanTimeUtils;
+import com.techcavern.wavetact.utils.databaseUtils.QuietTimeUtils;
 import com.techcavern.wavetact.utils.objects.UTime;
 import org.pircbotx.PircBotX;
 

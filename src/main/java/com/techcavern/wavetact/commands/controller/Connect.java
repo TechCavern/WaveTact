@@ -33,39 +33,39 @@ public class Connect extends GenericCommand {
     public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
         boolean reconnect = false;
         boolean disconnect = false;
-        if (args[0].startsWith("%")) {
-            reconnect = true;
+        if(args[0].startsWith("%")){
+            reconnect=true;
             args[0] = args[0].replaceFirst("\\%", "");
-        } else if (args[0].startsWith("-")) {
-            disconnect = true;
+        }else if(args[0].startsWith("-")){
+            disconnect=true;
             args[0] = args[0].replaceFirst("\\-", "");
         }
         PircBotX workingbot = GetUtils.getBotByNetworkName(args[0]);
-        if (workingbot == null) {
+        if(workingbot == null){
             IRCUtils.sendError(user, "Network does not exist");
             return;
         }
-        if (reconnect || disconnect) {
-            if (workingbot.getState().equals(PircBotX.State.DISCONNECTED)) {
-                IRCUtils.sendError(user, "Bot Currently Disconnected");
+        if(reconnect || disconnect){
+            if(workingbot.getState().equals(PircBotX.State.DISCONNECTED)){
+                IRCUtils.sendError(user, "Bot Currently Disonnected");
                 return;
-            } else {
+            }else{
                 workingbot.sendIRC().quitServer(GeneralUtils.buildMessage(1, args.length, args));
                 workingbot.stopBotReconnect();
             }
         }
-        if (disconnect) {
+        if(disconnect){
             return;
-        } else if (reconnect) {
-            do {
+        }else if(reconnect){
+            do{
                 TimeUnit.SECONDS.sleep(5);
-            } while (workingbot.getState().equals(PircBotX.State.CONNECTED));
+            }while(workingbot.getState().equals(PircBotX.State.CONNECTED));
         }
-        if (workingbot.getState().equals(PircBotX.State.CONNECTED)) {
-            IRCUtils.sendError(user, "Bot Currently Connected");
-        } else {
-            workingbot.startBot();
-        }
+            if(workingbot.getState().equals(PircBotX.State.CONNECTED)){
+                IRCUtils.sendError(user, "Bot Currently Connected");
+            }else{
+                workingbot.startBot();
+            }
 
     }
 }

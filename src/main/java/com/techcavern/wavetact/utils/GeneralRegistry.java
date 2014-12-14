@@ -1,6 +1,6 @@
 package com.techcavern.wavetact.utils;
 
-import com.techcavern.wavetact.utils.file.Configuration;
+import com.techcavern.wavetact.utils.fileUtils.Configuration;
 import com.techcavern.wavetact.utils.objects.*;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 import org.pircbotx.MultiBotManager;

@@ -2,14 +2,14 @@ package com.techcavern.wavetact.commandline.utils;
 
 import com.techcavern.wavetact.annot.CMDLine;
 import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.configuration.NetworkUtils;
+import com.techcavern.wavetact.utils.configurationUtils.NetworkUtils;
 import com.techcavern.wavetact.utils.objects.CommandLine;
 
 @CMDLine
 public class Start extends CommandLine {
 
     public Start() {
-        super(GeneralUtils.toArray("start"), "Start the bot", false);
+        super(GeneralUtils.toArray("start"), "starts the bot", false);
     }
 
     @Override
@@ -21,6 +21,7 @@ public class Start extends CommandLine {
             System.out.println("Running in production mode");
             NetworkUtils.registerNetworks();
         }
+
     }
 }
 

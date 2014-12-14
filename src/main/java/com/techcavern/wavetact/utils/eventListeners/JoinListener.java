@@ -1,8 +1,8 @@
-package com.techcavern.wavetact.utils.event;
+package com.techcavern.wavetact.utils.eventListeners;
 
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.PermUtils;
-import com.techcavern.wavetact.utils.database.PermChannelUtils;
+import com.techcavern.wavetact.utils.databaseUtils.PermChannelUtils;
 import com.techcavern.wavetact.utils.objects.PermChannel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.ListenerAdapter;

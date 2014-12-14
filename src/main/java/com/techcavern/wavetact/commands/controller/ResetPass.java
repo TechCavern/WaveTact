@@ -3,7 +3,7 @@ package com.techcavern.wavetact.commands.controller;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.utils.*;
-import com.techcavern.wavetact.utils.database.AccountUtils;
+import com.techcavern.wavetact.utils.databaseUtils.AccountUtils;
 import com.techcavern.wavetact.utils.objects.Account;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.pircbotx.Channel;

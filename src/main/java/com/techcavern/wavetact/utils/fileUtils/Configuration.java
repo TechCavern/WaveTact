@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.utils.file;
+package com.techcavern.wavetact.utils.fileUtils;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -15,11 +15,11 @@ public class Configuration {
     private final Map<String, String> pairs;
     private boolean lock;
 
-    public Configuration(String file) throws ConfigurationException {
+    public Configuration(String file) {
         this(new File(file));
     }
 
-    public Configuration(File file) throws ConfigurationException {
+    public Configuration(File file) {
         this.file = file;
         pairs = new HashMap<>();
         try {
@@ -30,7 +30,7 @@ public class Configuration {
         load();
     }
 
-    public void load() throws ConfigurationException {
+    public void load() {
         if (lock)
             return;
         pairs.clear();
@@ -38,19 +38,13 @@ public class Configuration {
         String[] split;
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));
-            int lineNum = 1;
             while ((line = reader.readLine()) != null) {
                 if (line.startsWith("#"))
                     continue;
                 if (StringUtils.countMatches(line, "=") != 1)
                     System.out.println("Problem parsing config file for " + file.getName());
                 split = line.split("=");
-                try {
-                    pairs.put(split[0], split[1]);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new ConfigurationException("Syntax error on line " + lineNum);
-                }
-                lineNum++;
+                pairs.put(split[0], split[1]);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -80,8 +74,6 @@ public class Configuration {
     }
 
     public void set(String name, String value) {
-        if (lock)
-            return;
         if (pairs.containsKey(name))
             pairs.remove(name);
         pairs.put(name, value);
@@ -107,15 +99,5 @@ public class Configuration {
 
     public int getInteger(String name) {
         return Integer.parseInt(getString(name));
-    }
-
-    public boolean exists(String name) {
-        return pairs.containsKey(name);
-    }
-
-    public class ConfigurationException extends Throwable {
-        public ConfigurationException(String message) {
-            super(message);
-        }
     }
 }

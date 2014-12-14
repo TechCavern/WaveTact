@@ -8,7 +8,7 @@ package com.techcavern.wavetact.commands.controller;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.utils.*;
-import com.techcavern.wavetact.utils.database.NetAdminUtils;
+import com.techcavern.wavetact.utils.databaseUtils.NetAdminUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.objects.NetworkAdmin;
 import org.pircbotx.Channel;
