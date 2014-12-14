@@ -21,7 +21,7 @@ public class SimpleAction extends GenericCommand {
     private boolean locked;
 
     public SimpleAction(String inputString, int permLevel, String action, boolean locked) {
-        super(GeneralUtils.toArray(inputString), permLevel, null, "A Basic Command that takes no Arguments");
+        super(GeneralUtils.toArray(inputString), permLevel, null, "A Basic Command that takes no Arguments", false);
         this.action = action;
         this.locked = locked;
 
@@ -29,19 +29,19 @@ public class SimpleAction extends GenericCommand {
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        String daction = this.action;
+        String actionmessage = this.action;
         String[] action = StringUtils.split(this.action, " ");
         int i = 0;
         for (String g : action) {
             if (g.startsWith("$") && !g.contains("*")) {
-                daction = daction.replace(g, args[Integer.parseInt(g.replace("$", "")) - 1]);
+                actionmessage = actionmessage.replace(g, args[Integer.parseInt(g.replace("$", "")) - 1]);
                 if (Integer.parseInt(g.replace("$", "")) > i) {
                     i++;
                 }
             }
         }
-        daction = daction.replace("$*", GeneralUtils.buildMessage(i, args.length, args));
-        IRCUtils.SendAction(user, channel, daction, isPrivate);
+        actionmessage = actionmessage.replace("$*", GeneralUtils.buildMessage(i, args.length, args));
+        IRCUtils.sendAction(user,network, channel, actionmessage, prefix);
     }
 
     @Override

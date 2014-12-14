@@ -23,30 +23,30 @@ public class SimpleMessage extends GenericCommand {
 
 
     public SimpleMessage(String inputString, int permLevel, String message, boolean locked) {
-        super(GeneralUtils.toArray(inputString), permLevel, null, "A Basic Command");
+        super(GeneralUtils.toArray(inputString), permLevel, null, "A Basic Command", false);
         this.message = message;
         this.locked = locked;
     }
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        String dresponse = this.message;
+        String actionmessage = this.message;
         String[] message = StringUtils.split(this.message, " ");
         int i = 0;
         for (String g : message) {
             if (g.startsWith("$") && !g.contains("*")) {
-                dresponse = dresponse.replace(g, args[Integer.parseInt(g.replace("$", "")) - 1]);
+                actionmessage = actionmessage.replace(g, args[Integer.parseInt(g.replace("$", "")) - 1]);
                 if (Integer.parseInt(g.replace("$", "")) > i) {
                     i++;
                 }
             }
         }
-        dresponse = dresponse.replace("$*", GeneralUtils.buildMessage(i, args.length, args));
-        String prefix = GetUtils.getCommandChar(Bot);
-        if (dresponse.startsWith(prefix)) {
-            dresponse = dresponse.replace(prefix, "");
+        actionmessage = actionmessage.replace("$*", GeneralUtils.buildMessage(i, args.length, args));
+        String responseprefix = GetUtils.getCommandChar(network);
+        if (actionmessage.startsWith(responseprefix)) {
+            actionmessage = actionmessage.replace(responseprefix, "");
         }
-        IRCUtils.sendMessage(user, channel, dresponse, isPrivate);
+        IRCUtils.sendMessage(user,network, channel, actionmessage, prefix);
     }
 
 

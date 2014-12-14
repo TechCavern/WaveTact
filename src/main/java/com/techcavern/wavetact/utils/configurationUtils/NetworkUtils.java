@@ -50,7 +50,7 @@ public class NetworkUtils {
                 bindhost = c.getString("bindhost");
             }
             network = createBot(nsPass, chans, c.getString("nick"), c.getString("server"), c.getInteger("port"), bindhost, c.getString("name"));
-            Constants.WaveTact.addBot(network);
+            Constants.WaveTact.addNetwork(network);
             Constants.CommandChars.add(new NetProperty(c.getString("prefix"), network));
             String authtype = c.getString("authtype").toLowerCase();
             if (authtype.startsWith("n")) {
