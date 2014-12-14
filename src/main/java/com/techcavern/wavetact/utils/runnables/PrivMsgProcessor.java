@@ -15,10 +15,10 @@ public class PrivMsgProcessor {
         class process implements Runnable {
             public void run() {
                 String[] message = StringUtils.split(Colors.removeFormattingAndColors(event.getMessage()), " ");
-                String m = message[0].toLowerCase();
-                GenericCommand Command = GetUtils.getCommand(m);
+                String command = message[0].toLowerCase();
+                GenericCommand Command = GetUtils.getCommand(command);
                 if (Command == null) {
-                    Command = GetUtils.getCommand(m.replace(GetUtils.getCommandChar(event.getBot()), ""));
+                    Command = GetUtils.getCommand(StringUtils.replaceOnce(command,GetUtils.getCommandChar(event.getBot()), ""));
                 }
                 message = ArrayUtils.remove(message, 0);
                 if (Command != null) {

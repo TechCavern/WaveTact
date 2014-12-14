@@ -15,7 +15,7 @@ public class ChanMsgProcessor {
                 String[] message = StringUtils.split(Colors.removeFormattingAndColors(event.getMessage()), " ");
                 String command = message[0].toLowerCase();
                 message = ArrayUtils.remove(message, 0);
-                GenericCommand Command = GetUtils.getCommand(command.replace(GetUtils.getCommandChar(event.getBot()), ""));
+                GenericCommand Command = GetUtils.getCommand(StringUtils.replaceOnce(command,GetUtils.getCommandChar(event.getBot()), ""));
                 if (Command != null && command.startsWith(GetUtils.getCommandChar(event.getBot()))) {
                     int userPermLevel = PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel());
                     if (userPermLevel >= Command.getPermLevel()) {

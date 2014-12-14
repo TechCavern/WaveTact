@@ -81,6 +81,15 @@ public class GetUtils {
         return null;
     }
 
+    public static String getNetworkNameByBot(PircBotX network) {
+        for (NetProperty d : Constants.NetworkName) {
+            if (d.getBot().equals(network)) {
+                return d.getProperty();
+            }
+        }
+        return null;
+    }
+
     public static String getAuthType(PircBotX networkObject) {
         for (NetProperty d : Constants.AuthType) {
             if (d.getBot() == networkObject) {

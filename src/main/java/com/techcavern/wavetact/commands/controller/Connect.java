@@ -26,19 +26,19 @@ import java.util.concurrent.TimeUnit;
 public class Connect extends GenericCommand {
 
     public Connect() {
-        super(GeneralUtils.toArray("connect"), 9001, "connect (%)(-)[networkname] (Reason)", "connects, reconnects or disconnects a network from a predefined network", false);
+        super(GeneralUtils.toArray("connect"), 9001, "connect (+)(-)[networkname] (Reason)", "connects, reconnects or disconnects a network from a predefined network", false);
     }
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         boolean reconnect = false;
         boolean disconnect = false;
-        if (args[0].startsWith("%")) {
+        if (args[0].startsWith("\\+")) {
             reconnect = true;
-            args[0] = args[0].replaceFirst("\\%", "");
+            args[0] = args[0].replaceFirst("\\+", "");
         } else if (args[0].startsWith("-")) {
             disconnect = true;
-            args[0] = args[0].replaceFirst("\\-", "");
+            args[0] = args[0].replaceFirst("-", "");
         }
         PircBotX workingnetwork = GetUtils.getBotByNetworkName(args[0]);
         if (workingnetwork == null) {

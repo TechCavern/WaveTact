@@ -19,7 +19,7 @@ public class Constants {
     public static final Gson GSON = new GsonBuilder().create();
     public static final Gson GSON_PRETTY_PRINT = new GsonBuilder().setPrettyPrinting().create();
     public static String LastLeftChannel = "";
-    public static HashMap<String, String> QuietBans = new HashMap<>();
+    public static final HashMap<String, String> QuietBans = new HashMap<>();
     public static final List<PermChannel> PermChannels = new ArrayList<>();
     public static final List<UTime> Topic = new ArrayList<>();
     public static final ForkJoinPool threadPool = new ForkJoinPool(100);
