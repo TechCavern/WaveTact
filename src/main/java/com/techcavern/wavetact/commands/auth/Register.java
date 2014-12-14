@@ -16,13 +16,13 @@ import org.pircbotx.User;
 public class Register extends GenericCommand {
 
     public Register() {
-        super(GeneralUtils.toArray("register reg"), 0, "register (username) [password]", "registers a user");
+        super(GeneralUtils.toArray("register reg"), 0, "register (username) [password]", "registers a user", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        if (!PermUtils.checkIfAccountEnabled(Bot)) {
-            IRCUtils.sendError(user, "This network is set to " + GetUtils.getAuthType(Bot) + " Authentication");
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+        if (!PermUtils.checkIfAccountEnabled(network)) {
+            IRCUtils.sendError(user, "This network is set to " + GetUtils.getAuthType(network) + " Authentication");
             return;
         }
         String userString;
@@ -34,14 +34,14 @@ public class Register extends GenericCommand {
             userString = args[0];
             password = args[1];
         }
-        if (AccountUtils.getAccount(userString) != null || PermUtils.authUser(Bot, user.getNick()) != null) {
+        if (AccountUtils.getAccount(userString) != null || PermUtils.authUser(network, user.getNick()) != null) {
             IRCUtils.sendError(user, "Error, you are already registered");
 
         } else {
             GeneralRegistry.Accounts.add(new Account(userString, GeneralRegistry.encryptor.encryptPassword(password)));
             AccountUtils.saveAccounts();
-            GeneralRegistry.AuthedUsers.add(new AuthedUser(Bot.getServerInfo().getNetwork(), userString, IRCUtils.getHostmask(Bot, user.getNick(), false)));
-            IRCUtils.sendMessage(user, channel, "You are now registered", isPrivate);
+            GeneralRegistry.AuthedUsers.add(new AuthedUser(network.getServerInfo().getNetwork(), userString, IRCUtils.getHostmask(network, user.getNick(), false)));
+            IRCUtils.sendMessage(user, network, channel, "You are now registered", prefix);
         }
     }
 }

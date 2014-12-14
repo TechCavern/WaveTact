@@ -14,21 +14,21 @@ import java.util.stream.Collectors;
 
 public class GetUtils {
 
-    public static User getUserByNick(PircBotX botObject, String Nick) {
+    public static User getUserByNick(PircBotX networkObject, String Nick) {
         try {
-            User userObject = botObject.getUserChannelDao().getUser(Nick);
+            User userObject = networkObject.getUserChannelDao().getUser(Nick);
             if (!userObject.getHostmask().isEmpty()) {
                 return userObject;
             } else {
                 return null;
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             return null;
         }
     }
 
-    public static Channel getChannelbyName(PircBotX botObject, String channelName) {
-        return botObject.getUserChannelDao().getChannel(channelName);
+    public static Channel getChannelbyName(PircBotX networkObject, String channelName) {
+        return networkObject.getUserChannelDao().getChannel(channelName);
 
     }
 
@@ -54,17 +54,18 @@ public class GetUtils {
 
     }
 
-    public static String getCommandChar(PircBotX botObject) {
+    public static String getCommandChar(PircBotX networkObject) {
         for (NetProperty d : GeneralRegistry.CommandChars) {
-            if (d.getBot() == botObject) {
+            if (d.getBot() == networkObject) {
                 return d.getProperty();
             }
         }
         return null;
     }
-    public static String getNetAdminAccess(PircBotX botObject) {
+
+    public static String getNetAdminAccess(PircBotX networkObject) {
         for (NetProperty d : GeneralRegistry.NetAdminAccess) {
-            if (d.getBot() == botObject) {
+            if (d.getBot() == networkObject) {
                 return d.getProperty();
             }
         }
@@ -80,9 +81,9 @@ public class GetUtils {
         return null;
     }
 
-    public static String getAuthType(PircBotX botObject) {
+    public static String getAuthType(PircBotX networkObject) {
         for (NetProperty d : GeneralRegistry.AuthType) {
-            if (d.getBot() == botObject) {
+            if (d.getBot() == networkObject) {
                 return d.getProperty();
             }
         }
@@ -134,10 +135,12 @@ public class GetUtils {
         }
         return null;
     }
-    public static List<String> getActionsList(int UserPermLevel){
+
+    public static List<String> getActionsList(int UserPermLevel) {
         return GeneralRegistry.SimpleActions.stream().filter(g -> g.getPermLevel() <= UserPermLevel).map(GenericCommand::getCommand).collect(Collectors.toList());
     }
-    public static List<String> getMessagesList(int UserPermLevel){
+
+    public static List<String> getMessagesList(int UserPermLevel) {
         return GeneralRegistry.SimpleMessages.stream().filter(g -> g.getPermLevel() <= UserPermLevel).map(GenericCommand::getCommand).collect(Collectors.toList());
     }
 

@@ -24,12 +24,12 @@ import org.pircbotx.User;
 public class NetAdmin extends GenericCommand {
 
     public NetAdmin() {
-        super(GeneralUtils.toArray("networkadministrator netadmin"), 9001, "networkadministrator (-)[user]", "adds a network admin to the bot");
+        super(GeneralUtils.toArray("networkadministrator netadmin"), 9001, "networkadministrator (-)[user]", "adds a network admin to the network", false);
 
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
 
         String account;
         if (args[0].startsWith("-")) {
@@ -37,18 +37,18 @@ public class NetAdmin extends GenericCommand {
         } else {
             account = args[0];
         }
-        String auth = PermUtils.authUser(Bot, account);
+        String auth = PermUtils.authUser(network, account);
         if (auth != null) {
             account = auth;
         }
         if (account != null) {
             if (args[0].startsWith("-")) {
-                if (GetUtils.getNetworkAdminByNick(account, Bot.getServerInfo().getNetwork()) != null) {
-                    GeneralRegistry.NetworkAdmins.remove(GetUtils.getNetworkAdminByNick(account, Bot.getServerInfo().getNetwork()));
+                if (GetUtils.getNetworkAdminByNick(account, network.getServerInfo().getNetwork()) != null) {
+                    GeneralRegistry.NetworkAdmins.remove(GetUtils.getNetworkAdminByNick(account, network.getServerInfo().getNetwork()));
                     NetAdminUtils.saveNetworkAdmins();
-                    IRCUtils.sendMessage(user, channel, "Global Removed", isPrivate);
+                    IRCUtils.sendMessage(user, network, channel, "Network Admin removed", prefix);
                 } else {
-                    IRCUtils.sendError(user, "User does not existing in NetworkAdmins");
+                    IRCUtils.sendError(user, "User does not exist in Network Admin List");
                 }
             } else if (args[0].equalsIgnoreCase("list")) {
                 String netAdmins = "";
@@ -60,23 +60,21 @@ public class NetAdmin extends GenericCommand {
                     }
                 }
                 if (!netAdmins.isEmpty()) {
-                    IRCUtils.sendMessage(user, channel, netAdmins, isPrivate);
+                    IRCUtils.sendMessage(user, network, channel, netAdmins, prefix);
                 } else {
-                    IRCUtils.sendError(user, "No NetworkAdmins Exist");
+                    IRCUtils.sendError(user, "No Network Admins Exist");
                 }
             } else {
-                if (GetUtils.getNetworkAdminByNick(account, Bot.getServerInfo().getNetwork()) != null) {
+                if (GetUtils.getNetworkAdminByNick(account, network.getServerInfo().getNetwork()) != null) {
                     IRCUtils.sendError(user, "User is already in database");
                 } else {
-                    GeneralRegistry.NetworkAdmins.add(new NetworkAdmin(Bot.getServerInfo().getNetwork(), account));
+                    GeneralRegistry.NetworkAdmins.add(new NetworkAdmin(network.getServerInfo().getNetwork(), account));
                     NetAdminUtils.saveNetworkAdmins();
-                    IRCUtils.sendMessage(user, channel, "Global Added", isPrivate);
+                    IRCUtils.sendMessage(user, network, channel, "Network Admin added", prefix);
                 }
             }
         } else {
-
-
-            IRCUtils.sendError(user, "User is not registered with Nickserv or not loggedin");
+            IRCUtils.sendError(user, "User is not registered with Nickserv or not logged in");
         }
     }
 }

@@ -15,20 +15,20 @@ import org.pircbotx.User;
 public class ResetPass extends GenericCommand {
 
     public ResetPass() {
-        super(GeneralUtils.toArray("resetpassword resetpass"), 9001, "setpass [user] [newpass]", "resets Password");
+        super(GeneralUtils.toArray("resetpassword resetpass"), 9001, "setpass [user] [newpass]", "resets Password", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        if (!PermUtils.checkIfAccountEnabled(Bot)) {
-            IRCUtils.sendError(user, "This network is set to " + GetUtils.getAuthType(Bot) + " Authentication");
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+        if (!PermUtils.checkIfAccountEnabled(network)) {
+            IRCUtils.sendError(user, "This network is set to " + GetUtils.getAuthType(network) + " Authentication");
             return;
         }
         Account acc = AccountUtils.getAccount(args[0]);
         if (acc != null) {
             acc.setAuthPassword(GeneralRegistry.encryptor.encryptPassword(args[1]));
             AccountUtils.saveAccounts();
-            IRCUtils.sendMessage(user, channel, "Password Changed Successfully", isPrivate);
+            IRCUtils.sendMessage(user, network, channel, "Password Changed Successfully", prefix);
         } else {
             IRCUtils.sendError(user, "User does not exist");
         }

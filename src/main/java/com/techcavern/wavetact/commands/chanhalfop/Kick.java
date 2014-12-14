@@ -24,26 +24,26 @@ import org.pircbotx.UserLevel;
 public class Kick extends GenericCommand {
 
     public Kick() {
-        super(GeneralUtils.toArray("kick"), 6, "kick [user] (message)", "kicks a user with specified message or none");
+        super(GeneralUtils.toArray("kick"), 7, "kick [user] (message)", "kicks a user with specified message or none", true);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         String message = "Kicked by " + user.getNick();
         if (args.length > 1) {
             message = "Kicked by " + user.getNick() + ": " + GeneralUtils.buildMessage(1, args.length, args);
         }
-        if (channel.getUserLevels(Bot.getUserBot()).contains(UserLevel.HALFOP) && !channel.isOwner(GetUtils.getUserByNick(Bot, args[0])) && !channel.isSuperOp(GetUtils.getUserByNick(Bot, args[0]))) {
-            if (channel.isHalfOp(GetUtils.getUserByNick(Bot, args[0])) || channel.isOp(GetUtils.getUserByNick(Bot, args[0]))) {
+        if (channel.getUserLevels(network.getUserBot()).contains(UserLevel.HALFOP) && !channel.isOwner(GetUtils.getUserByNick(network, args[0])) && !channel.isSuperOp(GetUtils.getUserByNick(network, args[0]))) {
+            if (channel.isHalfOp(GetUtils.getUserByNick(network, args[0])) || channel.isOp(GetUtils.getUserByNick(network, args[0]))) {
                 IRCUtils.sendError(user, "Error: I must be at least opped to kick someone that is opped or halfopped");
             } else {
-                channel.send().kick(GetUtils.getUserByNick(Bot, args[0]), message);
+                channel.send().kick(GetUtils.getUserByNick(network, args[0]), message);
             }
-        } else if (channel.getUserLevels(Bot.getUserBot()).contains(UserLevel.OP) && !channel.isOwner(GetUtils.getUserByNick(Bot, args[0])) && !channel.isSuperOp(GetUtils.getUserByNick(Bot, args[0]))) {
-            channel.send().kick(GetUtils.getUserByNick(Bot, args[0]), message);
+        } else if (channel.getUserLevels(network.getUserBot()).contains(UserLevel.OP) && !channel.isOwner(GetUtils.getUserByNick(network, args[0])) && !channel.isSuperOp(GetUtils.getUserByNick(network, args[0]))) {
+            channel.send().kick(GetUtils.getUserByNick(network, args[0]), message);
 
-        } else if (channel.getUserLevels(Bot.getUserBot()).contains(UserLevel.OWNER)) {
-            channel.send().kick(GetUtils.getUserByNick(Bot, args[0]), message);
+        } else if (channel.getUserLevels(network.getUserBot()).contains(UserLevel.OWNER)) {
+            channel.send().kick(GetUtils.getUserByNick(network, args[0]), message);
 
         } else {
             IRCUtils.sendError(user, "Error: I must be ownered in the channel to kick someone that is protected or ownered");

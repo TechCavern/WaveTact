@@ -17,17 +17,17 @@ import org.pircbotx.User;
 public class Logout extends GenericCommand {
 
     public Logout() {
-        super(GeneralUtils.toArray("logout"), 0, "logout", "logs out a user");
+        super(GeneralUtils.toArray("logout"), 0, "logout", "logs out a user", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        AuthedUser authedUser = PermUtils.getAuthedUser(Bot, user.getNick());
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+        AuthedUser authedUser = PermUtils.getAuthedUser(network, user.getNick());
         if (authedUser == null) {
             IRCUtils.sendError(user, "Error, you are not logged in");
         } else {
             GeneralRegistry.AuthedUsers.remove(authedUser);
-            IRCUtils.sendMessage(user, channel, "You are now logged out", isPrivate);
+            IRCUtils.sendMessage(user, network, channel, "You are now logged out", prefix);
         }
     }
 }

@@ -16,12 +16,12 @@ import org.pircbotx.User;
 public class MCMods extends GenericCommand {
 
     public MCMods() {
-        super(GeneralUtils.toArray("mcmods mcmod"), 0, "mcmods (MC Version#) [Mod Name]", "gets info on a minecraft mod");
+        super(GeneralUtils.toArray("mcmods mcmod"), 0, "mcmods (MC Version#) [Mod Name]", "gets info on a minecraft mod", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        JsonArray versions = GeneralUtils.getJsonArray("http://bot.notenoughmods.com/?json");
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+        JsonArray versions = GeneralUtils.getJsonArray("http://network.notenoughmods.com/?json");
         String version = "";
         String modname = "";
         JsonArray mods = null;
@@ -36,15 +36,15 @@ public class MCMods extends GenericCommand {
         if (version.isEmpty()) {
             int arraysize = 0;
             int versionsize = versions.size();
-            while(arraysize <= 20){
-                versionsize = versionsize-1;
+            while (arraysize <= 20) {
+                versionsize = versionsize - 1;
                 version = versions.get(versionsize).getAsString();
-                mods = GeneralUtils.getJsonArray("http://bot.notenoughmods.com/" + version + ".json");
+                mods = GeneralUtils.getJsonArray("http://network.notenoughmods.com/" + version + ".json");
                 arraysize = mods.size();
             }
             modname = args[0].toLowerCase();
-        }else{
-            mods = GeneralUtils.getJsonArray("http://bot.notenoughmods.com/" + version + ".json");
+        } else {
+            mods = GeneralUtils.getJsonArray("http://network.notenoughmods.com/" + version + ".json");
         }
         int total = 0;
         for (int i = 0; i < mods.size(); i++) {
@@ -53,11 +53,11 @@ public class MCMods extends GenericCommand {
                 String Version = mod.get("version").getAsString();
                 String Name = mod.get("name").getAsString();
                 String Link = mod.get("shorturl").getAsString();
-                if(Link.isEmpty()){
+                if (Link.isEmpty()) {
                     Link = mod.get("longurl").getAsString();
                 }
                 if (total < 3) {
-                    IRCUtils.sendMessage(user, channel, "[" + Version + "] " + Name + " - " + Link, isPrivate);
+                    IRCUtils.sendMessage(user, network, channel, "[" + Version + "] " + Name + " - " + Link, prefix);
                 }
                 total++;
             }

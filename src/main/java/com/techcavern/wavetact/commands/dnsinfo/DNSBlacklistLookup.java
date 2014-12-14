@@ -25,12 +25,12 @@ import org.xbill.DNS.*;
 public class DNSBlacklistLookup extends GenericCommand {
 
     public DNSBlacklistLookup() {
-        super(GeneralUtils.toArray("dnsblacklistlookup dbl"), 3, "dnsblacklistlookup [IPv4/Domain/User]", "looks up a domain or IP to see if its in a spam blacklist");
+        super(GeneralUtils.toArray("dnsblacklistlookup dbl"), 5, "dnsblacklistlookup [IPv4/Domain/User]", "looks up a domain or IP to see if its in a spam blacklist", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        String BeforeIP = GeneralUtils.getIP(args[0], Bot);
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+        String BeforeIP = GeneralUtils.getIP(args[0], network);
         if (BeforeIP == null) {
             IRCUtils.sendError(user, "Invalid IP/User");
             return;
@@ -59,18 +59,18 @@ public class DNSBlacklistLookup extends GenericCommand {
             lookup.setCache(null);
             Record[] records = lookup.run();
             if (lookup.getResult() == lookup.SUCCESSFUL) {
-                IRCUtils.sendMessage(user, channel, BeforeIP + " found in " + Domain, isPrivate);
+                IRCUtils.sendMessage(user, network, channel, BeforeIP + " found in " + Domain, prefix);
                 sent = true;
                 for (Record rec : records) {
                     if (rec instanceof TXTRecord) {
-                        IRCUtils.sendMessage(user, channel, Type.string(rec.getType()) + " - " + StringUtils.join((TXTRecord) rec, " "), isPrivate);
+                        IRCUtils.sendMessage(user, network, channel, Type.string(rec.getType()) + " - " + StringUtils.join((TXTRecord) rec, " "), prefix);
                     }
                 }
             }
 
         }
         if (!sent) {
-            IRCUtils.sendMessage(user, channel, BeforeIP + " not found in DNSBLs", isPrivate);
+            IRCUtils.sendMessage(user, network, channel, BeforeIP + " not found in DNSBLs", prefix);
         }
 
     }

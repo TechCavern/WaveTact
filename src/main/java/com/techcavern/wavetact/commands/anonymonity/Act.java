@@ -8,7 +8,9 @@ package com.techcavern.wavetact.commands.anonymonity;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.TruCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
+import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.PermUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
@@ -23,14 +25,24 @@ import org.pircbotx.User;
 public class Act extends GenericCommand {
 
     public Act() {
-        super(GeneralUtils.toArray("act do"), 5, "act [something]", "make the bot do something");
+        super(GeneralUtils.toArray("act do"), 5, "act [something]", "make the network do something", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        if (isPrivate && channel != null) {
-            isPrivate = false;
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+        if (!isPrivate) {
+            IRCUtils.sendAction(user, network, channel, StringUtils.join(args, " ").replace("\n", " "), prefix);
+        } else {
+            Channel chan = GetUtils.getChannelbyName(network, args[0].replace(IRCUtils.getPrefix(args[0]), ""));
+            if (chan == null) {
+                IRCUtils.sendAction(user, network, channel, StringUtils.join(args, " ").replace("\n", " "), IRCUtils.getPrefix(args[0]));
+            } else {
+                if (PermUtils.getPermLevel(network, user.getNick(), chan) >= 5) {
+                    IRCUtils.sendAction(user, network, chan, StringUtils.join(args, " ").replace("\n", " "), IRCUtils.getPrefix(args[0]));
+                } else {
+                    IRCUtils.sendError(user, "Permission Denied");
+                }
+            }
         }
-        IRCUtils.SendAction(user, channel, StringUtils.join(args, " ").replace("\n", " "), isPrivate);
     }
 }

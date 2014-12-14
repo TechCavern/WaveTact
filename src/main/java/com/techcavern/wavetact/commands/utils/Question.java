@@ -21,11 +21,11 @@ import java.util.List;
 public class Question extends GenericCommand {
 
     public Question() {
-        super(GeneralUtils.toArray("question wa wolframalpha"), 0, "question (Answer #) [Question]", "ask wolfram alpha a question!");
+        super(GeneralUtils.toArray("question wa wolframalpha"), 0, "question (Answer #) [Question]", "ask wolfram alpha a question!", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
 
         if (GeneralRegistry.wolframalphaapikey == null) {
             IRCUtils.sendError(user, "Wolfram Alpha API key is null - Contact Bot Controller to fix");
@@ -55,10 +55,10 @@ public class Question extends GenericCommand {
         if (waResults.size() > 0) {
             if (waResults.size() - 1 >= ArrayIndex && !waResults.get(ArrayIndex).isEmpty()) {
                 String result = waResults.get(ArrayIndex);
-                if(result.length() > 350){
+                if (result.length() > 350) {
                     result = StringUtils.substring(result, 0, 350) + "...";
                 }
-                IRCUtils.sendMessage(user, channel, waResults.get(0) + ": " +  result, isPrivate);
+                IRCUtils.sendMessage(user, network, channel, waResults.get(0) + ": " + result, prefix);
 
             } else {
                 ArrayIndex = ArrayIndex - 1;

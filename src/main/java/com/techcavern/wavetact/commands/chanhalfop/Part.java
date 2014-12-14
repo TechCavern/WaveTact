@@ -22,12 +22,12 @@ import org.pircbotx.User;
 public class Part extends GenericCommand {
 
     public Part() {
-        super(GeneralUtils.toArray("part pa"), 7, "part [channel]", "parts a channel");
+        super(GeneralUtils.toArray("part pa"), 7, "part [channel]", "parts a channel", true);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         channel.send().part();
-        GeneralRegistry.LastLeftChannel=channel.getName();
+        GeneralRegistry.LastLeftChannel = channel.getName();
     }
 }

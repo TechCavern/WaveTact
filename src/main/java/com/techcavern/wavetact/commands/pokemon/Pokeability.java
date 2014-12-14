@@ -15,14 +15,14 @@ import org.pircbotx.User;
 public class Pokeability extends GenericCommand {
 
     public Pokeability() {
-        super(GeneralUtils.toArray("pokeability pka"), 0, "pokeability [ID]", "Displays info on an ability");
+        super(GeneralUtils.toArray("pokeability pka"), 0, "pokeability [ID]", "Displays info on an ability", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         JsonObject pokemon = GeneralUtils.getJsonObject("http://pokeapi.co/api/v1/ability/" + args[0]);
         String name = pokemon.get("name").getAsString();
         String id = pokemon.get("id").getAsString();
-        IRCUtils.sendMessage(user,channel,name + "(" + id + ")",isPrivate);
+        IRCUtils.sendMessage(user, network, channel, name + "(" + id + ")", prefix);
     }
 }

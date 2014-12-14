@@ -5,21 +5,15 @@
  */
 package com.techcavern.wavetact.commands.netadmin;
 
-import com.google.common.collect.ImmutableSortedSet;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.NAdmCMD;
-import com.techcavern.wavetact.utils.GeneralRegistry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
-import jdk.nashorn.internal.ir.annotations.Immutable;
-import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
-
-import java.util.List;
 
 
 /**
@@ -30,36 +24,29 @@ import java.util.List;
 public class Global extends GenericCommand {
 
     public Global() {
-        super(GeneralUtils.toArray("global"), 20, "global [networkname/all]", "Sends a global to the network or to all networks");
+        super(GeneralUtils.toArray("global"), 20, "global [networkname/all]", "Sends a global to the network or to all networks", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        if(!args[0].equalsIgnoreCase("all")){
-            PircBotX workingbot = GetUtils.getBotByNetworkName(args[0]);
-            if(workingbot == null){
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+        if (!args[0].equalsIgnoreCase("all")) {
+            PircBotX workingnetwork = GetUtils.getBotByNetworkName(args[0]);
+            if (workingnetwork == null) {
                 IRCUtils.sendError(user, "Network does not exist");
                 return;
             }
-            if(workingbot == Bot){
-               sendGlobal("[Global - " + user.getNick() +"] " + GeneralUtils.buildMessage(1, args.length, args), workingbot, user);
-            }else{
-                if(UserPermLevel >= 9001){
-                    sendGlobal("[Global - " + user.getNick() +"] " + GeneralUtils.buildMessage(1, args.length, args), workingbot, user);
-                }else{
+            if (workingnetwork == network) {
+                IRCUtils.sendNetworkGlobal(GeneralUtils.buildMessage(1, args.length, args), workingnetwork, user);
+            } else {
+                if (userPermLevel >= 9001) {
+                    IRCUtils.sendNetworkGlobal(GeneralUtils.buildMessage(1, args.length, args), workingnetwork, user);
+                } else {
                     IRCUtils.sendError(user, "Permission Denied");
                 }
             }
-        }else if(args[0].equalsIgnoreCase("all")&& UserPermLevel>=9001){
-            for(PircBotX workingbot:GeneralRegistry.WaveTact.getBots()){
-                sendGlobal("[Global - " + user.getNick() +"] " + GeneralUtils.buildMessage(1, args.length, args), workingbot, user);
-            }
+        } else if (args[0].equalsIgnoreCase("all") && userPermLevel >= 9001) {
+            IRCUtils.sendGlobal(GeneralUtils.buildMessage(1, args.length, args), user);
+        }
+    }
 
-        }
-    }
-    public void sendGlobal(String message, PircBotX workingbot, User user){
-        for(Channel workingchannel: workingbot.getUserBot().getChannels()){
-            workingchannel.send().notice(message);
-        }
-    }
 }

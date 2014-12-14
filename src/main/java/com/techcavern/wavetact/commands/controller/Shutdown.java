@@ -14,11 +14,11 @@ import org.pircbotx.User;
 public class Shutdown extends GenericCommand {
 
     public Shutdown() {
-        super(GeneralUtils.toArray("shutdown stop"), 9001, null, "Shutdown");
+        super(GeneralUtils.toArray("shutdown stop"), 9001, null, "Shutdown", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         GeneralRegistry.WaveTact.stop();
         System.exit(0);
 

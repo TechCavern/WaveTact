@@ -4,16 +4,13 @@ import com.techcavern.wavetact.utils.fileUtils.Configuration;
 import com.techcavern.wavetact.utils.objects.*;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 import org.pircbotx.MultiBotManager;
-import org.pircbotx.PircBotX;
 import org.reflections.Reflections;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.ForkJoinPool;
 
 public class GeneralRegistry {
 
@@ -21,9 +18,7 @@ public class GeneralRegistry {
     public static HashMap<String, String> QuietBans = new HashMap<>();
     public static final List<PermChannel> PermChannels = new ArrayList<>();
     public static final List<UTime> Topic = new ArrayList<>();
-    public static final ThreadPoolExecutor threadPool = new ThreadPoolExecutor(10, 100, 1,
-            TimeUnit.SECONDS,
-            new LinkedBlockingQueue<>());
+    public static final ForkJoinPool threadPool = new ForkJoinPool(100);
     public static final List<String> Controllers = new ArrayList<>();
     public static final List<String> IRCBLs = new ArrayList<>();
     public static final List<String> DNSBLs = new ArrayList<>();
@@ -43,7 +38,7 @@ public class GeneralRegistry {
     public static final List<GenericCommand> ChanFounderCommands = new ArrayList<>();
     public static final List<SimpleMessage> SimpleMessages = new ArrayList<>();
     public static final List<SimpleAction> SimpleActions = new ArrayList<>();
-    public static final MultiBotManager<PircBotX> WaveTact = new MultiBotManager<>();
+    public static final MultiBotManager WaveTact = new MultiBotManager();
     public static final Map<String, Configuration> configs = new HashMap<>();
     public static final List<UTime> BanTimes = new ArrayList<>();
     public static final List<UTime> QuietTimes = new ArrayList<>();

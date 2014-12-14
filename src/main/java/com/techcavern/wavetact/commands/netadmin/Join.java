@@ -22,11 +22,11 @@ import org.pircbotx.User;
 public class Join extends GenericCommand {
 
     public Join() {
-        super(GeneralUtils.toArray("join jo"), 20, "join [channel]", "join a channel (not saved)");
+        super(GeneralUtils.toArray("join jo"), 20, "join [channel]", "join a channel (not saved)", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        Bot.sendIRC().joinChannel(args[0]);
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+        network.sendIRC().joinChannel(args[0]);
     }
 }

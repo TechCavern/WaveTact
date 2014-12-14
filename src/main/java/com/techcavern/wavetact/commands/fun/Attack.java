@@ -25,22 +25,22 @@ import org.pircbotx.User;
 public class Attack extends GenericCommand {
 
     public Attack() {
-        super(GeneralUtils.toArray("attack shoot"), 0, "attacks [something]", "attacks a user");
+        super(GeneralUtils.toArray("attack shoot"), 0, "attacks [something]", "attacks a user", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         String Something = GeneralUtils.buildMessage(0, args.length, args);
-        if (Something.toLowerCase().equalsIgnoreCase(Bot.getUserBot().getNick())) {
+        if (Something.toLowerCase().equalsIgnoreCase(network.getUserBot().getNick())) {
             Something = user.getNick();
         }
         int randomint = RandomUtils.nextInt(0, GeneralRegistry.Attacks.size());
         FunObject attack = GeneralRegistry.Attacks.get(randomint);
         if (attack.getMessageExists()) {
-            IRCUtils.SendAction(user, channel, attack.getAction().replace("$*", Something), isPrivate);
-            IRCUtils.sendMessage(user, channel, attack.getMessage().replace("$*", Something), isPrivate);
+            IRCUtils.sendAction(user, network, channel, attack.getAction().replace("$*", Something), prefix);
+            IRCUtils.sendMessage(user, network, channel, attack.getMessage().replace("$*", Something), prefix);
         } else {
-            IRCUtils.SendAction(user, channel, attack.getAction().replace("$*", Something), isPrivate);
+            IRCUtils.sendAction(user, network, channel, attack.getAction().replace("$*", Something), prefix);
         }
     }
 }

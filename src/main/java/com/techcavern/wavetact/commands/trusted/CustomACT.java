@@ -20,7 +20,6 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author jztech101
@@ -30,37 +29,37 @@ import java.util.stream.Collectors;
 public class CustomACT extends GenericCommand {
 
     public CustomACT() {
-        super(GeneralUtils.toArray("customaction cact customact"), 3, "customaction (+/-)[Command] [permlevel] [Response]", "Responses may contain $1, $2, etc which indicate the argument separated by a space. $* indicates all remaining arguments.");
+        super(GeneralUtils.toArray("customaction cact customact"), 5, "customaction (+/-)[Command] [permlevel] [Response]", "Responses may contain $1, $2, etc which indicate the argument separated by a space. $* indicates all remaining arguments.", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (args[0].toLowerCase().equalsIgnoreCase("list")) {
-            List<String> SimpleCommands = GetUtils.getActionsList(UserPermLevel);
-            IRCUtils.sendMessage(user, channel, StringUtils.join(SimpleCommands, ", "), isPrivate);
+            List<String> SimpleCommands = GetUtils.getActionsList(userPermLevel);
+            IRCUtils.sendMessage(user, network, channel, StringUtils.join(SimpleCommands, ", "), prefix);
         } else if (args[0].startsWith("-")) {
-            removeCommand(user, channel, isPrivate, UserPermLevel, args[0].substring(1));
+            removeCommand(user, network, channel, isPrivate, userPermLevel, args[0].substring(1), prefix);
         } else if (args[0].startsWith("+")) {
-            modifyCommand(user, channel, Integer.parseInt(args[1]), isPrivate, args[0].substring(1), UserPermLevel, GeneralUtils.buildMessage(2, args.length, args).replace("\n", " "));
+            modifyCommand(user, network, channel, Integer.parseInt(args[1]), isPrivate, args[0].substring(1), userPermLevel, GeneralUtils.buildMessage(2, args.length, args).replace("\n", " "), prefix);
         } else {
-            addCommand(user, channel, Integer.parseInt(args[1]), isPrivate, args[0], GeneralUtils.buildMessage(2, args.length, args).replace("\n", " "));
+            addCommand(user, network, channel, Integer.parseInt(args[1]), isPrivate, args[0], GeneralUtils.buildMessage(2, args.length, args).replace("\n", " "), prefix);
         }
     }
 
 
-    private void addCommand(User user, Channel channel, int accessLevel, boolean isPrivate, String cmd, String msg) {
+    private void addCommand(User user, PircBotX network, Channel channel, int accessLevel, boolean isPrivate, String cmd, String msg, String prefix) {
         if (GetUtils.getCommand(cmd) != null) {
             IRCUtils.sendError(user, "Custom Action already exists");
             return;
         } else
             GeneralRegistry.SimpleActions.add(new SimpleAction(cmd, accessLevel, msg, false));
         SimpleActionUtils.saveSimpleActions();
-        IRCUtils.sendMessage(user, channel, "Custom Action added", isPrivate);
+        IRCUtils.sendMessage(user, network, channel, "Custom Action added", prefix);
     }
 
 
     @SuppressWarnings("SuspiciousMethodCalls")
-    private void modifyCommand(User user, Channel channel, int accessLevel, boolean isPrivate, String command, int UserPermLevel, String msg) {
+    private void modifyCommand(User user, PircBotX network, Channel channel, int accessLevel, boolean isPrivate, String command, int UserPermLevel, String msg, String prefix) {
         SimpleAction cmd = SimpleActionUtils.getSimpleAction(command);
         if (cmd.getPermLevel() <= UserPermLevel) {
             if (cmd != null && !cmd.getLockedStatus()) {
@@ -68,7 +67,7 @@ public class CustomACT extends GenericCommand {
                 GeneralRegistry.AllCommands.remove(cmd);
                 GeneralRegistry.SimpleActions.add(new SimpleAction(command, accessLevel, msg, false));
                 SimpleActionUtils.saveSimpleActions();
-                IRCUtils.sendMessage(user, channel, "Custom Action modified", isPrivate);
+                IRCUtils.sendMessage(user, network, channel, "Custom Action modified", prefix);
             } else if (cmd.getLockedStatus()) {
                 IRCUtils.sendError(user, "Custom Action Locked");
             } else {
@@ -80,7 +79,7 @@ public class CustomACT extends GenericCommand {
     }
 
     @SuppressWarnings({"SuspiciousMethodCalls", "ConstantConditions"})
-    private void removeCommand(User user, Channel channel, boolean isPrivate, int UserPermLevel, String command) {
+    private void removeCommand(User user, PircBotX network, Channel channel, boolean isPrivate, int UserPermLevel, String command, String prefix) {
         SimpleAction cmd = SimpleActionUtils.getSimpleAction(command);
         if (cmd.getPermLevel() <= UserPermLevel) {
             if (cmd == null) {
@@ -91,7 +90,7 @@ public class CustomACT extends GenericCommand {
                 GeneralRegistry.SimpleActions.remove(cmd);
                 GeneralRegistry.AllCommands.remove(cmd);
                 SimpleActionUtils.saveSimpleActions();
-                IRCUtils.sendMessage(user, channel, "Custom Action removed", isPrivate);
+                IRCUtils.sendMessage(user, network, channel, "Custom Action removed", prefix);
             }
         } else {
             IRCUtils.sendError(user, "Permission Denied");

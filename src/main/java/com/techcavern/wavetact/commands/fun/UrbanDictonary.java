@@ -18,11 +18,11 @@ import org.pircbotx.User;
 public class UrbanDictonary extends GenericCommand {
 
     public UrbanDictonary() {
-        super(GeneralUtils.toArray("urbandictionary ub urban urb ud"), 0, "urbandictionary (def #) [what to define]", "defines a term in the urban dictionary");
+        super(GeneralUtils.toArray("urbandictionary ub urban urb ud"), 0, "urbandictionary (def #) [what to define]", "defines a term in the urban dictionary", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         int ArrayIndex = 0;
         if (GeneralUtils.isInteger(args[0])) {
             ArrayIndex = Integer.parseInt(args[0]) - 1;
@@ -34,9 +34,9 @@ public class UrbanDictonary extends GenericCommand {
                 String Word = WordUtils.capitalizeFully(objectJSON.getAsJsonArray("list").get(ArrayIndex).getAsJsonObject().get("word").getAsString().replaceAll("\\n|\\r|\\t", " ").replaceAll("  ", " "));
                 String Definition = objectJSON.getAsJsonArray("list").get(ArrayIndex).getAsJsonObject().get("definition").getAsString().replaceAll("\\n|\\r|\\t", " ").replaceAll("  ", " ");
                 String Examples = objectJSON.getAsJsonArray("list").get(ArrayIndex).getAsJsonObject().get("example").getAsString().replaceAll("\\n|\\r|\\t", " ").replaceAll("  ", " ");
-                IRCUtils.sendMessage(user, channel, Word + ": " + Definition, isPrivate);
+                IRCUtils.sendMessage(user, network, channel, Word + ": " + Definition, prefix);
                 if (!Examples.isEmpty()) {
-                    IRCUtils.sendMessage(user, channel, "Example: " + Examples, isPrivate);
+                    IRCUtils.sendMessage(user, network, channel, "Example: " + Examples, prefix);
                 }
             } else {
                 ArrayIndex = ArrayIndex + 1;

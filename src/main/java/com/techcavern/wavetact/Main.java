@@ -38,12 +38,12 @@ public class Main {
 
         BanTimeUtils.loadBanTimes();
         QuietTimeUtils.loadQuietTimes();
-        if(GeneralRegistry.Controllers.isEmpty()){
+        if (GeneralRegistry.Controllers.isEmpty()) {
             System.out.println("No Controllers Found, Please add one using -controller");
             System.exit(0);
-        }else{
+        } else {
             GeneralRegistry.WaveTact.start();
-            if(GeneralRegistry.WaveTact.getBots().isEmpty()) {
+            if (GeneralRegistry.WaveTact.getBots().isEmpty()) {
                 System.out.println("No Networks Found, Please add one using -addnetwork");
                 System.exit(0);
             }

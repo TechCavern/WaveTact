@@ -17,11 +17,11 @@ import org.pircbotx.User;
 public class Google extends GenericCommand {
 
     public Google() {
-        super(GeneralUtils.toArray("google gsearch"), 0, "google (result #) [string to google]", "googles something");
+        super(GeneralUtils.toArray("google gsearch"), 0, "google (result #) [string to google]", "googles something", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         int ArrayIndex = 0;
         if (GeneralUtils.isInteger(args[0])) {
             ArrayIndex = Integer.parseInt(args[0]) - 1;
@@ -29,12 +29,12 @@ public class Google extends GenericCommand {
         }
         JsonArray results = GeneralUtils.getJsonObject("https://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=" + StringUtils.join(args, "%20")).getAsJsonObject("responseData").getAsJsonArray("results");
         if (results.size() > 0) {
-            if (results.size()-1 >= ArrayIndex) {
+            if (results.size() - 1 >= ArrayIndex) {
                 String title = results.get(ArrayIndex).getAsJsonObject().get("titleNoFormatting").getAsString();
                 String content = results.get(ArrayIndex).getAsJsonObject().get("content").getAsString().replaceAll("<.*?>", "").replaceAll("&.*?;", "");
                 String url = results.get(ArrayIndex).getAsJsonObject().get("unescapedUrl").getAsString();
-                IRCUtils.sendMessage(user, channel, title + " - " + content, isPrivate);
-                IRCUtils.sendMessage(user, channel, url, isPrivate);
+                IRCUtils.sendMessage(user, network, channel, title + " - " + content, prefix);
+                IRCUtils.sendMessage(user, network, channel, url, prefix);
 
             } else {
                 ArrayIndex = ArrayIndex + 1;

@@ -16,13 +16,13 @@ import org.pircbotx.User;
 public class Authenticate extends GenericCommand {
 
     public Authenticate() {
-        super(GeneralUtils.toArray("authenticate auth identify id login"), 0, "identify (username) [password]", "identifies a user");
+        super(GeneralUtils.toArray("authenticate auth identify id login"), 0, "identify (username) [password]", "identifies a user", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        if (!PermUtils.checkIfAccountEnabled(Bot)) {
-            IRCUtils.sendError(user, "This network is set to " + GetUtils.getAuthType(Bot) + " Authentication");
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+        if (!PermUtils.checkIfAccountEnabled(network)) {
+            IRCUtils.sendError(user, "This network is set to " + GetUtils.getAuthType(network) + " Authentication");
             return;
         }
         String userString;
@@ -34,14 +34,14 @@ public class Authenticate extends GenericCommand {
             userString = args[0];
             password = args[1];
         }
-        if (PermUtils.authUser(Bot, user.getNick()) != null) {
+        if (PermUtils.authUser(network, user.getNick()) != null) {
             IRCUtils.sendError(user, "Error, you are already identified");
 
         } else {
             Account acc = AccountUtils.getAccount(userString);
             if (acc != null && GeneralRegistry.encryptor.checkPassword(password, acc.getAuthPassword())) {
-                GeneralRegistry.AuthedUsers.add(new AuthedUser(Bot.getServerInfo().getNetwork(), userString, IRCUtils.getHostmask(Bot, user.getNick(), false)));
-                IRCUtils.sendMessage(user, channel, "Identification Successful", isPrivate);
+                GeneralRegistry.AuthedUsers.add(new AuthedUser(network.getServerInfo().getNetwork(), userString, IRCUtils.getHostmask(network, user.getNick(), false)));
+                IRCUtils.sendMessage(user, network, channel, "Identification Successful", prefix);
             } else {
                 IRCUtils.sendError(user, "Unable to identify (Incorrect User/Password Combination)");
             }

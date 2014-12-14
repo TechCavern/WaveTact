@@ -19,18 +19,18 @@ import java.net.URL;
 public class MCStatus extends GenericCommand {
 
     public MCStatus() {
-        super(GeneralUtils.toArray("mcstatus"), 0, null, "checks status of MC servers");
+        super(GeneralUtils.toArray("mcstatus"), 0, null, "checks status of MC servers", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        String Result;
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+        String result;
         URL url = new URL("https://status.mojang.com/check");
         BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
-        Result = reader.readLine().replace("\"},{\"", " | ").replace("\":\"", ": ").replace("green", "Online").replace("red", "Offline").replace("[{\"", "").replace("\"}]", "").replace(".minecraft.net", "").replace(".mojang.com", "").replace("server", " Server").replace(".net", "");
-        Result = WordUtils.capitalizeFully(Result);
-        if (Result != null) {
-            IRCUtils.sendMessage(user, channel, Result, isPrivate);
+        result = reader.readLine().replace("\"},{\"", " | ").replace("\":\"", ": ").replace("green", "Online").replace("red", "Offline").replace("[{\"", "").replace("\"}]", "").replace(".minecraft.net", "").replace(".mojang.com", "").replace("server", " Server").replace(".net", "");
+        result = WordUtils.capitalizeFully(result);
+        if (result != null) {
+            IRCUtils.sendMessage(user, network, channel, result, prefix);
         } else {
             IRCUtils.sendError(user, "MC Status Currently Unavailable");
         }

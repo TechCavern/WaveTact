@@ -21,39 +21,38 @@ import org.pircbotx.User;
 public class Commands extends GenericCommand {
 
     public Commands() {
-        super(GeneralUtils.toArray("commands list cmds"), 0, "commands [permlevel/all]", "returns list of Commands specific to that permlevel");
+        super(GeneralUtils.toArray("commands list cmds"), 0, "commands [permlevel/all]", "returns list of Commands specific to that permlevel", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         int permlevel = 0;
-        if(args.length > 0) {
+        if (args.length > 0) {
             try {
                 permlevel = Integer.parseInt(args[0]);
-            }catch(NumberFormatException e){
-                IRCUtils.sendMessage(user, channel, StringUtils.join(GeneralRegistry.AllListCommands, ", "), isPrivate);
+            } catch (NumberFormatException e) {
+                IRCUtils.sendMessage(user, network, channel, StringUtils.join(GeneralRegistry.AllListCommands, ", "), prefix);
                 return;
             }
         }
-         if (permlevel >= 9001) {
-            IRCUtils.sendMessage(user, channel, StringUtils.join(GeneralRegistry.ControllerListCommands, ", "), isPrivate);
+        if (permlevel >= 9001) {
+            IRCUtils.sendMessage(user, network, channel, StringUtils.join(GeneralRegistry.ControllerListCommands, ", "), prefix);
         } else if (permlevel >= 20) {
-            IRCUtils.sendMessage(user, channel, StringUtils.join(GeneralRegistry.NetAdminListCommands, ", "), isPrivate);
+            IRCUtils.sendMessage(user, network, channel, StringUtils.join(GeneralRegistry.NetAdminListCommands, ", "), prefix);
         } else if (permlevel >= 18) {
-            IRCUtils.sendMessage(user, channel, StringUtils.join(GeneralRegistry.ChanFounderListCommands, ", "), isPrivate);
+            IRCUtils.sendMessage(user, network, channel, StringUtils.join(GeneralRegistry.ChanFounderListCommands, ", "), prefix);
         } else if (permlevel >= 15) {
-            IRCUtils.sendMessage(user, channel, StringUtils.join(GeneralRegistry.ChanOwnerListCommands, ", "), isPrivate);
+            IRCUtils.sendMessage(user, network, channel, StringUtils.join(GeneralRegistry.ChanOwnerListCommands, ", "), prefix);
         } else if (permlevel >= 13) {
-            IRCUtils.sendMessage(user, channel, StringUtils.join(GeneralRegistry.ChanOpListCommands, ", "), isPrivate);
+            IRCUtils.sendMessage(user, network, channel, StringUtils.join(GeneralRegistry.ChanOpListCommands, ", "), prefix);
         } else if (permlevel >= 10) {
-            IRCUtils.sendMessage(user, channel, StringUtils.join(GeneralRegistry.ChanOpListCommands, ", "), isPrivate);
+            IRCUtils.sendMessage(user, network, channel, StringUtils.join(GeneralRegistry.ChanOpListCommands, ", "), prefix);
         } else if (permlevel >= 7) {
-            IRCUtils.sendMessage(user, channel, StringUtils.join(GeneralRegistry.ChanHalfOpListCommands, ", "), isPrivate);
+            IRCUtils.sendMessage(user, network, channel, StringUtils.join(GeneralRegistry.ChanHalfOpListCommands, ", "), prefix);
         } else if (permlevel >= 5) {
-            IRCUtils.sendMessage(user, channel, StringUtils.join(GeneralRegistry.TrustedListCommands, ", "), isPrivate);
-        }
-        else {
-            IRCUtils.sendMessage(user, channel, StringUtils.join(GeneralRegistry.GenericListCommands, ", "), isPrivate);
+            IRCUtils.sendMessage(user, network, channel, StringUtils.join(GeneralRegistry.TrustedListCommands, ", "), prefix);
+        } else {
+            IRCUtils.sendMessage(user, network, channel, StringUtils.join(GeneralRegistry.GenericListCommands, ", "), prefix);
         }
 
     }

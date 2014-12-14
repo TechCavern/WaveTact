@@ -18,15 +18,17 @@ import org.pircbotx.User;
 public class ChannelPermLevel extends GenericCommand {
 
     public ChannelPermLevel() {
-        super(GeneralUtils.toArray("channelpermlevel chanpermlevel cpl cpermlevel"), 18, "channelpermlevel (+)(-)[user] (permlevel)", "adds, removes, modifies permissions");
+        super(GeneralUtils.toArray("channelpermlevel chanpermlevel cpl cpermlevel"), 18, "channelpermlevel (+)(-)[user] (permlevel)", "adds, removes, modifies permissions", true);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         int c = 0;
-
         if (args.length > 1) {
             c = Integer.parseInt(args[1]);
+        } else {
+            IRCUtils.sendError(user, "Failed to parse permission level: " + ChannelPermLevel.super.getSyntax());
+            return;
         }
         if (c <= 18) {
             String account;
@@ -37,17 +39,17 @@ public class ChannelPermLevel extends GenericCommand {
             } else {
                 account = args[0];
             }
-            String auth = PermUtils.authUser(Bot, account);
+            String auth = PermUtils.authUser(network, account);
             if (auth != null) {
                 account = auth;
             }
-            PermChannel PLChannel = PermChannelUtils.getPermLevelChannel(Bot.getServerInfo().getNetwork(), account, channel.getName());
+            PermChannel PLChannel = PermChannelUtils.getPermLevelChannel(network.getServerInfo().getNetwork(), account, channel.getName());
             if (account != null) {
                 if (args[0].startsWith("-")) {
                     if (PLChannel != null) {
                         GeneralRegistry.PermChannels.remove(PLChannel);
                         PermChannelUtils.savePermChannels();
-                        channel.send().message(args[0].replaceFirst("-", "") + " Removed from access lists");
+                        IRCUtils.sendNotice(user, network, channel, args[0].replaceFirst("-", "") + " removed from access lists", "");
                     } else {
                         IRCUtils.sendError(user, "User is not found on channel access lists");
                     }
@@ -55,7 +57,7 @@ public class ChannelPermLevel extends GenericCommand {
                     if (PLChannel != null) {
                         PLChannel.setPermLevel(Integer.parseInt(args[1]));
                         PermChannelUtils.savePermChannels();
-                        channel.send().message(args[0].replaceFirst("\\+", "") + " Modified in access lists");
+                        IRCUtils.sendNotice(user, network, channel, args[0].replaceFirst("-", "") + " modified from access lists", "");
                     } else {
                         IRCUtils.sendError(user, "User is not found on channel access lists");
                     }
@@ -63,11 +65,9 @@ public class ChannelPermLevel extends GenericCommand {
 
                 } else {
                     if (PLChannel == null) {
-                        GeneralRegistry.PermChannels.add(new PermChannel(channel.getName(), Integer.parseInt(args[1]), false, Bot.getServerInfo().getNetwork(), account));
+                        GeneralRegistry.PermChannels.add(new PermChannel(channel.getName(), Integer.parseInt(args[1]), false, network.getServerInfo().getNetwork(), account));
                         PermChannelUtils.savePermChannels();
-                        channel.send().message(args[0] + " added to access lists");
-
-
+                        IRCUtils.sendNotice(user, network, channel, args[0].replaceFirst("-", "") + " added from access lists", "");
                     } else {
                         IRCUtils.sendError(user, "User is already in channel access lists!");
                     }

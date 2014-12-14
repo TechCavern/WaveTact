@@ -28,7 +28,7 @@ public class SimpleAction extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         String daction = this.action;
         String[] action = StringUtils.split(this.action, " ");
         int i = 0;

@@ -16,17 +16,16 @@ import org.pircbotx.User;
 public class Insult extends GenericCommand {
 
     public Insult() {
-        super(GeneralUtils.toArray("insult burn"), 0, "insult [something]", "insults something");
+        super(GeneralUtils.toArray("insult burn"), 0, "insult [something]", "insults something", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         Document doc = Jsoup.connect("http://www.insultgenerator.org/").get();
         String c = doc.select("td").text();
-        if(args[0].equalsIgnoreCase(Bot.getNick()))
-            IRCUtils.sendMessage(user, channel,user.getNick() + ": " +  c, isPrivate);
+        if (args[0].equalsIgnoreCase(network.getNick()))
+            IRCUtils.sendMessage(user, network, channel, user.getNick() + ": " + c, prefix);
         else
-        IRCUtils.sendMessage(user, channel,args[0] + ": " +  c, isPrivate);
-
+            IRCUtils.sendMessage(user, network, channel, args[0] + ": " + c, prefix);
     }
 }

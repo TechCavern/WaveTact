@@ -21,11 +21,11 @@ import org.pircbotx.User;
 public class Cycle extends GenericCommand {
 
     public Cycle() {
-        super(GeneralUtils.toArray("cycle cl"), 7, "cycle [channel]", "cycle (parts/join) a channel");
+        super(GeneralUtils.toArray("cycle cl"), 7, "cycle [channel]", "cycle (parts/join) a channel", true);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         channel.send().cycle();
 
     }

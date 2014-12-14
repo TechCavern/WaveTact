@@ -22,11 +22,11 @@ import java.util.List;
 public class Define extends GenericCommand {
 
     public Define() {
-        super(GeneralUtils.toArray("define whatis"), 0, "Define (Def #) [word]", "defines a word");
+        super(GeneralUtils.toArray("define whatis"), 0, "Define (Def #) [word]", "defines a word", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (GeneralRegistry.wordnikapikey == null) {
             IRCUtils.sendError(user, "Wordnik API key is null - Contact Bot Controller to fix");
         }
@@ -43,9 +43,9 @@ public class Define extends GenericCommand {
                 String word = WordUtils.capitalizeFully(Defs.get(ArrayIndex).getWord());
                 String definition = Defs.get(ArrayIndex).getText();
                 List<ExampleUsage> examples = Defs.get(ArrayIndex).getExampleUses();
-                IRCUtils.sendMessage(user, channel, word + ": " + definition, isPrivate);
+                IRCUtils.sendMessage(user, network, channel, word + ": " + definition, prefix);
                 if (examples.size() > 0) {
-                    IRCUtils.sendMessage(user, channel, "Example: " + examples.get(0).getText(), isPrivate);
+                    IRCUtils.sendMessage(user, network, channel, "Example: " + examples.get(0).getText(), prefix);
                 }
             } else {
                 ArrayIndex = ArrayIndex + 1;

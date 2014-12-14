@@ -25,12 +25,12 @@ import org.xbill.DNS.*;
 public class IRCBlacklistLookup extends GenericCommand {
 
     public IRCBlacklistLookup() {
-        super(GeneralUtils.toArray("ircblacklistlookup ibl"), 3, "ircblacklistlookup [IPv4/Domain/User]", "looks up a domain or IP to see if its in a drone blacklist");
+        super(GeneralUtils.toArray("ircblacklistlookup ibl"), 5, "ircblacklistlookup [IPv4/Domain/User]", "looks up a domain or IP to see if its in a drone blacklist", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        String BeforeIP = GeneralUtils.getIP(args[0], Bot);
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+        String BeforeIP = GeneralUtils.getIP(args[0], network);
         if (BeforeIP == null) {
             IRCUtils.sendError(user, "Invalid IP/User");
             return;
@@ -59,19 +59,19 @@ public class IRCBlacklistLookup extends GenericCommand {
             lookup.setCache(null);
             Record[] records = lookup.run();
             if (lookup.getResult() == Lookup.SUCCESSFUL) {
-                IRCUtils.sendMessage(user, channel, BeforeIP + " found in " + Domain, isPrivate);
+                IRCUtils.sendMessage(user, network, channel, BeforeIP + " found in " + Domain, prefix);
                 sent = true;
                 for (Record rec : records) {
                     if (rec instanceof TXTRecord) {
                         TXTRecord c = (TXTRecord) rec;
-                        IRCUtils.sendMessage(user, channel, Type.string(rec.getType()) + " - " + StringUtils.join((TXTRecord) rec, " "), isPrivate);
+                        IRCUtils.sendMessage(user, network, channel, Type.string(rec.getType()) + " - " + StringUtils.join((TXTRecord) rec, " "), prefix);
                     }
                 }
             }
 
         }
         if (!sent) {
-            IRCUtils.sendMessage(user, channel, BeforeIP + " not found in IRC BLs", isPrivate);
+            IRCUtils.sendMessage(user, network, channel, BeforeIP + " not found in IRC BLs", prefix);
         }
 
     }

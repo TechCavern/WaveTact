@@ -29,7 +29,7 @@ public class SimpleMessage extends GenericCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         String dresponse = this.message;
         String[] message = StringUtils.split(this.message, " ");
         int i = 0;

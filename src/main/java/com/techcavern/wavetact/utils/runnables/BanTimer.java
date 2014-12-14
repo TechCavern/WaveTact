@@ -26,8 +26,8 @@ public class BanTimer implements Runnable {
                     UTime utimeObject = GeneralRegistry.BanTimes.get(i);
                     try {
                         if (System.currentTimeMillis() >= utimeObject.getTime() + utimeObject.getInit()) {
-                            PircBotX botObject = GetUtils.getBotByNetwork(utimeObject.getNetworkName());
-                            IRCUtils.setMode(GetUtils.getChannelbyName(botObject, utimeObject.getChannelName()), botObject, "-b ", utimeObject.getHostmask());
+                            PircBotX networkObject = GetUtils.getBotByNetwork(utimeObject.getNetworkName());
+                            IRCUtils.setMode(GetUtils.getChannelbyName(networkObject, utimeObject.getChannelName()), networkObject, "-b ", utimeObject.getHostmask());
                             GeneralRegistry.BanTimes.remove(i);
                             BanTimeUtils.saveBanTimes();
                         }
@@ -40,8 +40,8 @@ public class BanTimer implements Runnable {
                     UTime utimeObject = GeneralRegistry.QuietTimes.get(i);
                     try {
                         if (System.currentTimeMillis() >= utimeObject.getTime() + utimeObject.getInit()) {
-                            PircBotX botObject = GetUtils.getBotByNetwork(utimeObject.getNetworkName());
-                            IRCUtils.setMode(GetUtils.getChannelbyName(botObject, utimeObject.getChannelName()), botObject, "-" + GeneralRegistry.QuietBans.get(utimeObject.getType().toLowerCase()), utimeObject.getHostmask());
+                            PircBotX networkObject = GetUtils.getBotByNetwork(utimeObject.getNetworkName());
+                            IRCUtils.setMode(GetUtils.getChannelbyName(networkObject, utimeObject.getChannelName()), networkObject, "-" + GeneralRegistry.QuietBans.get(utimeObject.getType().toLowerCase()), utimeObject.getHostmask());
                             GeneralRegistry.QuietTimes.remove(i);
                             QuietTimeUtils.saveQuietTimes();
                         }

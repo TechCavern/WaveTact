@@ -6,17 +6,16 @@
 package com.techcavern.wavetact.utils.eventListeners;
 
 import com.techcavern.wavetact.utils.runnables.PrivMsgProcessor;
-import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.PrivateMessageEvent;
 
 /**
  * @author jztech101
  */
-public class PrivMsgListener extends ListenerAdapter<PircBotX> {
+public class PrivMsgListener extends ListenerAdapter {
 
     @Override
-    public void onPrivateMessage(PrivateMessageEvent<PircBotX> event) throws Exception {
+    public void onPrivateMessage(PrivateMessageEvent event) throws Exception {
         PrivMsgProcessor.PrivMsgProcess(event);
     }
 }

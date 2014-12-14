@@ -24,12 +24,12 @@ import org.pircbotx.User;
 public class Eightball extends GenericCommand {
 
     public Eightball() {
-        super(GeneralUtils.toArray("eightball 8ball 8b"), 0, "eightball [question]", "eightball");
+        super(GeneralUtils.toArray("eightball 8ball 8b"), 0, "eightball [question]", "eightball", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         int randomint = RandomUtils.nextInt(0, GeneralRegistry.Eightball.size());
-        IRCUtils.sendMessage(user, channel, GeneralRegistry.Eightball.get(randomint), isPrivate);
+        IRCUtils.sendMessage(user, network, channel, GeneralRegistry.Eightball.get(randomint), prefix);
     }
 }

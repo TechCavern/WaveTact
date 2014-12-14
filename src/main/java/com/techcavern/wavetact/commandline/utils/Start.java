@@ -9,7 +9,7 @@ import com.techcavern.wavetact.utils.objects.CommandLine;
 public class Start extends CommandLine {
 
     public Start() {
-        super(GeneralUtils.toArray("start"), "starts the bot", false);
+        super(GeneralUtils.toArray("start"), "starts the network", false);
     }
 
     @Override

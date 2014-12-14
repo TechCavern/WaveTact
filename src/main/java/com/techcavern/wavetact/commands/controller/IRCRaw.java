@@ -14,12 +14,12 @@ import org.pircbotx.User;
 public class IRCRaw extends GenericCommand {
 
     public IRCRaw() {
-        super(GeneralUtils.toArray("ircraw raw"), 9001, "raw [to be sent to server]", "sends a raw msg to the server");
+        super(GeneralUtils.toArray("ircraw raw"), 9001, "raw [to be sent to server]", "sends a raw msg to the server", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        Bot.sendRaw().rawLine(GeneralUtils.buildMessage(0, args.length, args));
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+        network.sendRaw().rawLine(GeneralUtils.buildMessage(0, args.length, args));
     }
 }
 

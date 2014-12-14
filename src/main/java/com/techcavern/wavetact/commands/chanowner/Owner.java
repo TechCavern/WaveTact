@@ -9,6 +9,7 @@ import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ChanOWNCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -22,21 +23,25 @@ import org.pircbotx.User;
 public class Owner extends GenericCommand {
 
     public Owner() {
-        super(GeneralUtils.toArray("owner own oop"), 14, "Owner (-)(User)", "sets owner mode if it exists on a user");
+        super(GeneralUtils.toArray("owner own oop"), 15, "Owner (-)(User)", "sets owner mode if it exists on a user", true);
     }
 
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        if (args.length >= 1) {
-            if (args[0].equalsIgnoreCase("-")) {
-                channel.send().deOwner(user);
-            } else if (args[0].startsWith("-")) {
-                channel.send().deOwner(GetUtils.getUserByNick(Bot, args[0].replaceFirst("-", "")));
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+        if (network.getServerInfo().getPrefixes().contains("q")) {
+            if (args.length >= 1) {
+                if (args[0].equalsIgnoreCase("-")) {
+                    channel.send().deOwner(user);
+                } else if (args[0].startsWith("-")) {
+                    channel.send().deOwner(GetUtils.getUserByNick(network, args[0].replaceFirst("-", "")));
+                } else {
+                    channel.send().owner(GetUtils.getUserByNick(network, args[0]));
+                }
             } else {
-                channel.send().owner(GetUtils.getUserByNick(Bot, args[0]));
-
+                channel.send().owner(user);
             }
         } else {
-            channel.send().owner(user);
+            IRCUtils.sendError(user, "This server does not support Owners");
         }
     }
 }
+

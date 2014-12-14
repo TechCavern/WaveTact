@@ -18,20 +18,20 @@ import java.util.List;
 public class FindIP extends GenericCommand {
 
     public FindIP() {
-        super(GeneralUtils.toArray("findip locate find loc geo geoip"), 0, "findip [IP][domain][user]", "GeoIPs a user - IPv6 NOT supported");
+        super(GeneralUtils.toArray("findip locate find loc geo geoip"), 0, "findip [IP][domain][user]", "GeoIPs a user", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         String IP;
         if (args.length > 0) {
             if (args[0].contains(".") || args[0].contains(":")) {
                 IP = args[0].replace("http://", "").replace("https://", "");
             } else {
-                IP = IRCUtils.getHost(Bot, args[0]);
+                IP = IRCUtils.getHost(network, args[0]);
             }
         } else {
-            IP = IRCUtils.getHost(Bot, user.getNick());
+            IP = IRCUtils.getHost(network, user.getNick());
         }
         if (IP == null) {
             IRCUtils.sendError(user, "Please Enter in an IP/User/Domain as argument #1");
@@ -47,18 +47,18 @@ public class FindIP extends GenericCommand {
             results.add(objectJson.get("zip").getAsString());
             results.add(objectJson.get("isp").getAsString());
             results.add(objectJson.get("timezone").getAsString());
-            String fin = "";
+            String message = "";
             for (String res : results) {
                 if (!res.isEmpty()) {
-                    if (fin.isEmpty()) {
-                        fin = res;
+                    if (message.isEmpty()) {
+                        message = res;
                     } else {
-                        fin += ", " + res;
+                        message += ", " + res;
                     }
                 }
             }
-            if (!fin.isEmpty()) {
-                IRCUtils.sendMessage(user, channel, fin, isPrivate);
+            if (!message.isEmpty()) {
+                IRCUtils.sendMessage(user, network, channel, message, prefix);
             } else {
                 IRCUtils.sendError(user, "Unable to Determine Location (Or you entered an invalid IP)");
             }

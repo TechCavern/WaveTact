@@ -15,40 +15,46 @@ import org.pircbotx.User;
  */
 public abstract class GenericCommand {
 
-    private final String[] comid;
-    private final String Desc;
+    private final String[] comID;
+    private final String desc;
     private final String Syntax;
+    private final boolean channelRequired;
 
-    private int PermLevel;
+    private int permLevel;
 
-    protected GenericCommand(String[] comid, int PermLevel, String Syntax, String Desc) {
-        this.comid = comid;
-        this.PermLevel = PermLevel;
-        this.Desc = Desc;
-        this.Syntax = Syntax;
+    protected GenericCommand(String[] comID, int permLevel, String syntax, String desc, boolean channelRequired) {
+        this.comID = comID;
+        this.permLevel = permLevel;
+        this.desc = desc;
+        this.Syntax = syntax;
+        this.channelRequired = channelRequired;
         GeneralRegistry.AllCommands.add(this);
     }
 
-    public abstract void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception;
+    public abstract void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception;
 
     public boolean getLockedStatus() {
         return false;
     }
 
     public int getPermLevel() {
-        return PermLevel;
+        return permLevel;
     }
 
-    public void setPermLevel(int newpermlevel) {
-        this.PermLevel = newpermlevel;
+    public void setPermLevel(int newPermLevel) {
+        this.permLevel = newPermLevel;
     }
 
     public String[] getCommandID() {
-        return comid;
+        return comID;
     }
 
     public String getCommand() {
-        return comid[0];
+        return comID[0];
+    }
+
+    public boolean getChannelRequired() {
+        return channelRequired;
     }
 
     public String getSyntax() {
@@ -60,11 +66,11 @@ public abstract class GenericCommand {
     }
 
     public String getDesc() {
-        return Desc;
+        return desc;
     }
 
     @Override
     public String toString() {
-        return "Command(" + comid[0] + ")";
+        return "Command(" + comID[0] + ")";
     }
 }

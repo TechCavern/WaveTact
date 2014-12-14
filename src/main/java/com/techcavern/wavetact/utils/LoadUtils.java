@@ -92,7 +92,7 @@ public class LoadUtils {
         GeneralRegistry.Attacks.add(new FunObject("throws a racket at $*", false, null));
     }
 
-    public static void registerQuiets(){
+    public static void registerQuiets() {
         GeneralRegistry.QuietBans.put("u", "b ~q:");
         GeneralRegistry.QuietBans.put("c", "q ");
         GeneralRegistry.QuietBans.put("i", "b m:");

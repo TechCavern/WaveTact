@@ -5,11 +5,11 @@ import org.pircbotx.PircBotX;
 
 public class NetProperty {
     private final String chard;
-    private final PircBotX bot;
+    private final PircBotX network;
 
     public NetProperty(String c, PircBotX d) {
         this.chard = c;
-        this.bot = d;
+        this.network = d;
     }
 
     public String getProperty() {
@@ -17,7 +17,7 @@ public class NetProperty {
     }
 
     public PircBotX getBot() {
-        return this.bot;
+        return this.network;
     }
 
 

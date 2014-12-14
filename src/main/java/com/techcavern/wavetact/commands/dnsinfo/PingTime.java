@@ -16,11 +16,11 @@ import java.net.Socket;
 public class PingTime extends GenericCommand {
 
     public PingTime() {
-        super(GeneralUtils.toArray("pingtime checkping chping ptime"), 0, "pingtime [website] (port)", " checks pingtime to a certain domain/address/ip/etc (IPv6 NOT supported)");
+        super(GeneralUtils.toArray("pingtime checkping chping ptime"), 0, "pingtime [website] (port)", " checks pingtime to a certain domain/address/ip/etc (IPv6 NOT supported)", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         int port;
         if (args.length < 2) {
             port = 80;
@@ -28,10 +28,10 @@ public class PingTime extends GenericCommand {
             port = Integer.parseInt(args[1]);
         }
         Long time = System.currentTimeMillis();
-        Socket socket = new Socket(GeneralUtils.getIP(args[0], Bot), port);
+        Socket socket = new Socket(GeneralUtils.getIP(args[0], network), port);
         socket.close();
         time = System.currentTimeMillis() - time;
-        IRCUtils.sendMessage(user, channel, "Ping Time: " + time + " milliseconds", isPrivate);
+        IRCUtils.sendMessage(user, network, channel, "Ping Time: " + time + " milliseconds", prefix);
 
     }
 }

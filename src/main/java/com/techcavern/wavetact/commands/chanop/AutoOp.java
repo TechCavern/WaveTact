@@ -17,22 +17,22 @@ import org.pircbotx.User;
 public class AutoOp extends GenericCommand {
 
     public AutoOp() {
-        super(GeneralUtils.toArray("autoop autop ap"), 10, "autoop (-)[user]", "Define whether to autoop the user or not");
+        super(GeneralUtils.toArray("autoop autop ap"), 10, "autoop (-)[user]", "Define whether to autoop the user or not", true);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         String account;
         if (args[0].startsWith("-")) {
             account = args[0].replaceFirst("-", "");
         } else {
             account = args[0];
         }
-        String auth = PermUtils.authUser(Bot, account);
+        String auth = PermUtils.authUser(network, account);
         if (auth != null) {
             account = auth;
         }
-        PermChannel PLChannel = PermChannelUtils.getPermLevelChannel(Bot.getServerInfo().getNetwork(), account, channel.getName());
+        PermChannel PLChannel = PermChannelUtils.getPermLevelChannel(network.getServerInfo().getNetwork(), account, channel.getName());
         if (args[0].startsWith("-")) {
             if (PLChannel != null) {
                 PLChannel.setAuto(false);

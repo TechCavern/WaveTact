@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.techcavern.wavetact.commands.fun;
 
 import com.techcavern.wavetact.annot.CMD;
@@ -23,17 +18,17 @@ import org.pircbotx.UserLevel;
 public class SomethingAwesome extends GenericCommand {
 
     public SomethingAwesome() {
-        super(GeneralUtils.toArray("somethingawesome awesome something"), 0, null, "Something AWESOME!");
+        super(GeneralUtils.toArray("somethingawesome awesome something"), 0, null, "Something AWESOME!", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        if (channel != null && channel.getUserLevels(Bot.getUserBot()).contains(UserLevel.OP) && !channel.isOwner(user) && !channel.isSuperOp(user)) {
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+        if (channel != null && channel.getUserLevels(network.getUserBot()).contains(UserLevel.OP) && !channel.isOwner(user) && !channel.isSuperOp(user)) {
             channel.send().kick(user, "http://bit.ly/1c9vo1S");
-        } else if (channel != null && channel.getUserLevels(Bot.getUserBot()).contains(UserLevel.OWNER)) {
+        } else if (channel != null && channel.getUserLevels(network.getUserBot()).contains(UserLevel.OWNER)) {
             channel.send().kick(user, "http://bit.ly/1c9vo1S");
         } else {
-            IRCUtils.SendAction(user, channel, "kicks " + user.getNick() + "(http://bit.ly/1c9vo1S)", isPrivate);
+            IRCUtils.sendAction(user, network, channel, "kicks " + user.getNick() + "(http://bit.ly/1c9vo1S)", prefix);
 
         }
     }

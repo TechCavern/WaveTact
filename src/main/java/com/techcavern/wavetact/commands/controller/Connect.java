@@ -7,7 +7,6 @@ package com.techcavern.wavetact.commands.controller;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ConCMD;
-import com.techcavern.wavetact.annot.NAdmCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
@@ -26,46 +25,48 @@ import java.util.concurrent.TimeUnit;
 public class Connect extends GenericCommand {
 
     public Connect() {
-        super(GeneralUtils.toArray("connect"), 9001, "connect (%)(-)[networkname] (Reason)", "connects, reconnects or disconnects a bot from a predefined network");
+        super(GeneralUtils.toArray("connect"), 9001, "connect (%)(-)[networkname] (Reason)", "connects, reconnects or disconnects a network from a predefined network", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         boolean reconnect = false;
         boolean disconnect = false;
-        if(args[0].startsWith("%")){
-            reconnect=true;
+        if (args[0].startsWith("%")) {
+            reconnect = true;
             args[0] = args[0].replaceFirst("\\%", "");
-        }else if(args[0].startsWith("-")){
-            disconnect=true;
+        } else if (args[0].startsWith("-")) {
+            disconnect = true;
             args[0] = args[0].replaceFirst("\\-", "");
         }
-        PircBotX workingbot = GetUtils.getBotByNetworkName(args[0]);
-        if(workingbot == null){
+        PircBotX workingnetwork = GetUtils.getBotByNetworkName(args[0]);
+        if (workingnetwork == null) {
             IRCUtils.sendError(user, "Network does not exist");
             return;
         }
-        if(reconnect || disconnect){
-            if(workingbot.getState().equals(PircBotX.State.DISCONNECTED)){
+        if (reconnect || disconnect) {
+            if (workingnetwork.getState().equals(PircBotX.State.DISCONNECTED)) {
                 IRCUtils.sendError(user, "Bot Currently Disonnected");
                 return;
-            }else{
-                workingbot.sendIRC().quitServer(GeneralUtils.buildMessage(1, args.length, args));
-                workingbot.stopBotReconnect();
+            } else {
+                IRCUtils.sendMessage(user, network, channel, "Disconnecting...", prefix);
+                workingnetwork.sendIRC().quitServer(GeneralUtils.buildMessage(1, args.length, args));
+                workingnetwork.stopBotReconnect();
             }
         }
-        if(disconnect){
+        if (disconnect) {
             return;
-        }else if(reconnect){
-            do{
+        } else if (reconnect) {
+            do {
                 TimeUnit.SECONDS.sleep(5);
-            }while(workingbot.getState().equals(PircBotX.State.CONNECTED));
+            } while (workingnetwork.getState().equals(PircBotX.State.CONNECTED));
         }
-            if(workingbot.getState().equals(PircBotX.State.CONNECTED)){
-                IRCUtils.sendError(user, "Bot Currently Connected");
-            }else{
-                workingbot.startBot();
-            }
+        if (workingnetwork.getState().equals(PircBotX.State.CONNECTED)) {
+            IRCUtils.sendError(user, "Bot Currently Connected");
+        } else {
+            workingnetwork.startBot();
+        }
+        IRCUtils.sendMessage(user, network, channel, "Reconnecting...", prefix);
 
     }
 }

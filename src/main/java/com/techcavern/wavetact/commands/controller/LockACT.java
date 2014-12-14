@@ -24,20 +24,20 @@ public class LockACT extends GenericCommand {
 
 
     public LockACT() {
-        super(GeneralUtils.toArray("lockaction lcact lockact"), 9001, "lockaction [command]", "locks a custom action");
+        super(GeneralUtils.toArray("lockaction lcact lockact"), 9001, "lockaction [command]", "locks a custom action", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
 
         if (args[0].startsWith("-")) {
             SimpleActionUtils.getSimpleAction(args[0].replaceFirst("-", "")).unlock();
             SimpleActionUtils.saveSimpleActions();
-            IRCUtils.sendMessage(user, channel, "Simple Action Unlocked", isPrivate);
+            IRCUtils.sendMessage(user, network, channel, "Simple Action Unlocked", prefix);
         } else {
             SimpleActionUtils.getSimpleAction(args[0].replaceFirst("-", "")).lock();
             SimpleActionUtils.saveSimpleActions();
-            IRCUtils.sendMessage(user, channel, "Simple Action Unlocked", isPrivate);
+            IRCUtils.sendMessage(user, network, channel, "Simple Action Unlocked", prefix);
 
         }
 

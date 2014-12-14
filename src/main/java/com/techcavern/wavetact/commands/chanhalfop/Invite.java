@@ -8,6 +8,7 @@ package com.techcavern.wavetact.commands.chanhalfop;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ChanHOPCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -21,13 +22,12 @@ import org.pircbotx.User;
 public class Invite extends GenericCommand {
 
     public Invite() {
-        super(GeneralUtils.toArray("invite inv"), 6, "invite [user]", "invites a user to the channel");
+        super(GeneralUtils.toArray("invite inv"), 7, "invite [user]", "invites a user to the channel", true);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         channel.send().invite(args[0]);
-        channel.send().notice(args[0] + " invited by " + user.getNick());
-
+        IRCUtils.sendAction(user, network, channel, args[0] + " invited by " + user.getNick(), prefix);
     }
 }

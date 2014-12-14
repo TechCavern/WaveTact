@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.conn.util.InetAddressUtils;
+import org.pircbotx.Colors;
 import org.pircbotx.PircBotX;
 
 import java.io.BufferedReader;
@@ -27,17 +28,19 @@ public class GeneralUtils {
         String result = parseUrl(url);
         return new JsonParser().parse(result).getAsJsonObject();
     }
-    public static String getJsonString(JsonArray array, String name){
+
+    public static String getJsonString(JsonArray array, String name) {
         String returning = "";
-        for(int i = 0; i < array.size(); i++){
-            if(i == 0 ){
+        for (int i = 0; i < array.size(); i++) {
+            if (i == 0) {
                 returning = array.get(i).getAsJsonObject().get(name).getAsString();
-            }else{
-                returning += ", " +array.get(i).getAsJsonObject().get(name).getAsString();
+            } else {
+                returning += ", " + array.get(i).getAsJsonObject().get(name).getAsString();
             }
         }
         return returning;
     }
+
     public static boolean isInteger(String s) {
         try {
             Integer.parseInt(s);
@@ -104,6 +107,13 @@ public class GeneralUtils {
         } else {
             return Long.parseLong(input);
         }
+    }
+
+    public static String[] removeColorsAndFormatting(String[] input) {
+        for (int i = 0; i < input.length; i++) {
+            input[i] = Colors.removeFormattingAndColors(input[i]);
+        }
+        return input;
     }
 
     public static String[] toArray(String input) {

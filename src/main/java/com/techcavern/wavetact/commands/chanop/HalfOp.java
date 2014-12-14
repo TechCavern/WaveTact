@@ -23,19 +23,19 @@ import org.pircbotx.User;
 public class HalfOp extends GenericCommand {
 
     public HalfOp() {
-        super(GeneralUtils.toArray("halfop hop"), 9, "halfop (-)(user to  halfop)", "sets halfop mode on a user if it exists");
+        super(GeneralUtils.toArray("halfop hop"), 10, "halfop (-)(user to  halfop)", "sets halfop mode on a user if it exists", true);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        if (Bot.getServerInfo().getPrefixes().contains("h")) {
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+        if (network.getServerInfo().getPrefixes().contains("h")) {
             if (args.length >= 1) {
                 if (args[0].equalsIgnoreCase("-")) {
                     channel.send().deHalfOp(user);
                 } else if (args[0].startsWith("-")) {
-                    channel.send().deHalfOp(GetUtils.getUserByNick(Bot, args[0].replaceFirst("-", "")));
+                    channel.send().deHalfOp(GetUtils.getUserByNick(network, args[0].replaceFirst("-", "")));
                 } else {
-                    channel.send().halfOp(GetUtils.getUserByNick(Bot, args[0]));
+                    channel.send().halfOp(GetUtils.getUserByNick(network, args[0]));
 
                 }
             } else {

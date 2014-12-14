@@ -15,22 +15,22 @@ import org.pircbotx.User;
 public class SetPass extends GenericCommand {
 
     public SetPass() {
-        super(GeneralUtils.toArray("setpassword setpass changepassword changepass"), 0, "setpass [oldpass] [newpass]", "Sets Password");
+        super(GeneralUtils.toArray("setpassword setpass changepassword changepass"), 0, "setpass [oldpass] [newpass]", "Sets Password", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        if (!PermUtils.checkIfAccountEnabled(Bot)) {
-            IRCUtils.sendError(user, "This network is set to " + GetUtils.getAuthType(Bot) + " Authentication");
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+        if (!PermUtils.checkIfAccountEnabled(network)) {
+            IRCUtils.sendError(user, "This network is set to " + GetUtils.getAuthType(network) + " Authentication");
             return;
         }
-        String AuthUser = PermUtils.authUser(Bot, user.getNick());
+        String AuthUser = PermUtils.authUser(network, user.getNick());
         if (AuthUser != null) {
             Account acc = AccountUtils.getAccount(AuthUser);
             if (GeneralRegistry.encryptor.checkPassword(args[0], acc.getAuthPassword())) {
                 acc.setAuthPassword(GeneralRegistry.encryptor.encryptPassword(args[1]));
                 AccountUtils.saveAccounts();
-                IRCUtils.sendMessage(user, channel, "Password Changed Successfully", isPrivate);
+                IRCUtils.sendMessage(user, network, channel, "Password Changed Successfully", prefix);
             } else {
                 IRCUtils.sendError(user, "Incorrect password");
             }

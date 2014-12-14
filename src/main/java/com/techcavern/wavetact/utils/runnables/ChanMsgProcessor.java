@@ -6,25 +6,29 @@ import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.PermUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Colors;
-import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.events.MessageEvent;
 
 
 public class ChanMsgProcessor {
-    public static void ChanMsgProcess(MessageEvent<PircBotX> event) {
+    public static void ChanMsgProcess(final MessageEvent event) {
         class process implements Runnable {
             public void run() {
-                String[] messageParts = Colors.removeFormattingAndColors(event.getMessage()).replaceAll("\\P{InBasic_Latin}", "").split(" ");
-                String m = messageParts[0].toLowerCase();
-                messageParts = ArrayUtils.remove(messageParts, 0);
-                GenericCommand Command = GetUtils.getCommand(m.replaceFirst(GetUtils.getCommandChar(event.getBot()), ""));
-                if (Command != null && m.startsWith(GetUtils.getCommandChar(event.getBot()))) {
-                    int UserPermLevel = PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel());
-                    if (UserPermLevel >= Command.getPermLevel()) {
-                        IRCUtils.processMessage(Command, event.getBot(), event.getChannel(), event.getUser(), UserPermLevel, messageParts, false);
+                String[] message = StringUtils.split(Colors.removeFormattingAndColors(event.getMessage()), " ");
+                String command = message[0].toLowerCase();
+                message = ArrayUtils.remove(message, 0);
+                GenericCommand Command = GetUtils.getCommand(command.replaceFirst(GetUtils.getCommandChar(event.getBot()), ""));
+                if (Command != null && command.startsWith(GetUtils.getCommandChar(event.getBot()))) {
+                    int userPermLevel = PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel());
+                    if (userPermLevel >= Command.getPermLevel()) {
+                        try {
+                            Command.onCommand(event.getUser(), event.getBot(), IRCUtils.getPrefix(event.getChannelSource()), event.getChannel(), false, userPermLevel, message);
+                        } catch (Exception e) {
+                            IRCUtils.sendError(event.getUser(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")");
+                        }
                     } else {
-                        event.getUser().send().notice("Permission Denied");
+                        IRCUtils.sendError(event.getUser(), "Permission Denied");
                     }
                 }
             }

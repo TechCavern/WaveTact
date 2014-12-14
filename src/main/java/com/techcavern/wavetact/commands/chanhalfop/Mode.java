@@ -21,11 +21,11 @@ import org.pircbotx.User;
 public class Mode extends GenericCommand {
 
     public Mode() {
-        super(GeneralUtils.toArray("mode mo"), 6, "mode [modes to set]", "sets a mode on the channel");
+        super(GeneralUtils.toArray("mode mo"), 7, "mode [modes to set]", "sets a mode on the channel", true);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         channel.send().setMode(args[0]);
 
     }

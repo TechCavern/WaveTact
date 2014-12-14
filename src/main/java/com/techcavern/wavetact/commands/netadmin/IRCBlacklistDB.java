@@ -28,24 +28,24 @@ public class IRCBlacklistDB extends GenericCommand {
 
 
     public IRCBlacklistDB() {
-        super(GeneralUtils.toArray("ircblacklistdb ircbldb"), 20, "ircblacklistdb (-)[IRC DNSBL Url]", "Adds/Removes Domains from IRCBL");
+        super(GeneralUtils.toArray("ircblacklistdb ircbldb"), 20, "ircblacklistdb (-)[IRC DNSBL Url]", "Adds/Removes Domains from IRCBL", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (args.length > 0) {
             if (args[0].startsWith("-")) {
                 String Domain = GetUtils.getIRCDNSBLbyDomain(args[0].replaceFirst("-", "")).replaceAll("http://|https://", "");
                 if (Domain != null) {
                     GeneralRegistry.IRCBLs.remove(Domain);
                     IRCBLUtils.saveIRCBLs();
-                    IRCUtils.sendMessage(user, channel, "IRC DNSBL Removed", isPrivate);
+                    IRCUtils.sendMessage(user, network, channel, "IRC DNSBL Removed", prefix);
                 } else {
                     IRCUtils.sendError(user, "IRC DNSBL does not exist on list");
                 }
             } else if (args[0].equalsIgnoreCase("list")) {
                 if (!GeneralRegistry.IRCBLs.isEmpty()) {
-                    IRCUtils.sendMessage(user, channel, StringUtils.join(GeneralRegistry.IRCBLs, ", "), isPrivate);
+                    IRCUtils.sendMessage(user, network, channel, StringUtils.join(GeneralRegistry.IRCBLs, ", "), prefix);
                 } else {
                     IRCUtils.sendError(user, "IRC DNS Blacklist is Empty");
                 }
@@ -54,7 +54,7 @@ public class IRCBlacklistDB extends GenericCommand {
                 if (Domain == null) {
                     GeneralRegistry.IRCBLs.add(args[0]);
                     IRCBLUtils.saveIRCBLs();
-                    IRCUtils.sendMessage(user, channel, "IRC DNSBL Added", isPrivate);
+                    IRCUtils.sendMessage(user, network, channel, "IRC DNSBL Added", prefix);
                 } else {
                     IRCUtils.sendError(user, "IRC DNSBL already listed");
                 }

@@ -14,16 +14,16 @@ import org.pircbotx.User;
 public class Hostmask extends GenericCommand {
 
     public Hostmask() {
-        super(GeneralUtils.toArray("hostmask host"), 0, "Hostmask $[nick]", "gets the hostmask of a user - $ before gets the ban mask of a user");
+        super(GeneralUtils.toArray("hostmask host"), 0, "Hostmask $[nick]", "gets the hostmask of a user - $ before gets the ban mask of a user", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
-        if (IRCUtils.getHostmask(Bot, args[0].replaceFirst("\\$", ""), false) != null) {
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+        if (IRCUtils.getHostmask(network, args[0].replaceFirst("\\$", ""), false) != null) {
             if (args[0].startsWith("$")) {
-                IRCUtils.sendMessage(user, channel, IRCUtils.getHostmask(Bot, args[0].replaceFirst("\\$", ""), true), isPrivate);
+                IRCUtils.sendMessage(user, network, channel, IRCUtils.getHostmask(network, args[0].replaceFirst("\\$", ""), true), prefix);
             } else {
-                IRCUtils.sendMessage(user, channel, IRCUtils.getHostmask(Bot, args[0], false), isPrivate);
+                IRCUtils.sendMessage(user, network, channel, IRCUtils.getHostmask(network, args[0], false), prefix);
             }
         } else {
             IRCUtils.sendError(user, "User not found");

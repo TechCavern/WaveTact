@@ -24,11 +24,11 @@ import org.xbill.DNS.*;
 public class DNSInfo extends GenericCommand {
 
     public DNSInfo() {
-        super(GeneralUtils.toArray("dnsinfo dns"), 3, "dns [domain]", "looks up a domain for information");
+        super(GeneralUtils.toArray("dnsinfo dns"), 5, "dns [domain]", "looks up a domain for information", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         Resolver resolver = new SimpleResolver();
         String domain = args[0];
         domain = domain.replace("http://", "").replace("https://", "");
@@ -40,17 +40,17 @@ public class DNSInfo extends GenericCommand {
         if (lookup.getResult() == Lookup.SUCCESSFUL) {
             for (Record rec : records) {
                 if (rec instanceof ARecord) {
-                    IRCUtils.sendMessage(user, channel, Type.string(rec.getType()) + " - " + ((ARecord) rec).getAddress(), isPrivate);
+                    IRCUtils.sendMessage(user, network, channel, Type.string(rec.getType()) + " - " + ((ARecord) rec).getAddress(), prefix);
                 } else if (rec instanceof NSRecord) {
-                    IRCUtils.sendMessage(user, channel, Type.string(rec.getType()) + " - " + ((NSRecord) rec).getTarget(), isPrivate);
+                    IRCUtils.sendMessage(user, network, channel, Type.string(rec.getType()) + " - " + ((NSRecord) rec).getTarget(), prefix);
                 } else if (rec instanceof AAAARecord) {
-                    IRCUtils.sendMessage(user, channel, Type.string(rec.getType()) + " - " + ((AAAARecord) rec).getAddress(), isPrivate);
+                    IRCUtils.sendMessage(user, network, channel, Type.string(rec.getType()) + " - " + ((AAAARecord) rec).getAddress(), prefix);
                 } else if (rec instanceof CNAMERecord) {
-                    IRCUtils.sendMessage(user, channel, Type.string(rec.getType()) + " - " + ((CNAMERecord) rec).getAlias() + ((CNAMERecord) rec).getTarget(), isPrivate);
+                    IRCUtils.sendMessage(user, network, channel, Type.string(rec.getType()) + " - " + ((CNAMERecord) rec).getAlias() + ((CNAMERecord) rec).getTarget(), prefix);
                 } else if (rec instanceof TXTRecord) {
-                    IRCUtils.sendMessage(user, channel, Type.string(rec.getType()) + " - " + StringUtils.join((TXTRecord) rec, " "), isPrivate);
+                    IRCUtils.sendMessage(user, network, channel, Type.string(rec.getType()) + " - " + StringUtils.join((TXTRecord) rec, " "), prefix);
                 } else if (rec instanceof MXRecord) {
-                    IRCUtils.sendMessage(user, channel, Type.string(rec.getType()) + " - " + ((MXRecord) rec).getPriority() + ((MXRecord) rec).getTarget(), isPrivate);
+                    IRCUtils.sendMessage(user, network, channel, Type.string(rec.getType()) + " - " + ((MXRecord) rec).getPriority() + ((MXRecord) rec).getTarget(), prefix);
                 }
             }
             isSuccessful = true;

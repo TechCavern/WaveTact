@@ -18,22 +18,22 @@ import java.net.InetSocketAddress;
 public class MCServerInfo extends GenericCommand {
 
     public MCServerInfo() {
-        super(GeneralUtils.toArray("mcserverinfo mcserver"), 0, null, "mcserverinfo [address] (port)");
+        super(GeneralUtils.toArray("mcserverinfo mcserver"), 0, null, "mcserverinfo [address] (port)", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         int port;
         if (args.length >= 2) {
             port = Integer.parseInt(args[1]);
         } else {
             port = 25565;
         }
-        MCServer server = StandardMCVersions.MC_18.ping(new InetSocketAddress(GeneralUtils.getIP(args[0], Bot), port));
+        MCServer server = StandardMCVersions.MC_18.ping(new InetSocketAddress(GeneralUtils.getIP(args[0], network), port));
         String gameVersion = "Version: " + server.gameVersion;
         String motd = "MOTD: " + server.motd;
         String playercount = "Players: " + Integer.toString(server.players) + "/" + Integer.toString(server.maxPlayers);
-        IRCUtils.sendMessage(user, channel, args[0] + ":" + port + " - " + gameVersion + " - " + motd + " - " + playercount, isPrivate);
+        IRCUtils.sendMessage(user, network, channel, args[0] + ":" + port + " - " + gameVersion + " - " + motd + " - " + playercount, prefix);
 
     }
 

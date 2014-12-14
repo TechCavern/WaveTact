@@ -23,18 +23,18 @@ import org.pircbotx.User;
 public class Voice extends GenericCommand {
 
     public Voice() {
-        super(GeneralUtils.toArray("voice vop"), 6, "Voice (-)(User)", "voices a user");
+        super(GeneralUtils.toArray("voice vop"), 7, "Voice (-)(User)", "voices a user", true);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (args.length >= 1) {
             if (args[0].equalsIgnoreCase("-")) {
                 channel.send().deVoice(user);
             } else if (args[0].startsWith("-")) {
-                channel.send().deVoice(GetUtils.getUserByNick(Bot, args[0].replaceFirst("-", "")));
+                channel.send().deVoice(GetUtils.getUserByNick(network, args[0].replaceFirst("-", "")));
             } else {
-                channel.send().voice(GetUtils.getUserByNick(Bot, args[0]));
+                channel.send().voice(GetUtils.getUserByNick(network, args[0]));
 
             }
         } else {

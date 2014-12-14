@@ -27,15 +27,15 @@ import org.pircbotx.User;
 public class DefCon extends GenericCommand {
 
     public DefCon() {
-        super(GeneralUtils.toArray("defcon"), 9001, "defcon (-)(1)(2)(3)(4)(5)", "locks down the bot");
+        super(GeneralUtils.toArray("defcon"), 9001, "defcon (-)(1)(2)(3)(4)(5)", "locks down the network", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (args.length >= 1) {
             if (args[0].startsWith("-")) {
                 initializeCommands();
-                IRCUtils.sendMessage(user, channel, "DefCon OFF", isPrivate);
+                IRCUtils.sendGlobal("Defcon OFF", user);
             }
             switch (Integer.parseInt(args[0])) {
                 case 1:
@@ -54,10 +54,10 @@ public class DefCon extends GenericCommand {
                     sPermLevel(5);
                     break;
             }
-            IRCUtils.sendMessage(user, channel, "DefCon ON", isPrivate);
+            IRCUtils.sendGlobal("Defcon " + args[0], user);
         } else {
             sPermLevel(9001);
-            IRCUtils.sendMessage(user, channel, "DefCon ON", isPrivate);
+            IRCUtils.sendGlobal("Defcon 1", user);
         }
     }
 

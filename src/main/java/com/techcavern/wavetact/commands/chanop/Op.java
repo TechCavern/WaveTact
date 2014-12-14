@@ -22,18 +22,18 @@ import org.pircbotx.User;
 public class Op extends GenericCommand {
 
     public Op() {
-        super(GeneralUtils.toArray("op aop"), 9, "op (-)(user to op)", "ops a user");
+        super(GeneralUtils.toArray("op aop"), 10, "op (-)(user to op)", "ops a user", true);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (args.length >= 1) {
             if (args[0].equalsIgnoreCase("-")) {
                 channel.send().deOp(user);
             } else if (args[0].startsWith("-")) {
-                channel.send().deOp(GetUtils.getUserByNick(Bot, args[0].replaceFirst("-", "")));
+                channel.send().deOp(GetUtils.getUserByNick(network, args[0].replaceFirst("-", "")));
             } else {
-                channel.send().op(GetUtils.getUserByNick(Bot, args[0]));
+                channel.send().op(GetUtils.getUserByNick(network, args[0]));
 
             }
         } else {

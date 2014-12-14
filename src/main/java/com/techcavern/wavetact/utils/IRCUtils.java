@@ -1,23 +1,16 @@
 package com.techcavern.wavetact.utils;
 
-import com.techcavern.wavetact.utils.eventListeners.*;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.pircbotx.Channel;
-import org.pircbotx.Configuration;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 import org.pircbotx.hooks.WaitForQueue;
 import org.pircbotx.hooks.events.WhoisEvent;
 import org.pircbotx.output.OutputChannel;
-import org.pircbotx.output.OutputUser;
-
-import java.nio.charset.Charset;
-import java.util.List;
 
 
 public class IRCUtils {
-    public static void setMode(Channel channelObject, PircBotX botObject, String modeToSet, String hostmask) {
-        OutputChannel o = new OutputChannel(botObject, channelObject);
+    public static void setMode(Channel channelObject, PircBotX networkObject, String modeToSet, String hostmask) {
+        OutputChannel o = new OutputChannel(networkObject, channelObject);
         if (hostmask != null) {
             modeToSet = modeToSet + hostmask;
             o.setMode(modeToSet);
@@ -26,11 +19,11 @@ public class IRCUtils {
         }
     }
 
-    public static WhoisEvent<PircBotX> WhoisEvent(PircBotX bot, String userObject) {
+    public static WhoisEvent WhoisEvent(PircBotX network, String userObject) {
 
-        WhoisEvent<PircBotX> WhoisEvent;
-        bot.sendIRC().whois(userObject);
-        WaitForQueue waitForQueue = new WaitForQueue(bot);
+        WhoisEvent WhoisEvent;
+        network.sendIRC().whois(userObject);
+        WaitForQueue waitForQueue = new WaitForQueue(network);
         try {
             WhoisEvent = waitForQueue.waitFor(WhoisEvent.class);
             waitForQueue.close();
@@ -44,30 +37,38 @@ public class IRCUtils {
         return WhoisEvent;
     }
 
-    public static void sendNotice(PircBotX botObject, User userObject, String notice) {
-        OutputUser x = new OutputUser(botObject, userObject);
-        x.notice(notice);
+    public static void sendNotice(User userObject, PircBotX networkObject, Channel channelObject, String message, String prefix) {
+        if (channelObject != null) {
+            networkObject.sendRaw().rawLine("NOTICE " + prefix + channelObject.getName() + " :" + message);
+        } else {
+            userObject.send().notice(message);
+        }
     }
 
-    public static void sendMessage(User userObject, Channel channelObject, String message, boolean isPrivate) {
-        if (channelObject != null && !isPrivate) {
-            channelObject.send().message(message);
+    public static void sendMessage(User userObject, PircBotX networkObject, Channel channelObject, String message, String prefix) {
+        if (channelObject != null) {
+            networkObject.sendRaw().rawLine("PRIVMSG " + prefix + channelObject.getName() + " :" + message);
         } else {
             userObject.send().message(message);
         }
     }
 
-    public static void SendAction(User userObject, Channel channelObject, String message, boolean isPrivate) {
-        if (channelObject != null && !isPrivate) {
-            channelObject.send().action(message);
+    public static void sendAction(User userObject, PircBotX networkObject, Channel channelObject, String message, String prefix) {
+        if (channelObject != null) {
+            networkObject.sendRaw().rawLine("PRIVMSG " + prefix + channelObject.getName() + " :" + (char) 1 + message + (char) 1);
         } else {
             userObject.send().action(message);
         }
     }
 
-    public static String getHostmask(PircBotX bot, String userObject, boolean isBanmask) {
+    public static String getPrefix(String fullChannelName) {
+        String[] channel = fullChannelName.split("#");
+        return channel[0];
+    }
+
+    public static String getHostmask(PircBotX network, String userObject, boolean isBanmask) {
         String hostmask;
-        WhoisEvent whois = WhoisEvent(bot, userObject);
+        WhoisEvent whois = WhoisEvent(network, userObject);
         if (whois != null) {
             String hostname = whois.getHostname();
             String Login = whois.getLogin();
@@ -87,8 +88,21 @@ public class IRCUtils {
         return hostmask;
     }
 
-    public static String getIRCHostmask(PircBotX bot, String userObject) {
-        User whois = GetUtils.getUserByNick(bot, userObject);
+    public static void sendGlobal(String message, User user) {
+        for (PircBotX network : GeneralRegistry.WaveTact.getBots()) {
+            sendNetworkGlobal(message, network, user);
+        }
+
+    }
+
+    public static void sendNetworkGlobal(String message, PircBotX network, User user) {
+        for (Channel channel : network.getUserBot().getChannels()) {
+            channel.send().notice("[" + user.getNick() + "]: " + message);
+        }
+    }
+
+    public static String getIRCHostmask(PircBotX network, String userObject) {
+        User whois = GetUtils.getUserByNick(network, userObject);
         String hostmask = "";
         if (whois != null) {
             String hostname = whois.getHostname();
@@ -101,9 +115,9 @@ public class IRCUtils {
         return hostmask;
     }
 
-    public static String getHost(PircBotX bot, String userObject) {
+    public static String getHost(PircBotX network, String userObject) {
         String host;
-        WhoisEvent whois = WhoisEvent(bot, userObject);
+        WhoisEvent whois = WhoisEvent(network, userObject);
         if (whois != null) {
             host = whois.getHostname();
         } else {
@@ -114,56 +128,6 @@ public class IRCUtils {
 
     public static void sendError(User user, String error) {
         user.send().notice(error);
-    }
-
-    public static void processMessage(GenericCommand Command, PircBotX Bot, Channel channel, User user, int UserPermLevel, String[] messageParts, boolean isPrivate) {
-        if (Command.getPermLevel() == 9) {
-            if (channel.isOp(Bot.getUserBot()) || channel.isOp(Bot.getUserBot()) || channel.isOwner(Bot.getUserBot())) {
-                try {
-                    Command.onCommand(user, Bot, channel, isPrivate, UserPermLevel, messageParts);
-                } catch (Exception e) {
-                    IRCUtils.sendError(user, "Unable to perform command - please make sure are using the correct syntax");
-                    IRCUtils.sendError(user, Command.getSyntax());
-                }
-            } else {
-                IRCUtils.sendError(user, "Error: I must be at op or higher to perform the operation requested");
-            }
-        } else if (Command.getPermLevel() == 14) {
-
-            if (channel.isOwner(Bot.getUserBot())) {
-                try {
-                    Command.onCommand(user, Bot, channel, isPrivate, UserPermLevel, messageParts);
-                } catch (Exception e) {
-                    IRCUtils.sendError(user, "Unable to perform command - please make sure are using the correct syntax");
-                    IRCUtils.sendError(user, Command.getSyntax());
-                }
-            } else {
-                IRCUtils.sendError(user, "Error: I must be owner to perform the operation requested");
-            }
-        } else if (Command.getPermLevel() == 6) {
-            if (channel.isOwner(Bot.getUserBot()) || channel.isOp(Bot.getUserBot()) || channel.isHalfOp(Bot.getUserBot()) || channel.isSuperOp(Bot.getUserBot())) {
-                try {
-                    Command.onCommand(user, Bot, channel, isPrivate, UserPermLevel, messageParts);
-                } catch (Exception e) {
-                    IRCUtils.sendError(user, "Unable to perform command - please make sure are using the correct syntax");
-                    IRCUtils.sendError(user, Command.getSyntax());
-                }
-            } else {
-                if (Bot.getServerInfo().getPrefixes().contains("h")) {
-                    IRCUtils.sendError(user, "Error: I must be half-op or higher to perform the operation requested");
-                } else {
-                    IRCUtils.sendError(user, "Error: I must be op or higher to perform the operation requested");
-                }
-            }
-        } else {
-            try {
-                Command.onCommand(user, Bot, channel, isPrivate, UserPermLevel, messageParts);
-            } catch (Exception e) {
-                e.printStackTrace();
-                IRCUtils.sendError(user, "Unable to perform command - please make sure are using the correct syntax");
-                IRCUtils.sendError(user, Command.getSyntax());
-            }
-        }
     }
 
 }

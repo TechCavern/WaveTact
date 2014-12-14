@@ -16,11 +16,11 @@ import org.pircbotx.User;
 public class Xkcd extends GenericCommand {
 
     public Xkcd() {
-        super(GeneralUtils.toArray("xkcd randomxkcd"), 0, "xkcd [comic num#]", "returns random comic or specified comic #");
+        super(GeneralUtils.toArray("xkcd randomxkcd"), 0, "xkcd [comic num#]", "returns random comic or specified comic #", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         Integer comicnumber = 1;
         JsonObject latestcomic = GeneralUtils.getJsonObject("http://xkcd.com/info.0.json");
         Integer latest = latestcomic.get("num").getAsInt();
@@ -37,6 +37,6 @@ public class Xkcd extends GenericCommand {
         String date = "Date: " + comic.get("day") + "/" + comic.get("month") + "/" + comic.get("year");
         String num = comic.get("num").getAsString();
         String title = comic.get("title").getAsString();
-        IRCUtils.sendMessage(user, channel, num + " - " + date + " - " + title + " - " + "http://xkcd.com/" + num, isPrivate);
+        IRCUtils.sendMessage(user, network, channel, num + " - " + date + " - " + title + " - " + "http://xkcd.com/" + num, prefix);
     }
 }

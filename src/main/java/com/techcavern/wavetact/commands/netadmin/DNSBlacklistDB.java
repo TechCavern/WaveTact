@@ -27,11 +27,11 @@ import org.pircbotx.User;
 public class DNSBlacklistDB extends GenericCommand {
 
     public DNSBlacklistDB() {
-        super(GeneralUtils.toArray("dnsblacklistdb dnsbldb"), 20, "dnsblacklistdb (-)[Spam DNSBL Url]", "Adds/Removes Domains from Spam DNS Blacklists");
+        super(GeneralUtils.toArray("dnsblacklistdb dnsbldb"), 20, "dnsblacklistdb (-)[Spam DNSBL Url]", "Adds/Removes Domains from Spam DNS Blacklists", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
 
         if (args.length > 0) {
             if (args[0].startsWith("-")) {
@@ -39,13 +39,13 @@ public class DNSBlacklistDB extends GenericCommand {
                 if (Domain != null) {
                     GeneralRegistry.DNSBLs.remove(Domain);
                     DNSBLUtils.saveDNSBLs();
-                    IRCUtils.sendMessage(user, channel, "Spam DNSBL Removed", isPrivate);
+                    IRCUtils.sendMessage(user, network, channel, "Spam DNSBL Removed", prefix);
                 } else {
                     IRCUtils.sendError(user, "Spam DNSBL does not exist on list");
                 }
             } else if (args[0].equalsIgnoreCase("list")) {
                 if (!GeneralRegistry.DNSBLs.isEmpty()) {
-                    IRCUtils.sendMessage(user, channel, StringUtils.join(GeneralRegistry.DNSBLs, ", "), isPrivate);
+                    IRCUtils.sendMessage(user, network, channel, StringUtils.join(GeneralRegistry.DNSBLs, ", "), prefix);
                 } else {
                     IRCUtils.sendError(user, "Spam DNS Blacklist is Empty");
                 }
@@ -54,7 +54,7 @@ public class DNSBlacklistDB extends GenericCommand {
                 if (Domain == null) {
                     GeneralRegistry.DNSBLs.add(args[0]);
                     DNSBLUtils.saveDNSBLs();
-                    IRCUtils.sendMessage(user, channel, "Spam DNSBL Added", isPrivate);
+                    IRCUtils.sendMessage(user, network, channel, "Spam DNSBL Added", prefix);
                 } else {
                     IRCUtils.sendError(user, "Spam DNSBL already listed");
                 }

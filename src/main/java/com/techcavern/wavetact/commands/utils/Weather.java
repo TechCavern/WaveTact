@@ -17,11 +17,11 @@ import org.pircbotx.User;
 public class Weather extends GenericCommand {
 
     public Weather() {
-        super(GeneralUtils.toArray("weather temperature temp humid humidity wind wunderground wunder"), 0, "weather [zipcode][city]", "gets weather in an area from wunderground");
+        super(GeneralUtils.toArray("weather temperature temp humid humidity wind wunderground wunder"), 0, "weather [zipcode][city]", "gets weather in an area from wunderground", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX Bot, Channel channel, boolean isPrivate, int UserPermLevel, String... args) throws Exception {
+    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (GeneralRegistry.wundergroundapikey == null) {
             IRCUtils.sendError(user, "Wunderground API key is null - Contact Bot Controller to fix");
             return;
@@ -33,7 +33,7 @@ public class Weather extends GenericCommand {
             String Temp = weather.get("temperature_string").getAsString();
             String Humidity = weather.get("relative_humidity").getAsString() + " humidity";
             String Wind = weather.get("wind_string").getAsString();
-            IRCUtils.sendMessage(user, channel, City + ": " + Weather + " - " + Temp + " - " + Humidity + " - " + Wind, isPrivate);
+            IRCUtils.sendMessage(user, network, channel, City + ": " + Weather + " - " + Temp + " - " + Humidity + " - " + Wind, prefix);
         } else {
             IRCUtils.sendError(user, "Requested location not found");
         }
