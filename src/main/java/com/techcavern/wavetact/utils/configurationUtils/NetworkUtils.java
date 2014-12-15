@@ -107,7 +107,6 @@ public class NetworkUtils {
         Net.getListenerManager().addListener(new KickListener());
         Net.setVersion("WaveTact 0.7.0");
         Net.setAutoReconnect(true);
-        Net.setMaxLineLength(350);
         if (nickservPassword != null) {
             Net.setNickservPassword(nickservPassword);
         }

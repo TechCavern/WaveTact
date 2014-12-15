@@ -1,5 +1,6 @@
 package com.techcavern.wavetact.utils;
 
+import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -47,7 +48,11 @@ public class IRCUtils {
 
     public static void sendMessage(User userObject, PircBotX networkObject, Channel channelObject, String message, String prefix) {
         if (channelObject != null) {
-            networkObject.sendRaw().rawLine("PRIVMSG " + prefix + channelObject.getName() + " :" + message);
+            for(int i = 0; i < message.length(); i += 350) {
+                String messageToSend=message.substring(i, Math.min(message.length(),i+350));
+                if(!messageToSend.isEmpty())
+                networkObject.sendRaw().rawLine("PRIVMSG " + prefix + channelObject.getName() + " :" + messageToSend);
+            }
         } else {
             userObject.send().message(message);
         }
