@@ -20,15 +20,18 @@ public class CheckUserLevel extends GenericCommand {
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         String userObject;
-        if (args.length > 1 && args[0].startsWith("#")) {
-            channel = GetUtils.getChannelbyName(network, args[0]);
+        Channel chan;
+        if (args.length > 1 && network.getServerInfo().getChannelTypes().contains(String.valueOf(args[0].charAt(0)))) {
+            chan = GetUtils.getChannelbyName(network, args[0]);
             args = ArrayUtils.remove(args, 0);
+        }else{
+            chan = channel;
         }
         if (args.length < 1) {
             userObject = user.getNick();
         } else {
             userObject = args[0];
-            userPermLevel = PermUtils.getPermLevel(network, userObject, channel);
+            userPermLevel = PermUtils.getPermLevel(network, userObject, chan);
         }
         if (userObject == null) {
             ErrorUtils.sendError(user, "User does not exist");

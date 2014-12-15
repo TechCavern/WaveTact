@@ -105,10 +105,12 @@ public class NetworkUtils {
         Net.getListenerManager().addListener(new PartListener());
         Net.getListenerManager().addListener(new PrivMsgListener());
         Net.getListenerManager().addListener(new KickListener());
+        Net.setChannelModeMessagePrefixes("+%@&~!");
         Net.setVersion("WaveTact 0.7.0");
         Net.setAutoReconnect(true);
         if (nickservPassword != null) {
             Net.setNickservPassword(nickservPassword);
+            Net.setNickservDelayJoin(true);
         }
         return new PircBotX(Net.buildConfiguration());
     }
