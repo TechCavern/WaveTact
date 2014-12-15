@@ -55,7 +55,7 @@ public class ChannelPermLevel extends GenericCommand {
                     if (PLChannel != null) {
                         PLChannel.setPermLevel(Integer.parseInt(args[1]));
                         PermChannelUtils.savePermChannels();
-                        IRCUtils.sendNotice(user, network, channel, args[0].replaceFirst("-", "") + " modified from access lists", "");
+                        IRCUtils.sendNotice(user, network, channel, args[0].replaceFirst("-", "") + " modified in access lists", "");
                     } else {
                         ErrorUtils.sendError(user, "User is not found on channel access lists");
                     }
@@ -65,7 +65,7 @@ public class ChannelPermLevel extends GenericCommand {
                     if (PLChannel == null) {
                         Constants.PermChannels.add(new PermChannel(channel.getName(), Integer.parseInt(args[1]), false, networkname, account));
                         PermChannelUtils.savePermChannels();
-                        IRCUtils.sendNotice(user, network, channel, args[0].replaceFirst("-", "") + " added from access lists", "");
+                        IRCUtils.sendNotice(user, network, channel, args[0].replaceFirst("-", "") + " added to access lists", "");
                     } else {
                         ErrorUtils.sendError(user, "User is already in channel access lists!");
                     }
