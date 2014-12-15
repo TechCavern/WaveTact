@@ -10,17 +10,15 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-import java.net.ConnectException;
-import java.net.InetAddress;
-import java.net.Socket;
-import java.net.UnknownHostException;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 @CMD
 @GenCMD
-public class CheckPing extends GenericCommand {
+public class Traceroute extends GenericCommand {
 
-    public CheckPing() {
-        super(GeneralUtils.toArray("checkping cping"), 0, "checkport [ip][domain]", " Checks ping to a server", false);
+    public Traceroute() {
+        super(GeneralUtils.toArray("traceroute trace"), 5, "traceroute [ip][domain]", "traces route to a server ", false);
     }
 
     @Override
@@ -30,21 +28,23 @@ public class CheckPing extends GenericCommand {
             IRCUtils.sendMessage(user, network, channel, "Host Unreachable", prefix);
         }else{
             String command = "";
-            if(System.getProperty("os.name").startsWith("Windows")) {
-                command = "ping -n 1 " + IP;
+            if(System.getProperty("os.name").startsWith("Windows") && InetAddressUtils.isIPv6Address(IP)) {
+                command = "tracert6 " + IP;
+            }else if(System.getProperty("os.name").startsWith("Windows") && InetAddressUtils.isIPv4Address(IP)){
+                command = "tracert " + IP;
             }else if(InetAddressUtils.isIPv6Address(IP)){
-                command = "ping6 -c 1 " + IP;
+                command = "traceroute6 " + IP;
             }else if(InetAddressUtils.isIPv4Address(IP)){
-                command = "ping -c 1 " + IP;
+                command = "traceroute " + IP;
             }
-            long time = System.currentTimeMillis();
             Process pinghost = Runtime.getRuntime().exec(command);
-            pinghost.waitFor();
-            if(pinghost.exitValue() == 0){
-                IRCUtils.sendMessage(user, network, channel, IP + ": " + (System.currentTimeMillis() - time) + " milliseconds", prefix);
-            }else{
-                IRCUtils.sendMessage(user, network, channel, "Host Unreachable", prefix);
+            BufferedReader buffereader = new BufferedReader(new InputStreamReader(pinghost.getInputStream()));
+            String line = "";
+            while ((line = buffereader.readLine()) != null) {
+                if(!line.contains("* * *"))
+                IRCUtils.sendMessage(user, network, channel, line, prefix);
             }
+            buffereader.close();
         }
 
     }

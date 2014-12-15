@@ -46,9 +46,9 @@ public class CheckPort extends GenericCommand {
             try {
                 Socket socket = new Socket(IP, port);
                 socket.close();
-                IRCUtils.sendMessage(user, network, channel, port + " is open", prefix);
+                IRCUtils.sendMessage(user, network, channel, "Port " + port + " is open on " + IP, prefix);
             } catch (ConnectException e) {
-                if(e.getCause().getMessage().equals("java.net.ConnectException: Connection refused"))
+                if(e.getMessage().equals("Connection refused"))
                 IRCUtils.sendMessage(user, network, channel, "Port " + port + " is closed on " + IP, prefix);
                 else
                     IRCUtils.sendMessage(user, network, channel, "Host Unreachable", prefix);

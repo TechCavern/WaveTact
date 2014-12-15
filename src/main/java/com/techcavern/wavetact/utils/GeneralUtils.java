@@ -75,9 +75,7 @@ public class GeneralUtils {
         } else {
             IP = IRCUtils.getHost(Bot, input);
         }
-        if (IP == null || IP.replaceFirst(":", "").contains(":")) {
-            return null;
-        } else if (InetAddressUtils.isIPv4Address(IP) || InetAddressUtils.isIPv6Address(IP)) {
+        if (InetAddressUtils.isIPv4Address(IP) || InetAddressUtils.isIPv6Address(IP)) {
             return IP;
         } else {
             IP = IP.replaceAll("http://|https://", "");
