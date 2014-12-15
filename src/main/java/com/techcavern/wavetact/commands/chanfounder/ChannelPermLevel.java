@@ -20,6 +20,7 @@ public class ChannelPermLevel extends GenericCommand {
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+        String networkname = GetUtils.getNetworkNameByNetwork(network);
         int c = 0;
         if (args.length > 1) {
             c = Integer.parseInt(args[1]);
@@ -40,7 +41,7 @@ public class ChannelPermLevel extends GenericCommand {
             if (auth != null) {
                 account = auth;
             }
-            PermChannel PLChannel = PermChannelUtils.getPermLevelChannel(network.getServerInfo().getNetwork(), account, channel.getName());
+            PermChannel PLChannel = PermChannelUtils.getPermLevelChannel(networkname, account, channel.getName());
             if (account != null) {
                 if (args[0].startsWith("-")) {
                     if (PLChannel != null) {
@@ -62,7 +63,7 @@ public class ChannelPermLevel extends GenericCommand {
 
                 } else {
                     if (PLChannel == null) {
-                        Constants.PermChannels.add(new PermChannel(channel.getName(), Integer.parseInt(args[1]), false, network.getServerInfo().getNetwork(), account));
+                        Constants.PermChannels.add(new PermChannel(channel.getName(), Integer.parseInt(args[1]), false, networkname, account));
                         PermChannelUtils.savePermChannels();
                         IRCUtils.sendNotice(user, network, channel, args[0].replaceFirst("-", "") + " added from access lists", "");
                     } else {

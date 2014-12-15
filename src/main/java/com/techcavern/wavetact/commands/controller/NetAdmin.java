@@ -30,7 +30,7 @@ public class NetAdmin extends GenericCommand {
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-
+        String networkname = GetUtils.getNetworkNameByNetwork(network);
         String account;
         if (args[0].startsWith("-")) {
             account = args[0].replaceFirst("-", "");
@@ -43,8 +43,8 @@ public class NetAdmin extends GenericCommand {
         }
         if (account != null) {
             if (args[0].startsWith("-")) {
-                if (GetUtils.getNetworkAdminByNick(account, network.getServerInfo().getNetwork()) != null) {
-                    Constants.NetworkAdmins.remove(GetUtils.getNetworkAdminByNick(account, network.getServerInfo().getNetwork()));
+                if (GetUtils.getNetworkAdminByNick(account, networkname) != null) {
+                    Constants.NetworkAdmins.remove(GetUtils.getNetworkAdminByNick(account, networkname));
                     NetAdminUtils.saveNetworkAdmins();
                     IRCUtils.sendMessage(user, network, channel, "Network admin removed", prefix);
                 } else {
@@ -65,10 +65,10 @@ public class NetAdmin extends GenericCommand {
                     ErrorUtils.sendError(user, "No network admins exist");
                 }
             } else {
-                if (GetUtils.getNetworkAdminByNick(account, network.getServerInfo().getNetwork()) != null) {
+                if (GetUtils.getNetworkAdminByNick(account, networkname) != null) {
                     ErrorUtils.sendError(user, "User is already in database");
                 } else {
-                    Constants.NetworkAdmins.add(new NetworkAdmin(network.getServerInfo().getNetwork(), account));
+                    Constants.NetworkAdmins.add(new NetworkAdmin(networkname, account));
                     NetAdminUtils.saveNetworkAdmins();
                     IRCUtils.sendMessage(user, network, channel, "Network admin added", prefix);
                 }

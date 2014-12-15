@@ -18,7 +18,6 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -49,7 +48,7 @@ public class Part extends GenericCommand {
                 }
                 network.sendRaw().rawLine("PART " + args[0]);
                 if(permanent){
-                    Configuration config = Constants.configs.get(GetUtils.getNetworkNameByBot(network));
+                    Configuration config = Constants.configs.get(GetUtils.getNetworkNameByNetwork(network));
                     List<String> channels = new LinkedList<>(Arrays.asList(StringUtils.split(config.getString("channels"), ", ")));
                     for(String chan:channels){
                         if(chan.equals(args[0])){

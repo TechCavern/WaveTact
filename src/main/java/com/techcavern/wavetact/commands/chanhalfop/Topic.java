@@ -55,7 +55,7 @@ public class Topic extends GenericCommand {
             channel.send().setTopic(channel.getTopic().replace(args[0], args[2]));
             saveTopic(channel, network);
         } else if (args[1].equalsIgnoreCase("r") || args[1].equalsIgnoreCase("revert")) {
-            UTime oldTopic = GetUtils.getTopic(channel.getName(), network.getServerInfo().getNetwork());
+            UTime oldTopic = GetUtils.getTopic(channel.getName(), GetUtils.getNetworkNameByNetwork(network));
             if (oldTopic != null) {
                 channel.send().setTopic(oldTopic.getHostmask());
                 Constants.Topic.remove(oldTopic);

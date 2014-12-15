@@ -40,7 +40,7 @@ public class Authenticate extends GenericCommand {
         } else {
             Account acc = AccountUtils.getAccount(userString);
             if (acc != null && Constants.encryptor.checkPassword(password, acc.getAuthPassword())) {
-                Constants.AuthedUsers.add(new AuthedUser(GetUtils.getNetworkNameByBot(network), userString, IRCUtils.getHostmask(network, user.getNick(), false)));
+                Constants.AuthedUsers.add(new AuthedUser(GetUtils.getNetworkNameByNetwork(network), userString, IRCUtils.getHostmask(network, user.getNick(), false)));
                 IRCUtils.sendMessage(user, network, channel, "Identification successful", prefix);
             } else {
                 ErrorUtils.sendError(user, "Unable to identify (incorrect user/password combination)");

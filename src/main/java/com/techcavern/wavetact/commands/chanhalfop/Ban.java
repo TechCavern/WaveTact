@@ -40,7 +40,7 @@ public class Ban extends GenericCommand {
 
             }
         }
-        String networkname = GetUtils.getNetworkNameByBot(network);
+        String networkname = GetUtils.getNetworkNameByNetwork(network);
         UTime BanTime = BanTimeUtils.getBanTime(hostmask, networkname, channel.getName());
         if (args[0].startsWith("-")) {
             if (BanTime != null) {
@@ -70,13 +70,13 @@ public class Ban extends GenericCommand {
             if (BanTime == null) {
                 if (args.length == 2) {
                     ban(hostmask, channel, network);
-                    UTime utimeObject = new UTime(hostmask, GetUtils.getNetworkNameByBot(network), "b", channel.getName(), GeneralUtils.getMilliSeconds(args[1]), System.currentTimeMillis());
+                    UTime utimeObject = new UTime(hostmask, networkname, "b", channel.getName(), GeneralUtils.getMilliSeconds(args[1]), System.currentTimeMillis());
                     Constants.BanTimes.add(utimeObject);
                     BanTimeUtils.saveBanTimes();
 
                 } else if (args.length < 2) {
                     ban(hostmask, channel, network);
-                    UTime utimeObject = new UTime(hostmask, GetUtils.getNetworkNameByBot(network), "b", channel.getName(), GeneralUtils.getMilliSeconds("24h"), System.currentTimeMillis());
+                    UTime utimeObject = new UTime(hostmask, networkname, "b", channel.getName(), GeneralUtils.getMilliSeconds("24h"), System.currentTimeMillis());
                     Constants.BanTimes.add(utimeObject);
                     BanTimeUtils.saveBanTimes();
                 }

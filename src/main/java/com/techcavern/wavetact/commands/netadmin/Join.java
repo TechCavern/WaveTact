@@ -36,7 +36,7 @@ public class Join extends GenericCommand {
             permanent = true;
         }
         if(permanent){
-            Configuration config = Constants.configs.get(GetUtils.getNetworkNameByBot(network));
+            Configuration config = Constants.configs.get(GetUtils.getNetworkNameByNetwork(network));
             config.set("channels", config.getString("channels") + ", " + args[0]);
             config.save();
         }

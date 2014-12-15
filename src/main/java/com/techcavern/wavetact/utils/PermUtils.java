@@ -43,7 +43,8 @@ public class PermUtils {
         if (userString == null) {
             userString = getAccountName(network, userObject);
             if (userString != null)
-                Constants.AuthedUsers.add(new AuthedUser(network.getServerInfo().getNetwork(), userString, hostmask));
+                Constants.AuthedUsers.add(new AuthedUser(GetUtils.getNetworkNameByNetwork(network), userString, hostmask));
+            GetUtils.getNetworkNameByNetwork(network);
         }
         return userString;
     }
@@ -51,7 +52,7 @@ public class PermUtils {
     public static String getAuthedUser(PircBotX network, String userObject, String hostmask) {
         String userString = null;
         for (AuthedUser user : Constants.AuthedUsers) {
-            if (user.getAuthHostmask().equals(hostmask) && user.getAuthNetwork().equals(network.getServerInfo().getNetwork())) {
+            if (user.getAuthHostmask().equals(hostmask) && user.getAuthNetwork().equals(GetUtils.getNetworkNameByNetwork(network))) {
                 userString = user.getAuthAccount();
             }
         }
@@ -66,7 +67,7 @@ public class PermUtils {
     public static AuthedUser getAuthedUser(PircBotX network, String userObject) {
         String hostmask = IRCUtils.getIRCHostmask(network, userObject);
         for (AuthedUser user : Constants.AuthedUsers) {
-            if (user.getAuthHostmask().equals(hostmask) && user.getAuthNetwork().equals(network.getServerInfo().getNetwork())) {
+            if (user.getAuthHostmask().equals(hostmask) && user.getAuthNetwork().equals(GetUtils.getNetworkNameByNetwork(network))) {
                 return user;
             }
         }
@@ -116,11 +117,11 @@ public class PermUtils {
             if (GetUtils.getControllerByNick(account) != null) {
                 return 9001;
             }
-            if (GetUtils.getNetworkAdminByNick(account, network.getServerInfo().getNetwork()) != null) {
+            if (GetUtils.getNetworkAdminByNick(account, GetUtils.getNetworkNameByNetwork(network)) != null) {
                 return 20;
             }
-            if (PermChannelUtils.getPermLevelChannel(network.getServerInfo().getNetwork(), account, channelObject.getName()) != null) {
-                return PermChannelUtils.getPermLevelChannel(network.getServerInfo().getNetwork(), account, channelObject.getName()).getPermLevel();
+            if (PermChannelUtils.getPermLevelChannel(GetUtils.getNetworkNameByNetwork(network), account, channelObject.getName()) != null) {
+                return PermChannelUtils.getPermLevelChannel(GetUtils.getNetworkNameByNetwork(network), account, channelObject.getName()).getPermLevel();
             } else {
                 return 0;
             }
@@ -157,7 +158,7 @@ public class PermUtils {
             if (account != null) {
                 if (GetUtils.getControllerByNick(account) != null) {
                     return 9001;
-                } else if (GetUtils.getNetworkAdminByNick(account, network.getServerInfo().getNetwork()) != null) {
+                } else if (GetUtils.getNetworkAdminByNick(account, GetUtils.getNetworkNameByNetwork(network)) != null) {
                     return 20;
                 } else {
                     return 3;

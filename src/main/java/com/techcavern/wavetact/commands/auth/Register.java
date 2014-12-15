@@ -40,7 +40,7 @@ public class Register extends GenericCommand {
         } else {
             Constants.Accounts.add(new Account(userString, Constants.encryptor.encryptPassword(password)));
             AccountUtils.saveAccounts();
-            Constants.AuthedUsers.add(new AuthedUser(network.getServerInfo().getNetwork(), userString, IRCUtils.getHostmask(network, user.getNick(), false)));
+            Constants.AuthedUsers.add(new AuthedUser(GetUtils.getNetworkNameByNetwork(network), userString, IRCUtils.getHostmask(network, user.getNick(), false)));
             IRCUtils.sendMessage(user, network, channel, "You are now registered", prefix);
         }
     }
