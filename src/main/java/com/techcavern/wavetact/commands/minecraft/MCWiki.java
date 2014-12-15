@@ -26,16 +26,19 @@ public class MCWiki extends GenericCommand {
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         Document doc = null;
         Elements content = null;
-        String url = "http://minecraft.gamepedia.com/" + StringUtils.join(args, "%20");
+        for(int i = 0; i < args.length; i++){
+            args[i] = StringUtils.capitalize(args[i]);
+        }
+        String url = "http://minecraft.gamepedia.com/" + StringUtils.join(args, "%20");;
         try {
             doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.57 Safari/537.17").get();
         } catch (Exception eee) {
-            url = "http://ftb.gamepedia.com/" + StringUtils.join(args, "%20");
+            url = "http://ftb.gamepedia.com/" + StringUtils.join(args, "%20");;
             try {
                 doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.57 Safari/537.17").get();
             } catch (Exception e) {
                 try {
-                    url = "http://ftbwiki.org/" + StringUtils.join(args, "%20");
+                    url = "http://ftbwiki.org/" + StringUtils.join(args, "%20");;
                     doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.57 Safari/537.17").get();
                 } catch (Exception ee) {
                     ErrorUtils.sendError(user, "Query returned no results Or Wikis are Down");

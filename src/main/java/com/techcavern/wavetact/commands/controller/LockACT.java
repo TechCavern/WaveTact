@@ -37,7 +37,7 @@ public class LockACT extends GenericCommand {
         } else {
             SimpleActionUtils.getSimpleAction(args[0].replaceFirst("-", "")).lock();
             SimpleActionUtils.saveSimpleActions();
-            IRCUtils.sendMessage(user, network, channel, "Simple Action Unlocked", prefix);
+            IRCUtils.sendMessage(user, network, channel, "Simple Action Locked", prefix);
 
         }
 
