@@ -110,6 +110,7 @@ public class LoadUtils {
         Constants.Eightball.add("Signs say yes");
         Constants.Eightball.add("Cannot predict now");
         Constants.Eightball.add("It is certain");
+        Constants.Eightball.add("Sure");
         Constants.Eightball.add("Outlook decent");
         Constants.Eightball.add("Very doubtful");
         Constants.Eightball.add("Perhaps now is not a good time to tell you");
