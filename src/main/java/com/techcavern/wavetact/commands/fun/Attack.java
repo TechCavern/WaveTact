@@ -36,11 +36,8 @@ public class Attack extends GenericCommand {
         }
         int randomint = RandomUtils.nextInt(0, Constants.Attacks.size());
         FunObject attack = Constants.Attacks.get(randomint);
-        if (attack.getMessageExists()) {
-            IRCUtils.sendAction(user, network, channel, attack.getAction().replace("$*", Something), prefix);
+        IRCUtils.sendAction(user, network, channel, attack.getAction().replace("$*", Something), prefix);
+        if (attack.getMessageExists())
             IRCUtils.sendMessage(user, network, channel, attack.getMessage().replace("$*", Something), prefix);
-        } else {
-            IRCUtils.sendAction(user, network, channel, attack.getAction().replace("$*", Something), prefix);
-        }
     }
 }

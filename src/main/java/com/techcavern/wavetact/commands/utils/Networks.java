@@ -19,7 +19,7 @@ import java.util.List;
 public class Networks extends GenericCommand {
 
     public Networks() {
-        super(GeneralUtils.toArray("networks netlist"), 0, "networks [connected/all/disconnected]", "lists the networks a network is on", false);
+        super(GeneralUtils.toArray("networks netlist"), 0, "networks [connected/all/disconnected]", "Lists the networks a bot is on", false);
     }
 
     @Override

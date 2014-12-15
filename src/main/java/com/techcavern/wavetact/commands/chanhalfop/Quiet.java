@@ -16,7 +16,7 @@ import org.pircbotx.User;
 public class Quiet extends GenericCommand {
 
     public Quiet() {
-        super(GeneralUtils.toArray("quiet mute"), 7, "Quiet (-)[User][hostmask] (-)(+)(time)", "quiets a user for the specified time or 24 hours", true);
+        super(GeneralUtils.toArray("quiet mute"), 7, "quiet (-)[user][hostmask] (-)(+)(time)", "Quiets a user for the specified time or 24 hours", true);
     }
 
     @Override
@@ -66,7 +66,7 @@ public class Quiet extends GenericCommand {
                     } else {
                         QuietTime.setTime(GeneralUtils.getMilliSeconds(args[1].replace("-", "")));
                     }
-                    IRCUtils.sendMessage(user, network, channel, "Quiet Modified", prefix);
+                    IRCUtils.sendMessage(user, network, channel, "Quiet modified", prefix);
                     QuietTimeUtils.saveQuietTimes();
                 }
             } else {

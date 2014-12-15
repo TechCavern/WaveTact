@@ -27,7 +27,7 @@ import java.util.List;
 public class Topic extends GenericCommand {
 
     public Topic() {
-        super(GeneralUtils.toArray("topic"), 7, "Topic [Seperator] [a(add)/sw(switch)/+[topic #]/-[topic #]/(Insert message to replace whole topic)/ss(switch seperator)/r(revert)] (Messages to add)(Integer to swap)(seperator to change to) (Integer to swap)", "manages the topic", true);
+        super(GeneralUtils.toArray("topic"), 7, "Topic [separator] [a(add)/sw(switch)/+[topic #]/-[topic #]/(insert message to replace whole topic)/ss(switch separator)/r(revert)] (messages to add)(integer to swap)(separator to change to) (integer to swap)", "Manages the topic", true);
     }
 
     @Override
@@ -60,7 +60,7 @@ public class Topic extends GenericCommand {
                 channel.send().setTopic(oldTopic.getHostmask());
                 Constants.Topic.remove(oldTopic);
             } else {
-                ErrorUtils.sendError(user, "Error: No Reversal Possible");
+                ErrorUtils.sendError(user, "Error: no reversal possible");
             }
         } else {
             channel.send().setTopic(GeneralUtils.buildMessage(1, args.length, args));

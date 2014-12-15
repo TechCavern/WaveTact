@@ -17,7 +17,7 @@ import org.pircbotx.User;
 public class MCMods extends GenericCommand {
 
     public MCMods() {
-        super(GeneralUtils.toArray("mcmods mcmod"), 0, "mcmods (MC Version#) [Mod Name]", "gets info on a minecraft mod", false);
+        super(GeneralUtils.toArray("mcmods mcmod"), 0, "mcmods (mc version#) [mod name]", "Gets info on a minecraft mod", false);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class MCMods extends GenericCommand {
         if (version.isEmpty()) {
             int arraysize = 0;
             int versionsize = versions.size();
-            while (arraysize <= 20) {
+            while (arraysize <= 100) {
                 versionsize = versionsize - 1;
                 version = versions.get(versionsize).getAsString();
                 mods = GeneralUtils.getJsonArray("http://bot.notenoughmods.com/" + version + ".json");
@@ -65,7 +65,7 @@ public class MCMods extends GenericCommand {
             }
         }
         if (total == 0) {
-            ErrorUtils.sendError(user, "No Mods Found");
+            ErrorUtils.sendError(user, "No mods found");
         }
     }
 }

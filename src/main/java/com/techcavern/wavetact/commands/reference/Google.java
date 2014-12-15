@@ -18,7 +18,7 @@ import org.pircbotx.User;
 public class Google extends GenericCommand {
 
     public Google() {
-        super(GeneralUtils.toArray("google gsearch"), 0, "google (result #) [string to google]", "googles something", false);
+        super(GeneralUtils.toArray("google gsearch"), 0, "google (result #) [string to google]", "Googles something", false);
     }
 
     @Override

@@ -20,7 +20,7 @@ import java.net.URL;
 public class MCStatus extends GenericCommand {
 
     public MCStatus() {
-        super(GeneralUtils.toArray("mcstatus"), 0, null, "checks status of MC servers", false);
+        super(GeneralUtils.toArray("mcstatus"), 0, null, "Checks status of mojang servers", false);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class MCStatus extends GenericCommand {
         if (result != null) {
             IRCUtils.sendMessage(user, network, channel, result, prefix);
         } else {
-            ErrorUtils.sendError(user, "MC Status Currently Unavailable");
+            ErrorUtils.sendError(user, "MC status currently unavailable");
         }
     }
 

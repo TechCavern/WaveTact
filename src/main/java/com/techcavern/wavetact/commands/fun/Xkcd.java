@@ -17,7 +17,7 @@ import org.pircbotx.User;
 public class Xkcd extends GenericCommand {
 
     public Xkcd() {
-        super(GeneralUtils.toArray("xkcd randomxkcd"), 0, "xkcd [comic num#]", "returns random comic or specified comic #", false);
+        super(GeneralUtils.toArray("xkcd randomxkcd"), 0, "xkcd [comic num#]", "Returns random xkcd comic or specified comic #", false);
     }
 
     @Override
@@ -28,7 +28,7 @@ public class Xkcd extends GenericCommand {
         if (args.length > 0) {
             comicnumber = Integer.parseInt(args[0]);
             if (latest < comicnumber) {
-                ErrorUtils.sendError(user, "comic does not exist");
+                ErrorUtils.sendError(user, "Comic does not exist");
                 return;
             }
         } else {

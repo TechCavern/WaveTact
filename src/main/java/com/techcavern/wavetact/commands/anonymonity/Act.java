@@ -22,7 +22,7 @@ import org.pircbotx.User;
 public class Act extends GenericCommand {
 
     public Act() {
-        super(GeneralUtils.toArray("act do"), 5, "act [something]", "make the network do something", false);
+        super(GeneralUtils.toArray("act do"), 5, "act [something]", "Makes the bot do something", false);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class Act extends GenericCommand {
                 if (PermUtils.getPermLevel(network, user.getNick(), chan) >= 5) {
                     IRCUtils.sendAction(user, network, chan, StringUtils.join(args, " ").replace("\n", " "), IRCUtils.getPrefix(args[0]));
                 } else {
-                    ErrorUtils.sendError(user, "Permission Denied");
+                    ErrorUtils.sendError(user, "Permission denied");
                 }
             }
         }

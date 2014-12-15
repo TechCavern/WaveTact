@@ -14,7 +14,7 @@ import org.pircbotx.User;
 public class IRCRaw extends GenericCommand {
 
     public IRCRaw() {
-        super(GeneralUtils.toArray("ircraw raw"), 9001, "raw [to be sent to server]", "sends a raw msg to the server", false);
+        super(GeneralUtils.toArray("ircraw raw"), 9001, "raw [to be sent to server]", "Sends a raw msg to the server", false);
     }
 
     @Override

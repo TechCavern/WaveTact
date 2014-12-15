@@ -17,7 +17,7 @@ import org.pircbotx.User;
 public class FMyLife extends GenericCommand {
 
     public FMyLife() {
-        super(GeneralUtils.toArray("fmylife fml"), 0, "fmylife (def #)", "sends Random FML", false);
+        super(GeneralUtils.toArray("fmylife fml"), 0, "fmylife (def #)", "Sends random fml or specified fml", false);
     }
 
     @Override

@@ -27,13 +27,13 @@ import java.util.List;
 public class Video extends GenericCommand {
 
     public Video() {
-        super(GeneralUtils.toArray("video vid youtube yt"), 0, "video (result #) [string to search for]", "searches youtube for videos", false);
+        super(GeneralUtils.toArray("video vid youtube yt"), 0, "video (result #) [string to search for]", "Searches youtube for videos", false);
     }
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (Constants.googleapikey == null) {
-            ErrorUtils.sendError(user, "Google API key is null - Contact Bot Controller to fix");
+            ErrorUtils.sendError(user, "Google api key is null - contact bot controller to fix");
             return;
         }
         int ArrayIndex = 1;

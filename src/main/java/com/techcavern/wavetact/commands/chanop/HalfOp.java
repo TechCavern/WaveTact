@@ -23,7 +23,7 @@ import org.pircbotx.User;
 public class HalfOp extends GenericCommand {
 
     public HalfOp() {
-        super(GeneralUtils.toArray("halfop hop"), 10, "halfop (-)(user to  halfop)", "sets halfop mode on a user if it exists", true);
+        super(GeneralUtils.toArray("halfop hop"), 10, "halfop (-)(user to  halfop)", "Sets half op mode on a user if it exists", true);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class HalfOp extends GenericCommand {
                 channel.send().halfOp(user);
             }
         } else {
-            ErrorUtils.sendError(user, "This server does not support HalfOps");
+            ErrorUtils.sendError(user, "This server does not support half ops");
         }
     }
 }

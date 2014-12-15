@@ -23,7 +23,7 @@ import org.pircbotx.User;
 public class Voice extends GenericCommand {
 
     public Voice() {
-        super(GeneralUtils.toArray("voice vop"), 7, "Voice (-)(User)", "voices a user", true);
+        super(GeneralUtils.toArray("voice vop"), 7, "voice (-)(user)", "Voices a user", true);
     }
 
     @Override

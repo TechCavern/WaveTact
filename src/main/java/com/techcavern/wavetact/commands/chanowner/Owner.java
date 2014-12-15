@@ -23,7 +23,7 @@ import org.pircbotx.User;
 public class Owner extends GenericCommand {
 
     public Owner() {
-        super(GeneralUtils.toArray("owner own oop"), 15, "Owner (-)(User)", "sets owner mode if it exists on a user", true);
+        super(GeneralUtils.toArray("owner own oop"), 15, "owner (-)(user)", "Sets owner mode if it exists on a user", true);
     }
 
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
@@ -40,7 +40,7 @@ public class Owner extends GenericCommand {
                 channel.send().owner(user);
             }
         } else {
-            ErrorUtils.sendError(user, "This server does not support Owners");
+            ErrorUtils.sendError(user, "This server does not support owners");
         }
     }
 }

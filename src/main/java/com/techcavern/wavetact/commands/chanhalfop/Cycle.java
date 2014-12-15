@@ -21,7 +21,7 @@ import org.pircbotx.User;
 public class Cycle extends GenericCommand {
 
     public Cycle() {
-        super(GeneralUtils.toArray("cycle cl"), 7, "cycle [channel]", "cycle (parts/join) a channel", true);
+        super(GeneralUtils.toArray("cycle cl"), 7, "cycle [channel]", "Cycle (parts/join) a channel", true);
     }
 
     @Override

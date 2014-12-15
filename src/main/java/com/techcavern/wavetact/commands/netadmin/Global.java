@@ -42,7 +42,7 @@ public class Global extends GenericCommand {
                 if (userPermLevel >= 9001) {
                     IRCUtils.sendNetworkGlobal(GeneralUtils.buildMessage(1, args.length, args), workingnetwork, user);
                 } else {
-                    ErrorUtils.sendError(user, "Permission Denied");
+                    ErrorUtils.sendError(user, "Permission denied");
                 }
             }
         } else if (args[0].equalsIgnoreCase("all") && userPermLevel >= 9001) {

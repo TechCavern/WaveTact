@@ -26,17 +26,17 @@ import org.xbill.DNS.*;
 public class DNSBlacklistLookup extends GenericCommand {
 
     public DNSBlacklistLookup() {
-        super(GeneralUtils.toArray("dnsblacklistlookup dbl"), 5, "dnsblacklistlookup [IPv4/Domain/User]", "looks up a domain or IP to see if its in a spam blacklist", false);
+        super(GeneralUtils.toArray("dnsblacklistlookup dbl"), 5, "dnsblacklistlookup [ip/domain/user]", "Looks up a domain or IP to see if its in a spam blacklist", false);
     }
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         String BeforeIP = GeneralUtils.getIP(args[0], network);
         if (BeforeIP == null) {
-            ErrorUtils.sendError(user, "Invalid IP/User");
+            ErrorUtils.sendError(user, "Invalid ip/user");
             return;
         } else if (BeforeIP.contains(":")) {
-            ErrorUtils.sendError(user, "IPv6 is Not supported");
+            ErrorUtils.sendError(user, "IPv6 is not supported");
             return;
         }
         String[] IPString = StringUtils.split(BeforeIP, ".");
@@ -51,7 +51,7 @@ public class DNSBlacklistLookup extends GenericCommand {
         Boolean sent = false;
         Resolver resolver = new SimpleResolver();
         if (Constants.DNSBLs.isEmpty()) {
-            ErrorUtils.sendError(user, "No DNS BLs found in Database");
+            ErrorUtils.sendError(user, "No dns blacklists found in database");
             return;
         }
         for (String Domain : Constants.DNSBLs) {
@@ -71,7 +71,7 @@ public class DNSBlacklistLookup extends GenericCommand {
 
         }
         if (!sent) {
-            IRCUtils.sendMessage(user, network, channel, BeforeIP + " not found in DNSBLs", prefix);
+            IRCUtils.sendMessage(user, network, channel, BeforeIP + " not found in dns blacklists", prefix);
         }
 
     }

@@ -21,7 +21,7 @@ import org.pircbotx.User;
 public class Mode extends GenericCommand {
 
     public Mode() {
-        super(GeneralUtils.toArray("mode mo"), 7, "mode [modes to set]", "sets a mode on the channel", true);
+        super(GeneralUtils.toArray("mode mo"), 7, "mode [modes to set]", "Sets a mode on the channel", true);
     }
 
     @Override

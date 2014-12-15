@@ -21,7 +21,7 @@ import org.pircbotx.User;
 public class Commands extends GenericCommand {
 
     public Commands() {
-        super(GeneralUtils.toArray("commands list cmds"), 0, "commands [permlevel/all]", "returns list of Commands specific to that permlevel", false);
+        super(GeneralUtils.toArray("commands list cmds"), 0, "commands [permlevel/all]", "Returns list of Commands specific to that permlevel", false);
     }
 
     @Override

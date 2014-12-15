@@ -27,7 +27,7 @@ import org.pircbotx.User;
 public class DefCon extends GenericCommand {
 
     public DefCon() {
-        super(GeneralUtils.toArray("defcon"), 9001, "defcon (-)(1)(2)(3)(4)(5)", "locks down the network", false);
+        super(GeneralUtils.toArray("defcon"), 9001, "defcon (-)(1)(2)(3)(4)(5)", "Locks down the network", false);
     }
 
     @Override

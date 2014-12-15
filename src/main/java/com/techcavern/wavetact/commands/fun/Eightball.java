@@ -24,7 +24,7 @@ import org.pircbotx.User;
 public class Eightball extends GenericCommand {
 
     public Eightball() {
-        super(GeneralUtils.toArray("eightball 8ball 8b"), 0, "eightball [question]", "eightball", false);
+        super(GeneralUtils.toArray("eightball 8ball 8b"), 0, "eightball [question]", "Eightball", false);
     }
 
     @Override

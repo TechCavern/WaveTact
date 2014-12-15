@@ -16,13 +16,13 @@ import org.pircbotx.User;
 public class Drop extends GenericCommand {
 
     public Drop() {
-        super(GeneralUtils.toArray("drop"), 0, "drop [password]", "drops a user", false);
+        super(GeneralUtils.toArray("drop"), 0, "drop [password]", "Drops a user", false);
     }
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (!PermUtils.checkIfAccountEnabled(network)) {
-            ErrorUtils.sendError(user, "This network is set to " + GetUtils.getAuthType(network) + " Authentication");
+            ErrorUtils.sendError(user, "This network is set to " + GetUtils.getAuthType(network) + " authentication");
             return;
         }
         AuthedUser authedUser = PermUtils.getAuthedUser(network, user.getNick());
@@ -36,7 +36,7 @@ public class Drop extends GenericCommand {
                 AccountUtils.saveAccounts();
                 IRCUtils.sendMessage(user, network, channel, "Your account is now dropped", prefix);
             } else {
-                ErrorUtils.sendError(user, "Incorrect Password");
+                ErrorUtils.sendError(user, "Incorrect password");
             }
         }
     }

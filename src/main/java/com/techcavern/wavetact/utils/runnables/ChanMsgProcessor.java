@@ -26,7 +26,7 @@ public class ChanMsgProcessor {
                             e.printStackTrace();
                         }
                     } else {
-                        ErrorUtils.sendError(event.getUser(), "Permission Denied");
+                        ErrorUtils.sendError(event.getUser(), "Permission denied");
                     }
                 }
             }

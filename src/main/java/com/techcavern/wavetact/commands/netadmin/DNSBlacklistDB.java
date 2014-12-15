@@ -24,7 +24,7 @@ import org.pircbotx.User;
 public class DNSBlacklistDB extends GenericCommand {
 
     public DNSBlacklistDB() {
-        super(GeneralUtils.toArray("dnsblacklistdb dnsbldb"), 20, "dnsblacklistdb (-)[Spam DNSBL Url]", "Adds/Removes Domains from Spam DNS Blacklists", false);
+        super(GeneralUtils.toArray("dnsblacklistdb dnsbldb"), 20, "dnsblacklistdb (-)[dns blacklist url]", "Adds/Removes Domains from Spam DNS Blacklists", false);
     }
 
     @Override
@@ -36,28 +36,28 @@ public class DNSBlacklistDB extends GenericCommand {
                 if (Domain != null) {
                     Constants.DNSBLs.remove(Domain);
                     DNSBLUtils.saveDNSBLs();
-                    IRCUtils.sendMessage(user, network, channel, "Spam DNSBL Removed", prefix);
+                    IRCUtils.sendMessage(user, network, channel, "DNS blacklist removed", prefix);
                 } else {
-                    ErrorUtils.sendError(user, "Spam DNSBL does not exist on list");
+                    ErrorUtils.sendError(user, "DNS blacklist does not exist on list");
                 }
             } else if (args[0].equalsIgnoreCase("list")) {
                 if (!Constants.DNSBLs.isEmpty()) {
                     IRCUtils.sendMessage(user, network, channel, StringUtils.join(Constants.DNSBLs, ", "), prefix);
                 } else {
-                    ErrorUtils.sendError(user, "Spam DNS Blacklist is Empty");
+                    ErrorUtils.sendError(user, "DNS blacklist is empty");
                 }
             } else {
                 String Domain = GetUtils.getDNSBLbyDomain(args[0]);
                 if (Domain == null) {
                     Constants.DNSBLs.add(args[0]);
                     DNSBLUtils.saveDNSBLs();
-                    IRCUtils.sendMessage(user, network, channel, "Spam DNSBL Added", prefix);
+                    IRCUtils.sendMessage(user, network, channel, "DNS blacklist added", prefix);
                 } else {
-                    ErrorUtils.sendError(user, "Spam DNSBL already listed");
+                    ErrorUtils.sendError(user, "DNS blacklist is already listed");
                 }
             }
         } else {
-            ErrorUtils.sendError(user, "Please Specifiy an Spam DNBL");
+            ErrorUtils.sendError(user, "Please specify a dns blacklist");
         }
     }
 }

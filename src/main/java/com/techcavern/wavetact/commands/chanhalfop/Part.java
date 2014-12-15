@@ -31,7 +31,7 @@ import java.util.List;
 public class Part extends GenericCommand {
 
     public Part() {
-        super(GeneralUtils.toArray("part pa"), 7, "part (+)[channel]", "parts a channel", true);
+        super(GeneralUtils.toArray("part pa"), 7, "part (+)[channel]", "Parts a channel", true);
     }
 
     @Override
@@ -60,7 +60,7 @@ public class Part extends GenericCommand {
                     config.save();
                 }
             }else{
-                ErrorUtils.sendError(user, "Permission Denied");
+                ErrorUtils.sendError(user, "Permission denied");
             }
         }
     }

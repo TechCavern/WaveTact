@@ -21,7 +21,7 @@ public class SimpleAction extends GenericCommand {
     private boolean locked;
 
     public SimpleAction(String inputString, int permLevel, String action, boolean locked) {
-        super(GeneralUtils.toArray(inputString), permLevel, null, "A Basic Command that takes no Arguments", false);
+        super(GeneralUtils.toArray(inputString), permLevel, null, "A basic command", false);
         this.action = action;
         this.locked = locked;
 

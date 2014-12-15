@@ -25,7 +25,7 @@ import org.pircbotx.User;
 public class Join extends GenericCommand {
 
     public Join() {
-        super(GeneralUtils.toArray("join jo"), 20, "join (+)[channel]", "joins a channel", false);
+        super(GeneralUtils.toArray("join jo"), 20, "join (+)[channel]", "Joins a channel", false);
     }
 
     @Override

@@ -16,7 +16,7 @@ import org.pircbotx.User;
 public class Insult extends GenericCommand {
 
     public Insult() {
-        super(GeneralUtils.toArray("insult burn"), 0, "insult [something]", "insults something", false);
+        super(GeneralUtils.toArray("insult burn"), 0, "insult [something]", "Insults something", false);
     }
 
     @Override

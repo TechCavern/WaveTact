@@ -17,7 +17,7 @@ import org.pircbotx.User;
 public class Movie extends GenericCommand {
 
     public Movie() {
-        super(GeneralUtils.toArray("movie imdb"), 0, "movie [string to search movies]", "searches imdb", false);
+        super(GeneralUtils.toArray("movie imdb"), 0, "movie [string to search movies]", "Searches imdb", false);
     }
 
     @Override

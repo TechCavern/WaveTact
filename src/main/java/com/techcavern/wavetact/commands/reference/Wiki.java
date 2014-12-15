@@ -17,7 +17,7 @@ import org.pircbotx.User;
 public class Wiki extends GenericCommand {
 
     public Wiki() {
-        super(GeneralUtils.toArray("wiki wikipedia"), 0, "wiki [string to search wiki]", "searches wikipedia for something", false);
+        super(GeneralUtils.toArray("wiki wikipedia"), 0, "wiki [string to search wiki]", "Searches wikipedia for something", false);
     }
 
     @Override

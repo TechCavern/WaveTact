@@ -20,7 +20,7 @@ import java.util.List;
 public class Pokemon extends GenericCommand {
 
     public Pokemon() {
-        super(GeneralUtils.toArray("pokemon pkm"), 0, "pokemon [name][ID]", "Displays info on a pokemon", false);
+        super(GeneralUtils.toArray("pokemon pkm"), 0, "pokemon [name][id]", "Displays info on a pokemon", false);
     }
 
     @Override

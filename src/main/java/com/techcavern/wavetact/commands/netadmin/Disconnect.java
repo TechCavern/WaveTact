@@ -21,7 +21,7 @@ import org.pircbotx.User;
 public class Disconnect extends GenericCommand {
 
     public Disconnect() {
-        super(GeneralUtils.toArray("disconnect dc"), 20, "disconnect (reason)", "disconnects from the network", false);
+        super(GeneralUtils.toArray("disconnect dc"), 20, "disconnect (reason)", "Disconnects from the network", false);
     }
 
     @Override

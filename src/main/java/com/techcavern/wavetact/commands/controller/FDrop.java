@@ -16,13 +16,13 @@ import org.pircbotx.User;
 public class FDrop extends GenericCommand {
 
     public FDrop() {
-        super(GeneralUtils.toArray("fdrop"), 9001, "fdrop [user]", "forcefully drops a user", false);
+        super(GeneralUtils.toArray("fdrop"), 9001, "fdrop [user]", "Forcefully drops a user", false);
     }
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (!PermUtils.checkIfAccountEnabled(network)) {
-            ErrorUtils.sendError(user, "This network is set to " + GetUtils.getAuthType(network) + " Authentication");
+            ErrorUtils.sendError(user, "This network is set to " + GetUtils.getAuthType(network) + " authentication");
             return;
         }
         AuthedUser authedUser = PermUtils.getAuthedUser(network, args[0]);
@@ -35,7 +35,7 @@ public class FDrop extends GenericCommand {
             AccountUtils.saveAccounts();
             IRCUtils.sendMessage(user, network, channel, "Account dropped", prefix);
         } else {
-            ErrorUtils.sendError(user, "account does not exist");
+            ErrorUtils.sendError(user, "Account does not exist");
         }
     }
 }

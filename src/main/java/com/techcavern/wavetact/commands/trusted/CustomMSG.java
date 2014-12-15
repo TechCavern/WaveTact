@@ -26,7 +26,7 @@ import java.util.List;
 public class CustomMSG extends GenericCommand {
 
     public CustomMSG() {
-        super(GeneralUtils.toArray("custommessage cmsg custommsg customsg"), 5, "custommessage (+/-)[Command] [permlevel] [Response]", "Responses may contain $1, $2, etc which indicate the argument separated by a space. $* indicates all remaining arguments.", false);
+        super(GeneralUtils.toArray("custommessage cmsg custommsg customsg"), 5, "custommessage (+/-)[command] [permlevel] [response]", "Responses may contain $1, $2, etc which indicate the argument separated by a space. $* indicates all remaining arguments.", false);
     }
 
     @Override
@@ -41,17 +41,17 @@ public class CustomMSG extends GenericCommand {
                 SimpleMessage cmd = SimpleMessageUtils.getSimpleMessage(command);
                 if (cmd.getPermLevel() <= userPermLevel) {
                     if (cmd == null) {
-                        ErrorUtils.sendError(user, "Custom Message does not exist");
+                        ErrorUtils.sendError(user, "Custom message does not exist");
                     } else if (cmd.getLockedStatus()) {
-                        ErrorUtils.sendError(user, "Custom Message is locked");
+                        ErrorUtils.sendError(user, "Custom message is locked");
                     } else {
                         Constants.SimpleMessages.remove(cmd);
                         Constants.AllCommands.remove(cmd);
                         SimpleMessageUtils.saveSimpleMessages();
-                        IRCUtils.sendMessage(user, network, channel, "Custom Message removed", prefix);
+                        IRCUtils.sendMessage(user, network, channel, "Custom message removed", prefix);
                     }
                 } else {
-                    ErrorUtils.sendError(user, "Permission Denied");
+                    ErrorUtils.sendError(user, "Permission denied");
                 }
             } else {
                 int accessLevel = Integer.parseInt(args[1]);
@@ -65,14 +65,14 @@ public class CustomMSG extends GenericCommand {
                             Constants.AllCommands.remove(cmd);
                             Constants.SimpleMessages.add(new SimpleMessage(command, accessLevel, msg, false));
                             SimpleMessageUtils.saveSimpleMessages();
-                            IRCUtils.sendMessage(user, network, channel, "Custom Message modified", prefix);
+                            IRCUtils.sendMessage(user, network, channel, "Custom message modified", prefix);
                         } else if (cmd.getLockedStatus()) {
-                            ErrorUtils.sendError(user, "Custom Message Locked");
+                            ErrorUtils.sendError(user, "Custom message locked");
                         } else {
-                            ErrorUtils.sendError(user, "Custom Message Does Not Exist");
+                            ErrorUtils.sendError(user, "Custom Message does not exist");
                         }
                     } else {
-                        ErrorUtils.sendError(user, "Permission Denied");
+                        ErrorUtils.sendError(user, "Permission denied");
                     }
                 } else {
                     if (GetUtils.getCommand(command) != null) {
@@ -81,7 +81,7 @@ public class CustomMSG extends GenericCommand {
                     } else
                         Constants.SimpleMessages.add(new SimpleMessage(command, accessLevel, msg, false));
                     SimpleMessageUtils.saveSimpleMessages();
-                    IRCUtils.sendMessage(user, network, channel, "Custom Message added", prefix);
+                    IRCUtils.sendMessage(user, network, channel, "Custom message added", prefix);
                 }
             }
 

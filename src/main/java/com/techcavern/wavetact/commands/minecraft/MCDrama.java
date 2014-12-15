@@ -16,7 +16,7 @@ import org.pircbotx.User;
 public class MCDrama extends GenericCommand {
 
     public MCDrama() {
-        super(GeneralUtils.toArray("mcdrama"), 0, null, "Displays Minecraft Drama", false);
+        super(GeneralUtils.toArray("mcdrama"), 0, null, "Displays minecraft drama", false);
     }
 
     @Override

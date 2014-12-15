@@ -18,7 +18,7 @@ import org.pircbotx.User;
 public class Image extends GenericCommand {
 
     public Image() {
-        super(GeneralUtils.toArray("image images gimages googleimages"), 0, "image (result #) [string to search]", "searches google images", false);
+        super(GeneralUtils.toArray("image images gimages googleimages"), 0, "image (result #) [string to search]", "Searches google images", false);
     }
 
     @Override

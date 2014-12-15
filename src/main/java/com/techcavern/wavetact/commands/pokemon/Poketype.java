@@ -16,7 +16,7 @@ import org.pircbotx.User;
 public class Poketype extends GenericCommand {
 
     public Poketype() {
-        super(GeneralUtils.toArray("poketype pkt"), 0, "poketype [ID]", "Displays info on a type", false);
+        super(GeneralUtils.toArray("poketype pkt"), 0, "poketype [id]", "Displays info on a type", false);
     }
 
     @Override
@@ -34,6 +34,6 @@ public class Poketype extends GenericCommand {
         String supereffective = GeneralUtils.getJsonString(presupereffective, "name");
         if (supereffective.isEmpty())
             supereffective = "No super effective types";
-        IRCUtils.sendMessage(user, network, channel, "Super Effective to: " + supereffective, prefix);
+        IRCUtils.sendMessage(user, network, channel, "Super effective to: " + supereffective, prefix);
     }
 }

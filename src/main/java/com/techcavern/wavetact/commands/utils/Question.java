@@ -22,14 +22,14 @@ import java.util.List;
 public class Question extends GenericCommand {
 
     public Question() {
-        super(GeneralUtils.toArray("question wa wolframalpha"), 0, "question (Answer #) [Question]", "ask wolfram alpha a question!", false);
+        super(GeneralUtils.toArray("question wa wolframalpha"), 0, "question (answer #) [question]", "Ask wolfram alpha a question!", false);
     }
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
 
         if (Constants.wolframalphaapikey == null) {
-            ErrorUtils.sendError(user, "Wolfram Alpha API key is null - Contact Bot Controller to fix");
+            ErrorUtils.sendError(user, "Wolfram Alpha api key is null - contact bot controller to fix");
             return;
         }
         int ArrayIndex = 0;

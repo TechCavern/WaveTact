@@ -24,7 +24,7 @@ public class LockACT extends GenericCommand {
 
 
     public LockACT() {
-        super(GeneralUtils.toArray("lockaction lcact lockact"), 9001, "lockaction [command]", "locks a custom action", false);
+        super(GeneralUtils.toArray("lockaction lcact lockact"), 9001, "lockaction [command]", "Locks a custom action", false);
     }
 
     @Override
@@ -33,11 +33,11 @@ public class LockACT extends GenericCommand {
         if (args[0].startsWith("-")) {
             SimpleActionUtils.getSimpleAction(args[0].replaceFirst("-", "")).unlock();
             SimpleActionUtils.saveSimpleActions();
-            IRCUtils.sendMessage(user, network, channel, "Simple Action Unlocked", prefix);
+            IRCUtils.sendMessage(user, network, channel, "Simple action unlocked", prefix);
         } else {
             SimpleActionUtils.getSimpleAction(args[0].replaceFirst("-", "")).lock();
             SimpleActionUtils.saveSimpleActions();
-            IRCUtils.sendMessage(user, network, channel, "Simple Action Locked", prefix);
+            IRCUtils.sendMessage(user, network, channel, "Simple action locked", prefix);
 
         }
 

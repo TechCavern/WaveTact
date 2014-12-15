@@ -16,13 +16,13 @@ import org.pircbotx.User;
 public class Register extends GenericCommand {
 
     public Register() {
-        super(GeneralUtils.toArray("register reg"), 0, "register (username) [password]", "registers a user", false);
+        super(GeneralUtils.toArray("register reg"), 0, "register (username) [password]", "Registers a user", false);
     }
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (!PermUtils.checkIfAccountEnabled(network)) {
-            ErrorUtils.sendError(user, "This network is set to " + GetUtils.getAuthType(network) + " Authentication");
+            ErrorUtils.sendError(user, "This network is set to " + GetUtils.getAuthType(network) + " authentication");
             return;
         }
         String userString;

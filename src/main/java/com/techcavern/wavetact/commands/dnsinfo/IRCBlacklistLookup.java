@@ -26,17 +26,17 @@ import org.xbill.DNS.*;
 public class IRCBlacklistLookup extends GenericCommand {
 
     public IRCBlacklistLookup() {
-        super(GeneralUtils.toArray("ircblacklistlookup ibl"), 5, "ircblacklistlookup [IPv4/Domain/User]", "looks up a domain or IP to see if its in a drone blacklist", false);
+        super(GeneralUtils.toArray("ircblacklistlookup ibl"), 5, "ircblacklistlookup [ip/domain/user]", "Looks up a domain or ip to see if its in a drone blacklist", false);
     }
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         String BeforeIP = GeneralUtils.getIP(args[0], network);
         if (BeforeIP == null) {
-            ErrorUtils.sendError(user, "Invalid IP/User");
+            ErrorUtils.sendError(user, "Invalid ip/user");
             return;
         } else if (BeforeIP.contains(":")) {
-            ErrorUtils.sendError(user, "IPv6 is Not supported");
+            ErrorUtils.sendError(user, "IPv6 is not supported");
             return;
         }
         String[] IPString = StringUtils.split(BeforeIP, ".");
@@ -51,7 +51,7 @@ public class IRCBlacklistLookup extends GenericCommand {
         Boolean sent = false;
         Resolver resolver = new SimpleResolver();
         if (Constants.IRCBLs.isEmpty()) {
-            ErrorUtils.sendError(user, "No IRC BLs found in Database");
+            ErrorUtils.sendError(user, "No irc blacklists found in database");
             return;
         }
         for (String Domain : Constants.IRCBLs) {
@@ -72,7 +72,7 @@ public class IRCBlacklistLookup extends GenericCommand {
 
         }
         if (!sent) {
-            IRCUtils.sendMessage(user, network, channel, BeforeIP + " not found in IRC BLs", prefix);
+            IRCUtils.sendMessage(user, network, channel, BeforeIP + " not found in irc blacklists", prefix);
         }
 
     }

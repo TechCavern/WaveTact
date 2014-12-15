@@ -18,7 +18,7 @@ import java.net.InetSocketAddress;
 public class MCServerInfo extends GenericCommand {
 
     public MCServerInfo() {
-        super(GeneralUtils.toArray("mcserverinfo mcserver"), 0, null, "mcserverinfo [address] (port)", false);
+        super(GeneralUtils.toArray("mcserverinfo mcserver"), 0, "mcserverinfo [address] (port)","Gets info on minecraft server" , false);
     }
 
     @Override

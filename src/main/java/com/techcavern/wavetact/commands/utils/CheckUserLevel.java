@@ -33,23 +33,23 @@ public class CheckUserLevel extends GenericCommand {
         if (userObject == null) {
             ErrorUtils.sendError(user, "User does not exist");
         } else if (userPermLevel >= 9001) {
-            IRCUtils.sendMessage(user, network, channel, userObject + " is a Bot Controller!" + " (" + userPermLevel + ")", prefix);
+            IRCUtils.sendMessage(user, network, channel, userObject + " is a bot controller!" + " (" + userPermLevel + ")", prefix);
         } else if (userPermLevel >= 20) {
-            IRCUtils.sendMessage(user, network, channel, userObject + " is a Network Administrator!" + " (" + userPermLevel + ")", prefix);
+            IRCUtils.sendMessage(user, network, channel, userObject + " is a network administrator!" + " (" + userPermLevel + ")", prefix);
         } else if (userPermLevel >= 18) {
-            IRCUtils.sendMessage(user, network, channel, userObject + " is a Channel Founder!" + " (" + userPermLevel + ")", prefix);
+            IRCUtils.sendMessage(user, network, channel, userObject + " is a channel founder!" + " (" + userPermLevel + ")", prefix);
         } else if (userPermLevel >= 15) {
-            IRCUtils.sendMessage(user, network, channel, userObject + " is a Channel Owner!" + " (" + userPermLevel + ")", prefix);
+            IRCUtils.sendMessage(user, network, channel, userObject + " is a channel owner!" + " (" + userPermLevel + ")", prefix);
         } else if (userPermLevel >= 13) {
-            IRCUtils.sendMessage(user, network, channel, userObject + " is a Channel Admin!" + " (" + userPermLevel + ")", prefix);
+            IRCUtils.sendMessage(user, network, channel, userObject + " is a channel admin!" + " (" + userPermLevel + ")", prefix);
         } else if (userPermLevel >= 10) {
-            IRCUtils.sendMessage(user, network, channel, userObject + " is a Channel Operator!" + " (" + userPermLevel + ")", prefix);
+            IRCUtils.sendMessage(user, network, channel, userObject + " is a channel operator!" + " (" + userPermLevel + ")", prefix);
         } else if (userPermLevel >= 7) {
-            IRCUtils.sendMessage(user, network, channel, userObject + " is a Channel Half-Operator" + " (" + userPermLevel + ")", prefix);
+            IRCUtils.sendMessage(user, network, channel, userObject + " is a channel half operator" + " (" + userPermLevel + ")", prefix);
         } else if (userPermLevel >= 5 && !isPrivate) {
-            IRCUtils.sendMessage(user, network, channel, userObject + " is a Channel Trusted User!" + " (" + userPermLevel + ")", prefix);
+            IRCUtils.sendMessage(user, network, channel, userObject + " is a channel trusted user!" + " (" + userPermLevel + ")", prefix);
         } else {
-            IRCUtils.sendMessage(user, network, channel, userObject + " is a Regular User!" + " (" + userPermLevel + ")", prefix);
+            IRCUtils.sendMessage(user, network, channel, userObject + " is a regular user!" + " (" + userPermLevel + ")", prefix);
         }
 
 

@@ -24,7 +24,7 @@ import java.net.URL;
 public class MCAccountInfo extends GenericCommand {
 
     public MCAccountInfo() {
-        super(GeneralUtils.toArray("mcaccountinfo mcuserinfo mcpremium mcuuid mcmigrated"), 0, "mcaccountinfo [user]", "Gets Info on a Minecraft Account", false);
+        super(GeneralUtils.toArray("mcaccountinfo mcuserinfo mcpremium mcuuid mcmigrated"), 0, "mcaccountinfo [user]", "Gets info on a minecraft account", false);
     }
 
     @Override
@@ -63,7 +63,7 @@ public class MCAccountInfo extends GenericCommand {
             }
             IRCUtils.sendMessage(user, network, channel, User + " - " + "UUID: " + UUID + " - " + "Paid: " + Premium + " - " + "Mojang Account: " + Migrated, prefix);
         } else {
-            ErrorUtils.sendError(user, "user does not exist");
+            ErrorUtils.sendError(user, "User does not exist");
         }
     }
 

@@ -15,7 +15,7 @@ import org.pircbotx.User;
 public class Ban extends GenericCommand {
 
     public Ban() {
-        super(GeneralUtils.toArray("ban b"), 7, "ban (-)(+)[User][hostmask] (-)(+)(time)", "bans a user for a specified period of time or 24 hours", true);
+        super(GeneralUtils.toArray("ban b"), 7, "ban (-)(+)[user][hostmask] (-)(+)(time)", "Bans a user for a specified period of time or 24 hours", true);
     }
 
     @Override
@@ -60,7 +60,7 @@ public class Ban extends GenericCommand {
                     } else {
                         BanTime.setTime(GeneralUtils.getMilliSeconds(args[1].replace("-", "")));
                     }
-                    IRCUtils.sendMessage(user, network, channel, "Ban Modified", prefix);
+                    IRCUtils.sendMessage(user, network, channel, "Ban modified", prefix);
                     BanTimeUtils.saveBanTimes();
                 }
             } else {

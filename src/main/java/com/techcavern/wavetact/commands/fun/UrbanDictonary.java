@@ -19,7 +19,7 @@ import org.pircbotx.User;
 public class UrbanDictonary extends GenericCommand {
 
     public UrbanDictonary() {
-        super(GeneralUtils.toArray("urbandictionary ub urban urb ud"), 0, "urbandictionary (def #) [what to define]", "defines a term in the urban dictionary", false);
+        super(GeneralUtils.toArray("urbandictionary ub urban urb ud"), 0, "urbandictionary (def #) [what to define]", "Defines a term in the urban dictionary", false);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class UrbanDictonary extends GenericCommand {
                 ErrorUtils.sendError(user, "Def #" + ArrayIndex + " does not exist");
             }
         } else {
-            ErrorUtils.sendError(user, "Not Defined in the Urban Dictionary");
+            ErrorUtils.sendError(user, "Not defined in the urban dictionary");
         }
 
     }

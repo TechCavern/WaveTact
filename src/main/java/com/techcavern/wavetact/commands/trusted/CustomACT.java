@@ -26,7 +26,7 @@ import java.util.List;
 public class CustomACT extends GenericCommand {
 
     public CustomACT() {
-        super(GeneralUtils.toArray("customaction cact customact"), 5, "customaction (+/-)[Command] [permlevel] [Response]", "Responses may contain $1, $2, etc which indicate the argument separated by a space. $* indicates all remaining arguments.", false);
+        super(GeneralUtils.toArray("customaction cact customact"), 5, "customaction (+/-)[command] [permlevel] [response]", "Responses may contain $1, $2, etc which indicate the argument separated by a space. $* indicates all remaining arguments.", false);
     }
 
     @Override
@@ -41,17 +41,17 @@ public class CustomACT extends GenericCommand {
                 SimpleAction cmd = SimpleActionUtils.getSimpleAction(command);
                 if (cmd.getPermLevel() <= userPermLevel) {
                     if (cmd == null) {
-                        ErrorUtils.sendError(user, "Custom Action does not exist");
+                        ErrorUtils.sendError(user, "Custom action does not exist");
                     } else if (cmd.getLockedStatus()) {
-                        ErrorUtils.sendError(user, "Custom Action is locked");
+                        ErrorUtils.sendError(user, "Custom action is locked");
                     } else {
                         Constants.SimpleActions.remove(cmd);
                         Constants.AllCommands.remove(cmd);
                         SimpleActionUtils.saveSimpleActions();
-                        IRCUtils.sendMessage(user, network, channel, "Custom Action removed", prefix);
+                        IRCUtils.sendMessage(user, network, channel, "Custom action removed", prefix);
                     }
                 } else {
-                    ErrorUtils.sendError(user, "Permission Denied");
+                    ErrorUtils.sendError(user, "Permission denied");
                 }
             } else {
                 int accessLevel = Integer.parseInt(args[1]);
@@ -65,14 +65,14 @@ public class CustomACT extends GenericCommand {
                             Constants.AllCommands.remove(cmd);
                             Constants.SimpleActions.add(new SimpleAction(command, accessLevel, msg, false));
                             SimpleActionUtils.saveSimpleActions();
-                            IRCUtils.sendMessage(user, network, channel, "Custom Action modified", prefix);
+                            IRCUtils.sendMessage(user, network, channel, "Custom action modified", prefix);
                         } else if (cmd.getLockedStatus()) {
-                            ErrorUtils.sendError(user, "Custom Action Locked");
+                            ErrorUtils.sendError(user, "Custom action locked");
                         } else {
-                            ErrorUtils.sendError(user, "Custom Action Does Not Exist");
+                            ErrorUtils.sendError(user, "Custom action does not exist");
                         }
                     } else {
-                        ErrorUtils.sendError(user, "Permission Denied");
+                        ErrorUtils.sendError(user, "Permission denied");
                     }
                 } else {
                     if (GetUtils.getCommand(command) != null) {
@@ -81,7 +81,7 @@ public class CustomACT extends GenericCommand {
                     } else
                         Constants.SimpleActions.add(new SimpleAction(command, accessLevel, msg, false));
                     SimpleActionUtils.saveSimpleActions();
-                    IRCUtils.sendMessage(user, network, channel, "Custom Action added", prefix);
+                    IRCUtils.sendMessage(user, network, channel, "Custom action added", prefix);
                 }
             }
         }

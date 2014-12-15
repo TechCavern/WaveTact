@@ -26,7 +26,7 @@ import java.util.concurrent.TimeUnit;
 public class Connect extends GenericCommand {
 
     public Connect() {
-        super(GeneralUtils.toArray("connect"), 9001, "connect (+)(-)[networkname] (Reason)", "connects, reconnects or disconnects a network from a predefined network", false);
+        super(GeneralUtils.toArray("connect"), 9001, "connect (+)(-)[networkname] (reason)", "Connects, reconnects or disconnects a network from a predefined network", false);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class Connect extends GenericCommand {
         }
         if (reconnect || disconnect) {
             if (workingnetwork.getState().equals(PircBotX.State.DISCONNECTED)) {
-                ErrorUtils.sendError(user, "Bot Currently Disonnected");
+                ErrorUtils.sendError(user, "Bot currently disconnected");
                 return;
             } else {
                 IRCUtils.sendMessage(user, network, channel, "Disconnecting...", prefix);
@@ -63,7 +63,7 @@ public class Connect extends GenericCommand {
             } while (workingnetwork.getState().equals(PircBotX.State.CONNECTED));
         }
         if (workingnetwork.getState().equals(PircBotX.State.CONNECTED)) {
-            ErrorUtils.sendError(user, "Bot Currently Connected");
+            ErrorUtils.sendError(user, "Bot currently connected");
         } else {
             workingnetwork.startBot();
         }

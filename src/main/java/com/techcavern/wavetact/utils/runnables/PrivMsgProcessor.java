@@ -34,7 +34,7 @@ public class PrivMsgProcessor {
                                     ErrorUtils.sendError(event.getUser(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")");
                                 }
                             } else {
-                                ErrorUtils.sendError(event.getUser(), "Permission Denied");
+                                ErrorUtils.sendError(event.getUser(), "Permission denied");
                             }
                         } else {
                             ErrorUtils.sendError(event.getUser(), "Please specify channel as argument #1 in front of all the other arguments");
@@ -56,7 +56,7 @@ public class PrivMsgProcessor {
                                     e.printStackTrace();
                                 }
                             } else {
-                                ErrorUtils.sendError(event.getUser(), "Permission Denied");
+                                ErrorUtils.sendError(event.getUser(), "Permission denied");
                             }
                         }
                     }

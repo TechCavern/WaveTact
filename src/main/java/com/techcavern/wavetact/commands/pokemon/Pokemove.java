@@ -15,7 +15,7 @@ import org.pircbotx.User;
 public class Pokemove extends GenericCommand {
 
     public Pokemove() {
-        super(GeneralUtils.toArray("pokemove pkmo"), 0, "pokemove [ID]", "Displays info on a move", false);
+        super(GeneralUtils.toArray("pokemove pkmo"), 0, "pokemove [id]", "Displays info on a move", false);
     }
 
     @Override

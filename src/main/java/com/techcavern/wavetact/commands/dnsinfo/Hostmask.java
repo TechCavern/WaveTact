@@ -15,7 +15,7 @@ import org.pircbotx.User;
 public class Hostmask extends GenericCommand {
 
     public Hostmask() {
-        super(GeneralUtils.toArray("hostmask host"), 0, "Hostmask $[nick]", "gets the hostmask of a user - $ before gets the ban mask of a user", false);
+        super(GeneralUtils.toArray("hostmask host"), 0, "hostmask (+)[nick]", "Gets the hostmask of a user - + before gets the ban mask of a user", false);
     }
 
     @Override

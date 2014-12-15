@@ -18,13 +18,13 @@ import org.pircbotx.User;
 public class Weather extends GenericCommand {
 
     public Weather() {
-        super(GeneralUtils.toArray("weather temperature temp humid humidity wind wunderground wunder"), 0, "weather [zipcode][city]", "gets weather in an area from wunderground", false);
+        super(GeneralUtils.toArray("weather temperature temp humid humidity wind wunderground wunder"), 0, "weather [zipcode][city]", "Gets weather in an area from wunderground", false);
     }
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (Constants.wundergroundapikey == null) {
-            ErrorUtils.sendError(user, "Wunderground API key is null - Contact Bot Controller to fix");
+            ErrorUtils.sendError(user, "Wunderground API key is null - contact bot controller to fix");
             return;
         }
         JsonObject weather = GeneralUtils.getJsonObject("http://api.wunderground.com/api/" + Constants.wundergroundapikey + "/conditions/q/" + StringUtils.join(args, "%20") + ".json").getAsJsonObject("current_observation");

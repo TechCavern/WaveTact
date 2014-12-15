@@ -22,7 +22,7 @@ import org.pircbotx.User;
 public class Invite extends GenericCommand {
 
     public Invite() {
-        super(GeneralUtils.toArray("invite inv"), 7, "invite [user]", "invites a user to the channel", true);
+        super(GeneralUtils.toArray("invite inv"), 7, "invite [user]", "Invites a user to the channel", true);
     }
 
     @Override

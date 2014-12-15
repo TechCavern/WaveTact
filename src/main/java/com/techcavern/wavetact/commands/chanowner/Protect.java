@@ -24,7 +24,7 @@ import org.pircbotx.User;
 public class Protect extends GenericCommand {
 
     public Protect() {
-        super(GeneralUtils.toArray("protect prot sop"), 15, "protect (-)(User)", "sets protect mode if it exists on a user", true);
+        super(GeneralUtils.toArray("protect prot sop"), 15, "protect (-)(user)", "Sets protect mode if it exists on a user", true);
     }
 
     @Override
@@ -43,7 +43,7 @@ public class Protect extends GenericCommand {
                 channel.send().superOp(user);
             }
         } else {
-            ErrorUtils.sendError(user, "This server does not support SuperOps");
+            ErrorUtils.sendError(user, "This server does not support superops");
         }
     }
 }

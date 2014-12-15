@@ -15,13 +15,13 @@ import org.pircbotx.User;
 public class SetPass extends GenericCommand {
 
     public SetPass() {
-        super(GeneralUtils.toArray("setpassword setpass changepassword changepass"), 0, "setpass [oldpass] [newpass]", "Sets Password", false);
+        super(GeneralUtils.toArray("setpassword setpass changepassword changepass"), 0, "setpass [oldpass] [newpass]", "Sets password", false);
     }
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (!PermUtils.checkIfAccountEnabled(network)) {
-            ErrorUtils.sendError(user, "This network is set to " + GetUtils.getAuthType(network) + " Authentication");
+            ErrorUtils.sendError(user, "This network is set to " + GetUtils.getAuthType(network) + " authentication");
             return;
         }
         String AuthUser = PermUtils.authUser(network, user.getNick());
@@ -30,12 +30,12 @@ public class SetPass extends GenericCommand {
             if (Constants.encryptor.checkPassword(args[0], acc.getAuthPassword())) {
                 acc.setAuthPassword(Constants.encryptor.encryptPassword(args[1]));
                 AccountUtils.saveAccounts();
-                IRCUtils.sendMessage(user, network, channel, "Password Changed Successfully", prefix);
+                IRCUtils.sendMessage(user, network, channel, "Password changed successfully", prefix);
             } else {
                 ErrorUtils.sendError(user, "Incorrect password");
             }
         } else {
-            ErrorUtils.sendError(user, "Error - You must be identified to use this command");
+            ErrorUtils.sendError(user, "Error - you must be identified to use this command");
         }
     }
 }

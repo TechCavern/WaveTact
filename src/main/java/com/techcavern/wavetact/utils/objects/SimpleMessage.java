@@ -23,7 +23,7 @@ public class SimpleMessage extends GenericCommand {
 
 
     public SimpleMessage(String inputString, int permLevel, String message, boolean locked) {
-        super(GeneralUtils.toArray(inputString), permLevel, null, "A Basic Command", false);
+        super(GeneralUtils.toArray(inputString), permLevel, null, "A basic command", false);
         this.message = message;
         this.locked = locked;
     }

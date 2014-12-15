@@ -23,7 +23,7 @@ import org.pircbotx.User;
 public class LockMSG extends GenericCommand {
 
     public LockMSG() {
-        super(GeneralUtils.toArray("lockmessage lcmsg lockmsg"), 9001, "lockmessage [command]", "locks a custom message", false);
+        super(GeneralUtils.toArray("lockmessage lcmsg lockmsg"), 9001, "lockmessage [command]", "Locks a custom message", false);
     }
 
     @Override
@@ -32,12 +32,12 @@ public class LockMSG extends GenericCommand {
         if (args[0].startsWith("-")) {
             SimpleMessageUtils.getSimpleMessage(args[0].replaceFirst("-", "")).unlock();
             SimpleMessageUtils.saveSimpleMessages();
-            IRCUtils.sendMessage(user, network, channel, "Simple Message Unlocked", prefix);
+            IRCUtils.sendMessage(user, network, channel, "Simple message unlocked", prefix);
 
         } else {
             SimpleMessageUtils.getSimpleMessage(args[0]).lock();
             SimpleMessageUtils.saveSimpleMessages();
-            IRCUtils.sendMessage(user, network, channel, "Simple Message Locked", prefix);
+            IRCUtils.sendMessage(user, network, channel, "Simple message locked", prefix);
 
         }
     }

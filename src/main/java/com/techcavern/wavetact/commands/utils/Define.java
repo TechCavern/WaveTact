@@ -23,13 +23,13 @@ import java.util.List;
 public class Define extends GenericCommand {
 
     public Define() {
-        super(GeneralUtils.toArray("define whatis"), 0, "Define (Def #) [word]", "defines a word", false);
+        super(GeneralUtils.toArray("define def"), 0, "define (def #) [word]", "Defines a word", false);
     }
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (Constants.wordnikapikey == null) {
-            ErrorUtils.sendError(user, "Wordnik API key is null - Contact Bot Controller to fix");
+            ErrorUtils.sendError(user, "Wordnik api key is null - contact bot controller to fix");
         }
         int ArrayIndex = 0;
         if (GeneralUtils.isInteger(args[0])) {
@@ -53,7 +53,7 @@ public class Define extends GenericCommand {
                 ErrorUtils.sendError(user, "Def #" + ArrayIndex + " does not exist");
             }
         } else {
-            ErrorUtils.sendError(user, "Not Defined");
+            ErrorUtils.sendError(user, "Not defined");
         }
 
     }

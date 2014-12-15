@@ -15,7 +15,7 @@ import org.pircbotx.User;
 public class ChannelPermLevel extends GenericCommand {
 
     public ChannelPermLevel() {
-        super(GeneralUtils.toArray("channelpermlevel chanpermlevel cpl cpermlevel"), 18, "channelpermlevel (+)(-)[user] (permlevel)", "adds, removes, modifies permissions", true);
+        super(GeneralUtils.toArray("channelpermlevel chanpermlevel cpl cpermlevel"), 18, "channelpermlevel (+)(-)[user] (permlevel)", "Adds, removes or modifies permissions", true);
     }
 
     @Override
@@ -73,7 +73,7 @@ public class ChannelPermLevel extends GenericCommand {
                 ErrorUtils.sendError(user, "User is not registered");
             }
         } else {
-            ErrorUtils.sendError(user, "NetworkAdmins & Controllers must be registered by the controller");
+            ErrorUtils.sendError(user, "Network Admins & controllers must be registered by the controller");
         }
     }
 }

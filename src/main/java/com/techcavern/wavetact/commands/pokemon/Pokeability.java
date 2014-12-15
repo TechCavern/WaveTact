@@ -15,7 +15,7 @@ import org.pircbotx.User;
 public class Pokeability extends GenericCommand {
 
     public Pokeability() {
-        super(GeneralUtils.toArray("pokeability pka"), 0, "pokeability [ID]", "Displays info on an ability", false);
+        super(GeneralUtils.toArray("pokeability pka"), 0, "pokeability [id]", "Displays info on a pokemon ability", false);
     }
 
     @Override

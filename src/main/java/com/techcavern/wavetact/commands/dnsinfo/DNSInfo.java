@@ -25,7 +25,7 @@ import org.xbill.DNS.*;
 public class DNSInfo extends GenericCommand {
 
     public DNSInfo() {
-        super(GeneralUtils.toArray("dnsinfo dns"), 5, "dns [domain]", "looks up a domain for information", false);
+        super(GeneralUtils.toArray("dnsinfo dns"), 5, "dns [domain]", "Looks up a domain for information", false);
     }
 
     @Override
@@ -57,7 +57,7 @@ public class DNSInfo extends GenericCommand {
             isSuccessful = true;
         }
         if (!isSuccessful) {
-            ErrorUtils.sendError(user, "Invalid Domain");
+            ErrorUtils.sendError(user, "Invalid domain");
         }
 
     }

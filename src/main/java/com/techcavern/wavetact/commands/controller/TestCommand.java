@@ -15,7 +15,7 @@ import org.pircbotx.User;
 public class TestCommand extends GenericCommand {
 
     public TestCommand() {
-        super(GeneralUtils.toArray("test"), 9001, null, "debug command", false);
+        super(GeneralUtils.toArray("test"), 9001, null, "Debug command", false);
     }
 
     @Override

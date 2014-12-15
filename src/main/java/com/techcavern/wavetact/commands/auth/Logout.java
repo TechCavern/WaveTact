@@ -14,7 +14,7 @@ import org.pircbotx.User;
 public class Logout extends GenericCommand {
 
     public Logout() {
-        super(GeneralUtils.toArray("logout"), 0, "logout", "logs out a user", false);
+        super(GeneralUtils.toArray("logout"), 0, "logout", "Logs you out", false);
     }
 
     @Override

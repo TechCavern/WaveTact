@@ -25,7 +25,7 @@ public class IRCBlacklistDB extends GenericCommand {
 
 
     public IRCBlacklistDB() {
-        super(GeneralUtils.toArray("ircblacklistdb ircbldb"), 20, "ircblacklistdb (-)[IRC DNSBL Url]", "Adds/Removes Domains from IRCBL", false);
+        super(GeneralUtils.toArray("ircblacklistdb ircbldb"), 20, "ircblacklistdb (-)[irc blacklist Url]", "Adds/removes domains from irc blacklist", false);
     }
 
     @Override
@@ -36,28 +36,28 @@ public class IRCBlacklistDB extends GenericCommand {
                 if (Domain != null) {
                     Constants.IRCBLs.remove(Domain);
                     IRCBLUtils.saveIRCBLs();
-                    IRCUtils.sendMessage(user, network, channel, "IRC DNSBL Removed", prefix);
+                    IRCUtils.sendMessage(user, network, channel, "IRC blacklist removed", prefix);
                 } else {
-                    ErrorUtils.sendError(user, "IRC DNSBL does not exist on list");
+                    ErrorUtils.sendError(user, "IRC blacklist does not exist on list");
                 }
             } else if (args[0].equalsIgnoreCase("list")) {
                 if (!Constants.IRCBLs.isEmpty()) {
                     IRCUtils.sendMessage(user, network, channel, StringUtils.join(Constants.IRCBLs, ", "), prefix);
                 } else {
-                    ErrorUtils.sendError(user, "IRC DNS Blacklist is Empty");
+                    ErrorUtils.sendError(user, "IRC blacklist is empty");
                 }
             } else {
                 String Domain = GetUtils.getIRCDNSBLbyDomain(args[0]);
                 if (Domain == null) {
                     Constants.IRCBLs.add(args[0]);
                     IRCBLUtils.saveIRCBLs();
-                    IRCUtils.sendMessage(user, network, channel, "IRC DNSBL Added", prefix);
+                    IRCUtils.sendMessage(user, network, channel, "IRC blacklist added", prefix);
                 } else {
-                    ErrorUtils.sendError(user, "IRC DNSBL already listed");
+                    ErrorUtils.sendError(user, "IRC blacklist already listed");
                 }
             }
         } else {
-            ErrorUtils.sendError(user, "Please Specifiy an IRC DNBL");
+            ErrorUtils.sendError(user, "Please specify an IRC blacklist");
         }
     }
 }

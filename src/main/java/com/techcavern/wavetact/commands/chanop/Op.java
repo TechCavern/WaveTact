@@ -22,7 +22,7 @@ import org.pircbotx.User;
 public class Op extends GenericCommand {
 
     public Op() {
-        super(GeneralUtils.toArray("op aop"), 10, "op (-)(user to op)", "ops a user", true);
+        super(GeneralUtils.toArray("op aop"), 10, "op (-)(user to op)", "Ops a user", true);
     }
 
     @Override

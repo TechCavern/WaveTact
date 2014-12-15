@@ -19,7 +19,7 @@ import org.pircbotx.User;
 public class MCWiki extends GenericCommand {
 
     public MCWiki() {
-        super(GeneralUtils.toArray("mcwiki mwiki"), 0, "mcwiki [string to search minecraft wikis]", "searches Official Minecraft Wiki & FTB-Wiki & FTBWiki", false);
+        super(GeneralUtils.toArray("mcwiki mwiki"), 0, "mcwiki [string to search minecraft wikis]", "Searches official minecraft wiki & official & unofficial ftb wikis", false);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class MCWiki extends GenericCommand {
                     url = "http://ftbwiki.org/" + StringUtils.join(args, "%20");;
                     doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.57 Safari/537.17").get();
                 } catch (Exception ee) {
-                    ErrorUtils.sendError(user, "Query returned no results Or Wikis are Down");
+                    ErrorUtils.sendError(user, "Query returned no results or wikis are Down");
                     return;
                 }
             }

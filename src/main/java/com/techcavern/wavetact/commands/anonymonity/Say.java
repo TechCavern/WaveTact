@@ -22,7 +22,7 @@ import org.pircbotx.User;
 public class Say extends GenericCommand {
 
     public Say() {
-        super(GeneralUtils.toArray("say msg"), 5, "say [something]", "make the network say something", false);
+        super(GeneralUtils.toArray("say msg"), 5, "say [something]", "Makes the bot say something", false);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class Say extends GenericCommand {
                 if (PermUtils.getPermLevel(network, user.getNick(), chan) >= 5) {
                     IRCUtils.sendMessage(user, network, chan, StringUtils.join(args, " ").replace("\n", " "), IRCUtils.getPrefix(args[0]));
                 } else {
-                    ErrorUtils.sendError(user, "Permission Denied");
+                    ErrorUtils.sendError(user, "Permission denied");
                 }
             }
         }
