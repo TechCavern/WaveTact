@@ -14,6 +14,7 @@ public class LoadUtils {
     public static void registerCommands() {
         addCommands(Constants.ChanFounderCommands, ChanFounderCMD.class);
         addCommands(Constants.ChanHalfOpCommands, ChanHOPCMD.class);
+        addCommands(Constants.ChanOpCommands, ChanOPCMD.class);
         addCommands(Constants.ChanOwnerCommands, ChanOWNCMD.class);
         addCommands(Constants.ControllerCommands, ConCMD.class);
         addCommands(Constants.GenericCommands, GenCMD.class);
