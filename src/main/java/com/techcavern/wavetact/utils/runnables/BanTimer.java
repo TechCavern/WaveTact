@@ -26,7 +26,7 @@ public class BanTimer implements Runnable {
                     UTime utimeObject = Constants.BanTimes.get(i);
                     try {
                         if (System.currentTimeMillis() >= utimeObject.getTime() + utimeObject.getInit()) {
-                            PircBotX networkObject = GetUtils.getBotByNetwork(utimeObject.getNetworkName());
+                            PircBotX networkObject = GetUtils.getBotByNetworkName(utimeObject.getNetworkName());
                             IRCUtils.setMode(GetUtils.getChannelbyName(networkObject, utimeObject.getChannelName()), networkObject, "-b ", utimeObject.getHostmask());
                             Constants.BanTimes.remove(i);
                             BanTimeUtils.saveBanTimes();
@@ -40,7 +40,7 @@ public class BanTimer implements Runnable {
                     UTime utimeObject = Constants.QuietTimes.get(i);
                     try {
                         if (System.currentTimeMillis() >= utimeObject.getTime() + utimeObject.getInit()) {
-                            PircBotX networkObject = GetUtils.getBotByNetwork(utimeObject.getNetworkName());
+                            PircBotX networkObject = GetUtils.getBotByNetworkName(utimeObject.getNetworkName());
                             IRCUtils.setMode(GetUtils.getChannelbyName(networkObject, utimeObject.getChannelName()), networkObject, "-" + Constants.QuietBans.get(utimeObject.getType().toLowerCase()), utimeObject.getHostmask());
                             Constants.QuietTimes.remove(i);
                             QuietTimeUtils.saveQuietTimes();

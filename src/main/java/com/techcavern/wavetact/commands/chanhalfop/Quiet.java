@@ -2,10 +2,8 @@ package com.techcavern.wavetact.commands.chanhalfop;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ChanHOPCMD;
-import com.techcavern.wavetact.utils.ErrorUtils;
-import com.techcavern.wavetact.utils.Constants;
-import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.*;
+import com.techcavern.wavetact.utils.databaseUtils.BanTimeUtils;
 import com.techcavern.wavetact.utils.databaseUtils.QuietTimeUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.objects.UTime;
@@ -55,42 +53,44 @@ public class Quiet extends GenericCommand {
             }
 
         }
+        String networkname = GetUtils.getNetworkNameByBot(network);
+        UTime QuietTime = QuietTimeUtils.getQuietTime(hostmask, networkname, channel.getName());
         if (args[0].startsWith("+")) {
-            if (QuietTimeUtils.getQuietTime(hostmask) != null) {
+            if (QuietTime != null) {
                 if (args[0].startsWith("+")) {
                     if (args[1].startsWith("+")) {
-                        QuietTimeUtils.getQuietTime(hostmask).setTime(QuietTimeUtils.getQuietTime(hostmask).getTime() + GeneralUtils.getMilliSeconds(args[1].replace("+", "")));
+                        QuietTime.setTime(QuietTime.getTime() + GeneralUtils.getMilliSeconds(args[1].replace("+", "")));
                     } else if (args[1].startsWith("-")) {
-                        QuietTimeUtils.getQuietTime(hostmask).setTime(QuietTimeUtils.getQuietTime(hostmask).getTime() - GeneralUtils.getMilliSeconds(args[1].replace("-", "")));
+                        QuietTime.setTime(QuietTime.getTime() - GeneralUtils.getMilliSeconds(args[1].replace("-", "")));
 
                     } else {
-                        QuietTimeUtils.getQuietTime(hostmask).setTime(GeneralUtils.getMilliSeconds(args[1].replace("-", "")));
+                        QuietTime.setTime(GeneralUtils.getMilliSeconds(args[1].replace("-", "")));
                     }
-                    IRCUtils.sendAction(user, network, channel, "Quiet Modified", prefix);
+                    IRCUtils.sendMessage(user, network, channel, "Quiet Modified", prefix);
                     QuietTimeUtils.saveQuietTimes();
                 }
             } else {
                 ErrorUtils.sendError(user, "Quiet does not exist!");
             }
         } else if (args[0].startsWith("-")) {
-            if (QuietTimeUtils.getQuietTime(hostmask) != null) {
-                QuietTimeUtils.getQuietTime(hostmask).setTime(0);
+            if (QuietTime != null) {
+                QuietTime.setTime(0);
                 QuietTimeUtils.saveQuietTimes();
             } else {
                 IRCUtils.setMode(channel, network, "-" + Constants.QuietBans.get(ircd), hostmask);
             }
         } else {
 
-            if (QuietTimeUtils.getQuietTime(hostmask) == null) {
+            if (QuietTime == null) {
                 if (args.length == 2) {
                     IRCUtils.setMode(channel, network, "+" + Constants.QuietBans.get(ircd), hostmask);
-                    UTime c = new UTime(hostmask, network.getServerInfo().getNetwork(), ircd, channel.getName(), GeneralUtils.getMilliSeconds(args[1]), System.currentTimeMillis());
+                    UTime c = new UTime(hostmask, GetUtils.getNetworkNameByBot(network), ircd, channel.getName(), GeneralUtils.getMilliSeconds(args[1]), System.currentTimeMillis());
                     Constants.QuietTimes.add(c);
                     QuietTimeUtils.saveQuietTimes();
 
                 } else if (args.length < 2) {
                     IRCUtils.setMode(channel, network, "+" + Constants.QuietBans.get(ircd), hostmask);
-                    UTime c = new UTime(hostmask, network.getServerInfo().getNetwork(), ircd, channel.getName(), GeneralUtils.getMilliSeconds("24h"), System.currentTimeMillis());
+                    UTime c = new UTime(hostmask, GetUtils.getNetworkNameByBot(network), ircd, channel.getName(), GeneralUtils.getMilliSeconds("24h"), System.currentTimeMillis());
                     Constants.QuietTimes.add(c);
                     QuietTimeUtils.saveQuietTimes();
 

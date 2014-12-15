@@ -36,7 +36,7 @@ public class Topic extends GenericCommand {
         List<String> topic = new LinkedList(Arrays.asList(StringUtils.split(channel.getTopic(), args[0])));
         List<String> newtopic = new LinkedList(Arrays.asList(StringUtils.split(channel.getTopic(), args[0])));
         if (args[1].equalsIgnoreCase("a") || args[1].equalsIgnoreCase("add")) {
-            channel.send().setTopic(channel.getTopic() + " " + args[0] + " " + GeneralUtils.buildMessage(2, args.length, args));
+            channel.send().setTopic(channel.getTopic() + " " + args[0] + " " + GeneralUtils.buildMessage(2, args.length, args) + " ");
             saveTopic(channel, network);
         } else if (args[1].startsWith("+")) {
             newtopic.set(Integer.parseInt(args[1].replaceFirst("\\+", "")) - 1, " " + GeneralUtils.buildMessage(2, args.length, args) + " ");

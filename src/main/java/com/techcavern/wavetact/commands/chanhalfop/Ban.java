@@ -2,10 +2,7 @@ package com.techcavern.wavetact.commands.chanhalfop;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ChanHOPCMD;
-import com.techcavern.wavetact.utils.ErrorUtils;
-import com.techcavern.wavetact.utils.Constants;
-import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.databaseUtils.BanTimeUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.objects.UTime;
@@ -23,7 +20,6 @@ public class Ban extends GenericCommand {
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-
         String hostmask;
         if (args[0].contains("!") && args[0].contains("@")) {
             if (args[0].startsWith("-")) {
@@ -44,43 +40,43 @@ public class Ban extends GenericCommand {
 
             }
         }
-
+        String networkname = GetUtils.getNetworkNameByBot(network);
+        UTime BanTime = BanTimeUtils.getBanTime(hostmask, networkname, channel.getName());
         if (args[0].startsWith("-")) {
-            if (BanTimeUtils.getBanTime(hostmask) != null) {
-                BanTimeUtils.getBanTime(hostmask).setTime(0);
+            if (BanTime != null) {
+                BanTime.setTime(0);
                 BanTimeUtils.saveBanTimes();
             } else {
                 IRCUtils.setMode(channel, network, "-b ", hostmask);
             }
 
         } else if (args[0].startsWith("+")) {
-            if (BanTimeUtils.getBanTime(hostmask) != null) {
+            if (BanTime != null) {
                 if (args[0].startsWith("+")) {
                     if (args[1].startsWith("+")) {
-                        BanTimeUtils.getBanTime(hostmask).setTime(BanTimeUtils.getBanTime(hostmask).getTime() + GeneralUtils.getMilliSeconds(args[1].replace("+", "")));
+                        BanTime.setTime(BanTime.getTime() + GeneralUtils.getMilliSeconds(args[1].replace("+", "")));
                     } else if (args[1].startsWith("-")) {
-                        BanTimeUtils.getBanTime(hostmask).setTime(BanTimeUtils.getBanTime(hostmask).getTime() - GeneralUtils.getMilliSeconds(args[1].replace("-", "")));
+                        BanTime.setTime(BanTime.getTime() - GeneralUtils.getMilliSeconds(args[1].replace("-", "")));
                     } else {
-                        BanTimeUtils.getBanTime(hostmask).setTime(GeneralUtils.getMilliSeconds(args[1].replace("-", "")));
+                        BanTime.setTime(GeneralUtils.getMilliSeconds(args[1].replace("-", "")));
                     }
-                    IRCUtils.sendAction(user, network, channel, "Ban Modified", prefix);
+                    IRCUtils.sendMessage(user, network, channel, "Ban Modified", prefix);
                     BanTimeUtils.saveBanTimes();
                 }
             } else {
                 ErrorUtils.sendError(user, "Ban does not exist!");
             }
         } else {
-            if (BanTimeUtils.getBanTime(hostmask) == null) {
-
+            if (BanTime == null) {
                 if (args.length == 2) {
                     ban(hostmask, channel, network);
-                    UTime utimeObject = new UTime(hostmask, network.getServerInfo().getNetwork(), "b", channel.getName(), GeneralUtils.getMilliSeconds(args[1]), System.currentTimeMillis());
+                    UTime utimeObject = new UTime(hostmask, GetUtils.getNetworkNameByBot(network), "b", channel.getName(), GeneralUtils.getMilliSeconds(args[1]), System.currentTimeMillis());
                     Constants.BanTimes.add(utimeObject);
                     BanTimeUtils.saveBanTimes();
 
                 } else if (args.length < 2) {
                     ban(hostmask, channel, network);
-                    UTime utimeObject = new UTime(hostmask, network.getServerInfo().getNetwork(), "b", channel.getName(), GeneralUtils.getMilliSeconds("24h"), System.currentTimeMillis());
+                    UTime utimeObject = new UTime(hostmask, GetUtils.getNetworkNameByBot(network), "b", channel.getName(), GeneralUtils.getMilliSeconds("24h"), System.currentTimeMillis());
                     Constants.BanTimes.add(utimeObject);
                     BanTimeUtils.saveBanTimes();
                 }
