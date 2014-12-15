@@ -22,7 +22,7 @@ public class Insult extends GenericCommand {
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         Document doc = Jsoup.connect("http://www.insultgenerator.org/").get();
-        String c = doc.select("td").text();
+        String c = doc.select(".wrap").text();
         if (args[0].equalsIgnoreCase(network.getNick()))
             IRCUtils.sendMessage(user, network, channel, user.getNick() + ": " + c, prefix);
         else
