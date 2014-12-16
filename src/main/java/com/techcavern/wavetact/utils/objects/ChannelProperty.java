@@ -14,6 +14,9 @@ public class ChannelProperty {
 
     public String getProperty() {return this.property; }
 
+    public void setProperty(String property) {this.property = property; }
+
+
     public String getChannelName() {
         return this.channelName;
     }

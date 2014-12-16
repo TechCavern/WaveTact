@@ -1,7 +1,7 @@
 package com.techcavern.wavetact.commandline.utils;
 
 import com.techcavern.wavetact.annot.CMDLine;
-import com.techcavern.wavetact.utils.Constants;
+import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleActionUtils;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleMessageUtils;
@@ -28,15 +28,15 @@ public class BasicCommands extends CommandLine {
         SimpleMessage authors = new SimpleMessage("authors", 0, "Julian (JZTech101)", true);
         SimpleMessage contributors = new SimpleMessage("contributors", 0, "Kenneth (kaendfinger), Sam (samrg472), Logan, Laceh", true);
         SimpleAction nom = new SimpleAction("nom", 0, "noms on $*", true);
-        Constants.SimpleActions.add(potato);
-        Constants.SimpleMessages.add(ping);
-        Constants.SimpleMessages.add(pong);
-        Constants.SimpleMessages.add(source);
-        Constants.SimpleMessages.add(license);
-        Constants.SimpleMessages.add(releases);
-        Constants.SimpleMessages.add(authors);
-        Constants.SimpleMessages.add(contributors);
-        Constants.SimpleActions.add(nom);
+        Registry.SimpleActions.add(potato);
+        Registry.SimpleMessages.add(ping);
+        Registry.SimpleMessages.add(pong);
+        Registry.SimpleMessages.add(source);
+        Registry.SimpleMessages.add(license);
+        Registry.SimpleMessages.add(releases);
+        Registry.SimpleMessages.add(authors);
+        Registry.SimpleMessages.add(contributors);
+        Registry.SimpleActions.add(nom);
         SimpleActionUtils.saveSimpleActions();
         SimpleMessageUtils.saveSimpleMessages();
         System.out.println("Basic Commands Added");

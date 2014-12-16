@@ -30,7 +30,7 @@ public class GetUtils {
     }
 
     public static PircBotX getBotByNetwork(String network) {
-        for (PircBotX c : Constants.WaveTact.getBots()) {
+        for (PircBotX c : Registry.WaveTact.getBots()) {
             if (c.getServerInfo().getNetwork().equals(network)) {
                 return c;
             }
@@ -39,8 +39,8 @@ public class GetUtils {
     }
 
     public static GenericCommand getCommand(String Command) {
-        for (GenericCommand g : Constants.AllCommands) {
-            List<GenericCommand> b = Constants.AllCommands;
+        for (GenericCommand g : Registry.AllCommands) {
+            List<GenericCommand> b = Registry.AllCommands;
             for (String commandid : g.getCommandID()) {
                 if (commandid.equalsIgnoreCase(Command)) {
                     return g;
@@ -52,7 +52,7 @@ public class GetUtils {
     }
 
     public static String getCommandChar(PircBotX networkObject) {
-        for (NetProperty d : Constants.CommandChars) {
+        for (NetProperty d : Registry.CommandChars) {
             if (d.getBot() == networkObject) {
                 return d.getProperty();
             }
@@ -61,7 +61,7 @@ public class GetUtils {
     }
 
     public static String getNetAdminAccess(PircBotX networkObject) {
-        for (NetProperty d : Constants.NetAdminAccess) {
+        for (NetProperty d : Registry.NetAdminAccess) {
             if (d.getBot() == networkObject) {
                 return d.getProperty();
             }
@@ -70,7 +70,7 @@ public class GetUtils {
     }
 
     public static PircBotX getBotByNetworkName(String name) {
-        for (NetProperty d : Constants.NetworkName) {
+        for (NetProperty d : Registry.NetworkName) {
             if (d.getProperty().equalsIgnoreCase(name)) {
                 return d.getBot();
             }
@@ -79,7 +79,7 @@ public class GetUtils {
     }
 
     public static String getNetworkNameByNetwork(PircBotX network) {
-        for (NetProperty d : Constants.NetworkName) {
+        for (NetProperty d : Registry.NetworkName) {
             if (d.getBot().equals(network)) {
                 return d.getProperty();
             }
@@ -88,7 +88,7 @@ public class GetUtils {
     }
 
     public static String getAuthType(PircBotX networkObject) {
-        for (NetProperty d : Constants.AuthType) {
+        for (NetProperty d : Registry.AuthType) {
             if (d.getBot() == networkObject) {
                 return d.getProperty();
             }
@@ -97,8 +97,8 @@ public class GetUtils {
     }
 
     public static ChannelProperty getTopic(String channelName, String networkName) {
-        for (int i = Constants.Topic.size() - 1; i > -1; i--) {
-            ChannelProperty x = Constants.Topic.get(i);
+        for (int i = Registry.Topic.size() - 1; i > -1; i--) {
+            ChannelProperty x = Registry.Topic.get(i);
             if (x.getChannelName().equalsIgnoreCase(channelName) && x.getNetworkName().equalsIgnoreCase(networkName)) {
                 return x;
             }
@@ -107,7 +107,7 @@ public class GetUtils {
     }
 
     public static NetworkAdmin getNetworkAdminByNick(String nick, String Network) {
-        for (NetworkAdmin networkAdmin : Constants.NetworkAdmins) {
+        for (NetworkAdmin networkAdmin : Registry.NetworkAdmins) {
             if (networkAdmin.getUser().equalsIgnoreCase(nick) && networkAdmin.getNetwork().equalsIgnoreCase(Network)) {
                 return networkAdmin;
             }
@@ -116,7 +116,7 @@ public class GetUtils {
     }
 
     public static String getControllerByNick(String Nick) {
-        for (String c : Constants.Controllers) {
+        for (String c : Registry.Controllers) {
             if (c.equalsIgnoreCase(Nick)) {
                 return c;
             }
@@ -125,7 +125,7 @@ public class GetUtils {
     }
 
     public static String getIRCDNSBLbyDomain(String Domain) {
-        for (String d : Constants.IRCBLs) {
+        for (String d : Registry.IRCBLs) {
             if (d.equalsIgnoreCase(Domain)) {
                 return d;
             }
@@ -134,7 +134,7 @@ public class GetUtils {
     }
 
     public static String getDNSBLbyDomain(String Domain) {
-        for (String d : Constants.DNSBLs) {
+        for (String d : Registry.DNSBLs) {
             if (d.equalsIgnoreCase(Domain)) {
                 return d;
             }
@@ -143,11 +143,20 @@ public class GetUtils {
     }
 
     public static List<String> getActionsList(int UserPermLevel) {
-        return Constants.SimpleActions.stream().filter(g -> g.getPermLevel() <= UserPermLevel).map(GenericCommand::getCommand).collect(Collectors.toList());
+        return Registry.SimpleActions.stream().filter(g -> g.getPermLevel() <= UserPermLevel).map(GenericCommand::getCommand).collect(Collectors.toList());
     }
 
     public static List<String> getMessagesList(int UserPermLevel) {
-        return Constants.SimpleMessages.stream().filter(g -> g.getPermLevel() <= UserPermLevel).map(GenericCommand::getCommand).collect(Collectors.toList());
+        return Registry.SimpleMessages.stream().filter(g -> g.getPermLevel() <= UserPermLevel).map(GenericCommand::getCommand).collect(Collectors.toList());
+    }
+    public static ChannelUserProperty getRelayBotbyBotName(PircBotX network, String channelName, String botName){
+        String networkName = getNetworkNameByNetwork(network);
+        for(ChannelUserProperty e:Registry.RelayBots){
+            if(e.getChannelName().equals(channelName) && e.getNetworkName().equals(networkName) && e.getUser().equals(botName)){
+                return e;
+            }
+        }
+        return null;
     }
 
 }

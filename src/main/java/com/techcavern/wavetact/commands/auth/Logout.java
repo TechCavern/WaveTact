@@ -23,7 +23,7 @@ public class Logout extends GenericCommand {
         if (authedUser == null) {
             ErrorUtils.sendError(user, "Error, you are not logged in");
         } else {
-            Constants.AuthedUsers.remove(authedUser);
+            Registry.AuthedUsers.remove(authedUser);
             IRCUtils.sendMessage(user, network, channel, "You are now logged out", prefix);
         }
     }

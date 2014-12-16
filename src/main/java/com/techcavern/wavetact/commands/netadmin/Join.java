@@ -7,7 +7,7 @@ package com.techcavern.wavetact.commands.netadmin;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.NAdmCMD;
-import com.techcavern.wavetact.utils.Constants;
+import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.fileUtils.Configuration;
@@ -36,7 +36,7 @@ public class Join extends GenericCommand {
             permanent = true;
         }
         if(permanent){
-            Configuration config = Constants.configs.get(GetUtils.getNetworkNameByNetwork(network));
+            Configuration config = Registry.configs.get(GetUtils.getNetworkNameByNetwork(network));
             config.set("channels", config.getString("channels") + ", " + args[0]);
             config.save();
         }

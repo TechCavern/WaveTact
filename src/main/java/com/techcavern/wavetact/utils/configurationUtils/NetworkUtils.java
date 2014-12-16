@@ -1,6 +1,6 @@
 package com.techcavern.wavetact.utils.configurationUtils;
 
-import com.techcavern.wavetact.utils.Constants;
+import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.eventListeners.*;
 import com.techcavern.wavetact.utils.objects.NetProperty;
@@ -29,13 +29,13 @@ public class NetworkUtils {
                 name = f.getName();
                 name = name.substring(0, f.getName().lastIndexOf('.'));
                 config = new com.techcavern.wavetact.utils.fileUtils.Configuration(f);
-                Constants.configs.put(name, config);
+                Registry.configs.put(name, config);
             }
         }
         PircBotX network;
         LinkedList<String> chans = new LinkedList<>();
         String nsPass;
-        for (com.techcavern.wavetact.utils.fileUtils.Configuration c : Constants.configs.values()) {
+        for (com.techcavern.wavetact.utils.fileUtils.Configuration c : Registry.configs.values()) {
             chans.clear();
             Collections.addAll(chans, c.getString("channels").split(", "));
             if (c.getString("nickserv").equalsIgnoreCase("False")) {
@@ -50,18 +50,18 @@ public class NetworkUtils {
                 bindhost = c.getString("bindhost");
             }
             network = createBot(nsPass, chans, c.getString("nick"), c.getString("server"), c.getInteger("port"), bindhost, c.getString("name"));
-            Constants.WaveTact.addNetwork(network);
-            Constants.CommandChars.add(new NetProperty(c.getString("prefix"), network));
+            Registry.WaveTact.addNetwork(network);
+            Registry.CommandChars.add(new NetProperty(c.getString("prefix"), network));
             String authtype = c.getString("authtype").toLowerCase();
             if (authtype.startsWith("n")) {
-                Constants.AuthType.add(new NetProperty("nickserv", network));
+                Registry.AuthType.add(new NetProperty("nickserv", network));
             } else if (authtype.startsWith("a")) {
-                Constants.AuthType.add(new NetProperty("account", network));
+                Registry.AuthType.add(new NetProperty("account", network));
             } else {
-                Constants.AuthType.add(new NetProperty("nick", network));
+                Registry.AuthType.add(new NetProperty("nick", network));
             }
-            Constants.NetworkName.add(new NetProperty(c.getString("name"), network));
-            Constants.NetAdminAccess.add(new NetProperty(c.getString("netadminaccess"), network));
+            Registry.NetworkName.add(new NetProperty(c.getString("name"), network));
+            Registry.NetAdminAccess.add(new NetProperty(c.getString("netadminaccess"), network));
         }
     }
 
@@ -69,13 +69,13 @@ public class NetworkUtils {
         //      PircBotX Dev = createBot(null, Arrays.asList(GeneralUtils.toArray("#techcavern #testing")), "WaveTactDev", "irc.synirc.net");
         PircBotX Dev2 = createBot(null, Arrays.asList(GeneralUtils.toArray("")), "WaveTactDev", "irc.esper.net", 6667, null, "Esper");
         //      GeneralRegistry.WaveTact.addBot(Dev);
-        Constants.WaveTact.addBot(Dev2);
-        Constants.Controllers.add("JZTech101");
+        Registry.WaveTact.addBot(Dev2);
+        Registry.Controllers.add("JZTech101");
         //      GeneralRegistry.CommandChars.add(new NetProperty("@", Dev));
-        Constants.CommandChars.add(new NetProperty("@", Dev2));
-        Constants.AuthType.add(new NetProperty("nickserv", Dev2));
-        Constants.NetworkName.add(new NetProperty("dev2", Dev2));
-        Constants.NetAdminAccess.add(new NetProperty("True", Dev2));
+        Registry.CommandChars.add(new NetProperty("@", Dev2));
+        Registry.AuthType.add(new NetProperty("nickserv", Dev2));
+        Registry.NetworkName.add(new NetProperty("dev2", Dev2));
+        Registry.NetAdminAccess.add(new NetProperty("True", Dev2));
         //     GeneralRegistry.NetworkName.add(new NetProperty("dev1", Dev));
     }
 

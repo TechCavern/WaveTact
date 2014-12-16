@@ -30,9 +30,9 @@ public class Drop extends GenericCommand {
             ErrorUtils.sendError(user, "Error, you are not logged in");
         } else {
             Account account = AccountUtils.getAccount(authedUser.getAuthAccount());
-            if (Constants.encryptor.checkPassword(args[0], account.getAuthPassword())) {
-                Constants.AuthedUsers.remove(authedUser);
-                Constants.Accounts.remove(account);
+            if (Registry.encryptor.checkPassword(args[0], account.getAuthPassword())) {
+                Registry.AuthedUsers.remove(authedUser);
+                Registry.Accounts.remove(account);
                 AccountUtils.saveAccounts();
                 IRCUtils.sendMessage(user, network, channel, "Your account is now dropped", prefix);
             } else {

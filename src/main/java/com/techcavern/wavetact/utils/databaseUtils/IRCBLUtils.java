@@ -1,7 +1,7 @@
 package com.techcavern.wavetact.utils.databaseUtils;
 
 import com.techcavern.wavetact.utils.ErrorUtils;
-import com.techcavern.wavetact.utils.Constants;
+import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.fileUtils.JSONFile;
 
 import java.io.FileNotFoundException;
@@ -16,8 +16,8 @@ public class IRCBLUtils {
         if (file.exists()) {
             try {
                 List<String> controllers = file.read();
-                Constants.IRCBLs.clear();
-                Constants.IRCBLs.addAll(controllers.stream().collect(Collectors.toList()));
+                Registry.IRCBLs.clear();
+                Registry.IRCBLs.addAll(controllers.stream().collect(Collectors.toList()));
             } catch (FileNotFoundException e) {
                 ErrorUtils.handleException(e);
             }
@@ -27,7 +27,7 @@ public class IRCBLUtils {
     public static void saveIRCBLs() {
         JSONFile file = new JSONFile("IRCBLs.json");
         try {
-            file.write(Constants.IRCBLs);
+            file.write(Registry.IRCBLs);
         } catch (IOException e) {
             ErrorUtils.handleException(e);
         }

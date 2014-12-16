@@ -34,22 +34,22 @@ public class DNSBlacklistDB extends GenericCommand {
             if (args[0].startsWith("-")) {
                 String Domain = GetUtils.getDNSBLbyDomain(args[0].replaceFirst("-", "")).replaceAll("http://|https://", "");
                 if (Domain != null) {
-                    Constants.DNSBLs.remove(Domain);
+                    Registry.DNSBLs.remove(Domain);
                     DNSBLUtils.saveDNSBLs();
                     IRCUtils.sendMessage(user, network, channel, "DNS blacklist removed", prefix);
                 } else {
                     ErrorUtils.sendError(user, "DNS blacklist does not exist on list");
                 }
             } else if (args[0].equalsIgnoreCase("list")) {
-                if (!Constants.DNSBLs.isEmpty()) {
-                    IRCUtils.sendMessage(user, network, channel, StringUtils.join(Constants.DNSBLs, ", "), prefix);
+                if (!Registry.DNSBLs.isEmpty()) {
+                    IRCUtils.sendMessage(user, network, channel, StringUtils.join(Registry.DNSBLs, ", "), prefix);
                 } else {
                     ErrorUtils.sendError(user, "DNS blacklist is empty");
                 }
             } else {
                 String Domain = GetUtils.getDNSBLbyDomain(args[0]);
                 if (Domain == null) {
-                    Constants.DNSBLs.add(args[0]);
+                    Registry.DNSBLs.add(args[0]);
                     DNSBLUtils.saveDNSBLs();
                     IRCUtils.sendMessage(user, network, channel, "DNS blacklist added", prefix);
                 } else {

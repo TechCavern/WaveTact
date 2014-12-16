@@ -2,7 +2,7 @@ package com.techcavern.wavetact.utils.databaseUtils;
 
 import com.google.gson.internal.LinkedTreeMap;
 import com.techcavern.wavetact.utils.ErrorUtils;
-import com.techcavern.wavetact.utils.Constants;
+import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.fileUtils.JSONFile;
 import com.techcavern.wavetact.utils.objects.SimpleMessage;
 
@@ -20,9 +20,9 @@ public class SimpleMessageUtils {
         if (file.exists()) {
             try {
                 List<LinkedTreeMap> messages = file.read();
-                Constants.SimpleMessages.clear();
+                Registry.SimpleMessages.clear();
 
-                Constants.SimpleMessages.addAll(messages.stream().map(msg -> new SimpleMessage(
+                Registry.SimpleMessages.addAll(messages.stream().map(msg -> new SimpleMessage(
                         ((ArrayList<String>) msg.get("comID")).get(0),
                         ((Double) msg.get("permLevel")).intValue(),
                         (String) msg.get("message"),
@@ -36,14 +36,14 @@ public class SimpleMessageUtils {
     public static void saveSimpleMessages() {
         JSONFile file = new JSONFile("SimpleMessages.json");
         try {
-            file.write(Constants.SimpleMessages);
+            file.write(Registry.SimpleMessages);
         } catch (IOException e) {
             ErrorUtils.handleException(e);
         }
     }
 
     public static SimpleMessage getSimpleMessage(String SimpleAction) {
-        for (SimpleMessage g : Constants.SimpleMessages) {
+        for (SimpleMessage g : Registry.SimpleMessages) {
             if (g.getCommand().equalsIgnoreCase(SimpleAction)) {
                 return g;
             }

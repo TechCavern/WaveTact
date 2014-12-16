@@ -2,7 +2,7 @@ package com.techcavern.wavetact.utils.databaseUtils;
 
 import com.google.gson.internal.LinkedTreeMap;
 import com.techcavern.wavetact.utils.ErrorUtils;
-import com.techcavern.wavetact.utils.Constants;
+import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.fileUtils.JSONFile;
 import com.techcavern.wavetact.utils.objects.PermChannel;
 
@@ -21,8 +21,8 @@ public class PermChannelUtils {
 
                 List<LinkedTreeMap> permChannels = file.read(List.class);
 
-                Constants.PermChannels.clear();
-                Constants.PermChannels.addAll(permChannels.stream().map(perms -> new PermChannel((String) perms.get("channelName"),
+                Registry.PermChannels.clear();
+                Registry.PermChannels.addAll(permChannels.stream().map(perms -> new PermChannel((String) perms.get("channelName"),
                         ((Double) perms.get("PermLevel")).intValue(),
                         (String) perms.get("networkName"),
                         (String) perms.get("property"))).collect(Collectors.toList()));
@@ -37,7 +37,7 @@ public class PermChannelUtils {
     public static void savePermChannels() {
         JSONFile file = new JSONFile("PermChannels.json");
         try {
-            file.write(Constants.PermChannels);
+            file.write(Registry.PermChannels);
         } catch (IOException e) {
             ErrorUtils.handleException(e);
         }
@@ -45,7 +45,7 @@ public class PermChannelUtils {
 
     public static PermChannel getPermLevelChannel(String Network, String nick, String Channel) {
         if (nick != null) {
-            for (PermChannel c : Constants.PermChannels) {
+            for (PermChannel c : Registry.PermChannels) {
                 if (c.getChannelName().equals(Channel) && c.getPermUser().equalsIgnoreCase(nick) && c.getNetworkName().equals(Network)) {
                     return c;
                 }

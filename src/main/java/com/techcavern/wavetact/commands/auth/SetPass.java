@@ -27,8 +27,8 @@ public class SetPass extends GenericCommand {
         String AuthUser = PermUtils.authUser(network, user.getNick());
         if (AuthUser != null) {
             Account acc = AccountUtils.getAccount(AuthUser);
-            if (Constants.encryptor.checkPassword(args[0], acc.getAuthPassword())) {
-                acc.setAuthPassword(Constants.encryptor.encryptPassword(args[1]));
+            if (Registry.encryptor.checkPassword(args[0], acc.getAuthPassword())) {
+                acc.setAuthPassword(Registry.encryptor.encryptPassword(args[1]));
                 AccountUtils.saveAccounts();
                 IRCUtils.sendMessage(user, network, channel, "Password changed successfully", prefix);
             } else {

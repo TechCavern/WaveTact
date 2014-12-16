@@ -20,8 +20,7 @@ public class TestCommand extends GenericCommand {
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        User c = GetUtils.getUserByNick(network, args[0]);
-        ErrorUtils.sendError(user, c.toString());
+        user.send().notice("hi");
     }
 
 }

@@ -9,7 +9,7 @@ import com.google.api.services.youtube.model.SearchResult;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.ErrorUtils;
-import com.techcavern.wavetact.utils.Constants;
+import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
@@ -32,7 +32,7 @@ public class Video extends GenericCommand {
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        if (Constants.googleapikey == null) {
+        if (Registry.googleapikey == null) {
             ErrorUtils.sendError(user, "Google api key is null - contact bot controller to fix");
             return;
         }
@@ -47,7 +47,7 @@ public class Video extends GenericCommand {
 
         }).setApplicationName("youtubesearch").build();
         YouTube.Search.List search = yt.search().list("id,snippet");
-        search.setKey(Constants.googleapikey);
+        search.setKey(Registry.googleapikey);
         search.setQ(StringUtils.join(args, " "));
         search.setMaxResults(Integer.toUnsignedLong(ArrayIndex));
         List<SearchResult> results = search.execute().getItems();

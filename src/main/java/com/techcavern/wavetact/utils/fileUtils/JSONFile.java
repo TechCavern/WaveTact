@@ -3,7 +3,7 @@ package com.techcavern.wavetact.utils.fileUtils;
 import com.google.common.io.Files;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.techcavern.wavetact.utils.Constants;
+import com.techcavern.wavetact.utils.Registry;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,7 +21,7 @@ public class JSONFile {
 
     public void write(Object obj) throws IOException {
         Files.touch(file);
-        Gson gson = Constants.GSON_PRETTY_PRINT;
+        Gson gson = Registry.GSON_PRETTY_PRINT;
         Files.write(gson.toJson(obj), file, charset);
     }
 
@@ -30,12 +30,12 @@ public class JSONFile {
     }
 
     public <T> T read(Class<T> clazz) throws FileNotFoundException {
-        return Constants.GSON.fromJson(Files.newReader(file, charset), new TypeToken<T>() {
+        return Registry.GSON.fromJson(Files.newReader(file, charset), new TypeToken<T>() {
         }.getType());
     }
 
     public <T> T read() throws FileNotFoundException {
-        return Constants.GSON.fromJson(Files.newReader(file, charset), new TypeToken<T>() {
+        return Registry.GSON.fromJson(Files.newReader(file, charset), new TypeToken<T>() {
         }.getType());
     }
 }

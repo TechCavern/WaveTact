@@ -3,7 +3,7 @@ package com.techcavern.wavetact.commands.utils;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.ErrorUtils;
-import com.techcavern.wavetact.utils.Constants;
+import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
@@ -28,7 +28,7 @@ public class Question extends GenericCommand {
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
 
-        if (Constants.wolframalphaapikey == null) {
+        if (Registry.wolframalphaapikey == null) {
             ErrorUtils.sendError(user, "Wolfram Alpha api key is null - contact bot controller to fix");
             return;
         }
@@ -38,7 +38,7 @@ public class Question extends GenericCommand {
             args = ArrayUtils.remove(args, 0);
         }
         WAEngine engine = new WAEngine();
-        engine.setAppID(Constants.wolframalphaapikey);
+        engine.setAppID(Registry.wolframalphaapikey);
         engine.addFormat("plaintext");
         WAQuery query = engine.createQuery();
         query.setInput(StringUtils.join(args, " "));

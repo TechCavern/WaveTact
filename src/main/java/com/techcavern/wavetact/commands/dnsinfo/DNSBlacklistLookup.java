@@ -8,7 +8,7 @@ package com.techcavern.wavetact.commands.dnsinfo;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.TruCMD;
 import com.techcavern.wavetact.utils.ErrorUtils;
-import com.techcavern.wavetact.utils.Constants;
+import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
@@ -50,11 +50,11 @@ public class DNSBlacklistLookup extends GenericCommand {
         }
         Boolean sent = false;
         Resolver resolver = new SimpleResolver();
-        if (Constants.DNSBLs.isEmpty()) {
+        if (Registry.DNSBLs.isEmpty()) {
             ErrorUtils.sendError(user, "No dns blacklists found in database");
             return;
         }
-        for (String Domain : Constants.DNSBLs) {
+        for (String Domain : Registry.DNSBLs) {
             Lookup lookup = new Lookup(IP + "." + Domain, Type.ANY);
             lookup.setResolver(resolver);
             lookup.setCache(null);

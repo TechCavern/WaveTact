@@ -3,7 +3,7 @@ package com.techcavern.wavetact.commands.utils;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.ErrorUtils;
-import com.techcavern.wavetact.utils.Constants;
+import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
@@ -28,7 +28,7 @@ public class Define extends GenericCommand {
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        if (Constants.wordnikapikey == null) {
+        if (Registry.wordnikapikey == null) {
             ErrorUtils.sendError(user, "Wordnik api key is null - contact bot controller to fix");
         }
         int ArrayIndex = 0;
@@ -37,7 +37,7 @@ public class Define extends GenericCommand {
             args = ArrayUtils.remove(args, 0);
         }
         WordApi api = new WordApi();
-        api.getInvoker().addDefaultHeader("api_key", Constants.wordnikapikey);
+        api.getInvoker().addDefaultHeader("api_key", Registry.wordnikapikey);
         List<Definition> Defs = api.getDefinitions(args[0], null, null, null, null, null, null);
         if (Defs.size() > 0) {
             if (Defs.size() - 1 >= ArrayIndex) {

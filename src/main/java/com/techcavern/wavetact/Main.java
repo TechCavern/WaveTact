@@ -1,6 +1,6 @@
 package com.techcavern.wavetact;
 
-import com.techcavern.wavetact.utils.Constants;
+import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.LoadUtils;
 import com.techcavern.wavetact.utils.configurationUtils.ConfigUtils;
 import com.techcavern.wavetact.utils.databaseUtils.*;
@@ -23,6 +23,7 @@ public class Main {
         AccountUtils.loadAccounts();
         NetAdminUtils.loadNetworkAdmins();
         PermChannelUtils.loadPermChannels();
+        RelayUtils.loadRelayBots();
 
         ConfigUtils.registerConfigs();
         LoadUtils.registerCommands();
@@ -38,16 +39,16 @@ public class Main {
 
         BanTimeUtils.loadBanTimes();
         QuietTimeUtils.loadQuietTimes();
-        if (Constants.Controllers.isEmpty()) {
+        if (Registry.Controllers.isEmpty()) {
             System.out.println("No Controllers Found, Please add one using -controller");
             System.exit(0);
         } else {
-            Constants.WaveTact.start();
-            if (Constants.WaveTact.getBots().isEmpty()) {
+            Registry.WaveTact.start();
+            if (Registry.WaveTact.getBots().isEmpty()) {
                 System.out.println("No Networks Found, Please add one using -addnetwork");
                 System.exit(0);
             }
-            Constants.threadPool.execute(new BanTimer());
+            Registry.threadPool.execute(new BanTimer());
         }
     }
 }

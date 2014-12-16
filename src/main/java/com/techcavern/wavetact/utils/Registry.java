@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ForkJoinPool;
 
-public class Constants {
+public class Registry {
 
     public static final Gson GSON = new GsonBuilder().create();
     public static final Gson GSON_PRETTY_PRINT = new GsonBuilder().setPrettyPrinting().create();
@@ -22,6 +22,7 @@ public class Constants {
     public static final HashMap<String, String> QuietBans = new HashMap<>();
     public static final List<PermChannel> PermChannels = new ArrayList<>();
     public static final List<ChannelProperty> Topic = new ArrayList<>();
+    public static final List<ChannelUserProperty> RelayBots = new ArrayList<>();
     public static final ForkJoinPool threadPool = new ForkJoinPool(100);
     public static final List<String> Controllers = new ArrayList<>();
     public static final List<String> IRCBLs = new ArrayList<>();

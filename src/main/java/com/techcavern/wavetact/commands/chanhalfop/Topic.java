@@ -58,7 +58,7 @@ public class Topic extends GenericCommand {
             ChannelProperty oldTopic = GetUtils.getTopic(channel.getName(), GetUtils.getNetworkNameByNetwork(network));
             if (oldTopic != null) {
                 channel.send().setTopic(oldTopic.getProperty());
-                Constants.Topic.remove(oldTopic);
+                Registry.Topic.remove(oldTopic);
             } else {
                 ErrorUtils.sendError(user, "Error: no reversal possible");
             }
@@ -69,6 +69,6 @@ public class Topic extends GenericCommand {
     }
 
     void saveTopic(Channel channel, PircBotX Bot) {
-        Constants.Topic.add(new ChannelProperty(Bot.getServerInfo().getNetwork(),channel.getName(),channel.getTopic()));
+        Registry.Topic.add(new ChannelProperty(Bot.getServerInfo().getNetwork(),channel.getName(),channel.getTopic()));
     }
 }

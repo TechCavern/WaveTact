@@ -2,7 +2,7 @@ package com.techcavern.wavetact.utils.databaseUtils;
 
 import com.google.gson.internal.LinkedTreeMap;
 import com.techcavern.wavetact.utils.ErrorUtils;
-import com.techcavern.wavetact.utils.Constants;
+import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.fileUtils.JSONFile;
 import com.techcavern.wavetact.utils.objects.Account;
 
@@ -18,8 +18,8 @@ public class AccountUtils {
         if (file.exists()) {
             try {
                 List<LinkedTreeMap> accounts = file.read(List.class);
-                Constants.Accounts.clear();
-                Constants.Accounts.addAll(accounts.stream().map(Acc -> new Account((String) Acc.get("AuthAccount"),
+                Registry.Accounts.clear();
+                Registry.Accounts.addAll(accounts.stream().map(Acc -> new Account((String) Acc.get("AuthAccount"),
                         (String) Acc.get("AuthPassword"))).collect(Collectors.toList()));
             } catch (FileNotFoundException e) {
                 ErrorUtils.handleException(e);
@@ -30,14 +30,14 @@ public class AccountUtils {
     public static void saveAccounts() {
         JSONFile file = new JSONFile("Accounts.json");
         try {
-            file.write(Constants.Accounts);
+            file.write(Registry.Accounts);
         } catch (IOException e) {
             ErrorUtils.handleException(e);
         }
     }
 
     public static Account getAccount(String Account) {
-        for (Account account : Constants.Accounts) {
+        for (Account account : Registry.Accounts) {
             if (account.getAuthAccount().equals(Account)) {
                 return account;
             }

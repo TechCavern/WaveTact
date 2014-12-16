@@ -7,7 +7,7 @@ package com.techcavern.wavetact.commands.chanhalfop;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ChanHOPCMD;
-import com.techcavern.wavetact.utils.Constants;
+import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
@@ -37,18 +37,18 @@ public class Part extends GenericCommand {
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if(args.length < 1){
             channel.send().part();
-            Constants.LastLeftChannel = channel.getName();
+            Registry.LastLeftChannel = channel.getName();
         }else{
             if(userPermLevel >= 9001){
                 boolean permanent = false;
                 if(args[0].startsWith("+")) {
                     args[0] = args[0].replace("+", "");
-                    Constants.LastLeftChannel = args[0];
+                    Registry.LastLeftChannel = args[0];
                     permanent = true;
                 }
                 network.sendRaw().rawLine("PART " + args[0]);
                 if(permanent){
-                    Configuration config = Constants.configs.get(GetUtils.getNetworkNameByNetwork(network));
+                    Configuration config = Registry.configs.get(GetUtils.getNetworkNameByNetwork(network));
                     List<String> channels = new LinkedList<>(Arrays.asList(StringUtils.split(config.getString("channels"), ", ")));
                     for(String chan:channels){
                         if(chan.equals(args[0])){

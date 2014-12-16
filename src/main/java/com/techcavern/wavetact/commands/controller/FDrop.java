@@ -27,11 +27,11 @@ public class FDrop extends GenericCommand {
         }
         AuthedUser authedUser = PermUtils.getAuthedUser(network, args[0]);
         if (authedUser != null) {
-            Constants.AuthedUsers.remove(authedUser);
+            Registry.AuthedUsers.remove(authedUser);
         }
         Account account = AccountUtils.getAccount(args[0]);
         if (account != null) {
-            Constants.Accounts.remove(account);
+            Registry.Accounts.remove(account);
             AccountUtils.saveAccounts();
             IRCUtils.sendMessage(user, network, channel, "Account dropped", prefix);
         } else {

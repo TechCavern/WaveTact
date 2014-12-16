@@ -37,7 +37,6 @@ public class Ban extends GenericCommand {
 
             } else {
                 hostmask = IRCUtils.getHostmask(network, args[0], true);
-
             }
         }
         String networkname = GetUtils.getNetworkNameByNetwork(network);
@@ -71,13 +70,13 @@ public class Ban extends GenericCommand {
                 if (args.length == 2) {
                     ban(hostmask, channel, network);
                     TimedObj utimeObject = new TimedObj(hostmask, networkname, "b", channel.getName(), GeneralUtils.getMilliSeconds(args[1]), System.currentTimeMillis());
-                    Constants.BanTimes.add(utimeObject);
+                    Registry.BanTimes.add(utimeObject);
                     BanTimeUtils.saveBanTimes();
 
                 } else if (args.length < 2) {
                     ban(hostmask, channel, network);
                     TimedObj utimeObject = new TimedObj(hostmask, networkname, "b", channel.getName(), GeneralUtils.getMilliSeconds("24h"), System.currentTimeMillis());
-                    Constants.BanTimes.add(utimeObject);
+                    Registry.BanTimes.add(utimeObject);
                     BanTimeUtils.saveBanTimes();
                 }
             } else {

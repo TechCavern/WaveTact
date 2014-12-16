@@ -1,6 +1,5 @@
 package com.techcavern.wavetact.utils;
 
-import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -97,7 +96,7 @@ public class IRCUtils {
     }
 
     public static void sendGlobal(String message, User user) {
-        for (PircBotX network : Constants.WaveTact.getBots()) {
+        for (PircBotX network : Registry.WaveTact.getBots()) {
             sendNetworkGlobal(message, network, user);
         }
 

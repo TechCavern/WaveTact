@@ -45,8 +45,8 @@ public class CustomMSG extends GenericCommand {
                     } else if (cmd.getLockedStatus()) {
                         ErrorUtils.sendError(user, "Custom message is locked");
                     } else {
-                        Constants.SimpleMessages.remove(cmd);
-                        Constants.AllCommands.remove(cmd);
+                        Registry.SimpleMessages.remove(cmd);
+                        Registry.AllCommands.remove(cmd);
                         SimpleMessageUtils.saveSimpleMessages();
                         IRCUtils.sendMessage(user, network, channel, "Custom message removed", prefix);
                     }
@@ -61,9 +61,9 @@ public class CustomMSG extends GenericCommand {
                     SimpleMessage cmd = SimpleMessageUtils.getSimpleMessage(command);
                     if (cmd.getPermLevel() <= userPermLevel) {
                         if (cmd != null && !cmd.getLockedStatus()) {
-                            Constants.SimpleMessages.remove(cmd);
-                            Constants.AllCommands.remove(cmd);
-                            Constants.SimpleMessages.add(new SimpleMessage(command, accessLevel, msg, false));
+                            Registry.SimpleMessages.remove(cmd);
+                            Registry.AllCommands.remove(cmd);
+                            Registry.SimpleMessages.add(new SimpleMessage(command, accessLevel, msg, false));
                             SimpleMessageUtils.saveSimpleMessages();
                             IRCUtils.sendMessage(user, network, channel, "Custom message modified", prefix);
                         } else if (cmd.getLockedStatus()) {
@@ -79,7 +79,7 @@ public class CustomMSG extends GenericCommand {
                         ErrorUtils.sendError(user, "Command already exists");
                         return;
                     } else
-                        Constants.SimpleMessages.add(new SimpleMessage(command, accessLevel, msg, false));
+                        Registry.SimpleMessages.add(new SimpleMessage(command, accessLevel, msg, false));
                     SimpleMessageUtils.saveSimpleMessages();
                     IRCUtils.sendMessage(user, network, channel, "Custom message added", prefix);
                 }

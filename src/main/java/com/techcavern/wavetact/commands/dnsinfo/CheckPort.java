@@ -41,7 +41,7 @@ public class CheckPort extends GenericCommand {
             //do nothing
         }
         if(IP == null){
-            IRCUtils.sendMessage(user, network, channel, "Host Unreachable", prefix);
+            ErrorUtils.sendError(user, "Host Unreachable");
         }else {
             try {
                 Socket socket = new Socket(IP, port);
@@ -51,7 +51,7 @@ public class CheckPort extends GenericCommand {
                 if(e.getMessage().equals("Connection refused"))
                 IRCUtils.sendMessage(user, network, channel, "Port " + port + " is closed on " + IP, prefix);
                 else
-                    IRCUtils.sendMessage(user, network, channel, "Host Unreachable", prefix);
+                    ErrorUtils.sendError(user, "Host Unreachable");
             }
             ;
         }

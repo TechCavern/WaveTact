@@ -7,7 +7,7 @@ package com.techcavern.wavetact.commands.controller;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ConCMD;
-import com.techcavern.wavetact.utils.Constants;
+import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.LoadUtils;
@@ -62,24 +62,24 @@ public class DefCon extends GenericCommand {
     }
 
     void initializeCommands() {
-        Constants.AllCommands.clear();
-        Constants.GenericCommands.clear();
-        Constants.SimpleActions.clear();
-        Constants.SimpleMessages.clear();
-        Constants.TrustedCommands.clear();
-        Constants.ChanHalfOpCommands.clear();
-        Constants.ControllerCommands.clear();
-        Constants.ChanOwnOpCommands.clear();
-        Constants.NetAdminCommands.clear();
-        Constants.ChanOpCommands.clear();
-        Constants.ChanAdminCommands.clear();
+        Registry.AllCommands.clear();
+        Registry.GenericCommands.clear();
+        Registry.SimpleActions.clear();
+        Registry.SimpleMessages.clear();
+        Registry.TrustedCommands.clear();
+        Registry.ChanHalfOpCommands.clear();
+        Registry.ControllerCommands.clear();
+        Registry.ChanOwnOpCommands.clear();
+        Registry.NetAdminCommands.clear();
+        Registry.ChanOpCommands.clear();
+        Registry.ChanAdminCommands.clear();
         SimpleActionUtils.loadSimpleActions();
         SimpleMessageUtils.loadSimpleMessages();
         LoadUtils.registerCommands();
     }
 
     void sPermLevel(int PermLevel) {
-        for (GenericCommand Command : Constants.AllCommands) {
+        for (GenericCommand Command : Registry.AllCommands) {
             if (Command.getPermLevel() < PermLevel) {
                 Command.setPermLevel(PermLevel);
             }

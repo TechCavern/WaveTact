@@ -18,19 +18,19 @@ public class PrivMsgProcessor {
                 String command = message[0].toLowerCase();
                 GenericCommand Command = GetUtils.getCommand(command);
                 if (Command == null) {
-                    Command = GetUtils.getCommand(StringUtils.replaceOnce(command,GetUtils.getCommandChar(event.getBot()), ""));
+                    Command = GetUtils.getCommand(StringUtils.replaceOnce(command, GetUtils.getCommandChar(event.getBot()), ""));
                 }
                 message = ArrayUtils.remove(message, 0);
                 if (Command != null) {
                     if (Command.getChannelRequired()) {
                         Channel channel = null;
                         String prefix = null;
-                        if(message.length > 0) {
-                            prefix = IRCUtils.getPrefix(event.getBot(),message[0]);
-                            if(!prefix.isEmpty())
-                            channel = GetUtils.getChannelbyName(event.getBot(), message[0].replace(prefix, ""));
+                        if (message.length > 0) {
+                            prefix = IRCUtils.getPrefix(event.getBot(), message[0]);
+                            if (!prefix.isEmpty())
+                                channel = GetUtils.getChannelbyName(event.getBot(), message[0].replace(prefix, ""));
                             else
-                            channel = GetUtils.getChannelbyName(event.getBot(), message[0]);
+                                channel = GetUtils.getChannelbyName(event.getBot(), message[0]);
                             message = ArrayUtils.remove(message, 0);
                         }
                         if (channel != null) {
@@ -74,6 +74,6 @@ public class PrivMsgProcessor {
             }
 
         }
-        Constants.threadPool.execute(new process());
+        Registry.threadPool.execute(new process());
     }
 }

@@ -38,9 +38,9 @@ public class Register extends GenericCommand {
             ErrorUtils.sendError(user, "Error, you are already registered");
 
         } else {
-            Constants.Accounts.add(new Account(userString, Constants.encryptor.encryptPassword(password)));
+            Registry.Accounts.add(new Account(userString, Registry.encryptor.encryptPassword(password)));
             AccountUtils.saveAccounts();
-            Constants.AuthedUsers.add(new AuthedUser(GetUtils.getNetworkNameByNetwork(network), userString, IRCUtils.getHostmask(network, user.getNick(), false)));
+            Registry.AuthedUsers.add(new AuthedUser(GetUtils.getNetworkNameByNetwork(network), userString, IRCUtils.getHostmask(network, user.getNick(), false)));
             IRCUtils.sendMessage(user, network, channel, "You are now registered", prefix);
         }
     }

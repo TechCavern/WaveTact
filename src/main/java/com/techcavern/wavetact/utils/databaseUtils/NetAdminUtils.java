@@ -2,7 +2,7 @@ package com.techcavern.wavetact.utils.databaseUtils;
 
 import com.google.gson.internal.LinkedTreeMap;
 import com.techcavern.wavetact.utils.ErrorUtils;
-import com.techcavern.wavetact.utils.Constants;
+import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.fileUtils.JSONFile;
 import com.techcavern.wavetact.utils.objects.NetworkAdmin;
 
@@ -19,8 +19,8 @@ public class NetAdminUtils {
             try {
                 List<LinkedTreeMap> permChannels = file.read(List.class);
 
-                Constants.NetworkAdmins.clear();
-                Constants.NetworkAdmins.addAll(permChannels.stream().map(perms -> new NetworkAdmin((String) perms.get("Network"),
+                Registry.NetworkAdmins.clear();
+                Registry.NetworkAdmins.addAll(permChannels.stream().map(perms -> new NetworkAdmin((String) perms.get("Network"),
                         (String) perms.get("user"))).collect(Collectors.toList()));
             } catch (FileNotFoundException e) {
                 ErrorUtils.handleException(e);
@@ -31,7 +31,7 @@ public class NetAdminUtils {
     public static void saveNetworkAdmins() {
         JSONFile file = new JSONFile("NetworkAdmins.json");
         try {
-            file.write(Constants.NetworkAdmins);
+            file.write(Registry.NetworkAdmins);
         } catch (IOException e) {
             ErrorUtils.handleException(e);
         }

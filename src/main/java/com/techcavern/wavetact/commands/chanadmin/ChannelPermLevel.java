@@ -21,37 +21,40 @@ public class ChannelPermLevel extends GenericCommand {
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         String networkname = GetUtils.getNetworkNameByNetwork(network);
-        int c = 0;
-        if (args.length > 1) {
-            c = Integer.parseInt(args[1]);
+        String account;
+        if (args[0].startsWith("-")) {
+            account = args[0].replaceFirst("-", "");
+        } else if (args[0].startsWith("+")) {
+            account = args[0].replaceFirst("\\+", "");
         } else {
-            ErrorUtils.sendError(user, "Failed to parse permission level: " + ChannelPermLevel.super.getSyntax());
-            return;
+            account = args[0];
+        }
+        String auth = PermUtils.authUser(network, account);
+        if (auth != null) {
+            account = auth;
+        }
+        PermChannel PLChannel = PermChannelUtils.getPermLevelChannel(networkname, account, channel.getName());
+        int c = 0;
+        try{
+            c = Integer.parseInt(args[1]);
+        } catch(NumberFormatException | ArrayIndexOutOfBoundsException e ) {
+            if (args[0].startsWith("-")) {
+                if (PLChannel != null) {
+                    Registry.PermChannels.remove(PLChannel);
+                    PermChannelUtils.savePermChannels();
+                    IRCUtils.sendNotice(user, network, channel, args[0].replaceFirst("-", "") + " removed from access lists", "");
+                } else {
+                    ErrorUtils.sendError(user, "User is not found on channel access lists");
+                }
+                return;
+            } else {
+                ErrorUtils.sendError(user, "Failed to parse permission level: " + ChannelPermLevel.super.getSyntax());
+                return;
+            }
         }
         if (c <= 18) {
-            String account;
-            if (args[0].startsWith("-")) {
-                account = args[0].replaceFirst("-", "");
-            } else if (args[0].startsWith("+")) {
-                account = args[0].replaceFirst("\\+", "");
-            } else {
-                account = args[0];
-            }
-            String auth = PermUtils.authUser(network, account);
-            if (auth != null) {
-                account = auth;
-            }
-            PermChannel PLChannel = PermChannelUtils.getPermLevelChannel(networkname, account, channel.getName());
             if (account != null) {
-                if (args[0].startsWith("-")) {
-                    if (PLChannel != null) {
-                        Constants.PermChannels.remove(PLChannel);
-                        PermChannelUtils.savePermChannels();
-                        IRCUtils.sendNotice(user, network, channel, args[0].replaceFirst("-", "") + " removed from access lists", "");
-                    } else {
-                        ErrorUtils.sendError(user, "User is not found on channel access lists");
-                    }
-                } else if (args[0].startsWith("+")) {
+                if (args[0].startsWith("+")) {
                     if (PLChannel != null) {
                         PLChannel.setPermLevel(Integer.parseInt(args[1]));
                         PermChannelUtils.savePermChannels();
@@ -59,11 +62,9 @@ public class ChannelPermLevel extends GenericCommand {
                     } else {
                         ErrorUtils.sendError(user, "User is not found on channel access lists");
                     }
-
-
                 } else {
                     if (PLChannel == null) {
-                        Constants.PermChannels.add(new PermChannel(channel.getName(), Integer.parseInt(args[1]), networkname, account));
+                        Registry.PermChannels.add(new PermChannel(channel.getName(), Integer.parseInt(args[1]), networkname, account));
                         PermChannelUtils.savePermChannels();
                         IRCUtils.sendNotice(user, network, channel, args[0].replaceFirst("-", "") + " added to access lists", "");
                     } else {

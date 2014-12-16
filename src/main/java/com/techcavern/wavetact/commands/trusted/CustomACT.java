@@ -45,8 +45,8 @@ public class CustomACT extends GenericCommand {
                     } else if (cmd.getLockedStatus()) {
                         ErrorUtils.sendError(user, "Custom action is locked");
                     } else {
-                        Constants.SimpleActions.remove(cmd);
-                        Constants.AllCommands.remove(cmd);
+                        Registry.SimpleActions.remove(cmd);
+                        Registry.AllCommands.remove(cmd);
                         SimpleActionUtils.saveSimpleActions();
                         IRCUtils.sendMessage(user, network, channel, "Custom action removed", prefix);
                     }
@@ -61,9 +61,9 @@ public class CustomACT extends GenericCommand {
                     SimpleAction cmd = SimpleActionUtils.getSimpleAction(command);
                     if (cmd.getPermLevel() <= userPermLevel) {
                         if (cmd != null && !cmd.getLockedStatus()) {
-                            Constants.SimpleActions.remove(cmd);
-                            Constants.AllCommands.remove(cmd);
-                            Constants.SimpleActions.add(new SimpleAction(command, accessLevel, msg, false));
+                            Registry.SimpleActions.remove(cmd);
+                            Registry.AllCommands.remove(cmd);
+                            Registry.SimpleActions.add(new SimpleAction(command, accessLevel, msg, false));
                             SimpleActionUtils.saveSimpleActions();
                             IRCUtils.sendMessage(user, network, channel, "Custom action modified", prefix);
                         } else if (cmd.getLockedStatus()) {
@@ -79,7 +79,7 @@ public class CustomACT extends GenericCommand {
                         ErrorUtils.sendError(user, "Command already exists");
                         return;
                     } else
-                        Constants.SimpleActions.add(new SimpleAction(command, accessLevel, msg, false));
+                        Registry.SimpleActions.add(new SimpleAction(command, accessLevel, msg, false));
                     SimpleActionUtils.saveSimpleActions();
                     IRCUtils.sendMessage(user, network, channel, "Custom action added", prefix);
                 }

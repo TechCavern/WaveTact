@@ -76,21 +76,21 @@ public class Quiet extends GenericCommand {
                 QuietTime.setTime(0);
                 QuietTimeUtils.saveQuietTimes();
             } else {
-                IRCUtils.setMode(channel, network, "-" + Constants.QuietBans.get(ircd), hostmask);
+                IRCUtils.setMode(channel, network, "-" + Registry.QuietBans.get(ircd), hostmask);
             }
         } else {
 
             if (QuietTime == null) {
                 if (args.length == 2) {
-                    IRCUtils.setMode(channel, network, "+" + Constants.QuietBans.get(ircd), hostmask);
+                    IRCUtils.setMode(channel, network, "+" + Registry.QuietBans.get(ircd), hostmask);
                     TimedObj c = new TimedObj(hostmask, networkname, ircd, channel.getName(), GeneralUtils.getMilliSeconds(args[1]), System.currentTimeMillis());
-                    Constants.QuietTimes.add(c);
+                    Registry.QuietTimes.add(c);
                     QuietTimeUtils.saveQuietTimes();
 
                 } else if (args.length < 2) {
-                    IRCUtils.setMode(channel, network, "+" + Constants.QuietBans.get(ircd), hostmask);
+                    IRCUtils.setMode(channel, network, "+" + Registry.QuietBans.get(ircd), hostmask);
                     TimedObj c = new TimedObj(hostmask, networkname, ircd, channel.getName(), GeneralUtils.getMilliSeconds("24h"), System.currentTimeMillis());
-                    Constants.QuietTimes.add(c);
+                    Registry.QuietTimes.add(c);
                     QuietTimeUtils.saveQuietTimes();
 
                 }

@@ -1,7 +1,7 @@
 package com.techcavern.wavetact.utils.databaseUtils;
 
 import com.techcavern.wavetact.utils.ErrorUtils;
-import com.techcavern.wavetact.utils.Constants;
+import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.fileUtils.JSONFile;
 
 import java.io.FileNotFoundException;
@@ -16,8 +16,8 @@ public class ControllerUtils {
         if (file.exists()) {
             try {
                 List<String> controllers = file.read();
-                Constants.Controllers.clear();
-                Constants.Controllers.addAll(controllers.stream().collect(Collectors.toList()));
+                Registry.Controllers.clear();
+                Registry.Controllers.addAll(controllers.stream().collect(Collectors.toList()));
             } catch (FileNotFoundException e) {
                 ErrorUtils.handleException(e);
             }
@@ -27,7 +27,7 @@ public class ControllerUtils {
     public static void saveControllers() {
         JSONFile file = new JSONFile("Controllers.json");
         try {
-            file.write(Constants.Controllers);
+            file.write(Registry.Controllers);
         } catch (IOException e) {
             ErrorUtils.handleException(e);
         }

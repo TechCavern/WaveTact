@@ -34,22 +34,22 @@ public class IRCBlacklistDB extends GenericCommand {
             if (args[0].startsWith("-")) {
                 String Domain = GetUtils.getIRCDNSBLbyDomain(args[0].replaceFirst("-", "")).replaceAll("http://|https://", "");
                 if (Domain != null) {
-                    Constants.IRCBLs.remove(Domain);
+                    Registry.IRCBLs.remove(Domain);
                     IRCBLUtils.saveIRCBLs();
                     IRCUtils.sendMessage(user, network, channel, "IRC blacklist removed", prefix);
                 } else {
                     ErrorUtils.sendError(user, "IRC blacklist does not exist on list");
                 }
             } else if (args[0].equalsIgnoreCase("list")) {
-                if (!Constants.IRCBLs.isEmpty()) {
-                    IRCUtils.sendMessage(user, network, channel, StringUtils.join(Constants.IRCBLs, ", "), prefix);
+                if (!Registry.IRCBLs.isEmpty()) {
+                    IRCUtils.sendMessage(user, network, channel, StringUtils.join(Registry.IRCBLs, ", "), prefix);
                 } else {
                     ErrorUtils.sendError(user, "IRC blacklist is empty");
                 }
             } else {
                 String Domain = GetUtils.getIRCDNSBLbyDomain(args[0]);
                 if (Domain == null) {
-                    Constants.IRCBLs.add(args[0]);
+                    Registry.IRCBLs.add(args[0]);
                     IRCBLUtils.saveIRCBLs();
                     IRCUtils.sendMessage(user, network, channel, "IRC blacklist added", prefix);
                 } else {

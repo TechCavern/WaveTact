@@ -26,7 +26,7 @@ public class ResetPass extends GenericCommand {
         }
         Account acc = AccountUtils.getAccount(args[0]);
         if (acc != null) {
-            acc.setAuthPassword(Constants.encryptor.encryptPassword(args[1]));
+            acc.setAuthPassword(Registry.encryptor.encryptPassword(args[1]));
             AccountUtils.saveAccounts();
             IRCUtils.sendMessage(user, network, channel, "Password changed successfully", prefix);
         } else {

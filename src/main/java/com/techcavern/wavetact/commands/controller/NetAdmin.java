@@ -44,7 +44,7 @@ public class NetAdmin extends GenericCommand {
         if (account != null) {
             if (args[0].startsWith("-")) {
                 if (GetUtils.getNetworkAdminByNick(account, networkname) != null) {
-                    Constants.NetworkAdmins.remove(GetUtils.getNetworkAdminByNick(account, networkname));
+                    Registry.NetworkAdmins.remove(GetUtils.getNetworkAdminByNick(account, networkname));
                     NetAdminUtils.saveNetworkAdmins();
                     IRCUtils.sendMessage(user, network, channel, "Network admin removed", prefix);
                 } else {
@@ -52,7 +52,7 @@ public class NetAdmin extends GenericCommand {
                 }
             } else if (args[0].equalsIgnoreCase("list")) {
                 String netAdmins = "";
-                for (NetworkAdmin netAdmin : Constants.NetworkAdmins) {
+                for (NetworkAdmin netAdmin : Registry.NetworkAdmins) {
                     if (netAdmins.isEmpty()) {
                         netAdmins = netAdmin.getUser();
                     } else {
@@ -68,7 +68,7 @@ public class NetAdmin extends GenericCommand {
                 if (GetUtils.getNetworkAdminByNick(account, networkname) != null) {
                     ErrorUtils.sendError(user, "User is already in database");
                 } else {
-                    Constants.NetworkAdmins.add(new NetworkAdmin(networkname, account));
+                    Registry.NetworkAdmins.add(new NetworkAdmin(networkname, account));
                     NetAdminUtils.saveNetworkAdmins();
                     IRCUtils.sendMessage(user, network, channel, "Network admin added", prefix);
                 }

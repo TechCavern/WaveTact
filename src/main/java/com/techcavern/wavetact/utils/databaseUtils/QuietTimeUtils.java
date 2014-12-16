@@ -2,7 +2,7 @@ package com.techcavern.wavetact.utils.databaseUtils;
 
 import com.google.gson.internal.LinkedTreeMap;
 import com.techcavern.wavetact.utils.ErrorUtils;
-import com.techcavern.wavetact.utils.Constants;
+import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.fileUtils.JSONFile;
 import com.techcavern.wavetact.utils.objects.TimedObj;
 
@@ -19,8 +19,8 @@ public class QuietTimeUtils {
         if (file.exists()) {
             try {
                 List<LinkedTreeMap> quiettimes = file.read(List.class);
-                Constants.QuietTimes.clear();
-                Constants.QuietTimes.addAll(quiettimes.stream().map(quiets -> new TimedObj((String) quiets.get("hostmask"),
+                Registry.QuietTimes.clear();
+                Registry.QuietTimes.addAll(quiettimes.stream().map(quiets -> new TimedObj((String) quiets.get("hostmask"),
                         (String) quiets.get("networkName"),
                         (String) quiets.get("property"),
                         (String) quiets.get("channelName"),
@@ -35,14 +35,14 @@ public class QuietTimeUtils {
     public static void saveQuietTimes() {
         JSONFile file = new JSONFile("QuietTimes.json");
         try {
-            file.write(Constants.QuietTimes);
+            file.write(Registry.QuietTimes);
         } catch (IOException e) {
             ErrorUtils.handleException(e);
         }
     }
 
     public static TimedObj getQuietTime(String hostmask, String networkname, String channelname) {
-        for (TimedObj x : Constants.QuietTimes) {
+        for (TimedObj x : Registry.QuietTimes) {
             if (x.getHostmask().equals(hostmask) && x.getNetworkName().equals(networkname) && x.getChannelName().equals(channelname)) {
                 return x;
             }
