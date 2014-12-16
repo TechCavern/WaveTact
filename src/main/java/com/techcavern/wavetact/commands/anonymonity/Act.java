@@ -9,6 +9,7 @@ import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.TruCMD;
 import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -27,19 +28,25 @@ public class Act extends GenericCommand {
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        if (!isPrivate) {
-            IRCUtils.sendAction(user, network, channel, StringUtils.join(args, " ").replace("\n", " "), prefix);
-        } else {
-            Channel chan = GetUtils.getChannelbyName(network, args[0].replace(IRCUtils.getPrefix(args[0]), ""));
-            if (chan == null) {
-                IRCUtils.sendAction(user, network, channel, StringUtils.join(args, " ").replace("\n", " "), IRCUtils.getPrefix(args[0]));
-            } else {
-                if (PermUtils.getPermLevel(network, user.getNick(), chan) >= 5) {
-                    IRCUtils.sendAction(user, network, chan, StringUtils.join(args, " ").replace("\n", " "), IRCUtils.getPrefix(args[0]));
+        Channel chan;
+        if (args.length > 1) {
+            prefix = IRCUtils.getPrefix(network, args[0]);
+            if(!prefix.isEmpty())
+                chan = GetUtils.getChannelbyName(network, args[0].replace(prefix, ""));
+            else
+                chan = GetUtils.getChannelbyName(network, args[0]);
+            if(chan != null)
+                args = ArrayUtils.remove(args, 0);
+            else
+                chan = channel;
+        }else{
+            chan = channel;
+        }
+            if (PermUtils.getPermLevel(network, user.getNick(), chan) >= 5) {
+                    IRCUtils.sendAction(user, network, chan, StringUtils.join(args, " ").replace("\n", " "), prefix);
                 } else {
                     ErrorUtils.sendError(user, "Permission denied");
                 }
-            }
         }
     }
-}
+

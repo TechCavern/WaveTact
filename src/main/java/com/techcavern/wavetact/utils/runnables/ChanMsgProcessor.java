@@ -20,7 +20,7 @@ public class ChanMsgProcessor {
                     int userPermLevel = PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel());
                     if (userPermLevel >= Command.getPermLevel()) {
                         try {
-                            Command.onCommand(event.getUser(), event.getBot(), IRCUtils.getPrefix(event.getChannelSource()), event.getChannel(), false, userPermLevel, message);
+                            Command.onCommand(event.getUser(), event.getBot(), IRCUtils.getPrefix(event.getBot(), event.getChannelSource()), event.getChannel(), false, userPermLevel, message);
                         } catch (Exception e) {
                             ErrorUtils.sendError(event.getUser(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")");
                             e.printStackTrace();

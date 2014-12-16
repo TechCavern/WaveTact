@@ -23,15 +23,24 @@ public class PrivMsgProcessor {
                 message = ArrayUtils.remove(message, 0);
                 if (Command != null) {
                     if (Command.getChannelRequired()) {
-                        String prefix = IRCUtils.getPrefix(message[0]);
-                        Channel channel = GetUtils.getChannelbyName(event.getBot(), message[0].replace(prefix, ""));
+                        Channel channel = null;
+                        String prefix = null;
+                        if(message.length > 0) {
+                            prefix = IRCUtils.getPrefix(event.getBot(),message[0]);
+                            if(!prefix.isEmpty())
+                            channel = GetUtils.getChannelbyName(event.getBot(), message[0].replace(prefix, ""));
+                            else
+                            channel = GetUtils.getChannelbyName(event.getBot(), message[0]);
+                            message = ArrayUtils.remove(message, 0);
+                        }
                         if (channel != null) {
                             int userPermLevel = PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), channel);
                             if (userPermLevel >= Command.getPermLevel()) {
                                 try {
-                                    Command.onCommand(event.getUser(), event.getBot(), prefix + channel.getName(), channel, true, userPermLevel, ArrayUtils.remove(message, 0));
+                                    Command.onCommand(event.getUser(), event.getBot(), prefix + channel.getName(), channel, true, userPermLevel, message);
                                 } catch (Exception e) {
                                     ErrorUtils.sendError(event.getUser(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")");
+                                    e.printStackTrace();
                                 }
                             } else {
                                 ErrorUtils.sendError(event.getUser(), "Permission denied");
@@ -43,14 +52,15 @@ public class PrivMsgProcessor {
                         int userPermLevel = PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), null);
                         if (Command.getPermLevel() <= 5) {
                             try {
-                                Command.onCommand(event.getUser(), event.getBot(), null, null, true, 5, ArrayUtils.remove(message, 0));
+                                Command.onCommand(event.getUser(), event.getBot(), null, null, true, 5, message);
                             } catch (Exception e) {
                                 ErrorUtils.sendError(event.getUser(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")");
+                                e.printStackTrace();
                             }
                         } else {
                             if (userPermLevel >= Command.getPermLevel()) {
                                 try {
-                                    Command.onCommand(event.getUser(), event.getBot(), null, null, true, 5, ArrayUtils.remove(message, 0));
+                                    Command.onCommand(event.getUser(), event.getBot(), null, null, true, 5, message);
                                 } catch (Exception e) {
                                     ErrorUtils.sendError(event.getUser(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")");
                                     e.printStackTrace();
@@ -61,9 +71,9 @@ public class PrivMsgProcessor {
                         }
                     }
                 }
-                Constants.threadPool.execute(new process());
             }
 
         }
+        Constants.threadPool.execute(new process());
     }
 }

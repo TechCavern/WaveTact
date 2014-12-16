@@ -66,9 +66,12 @@ public class IRCUtils {
         }
     }
 
-    public static String getPrefix(String fullChannelName) {
-        String[] channel = fullChannelName.split("#");
-        return channel[0];
+    public static String getPrefix(PircBotX network, String fullChannelName) {
+        String prefix = String.valueOf(fullChannelName.charAt(0));
+        if(network.getServerInfo().getStatusMessage().contains(prefix)){
+            return prefix;
+        };
+        return "";
     }
 
     public static String getHostmask(PircBotX network, String userObject, boolean isBanmask) {
