@@ -21,7 +21,7 @@ public class Constants {
     public static String LastLeftChannel = "";
     public static final HashMap<String, String> QuietBans = new HashMap<>();
     public static final List<PermChannel> PermChannels = new ArrayList<>();
-    public static final List<UTime> Topic = new ArrayList<>();
+    public static final List<ChannelProperty> Topic = new ArrayList<>();
     public static final ForkJoinPool threadPool = new ForkJoinPool(100);
     public static final List<String> Controllers = new ArrayList<>();
     public static final List<String> IRCBLs = new ArrayList<>();

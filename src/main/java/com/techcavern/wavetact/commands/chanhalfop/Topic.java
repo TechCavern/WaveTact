@@ -8,6 +8,7 @@ package com.techcavern.wavetact.commands.chanhalfop;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ChanHOPCMD;
 import com.techcavern.wavetact.utils.*;
+import com.techcavern.wavetact.utils.objects.ChannelProperty;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import com.techcavern.wavetact.utils.objects.UTime;
 import org.apache.commons.lang3.StringUtils;
@@ -55,9 +56,9 @@ public class Topic extends GenericCommand {
             channel.send().setTopic(channel.getTopic().replace(args[0], args[2]));
             saveTopic(channel, network);
         } else if (args[1].equalsIgnoreCase("r") || args[1].equalsIgnoreCase("revert")) {
-            UTime oldTopic = GetUtils.getTopic(channel.getName(), GetUtils.getNetworkNameByNetwork(network));
+            ChannelProperty oldTopic = GetUtils.getTopic(channel.getName(), GetUtils.getNetworkNameByNetwork(network));
             if (oldTopic != null) {
-                channel.send().setTopic(oldTopic.getHostmask());
+                channel.send().setTopic(oldTopic.getProperty());
                 Constants.Topic.remove(oldTopic);
             } else {
                 ErrorUtils.sendError(user, "Error: no reversal possible");
@@ -69,6 +70,6 @@ public class Topic extends GenericCommand {
     }
 
     void saveTopic(Channel channel, PircBotX Bot) {
-        Constants.Topic.add(new UTime(channel.getTopic(), Bot.getServerInfo().getNetwork(), "Topic", channel.getName(), GeneralUtils.getMilliSeconds("30s"), System.currentTimeMillis()));
+        Constants.Topic.add(new ChannelProperty(Bot.getServerInfo().getNetwork(),channel.getName(),channel.getTopic()));
     }
 }

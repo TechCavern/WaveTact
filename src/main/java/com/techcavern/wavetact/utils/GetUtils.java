@@ -1,9 +1,6 @@
 package com.techcavern.wavetact.utils;
 
-import com.techcavern.wavetact.utils.objects.GenericCommand;
-import com.techcavern.wavetact.utils.objects.NetProperty;
-import com.techcavern.wavetact.utils.objects.NetworkAdmin;
-import com.techcavern.wavetact.utils.objects.UTime;
+import com.techcavern.wavetact.utils.objects.*;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -99,9 +96,9 @@ public class GetUtils {
         return null;
     }
 
-    public static UTime getTopic(String channelName, String networkName) {
+    public static ChannelProperty getTopic(String channelName, String networkName) {
         for (int i = Constants.Topic.size() - 1; i > -1; i--) {
-            UTime x = Constants.Topic.get(i);
+            ChannelProperty x = Constants.Topic.get(i);
             if (x.getChannelName().equalsIgnoreCase(channelName) && x.getNetworkName().equalsIgnoreCase(networkName)) {
                 return x;
             }

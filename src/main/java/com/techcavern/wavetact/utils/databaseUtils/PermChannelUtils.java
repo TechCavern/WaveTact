@@ -22,11 +22,10 @@ public class PermChannelUtils {
                 List<LinkedTreeMap> permChannels = file.read(List.class);
 
                 Constants.PermChannels.clear();
-                Constants.PermChannels.addAll(permChannels.stream().map(perms -> new PermChannel((String) perms.get("Channel"),
+                Constants.PermChannels.addAll(permChannels.stream().map(perms -> new PermChannel((String) perms.get("channelName"),
                         ((Double) perms.get("PermLevel")).intValue(),
-                        (Boolean) perms.get("auto"),
-                        (String) perms.get("PermNetwork"),
-                        (String) perms.get("permuser"))).collect(Collectors.toList()));
+                        (String) perms.get("networkName"),
+                        (String) perms.get("property"))).collect(Collectors.toList()));
 
 
             } catch (FileNotFoundException e) {
@@ -47,7 +46,7 @@ public class PermChannelUtils {
     public static PermChannel getPermLevelChannel(String Network, String nick, String Channel) {
         if (nick != null) {
             for (PermChannel c : Constants.PermChannels) {
-                if (c.getChannel().equals(Channel) && c.getPermUser().equalsIgnoreCase(nick) && c.getPermNetwork().equals(Network)) {
+                if (c.getChannelName().equals(Channel) && c.getPermUser().equalsIgnoreCase(nick) && c.getNetworkName().equals(Network)) {
                     return c;
                 }
             }

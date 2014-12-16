@@ -22,7 +22,7 @@ public class QuietTimeUtils {
                 Constants.QuietTimes.clear();
                 Constants.QuietTimes.addAll(quiettimes.stream().map(quiets -> new UTime((String) quiets.get("hostmask"),
                         (String) quiets.get("networkName"),
-                        (String) quiets.get("type"),
+                        (String) quiets.get("property"),
                         (String) quiets.get("channelName"),
                         ((Double) quiets.get("time")).longValue(),
                         ((Double) quiets.get("init")).longValue())).collect(Collectors.toList()));

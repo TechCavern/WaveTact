@@ -63,7 +63,7 @@ public class ChannelPermLevel extends GenericCommand {
 
                 } else {
                     if (PLChannel == null) {
-                        Constants.PermChannels.add(new PermChannel(channel.getName(), Integer.parseInt(args[1]), false, networkname, account));
+                        Constants.PermChannels.add(new PermChannel(channel.getName(), Integer.parseInt(args[1]), networkname, account));
                         PermChannelUtils.savePermChannels();
                         IRCUtils.sendNotice(user, network, channel, args[0].replaceFirst("-", "") + " added to access lists", "");
                     } else {

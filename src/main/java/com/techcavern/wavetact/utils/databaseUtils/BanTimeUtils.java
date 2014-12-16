@@ -22,7 +22,7 @@ public class BanTimeUtils {
                 Constants.BanTimes.clear();
                 Constants.BanTimes.addAll(bantimes.stream().map(bans -> new UTime((String) bans.get("hostmask"),
                         (String) bans.get("networkName"),
-                        (String) bans.get("type"),
+                        (String) bans.get("property"),
                         (String) bans.get("channelName"),
                         ((Double) bans.get("time")).longValue(),
                         ((Double) bans.get("init")).longValue())).collect(Collectors.toList()));
