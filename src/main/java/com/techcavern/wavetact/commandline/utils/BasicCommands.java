@@ -25,8 +25,8 @@ public class BasicCommands extends CommandLine {
         SimpleMessage license = new SimpleMessage("license", 0, "MIT (Do What The Fuck You Want, We take ZERO liability)", true);
         SimpleMessage source = new SimpleMessage("source", 0,
                 "http://github.com/TechCavern/WaveTact", true);
-        SimpleMessage authors = new SimpleMessage("authors", 0, "Julian (JZTech101), Logan", true);
-        SimpleMessage contributors = new SimpleMessage("contributors", 0, "Kenneth (kaendfinger), Sam (samrg472), Laceh", true);
+        SimpleMessage authors = new SimpleMessage("authors", 0, "Julian (JZTech101)", true);
+        SimpleMessage contributors = new SimpleMessage("contributors", 0, "Kenneth (kaendfinger), Sam (samrg472), Logan, Laceh", true);
         SimpleAction nom = new SimpleAction("nom", 0, "noms on $*", true);
         Constants.SimpleActions.add(potato);
         Constants.SimpleMessages.add(ping);
