@@ -40,11 +40,11 @@ public class CheckUserLevel extends GenericCommand {
         } else if (userPermLevel >= 20) {
             IRCUtils.sendMessage(user, network, channel, userObject + " is a network administrator!" + " (" + userPermLevel + ")", prefix);
         } else if (userPermLevel >= 18) {
-            IRCUtils.sendMessage(user, network, channel, userObject + " is a channel founder!" + " (" + userPermLevel + ")", prefix);
+            IRCUtils.sendMessage(user, network, channel, userObject + " is a channel administrator!" + " (" + userPermLevel + ")", prefix);
         } else if (userPermLevel >= 15) {
-            IRCUtils.sendMessage(user, network, channel, userObject + " is a channel owner!" + " (" + userPermLevel + ")", prefix);
+            IRCUtils.sendMessage(user, network, channel, userObject + " is a channel ownered operator!" + " (" + userPermLevel + ")", prefix);
         } else if (userPermLevel >= 13) {
-            IRCUtils.sendMessage(user, network, channel, userObject + " is a channel admin!" + " (" + userPermLevel + ")", prefix);
+            IRCUtils.sendMessage(user, network, channel, userObject + " is a channel protected operator!" + " (" + userPermLevel + ")", prefix);
         } else if (userPermLevel >= 10) {
             IRCUtils.sendMessage(user, network, channel, userObject + " is a channel operator!" + " (" + userPermLevel + ")", prefix);
         } else if (userPermLevel >= 7) {

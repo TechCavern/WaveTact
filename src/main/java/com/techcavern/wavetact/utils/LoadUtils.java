@@ -12,10 +12,10 @@ import java.util.Set;
 public class LoadUtils {
 
     public static void registerCommands() {
-        addCommands(Constants.ChanFounderCommands, ChanFounderCMD.class);
+        addCommands(Constants.ChanAdminCommands, ChanAdminCMD.class);
         addCommands(Constants.ChanHalfOpCommands, ChanHOPCMD.class);
         addCommands(Constants.ChanOpCommands, ChanOPCMD.class);
-        addCommands(Constants.ChanOwnerCommands, ChanOWNCMD.class);
+        addCommands(Constants.ChanOwnOpCommands, ChanOwnOpCMD.class);
         addCommands(Constants.ControllerCommands, ConCMD.class);
         addCommands(Constants.GenericCommands, GenCMD.class);
         addCommands(Constants.TrustedCommands, TruCMD.class);
@@ -136,12 +136,12 @@ public class LoadUtils {
             Constants.ChanOpListCommands.add(command.getCommand());
             Constants.AllListCommands.add(command.getCommand());
         }
-        for (GenericCommand command : Constants.ChanOwnerCommands) {
-            Constants.ChanOwnerListCommands.add(command.getCommand());
+        for (GenericCommand command : Constants.ChanOwnOpCommands) {
+            Constants.ChanOwnOpListCommands.add(command.getCommand());
             Constants.AllListCommands.add(command.getCommand());
         }
-        for (GenericCommand command : Constants.ChanFounderCommands) {
-            Constants.ChanFounderListCommands.add(command.getCommand());
+        for (GenericCommand command : Constants.ChanAdminCommands) {
+            Constants.ChanAdminListCommands.add(command.getCommand());
             Constants.AllListCommands.add(command.getCommand());
         }
         for (GenericCommand command : Constants.NetAdminCommands) {

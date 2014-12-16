@@ -40,9 +40,9 @@ public class Commands extends GenericCommand {
         } else if (permlevel >= 20) {
             IRCUtils.sendMessage(user, network, channel, StringUtils.join(Constants.NetAdminListCommands, ", "), prefix);
         } else if (permlevel >= 18) {
-            IRCUtils.sendMessage(user, network, channel, StringUtils.join(Constants.ChanFounderListCommands, ", "), prefix);
+            IRCUtils.sendMessage(user, network, channel, StringUtils.join(Constants.ChanAdminListCommands, ", "), prefix);
         } else if (permlevel >= 15) {
-            IRCUtils.sendMessage(user, network, channel, StringUtils.join(Constants.ChanOwnerListCommands, ", "), prefix);
+            IRCUtils.sendMessage(user, network, channel, StringUtils.join(Constants.ChanOwnOpListCommands, ", "), prefix);
         } else if (permlevel >= 13) {
             IRCUtils.sendMessage(user, network, channel, StringUtils.join(Constants.ChanOpListCommands, ", "), prefix);
         } else if (permlevel >= 10) {

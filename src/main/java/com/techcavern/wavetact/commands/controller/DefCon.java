@@ -69,10 +69,10 @@ public class DefCon extends GenericCommand {
         Constants.TrustedCommands.clear();
         Constants.ChanHalfOpCommands.clear();
         Constants.ControllerCommands.clear();
-        Constants.ChanOwnerCommands.clear();
+        Constants.ChanOwnOpCommands.clear();
         Constants.NetAdminCommands.clear();
         Constants.ChanOpCommands.clear();
-        Constants.ChanFounderCommands.clear();
+        Constants.ChanAdminCommands.clear();
         SimpleActionUtils.loadSimpleActions();
         SimpleMessageUtils.loadSimpleMessages();
         LoadUtils.registerCommands();
