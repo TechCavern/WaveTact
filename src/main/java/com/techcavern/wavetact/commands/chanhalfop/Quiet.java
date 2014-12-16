@@ -5,7 +5,7 @@ import com.techcavern.wavetact.annot.ChanHOPCMD;
 import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.databaseUtils.QuietTimeUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
-import com.techcavern.wavetact.utils.objects.UTime;
+import com.techcavern.wavetact.utils.objects.TimedObj;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -53,7 +53,7 @@ public class Quiet extends GenericCommand {
 
         }
         String networkname = GetUtils.getNetworkNameByNetwork(network);
-        UTime QuietTime = QuietTimeUtils.getQuietTime(hostmask, networkname, channel.getName());
+        TimedObj QuietTime = QuietTimeUtils.getQuietTime(hostmask, networkname, channel.getName());
         if (args[0].startsWith("+")) {
             if (QuietTime != null) {
                 if (args[0].startsWith("+")) {
@@ -83,13 +83,13 @@ public class Quiet extends GenericCommand {
             if (QuietTime == null) {
                 if (args.length == 2) {
                     IRCUtils.setMode(channel, network, "+" + Constants.QuietBans.get(ircd), hostmask);
-                    UTime c = new UTime(hostmask, networkname, ircd, channel.getName(), GeneralUtils.getMilliSeconds(args[1]), System.currentTimeMillis());
+                    TimedObj c = new TimedObj(hostmask, networkname, ircd, channel.getName(), GeneralUtils.getMilliSeconds(args[1]), System.currentTimeMillis());
                     Constants.QuietTimes.add(c);
                     QuietTimeUtils.saveQuietTimes();
 
                 } else if (args.length < 2) {
                     IRCUtils.setMode(channel, network, "+" + Constants.QuietBans.get(ircd), hostmask);
-                    UTime c = new UTime(hostmask, networkname, ircd, channel.getName(), GeneralUtils.getMilliSeconds("24h"), System.currentTimeMillis());
+                    TimedObj c = new TimedObj(hostmask, networkname, ircd, channel.getName(), GeneralUtils.getMilliSeconds("24h"), System.currentTimeMillis());
                     Constants.QuietTimes.add(c);
                     QuietTimeUtils.saveQuietTimes();
 

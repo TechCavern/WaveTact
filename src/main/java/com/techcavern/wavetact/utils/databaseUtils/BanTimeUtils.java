@@ -4,7 +4,7 @@ import com.google.gson.internal.LinkedTreeMap;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.Constants;
 import com.techcavern.wavetact.utils.fileUtils.JSONFile;
-import com.techcavern.wavetact.utils.objects.UTime;
+import com.techcavern.wavetact.utils.objects.TimedObj;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -20,7 +20,7 @@ public class BanTimeUtils {
             try {
                 List<LinkedTreeMap> bantimes = file.read(List.class);
                 Constants.BanTimes.clear();
-                Constants.BanTimes.addAll(bantimes.stream().map(bans -> new UTime((String) bans.get("hostmask"),
+                Constants.BanTimes.addAll(bantimes.stream().map(bans -> new TimedObj((String) bans.get("hostmask"),
                         (String) bans.get("networkName"),
                         (String) bans.get("property"),
                         (String) bans.get("channelName"),
@@ -41,8 +41,8 @@ public class BanTimeUtils {
         }
     }
 
-    public static UTime getBanTime(String hostmask, String networkname, String channelname) {
-        for (UTime x : Constants.BanTimes) {
+    public static TimedObj getBanTime(String hostmask, String networkname, String channelname) {
+        for (TimedObj x : Constants.BanTimes) {
             if (x.getHostmask().equals(hostmask) && x.getNetworkName().equals(networkname) && x.getChannelName().equals(channelname)) {
                 return x;
             }

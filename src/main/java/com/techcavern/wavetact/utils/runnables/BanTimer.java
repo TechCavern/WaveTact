@@ -5,7 +5,7 @@ import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.databaseUtils.BanTimeUtils;
 import com.techcavern.wavetact.utils.databaseUtils.QuietTimeUtils;
-import com.techcavern.wavetact.utils.objects.UTime;
+import com.techcavern.wavetact.utils.objects.TimedObj;
 import org.pircbotx.PircBotX;
 
 import java.util.concurrent.TimeUnit;
@@ -23,7 +23,7 @@ public class BanTimer implements Runnable {
             try {
                 TimeUnit.SECONDS.sleep(5);
                 for (int i = 0; i < Constants.BanTimes.size(); i++) {
-                    UTime utimeObject = Constants.BanTimes.get(i);
+                    TimedObj utimeObject = Constants.BanTimes.get(i);
                     try {
                         if (System.currentTimeMillis() >= utimeObject.getTime() + utimeObject.getInit()) {
                             PircBotX networkObject = GetUtils.getBotByNetworkName(utimeObject.getNetworkName());
@@ -37,7 +37,7 @@ public class BanTimer implements Runnable {
                 }
 
                 for (int i = 0; i < Constants.QuietTimes.size(); i++) {
-                    UTime utimeObject = Constants.QuietTimes.get(i);
+                    TimedObj utimeObject = Constants.QuietTimes.get(i);
                     try {
                         if (System.currentTimeMillis() >= utimeObject.getTime() + utimeObject.getInit()) {
                             PircBotX networkObject = GetUtils.getBotByNetworkName(utimeObject.getNetworkName());

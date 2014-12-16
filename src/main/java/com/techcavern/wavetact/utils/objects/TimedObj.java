@@ -1,12 +1,12 @@
 package com.techcavern.wavetact.utils.objects;
 
 
-public class UTime extends ChannelProperty{
+public class TimedObj extends ChannelProperty{
     private final long init;
     private long time;
     private final String hostmask;
 
-    public UTime(String hostmask, String networkName, String type, String channelName, long time, long init) {
+    public TimedObj(String hostmask, String networkName, String type, String channelName, long time, long init) {
         super(networkName,channelName, type);
         this.time = time;
         this.init = init;

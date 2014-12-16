@@ -44,8 +44,8 @@ public class Constants {
     public static final List<SimpleAction> SimpleActions = new ArrayList<>();
     public static final MultiBotManager WaveTact = new MultiBotManager();
     public static final Map<String, Configuration> configs = new HashMap<>();
-    public static final List<UTime> BanTimes = new ArrayList<>();
-    public static final List<UTime> QuietTimes = new ArrayList<>();
+    public static final List<TimedObj> BanTimes = new ArrayList<>();
+    public static final List<TimedObj> QuietTimes = new ArrayList<>();
     public static final List<NetProperty> CommandChars = new ArrayList<>();
     public static final List<NetProperty> AuthType = new ArrayList<>();
     public static final List<CommandLine> CommandLines = new ArrayList<>();
