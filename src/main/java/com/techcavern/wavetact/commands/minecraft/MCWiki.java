@@ -58,7 +58,7 @@ public class MCWiki extends GenericCommand {
             i++;
         }
         if (text.length() > 700) {
-            text = StringUtils.substring(text, 0, 700) + "...";
+            text = StringUtils.substring(text, 0, 697) + "...";
         }
         IRCUtils.sendMessage(user, network, channel, title + ": " + text, prefix);
         IRCUtils.sendMessage(user, network, channel, url, prefix);

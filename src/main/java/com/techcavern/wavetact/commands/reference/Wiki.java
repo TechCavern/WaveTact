@@ -22,7 +22,10 @@ public class Wiki extends GenericCommand {
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        JsonObject result = GeneralUtils.getJsonObject("http://en.wikipedia.org/w/api.php?action=query&prop=extracts&explaintext&exsectionformat=plain&exchars=700&titles=" + StringUtils.join(args, "%20").toLowerCase() + "&format=json").getAsJsonObject("query").getAsJsonObject("pages");
+        for(int i = 0; i < args.length; i++){
+            args[i] = StringUtils.capitalize(args[i]);
+        }
+        JsonObject result = GeneralUtils.getJsonObject("http://en.wikipedia.org/w/api.php?action=query&prop=extracts&explaintext&exsectionformat=plain&exchars=697&titles=" + StringUtils.join(args, "%20") + "&format=json").getAsJsonObject("query").getAsJsonObject("pages");
         String key = result.entrySet().iterator().next().getKey();
         if (result.getAsJsonObject(key).get("missing") != null) {
             ErrorUtils.sendError(user, "Query returned no results");
