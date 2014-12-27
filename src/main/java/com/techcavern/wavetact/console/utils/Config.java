@@ -15,16 +15,16 @@ public class Config extends CommandLine {
     }
 
     @Override
-    public void doAction(String[] args) {
-        Scanner input = new Scanner(System.in);
+    public void doAction(String[] args, CommandVariables commandVariables) {
+        Scanner input = new Scanner(commandVariables.getInputStream());
         com.techcavern.wavetact.utils.fileUtils.Configuration config = new com.techcavern.wavetact.utils.fileUtils.Configuration(new File("config.properties"));
-        System.out.print("Wolfram API Key: ");
+        commandVariables.getPrintStream().print("Wolfram API Key: ");
         config.set("wolframapi", input.nextLine());
-        System.out.print("Wunderground API Key: ");
+        commandVariables.getPrintStream().print("Wunderground API Key: ");
         config.set("wundergroundapi", input.nextLine());
-        System.out.print("Wordnik API Key: ");
+        commandVariables.getPrintStream().print("Wordnik API Key: ");
         config.set("wordnikapi", input.nextLine());
-        System.out.print("Google API Key: ");
+        commandVariables.getPrintStream().print("Google API Key: ");
         config.set("googleapi", input.nextLine());
         config.save();
         System.exit(0);

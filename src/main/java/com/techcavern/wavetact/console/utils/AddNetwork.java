@@ -16,39 +16,38 @@ public class AddNetwork extends CommandLine {
     }
 
     @Override
-    public void doAction(String[] args) {
+    public void doAction(String[] args, CommandVariables commandVariables) {
         boolean loop = true;
         while (loop) {
             new File("servers/").mkdir();
-            Scanner input = new Scanner(System.in);
-            System.out.print("Server name: ");
+            Scanner input = new Scanner(commandVariables.getInputStream());
+            commandVariables.getPrintStream().print("Server name: ");
             String name = input.nextLine();
             Configuration config = new Configuration(new File("servers/", name + ".server"));
             config.set("name", name);
-            System.out.print("Server host: ");
+            commandVariables.getPrintStream().print("Server host: ");
             config.set("server", input.nextLine());
-            System.out.print("Server Port(Enter 6667 to use Default): ");
+            commandVariables.getPrintStream().print("Server Port(Enter 6667 to use Default): ");
             config.set("port", input.nextLine());
-            System.out.print("Server nick: ");
+            commandVariables.getPrintStream().print("Server nick: ");
             config.set("nick", input.nextLine());
-            System.out.print("Channels(#chan1, #chan2): ");
+            commandVariables.getPrintStream().print("Channels(#chan1, #chan2): ");
             config.set("channels", input.nextLine());
-            System.out.print("Nickserv Pass(Enter False to disable): ");
+            commandVariables.getPrintStream().print("Nickserv Pass(Enter False to disable): ");
             config.set("nickserv", input.nextLine());
-            System.out.print("Bindhost(Enter None to use Default): ");
+            commandVariables.getPrintStream().print("Bindhost(Enter None to use Default): ");
             config.set("bindhost", input.nextLine());
-            System.out.print("Command Prefix: ");
+            commandVariables.getPrintStream().print("Command Prefix: ");
             config.set("prefix", input.nextLine());
-            System.out.print("AuthType (nickserv/account): ");
+            commandVariables.getPrintStream().print("AuthType (nickserv/account): ");
             config.set("authtype", input.nextLine());
-            System.out.print("Auto Allow Network Operators NetAdmin Level Access? (True/False): ");
+            commandVariables.getPrintStream().print("Auto Allow Network Operators NetAdmin Level Access? (True/False): ");
             config.set("netadminaccess", input.nextLine());
             config.save();
-            System.out.print("Add another? [y/n]");
+            commandVariables.getPrintStream().print("Add another? [y/n]");
             char ans = input.next().charAt(0);
             if (ans == 'n')
                 loop = false;
         }
-        System.exit(0);
     }
 }

@@ -1,6 +1,7 @@
 package com.techcavern.wavetact.console.perms;
 
 import com.techcavern.wavetact.annot.CMDLine;
+import com.techcavern.wavetact.console.utils.CommandVariables;
 import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.databaseUtils.ControllerUtils;
@@ -14,18 +15,16 @@ public class Controller extends CommandLine {
     }
 
     @Override
-    public void doAction(String[] args) {
+    public void doAction(String[] args, CommandVariables commandVariables) {
         if (args[1].startsWith("-")) {
             Registry.Controllers.remove(args[1].replace("-", ""));
             ControllerUtils.saveControllers();
-            System.out.println("removed " + args[1]);
+            commandVariables.getPrintStream().println("removed " + args[1]);
         } else {
             Registry.Controllers.add(args[1]);
             ControllerUtils.saveControllers();
-            System.out.println("added " + args[1]);
+            commandVariables.getPrintStream().println("added " + args[1]);
         }
-        System.exit(0);
-
     }
 }
 

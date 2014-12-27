@@ -9,12 +9,12 @@ import com.techcavern.wavetact.utils.objects.CommandLine;
 public class Quit extends CommandLine {
 
 	public Quit() {
-		super(GeneralUtils.toArray("shutdown stop"), "Stops the server.", false);
+		super(GeneralUtils.toArray("quit exit disconnect"), "Disconnects you.", false);
 	}
 
 	@Override
 	public void doAction(String[] args, CommandVariables commandVariables) {
-		Main.consoleServer.keepConsoleRunning = false;
-		commandVariables.getPrintStream().println("Will shutdown once you disconnect.");
+		Main.consoleServer.keepConnectionRunning = false;
+		commandVariables.getPrintStream().println("Bye!");
 	}
 }

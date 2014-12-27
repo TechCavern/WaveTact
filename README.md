@@ -34,7 +34,8 @@ PermLevels
 
 Running
 =======
-- Run `java -jar WaveTact.jar -start`
+- Make sure you have both the libs subdirectory and the WaveTact jar in your current directory.
+- Run `java -Dorg.newsclub.net.unix.library.path=./libs/ -jar WaveTact.jar`
 - WaveTact help is access by the -h or -help parameter
 - Adding and removing controllers is available via the -con or -controller parameter.
 - Make configuration by using the -config or -c parameter

@@ -26,37 +26,6 @@ public class LoadUtils {
         addCommandLines(Registry.CommandLines, CMDLine.class);
     }
 
-    public static void parseCommandLineArguments(String[] args) {
-        boolean invalid = true;
-        if (args.length < 1) {
-            com.techcavern.wavetact.commandline.Help c = new com.techcavern.wavetact.commandline.Help();
-            c.doAction(args);
-        }
-        for (CommandLine c : Registry.CommandLineArguments) {
-            for (String b : c.getArgument()) {
-                for (String s : args) {
-
-                    if (s.equalsIgnoreCase("-" + b)) {
-                        c.doAction(args);
-                        invalid = false;
-                    }
-                }
-            }
-        }
-        for (CommandLine c : Registry.CommandLines) {
-            for (String b : c.getArgument()) {
-
-                if (args[0].equalsIgnoreCase("-" + b)) {
-                    c.doAction(args);
-                    invalid = false;
-
-
-                }
-            }
-        }
-        if (invalid) System.exit(0);
-    }
-
     public static void addCommands(List<GenericCommand> list, Class<? extends Annotation> cl) {
         Set<Class<?>> classes = Registry.wavetactreflection.getTypesAnnotatedWith(cl);
         for (Class<?> clss : classes) {

@@ -17,7 +17,7 @@ public class BasicCommands extends CommandLine {
     }
 
     @Override
-    public void doAction(String[] args) {
+    public void doAction(String[] args,  CommandVariables commandVariables) {
         SimpleAction potato = new SimpleAction("potato", 0, "is a potato", true);
         SimpleMessage ping = new SimpleMessage("ping", 0, "pong", true);
         SimpleMessage pong = new SimpleMessage("pong", 0, "ping", true);
@@ -39,8 +39,7 @@ public class BasicCommands extends CommandLine {
         Registry.SimpleActions.add(nom);
         SimpleActionUtils.saveSimpleActions();
         SimpleMessageUtils.saveSimpleMessages();
-        System.out.println("Basic Commands Added");
-        System.exit(0);
+        commandVariables.getPrintStream().println("Basic Commands Added");
 
     }
 }
