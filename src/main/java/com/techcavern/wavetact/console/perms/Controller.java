@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.commandline.perms;
+package com.techcavern.wavetact.console.perms;
 
 import com.techcavern.wavetact.annot.CMDLine;
 import com.techcavern.wavetact.utils.Registry;

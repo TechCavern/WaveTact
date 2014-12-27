@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.commandline.utils;
+package com.techcavern.wavetact.console.utils;
 
 import com.techcavern.wavetact.annot.CMDLine;
 import com.techcavern.wavetact.utils.Registry;
