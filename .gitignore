@@ -20,3 +20,5 @@ databases/
 classes/
 production/
 *.properties
+workingdirectory/
+

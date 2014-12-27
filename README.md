@@ -34,10 +34,16 @@ PermLevels
 
 Running
 =======
-- Run `java -jar WaveTact.jar -start`
-- WaveTact help is access by the -h or -help parameter
-- Adding and removing controllers is available via the -con or -controller parameter.
-- Make configuration by using the -config or -c parameter
-- Make server configs by using the -addserver or -a parameter
-- If you wish to populate the custom commands database with some prechosen commands use -addbasiccommands ONCE.
+- Make sure you have both the libs subdirectory and the WaveTact jar in your current directory.
+- Run `java -Dorg.newsclub.net.unix.library.path=./libs/ -jar WaveTact.jar`
 
+If you wish to populate the custom commands database with some prechosen commands use the console command ````addbasiccommands```` ONCE.
+
+Until someone can be bothered to add a function for this to WaveTact itself, you can connect to the console like this:
+````
+netcat -U ./console.unixsocket
+````
+Note: You will need netcat-openbsd rather than netcat-traditional.
+
+Note that you'll have to add a controller and network at least once.
+You will have to restart WaveTact after adding the latter, we haven't yet implemented a proper way to live-add a channel.

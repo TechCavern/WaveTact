@@ -1,5 +1,7 @@
 package com.techcavern.wavetact.utils.objects;
 
+import com.techcavern.wavetact.console.utils.CommandVariables;
+
 public abstract class CommandLine {
 
     private final String[] argument;
@@ -25,7 +27,7 @@ public abstract class CommandLine {
         return this.helpString;
     }
 
-    public abstract void doAction(String[] args);
+    public abstract void doAction(String[] args, CommandVariables commandVariables);
 
 }
 
