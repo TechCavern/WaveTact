@@ -69,7 +69,7 @@ public class NetworkUtils {
         //      PircBotX Dev = createBot(null, Arrays.asList(GeneralUtils.toArray("#techcavern #testing")), "WaveTactDev", "irc.synirc.net");
         PircBotX Dev2 = createBot(null, Arrays.asList(GeneralUtils.toArray("")), "WaveTactDev", "irc.esper.net", 6667, null, "Esper");
         //      GeneralRegistry.WaveTact.addBot(Dev);
-        Registry.WaveTact.addBot(Dev2);
+        Registry.WaveTact.addNetwork(Dev2);
         Registry.Controllers.add("JZTech101");
         //      GeneralRegistry.CommandChars.add(new NetProperty("@", Dev));
         Registry.CommandChars.add(new NetProperty("@", Dev2));

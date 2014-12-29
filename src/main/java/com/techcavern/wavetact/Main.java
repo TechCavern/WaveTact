@@ -46,8 +46,6 @@ public class Main {
             System.err.println("Running in production mode");
             NetworkUtils.registerNetworks();
         }
-
-
         AccountUtils.loadAccounts();
         NetAdminUtils.loadNetworkAdmins();
         PermChannelUtils.loadPermChannels();
