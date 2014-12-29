@@ -34,8 +34,8 @@ PermLevels
 
 Running
 =======
-- Make sure you have both the libs subdirectory and the WaveTact jar in your current directory.
-- Run `java -Dorg.newsclub.net.unix.library.path=./libs/ -jar WaveTact.jar`
+- Make sure you have the WaveTact jar in your current directory.
+- Run `java -jar WaveTact.jar`
 
 If you wish to populate the custom commands database with some prechosen commands use the console command ````addbasiccommands```` ONCE.
 

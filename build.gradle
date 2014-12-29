@@ -11,6 +11,17 @@ repositories {
     }
 }
 
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+        }
+        resources {
+            srcDir 'src/main/resources'
+        }
+    }
+}
+
 dependencies {
     compile 'junit:junit:4.11'
     compile 'org.apache.commons:commons-lang3:3.3.2'
@@ -33,7 +44,7 @@ dependencies {
 }
 
 jar {
-    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     manifest {
         attributes('Main-class': 'com.techcavern.wavetact.Main')
     }

@@ -1,0 +1,4 @@
+libjunixsocket-linux-1.5-amd64.so
+libjunixsocket-linux-1.5-i386.so
+libjunixsocket-macosx-1.5-i386.dylib
+libjunixsocket-macosx-1.5-x86_64.dylib

@@ -21,6 +21,8 @@ public class Main {
         System.setProperty(SimpleLogger.DATE_TIME_FORMAT_KEY, "[yyyy/MM/dd HH:mm:ss]");
         System.setProperty(SimpleLogger.LEVEL_IN_BRACKETS_KEY, "true");
 
+        LoadUtils.unpackNatives();
+
         ControllerUtils.loadControllers();
         LoadUtils.initializeCommandlines();
         if (args.length >= 2 && (args[1].equalsIgnoreCase("debug") || args[1].toLowerCase().startsWith("dev"))) {

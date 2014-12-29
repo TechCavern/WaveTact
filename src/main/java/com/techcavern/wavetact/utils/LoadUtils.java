@@ -1,12 +1,18 @@
 package com.techcavern.wavetact.utils;
 
+import com.google.common.io.Files;
 import com.techcavern.wavetact.annot.*;
 import com.techcavern.wavetact.utils.objects.CommandLine;
 import com.techcavern.wavetact.utils.objects.FunObject;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Scanner;
 import java.util.Set;
 
 public class LoadUtils {
@@ -121,5 +127,57 @@ public class LoadUtils {
             Registry.ControllerListCommands.add(command.getCommand());
             Registry.AllListCommands.add(command.getCommand());
         }
+    }
+
+    public static void addDir(String s) throws IOException {
+        try {
+            // This enables the java.library.path to be modified at runtime
+            // From a Sun engineer at http://forums.sun.com/thread.jspa?threadID=707176
+            //
+            Field field = ClassLoader.class.getDeclaredField("usr_paths");
+            field.setAccessible(true);
+            String[] paths = (String[])field.get(null);
+            for (int i = 0; i < paths.length; i++) {
+                if (s.equals(paths[i])) {
+                    return;
+                }
+            }
+            String[] tmp = new String[paths.length+1];
+            System.arraycopy(paths,0,tmp,0,paths.length);
+            tmp[paths.length] = s;
+            field.set(null,tmp);
+            System.setProperty("java.library.path", System.getProperty("java.library.path") + File.pathSeparator + s);
+        } catch (IllegalAccessException e) {
+            throw new IOException("Failed to get permissions to set library path");
+        } catch (NoSuchFieldException e) {
+            throw new IOException("Failed to get field handle to set library path");
+        }
+    }
+
+    public static void unpackNatives() throws IOException {
+        System.err.println("Extracting natives...");
+        File tempDir = new File("./libs");
+        tempDir.mkdirs();
+        tempDir.mkdir();
+        Scanner files = new Scanner(LoadUtils.class.getClassLoader().getResourceAsStream("files.txt"));
+        while (files.hasNextLine())
+        {
+            String filename = files.nextLine();
+            if (filename.length() == 0)
+                continue;
+            System.err.println("Processing: " + filename);
+            File targetFile = new File(tempDir.getAbsolutePath() + "/" + filename);
+            if (!targetFile.exists())
+            {
+                InputStream source = LoadUtils.class.getResourceAsStream("/" + filename);
+                byte[] buffer = new byte[source.available()];
+                source.read(buffer);
+                Files.write(buffer, targetFile);
+            }
+            else
+                System.err.println("-> Skipping. File exists.");
+        }
+        System.err.println("Patching java.library.path...");
+        addDir(tempDir.getAbsolutePath());
     }
 }
