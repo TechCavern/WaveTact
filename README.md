@@ -1,4 +1,4 @@
-WaveTact [![Build Status](https://travis-ci.org/TechCavern/WaveTact.svg?branch=master)](https://travis-ci.org/TechCavern/WaveTact) [![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)]()
+WaveTact [![Build Status](https://travis-ci.org/TechCavern/WaveTact.svg?branch=master)](https://travis-ci.org/TechCavern/WaveTact) [![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg?style=flat)](https://github.com/TechCavern/WaveTact/blob/master/license.txt)
 --------
 An IRC bot that is based upon PircBotX and sits in #techcavern on the following networks:
 - ElectroCode (irc.electrocode.net)
