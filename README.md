@@ -39,11 +39,10 @@ Running
 
 If you wish to populate the custom commands database with some prechosen commands use the console command ````addbasiccommands```` ONCE.
 
-Until someone can be bothered to add a function for this to WaveTact itself, you can connect to the console like this:
+You can connect to the WaveTact console by running this:
 ````
-netcat -U ./console.unixsocket
+java -jar WaveTact.jar console
 ````
-Note: You will need netcat-openbsd rather than netcat-traditional.
 
 Note that you'll have to add a controller and network at least once.
 You will have to restart WaveTact after adding the latter, we haven't yet implemented a proper way to live-add a channel.
