@@ -45,13 +45,20 @@ public class ConsoleServer implements Runnable {
 
 						byte[] buf = new byte[512];
 						int read = is.read(buf);
-						String input = new String(buf, 0, read);
-						//Strip the newline.
-						if (input.endsWith("\n"))
-							input = input.substring(0, input.length() - 1);
+						if (read < 0) {
+							keepConnectionRunning = false;
+							break;
+						}
+						else
+						{
+							String input = new String(buf, 0, read);
+							//Strip the newline.
+							if (input.endsWith("\n"))
+								input = input.substring(0, input.length() - 1);
 
-						CommandVariables commandVariables = new CommandVariables(is, os);
-						parseCommandLineArguments(input.split(" "), commandVariables);
+							CommandVariables commandVariables = new CommandVariables(is, os);
+							parseCommandLineArguments(input.split(" "), commandVariables);
+						}
 					}
 					os.close();
 					is.close();
@@ -72,7 +79,7 @@ public class ConsoleServer implements Runnable {
 
 	public static void parseCommandLineArguments(String[] args, CommandVariables commandVariables) {
 		boolean invalid = true;
-		for (CommandLine c : Registry.CommandLineArguments) {
+		/*for (CommandLine c : Registry.CommandLineArguments) {
 			for (String b : c.getArgument()) {
 				for (String s : args) {
 
@@ -82,7 +89,7 @@ public class ConsoleServer implements Runnable {
 					}
 				}
 			}
-		}
+		}*/
 
 		if (invalid)
 			for (CommandLine c : Registry.CommandLines) {
