@@ -14,7 +14,7 @@ import java.util.Arrays;
 public class ListCommands extends ConsoleCommand {
 
     public ListCommands() {
-        super(GeneralUtils.toArray("listcommands commands list cmds"),"list", "lists all commands");
+        super(GeneralUtils.toArray("listcommands ircCommands list cmds"),"list", "lists all ircCommands");
     }
 
     @Override

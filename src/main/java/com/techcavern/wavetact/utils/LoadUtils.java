@@ -5,12 +5,18 @@ import com.techcavern.wavetact.annot.*;
 import com.techcavern.wavetact.utils.objects.ConsoleCommand;
 import com.techcavern.wavetact.utils.objects.FunObject;
 import com.techcavern.wavetact.utils.objects.IRCCommand;
+import org.flywaydb.core.Flyway;
+import org.jooq.DSLContext;
+import org.jooq.SQLDialect;
+import org.jooq.impl.DSL;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
@@ -27,6 +33,20 @@ public class LoadUtils {
         addCommands(Registry.GenericIRCCommands, GenCMD.class);
         addCommands(Registry.TrustedCommands, TruCMD.class);
         addCommands(Registry.NetAdminCommands, NAdmCMD.class);
+    }
+
+    public static void initiateDatabaseConnection() throws Exception{
+        Flyway flyway = new Flyway();
+        flyway.setDataSource("jdbc:sqlite:./db.sqlite", null, null);
+        flyway.migrate();
+
+
+        System.err.println("Getting connection...");
+        Class.forName("org.sqlite.JDBC");
+        Connection conn = DriverManager.getConnection("jdbc:sqlite:./db.sqlite");
+
+        System.err.println("Creating DSLContext...");
+        Registry.WaveTactDB = DSL.using(conn, SQLDialect.SQLITE);
     }
 
     public static void addCommands(List<IRCCommand> list, Class<? extends Annotation> cl) {

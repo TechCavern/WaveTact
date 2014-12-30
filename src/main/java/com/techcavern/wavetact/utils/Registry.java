@@ -6,6 +6,7 @@ import com.techcavern.wavetact.utils.consoleUtils.ConsoleServer;
 import com.techcavern.wavetact.utils.fileUtils.Configuration;
 import com.techcavern.wavetact.utils.objects.*;
 import org.jasypt.util.password.StrongPasswordEncryptor;
+import org.jooq.DSLContext;
 import org.pircbotx.MultiBotManager;
 import org.reflections.Reflections;
 
@@ -21,13 +22,8 @@ public class Registry {
     public static final Gson GSON_PRETTY_PRINT = new GsonBuilder().setPrettyPrinting().create();
     public static String LastLeftChannel = "";
     public static final HashMap<String, String> QuietBans = new HashMap<>();
-    public static final List<PermChannel> PermChannels = new ArrayList<>();
     public static final List<ChannelProperty> Topic = new ArrayList<>();
-    public static final List<ChannelUserProperty> RelayBots = new ArrayList<>();
     public static final ForkJoinPool threadPool = new ForkJoinPool(100);
-    public static final List<String> Controllers = new ArrayList<>();
-    public static final List<String> IRCBLs = new ArrayList<>();
-    public static final List<String> DNSBLs = new ArrayList<>();
     public static final List<NetworkAdmin> NetworkAdmins = new ArrayList<>();
     public static final List<IRCCommand> AllCommands = new ArrayList<>();
     public static final List<IRCCommand> GenericIRCCommands = new ArrayList<>();
@@ -37,19 +33,11 @@ public class Registry {
     public static final List<IRCCommand> ChanOwnOpCommands = new ArrayList<>();
     public static final List<IRCCommand> ChanHalfOpCommands = new ArrayList<>();
     public static final List<AuthedUser> AuthedUsers = new ArrayList<>();
-    public static final List<Account> Accounts = new ArrayList<>();
     public static final List<FunObject> Attacks = new ArrayList<>();
     public static final List<String> Eightball = new ArrayList<>();
     public static final List<IRCCommand> ChanOpCommands = new ArrayList<>();
     public static final List<IRCCommand> ChanAdminCommands = new ArrayList<>();
-    public static final List<SimpleMessage> SimpleMessages = new ArrayList<>();
-    public static final List<SimpleAction> SimpleActions = new ArrayList<>();
     public static final MultiBotManager WaveTact = new MultiBotManager();
-    public static final Map<String, Configuration> configs = new HashMap<>();
-    public static final List<TimedBan> BanTimes = new ArrayList<>();
-    public static final List<TimedBan> QuietTimes = new ArrayList<>();
-    public static final List<NetProperty> CommandChars = new ArrayList<>();
-    public static final List<NetProperty> AuthType = new ArrayList<>();
     public static final List<ConsoleCommand> ConsoleCommands = new ArrayList<>();
     public static final List<String> ConsoleListCommands = new ArrayList<>();
     public static final List<String> GenericListCommands = new ArrayList<>();
@@ -68,6 +56,6 @@ public class Registry {
     public static String wolframalphaapikey = null;
     public static String wordnikapikey = null;
     public static String googleapikey = null;
-    public static final List<NetProperty> NetAdminAccess = new ArrayList<>();
     public static ConsoleServer consoleServer = new ConsoleServer();
+    public static DSLContext WaveTactDB = null;
 }

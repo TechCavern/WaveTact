@@ -26,27 +26,13 @@ public class Main {
         if ((args.length >= 1) && args[0].equalsIgnoreCase("client")){
             ConsoleClient.go();
         }else {
-            ControllerUtils.loadControllers();
-            NetworkUtils.registerNetworks();
-            AccountUtils.loadAccounts();
-            NetAdminUtils.loadNetworkAdmins();
-            PermChannelUtils.loadPermChannels();
-            RelayUtils.loadRelayBots();
-
             ConfigUtils.registerConfigs();
+            LoadUtils.initiateDatabaseConnection();
             LoadUtils.registerCommands();
             LoadUtils.registerCommandList();
             LoadUtils.registerQuiets();
-            SimpleActionUtils.loadSimpleActions();
-            SimpleMessageUtils.loadSimpleMessages();
-
             LoadUtils.registerAttacks();
             LoadUtils.registerEightball();
-            IRCBLUtils.loadIRCBLs();
-            DNSBLUtils.loadDNSBLs();
-
-            BanTimeUtils.loadBanTimes();
-            QuietTimeUtils.loadQuietTimes();
             Registry.WaveTact.start();
 
             Registry.threadPool.execute(Registry.consoleServer);

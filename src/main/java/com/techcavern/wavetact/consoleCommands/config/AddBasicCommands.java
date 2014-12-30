@@ -14,7 +14,7 @@ import com.techcavern.wavetact.utils.objects.SimpleMessage;
 public class AddBasicCommands extends ConsoleCommand {
 
     public AddBasicCommands() {
-        super(GeneralUtils.toArray("addbasiccommands"),"addbasiccommands", "Pre-Populate the database with some pre-chosen commands (Use ONCE and only ONCE");
+        super(GeneralUtils.toArray("addbasiccommands"),"addbasiccommands", "Pre-Populate the database with some pre-chosen ircCommands (Use ONCE and only ONCE");
     }
 
     @Override
