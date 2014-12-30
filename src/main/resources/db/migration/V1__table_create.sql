@@ -1,76 +1,58 @@
 CREATE TABLE ACCOUNTS (
-ID String NULL,
-COL1 String NULL,
-PRIMARY KEY (ID)
+username String,
+password String
 );
 CREATE TABLE BANS (
-ID String NULL,
-COL1 String NULL,
-COL2 String NULL,
-COL3 String NULL,
-COL4 Long NULL,
-COL5 Long NULL,
-COL6 Boolean NULL,
-PRIMARY KEY (ID)
+hostmask String,
+network String,
+channel String,
+init Long,
+time Long,
+isMute Boolean,
+property String
 );
 
 CREATE TABLE CONFIG(
-ID String NULL,
-COL1 String NULL,
-PRIMARY KEY (ID)
+property String,
+value String
 );
 
 CREATE TABLE PERMUSERCHANNELS(
-ID String NULL,
-COL1 int NULL,
-COL2 String NULL,
-COL3 String NULL,
-PRIMARY KEY (ID)
-);
-
-CREATE TABLE RELAYBOTS(
-ID String NULL,
-COL1 String NULL,
-COL2 String NULL,
-COL3 String NULL,
-PRIMARY KEY (ID)
+network String,
+channel String,
+account String,
+permlevel int
 );
 
 CREATE TABLE CUSTOMCOMMANDS(
-ID String NULL,
-COL1 int NULL,
-COL2 String NULL,
-COL3 String NULL,
-COL4 String NULL,
-COL5 Boolean NULL,
-PRIMARY KEY (ID)
+network int,
+channel String,
+permlevel String,
+locked String,
+isAction Boolean,
 );
 
 CREATE TABLE BLACKLISTS(
-ID String NULL,
-COL1 String NULL,
-PRIMARY KEY (ID)
+type String,
+url String
 );
 
 CREATE TABLE CHANNELPROPERTY(
-ID String NULL,
-COL1 String NULL,
-COL2 String NULL,
-PRIMARY KEY (ID)
+network String,
+channel String,
+property String,
+value String
 );
 
 CREATE TABLE SERVERS(
-ID String NULL,
-COL1 String NULL,
-COL2 int NULL,
-COL3 String NULL,
-COL4 String NULL,
-COL5 String NULL,
-COL6 String NULL,
-COL7 String NULL,
-COL8 String NULL,
-COL9 boolean NULL,
-COL10 String NULL,
-PRIMARY KEY (ID)
+name String,
+port int,
+server String,
+nick String,
+channels String,
+nickserv String,
+bindhost String,
+networkadminaccess boolean,
+authtype String
 );
 
