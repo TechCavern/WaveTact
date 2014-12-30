@@ -5,7 +5,7 @@ import com.techcavern.wavetact.annot.ChanHOPCMD;
 import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.databaseUtils.BanTimeUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
-import com.techcavern.wavetact.utils.objects.TimedObj;
+import com.techcavern.wavetact.utils.objects.TimedBan;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -40,7 +40,7 @@ public class Ban extends GenericCommand {
             }
         }
         String networkname = GetUtils.getNetworkNameByNetwork(network);
-        TimedObj BanTime = BanTimeUtils.getBanTime(hostmask, networkname, channel.getName());
+        TimedBan BanTime = BanTimeUtils.getBanTime(hostmask, networkname, channel.getName());
         if (args[0].startsWith("-")) {
             if (BanTime != null) {
                 BanTime.setTime(0);
@@ -69,13 +69,13 @@ public class Ban extends GenericCommand {
             if (BanTime == null) {
                 if (args.length == 2) {
                     ban(hostmask, channel, network);
-                    TimedObj utimeObject = new TimedObj(hostmask, networkname, "b", channel.getName(), GeneralUtils.getMilliSeconds(args[1]), System.currentTimeMillis());
+                    TimedBan utimeObject = new TimedBan(hostmask, networkname, "b", channel.getName(), GeneralUtils.getMilliSeconds(args[1]), System.currentTimeMillis());
                     Registry.BanTimes.add(utimeObject);
                     BanTimeUtils.saveBanTimes();
 
                 } else if (args.length < 2) {
                     ban(hostmask, channel, network);
-                    TimedObj utimeObject = new TimedObj(hostmask, networkname, "b", channel.getName(), GeneralUtils.getMilliSeconds("24h"), System.currentTimeMillis());
+                    TimedBan utimeObject = new TimedBan(hostmask, networkname, "b", channel.getName(), GeneralUtils.getMilliSeconds("24h"), System.currentTimeMillis());
                     Registry.BanTimes.add(utimeObject);
                     BanTimeUtils.saveBanTimes();
                 }

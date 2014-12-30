@@ -1,4 +1,5 @@
 apply plugin: 'java'
+apply plugin: 'idea'
 
 repositories {
     mavenCentral()
@@ -34,8 +35,7 @@ dependencies {
     compile 'jp.freepress.repo:WolframAlpha:1.1'
     compile 'org.pircbotx:pircbotx:2.1-SNAPSHOT'
     compile 'org.jooq:jooq:3.5.0'
-    compile 'org.jooq:jooq-meta:3.5.0'
-    compile 'org.jooq:jooq-codegen:3.5.0'
+    compile 'org.flywaydb:flyway-core:3.1'
     compile 'org.jasypt:jasypt:1.9.2'
     compile 'com.wordnik:wordnik-java-client:1.0.0'
     compile 'org.jsoup:jsoup:1.7.3'
@@ -44,8 +44,60 @@ dependencies {
     compile 'com.google.apis:google-api-services-youtube:v3-rev120-1.19.0'
     compile files('libs/MC-Ping.jar')
     compile files('libs/junixsocket-1.3.jar')
+    runtime 'org.xerial:sqlite-jdbc:3.8.7'
 }
-
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.jooq:jooq-codegen:3.5.0'
+        classpath 'org.xerial:sqlite-jdbc:3.8.7'
+        classpath 'org.flywaydb:flyway-gradle-plugin:3.1'
+    }
+}
+apply plugin: 'flyway'
+flyway {
+    url = 'jdbc:sqlite:./tempdb.sqlite'
+}
+task codeGen << {
+// Use your favourite XML builder to construct the code generation configuration file
+// ----------------------------------------------------------------------------------
+    def writer = new StringWriter()
+    def xml = new groovy.xml.MarkupBuilder(writer)
+            .configuration('xmlns': 'http://www.jooq.org/xsd/jooq-codegen-3.5.0.xsd') {
+        jdbc() {
+            driver('org.sqlite.JDBC')
+            url('jdbc:sqlite:./tempdb.sqlite')
+        }
+        generator() {
+            database() {
+            }
+            generate() {
+            }
+            target() {
+                packageName('test.database')
+                directory('src/main/java')
+            }
+        }
+    }
+    org.jooq.util.GenerationTool.main(
+            javax.xml.bind.JAXB.unmarshal(new StringReader(writer.toString()),
+                    org.jooq.util.jaxb.Configuration.class)
+    )
+}
+task deleteTempDb(type: Delete) {
+    delete 'tempdb.sqlite'
+}
+codeGen.dependsOn tasks.flywayMigrate
+codeGen.finalizedBy deleteTempDb
+tasks.idea.dependsOn codeGen
+compileJava.dependsOn codeGen
+project.afterEvaluate {
+    flywayClean.dependsOn -= testClasses
+    flywayMigrate.dependsOn = [processResources, processTestResources]
+}
 jar {
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     manifest {

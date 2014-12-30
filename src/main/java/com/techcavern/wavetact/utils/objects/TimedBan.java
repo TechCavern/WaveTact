@@ -1,15 +1,17 @@
 package com.techcavern.wavetact.utils.objects;
 
 
-public class TimedObj extends ChannelProperty{
+public class TimedBan extends ChannelProperty{
     private final long init;
     private long time;
     private final String hostmask;
+    private final boolean isMute;
 
-    public TimedObj(String hostmask, String networkName, String type, String channelName, long time, long init) {
+    public TimedBan(String hostmask, String networkName, String type, String channelName, long time, long init, boolean isMute) {
         super(networkName,channelName, type);
         this.time = time;
         this.init = init;
+        this.isMute = isMute;
         this.hostmask = hostmask;
     }
 
@@ -21,6 +23,8 @@ public class TimedObj extends ChannelProperty{
     public void setTime(long x) {
         this.time = x;
     }
+
+    public boolean isMute(){return isMute;}
 
     public String getType() {
         return this.getProperty();

@@ -4,7 +4,7 @@ import com.google.gson.internal.LinkedTreeMap;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.fileUtils.JSONFile;
-import com.techcavern.wavetact.utils.objects.TimedObj;
+import com.techcavern.wavetact.utils.objects.TimedBan;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -20,7 +20,7 @@ public class QuietTimeUtils {
             try {
                 List<LinkedTreeMap> quiettimes = file.read(List.class);
                 Registry.QuietTimes.clear();
-                Registry.QuietTimes.addAll(quiettimes.stream().map(quiets -> new TimedObj((String) quiets.get("hostmask"),
+                Registry.QuietTimes.addAll(quiettimes.stream().map(quiets -> new TimedBan((String) quiets.get("hostmask"),
                         (String) quiets.get("networkName"),
                         (String) quiets.get("property"),
                         (String) quiets.get("channelName"),
@@ -41,8 +41,8 @@ public class QuietTimeUtils {
         }
     }
 
-    public static TimedObj getQuietTime(String hostmask, String networkname, String channelname) {
-        for (TimedObj x : Registry.QuietTimes) {
+    public static TimedBan getQuietTime(String hostmask, String networkname, String channelname) {
+        for (TimedBan x : Registry.QuietTimes) {
             if (x.getHostmask().equals(hostmask) && x.getNetworkName().equals(networkname) && x.getChannelName().equals(channelname)) {
                 return x;
             }

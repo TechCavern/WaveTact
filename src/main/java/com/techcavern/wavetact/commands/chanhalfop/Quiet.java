@@ -5,7 +5,7 @@ import com.techcavern.wavetact.annot.ChanHOPCMD;
 import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.databaseUtils.QuietTimeUtils;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
-import com.techcavern.wavetact.utils.objects.TimedObj;
+import com.techcavern.wavetact.utils.objects.TimedBan;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -53,7 +53,7 @@ public class Quiet extends GenericCommand {
 
         }
         String networkname = GetUtils.getNetworkNameByNetwork(network);
-        TimedObj QuietTime = QuietTimeUtils.getQuietTime(hostmask, networkname, channel.getName());
+        TimedBan QuietTime = QuietTimeUtils.getQuietTime(hostmask, networkname, channel.getName());
         if (args[0].startsWith("+")) {
             if (QuietTime != null) {
                 if (args[0].startsWith("+")) {
@@ -83,13 +83,13 @@ public class Quiet extends GenericCommand {
             if (QuietTime == null) {
                 if (args.length == 2) {
                     IRCUtils.setMode(channel, network, "+" + Registry.QuietBans.get(ircd), hostmask);
-                    TimedObj c = new TimedObj(hostmask, networkname, ircd, channel.getName(), GeneralUtils.getMilliSeconds(args[1]), System.currentTimeMillis());
+                    TimedBan c = new TimedBan(hostmask, networkname, ircd, channel.getName(), GeneralUtils.getMilliSeconds(args[1]), System.currentTimeMillis());
                     Registry.QuietTimes.add(c);
                     QuietTimeUtils.saveQuietTimes();
 
                 } else if (args.length < 2) {
                     IRCUtils.setMode(channel, network, "+" + Registry.QuietBans.get(ircd), hostmask);
-                    TimedObj c = new TimedObj(hostmask, networkname, ircd, channel.getName(), GeneralUtils.getMilliSeconds("24h"), System.currentTimeMillis());
+                    TimedBan c = new TimedBan(hostmask, networkname, ircd, channel.getName(), GeneralUtils.getMilliSeconds("24h"), System.currentTimeMillis());
                     Registry.QuietTimes.add(c);
                     QuietTimeUtils.saveQuietTimes();
 
