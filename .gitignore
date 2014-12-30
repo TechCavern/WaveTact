@@ -21,4 +21,6 @@ classes/
 production/
 *.properties
 workingdirectory/
-
+*.ipr
+*.iws
+src/main/java/test/
