@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.console;
+package com.techcavern.wavetact.utils.consoleUtils;
 
 import org.newsclub.net.unix.AFUNIXSocket;
 import org.newsclub.net.unix.AFUNIXSocketAddress;
@@ -64,7 +64,7 @@ public class ConsoleClient {
 
 		}
 
-		inputThread.stop();
+		inputThread.interrupt();
 		os.close();
 		is.close();
 

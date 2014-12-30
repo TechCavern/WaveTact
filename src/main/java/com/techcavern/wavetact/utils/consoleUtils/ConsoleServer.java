@@ -1,8 +1,8 @@
-package com.techcavern.wavetact.console;
+package com.techcavern.wavetact.utils.consoleUtils;
 
-import com.techcavern.wavetact.console.utils.CommandVariables;
 import com.techcavern.wavetact.utils.Registry;
-import com.techcavern.wavetact.utils.objects.CommandLine;
+import com.techcavern.wavetact.utils.objects.CommandIO;
+import com.techcavern.wavetact.utils.objects.ConsoleCommand;
 import org.newsclub.net.unix.AFUNIXServerSocket;
 import org.newsclub.net.unix.AFUNIXSocketAddress;
 
@@ -13,7 +13,7 @@ import java.io.OutputStream;
 import java.net.Socket;
 
 /**
- * A crude implementation of a console server.
+ * A crude implementation of a consoleCommands server.
  */
 public class ConsoleServer implements Runnable {
 
@@ -30,7 +30,7 @@ public class ConsoleServer implements Runnable {
 			server.bind(new AFUNIXSocketAddress(socketFile));
 
 			while ((!Thread.interrupted()) && keepConsoleRunning) {
-				System.err.println("Waiting for connection on console socket...");
+				System.err.println("Waiting for connection on consoleCommands socket...");
 				Socket sock = server.accept();
 				try {
 					System.err.println("Connected: " + sock);
@@ -55,9 +55,8 @@ public class ConsoleServer implements Runnable {
 							//Strip the newline.
 							if (input.endsWith("\n"))
 								input = input.substring(0, input.length() - 1);
-
-							CommandVariables commandVariables = new CommandVariables(is, os);
-							parseCommandLineArguments(input.split(" "), commandVariables);
+							CommandIO commandIO = new CommandIO(is, os);
+							parseCommandLineArguments(input.split(" "), commandIO);
 						}
 					}
 					os.close();
@@ -76,34 +75,18 @@ public class ConsoleServer implements Runnable {
 		socketFile.delete();
 		System.exit(0);
 	}
-
-	public static void parseCommandLineArguments(String[] args, CommandVariables commandVariables) {
+	public static void parseCommandLineArguments(String[] args, CommandIO commandIO) {
 		boolean invalid = true;
-		/*for (CommandLine c : Registry.CommandLineArguments) {
-			for (String b : c.getArgument()) {
-				for (String s : args) {
-
-					if (s.equalsIgnoreCase(b)) {
-						c.doAction(args, commandVariables);
-						invalid = false;
-					}
-				}
-			}
-		}*/
-
-		if (invalid)
-			for (CommandLine c : Registry.CommandLines) {
-				for (String b : c.getArgument()) {
-
+			for (ConsoleCommand c : Registry.ConsoleCommands) {
+				for (String b : c.getCommandID()) {
 					if (args[0].equalsIgnoreCase(b)) {
-						c.doAction(args, commandVariables);
+						c.onCommand(args, commandIO);
 						invalid = false;
-
 					}
 				}
 			}
 		if (invalid)
-			commandVariables.getPrintStream().println("Invalid command.");
+			commandIO.getPrintStream().println("Invalid command.");
 	}
 
 }

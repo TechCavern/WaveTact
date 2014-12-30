@@ -30,7 +30,7 @@ public class RelayMsgProcessor {
                 String[] message = StringUtils.split(Colors.removeFormattingAndColors(startingmessage), " ");
                 String command = message[0].toLowerCase();
                 message = ArrayUtils.remove(message, 0);
-                GenericCommand Command = GetUtils.getCommand(StringUtils.replaceOnce(command, GetUtils.getCommandChar(event.getBot()), ""));
+                GenericCommand Command = GetUtils.getGenericCommand(StringUtils.replaceOnce(command, GetUtils.getCommandChar(event.getBot()), ""));
                 if (Command != null && command.startsWith(GetUtils.getCommandChar(event.getBot())) && Command.getPermLevel() == 0) {
                     try {
                         Command.onCommand(event.getUser(), event.getBot(), IRCUtils.getPrefix(event.getBot(), event.getChannelSource()), event.getChannel(), false, 0, message);

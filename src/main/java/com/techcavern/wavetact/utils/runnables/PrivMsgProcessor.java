@@ -16,9 +16,9 @@ public class PrivMsgProcessor {
             public void run() {
                 String[] message = StringUtils.split(Colors.removeFormattingAndColors(event.getMessage()), " ");
                 String command = message[0].toLowerCase();
-                GenericCommand Command = GetUtils.getCommand(command);
+                GenericCommand Command = GetUtils.getGenericCommand(command);
                 if (Command == null) {
-                    Command = GetUtils.getCommand(StringUtils.replaceOnce(command, GetUtils.getCommandChar(event.getBot()), ""));
+                    Command = GetUtils.getGenericCommand(StringUtils.replaceOnce(command, GetUtils.getCommandChar(event.getBot()), ""));
                 }
                 message = ArrayUtils.remove(message, 0);
                 if (Command != null) {

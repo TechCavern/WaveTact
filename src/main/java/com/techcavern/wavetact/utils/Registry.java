@@ -49,8 +49,8 @@ public class Registry {
     public static final List<TimedObj> QuietTimes = new ArrayList<>();
     public static final List<NetProperty> CommandChars = new ArrayList<>();
     public static final List<NetProperty> AuthType = new ArrayList<>();
-    public static final List<CommandLine> CommandLines = new ArrayList<>();
-    public static final List<CommandLine> CommandLineArguments = new ArrayList<>();
+    public static final List<ConsoleCommand> ConsoleCommands = new ArrayList<>();
+    public static final List<String> ConsoleListCommands = new ArrayList<>();
     public static final List<String> GenericListCommands = new ArrayList<>();
     public static final List<String> TrustedListCommands = new ArrayList<>();
     public static final List<String> ControllerListCommands = new ArrayList<>();

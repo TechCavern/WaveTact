@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.console.utils;
+package com.techcavern.wavetact.utils.objects;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -7,12 +7,12 @@ import java.io.PrintStream;
 /**
  * Created by roelf on 12/27/14.
  */
-public class CommandVariables {
+public class CommandIO {
 	private InputStream is;
 	private OutputStream os;
 	private PrintStream ps;
 
-	public CommandVariables(InputStream is, OutputStream os) {
+	public CommandIO(InputStream is, OutputStream os) {
 		this.is = is;
 		this.os = os;
 		this.ps = new PrintStream(os, true);

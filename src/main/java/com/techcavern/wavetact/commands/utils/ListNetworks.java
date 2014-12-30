@@ -16,16 +16,15 @@ import java.util.List;
 
 @CMD
 @GenCMD
-public class Networks extends GenericCommand {
+public class ListNetworks extends GenericCommand {
 
-    public Networks() {
-        super(GeneralUtils.toArray("networks netlist"), 0, "networks [connected/all/disconnected]", "Lists the networks a bot is on", false);
+    public ListNetworks() {
+        super(GeneralUtils.toArray("listnetworks netlist"), 0, "listnetworks [connected/all/disconnected]", "Lists the networks a bot is on", false);
     }
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         String networks = "";
-        int netcount = 0;
         List<NetProperty> bufferlist = new ArrayList<>();
         if (args[0].equalsIgnoreCase("connected")) {
             for (NetProperty netprop : Registry.NetworkName) {
@@ -42,6 +41,7 @@ public class Networks extends GenericCommand {
                 bufferlist.add(netprop);
             }
         }
+        int netcount = 0;
         for (NetProperty netprop : bufferlist) {
             if (netcount > 0) {
                 networks += ", " + netprop.getProperty();

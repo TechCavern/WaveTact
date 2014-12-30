@@ -75,7 +75,7 @@ public class CustomACT extends GenericCommand {
                         ErrorUtils.sendError(user, "Permission denied");
                     }
                 } else {
-                    if (GetUtils.getCommand(command) != null) {
+                    if (GetUtils.getGenericCommand(command) != null) {
                         ErrorUtils.sendError(user, "Command already exists");
                         return;
                     } else

@@ -1,23 +1,24 @@
-package com.techcavern.wavetact.console.utils;
+package com.techcavern.wavetact.consoleCommands.config;
 
 import com.techcavern.wavetact.annot.CMDLine;
 import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.GeneralUtils;
+import com.techcavern.wavetact.utils.objects.CommandIO;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleActionUtils;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleMessageUtils;
-import com.techcavern.wavetact.utils.objects.CommandLine;
+import com.techcavern.wavetact.utils.objects.ConsoleCommand;
 import com.techcavern.wavetact.utils.objects.SimpleAction;
 import com.techcavern.wavetact.utils.objects.SimpleMessage;
 
 @CMDLine
-public class BasicCommands extends CommandLine {
+public class AddBasicCommands extends ConsoleCommand {
 
-    public BasicCommands() {
-        super(GeneralUtils.toArray("addbasiccommands"), "No Arguments, Use it ONCE and ONLY ONCE to populate the Basic Commands", false);
+    public AddBasicCommands() {
+        super(GeneralUtils.toArray("addbasiccommands"),"addbasiccommands", "Pre-Populate the database with some pre-chosen commands (Use ONCE and only ONCE");
     }
 
     @Override
-    public void doAction(String[] args,  CommandVariables commandVariables) {
+    public void onCommand(String[] args, CommandIO commandIO) {
         SimpleAction potato = new SimpleAction("potato", 0, "is a potato", true);
         SimpleMessage ping = new SimpleMessage("ping", 0, "pong", true);
         SimpleMessage pong = new SimpleMessage("pong", 0, "ping", true);
@@ -39,7 +40,7 @@ public class BasicCommands extends CommandLine {
         Registry.SimpleActions.add(nom);
         SimpleActionUtils.saveSimpleActions();
         SimpleMessageUtils.saveSimpleMessages();
-        commandVariables.getPrintStream().println("Basic Commands Added");
+        commandIO.getPrintStream().println("Basic Commands Added");
 
     }
 }

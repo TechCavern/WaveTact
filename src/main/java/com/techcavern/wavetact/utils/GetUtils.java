@@ -29,18 +29,20 @@ public class GetUtils {
 
     }
 
-    public static PircBotX getBotByNetwork(String network) {
-        for (PircBotX c : Registry.WaveTact.getBots()) {
-            if (c.getServerInfo().getNetwork().equals(network)) {
-                return c;
+
+    public static GenericCommand getGenericCommand(String Command) {
+        for (GenericCommand g : Registry.AllCommands) {
+            for (String commandid : g.getCommandID()) {
+                if (commandid.equalsIgnoreCase(Command)) {
+                    return g;
+                }
             }
         }
         return null;
-    }
 
-    public static GenericCommand getCommand(String Command) {
-        for (GenericCommand g : Registry.AllCommands) {
-            List<GenericCommand> b = Registry.AllCommands;
+    }
+    public static ConsoleCommand getConsoleCommand(String Command) {
+        for (ConsoleCommand g : Registry.ConsoleCommands) {
             for (String commandid : g.getCommandID()) {
                 if (commandid.equalsIgnoreCase(Command)) {
                     return g;

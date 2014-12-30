@@ -18,10 +18,10 @@ import org.pircbotx.User;
 @SuppressWarnings("ALL")
 @CMD
 @GenCMD
-public class Commands extends GenericCommand {
+public class ListCommands extends GenericCommand {
 
-    public Commands() {
-        super(GeneralUtils.toArray("commands list cmds"), 0, "commands [permlevel/all]", "Returns list of Commands specific to that permlevel or all commands", false);
+    public ListCommands() {
+        super(GeneralUtils.toArray("listcommands commands list cmds"), 0, "listcommands [permlevel/all]", "Returns list of Commands specific to that permlevel or all commands", false);
     }
 
     @Override

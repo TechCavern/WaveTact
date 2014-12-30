@@ -2,7 +2,7 @@ package com.techcavern.wavetact.utils;
 
 import com.google.common.io.Files;
 import com.techcavern.wavetact.annot.*;
-import com.techcavern.wavetact.utils.objects.CommandLine;
+import com.techcavern.wavetact.utils.objects.ConsoleCommand;
 import com.techcavern.wavetact.utils.objects.FunObject;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 
@@ -18,6 +18,7 @@ import java.util.Set;
 public class LoadUtils {
 
     public static void registerCommands() {
+        addConsoleCommands(Registry.ConsoleCommands, CMDLine.class);
         addCommands(Registry.ChanAdminCommands, ChanAdminCMD.class);
         addCommands(Registry.ChanHalfOpCommands, ChanHOPCMD.class);
         addCommands(Registry.ChanOpCommands, ChanOPCMD.class);
@@ -26,10 +27,6 @@ public class LoadUtils {
         addCommands(Registry.GenericCommands, GenCMD.class);
         addCommands(Registry.TrustedCommands, TruCMD.class);
         addCommands(Registry.NetAdminCommands, NAdmCMD.class);
-    }
-
-    public static void initializeCommandlines() {
-        addCommandLines(Registry.CommandLines, CMDLine.class);
     }
 
     public static void addCommands(List<GenericCommand> list, Class<? extends Annotation> cl) {
@@ -43,11 +40,11 @@ public class LoadUtils {
         }
     }
 
-    public static void addCommandLines(List<CommandLine> list, Class<? extends Annotation> cl) {
+    public static void addConsoleCommands(List<ConsoleCommand> list, Class<? extends Annotation> cl) {
         Set<Class<?>> classes = Registry.wavetactreflection.getTypesAnnotatedWith(cl);
         for (Class<?> clss : classes) {
             try {
-                list.add(((CommandLine) clss.newInstance()));
+                list.add(((ConsoleCommand) clss.newInstance()));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -95,6 +92,9 @@ public class LoadUtils {
     }
 
     public static void registerCommandList() {
+        for (ConsoleCommand command : Registry.ConsoleCommands) {
+            Registry.ConsoleListCommands.add(command.getCommand());
+        }
         for (GenericCommand command : Registry.GenericCommands) {
             Registry.GenericListCommands.add(command.getCommand());
             Registry.AllListCommands.add(command.getCommand());

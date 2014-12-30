@@ -17,7 +17,7 @@ public abstract class GenericCommand {
 
     private final String[] comID;
     private final String desc;
-    private final String Syntax;
+    private final String syntax;
     private final boolean channelRequired;
 
     private int permLevel;
@@ -26,7 +26,7 @@ public abstract class GenericCommand {
         this.comID = comID;
         this.permLevel = permLevel;
         this.desc = desc;
-        this.Syntax = syntax;
+        this.syntax = syntax;
         this.channelRequired = channelRequired;
         Registry.AllCommands.add(this);
     }
@@ -58,8 +58,8 @@ public abstract class GenericCommand {
     }
 
     public String getSyntax() {
-        if (Syntax != null) {
-            return Syntax;
+        if (syntax != null) {
+            return syntax;
         } else {
             return "";
         }

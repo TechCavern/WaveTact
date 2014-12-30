@@ -25,16 +25,16 @@ public class Help extends GenericCommand {
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (args.length > 0) {
-            if (args[0].equalsIgnoreCase("permissions") || args[0].equalsIgnoreCase("perms")) {
+            if (args[0].equalsIgnoreCase("permissions")) {
                 IRCUtils.sendMessage(user, network, channel, "0 = Everyone, 5 = Voiced/Trusted, 7 = Half-Opped, 10 = Opped & Protected, 15 = Ownered, 18 = Network Admin,  9001 = Controller ", prefix);
             } else {
-                GenericCommand command = GetUtils.getCommand(args[0]);
+                GenericCommand command = GetUtils.getGenericCommand(args[0]);
                 if (command != null) {
                     IRCUtils.sendMessage(user, network, channel, "Aliases: " + StringUtils.join(Arrays.asList(command.getCommandID()), " "), prefix);
                     String syntax = command.getSyntax();
                     if (!syntax.isEmpty())
                         IRCUtils.sendMessage(user, network, channel, "Syntax: " + syntax, prefix);
-                    IRCUtils.sendMessage(user, network, channel, GetUtils.getCommand(args[0]).getDesc(), prefix);
+                    IRCUtils.sendMessage(user, network, channel, command.getDesc(), prefix);
                 } else {
                     ErrorUtils.sendError(user, "Command does not exist");
                 }
