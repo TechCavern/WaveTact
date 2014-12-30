@@ -2,6 +2,7 @@ package com.techcavern.wavetact.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.techcavern.wavetact.utils.consoleUtils.ConsoleServer;
 import com.techcavern.wavetact.utils.fileUtils.Configuration;
 import com.techcavern.wavetact.utils.objects.*;
 import org.jasypt.util.password.StrongPasswordEncryptor;
@@ -68,4 +69,5 @@ public class Registry {
     public static String wordnikapikey = null;
     public static String googleapikey = null;
     public static final List<NetProperty> NetAdminAccess = new ArrayList<>();
+    public static ConsoleServer consoleServer = new ConsoleServer();
 }

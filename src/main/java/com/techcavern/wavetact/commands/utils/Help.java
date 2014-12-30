@@ -30,7 +30,7 @@ public class Help extends GenericCommand {
             } else {
                 GenericCommand command = GetUtils.getGenericCommand(args[0]);
                 if (command != null) {
-                    IRCUtils.sendMessage(user, network, channel, "Aliases: " + StringUtils.join(Arrays.asList(command.getCommandID()), " "), prefix);
+                    IRCUtils.sendMessage(user, network, channel, "Aliases: " + StringUtils.join(Arrays.asList(command.getCommandID()), ", "), prefix);
                     String syntax = command.getSyntax();
                     if (!syntax.isEmpty())
                         IRCUtils.sendMessage(user, network, channel, "Syntax: " + syntax, prefix);
@@ -40,9 +40,7 @@ public class Help extends GenericCommand {
                 }
             }
         } else {
-            IRCUtils.sendMessage(user, network, channel, "Help [command] - Generally a + before something means editing it, and a - means removing it. None means adding it. - Time is in [time](s/m/h/d/w) format", prefix);
-
-
+            IRCUtils.sendMessage(user, network, channel, "help [command] - generally a + before something means editing it, and a - means removing it. None means adding it. - Time is in [time](s/m/h/d/w) format", prefix);
         }
     }
 }

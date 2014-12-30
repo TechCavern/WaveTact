@@ -1,8 +1,10 @@
 package com.techcavern.wavetact.utils.consoleUtils;
 
+import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.objects.CommandIO;
 import com.techcavern.wavetact.utils.objects.ConsoleCommand;
+import org.apache.commons.lang3.ArrayUtils;
 import org.newsclub.net.unix.AFUNIXServerSocket;
 import org.newsclub.net.unix.AFUNIXSocketAddress;
 
@@ -12,9 +14,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
-/**
- * A crude implementation of a consoleCommands server.
- */
 public class ConsoleServer implements Runnable {
 
 	public boolean keepConsoleRunning = true;
@@ -40,7 +39,7 @@ public class ConsoleServer implements Runnable {
 
 					keepConnectionRunning = true;
 					while (keepConnectionRunning) {
-						os.write("WaveTact> ".getBytes());
+						os.write("\nWaveTact> ".getBytes());
 						os.flush();
 
 						byte[] buf = new byte[512];
@@ -52,7 +51,6 @@ public class ConsoleServer implements Runnable {
 						else
 						{
 							String input = new String(buf, 0, read);
-							//Strip the newline.
 							if (input.endsWith("\n"))
 								input = input.substring(0, input.length() - 1);
 							CommandIO commandIO = new CommandIO(is, os);
@@ -76,17 +74,19 @@ public class ConsoleServer implements Runnable {
 		System.exit(0);
 	}
 	public static void parseCommandLineArguments(String[] args, CommandIO commandIO) {
-		boolean invalid = true;
-			for (ConsoleCommand c : Registry.ConsoleCommands) {
-				for (String b : c.getCommandID()) {
-					if (args[0].equalsIgnoreCase(b)) {
-						c.onCommand(args, commandIO);
-						invalid = false;
-					}
-				}
+		try {
+			String command = args[0].toLowerCase();
+			args = ArrayUtils.remove(args, 0);
+			ConsoleCommand cmd = GetUtils.getConsoleCommand(command);
+			if (cmd != null) {
+				cmd.onCommand(args, commandIO);
+			} else {
+				commandIO.getPrintStream().print("Invalid Command");
 			}
-		if (invalid)
-			commandIO.getPrintStream().println("Invalid command.");
+		}catch(Exception e){
+			commandIO.getPrintStream().print("Failed to execute command");
+			e.printStackTrace();
+		}
 	}
 
 }

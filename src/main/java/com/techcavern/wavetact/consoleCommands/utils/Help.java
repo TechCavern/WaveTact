@@ -18,16 +18,19 @@ public class Help extends ConsoleCommand {
 
     @Override
     public void onCommand(String[] args, CommandIO commandIO) {
-        commandIO.getPrintStream().println("Help:");
-        ConsoleCommand command = GetUtils.getConsoleCommand(args[0]);
-        if (command != null) {
-            commandIO.getPrintStream().print("Aliases: " + StringUtils.join(Arrays.asList(command.getCommandID())));
-            String syntax = command.getSyntax();
-            if (!syntax.isEmpty())
-                commandIO.getPrintStream().print("Syntax: " + syntax);
-            commandIO.getPrintStream().print(command.getDesc());
+        if (args.length > 0) {
+            ConsoleCommand command = GetUtils.getConsoleCommand(args[0]);
+            if (command != null) {
+                commandIO.getPrintStream().println("Aliases: " + StringUtils.join(Arrays.asList(command.getCommandID()), ", "));
+                String syntax = command.getSyntax();
+                if (!syntax.isEmpty())
+                    commandIO.getPrintStream().println("Syntax: " + syntax);
+                commandIO.getPrintStream().println(command.getDesc());
+            } else {
+                commandIO.getPrintStream().println("Command does not exist");
+            }
         } else {
-            commandIO.getPrintStream().print("Command does not exist");
+            commandIO.getPrintStream().println("help (command) - gets help on a specific command");
         }
     }
 

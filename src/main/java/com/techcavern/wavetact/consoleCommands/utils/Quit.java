@@ -1,8 +1,8 @@
 package com.techcavern.wavetact.consoleCommands.utils;
 
-import com.techcavern.wavetact.Main;
 import com.techcavern.wavetact.annot.CMDLine;
 import com.techcavern.wavetact.utils.GeneralUtils;
+import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.objects.CommandIO;
 import com.techcavern.wavetact.utils.objects.ConsoleCommand;
 
@@ -15,7 +15,7 @@ public class Quit extends ConsoleCommand {
 
 	@Override
 	public void onCommand(String[] args, CommandIO commandIO) {
-		Main.consoleServer.keepConnectionRunning = false;
+		Registry.consoleServer.keepConnectionRunning = false;
 		commandIO.getPrintStream().println("Bye!");
 	}
 }

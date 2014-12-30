@@ -7,9 +7,6 @@ import org.newsclub.net.unix.AFUNIXSocketException;
 import java.io.*;
 import java.util.Scanner;
 
-/**
- * Crude client implementation.
- */
 public class ConsoleClient {
 	public static void go() throws Exception {
 		AFUNIXSocket sock = AFUNIXSocket.newInstance();

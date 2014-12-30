@@ -1,7 +1,6 @@
 package com.techcavern.wavetact;
 
 import com.techcavern.wavetact.utils.consoleUtils.ConsoleClient;
-import com.techcavern.wavetact.utils.consoleUtils.ConsoleServer;
 import com.techcavern.wavetact.utils.LoadUtils;
 import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.configurationUtils.ConfigUtils;
@@ -14,8 +13,6 @@ import java.util.concurrent.TimeUnit;
 
 @SuppressWarnings("ConstantConditions")
 public class Main {
-
-    public static ConsoleServer consoleServer = new ConsoleServer();
 
     public static void main(String[] args) throws Exception {
         System.err.println("");
@@ -52,7 +49,7 @@ public class Main {
             QuietTimeUtils.loadQuietTimes();
             Registry.WaveTact.start();
 
-            Registry.threadPool.execute(consoleServer);
+            Registry.threadPool.execute(Registry.consoleServer);
             Registry.threadPool.execute(new BanTimer());
             Registry.threadPool.awaitTermination(Long.MAX_VALUE, TimeUnit.DAYS);
         }

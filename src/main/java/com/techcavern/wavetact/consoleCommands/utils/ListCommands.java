@@ -19,7 +19,7 @@ public class ListCommands extends ConsoleCommand {
 
     @Override
     public void onCommand(String[] args, CommandIO commandIO) {
-        commandIO.getPrintStream().print(StringUtils.join(Registry.ConsoleListCommands, ", commands"));
+        commandIO.getPrintStream().println(StringUtils.join(Registry.ConsoleListCommands, ", "));
     }
 
 }

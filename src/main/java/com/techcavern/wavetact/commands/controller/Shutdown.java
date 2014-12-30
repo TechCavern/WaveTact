@@ -1,9 +1,9 @@
 package com.techcavern.wavetact.commands.controller;
 
-import com.techcavern.wavetact.Main;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
+import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -20,7 +20,7 @@ public class Shutdown extends GenericCommand {
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         //The consoleserver will initiate a shutdown for us.
-        Main.consoleServer.keepConsoleRunning = false;
+        Registry.consoleServer.keepConsoleRunning = false;
     }
 }
 
