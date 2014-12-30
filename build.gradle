@@ -77,7 +77,7 @@ task codeGen << {
             generate() {
             }
             target() {
-                packageName('test.database')
+                packageName('wavetactdb')
                 directory('src/main/java')
             }
         }
