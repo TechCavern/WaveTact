@@ -1,58 +1,58 @@
 CREATE TABLE ACCOUNTS (
-username String,
-password String
+username Text,
+password Text
 );
 CREATE TABLE BANS (
-hostmask String,
-network String,
-channel String,
+hostmask Text,
+network Text,
+channel Text,
 init Long,
 time Long,
 isMute Boolean,
-property String
+property Text
 );
 
 CREATE TABLE CONFIG(
-property String,
-value String
+property Text,
+value Text
 );
 
 CREATE TABLE PERMUSERCHANNELS(
-network String,
-channel String,
-account String,
+network Text,
+channel Text,
+account Text,
 permlevel int
 );
 
 CREATE TABLE CUSTOMCOMMANDS(
-network int,
-channel String,
-permlevel String,
-locked String,
+permlevel int,
+channel Text,
+network Text,
+locked Text,
 isAction Boolean,
 );
 
 CREATE TABLE BLACKLISTS(
-type String,
-url String
+type Text,
+url Text
 );
 
 CREATE TABLE CHANNELPROPERTY(
-network String,
-channel String,
-property String,
-value String
+network Text,
+channel Text,
+property Text,
+value Text
 );
 
 CREATE TABLE SERVERS(
-name String,
+name Text,
 port int,
-server String,
-nick String,
-channels String,
-nickserv String,
-bindhost String,
+server Text,
+nick Text,
+channels Text,
+nickserv Text,
+bindhost Text,
 networkadminaccess boolean,
-authtype String
+authtype Text
 );
 
