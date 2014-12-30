@@ -10,7 +10,7 @@ import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleMessageUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -20,7 +20,7 @@ import org.pircbotx.User;
  */
 @CMD
 @ConCMD
-public class LockMSG extends GenericCommand {
+public class LockMSG extends IRCCommand {
 
     public LockMSG() {
         super(GeneralUtils.toArray("lockmessage lcmsg lockmsg"), 9001, "lockmessage (-)[command]", "Locks a custom message", false);

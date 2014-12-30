@@ -5,7 +5,7 @@ import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -18,7 +18,7 @@ import org.pircbotx.User;
 @SuppressWarnings("ALL")
 @CMD
 @GenCMD
-public class ListCommands extends GenericCommand {
+public class ListCommands extends IRCCommand {
 
     public ListCommands() {
         super(GeneralUtils.toArray("listcommands commands list cmds"), 0, "listcommands [permlevel/all]", "Returns list of Commands specific to that permlevel or all commands", false);

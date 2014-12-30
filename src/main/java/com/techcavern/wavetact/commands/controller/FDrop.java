@@ -6,14 +6,14 @@ import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.databaseUtils.AccountUtils;
 import com.techcavern.wavetact.utils.objects.Account;
 import com.techcavern.wavetact.utils.objects.AuthedUser;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
 @CMD
 @ConCMD
-public class FDrop extends GenericCommand {
+public class FDrop extends IRCCommand {
 
     public FDrop() {
         super(GeneralUtils.toArray("fdrop"), 9001, "fdrop [user]", "Forcefully drops a user", false);

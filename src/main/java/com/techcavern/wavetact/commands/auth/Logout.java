@@ -4,14 +4,14 @@ import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.objects.AuthedUser;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
 @CMD
 @GenCMD
-public class Logout extends GenericCommand {
+public class Logout extends IRCCommand {
 
     public Logout() {
         super(GeneralUtils.toArray("logout"), 0, "logout", "Logs you out", false);

@@ -4,7 +4,7 @@ import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -15,7 +15,7 @@ import org.pircbotx.UserLevel;
  */
 @CMD
 @GenCMD
-public class SomethingAwesome extends GenericCommand {
+public class SomethingAwesome extends IRCCommand {
 
     public SomethingAwesome() {
         super(GeneralUtils.toArray("somethingawesome awesome something"), 0, null, "Something AWESOME!", false);

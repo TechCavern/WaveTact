@@ -1,7 +1,7 @@
 package com.techcavern.wavetact.utils.runnables;
 
 import com.techcavern.wavetact.utils.*;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
@@ -16,7 +16,7 @@ public class PrivMsgProcessor {
             public void run() {
                 String[] message = StringUtils.split(Colors.removeFormattingAndColors(event.getMessage()), " ");
                 String command = message[0].toLowerCase();
-                GenericCommand Command = GetUtils.getGenericCommand(command);
+                IRCCommand Command = GetUtils.getGenericCommand(command);
                 if (Command == null) {
                     Command = GetUtils.getGenericCommand(StringUtils.replaceOnce(command, GetUtils.getCommandChar(event.getBot()), ""));
                 }

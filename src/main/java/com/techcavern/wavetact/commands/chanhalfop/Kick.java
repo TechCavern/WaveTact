@@ -7,21 +7,19 @@ package com.techcavern.wavetact.commands.chanhalfop;
 
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ChanHOPCMD;
-import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
-import org.pircbotx.UserLevel;
 
 /**
  * @author jztech101
  */
 @CMD
 @ChanHOPCMD
-public class Kick extends GenericCommand {
+public class Kick extends IRCCommand {
 
     public Kick() {
         super(GeneralUtils.toArray("kick"), 7, "kick [user] (message)", "Kicks a user with specified message or none", true);

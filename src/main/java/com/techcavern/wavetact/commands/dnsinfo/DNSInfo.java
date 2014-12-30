@@ -10,7 +10,7 @@ import com.techcavern.wavetact.annot.TruCMD;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -22,7 +22,7 @@ import org.xbill.DNS.*;
  */
 @CMD
 @TruCMD
-public class DNSInfo extends GenericCommand {
+public class DNSInfo extends IRCCommand {
 
     public DNSInfo() {
         super(GeneralUtils.toArray("dnsinfo dns"), 5, "dns [domain]", "Looks up a domain for information", false);

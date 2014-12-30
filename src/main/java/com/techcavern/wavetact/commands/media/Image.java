@@ -6,7 +6,7 @@ import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
@@ -15,7 +15,7 @@ import org.pircbotx.User;
 
 @CMD
 @GenCMD
-public class Image extends GenericCommand {
+public class Image extends IRCCommand {
 
     public Image() {
         super(GeneralUtils.toArray("image images gimages googleimages"), 0, "image (result #) [string to search]", "Searches google images", false);

@@ -10,7 +10,7 @@ import com.techcavern.wavetact.annot.ChanOwnOpCMD;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -20,7 +20,7 @@ import org.pircbotx.User;
  */
 @CMD
 @ChanOwnOpCMD
-public class Owner extends GenericCommand {
+public class Owner extends IRCCommand {
 
     public Owner() {
         super(GeneralUtils.toArray("owner own oop"), 15, "owner (-)(user)", "Sets owner mode if it exists on a user", true);

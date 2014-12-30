@@ -9,7 +9,7 @@ import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ChanHOPCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -20,7 +20,7 @@ import org.pircbotx.User;
  */
 @CMD
 @ChanHOPCMD
-public class Voice extends GenericCommand {
+public class Voice extends IRCCommand {
 
     public Voice() {
         super(GeneralUtils.toArray("voice vop"), 7, "voice (-)(user)", "Voices a user", true);

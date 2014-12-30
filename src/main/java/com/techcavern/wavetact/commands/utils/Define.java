@@ -6,7 +6,7 @@ import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import com.wordnik.client.api.WordApi;
 import com.wordnik.client.model.Definition;
 import com.wordnik.client.model.ExampleUsage;
@@ -20,7 +20,7 @@ import java.util.List;
 
 @CMD
 @GenCMD
-public class Define extends GenericCommand {
+public class Define extends IRCCommand {
 
     public Define() {
         super(GeneralUtils.toArray("define def"), 0, "define (def #) [word]", "Defines a word", false);

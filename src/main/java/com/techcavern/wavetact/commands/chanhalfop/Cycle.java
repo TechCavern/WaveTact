@@ -8,7 +8,7 @@ package com.techcavern.wavetact.commands.chanhalfop;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ChanHOPCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -18,7 +18,7 @@ import org.pircbotx.User;
  */
 @CMD
 @ChanHOPCMD
-public class Cycle extends GenericCommand {
+public class Cycle extends IRCCommand {
 
     public Cycle() {
         super(GeneralUtils.toArray("cycle cl"), 7, "cycle [channel]", "Cycle (parts/join) a channel", true);

@@ -11,7 +11,7 @@ import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -22,7 +22,7 @@ import org.pircbotx.User;
  */
 @CMD
 @NAdmCMD
-public class Global extends GenericCommand {
+public class Global extends IRCCommand {
 
     public Global() {
         super(GeneralUtils.toArray("global"), 20, "global [networkname/all]", "Sends a global to the network or to all networks", false);

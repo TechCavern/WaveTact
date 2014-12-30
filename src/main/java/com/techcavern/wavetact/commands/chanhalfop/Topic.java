@@ -9,7 +9,7 @@ import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ChanHOPCMD;
 import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.objects.ChannelProperty;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -24,7 +24,7 @@ import java.util.List;
  */
 @CMD
 @ChanHOPCMD
-public class Topic extends GenericCommand {
+public class Topic extends IRCCommand {
 
     public Topic() {
         super(GeneralUtils.toArray("topic"), 7, "Topic [separator] [a(add)/sw(switch)/+[topic #]/-[topic #]/(insert message to replace whole topic)/ss(switch separator)/r(revert)] (messages to add)(integer to swap)(separator to change to) (integer to swap)", "Manages the topic", true);

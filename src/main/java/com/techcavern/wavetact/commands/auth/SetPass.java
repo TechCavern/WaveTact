@@ -5,14 +5,14 @@ import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.databaseUtils.AccountUtils;
 import com.techcavern.wavetact.utils.objects.Account;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
 @CMD
 @GenCMD
-public class SetPass extends GenericCommand {
+public class SetPass extends IRCCommand {
 
     public SetPass() {
         super(GeneralUtils.toArray("setpassword setpass changepassword changepass"), 0, "setpass [oldpass] [newpass]", "Sets password", false);

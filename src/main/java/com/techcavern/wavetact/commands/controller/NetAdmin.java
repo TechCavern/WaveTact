@@ -9,7 +9,7 @@ import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.databaseUtils.NetAdminUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import com.techcavern.wavetact.utils.objects.NetworkAdmin;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -21,7 +21,7 @@ import org.pircbotx.User;
  */
 @CMD
 @ConCMD
-public class NetAdmin extends GenericCommand {
+public class NetAdmin extends IRCCommand {
 
     public NetAdmin() {
         super(GeneralUtils.toArray("networkadministrator netadmin"), 9001, "networkadministrator (-)[user]", "Adds a network admin to the network", false);

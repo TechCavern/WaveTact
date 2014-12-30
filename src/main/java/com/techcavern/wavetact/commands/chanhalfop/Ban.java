@@ -4,7 +4,7 @@ import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ChanHOPCMD;
 import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.databaseUtils.BanTimeUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import com.techcavern.wavetact.utils.objects.TimedBan;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -12,7 +12,7 @@ import org.pircbotx.User;
 
 @CMD
 @ChanHOPCMD
-public class Ban extends GenericCommand {
+public class Ban extends IRCCommand {
 
     public Ban() {
         super(GeneralUtils.toArray("ban b"), 7, "ban (-)(+)[user][hostmask] (-)(+)(time)", "Bans a user for a specified period of time or 24 hours", true);

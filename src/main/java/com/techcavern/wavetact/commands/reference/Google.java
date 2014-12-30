@@ -6,7 +6,7 @@ import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
@@ -15,7 +15,7 @@ import org.pircbotx.User;
 
 @CMD
 @GenCMD
-public class Google extends GenericCommand {
+public class Google extends IRCCommand {
 
     public Google() {
         super(GeneralUtils.toArray("google gsearch"), 0, "google (result #) [string to google]", "Googles something", false);

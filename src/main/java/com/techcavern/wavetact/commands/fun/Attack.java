@@ -11,7 +11,7 @@ import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.objects.FunObject;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.apache.commons.lang3.RandomUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -22,7 +22,7 @@ import org.pircbotx.User;
  */
 @CMD
 @GenCMD
-public class Attack extends GenericCommand {
+public class Attack extends IRCCommand {
 
     public Attack() {
         super(GeneralUtils.toArray("attack shoot"), 0, "attacks [something]", "attacks a user", false);

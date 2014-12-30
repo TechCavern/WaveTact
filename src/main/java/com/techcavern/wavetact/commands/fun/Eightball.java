@@ -10,7 +10,7 @@ import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.apache.commons.lang3.RandomUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -21,7 +21,7 @@ import org.pircbotx.User;
  */
 @CMD
 @GenCMD
-public class Eightball extends GenericCommand {
+public class Eightball extends IRCCommand {
 
     public Eightball() {
         super(GeneralUtils.toArray("eightball 8ball 8b"), 0, "eightball [question]", "Eightball", false);

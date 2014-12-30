@@ -3,18 +3,16 @@ package com.techcavern.wavetact.commands.chanadmin;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ChanAdminCMD;
 import com.techcavern.wavetact.utils.*;
-import com.techcavern.wavetact.utils.databaseUtils.PermChannelUtils;
 import com.techcavern.wavetact.utils.databaseUtils.RelayUtils;
 import com.techcavern.wavetact.utils.objects.ChannelUserProperty;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
-import com.techcavern.wavetact.utils.objects.PermChannel;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
 @CMD
 @ChanAdminCMD
-public class RelayBot extends GenericCommand {
+public class RelayBot extends IRCCommand {
 
     public RelayBot() {
         super(GeneralUtils.toArray("relaybot relay"), 18, "relaybot +)(-)[bot] (character before actual message)", "Adds, modifies, or removes a relay bot", true);

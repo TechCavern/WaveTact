@@ -8,7 +8,7 @@ package com.techcavern.wavetact.commands.chanhalfop;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ChanHOPCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -18,7 +18,7 @@ import org.pircbotx.User;
  */
 @CMD
 @ChanHOPCMD
-public class Mode extends GenericCommand {
+public class Mode extends IRCCommand {
 
     public Mode() {
         super(GeneralUtils.toArray("mode mo"), 7, "mode [modes to set]", "Sets a mode on the channel", true);

@@ -8,7 +8,7 @@ package com.techcavern.wavetact.commands.netadmin;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.NAdmCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -18,7 +18,7 @@ import org.pircbotx.User;
  */
 @CMD
 @NAdmCMD
-public class Disconnect extends GenericCommand {
+public class Disconnect extends IRCCommand {
 
     public Disconnect() {
         super(GeneralUtils.toArray("disconnect dc"), 20, "disconnect (reason)", "Disconnects from the network", false);

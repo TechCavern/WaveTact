@@ -3,7 +3,7 @@ package com.techcavern.wavetact.commands.utils;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.*;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.apache.commons.lang3.ArrayUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -11,7 +11,7 @@ import org.pircbotx.User;
 
 @CMD
 @GenCMD
-public class CheckUserLevel extends GenericCommand {
+public class CheckUserLevel extends IRCCommand {
 
     public CheckUserLevel() {
         super(GeneralUtils.toArray("checkuserlevel level checklevel"), 0, "checkuserlevel (user)", "Checks User Level of the specified user or yourself if unspecified", false);

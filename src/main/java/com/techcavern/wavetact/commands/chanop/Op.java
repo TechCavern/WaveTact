@@ -9,7 +9,7 @@ import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ChanOPCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -19,7 +19,7 @@ import org.pircbotx.User;
  */
 @CMD
 @ChanOPCMD
-public class Op extends GenericCommand {
+public class Op extends IRCCommand {
 
     public Op() {
         super(GeneralUtils.toArray("op aop"), 10, "op (-)(user to op)", "Ops a user", true);

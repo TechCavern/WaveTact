@@ -10,7 +10,7 @@ import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleActionUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -20,7 +20,7 @@ import org.pircbotx.User;
  */
 @CMD
 @ConCMD
-public class LockACT extends GenericCommand {
+public class LockACT extends IRCCommand {
 
 
     public LockACT() {

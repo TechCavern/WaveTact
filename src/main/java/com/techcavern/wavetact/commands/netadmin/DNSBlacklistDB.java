@@ -9,7 +9,7 @@ import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.NAdmCMD;
 import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.databaseUtils.DNSBLUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -21,7 +21,7 @@ import org.pircbotx.User;
  */
 @CMD
 @NAdmCMD
-public class DNSBlacklistDB extends GenericCommand {
+public class DNSBlacklistDB extends IRCCommand {
 
     public DNSBlacklistDB() {
         super(GeneralUtils.toArray("dnsblacklistdb dnsbldb"), 20, "dnsblacklistdb (-)[dns blacklist url]", "Adds/Removes Domains from Spam DNS Blacklists", false);

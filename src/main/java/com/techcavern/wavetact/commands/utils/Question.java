@@ -6,7 +6,7 @@ import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import com.wolfram.alpha.*;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -19,7 +19,7 @@ import java.util.List;
 
 @CMD
 @GenCMD
-public class Question extends GenericCommand {
+public class Question extends IRCCommand {
 
     public Question() {
         super(GeneralUtils.toArray("question wa wolframalpha"), 0, "question (answer #) [question]", "Ask wolfram alpha a question!", false);

@@ -6,14 +6,14 @@ import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.databaseUtils.AccountUtils;
 import com.techcavern.wavetact.utils.objects.Account;
 import com.techcavern.wavetact.utils.objects.AuthedUser;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
 @CMD
 @GenCMD
-public class Drop extends GenericCommand {
+public class Drop extends IRCCommand {
 
     public Drop() {
         super(GeneralUtils.toArray("drop"), 0, "drop [password]", "Drops a user", false);

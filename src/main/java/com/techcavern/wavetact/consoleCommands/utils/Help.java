@@ -4,7 +4,6 @@ import com.techcavern.wavetact.annot.CMDLine;
 import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.objects.CommandIO;
 import com.techcavern.wavetact.utils.objects.ConsoleCommand;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;

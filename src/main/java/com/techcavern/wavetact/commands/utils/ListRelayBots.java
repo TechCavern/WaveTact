@@ -4,8 +4,7 @@ import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.objects.ChannelUserProperty;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
-import com.techcavern.wavetact.utils.objects.PermChannel;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.apache.commons.lang3.ArrayUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -18,7 +17,7 @@ import org.pircbotx.User;
 @SuppressWarnings("ALL")
 @CMD
 @GenCMD
-public class ListRelayBots extends GenericCommand {
+public class ListRelayBots extends IRCCommand {
 
     public ListRelayBots() {
         super(GeneralUtils.toArray("listrelaybots listrelays"), 0, "listrelays", "Returns list of relay bots", false);

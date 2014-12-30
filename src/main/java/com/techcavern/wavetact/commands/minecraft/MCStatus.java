@@ -5,7 +5,7 @@ import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.apache.commons.lang3.text.WordUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -17,7 +17,7 @@ import java.net.URL;
 
 @CMD
 @GenCMD
-public class MCStatus extends GenericCommand {
+public class MCStatus extends IRCCommand {
 
     public MCStatus() {
         super(GeneralUtils.toArray("mcstatus"), 0, null, "Checks status of mojang servers", false);

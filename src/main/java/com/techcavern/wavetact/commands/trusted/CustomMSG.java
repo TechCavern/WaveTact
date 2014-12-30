@@ -9,7 +9,7 @@ import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.TruCMD;
 import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleMessageUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import com.techcavern.wavetact.utils.objects.SimpleMessage;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
@@ -23,7 +23,7 @@ import java.util.List;
  */
 @CMD
 @TruCMD
-public class CustomMSG extends GenericCommand {
+public class CustomMSG extends IRCCommand {
 
     public CustomMSG() {
         super(GeneralUtils.toArray("custommessage cmsg custommsg customsg"), 5, "custommessage (+/-)[command] [permlevel] [response]", "Responses may contain $1, $2, etc which indicate the argument separated by a space. $* indicates all remaining arguments.", false);

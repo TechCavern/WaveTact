@@ -2,7 +2,7 @@ package com.techcavern.wavetact.utils.runnables;
 
 import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.objects.ChannelUserProperty;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Colors;
@@ -16,7 +16,7 @@ public class ChanMsgProcessor {
                 String[] message = StringUtils.split(Colors.removeFormattingAndColors(event.getMessage()), " ");
                 String command = message[0].toLowerCase();
                 message = ArrayUtils.remove(message, 0);
-                GenericCommand Command = GetUtils.getGenericCommand(StringUtils.replaceOnce(command, GetUtils.getCommandChar(event.getBot()), ""));
+                IRCCommand Command = GetUtils.getGenericCommand(StringUtils.replaceOnce(command, GetUtils.getCommandChar(event.getBot()), ""));
                 if (Command != null && command.startsWith(GetUtils.getCommandChar(event.getBot()))) {
                     int userPermLevel = PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel());
                     if (userPermLevel >= Command.getPermLevel()) {
@@ -54,7 +54,7 @@ public class ChanMsgProcessor {
                 String[] message = StringUtils.split(Colors.removeFormattingAndColors(startingmessage), " ");
                 String command = message[0].toLowerCase();
                 message = ArrayUtils.remove(message, 0);
-                GenericCommand Command = GetUtils.getGenericCommand(StringUtils.replaceOnce(command, GetUtils.getCommandChar(event.getBot()), ""));
+                IRCCommand Command = GetUtils.getGenericCommand(StringUtils.replaceOnce(command, GetUtils.getCommandChar(event.getBot()), ""));
                 if (Command != null && command.startsWith(GetUtils.getCommandChar(event.getBot())) && Command.getPermLevel() == 0) {
                     try {
                         Command.onCommand(event.getUser(), event.getBot(), IRCUtils.getPrefix(event.getBot(), event.getChannelSource()), event.getChannel(), false, 0, message);

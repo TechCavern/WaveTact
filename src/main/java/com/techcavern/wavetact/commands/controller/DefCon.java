@@ -13,7 +13,7 @@ import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.LoadUtils;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleActionUtils;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleMessageUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -24,7 +24,7 @@ import org.pircbotx.User;
  */
 @CMD
 @ConCMD
-public class DefCon extends GenericCommand {
+public class DefCon extends IRCCommand {
 
     public DefCon() {
         super(GeneralUtils.toArray("defcon"), 9001, "defcon (-)(1)(2)(3)(4)(5)", "Locks down the network", false);
@@ -63,7 +63,7 @@ public class DefCon extends GenericCommand {
 
     void initializeCommands() {
         Registry.AllCommands.clear();
-        Registry.GenericCommands.clear();
+        Registry.GenericIRCCommands.clear();
         Registry.SimpleActions.clear();
         Registry.SimpleMessages.clear();
         Registry.TrustedCommands.clear();
@@ -79,7 +79,7 @@ public class DefCon extends GenericCommand {
     }
 
     void sPermLevel(int PermLevel) {
-        for (GenericCommand Command : Registry.AllCommands) {
+        for (IRCCommand Command : Registry.AllCommands) {
             if (Command.getPermLevel() < PermLevel) {
                 Command.setPermLevel(PermLevel);
             }

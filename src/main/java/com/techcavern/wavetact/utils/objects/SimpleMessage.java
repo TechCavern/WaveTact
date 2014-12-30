@@ -16,7 +16,7 @@ import org.pircbotx.User;
 /**
  * @author jztech101
  */
-public class SimpleMessage extends GenericCommand {
+public class SimpleMessage extends IRCCommand {
 
     private final String message;
     private boolean locked;

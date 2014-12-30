@@ -7,14 +7,14 @@ import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
 @CMD
 @GenCMD
-public class MCMods extends GenericCommand {
+public class MCMods extends IRCCommand {
 
     public MCMods() {
         super(GeneralUtils.toArray("mcmods mcmod"), 0, "mcmods (mc version#) [mod name]", "Gets info on a minecraft mod", false);

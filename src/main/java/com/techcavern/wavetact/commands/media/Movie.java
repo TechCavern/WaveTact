@@ -6,7 +6,7 @@ import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -14,7 +14,7 @@ import org.pircbotx.User;
 
 @CMD
 @GenCMD
-public class Movie extends GenericCommand {
+public class Movie extends IRCCommand {
 
     public Movie() {
         super(GeneralUtils.toArray("movie imdb"), 0, "movie [string to search movies]", "Searches imdb", false);

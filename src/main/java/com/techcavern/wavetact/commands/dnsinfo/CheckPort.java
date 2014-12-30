@@ -5,7 +5,7 @@ import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -17,7 +17,7 @@ import java.net.UnknownHostException;
 
 @CMD
 @GenCMD
-public class CheckPort extends GenericCommand {
+public class CheckPort extends IRCCommand {
 
     public CheckPort() {
         super(GeneralUtils.toArray("checkport cport"), 0, "checkport [ip][domain] (port)", " Checks if port is open on a certain ip and port", false);

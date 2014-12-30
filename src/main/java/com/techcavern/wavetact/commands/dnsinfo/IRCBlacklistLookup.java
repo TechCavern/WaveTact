@@ -11,7 +11,7 @@ import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -23,7 +23,7 @@ import org.xbill.DNS.*;
  */
 @CMD
 @TruCMD
-public class IRCBlacklistLookup extends GenericCommand {
+public class IRCBlacklistLookup extends IRCCommand {
 
     public IRCBlacklistLookup() {
         super(GeneralUtils.toArray("ircblacklistlookup ibl"), 5, "ircblacklistlookup [ip/domain/user]", "Looks up a domain or ip to see if its in a drone blacklist", false);

@@ -3,10 +3,9 @@ package com.techcavern.wavetact.commands.utils;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.*;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import com.techcavern.wavetact.utils.objects.PermChannel;
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -18,7 +17,7 @@ import org.pircbotx.User;
 @SuppressWarnings("ALL")
 @CMD
 @GenCMD
-public class ListAccess extends GenericCommand {
+public class ListAccess extends IRCCommand {
 
     public ListAccess() {
         super(GeneralUtils.toArray("listaccess listaccesslist laccess"), 0, "listaccess [permlevel/all]", "Returns list of users specific to that permlevel or all users", false);

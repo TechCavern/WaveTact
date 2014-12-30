@@ -10,7 +10,7 @@ import com.techcavern.wavetact.annot.ChanOwnOpCMD;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -21,7 +21,7 @@ import org.pircbotx.User;
  */
 @CMD
 @ChanOwnOpCMD
-public class Protect extends GenericCommand {
+public class Protect extends IRCCommand {
 
     public Protect() {
         super(GeneralUtils.toArray("protect prot sop"), 15, "protect (-)(user)", "Sets protect mode if it exists on a user", true);

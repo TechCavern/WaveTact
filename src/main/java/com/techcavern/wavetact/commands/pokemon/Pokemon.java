@@ -6,7 +6,7 @@ import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -17,7 +17,7 @@ import java.util.List;
 
 @CMD
 @GenCMD
-public class Pokemon extends GenericCommand {
+public class Pokemon extends IRCCommand {
 
     public Pokemon() {
         super(GeneralUtils.toArray("pokemon pkm"), 0, "pokemon [name][id]", "Displays info on a pokemon", false);

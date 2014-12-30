@@ -8,7 +8,7 @@ package com.techcavern.wavetact.commands.anonymonity;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.TruCMD;
 import com.techcavern.wavetact.utils.*;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
@@ -20,7 +20,7 @@ import org.pircbotx.User;
  */
 @CMD
 @TruCMD
-public class Act extends GenericCommand {
+public class Act extends IRCCommand {
 
     public Act() {
         super(GeneralUtils.toArray("act do"), 5, "act [something]", "Makes the bot do something", false);

@@ -6,7 +6,7 @@ import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.apache.commons.lang3.RandomUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -14,7 +14,7 @@ import org.pircbotx.User;
 
 @CMD
 @GenCMD
-public class Xkcd extends GenericCommand {
+public class Xkcd extends IRCCommand {
 
     public Xkcd() {
         super(GeneralUtils.toArray("xkcd randomxkcd"), 0, "xkcd [comic num#]", "Returns random xkcd comic or specified comic #", false);

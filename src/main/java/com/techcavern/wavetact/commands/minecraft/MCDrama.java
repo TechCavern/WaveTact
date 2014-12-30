@@ -4,7 +4,7 @@ import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.pircbotx.Channel;
@@ -13,7 +13,7 @@ import org.pircbotx.User;
 
 @CMD
 @GenCMD
-public class MCDrama extends GenericCommand {
+public class MCDrama extends IRCCommand {
 
     public MCDrama() {
         super(GeneralUtils.toArray("mcdrama"), 0, null, "Displays minecraft drama", false);

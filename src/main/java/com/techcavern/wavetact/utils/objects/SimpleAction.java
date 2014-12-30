@@ -15,7 +15,7 @@ import org.pircbotx.User;
 /**
  * @author jztech101
  */
-public class SimpleAction extends GenericCommand {
+public class SimpleAction extends IRCCommand {
 
     private final String action;
     private boolean locked;

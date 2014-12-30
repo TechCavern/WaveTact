@@ -12,7 +12,7 @@ import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
@@ -24,7 +24,7 @@ import java.util.List;
 
 @CMD
 @GenCMD
-public class Video extends GenericCommand {
+public class Video extends IRCCommand {
 
     public Video() {
         super(GeneralUtils.toArray("video vid youtube yt"), 0, "video (result #) [string to search for]", "Searches youtube for videos", false);

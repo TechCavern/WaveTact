@@ -6,14 +6,14 @@ import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
 @CMD
 @GenCMD
-public class Poketype extends GenericCommand {
+public class Poketype extends IRCCommand {
 
     public Poketype() {
         super(GeneralUtils.toArray("poketype pkt"), 0, "poketype [id]", "Displays info on a type", false);

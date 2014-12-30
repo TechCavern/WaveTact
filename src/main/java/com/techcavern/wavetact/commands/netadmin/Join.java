@@ -11,7 +11,7 @@ import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.fileUtils.Configuration;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -22,7 +22,7 @@ import org.pircbotx.User;
  */
 @CMD
 @NAdmCMD
-public class Join extends GenericCommand {
+public class Join extends IRCCommand {
 
     public Join() {
         super(GeneralUtils.toArray("join jo"), 20, "join (+)[channel]", "Joins a channel", false);

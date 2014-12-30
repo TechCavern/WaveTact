@@ -9,7 +9,7 @@ import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.NAdmCMD;
 import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.databaseUtils.IRCBLUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -21,7 +21,7 @@ import org.pircbotx.User;
  */
 @CMD
 @NAdmCMD
-public class IRCBlacklistDB extends GenericCommand {
+public class IRCBlacklistDB extends IRCCommand {
 
 
     public IRCBlacklistDB() {

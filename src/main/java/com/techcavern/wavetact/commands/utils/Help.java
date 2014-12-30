@@ -6,7 +6,7 @@ import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -16,7 +16,7 @@ import java.util.Arrays;
 
 @CMD
 @GenCMD
-public class Help extends GenericCommand {
+public class Help extends IRCCommand {
 
     public Help() {
         super(GeneralUtils.toArray("help halp"), 0, "help (command)", "Gets help on a command - generally a + before something means editing it, and a - means removing it. None means adding it. Time is in [time](s/m/h/d/w) format", false);
@@ -28,7 +28,7 @@ public class Help extends GenericCommand {
             if (args[0].equalsIgnoreCase("permissions")) {
                 IRCUtils.sendMessage(user, network, channel, "0 = Everyone, 5 = Voiced/Trusted, 7 = Half-Opped, 10 = Opped & Protected, 15 = Ownered, 18 = Network Admin,  9001 = Controller ", prefix);
             } else {
-                GenericCommand command = GetUtils.getGenericCommand(args[0]);
+                IRCCommand command = GetUtils.getGenericCommand(args[0]);
                 if (command != null) {
                     IRCUtils.sendMessage(user, network, channel, "Aliases: " + StringUtils.join(Arrays.asList(command.getCommandID()), ", "), prefix);
                     String syntax = command.getSyntax();

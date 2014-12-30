@@ -4,7 +4,7 @@ import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ChanHOPCMD;
 import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.databaseUtils.QuietTimeUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import com.techcavern.wavetact.utils.objects.TimedBan;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -12,7 +12,7 @@ import org.pircbotx.User;
 
 @CMD
 @ChanHOPCMD
-public class Quiet extends GenericCommand {
+public class Quiet extends IRCCommand {
 
     public Quiet() {
         super(GeneralUtils.toArray("quiet mute"), 7, "quiet (-)[user][hostmask] (-)(+)(time)", "Quiets a user for the specified time or 24 hours", true);

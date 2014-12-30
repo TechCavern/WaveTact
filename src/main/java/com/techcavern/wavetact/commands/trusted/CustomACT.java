@@ -9,7 +9,7 @@ import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.TruCMD;
 import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleActionUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import com.techcavern.wavetact.utils.objects.SimpleAction;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
@@ -23,7 +23,7 @@ import java.util.List;
  */
 @CMD
 @TruCMD
-public class CustomACT extends GenericCommand {
+public class CustomACT extends IRCCommand {
 
     public CustomACT() {
         super(GeneralUtils.toArray("customaction cact customact"), 5, "customaction (+/-)[command] [permlevel] [response]", "Responses may contain $1, $2, etc which indicate the argument separated by a space. $* indicates all remaining arguments.", false);

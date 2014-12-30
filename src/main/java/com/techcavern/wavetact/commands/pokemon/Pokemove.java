@@ -5,14 +5,14 @@ import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
 @CMD
 @GenCMD
-public class Pokemove extends GenericCommand {
+public class Pokemove extends IRCCommand {
 
     public Pokemove() {
         super(GeneralUtils.toArray("pokemove pkmo"), 0, "pokemove [id]", "Displays info on a move", false);

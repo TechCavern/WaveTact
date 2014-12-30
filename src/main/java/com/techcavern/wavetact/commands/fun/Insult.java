@@ -4,7 +4,7 @@ import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.pircbotx.Channel;
@@ -13,7 +13,7 @@ import org.pircbotx.User;
 
 @CMD
 @GenCMD
-public class Insult extends GenericCommand {
+public class Insult extends IRCCommand {
 
     public Insult() {
         super(GeneralUtils.toArray("insult burn"), 0, "insult [something]", "Insults something", false);

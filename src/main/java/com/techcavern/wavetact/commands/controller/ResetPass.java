@@ -5,14 +5,14 @@ import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.databaseUtils.AccountUtils;
 import com.techcavern.wavetact.utils.objects.Account;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
 @CMD
 @ConCMD
-public class ResetPass extends GenericCommand {
+public class ResetPass extends IRCCommand {
 
     public ResetPass() {
         super(GeneralUtils.toArray("resetpassword resetpass"), 9001, "setpass [user] [newpass]", "Resets password", false);

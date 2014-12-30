@@ -5,14 +5,14 @@ import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
 @CMD
 @GenCMD
-public class Hostmask extends GenericCommand {
+public class Hostmask extends IRCCommand {
 
     public Hostmask() {
         super(GeneralUtils.toArray("hostmask host"), 0, "hostmask (+)[nick]", "Gets the hostmask of a user - + before gets the ban mask of a user", false);

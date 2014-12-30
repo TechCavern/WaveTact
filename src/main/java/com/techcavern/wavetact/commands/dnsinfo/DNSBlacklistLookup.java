@@ -11,7 +11,7 @@ import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -23,7 +23,7 @@ import org.xbill.DNS.*;
  */
 @CMD
 @TruCMD
-public class DNSBlacklistLookup extends GenericCommand {
+public class DNSBlacklistLookup extends IRCCommand {
 
     public DNSBlacklistLookup() {
         super(GeneralUtils.toArray("dnsblacklistlookup dbl"), 5, "dnsblacklistlookup [ip/domain/user]", "Looks up a domain or IP to see if its in a spam blacklist", false);

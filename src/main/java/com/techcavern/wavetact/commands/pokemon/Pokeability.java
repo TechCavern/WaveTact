@@ -5,14 +5,14 @@ import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
 @CMD
 @GenCMD
-public class Pokeability extends GenericCommand {
+public class Pokeability extends IRCCommand {
 
     public Pokeability() {
         super(GeneralUtils.toArray("pokeability pka"), 0, "pokeability [id]", "Displays info on a pokemon ability", false);

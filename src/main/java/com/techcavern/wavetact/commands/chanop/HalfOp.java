@@ -10,7 +10,7 @@ import com.techcavern.wavetact.annot.ChanOPCMD;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -20,7 +20,7 @@ import org.pircbotx.User;
  */
 @CMD
 @ChanOPCMD
-public class HalfOp extends GenericCommand {
+public class HalfOp extends IRCCommand {
 
     public HalfOp() {
         super(GeneralUtils.toArray("halfop hop"), 10, "halfop (-)(user to  halfop)", "Sets half op mode on a user if it exists", true);

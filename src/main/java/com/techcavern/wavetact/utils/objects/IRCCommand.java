@@ -13,7 +13,7 @@ import org.pircbotx.User;
 /**
  * @author jztech101
  */
-public abstract class GenericCommand {
+public abstract class IRCCommand {
 
     private final String[] comID;
     private final String desc;
@@ -22,7 +22,7 @@ public abstract class GenericCommand {
 
     private int permLevel;
 
-    protected GenericCommand(String[] comID, int permLevel, String syntax, String desc, boolean channelRequired) {
+    protected IRCCommand(String[] comID, int permLevel, String syntax, String desc, boolean channelRequired) {
         this.comID = comID;
         this.permLevel = permLevel;
         this.desc = desc;

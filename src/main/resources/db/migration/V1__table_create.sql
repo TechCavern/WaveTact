@@ -27,9 +27,11 @@ permlevel int
 CREATE TABLE CUSTOMCOMMANDS(
 permlevel int,
 channel Text,
+command Text,
+value Text,
 network Text,
 locked Text,
-isAction Boolean,
+isAction Boolean
 );
 
 CREATE TABLE BLACKLISTS(

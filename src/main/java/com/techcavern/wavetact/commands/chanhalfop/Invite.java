@@ -9,7 +9,7 @@ import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ChanHOPCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -19,7 +19,7 @@ import org.pircbotx.User;
  */
 @CMD
 @ChanHOPCMD
-public class Invite extends GenericCommand {
+public class Invite extends IRCCommand {
 
     public Invite() {
         super(GeneralUtils.toArray("invite inv"), 7, "invite [user]", "Invites a user to the channel", true);

@@ -11,7 +11,7 @@ import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
  */
 @CMD
 @ConCMD
-public class Connect extends GenericCommand {
+public class Connect extends IRCCommand {
 
     public Connect() {
         super(GeneralUtils.toArray("connect"), 9001, "connect (+)(-)[networkname] (reason)", "Connects, reconnects or disconnects a network from a predefined network", false);

@@ -30,8 +30,8 @@ public class GetUtils {
     }
 
 
-    public static GenericCommand getGenericCommand(String Command) {
-        for (GenericCommand g : Registry.AllCommands) {
+    public static IRCCommand getGenericCommand(String Command) {
+        for (IRCCommand g : Registry.AllCommands) {
             for (String commandid : g.getCommandID()) {
                 if (commandid.equalsIgnoreCase(Command)) {
                     return g;
@@ -145,11 +145,11 @@ public class GetUtils {
     }
 
     public static List<String> getActionsList(int UserPermLevel) {
-        return Registry.SimpleActions.stream().filter(g -> g.getPermLevel() <= UserPermLevel).map(GenericCommand::getCommand).collect(Collectors.toList());
+        return Registry.SimpleActions.stream().filter(g -> g.getPermLevel() <= UserPermLevel).map(IRCCommand::getCommand).collect(Collectors.toList());
     }
 
     public static List<String> getMessagesList(int UserPermLevel) {
-        return Registry.SimpleMessages.stream().filter(g -> g.getPermLevel() <= UserPermLevel).map(GenericCommand::getCommand).collect(Collectors.toList());
+        return Registry.SimpleMessages.stream().filter(g -> g.getPermLevel() <= UserPermLevel).map(IRCCommand::getCommand).collect(Collectors.toList());
     }
     public static ChannelUserProperty getRelayBotbyBotName(PircBotX network, String channelName, String botName){
         String networkName = getNetworkNameByNetwork(network);

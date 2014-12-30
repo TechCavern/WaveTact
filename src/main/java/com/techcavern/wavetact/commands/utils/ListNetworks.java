@@ -5,7 +5,7 @@ import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 import com.techcavern.wavetact.utils.objects.NetProperty;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -16,7 +16,7 @@ import java.util.List;
 
 @CMD
 @GenCMD
-public class ListNetworks extends GenericCommand {
+public class ListNetworks extends IRCCommand {
 
     public ListNetworks() {
         super(GeneralUtils.toArray("listnetworks netlist"), 0, "listnetworks [connected/all/disconnected]", "Lists the networks a bot is on", false);

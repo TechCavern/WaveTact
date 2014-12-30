@@ -4,7 +4,7 @@ import com.google.common.io.Files;
 import com.techcavern.wavetact.annot.*;
 import com.techcavern.wavetact.utils.objects.ConsoleCommand;
 import com.techcavern.wavetact.utils.objects.FunObject;
-import com.techcavern.wavetact.utils.objects.GenericCommand;
+import com.techcavern.wavetact.utils.objects.IRCCommand;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,16 +24,16 @@ public class LoadUtils {
         addCommands(Registry.ChanOpCommands, ChanOPCMD.class);
         addCommands(Registry.ChanOwnOpCommands, ChanOwnOpCMD.class);
         addCommands(Registry.ControllerCommands, ConCMD.class);
-        addCommands(Registry.GenericCommands, GenCMD.class);
+        addCommands(Registry.GenericIRCCommands, GenCMD.class);
         addCommands(Registry.TrustedCommands, TruCMD.class);
         addCommands(Registry.NetAdminCommands, NAdmCMD.class);
     }
 
-    public static void addCommands(List<GenericCommand> list, Class<? extends Annotation> cl) {
+    public static void addCommands(List<IRCCommand> list, Class<? extends Annotation> cl) {
         Set<Class<?>> classes = Registry.wavetactreflection.getTypesAnnotatedWith(cl);
         for (Class<?> clss : classes) {
             try {
-                list.add(((GenericCommand) clss.newInstance()));
+                list.add(((IRCCommand) clss.newInstance()));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -95,35 +95,35 @@ public class LoadUtils {
         for (ConsoleCommand command : Registry.ConsoleCommands) {
             Registry.ConsoleListCommands.add(command.getCommand());
         }
-        for (GenericCommand command : Registry.GenericCommands) {
+        for (IRCCommand command : Registry.GenericIRCCommands) {
             Registry.GenericListCommands.add(command.getCommand());
             Registry.AllListCommands.add(command.getCommand());
         }
-        for (GenericCommand command : Registry.TrustedCommands) {
+        for (IRCCommand command : Registry.TrustedCommands) {
             Registry.TrustedListCommands.add(command.getCommand());
             Registry.AllListCommands.add(command.getCommand());
         }
-        for (GenericCommand command : Registry.ChanHalfOpCommands) {
+        for (IRCCommand command : Registry.ChanHalfOpCommands) {
             Registry.ChanHalfOpListCommands.add(command.getCommand());
             Registry.AllListCommands.add(command.getCommand());
         }
-        for (GenericCommand command : Registry.ChanOpCommands) {
+        for (IRCCommand command : Registry.ChanOpCommands) {
             Registry.ChanOpListCommands.add(command.getCommand());
             Registry.AllListCommands.add(command.getCommand());
         }
-        for (GenericCommand command : Registry.ChanOwnOpCommands) {
+        for (IRCCommand command : Registry.ChanOwnOpCommands) {
             Registry.ChanOwnOpListCommands.add(command.getCommand());
             Registry.AllListCommands.add(command.getCommand());
         }
-        for (GenericCommand command : Registry.ChanAdminCommands) {
+        for (IRCCommand command : Registry.ChanAdminCommands) {
             Registry.ChanAdminListCommands.add(command.getCommand());
             Registry.AllListCommands.add(command.getCommand());
         }
-        for (GenericCommand command : Registry.NetAdminCommands) {
+        for (IRCCommand command : Registry.NetAdminCommands) {
             Registry.NetAdminListCommands.add(command.getCommand());
             Registry.AllListCommands.add(command.getCommand());
         }
-        for (GenericCommand command : Registry.ControllerCommands) {
+        for (IRCCommand command : Registry.ControllerCommands) {
             Registry.ControllerListCommands.add(command.getCommand());
             Registry.AllListCommands.add(command.getCommand());
         }
