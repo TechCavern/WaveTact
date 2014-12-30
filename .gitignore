@@ -23,4 +23,4 @@ production/
 workingdirectory/
 *.ipr
 *.iws
-src/main/java/wavetactdb/
+src/main/java/com/techcavern/wavetactdb/

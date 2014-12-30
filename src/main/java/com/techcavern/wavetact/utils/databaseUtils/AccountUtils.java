@@ -1,6 +1,7 @@
 package com.techcavern.wavetact.utils.databaseUtils;
 
 import com.techcavern.wavetact.utils.Registry;
+import static wavetactdb.Tables.*;
 
 public class AccountUtils {
     @SuppressWarnings("unchecked")
