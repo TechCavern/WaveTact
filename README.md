@@ -32,6 +32,10 @@ PermLevels
 - 0 - Default Access. Everyone has it.
 - -1 - Banned
 
+Developing
+==========
+- You will need to run `gradle idea` each time the build file is modified as intellij internal gradle support does not handle it properly. 
+
 Running
 =======
 - Make sure you have the WaveTact jar in your current directory.
