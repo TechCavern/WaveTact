@@ -1,7 +1,7 @@
 package com.techcavern.wavetact.utils.databaseUtils;
 
 import com.techcavern.wavetact.utils.Registry;
-import static wavetactdb.Tables.*;
+import static com.techcavern.wavetactdb.Tables.*;
 
 public class AccountUtils {
     @SuppressWarnings("unchecked")
@@ -13,6 +13,6 @@ public class AccountUtils {
     }
 
     public static String getAccountPassword(String Account) {
-        return Registry.WaveTactDB.select().from(ACCOUNTS).where(ACCOUNTS.username.eq(Account)).fetch().getValue(ACCOUNTS.password);
+        return Registry.WaveTactDB.select().from(ACCOUNTS).where(ACCOUNTS.USERNAME.eq(Account)).fetch().getValue(ACCOUNTS.PASSWORD);
     }
 }
