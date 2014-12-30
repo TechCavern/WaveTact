@@ -1,7 +1,7 @@
-package com.techcavern.wavetact.utils.runnables;
+package com.techcavern.wavetact.runnables;
 
 import com.techcavern.wavetact.utils.*;
-import com.techcavern.wavetact.utils.objects.IRCCommand;
+import com.techcavern.wavetact.objects.IRCCommand;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;

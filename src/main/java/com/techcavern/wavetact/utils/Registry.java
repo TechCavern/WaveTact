@@ -2,9 +2,8 @@ package com.techcavern.wavetact.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.techcavern.wavetact.utils.consoleUtils.ConsoleServer;
-import com.techcavern.wavetact.utils.fileUtils.Configuration;
-import com.techcavern.wavetact.utils.objects.*;
+import com.techcavern.wavetact.console.ConsoleServer;
+import com.techcavern.wavetact.objects.*;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 import org.jooq.DSLContext;
 import org.pircbotx.MultiBotManager;
@@ -13,7 +12,6 @@ import org.reflections.Reflections;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ForkJoinPool;
 
 public class Registry {

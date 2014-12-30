@@ -2,8 +2,8 @@ package com.techcavern.wavetact.utils.configurationUtils;
 
 import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.eventListeners.*;
-import com.techcavern.wavetact.utils.objects.NetProperty;
+import com.techcavern.wavetact.eventListeners.*;
+import com.techcavern.wavetact.objects.NetProperty;
 import org.pircbotx.Configuration;
 import org.pircbotx.PircBotX;
 

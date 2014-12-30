@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.techcavern.wavetact.utils.eventListeners;
+package com.techcavern.wavetact.eventListeners;
 
-import com.techcavern.wavetact.utils.runnables.PrivMsgProcessor;
+import com.techcavern.wavetact.runnables.PrivMsgProcessor;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.PrivateMessageEvent;
 

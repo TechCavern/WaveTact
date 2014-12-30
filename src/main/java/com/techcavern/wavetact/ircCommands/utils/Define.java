@@ -6,7 +6,7 @@ import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.objects.IRCCommand;
+import com.techcavern.wavetact.objects.IRCCommand;
 import com.wordnik.client.api.WordApi;
 import com.wordnik.client.model.Definition;
 import com.wordnik.client.model.ExampleUsage;

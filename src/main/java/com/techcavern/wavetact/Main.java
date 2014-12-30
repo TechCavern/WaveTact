@@ -1,12 +1,10 @@
 package com.techcavern.wavetact;
 
-import com.techcavern.wavetact.utils.consoleUtils.ConsoleClient;
+import com.techcavern.wavetact.console.ConsoleClient;
 import com.techcavern.wavetact.utils.LoadUtils;
 import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.configurationUtils.ConfigUtils;
-import com.techcavern.wavetact.utils.configurationUtils.NetworkUtils;
-import com.techcavern.wavetact.utils.databaseUtils.*;
-import com.techcavern.wavetact.utils.runnables.BanTimer;
+import com.techcavern.wavetact.runnables.BanTimer;
 import org.slf4j.impl.SimpleLogger;
 
 import java.util.concurrent.TimeUnit;

@@ -7,7 +7,7 @@ import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.objects.IRCCommand;
+import com.techcavern.wavetact.objects.IRCCommand;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;

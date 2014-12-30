@@ -3,12 +3,12 @@ package com.techcavern.wavetact.consoleCommands.config;
 import com.techcavern.wavetact.annot.CMDLine;
 import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.objects.CommandIO;
+import com.techcavern.wavetact.objects.CommandIO;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleActionUtils;
 import com.techcavern.wavetact.utils.databaseUtils.SimpleMessageUtils;
-import com.techcavern.wavetact.utils.objects.ConsoleCommand;
-import com.techcavern.wavetact.utils.objects.SimpleAction;
-import com.techcavern.wavetact.utils.objects.SimpleMessage;
+import com.techcavern.wavetact.objects.ConsoleCommand;
+import com.techcavern.wavetact.objects.SimpleAction;
+import com.techcavern.wavetact.objects.SimpleMessage;
 
 @CMDLine
 public class AddBasicCommands extends ConsoleCommand {

@@ -4,7 +4,7 @@ import com.google.gson.internal.LinkedTreeMap;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.fileUtils.JSONFile;
-import com.techcavern.wavetact.utils.objects.SimpleAction;
+import com.techcavern.wavetact.objects.SimpleAction;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

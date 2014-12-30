@@ -1,11 +1,11 @@
-package com.techcavern.wavetact.utils.runnables;
+package com.techcavern.wavetact.runnables;
 
 import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.databaseUtils.BanTimeUtils;
 import com.techcavern.wavetact.utils.databaseUtils.QuietTimeUtils;
-import com.techcavern.wavetact.utils.objects.TimedBan;
+import com.techcavern.wavetact.objects.TimedBan;
 import org.pircbotx.PircBotX;
 
 import java.util.concurrent.TimeUnit;

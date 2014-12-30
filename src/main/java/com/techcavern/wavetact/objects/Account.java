@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.utils.objects;
+package com.techcavern.wavetact.objects;
 
 public class Account {
     private final String AuthAccount;

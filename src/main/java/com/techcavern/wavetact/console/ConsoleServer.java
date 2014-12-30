@@ -1,9 +1,9 @@
-package com.techcavern.wavetact.utils.consoleUtils;
+package com.techcavern.wavetact.console;
 
 import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.Registry;
-import com.techcavern.wavetact.utils.objects.CommandIO;
-import com.techcavern.wavetact.utils.objects.ConsoleCommand;
+import com.techcavern.wavetact.objects.CommandIO;
+import com.techcavern.wavetact.objects.ConsoleCommand;
 import org.apache.commons.lang3.ArrayUtils;
 import org.newsclub.net.unix.AFUNIXServerSocket;
 import org.newsclub.net.unix.AFUNIXSocketAddress;

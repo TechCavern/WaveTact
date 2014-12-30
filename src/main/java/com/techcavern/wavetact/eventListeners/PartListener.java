@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.techcavern.wavetact.utils.eventListeners;
+package com.techcavern.wavetact.eventListeners;
 
-import org.pircbotx.PircBotX;
+import com.techcavern.wavetact.utils.Registry;
 import org.pircbotx.hooks.ListenerAdapter;
-import org.pircbotx.hooks.events.KickEvent;
+import org.pircbotx.hooks.events.PartEvent;
 
 import java.util.concurrent.TimeUnit;
 
@@ -15,9 +15,11 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author jztech101
  */
-public class KickListener extends ListenerAdapter {
-    public void onKick(KickEvent event) throws Exception {
-        if (event.getRecipient().getNick().equals(event.getBot().getNick())) {
+public class PartListener extends ListenerAdapter {
+    public void onPart(PartEvent event) throws Exception {
+        if (Registry.LastLeftChannel.equals(event.getChannel().getName())) {
+            Registry.LastLeftChannel = "";
+        } else if (event.getUser().getNick().equals(event.getBot().getNick())) {
             int tries = 0;
             do {
                 event.getBot().sendIRC().joinChannel(event.getChannel().getName());

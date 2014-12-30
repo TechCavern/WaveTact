@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.techcavern.wavetact.utils.eventListeners;
+package com.techcavern.wavetact.eventListeners;
 
-import com.techcavern.wavetact.utils.runnables.ChanMsgProcessor;
-import com.techcavern.wavetact.utils.runnables.RelayMsgProcessor;
+import com.techcavern.wavetact.runnables.ChanMsgProcessor;
+import com.techcavern.wavetact.runnables.RelayMsgProcessor;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.MessageEvent;
 

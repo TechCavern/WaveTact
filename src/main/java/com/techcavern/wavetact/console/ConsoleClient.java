@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.utils.consoleUtils;
+package com.techcavern.wavetact.console;
 
 import org.newsclub.net.unix.AFUNIXSocket;
 import org.newsclub.net.unix.AFUNIXSocketAddress;

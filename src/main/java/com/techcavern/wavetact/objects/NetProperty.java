@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.utils.objects;
+package com.techcavern.wavetact.objects;
 
 import org.pircbotx.PircBotX;
 

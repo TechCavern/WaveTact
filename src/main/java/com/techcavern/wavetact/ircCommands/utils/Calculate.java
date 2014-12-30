@@ -4,7 +4,7 @@ import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.objects.IRCCommand;
+import com.techcavern.wavetact.objects.IRCCommand;
 import net.objecthunter.exp4j.ExpressionBuilder;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;

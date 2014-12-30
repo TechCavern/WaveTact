@@ -1,11 +1,11 @@
 package com.techcavern.wavetact.consoleCommands.config;
 
 import com.techcavern.wavetact.annot.CMDLine;
-import com.techcavern.wavetact.utils.objects.CommandIO;
+import com.techcavern.wavetact.objects.CommandIO;
 import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.databaseUtils.ControllerUtils;
-import com.techcavern.wavetact.utils.objects.ConsoleCommand;
+import com.techcavern.wavetact.objects.ConsoleCommand;
 
 @CMDLine
 public class Controller extends ConsoleCommand {

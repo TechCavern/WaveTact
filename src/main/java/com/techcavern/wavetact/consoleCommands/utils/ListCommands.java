@@ -2,13 +2,10 @@ package com.techcavern.wavetact.consoleCommands.utils;
 
 import com.techcavern.wavetact.annot.CMDLine;
 import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.Registry;
-import com.techcavern.wavetact.utils.objects.CommandIO;
-import com.techcavern.wavetact.utils.objects.ConsoleCommand;
+import com.techcavern.wavetact.objects.CommandIO;
+import com.techcavern.wavetact.objects.ConsoleCommand;
 import org.apache.commons.lang3.StringUtils;
-
-import java.util.Arrays;
 
 @CMDLine
 public class ListCommands extends ConsoleCommand {

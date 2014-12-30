@@ -10,7 +10,7 @@ import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.objects.IRCCommand;
+import com.techcavern.wavetact.objects.IRCCommand;
 import org.apache.commons.lang3.RandomUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;

@@ -2,11 +2,10 @@ package com.techcavern.wavetact.utils;
 
 import com.google.common.io.Files;
 import com.techcavern.wavetact.annot.*;
-import com.techcavern.wavetact.utils.objects.ConsoleCommand;
-import com.techcavern.wavetact.utils.objects.FunObject;
-import com.techcavern.wavetact.utils.objects.IRCCommand;
+import com.techcavern.wavetact.objects.ConsoleCommand;
+import com.techcavern.wavetact.objects.FunObject;
+import com.techcavern.wavetact.objects.IRCCommand;
 import org.flywaydb.core.Flyway;
-import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 
