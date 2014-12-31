@@ -1,9 +1,12 @@
-package com.techcavern.wavetact.utils.configurationUtils;
+package com.techcavern.wavetact.utils;
 
-import com.techcavern.wavetact.utils.Registry;
-import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.eventListeners.*;
+import com.techcavern.wavetact.eventListeners.ChanMsgListener;
+import com.techcavern.wavetact.eventListeners.KickListener;
+import com.techcavern.wavetact.eventListeners.PartListener;
+import com.techcavern.wavetact.eventListeners.PrivMsgListener;
 import com.techcavern.wavetact.objects.NetProperty;
+import com.techcavern.wavetact.utils.GeneralUtils;
+import com.techcavern.wavetact.utils.Registry;
 import org.pircbotx.Configuration;
 import org.pircbotx.PircBotX;
 
@@ -16,8 +19,15 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-
-public class NetworkUtils {
+public class ConfigUtils {
+    public static void registerConfigs() {
+        File configfile = new File("config.properties");
+        com.techcavern.wavetact.utils.fileUtils.Configuration config = new com.techcavern.wavetact.utils.fileUtils.Configuration(configfile);
+        Registry.wolframalphaapikey = config.getString("wolframapi");
+        Registry.wundergroundapikey = config.getString("wundergroundapi");
+        Registry.wordnikapikey = config.getString("wordnikapi");
+        Registry.googleapikey = config.getString("googleapi");
+    }
     public static void registerNetworks() {
         File serversFolder = new File("servers/");
         serversFolder.mkdir();

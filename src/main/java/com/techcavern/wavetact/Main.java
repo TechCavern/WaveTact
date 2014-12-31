@@ -3,7 +3,7 @@ package com.techcavern.wavetact;
 import com.techcavern.wavetact.console.ConsoleClient;
 import com.techcavern.wavetact.utils.LoadUtils;
 import com.techcavern.wavetact.utils.Registry;
-import com.techcavern.wavetact.utils.configurationUtils.ConfigUtils;
+import com.techcavern.wavetact.utils.ConfigUtils;
 import com.techcavern.wavetact.runnables.BanTimer;
 import org.slf4j.impl.SimpleLogger;
 

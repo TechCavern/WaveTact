@@ -16,12 +16,10 @@ import java.util.concurrent.ForkJoinPool;
 
 public class Registry {
 
-    public static final Gson GSON = new GsonBuilder().create();
-    public static final Gson GSON_PRETTY_PRINT = new GsonBuilder().setPrettyPrinting().create();
     public static String LastLeftChannel = "";
     public static final HashMap<String, String> QuietBans = new HashMap<>();
     public static final List<ChannelProperty> Topic = new ArrayList<>();
-    public static final ForkJoinPool threadPool = new ForkJoinPool(100);
+    public static final ForkJoinPool threadPool = new ForkJoinPool(15);
     public static final List<NetworkAdmin> NetworkAdmins = new ArrayList<>();
     public static final List<IRCCommand> AllCommands = new ArrayList<>();
     public static final List<IRCCommand> GenericIRCCommands = new ArrayList<>();
