@@ -8,13 +8,12 @@ import org.jooq.Record;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
-import static com.techcavern.wavetactdb.Tables.*;
 import org.pircbotx.hooks.WaitForQueue;
 import org.pircbotx.hooks.events.WhoisEvent;
 import org.pircbotx.output.OutputChannel;
-import sun.nio.ch.Net;
 
-import javax.xml.crypto.Data;
+import static com.techcavern.wavetactdb.Tables.CUSTOMCOMMANDS;
+import static com.techcavern.wavetactdb.Tables.SERVERS;
 
 
 public class IRCUtils {
@@ -56,10 +55,10 @@ public class IRCUtils {
 
     public static void sendMessage(User userObject, PircBotX networkObject, Channel channelObject, String message, String prefix) {
         if (channelObject != null) {
-            for(int i = 0; i < message.length(); i += 350) {
-                String messageToSend=message.substring(i, Math.min(message.length(),i+350));
-                if(!messageToSend.isEmpty())
-                networkObject.sendRaw().rawLine("PRIVMSG " + prefix + channelObject.getName() + " :" + messageToSend);
+            for (int i = 0; i < message.length(); i += 350) {
+                String messageToSend = message.substring(i, Math.min(message.length(), i + 350));
+                if (!messageToSend.isEmpty())
+                    networkObject.sendRaw().rawLine("PRIVMSG " + prefix + channelObject.getName() + " :" + messageToSend);
             }
         } else {
             userObject.send().message(message);
@@ -76,9 +75,10 @@ public class IRCUtils {
 
     public static String getPrefix(PircBotX network, String fullChannelName) {
         String prefix = String.valueOf(fullChannelName.charAt(0));
-        if(network.getServerInfo().getStatusMessage().contains(prefix)){
+        if (network.getServerInfo().getStatusMessage().contains(prefix)) {
             return prefix;
-        };
+        }
+        ;
         return "";
     }
 
@@ -141,6 +141,7 @@ public class IRCUtils {
         }
         return host;
     }
+
     public static User getUserByNick(PircBotX networkObject, String Nick) {
         try {
             User userObject = networkObject.getUserChannelDao().getUser(Nick);
@@ -172,52 +173,52 @@ public class IRCUtils {
 
     }
 
-    public static IRCCommand getCommand(String Command, String Network, String Channel){
+    public static IRCCommand getCommand(String Command, String Network, String Channel) {
         IRCCommand cmd = getCustomCommand(Command, Network, Channel);
-        if(cmd != null){
+        if (cmd != null) {
             return cmd;
-        }else{
+        } else {
             return getGenericCommand(Command);
         }
     }
 
-    public static IRCCommand getCustomCommand(String Command, String Network, String Channel){
-        Record cmd = DatabaseUtils.getCustomCommand(Channel, Network, Command);
-        if(cmd != null){
-                 class SimpleCommand extends  IRCCommand{
-                    public SimpleCommand() {
-                        super(GeneralUtils.toArray(cmd.getValue(CUSTOMCOMMANDS.COMMAND)), cmd.getValue(CUSTOMCOMMANDS.PERMLEVEL), cmd.getValue(CUSTOMCOMMANDS.COMMAND), "Custom Command", false);
+    public static IRCCommand getCustomCommand(String Command, String Network, String Channel) {
+        Record cmd = DatabaseUtils.getCustomCommand(Network, Channel, Command);
+        if (cmd != null) {
+            class SimpleCommand extends IRCCommand {
+                public SimpleCommand() {
+                    super(GeneralUtils.toArray(cmd.getValue(CUSTOMCOMMANDS.COMMAND)), cmd.getValue(CUSTOMCOMMANDS.PERMLEVEL), cmd.getValue(CUSTOMCOMMANDS.COMMAND), "Custom Command", false);
 
-                    }
-                      @Override
+                }
+
+                @Override
                 public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-                          String action = cmd.getValue(CUSTOMCOMMANDS.VALUE);
-                          String[] message = StringUtils.split(action, " ");
-                          int i = 0;
-                          for (String g : message) {
-                              if (g.startsWith("$") && !g.contains("*")) {
-                                  action = action.replace(g, args[Integer.parseInt(g.replace("$", "")) - 1]);
-                                  if (Integer.parseInt(g.replace("$", "")) > i) {
-                                      i++;
-                                  }
-                              }
-                          }
-                          action = action.replace("$*", GeneralUtils.buildMessage(i, args.length, args));
-                          String responseprefix = DatabaseUtils.getConfig("commandchar");
-                          if (action.startsWith(responseprefix)) {
-                              action = action.replace(responseprefix, "");
-                          }
-                          if(cmd.getValue(CUSTOMCOMMANDS.ISACTION)){
-                              IRCUtils.sendAction(user,network, channel, action, prefix);
-                          }else{
-                              IRCUtils.sendMessage(user,network, channel, action, prefix);
-                          }
+                    String action = cmd.getValue(CUSTOMCOMMANDS.VALUE);
+                    String[] message = StringUtils.split(action, " ");
+                    int i = 0;
+                    for (String g : message) {
+                        if (g.startsWith("$") && !g.contains("*")) {
+                            action = action.replace(g, args[Integer.parseInt(g.replace("$", "")) - 1]);
+                            if (Integer.parseInt(g.replace("$", "")) > i) {
+                                i++;
+                            }
+                        }
+                    }
+                    action = action.replace("$*", GeneralUtils.buildMessage(i, args.length, args));
+                    String responseprefix = DatabaseUtils.getConfig("commandchar");
+                    if (action.startsWith(responseprefix)) {
+                        action = action.replace(responseprefix, "");
+                    }
+                    if (cmd.getValue(CUSTOMCOMMANDS.ISACTION)) {
+                        IRCUtils.sendAction(user, network, channel, action, prefix);
+                    } else {
+                        IRCUtils.sendMessage(user, network, channel, action, prefix);
+                    }
 
                 }
             }
             return new SimpleCommand();
-        }
-        else
+        } else
             return null;
     }
 
@@ -251,16 +252,18 @@ public class IRCUtils {
         }
         return null;
     }
-    public static boolean isController(String account, String network){
-        for(String c: StringUtils.split(DatabaseUtils.getServer(network).getValue(SERVERS.CONTROLLERS), ", ")){
-            if(c.equalsIgnoreCase(account))
+
+    public static boolean isController(String account, String network) {
+        for (String c : StringUtils.split(DatabaseUtils.getServer(network).getValue(SERVERS.CONTROLLERS), ", ")) {
+            if (c.equalsIgnoreCase(account))
                 return true;
         }
         return false;
     }
-    public static boolean isNetworkAdmin(String account, String network){
-        for(String c: StringUtils.split(DatabaseUtils.getServer(network).getValue(SERVERS.NETWORKADMINS), ", ")){
-            if(c.equalsIgnoreCase(account))
+
+    public static boolean isNetworkAdmin(String account, String network) {
+        for (String c : StringUtils.split(DatabaseUtils.getServer(network).getValue(SERVERS.NETWORKADMINS), ", ")) {
+            if (c.equalsIgnoreCase(account))
                 return true;
         }
         return false;

@@ -1,9 +1,12 @@
 package com.techcavern.wavetact.ircCommands.utils;
 
-import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.annot.GenCMD;
-import com.techcavern.wavetact.utils.*;
+import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
+import com.techcavern.wavetact.utils.ErrorUtils;
+import com.techcavern.wavetact.utils.GeneralUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.PermUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -24,7 +27,7 @@ public class CheckUserLevel extends IRCCommand {
         if (args.length > 1 && network.getServerInfo().getChannelTypes().contains(String.valueOf(args[0].charAt(0)))) {
             chan = IRCUtils.getChannelbyName(network, args[0]);
             args = ArrayUtils.remove(args, 0);
-        }else{
+        } else {
             chan = channel;
         }
         if (args.length < 1) {

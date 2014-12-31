@@ -5,15 +5,15 @@
  */
 package com.techcavern.wavetact.ircCommands.controller;
 
-import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.annot.ConCMD;
-import com.techcavern.wavetact.utils.Registry;
+import com.techcavern.wavetact.annot.IRCCMD;
+import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.LoadUtils;
+import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.olddatabaseUtils.SimpleActionUtils;
 import com.techcavern.wavetact.utils.olddatabaseUtils.SimpleMessageUtils;
-import com.techcavern.wavetact.objects.IRCCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;

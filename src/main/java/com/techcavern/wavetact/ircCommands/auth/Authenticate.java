@@ -1,12 +1,12 @@
 package com.techcavern.wavetact.ircCommands.auth;
 
-import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.annot.GenCMD;
-import com.techcavern.wavetact.utils.*;
-import com.techcavern.wavetact.utils.olddatabaseUtils.AccountUtils;
+import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.Account;
 import com.techcavern.wavetact.objects.AuthedUser;
 import com.techcavern.wavetact.objects.IRCCommand;
+import com.techcavern.wavetact.utils.*;
+import com.techcavern.wavetact.utils.olddatabaseUtils.AccountUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;

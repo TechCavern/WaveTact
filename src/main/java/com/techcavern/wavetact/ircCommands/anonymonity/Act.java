@@ -7,8 +7,11 @@ package com.techcavern.wavetact.ircCommands.anonymonity;
 
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.annot.TruCMD;
-import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.objects.IRCCommand;
+import com.techcavern.wavetact.utils.ErrorUtils;
+import com.techcavern.wavetact.utils.GeneralUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.PermUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
@@ -31,22 +34,22 @@ public class Act extends IRCCommand {
         Channel chan;
         if (args.length > 1) {
             prefix = IRCUtils.getPrefix(network, args[0]);
-            if(!prefix.isEmpty())
+            if (!prefix.isEmpty())
                 chan = IRCUtils.getChannelbyName(network, args[0].replace(prefix, ""));
             else
                 chan = IRCUtils.getChannelbyName(network, args[0]);
-            if(chan != null)
+            if (chan != null)
                 args = ArrayUtils.remove(args, 0);
             else
                 chan = channel;
-        }else{
+        } else {
             chan = channel;
         }
-            if (PermUtils.getPermLevel(network, user.getNick(), chan) >= 5) {
-                    IRCUtils.sendAction(user, network, chan, StringUtils.join(args, " ").replace("\n", " "), prefix);
-                } else {
-                    ErrorUtils.sendError(user, "Permission denied");
-                }
+        if (PermUtils.getPermLevel(network, user.getNick(), chan) >= 5) {
+            IRCUtils.sendAction(user, network, chan, StringUtils.join(args, " ").replace("\n", " "), prefix);
+        } else {
+            ErrorUtils.sendError(user, "Permission denied");
         }
     }
+}
 

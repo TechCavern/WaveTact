@@ -1,6 +1,5 @@
 package com.techcavern.wavetact.utils;
 
-import static com.techcavern.wavetactdb.Tables.*;
 import com.techcavern.wavetact.console.ConsoleServer;
 import com.techcavern.wavetact.objects.*;
 import org.jasypt.util.password.StrongPasswordEncryptor;
@@ -28,8 +27,10 @@ public class Registry {
     public static final List<NetProperty> NetworkName = new ArrayList<>();
     public static String wundergroundapikey = DatabaseUtils.getConfig("wundergroundapikey");
     public static String wolframalphaapikey = DatabaseUtils.getConfig("wolframalphaapikey");
-    public static String wordnikapikey = DatabaseUtils.getConfig("wordnikapikey");;
-    public static String googleapikey = DatabaseUtils.getConfig("googleapikey");;
+    public static String wordnikapikey = DatabaseUtils.getConfig("wordnikapikey");
+    ;
+    public static String googleapikey = DatabaseUtils.getConfig("googleapikey");
+    ;
     public static ConsoleServer consoleServer = new ConsoleServer();
     public static DSLContext WaveTactDB = null;
 }

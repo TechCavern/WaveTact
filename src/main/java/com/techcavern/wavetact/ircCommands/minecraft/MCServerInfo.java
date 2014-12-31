@@ -1,10 +1,10 @@
 package com.techcavern.wavetact.ircCommands.minecraft;
 
-import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.annot.GenCMD;
+import com.techcavern.wavetact.annot.IRCCMD;
+import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.objects.IRCCommand;
 import io.github.asyncronous.mcping.MCServer;
 import io.github.asyncronous.mcping.StandardMCVersions;
 import org.pircbotx.Channel;
@@ -18,7 +18,7 @@ import java.net.InetSocketAddress;
 public class MCServerInfo extends IRCCommand {
 
     public MCServerInfo() {
-        super(GeneralUtils.toArray("mcserverinfo mcserver"), 0, "mcserverinfo [address] (port)","Gets info on minecraft server" , false);
+        super(GeneralUtils.toArray("mcserverinfo mcserver"), 0, "mcserverinfo [address] (port)", "Gets info on minecraft server", false);
     }
 
     @Override

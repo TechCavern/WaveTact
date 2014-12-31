@@ -5,7 +5,6 @@
  */
 package com.techcavern.wavetact.objects;
 
-import com.techcavern.wavetact.utils.Registry;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;

@@ -5,7 +5,9 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 import org.pircbotx.hooks.events.WhoisEvent;
-import static com.techcavern.wavetactdb.Tables.*;
+
+import static com.techcavern.wavetactdb.Tables.PERMUSERCHANNELS;
+import static com.techcavern.wavetactdb.Tables.SERVERS;
 
 
 public class PermUtils {
@@ -159,6 +161,7 @@ public class PermUtils {
             return getManualPermLevel(network, channelObject, account);
         }
     }
+
     public static boolean isAccountEnabled(PircBotX network) { //checks if account authentication is enabled
         return DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(network)).getValue(SERVERS.AUTHTYPE).equalsIgnoreCase("account");
     }

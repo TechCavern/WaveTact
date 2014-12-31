@@ -6,10 +6,12 @@
 package com.techcavern.wavetact.ircCommands.chanhalfop;
 
 import com.techcavern.wavetact.annot.IRCCMD;
-import com.techcavern.wavetact.annot.ChanHOPCMD;
-import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.objects.ChannelProperty;
 import com.techcavern.wavetact.objects.IRCCommand;
+import com.techcavern.wavetact.utils.ErrorUtils;
+import com.techcavern.wavetact.utils.GeneralUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.Registry;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -69,6 +71,6 @@ public class Topic extends IRCCommand {
     }
 
     void saveTopic(Channel channel, PircBotX Bot) {
-        Registry.Topic.add(new ChannelProperty(Bot.getServerInfo().getNetwork(),channel.getName(),channel.getTopic()));
+        Registry.Topic.add(new ChannelProperty(Bot.getServerInfo().getNetwork(), channel.getName(), channel.getTopic()));
     }
 }

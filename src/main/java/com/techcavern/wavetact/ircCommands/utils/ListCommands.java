@@ -1,11 +1,10 @@
 package com.techcavern.wavetact.ircCommands.utils;
 
 import com.techcavern.wavetact.annot.IRCCMD;
-import com.techcavern.wavetact.objects.ConsoleCommand;
-import com.techcavern.wavetact.utils.Registry;
+import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.objects.IRCCommand;
+import com.techcavern.wavetact.utils.Registry;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -38,9 +37,9 @@ public class ListCommands extends IRCCommand {
             }
         }
         List<String> commands = new ArrayList<>();
-        for(IRCCommand cmd:Registry.IRCCommands){
-            if(cmd.getPermLevel() <= permlevel)
-            commands.add(cmd.getCommand());
+        for (IRCCommand cmd : Registry.IRCCommands) {
+            if (cmd.getPermLevel() <= permlevel)
+                commands.add(cmd.getCommand());
         }
         IRCUtils.sendMessage(user, network, channel, StringUtils.join(commands, ", "), prefix);
     }

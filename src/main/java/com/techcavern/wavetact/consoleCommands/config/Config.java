@@ -1,22 +1,22 @@
 package com.techcavern.wavetact.consoleCommands.config;
 
 import com.techcavern.wavetact.annot.ConCMD;
-import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.objects.CommandIO;
 import com.techcavern.wavetact.objects.ConsoleCommand;
-import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.DatabaseUtils;
+import com.techcavern.wavetact.utils.GeneralUtils;
+import com.techcavern.wavetact.utils.Registry;
 
 @ConCMD
 public class Config extends ConsoleCommand {
 
     public Config() {
-        super(GeneralUtils.toArray("config conf"),"config [property] [value]", "config the bot");
+        super(GeneralUtils.toArray("config conf"), "config [property] [value]", "config the bot");
     }
 
     @Override
     public void onCommand(String[] args, CommandIO commandIO) throws Exception {
-        switch(args[0].toLowerCase()){
+        switch (args[0].toLowerCase()) {
             case "commandchar":
                 DatabaseUtils.deleteConfig("commandchar");
                 DatabaseUtils.addConfig("commandchar", args[1]);

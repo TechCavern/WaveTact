@@ -22,74 +22,74 @@ public class Network extends ConsoleCommand {
     }
 
     @Override
-    public void onCommand(String[] args, CommandIO commandIO) throws Exception{
+    public void onCommand(String[] args, CommandIO commandIO) throws Exception {
         Scanner input = new Scanner(commandIO.getInputStream());
         if (args[0].startsWith("+")) {
             Record network = DatabaseUtils.getServer(args[0].replaceFirst("\\+", ""));
             boolean viewonly = false;
-            if(args.length <3 ){
+            if (args.length < 3) {
                 viewonly = true;
             }
             switch (args[1].toLowerCase()) {
                 case "name":
-                    if(viewonly)
+                    if (viewonly)
                         commandIO.getPrintStream().println(network.getValue(SERVERS.NAME));
                     else
-                    network.setValue(SERVERS.NAME, args[2]);
+                        network.setValue(SERVERS.NAME, args[2]);
                     break;
                 case "server":
-                    if(viewonly)
+                    if (viewonly)
                         commandIO.getPrintStream().println(network.getValue(SERVERS.SERVER));
                     else
-                    network.setValue(SERVERS.SERVER, args[2]);
+                        network.setValue(SERVERS.SERVER, args[2]);
                     break;
                 case "port":
-                    if(viewonly)
+                    if (viewonly)
                         commandIO.getPrintStream().println(network.getValue(SERVERS.PORT));
                     else
-                    network.setValue(SERVERS.PORT, Integer.parseInt(args[2]));
+                        network.setValue(SERVERS.PORT, Integer.parseInt(args[2]));
                     break;
                 case "nick":
-                    if(viewonly)
+                    if (viewonly)
                         commandIO.getPrintStream().println(network.getValue(SERVERS.NICK));
                     else
-                    network.setValue(SERVERS.NICK, args[2]);
+                        network.setValue(SERVERS.NICK, args[2]);
                     break;
                 case "nickserv":
-                    if(viewonly)
+                    if (viewonly)
                         commandIO.getPrintStream().println(network.getValue(SERVERS.NICKSERV));
                     else
-                    network.setValue(SERVERS.NICKSERV, args[2]);
+                        network.setValue(SERVERS.NICKSERV, args[2]);
                     break;
                 case "controllers":
-                    if(viewonly)
+                    if (viewonly)
                         commandIO.getPrintStream().println(network.getValue(SERVERS.CONTROLLERS));
                     else
                         network.setValue(SERVERS.CONTROLLERS, args[2]);
                     break;
                 case "netadmin":
-                    if(viewonly)
+                    if (viewonly)
                         commandIO.getPrintStream().println(network.getValue(SERVERS.NETWORKADMINS));
                     else
                         network.setValue(SERVERS.NETWORKADMINS, args[2]);
                     break;
                 case "bindhost":
-                    if(viewonly)
+                    if (viewonly)
                         commandIO.getPrintStream().println(network.getValue(SERVERS.BINDHOST));
                     else
-                    network.setValue(SERVERS.BINDHOST, args[2]);
+                        network.setValue(SERVERS.BINDHOST, args[2]);
                     break;
                 case "authtype":
-                    if(viewonly)
+                    if (viewonly)
                         commandIO.getPrintStream().println(network.getValue(SERVERS.AUTHTYPE));
                     else
-                    network.setValue(SERVERS.AUTHTYPE, args[2]);
+                        network.setValue(SERVERS.AUTHTYPE, args[2]);
                     break;
                 case "netadminaccess":
-                    if(viewonly)
+                    if (viewonly)
                         commandIO.getPrintStream().println(network.getValue(SERVERS.NETWORKADMINACCESS));
                     else
-                    network.setValue(SERVERS.NETWORKADMINACCESS, Boolean.valueOf(args[2]));
+                        network.setValue(SERVERS.NETWORKADMINACCESS, Boolean.valueOf(args[2]));
                     break;
                 default:
                     commandIO.getPrintStream().println("Failed to parse property");

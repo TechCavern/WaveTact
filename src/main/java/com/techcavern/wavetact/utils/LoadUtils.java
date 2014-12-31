@@ -1,7 +1,7 @@
 package com.techcavern.wavetact.utils;
 
 import com.google.common.io.Files;
-import com.techcavern.wavetact.annot.*;
+import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.ConsoleCommand;
 import com.techcavern.wavetact.objects.FunObject;
 import com.techcavern.wavetact.objects.IRCCommand;
@@ -20,7 +20,7 @@ import java.util.Set;
 
 public class LoadUtils {
 
-    public static void initiateDatabaseConnection() throws Exception{
+    public static void initiateDatabaseConnection() throws Exception {
         Flyway flyway = new Flyway();
         flyway.setDataSource("jdbc:sqlite:./db.sqlite", null, null);
         flyway.migrate();
@@ -95,6 +95,7 @@ public class LoadUtils {
         Registry.Eightball.add("Forget about it");
         Registry.Eightball.add("Don't count on it");
     }
+
     public static void addDir(String s) throws IOException {
         try {
             // This enables the java.library.path to be modified at runtime
@@ -102,16 +103,16 @@ public class LoadUtils {
             //
             Field field = ClassLoader.class.getDeclaredField("usr_paths");
             field.setAccessible(true);
-            String[] paths = (String[])field.get(null);
+            String[] paths = (String[]) field.get(null);
             for (int i = 0; i < paths.length; i++) {
                 if (s.equals(paths[i])) {
                     return;
                 }
             }
-            String[] tmp = new String[paths.length+1];
-            System.arraycopy(paths,0,tmp,0,paths.length);
+            String[] tmp = new String[paths.length + 1];
+            System.arraycopy(paths, 0, tmp, 0, paths.length);
             tmp[paths.length] = s;
-            field.set(null,tmp);
+            field.set(null, tmp);
             System.setProperty("java.library.path", System.getProperty("java.library.path") + File.pathSeparator + s);
         } catch (IllegalAccessException e) {
             throw new IOException("Failed to get permissions to set library path");
@@ -126,21 +127,18 @@ public class LoadUtils {
         tempDir.mkdirs();
         tempDir.mkdir();
         Scanner files = new Scanner(LoadUtils.class.getClassLoader().getResourceAsStream("files.txt"));
-        while (files.hasNextLine())
-        {
+        while (files.hasNextLine()) {
             String filename = files.nextLine();
             if (filename.length() == 0)
                 continue;
             System.err.println("Processing: " + filename);
             File targetFile = new File(tempDir.getAbsolutePath() + "/" + filename);
-            if (!targetFile.exists())
-            {
+            if (!targetFile.exists()) {
                 InputStream source = LoadUtils.class.getResourceAsStream("/" + filename);
                 byte[] buffer = new byte[source.available()];
                 source.read(buffer);
                 Files.write(buffer, targetFile);
-            }
-            else
+            } else
                 System.err.println("-> Skipping. File exists.");
         }
         System.err.println("Patching java.library.path...");

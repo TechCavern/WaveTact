@@ -1,12 +1,12 @@
 package com.techcavern.wavetact.ircCommands.reference;
 
 import com.google.gson.JsonObject;
-import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.annot.GenCMD;
+import com.techcavern.wavetact.annot.IRCCMD;
+import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.objects.IRCCommand;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -22,7 +22,7 @@ public class Wiki extends IRCCommand {
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        for(int i = 0; i < args.length; i++){
+        for (int i = 0; i < args.length; i++) {
             args[i] = StringUtils.capitalize(args[i]);
         }
         JsonObject result = GeneralUtils.getJsonObject("http://en.wikipedia.org/w/api.php?action=query&prop=extracts&explaintext&exsectionformat=plain&exchars=697&titles=" + StringUtils.join(args, "%20") + "&format=json").getAsJsonObject("query").getAsJsonObject("pages");

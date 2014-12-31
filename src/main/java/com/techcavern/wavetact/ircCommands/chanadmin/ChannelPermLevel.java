@@ -1,11 +1,10 @@
 package com.techcavern.wavetact.ircCommands.chanadmin;
 
 import com.techcavern.wavetact.annot.IRCCMD;
-import com.techcavern.wavetact.annot.ChanAdminCMD;
-import com.techcavern.wavetact.utils.*;
-import com.techcavern.wavetact.utils.olddatabaseUtils.PermChannelUtils;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.objects.PermChannel;
+import com.techcavern.wavetact.utils.*;
+import com.techcavern.wavetact.utils.olddatabaseUtils.PermChannelUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -34,9 +33,9 @@ public class ChannelPermLevel extends IRCCommand {
         }
         PermChannel PLChannel = PermChannelUtils.getPermLevelChannel(networkname, account, channel.getName());
         int c = 0;
-        try{
+        try {
             c = Integer.parseInt(args[1]);
-        } catch(NumberFormatException | ArrayIndexOutOfBoundsException e ) {
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
             if (args[0].startsWith("-")) {
                 if (PLChannel != null) {
                     Registry.PermChannels.remove(PLChannel);

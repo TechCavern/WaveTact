@@ -7,9 +7,12 @@ package com.techcavern.wavetact.ircCommands.netadmin;
 
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.annot.NAdmCMD;
-import com.techcavern.wavetact.utils.*;
-import com.techcavern.wavetact.utils.olddatabaseUtils.IRCBLUtils;
 import com.techcavern.wavetact.objects.IRCCommand;
+import com.techcavern.wavetact.utils.ErrorUtils;
+import com.techcavern.wavetact.utils.GeneralUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.Registry;
+import com.techcavern.wavetact.utils.olddatabaseUtils.IRCBLUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;

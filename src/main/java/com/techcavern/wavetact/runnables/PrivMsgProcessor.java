@@ -1,7 +1,7 @@
 package com.techcavern.wavetact.runnables;
 
-import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.objects.IRCCommand;
+import com.techcavern.wavetact.utils.*;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
@@ -18,7 +18,8 @@ public class PrivMsgProcessor {
                 String command = message[0].toLowerCase();
                 IRCCommand Command = IRCUtils.getCommand(command, IRCUtils.getNetworkNameByNetwork(event.getBot()), null);
                 if (Command == null) {
-                    Command = IRCUtils.getCommand(StringUtils.replaceOnce(command, DatabaseUtils.getConfig("commandchar"), ""), IRCUtils.getNetworkNameByNetwork(event.getBot()), null);                }
+                    Command = IRCUtils.getCommand(StringUtils.replaceOnce(command, DatabaseUtils.getConfig("commandchar"), ""), IRCUtils.getNetworkNameByNetwork(event.getBot()), null);
+                }
                 message = ArrayUtils.remove(message, 0);
                 if (Command != null) {
                     if (Command.getChannelRequired()) {

@@ -1,11 +1,10 @@
 package com.techcavern.wavetact.ircCommands.chanadmin;
 
 import com.techcavern.wavetact.annot.IRCCMD;
-import com.techcavern.wavetact.annot.ChanAdminCMD;
-import com.techcavern.wavetact.utils.*;
-import com.techcavern.wavetact.utils.olddatabaseUtils.RelayUtils;
 import com.techcavern.wavetact.objects.ChannelUserProperty;
 import com.techcavern.wavetact.objects.IRCCommand;
+import com.techcavern.wavetact.utils.*;
+import com.techcavern.wavetact.utils.olddatabaseUtils.RelayUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -29,27 +28,27 @@ public class RelayBot extends IRCCommand {
         }
         String account = PermUtils.authUser(network, bot);
         ChannelUserProperty relayBot = IRCUtils.getRelayBotbyBotName(network, channel.getName(), account);
-        if(args[0].startsWith("-")){
-            if(relayBot != null) {
+        if (args[0].startsWith("-")) {
+            if (relayBot != null) {
                 Registry.RelayBots.remove(relayBot);
                 IRCUtils.sendMessage(user, network, channel, bot + " removed from relay bots list", prefix);
                 RelayUtils.saveRelayBots();
-            }else{
+            } else {
                 ErrorUtils.sendError(user, "Relay bot does not exist");
             }
-        }else if(args[0].startsWith("\\+")){
-            if(relayBot != null){
-            relayBot.setProperty(args[1]);
-            IRCUtils.sendMessage(user,network, channel, bot + " modified in relay bots list", prefix );
-            RelayUtils.saveRelayBots();
-            }else{
+        } else if (args[0].startsWith("\\+")) {
+            if (relayBot != null) {
+                relayBot.setProperty(args[1]);
+                IRCUtils.sendMessage(user, network, channel, bot + " modified in relay bots list", prefix);
+                RelayUtils.saveRelayBots();
+            } else {
                 ErrorUtils.sendError(user, "Relay bot does not exist");
             }
-        }else{
-            if(relayBot != null){
+        } else {
+            if (relayBot != null) {
                 ErrorUtils.sendError(user, "Relay bot already exists!");
-            }else{
-                Registry.RelayBots.add(new ChannelUserProperty(IRCUtils.getNetworkNameByNetwork(network), channel.getName(),account, args[1]));
+            } else {
+                Registry.RelayBots.add(new ChannelUserProperty(IRCUtils.getNetworkNameByNetwork(network), channel.getName(), account, args[1]));
                 IRCUtils.sendMessage(user, network, channel, bot + " added to relay bots list", prefix);
                 RelayUtils.saveRelayBots();
             }

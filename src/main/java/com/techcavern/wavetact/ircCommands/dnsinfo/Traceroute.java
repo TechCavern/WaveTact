@@ -1,11 +1,11 @@
 package com.techcavern.wavetact.ircCommands.dnsinfo;
 
-import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.annot.GenCMD;
+import com.techcavern.wavetact.annot.IRCCMD;
+import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.objects.IRCCommand;
 import org.apache.http.conn.util.InetAddressUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -25,25 +25,25 @@ public class Traceroute extends IRCCommand {
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         String IP = GeneralUtils.getIP(args[0], network);
-        if(IP == null){
+        if (IP == null) {
             ErrorUtils.sendError(user, "Host Unreachable");
-        }else{
+        } else {
             String command = "";
-            if(System.getProperty("os.name").startsWith("Windows") && InetAddressUtils.isIPv6Address(IP)) {
+            if (System.getProperty("os.name").startsWith("Windows") && InetAddressUtils.isIPv6Address(IP)) {
                 command = "tracert6 " + IP;
-            }else if(System.getProperty("os.name").startsWith("Windows") && InetAddressUtils.isIPv4Address(IP)){
+            } else if (System.getProperty("os.name").startsWith("Windows") && InetAddressUtils.isIPv4Address(IP)) {
                 command = "tracert " + IP;
-            }else if(InetAddressUtils.isIPv6Address(IP)){
+            } else if (InetAddressUtils.isIPv6Address(IP)) {
                 command = "traceroute6 " + IP;
-            }else if(InetAddressUtils.isIPv4Address(IP)){
+            } else if (InetAddressUtils.isIPv4Address(IP)) {
                 command = "traceroute " + IP;
             }
             Process pinghost = Runtime.getRuntime().exec(command);
             BufferedReader buffereader = new BufferedReader(new InputStreamReader(pinghost.getInputStream()));
             String line = "";
             while ((line = buffereader.readLine()) != null) {
-                if(!line.contains("* * *"))
-                IRCUtils.sendMessage(user, network, channel, line, prefix);
+                if (!line.contains("* * *"))
+                    IRCUtils.sendMessage(user, network, channel, line, prefix);
             }
             buffereader.close();
         }

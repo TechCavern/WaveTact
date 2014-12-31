@@ -5,11 +5,13 @@ public abstract class ConsoleCommand {
     private final String[] comID;
     private final String desc;
     private final String syntax;
+
     protected ConsoleCommand(String[] comID, String syntax, String desc) {
         this.comID = comID;
         this.desc = desc;
         this.syntax = syntax;
     }
+
     public String[] getCommandID() {
         return this.comID;
     }

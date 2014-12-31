@@ -1,11 +1,11 @@
 package com.techcavern.wavetact.ircCommands.minecraft;
 
-import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.annot.GenCMD;
+import com.techcavern.wavetact.annot.IRCCMD;
+import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.objects.IRCCommand;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -26,19 +26,22 @@ public class MCWiki extends IRCCommand {
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         Document doc = null;
         Elements content = null;
-        for(int i = 0; i < args.length; i++){
+        for (int i = 0; i < args.length; i++) {
             args[i] = StringUtils.capitalize(args[i]);
         }
-        String url = "http://minecraft.gamepedia.com/" + StringUtils.join(args, "%20");;
+        String url = "http://minecraft.gamepedia.com/" + StringUtils.join(args, "%20");
+        ;
         try {
             doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.57 Safari/537.17").get();
         } catch (Exception eee) {
-            url = "http://ftb.gamepedia.com/" + StringUtils.join(args, "%20");;
+            url = "http://ftb.gamepedia.com/" + StringUtils.join(args, "%20");
+            ;
             try {
                 doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.57 Safari/537.17").get();
             } catch (Exception e) {
                 try {
-                    url = "http://ftbwiki.org/" + StringUtils.join(args, "%20");;
+                    url = "http://ftbwiki.org/" + StringUtils.join(args, "%20");
+                    ;
                     doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.57 Safari/537.17").get();
                 } catch (Exception ee) {
                     ErrorUtils.sendError(user, "Query returned no results or wikis are Down");

@@ -1,11 +1,11 @@
 package com.techcavern.wavetact.ircCommands.dnsinfo;
 
-import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.annot.GenCMD;
+import com.techcavern.wavetact.annot.IRCCMD;
+import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.objects.IRCCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -37,19 +37,19 @@ public class CheckPort extends IRCCommand {
                 IRCUtils.sendMessage(user, network, channel, "I cannot find myself! :<", prefix);
                 return;
             }
-        }catch(UnknownHostException e){
+        } catch (UnknownHostException e) {
             //do nothing
         }
-        if(IP == null){
+        if (IP == null) {
             ErrorUtils.sendError(user, "Host Unreachable");
-        }else {
+        } else {
             try {
                 Socket socket = new Socket(IP, port);
                 socket.close();
                 IRCUtils.sendMessage(user, network, channel, "Port " + port + " is open on " + IP, prefix);
             } catch (ConnectException e) {
-                if(e.getMessage().equals("Connection refused"))
-                IRCUtils.sendMessage(user, network, channel, "Port " + port + " is closed on " + IP, prefix);
+                if (e.getMessage().equals("Connection refused"))
+                    IRCUtils.sendMessage(user, network, channel, "Port " + port + " is closed on " + IP, prefix);
                 else
                     ErrorUtils.sendError(user, "Host Unreachable");
             }

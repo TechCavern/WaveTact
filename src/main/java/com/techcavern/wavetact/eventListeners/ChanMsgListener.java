@@ -6,7 +6,6 @@
 package com.techcavern.wavetact.eventListeners;
 
 import com.techcavern.wavetact.runnables.ChanMsgProcessor;
-import com.techcavern.wavetact.runnables.RelayMsgProcessor;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.MessageEvent;
 

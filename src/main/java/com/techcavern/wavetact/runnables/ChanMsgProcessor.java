@@ -1,15 +1,13 @@
 package com.techcavern.wavetact.runnables;
 
-import com.techcavern.wavetact.utils.*;
-import static com.techcavern.wavetactdb.Tables.*;
 import com.techcavern.wavetact.objects.IRCCommand;
+import com.techcavern.wavetact.utils.*;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.jooq.util.Database;
 import org.pircbotx.Colors;
 import org.pircbotx.hooks.events.MessageEvent;
 
-import javax.xml.crypto.Data;
+import static com.techcavern.wavetactdb.Tables.RELAYBOTS;
 
 
 public class ChanMsgProcessor {
@@ -40,10 +38,11 @@ public class ChanMsgProcessor {
         }
         Registry.threadPool.execute(new process());
     }
+
     public static void RelayMsgProcess(final MessageEvent event) {
         class process implements Runnable {
             public void run() {
-                String relaysplit = DatabaseUtils.getRelayBot(event.getChannel().getName(), IRCUtils.getNetworkNameByNetwork(event.getBot()), PermUtils.authUser(event.getBot(), event.getUser().getNick())).getValue(RELAYBOTS.VALUE);
+                String relaysplit = DatabaseUtils.getRelayBot(IRCUtils.getNetworkNameByNetwork(event.getBot()), event.getChannel().getName(), PermUtils.authUser(event.getBot(), event.getUser().getNick())).getValue(RELAYBOTS.VALUE);
                 String startingmessage = event.getMessage();
                 if (relaysplit != null) {
                     String[] midmessage = StringUtils.split(startingmessage, relaysplit);
@@ -51,7 +50,7 @@ public class ChanMsgProcessor {
                         startingmessage = midmessage[1];
                     else
                         return;
-                }else{
+                } else {
                     return;
                 }
                 String[] message = StringUtils.split(Colors.removeFormattingAndColors(startingmessage), " ");

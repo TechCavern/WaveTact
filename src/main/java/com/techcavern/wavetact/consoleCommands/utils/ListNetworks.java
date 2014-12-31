@@ -15,13 +15,13 @@ import java.util.List;
 public class ListNetworks extends ConsoleCommand {
 
     public ListNetworks() {
-        super(GeneralUtils.toArray("listnetworks networks"),"list", "lists all networks");
+        super(GeneralUtils.toArray("listnetworks networks"), "list", "lists all networks");
     }
 
     @Override
-    public void onCommand(String[] args, CommandIO commandIO) throws Exception{
+    public void onCommand(String[] args, CommandIO commandIO) throws Exception {
         List<String> networks = new ArrayList<>();
-        for(NetProperty e:Registry.NetworkName){
+        for (NetProperty e : Registry.NetworkName) {
             networks.add(e.getProperty());
         }
         commandIO.getPrintStream().println(StringUtils.join(networks, ", "));

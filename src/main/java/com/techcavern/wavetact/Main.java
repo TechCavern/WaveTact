@@ -1,10 +1,10 @@
 package com.techcavern.wavetact;
 
 import com.techcavern.wavetact.console.ConsoleClient;
+import com.techcavern.wavetact.runnables.BanTimer;
+import com.techcavern.wavetact.utils.ConfigUtils;
 import com.techcavern.wavetact.utils.LoadUtils;
 import com.techcavern.wavetact.utils.Registry;
-import com.techcavern.wavetact.utils.ConfigUtils;
-import com.techcavern.wavetact.runnables.BanTimer;
 import org.slf4j.impl.SimpleLogger;
 
 import java.util.concurrent.TimeUnit;
@@ -21,9 +21,9 @@ public class Main {
         System.setProperty(SimpleLogger.DATE_TIME_FORMAT_KEY, "[yyyy/MM/dd HH:mm:ss]");
         System.setProperty(SimpleLogger.LEVEL_IN_BRACKETS_KEY, "true");
         LoadUtils.unpackNatives();
-        if ((args.length >= 1) && args[0].equalsIgnoreCase("client")){
+        if ((args.length >= 1) && args[0].equalsIgnoreCase("client")) {
             ConsoleClient.go();
-        }else {
+        } else {
             LoadUtils.initiateDatabaseConnection();
             ConfigUtils.registerNetworks();
             LoadUtils.registerConsoleCommands();

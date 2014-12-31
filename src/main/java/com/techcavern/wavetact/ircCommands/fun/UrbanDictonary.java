@@ -1,12 +1,12 @@
 package com.techcavern.wavetact.ircCommands.fun;
 
 import com.google.gson.JsonObject;
-import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.annot.GenCMD;
+import com.techcavern.wavetact.annot.IRCCMD;
+import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.objects.IRCCommand;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.WordUtils;
@@ -35,12 +35,12 @@ public class UrbanDictonary extends IRCCommand {
                 String Word = WordUtils.capitalizeFully(objectJSON.getAsJsonArray("list").get(ArrayIndex).getAsJsonObject().get("word").getAsString().replaceAll("\\n|\\r|\\t", " ").replaceAll("  ", " "));
                 String Definition = objectJSON.getAsJsonArray("list").get(ArrayIndex).getAsJsonObject().get("definition").getAsString().replaceAll("\\n|\\r|\\t", " ").replaceAll("  ", " ");
                 String Examples = objectJSON.getAsJsonArray("list").get(ArrayIndex).getAsJsonObject().get("example").getAsString().replaceAll("\\n|\\r|\\t", " ").replaceAll("  ", " ");
-                if(Definition.length() > 700){
+                if (Definition.length() > 700) {
                     Definition = Definition.substring(0, 700);
                 }
                 IRCUtils.sendMessage(user, network, channel, Word + ": " + Definition, prefix);
                 if (!Examples.isEmpty()) {
-                    if(Examples.length() > 700){
+                    if (Examples.length() > 700) {
                         Examples = Examples.substring(0, 700);
                     }
                     IRCUtils.sendMessage(user, network, channel, "Example: " + Examples, prefix);
