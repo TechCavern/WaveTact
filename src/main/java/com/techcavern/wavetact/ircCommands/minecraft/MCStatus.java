@@ -1,6 +1,6 @@
 package com.techcavern.wavetact.ircCommands.minecraft;
 
-import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
@@ -15,7 +15,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 
-@CMD
+@IRCCMD
 @GenCMD
 public class MCStatus extends IRCCommand {
 

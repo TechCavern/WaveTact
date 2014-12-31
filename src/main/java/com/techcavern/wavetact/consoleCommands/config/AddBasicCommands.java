@@ -1,6 +1,6 @@
 package com.techcavern.wavetact.consoleCommands.config;
 
-import com.techcavern.wavetact.annot.CMDLine;
+import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.objects.CommandIO;
@@ -10,7 +10,7 @@ import com.techcavern.wavetact.objects.ConsoleCommand;
 import com.techcavern.wavetact.objects.SimpleAction;
 import com.techcavern.wavetact.objects.SimpleMessage;
 
-@CMDLine
+@ConCMD
 public class AddBasicCommands extends ConsoleCommand {
 
     public AddBasicCommands() {

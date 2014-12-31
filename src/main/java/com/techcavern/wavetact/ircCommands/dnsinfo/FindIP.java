@@ -1,7 +1,7 @@
 package com.techcavern.wavetact.ircCommands.dnsinfo;
 
 import com.google.gson.JsonObject;
-import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
@@ -14,7 +14,7 @@ import org.pircbotx.User;
 import java.util.ArrayList;
 import java.util.List;
 
-@CMD
+@IRCCMD
 @GenCMD
 public class FindIP extends IRCCommand {
 

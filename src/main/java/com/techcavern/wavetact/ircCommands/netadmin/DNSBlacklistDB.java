@@ -5,7 +5,7 @@
  */
 package com.techcavern.wavetact.ircCommands.netadmin;
 
-import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.annot.NAdmCMD;
 import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.olddatabaseUtils.DNSBLUtils;
@@ -19,7 +19,7 @@ import org.pircbotx.User;
 /**
  * @author jztech101
  */
-@CMD
+@IRCCMD
 @NAdmCMD
 public class DNSBlacklistDB extends IRCCommand {
 

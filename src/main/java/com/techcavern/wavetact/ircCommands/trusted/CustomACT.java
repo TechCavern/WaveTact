@@ -5,7 +5,7 @@
  */
 package com.techcavern.wavetact.ircCommands.trusted;
 
-import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.annot.TruCMD;
 import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.olddatabaseUtils.SimpleActionUtils;
@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * @author jztech101
  */
-@CMD
+@IRCCMD
 @TruCMD
 public class CustomACT extends IRCCommand {
 
@@ -46,7 +46,7 @@ public class CustomACT extends IRCCommand {
                         ErrorUtils.sendError(user, "Custom action is locked");
                     } else {
                         Registry.SimpleActions.remove(cmd);
-                        Registry.AllCommands.remove(cmd);
+                        Registry.IRCCommands.remove(cmd);
                         SimpleActionUtils.saveSimpleActions();
                         IRCUtils.sendMessage(user, network, channel, "Custom action removed", prefix);
                     }
@@ -62,7 +62,7 @@ public class CustomACT extends IRCCommand {
                     if (cmd.getPermLevel() <= userPermLevel) {
                         if (cmd != null && !cmd.getLockedStatus()) {
                             Registry.SimpleActions.remove(cmd);
-                            Registry.AllCommands.remove(cmd);
+                            Registry.IRCCommands.remove(cmd);
                             Registry.SimpleActions.add(new SimpleAction(command, accessLevel, msg, false));
                             SimpleActionUtils.saveSimpleActions();
                             IRCUtils.sendMessage(user, network, channel, "Custom action modified", prefix);

@@ -5,7 +5,7 @@
  */
 package com.techcavern.wavetact.ircCommands.controller;
 
-import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.GeneralUtils;
@@ -22,7 +22,7 @@ import org.pircbotx.User;
 /**
  * @author jztech101
  */
-@CMD
+@IRCCMD
 @ConCMD
 public class DefCon extends IRCCommand {
 
@@ -62,7 +62,7 @@ public class DefCon extends IRCCommand {
     }
 
     void initializeCommands() {
-        Registry.AllCommands.clear();
+        Registry.IRCCommands.clear();
         Registry.GenericIRCCommands.clear();
         Registry.SimpleActions.clear();
         Registry.SimpleMessages.clear();
@@ -79,7 +79,7 @@ public class DefCon extends IRCCommand {
     }
 
     void sPermLevel(int PermLevel) {
-        for (IRCCommand Command : Registry.AllCommands) {
+        for (IRCCommand Command : Registry.IRCCommands) {
             if (Command.getPermLevel() < PermLevel) {
                 Command.setPermLevel(PermLevel);
             }

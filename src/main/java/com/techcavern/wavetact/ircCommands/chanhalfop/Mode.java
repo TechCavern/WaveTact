@@ -5,7 +5,7 @@
  */
 package com.techcavern.wavetact.ircCommands.chanhalfop;
 
-import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.annot.ChanHOPCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.objects.IRCCommand;
@@ -16,8 +16,8 @@ import org.pircbotx.User;
 /**
  * @author jztech101
  */
-@CMD
-@ChanHOPCMD
+@IRCCMD
+
 public class Mode extends IRCCommand {
 
     public Mode() {

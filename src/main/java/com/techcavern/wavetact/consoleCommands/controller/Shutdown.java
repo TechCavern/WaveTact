@@ -1,12 +1,12 @@
 package com.techcavern.wavetact.consoleCommands.controller;
 
-import com.techcavern.wavetact.annot.CMDLine;
+import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.objects.CommandIO;
 import com.techcavern.wavetact.objects.ConsoleCommand;
 
-@CMDLine
+@ConCMD
 public class Shutdown extends ConsoleCommand {
 
 	public Shutdown() {

@@ -1,6 +1,6 @@
 package com.techcavern.wavetact.ircCommands.controller;
 
-import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.olddatabaseUtils.AccountUtils;
@@ -11,7 +11,7 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-@CMD
+@IRCCMD
 @ConCMD
 public class FDrop extends IRCCommand {
 

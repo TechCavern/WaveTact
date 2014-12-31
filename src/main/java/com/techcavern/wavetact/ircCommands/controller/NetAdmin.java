@@ -5,7 +5,7 @@
  */
 package com.techcavern.wavetact.ircCommands.controller;
 
-import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.olddatabaseUtils.NetAdminUtils;
@@ -19,7 +19,7 @@ import org.pircbotx.User;
 /**
  * @author jztech101
  */
-@CMD
+@IRCCMD
 @ConCMD
 public class NetAdmin extends IRCCommand {
 

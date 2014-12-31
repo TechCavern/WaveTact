@@ -1,6 +1,6 @@
 package com.techcavern.wavetact.consoleCommands.config;
 
-import com.techcavern.wavetact.annot.CMDLine;
+import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.objects.CommandIO;
 import com.techcavern.wavetact.utils.fileUtils.Configuration;
@@ -9,7 +9,7 @@ import com.techcavern.wavetact.objects.ConsoleCommand;
 import java.io.File;
 import java.util.Scanner;
 
-@CMDLine
+@ConCMD
 public class AddNetwork extends ConsoleCommand {
 
     public AddNetwork() {

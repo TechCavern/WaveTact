@@ -5,7 +5,7 @@
  */
 package com.techcavern.wavetact.ircCommands.anonymonity;
 
-import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.annot.TruCMD;
 import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.objects.IRCCommand;
@@ -18,7 +18,7 @@ import org.pircbotx.User;
 /**
  * @author jztech101
  */
-@CMD
+@IRCCMD
 @TruCMD
 public class Act extends IRCCommand {
 

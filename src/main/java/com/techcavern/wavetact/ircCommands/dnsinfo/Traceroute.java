@@ -1,6 +1,6 @@
 package com.techcavern.wavetact.ircCommands.dnsinfo;
 
-import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
@@ -14,7 +14,7 @@ import org.pircbotx.User;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-@CMD
+@IRCCMD
 @GenCMD
 public class Traceroute extends IRCCommand {
 

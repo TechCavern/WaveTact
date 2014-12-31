@@ -12,27 +12,13 @@ import org.jooq.impl.DSL;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
 public class LoadUtils {
-
-    public static void registerCommands() {
-        addConsoleCommands(Registry.ConsoleCommands, CMDLine.class);
-        addCommands(Registry.ChanAdminCommands, ChanAdminCMD.class);
-        addCommands(Registry.ChanHalfOpCommands, ChanHOPCMD.class);
-        addCommands(Registry.ChanOpCommands, ChanOPCMD.class);
-        addCommands(Registry.ChanOwnOpCommands, ChanOwnOpCMD.class);
-        addCommands(Registry.ControllerCommands, ConCMD.class);
-        addCommands(Registry.GenericIRCCommands, GenCMD.class);
-        addCommands(Registry.TrustedCommands, TruCMD.class);
-        addCommands(Registry.NetAdminCommands, NAdmCMD.class);
-    }
 
     public static void initiateDatabaseConnection() throws Exception{
         Flyway flyway = new Flyway();
@@ -48,22 +34,22 @@ public class LoadUtils {
         Registry.WaveTactDB = DSL.using(conn, SQLDialect.SQLITE);
     }
 
-    public static void addCommands(List<IRCCommand> list, Class<? extends Annotation> cl) {
-        Set<Class<?>> classes = Registry.wavetactreflection.getTypesAnnotatedWith(cl);
+    public static void registerIRCCommands() {
+        Set<Class<?>> classes = Registry.wavetactreflection.getTypesAnnotatedWith(IRCCMD.class);
         for (Class<?> clss : classes) {
             try {
-                list.add(((IRCCommand) clss.newInstance()));
+                Registry.IRCCommands.add(((IRCCommand) clss.newInstance()));
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public static void addConsoleCommands(List<ConsoleCommand> list, Class<? extends Annotation> cl) {
-        Set<Class<?>> classes = Registry.wavetactreflection.getTypesAnnotatedWith(cl);
+    public static void registerConsoleCommands() {
+        Set<Class<?>> classes = Registry.wavetactreflection.getTypesAnnotatedWith(IRCCMD.class);
         for (Class<?> clss : classes) {
             try {
-                list.add(((ConsoleCommand) clss.newInstance()));
+                Registry.ConsoleCommands.add(((ConsoleCommand) clss.newInstance()));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -109,45 +95,6 @@ public class LoadUtils {
         Registry.Eightball.add("Forget about it");
         Registry.Eightball.add("Don't count on it");
     }
-
-    public static void registerCommandList() {
-        for (ConsoleCommand command : Registry.ConsoleCommands) {
-            Registry.ConsoleListCommands.add(command.getCommand());
-        }
-        for (IRCCommand command : Registry.GenericIRCCommands) {
-            Registry.GenericListCommands.add(command.getCommand());
-            Registry.AllListCommands.add(command.getCommand());
-        }
-        for (IRCCommand command : Registry.TrustedCommands) {
-            Registry.TrustedListCommands.add(command.getCommand());
-            Registry.AllListCommands.add(command.getCommand());
-        }
-        for (IRCCommand command : Registry.ChanHalfOpCommands) {
-            Registry.ChanHalfOpListCommands.add(command.getCommand());
-            Registry.AllListCommands.add(command.getCommand());
-        }
-        for (IRCCommand command : Registry.ChanOpCommands) {
-            Registry.ChanOpListCommands.add(command.getCommand());
-            Registry.AllListCommands.add(command.getCommand());
-        }
-        for (IRCCommand command : Registry.ChanOwnOpCommands) {
-            Registry.ChanOwnOpListCommands.add(command.getCommand());
-            Registry.AllListCommands.add(command.getCommand());
-        }
-        for (IRCCommand command : Registry.ChanAdminCommands) {
-            Registry.ChanAdminListCommands.add(command.getCommand());
-            Registry.AllListCommands.add(command.getCommand());
-        }
-        for (IRCCommand command : Registry.NetAdminCommands) {
-            Registry.NetAdminListCommands.add(command.getCommand());
-            Registry.AllListCommands.add(command.getCommand());
-        }
-        for (IRCCommand command : Registry.ControllerCommands) {
-            Registry.ControllerListCommands.add(command.getCommand());
-            Registry.AllListCommands.add(command.getCommand());
-        }
-    }
-
     public static void addDir(String s) throws IOException {
         try {
             // This enables the java.library.path to be modified at runtime

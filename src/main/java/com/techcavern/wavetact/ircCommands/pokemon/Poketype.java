@@ -2,7 +2,7 @@ package com.techcavern.wavetact.ircCommands.pokemon;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
@@ -11,7 +11,7 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-@CMD
+@IRCCMD
 @GenCMD
 public class Poketype extends IRCCommand {
 

@@ -5,7 +5,7 @@
  */
 package com.techcavern.wavetact.ircCommands.trusted;
 
-import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.annot.TruCMD;
 import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.olddatabaseUtils.SimpleMessageUtils;
@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * @author jztech101
  */
-@CMD
+@IRCCMD
 @TruCMD
 public class CustomMSG extends IRCCommand {
 
@@ -46,7 +46,7 @@ public class CustomMSG extends IRCCommand {
                         ErrorUtils.sendError(user, "Custom message is locked");
                     } else {
                         Registry.SimpleMessages.remove(cmd);
-                        Registry.AllCommands.remove(cmd);
+                        Registry.IRCCommands.remove(cmd);
                         SimpleMessageUtils.saveSimpleMessages();
                         IRCUtils.sendMessage(user, network, channel, "Custom message removed", prefix);
                     }
@@ -62,7 +62,7 @@ public class CustomMSG extends IRCCommand {
                     if (cmd.getPermLevel() <= userPermLevel) {
                         if (cmd != null && !cmd.getLockedStatus()) {
                             Registry.SimpleMessages.remove(cmd);
-                            Registry.AllCommands.remove(cmd);
+                            Registry.IRCCommands.remove(cmd);
                             Registry.SimpleMessages.add(new SimpleMessage(command, accessLevel, msg, false));
                             SimpleMessageUtils.saveSimpleMessages();
                             IRCUtils.sendMessage(user, network, channel, "Custom message modified", prefix);

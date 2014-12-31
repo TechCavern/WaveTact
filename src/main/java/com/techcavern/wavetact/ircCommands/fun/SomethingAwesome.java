@@ -1,6 +1,6 @@
 package com.techcavern.wavetact.ircCommands.fun;
 
-import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
@@ -13,7 +13,7 @@ import org.pircbotx.UserLevel;
 /**
  * @author jztech101
  */
-@CMD
+@IRCCMD
 @GenCMD
 public class SomethingAwesome extends IRCCommand {
 

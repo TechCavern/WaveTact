@@ -5,7 +5,7 @@
  */
 package com.techcavern.wavetact.ircCommands.chanhalfop;
 
-import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.annot.ChanHOPCMD;
 import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.objects.ChannelProperty;
@@ -22,8 +22,8 @@ import java.util.List;
 /**
  * @author jztech101
  */
-@CMD
-@ChanHOPCMD
+@IRCCMD
+
 public class Topic extends IRCCommand {
 
     public Topic() {

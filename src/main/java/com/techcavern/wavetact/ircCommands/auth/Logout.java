@@ -1,6 +1,6 @@
 package com.techcavern.wavetact.ircCommands.auth;
 
-import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.objects.AuthedUser;
@@ -9,7 +9,7 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-@CMD
+@IRCCMD
 @GenCMD
 public class Logout extends IRCCommand {
 

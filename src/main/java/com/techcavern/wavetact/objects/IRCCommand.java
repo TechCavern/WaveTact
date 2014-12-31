@@ -28,14 +28,9 @@ public abstract class IRCCommand {
         this.desc = desc;
         this.syntax = syntax;
         this.channelRequired = channelRequired;
-        Registry.AllCommands.add(this);
     }
 
     public abstract void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception;
-
-    public boolean getLockedStatus() {
-        return false;
-    }
 
     public int getPermLevel() {
         return permLevel;

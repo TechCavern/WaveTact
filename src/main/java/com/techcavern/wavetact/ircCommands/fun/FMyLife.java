@@ -1,6 +1,6 @@
 package com.techcavern.wavetact.ircCommands.fun;
 
-import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
@@ -12,7 +12,7 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-@CMD
+@IRCCMD
 @GenCMD
 public class FMyLife extends IRCCommand {
 

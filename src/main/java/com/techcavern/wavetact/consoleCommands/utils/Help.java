@@ -1,6 +1,6 @@
 package com.techcavern.wavetact.consoleCommands.utils;
 
-import com.techcavern.wavetact.annot.CMDLine;
+import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.objects.CommandIO;
 import com.techcavern.wavetact.objects.ConsoleCommand;
@@ -8,7 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
 
-@CMDLine
+@ConCMD
 public class Help extends ConsoleCommand {
 
     public Help() {

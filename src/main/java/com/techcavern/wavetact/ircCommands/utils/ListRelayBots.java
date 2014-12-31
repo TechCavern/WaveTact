@@ -1,6 +1,6 @@
 package com.techcavern.wavetact.ircCommands.utils;
 
-import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.objects.ChannelUserProperty;
@@ -15,7 +15,7 @@ import org.pircbotx.User;
  */
 
 @SuppressWarnings("ALL")
-@CMD
+@IRCCMD
 @GenCMD
 public class ListRelayBots extends IRCCommand {
 

@@ -5,7 +5,7 @@
  */
 package com.techcavern.wavetact.ircCommands.fun;
 
-import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.GeneralUtils;
@@ -20,7 +20,7 @@ import org.pircbotx.User;
 /**
  * @author jztech101
  */
-@CMD
+@IRCCMD
 @GenCMD
 public class Attack extends IRCCommand {
 

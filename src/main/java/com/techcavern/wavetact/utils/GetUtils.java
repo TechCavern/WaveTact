@@ -31,7 +31,7 @@ public class GetUtils {
 
 
     public static IRCCommand getGenericCommand(String Command) {
-        for (IRCCommand g : Registry.AllCommands) {
+        for (IRCCommand g : Registry.IRCCommands) {
             for (String commandid : g.getCommandID()) {
                 if (commandid.equalsIgnoreCase(Command)) {
                     return g;

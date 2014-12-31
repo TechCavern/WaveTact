@@ -1,6 +1,6 @@
 package com.techcavern.wavetact.ircCommands.minecraft;
 
-import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
@@ -13,7 +13,7 @@ import org.pircbotx.User;
 
 import java.net.InetSocketAddress;
 
-@CMD
+@IRCCMD
 @GenCMD
 public class MCServerInfo extends IRCCommand {
 

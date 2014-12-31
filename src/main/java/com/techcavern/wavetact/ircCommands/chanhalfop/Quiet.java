@@ -1,6 +1,6 @@
 package com.techcavern.wavetact.ircCommands.chanhalfop;
 
-import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.annot.ChanHOPCMD;
 import com.techcavern.wavetact.utils.*;
 import com.techcavern.wavetact.utils.olddatabaseUtils.QuietTimeUtils;
@@ -10,8 +10,8 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-@CMD
-@ChanHOPCMD
+@IRCCMD
+
 public class Quiet extends IRCCommand {
 
     public Quiet() {

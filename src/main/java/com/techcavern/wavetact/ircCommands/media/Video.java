@@ -6,7 +6,7 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.SearchResult;
-import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.Registry;
@@ -22,7 +22,7 @@ import org.pircbotx.User;
 import java.io.IOException;
 import java.util.List;
 
-@CMD
+@IRCCMD
 @GenCMD
 public class Video extends IRCCommand {
 

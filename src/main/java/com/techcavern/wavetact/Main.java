@@ -26,8 +26,8 @@ public class Main {
         }else {
             LoadUtils.initiateDatabaseConnection();
             ConfigUtils.registerNetworks();
-            LoadUtils.registerCommands();
-            LoadUtils.registerCommandList();
+            LoadUtils.registerConsoleCommands();
+            LoadUtils.registerIRCCommands();
             LoadUtils.registerQuiets();
             LoadUtils.registerAttacks();
             LoadUtils.registerEightball();

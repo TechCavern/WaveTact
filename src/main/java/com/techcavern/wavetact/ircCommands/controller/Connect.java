@@ -5,7 +5,7 @@
  */
 package com.techcavern.wavetact.ircCommands.controller;
 
-import com.techcavern.wavetact.annot.CMD;
+import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author jztech101
  */
-@CMD
+@IRCCMD
 @ConCMD
 public class Connect extends IRCCommand {
 
