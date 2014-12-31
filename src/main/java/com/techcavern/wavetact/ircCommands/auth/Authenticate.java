@@ -21,7 +21,7 @@ public class Authenticate extends IRCCommand {
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        if (!PermUtils.checkIfAccountEnabled(network)) {
+        if (!PermUtils.isAccountEnabled(network)) {
             ErrorUtils.sendError(user, "This network is set to " + IRCUtils.getAuthType(network) + " authentication");
             return;
         }

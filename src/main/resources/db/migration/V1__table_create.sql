@@ -55,7 +55,8 @@ channels Text,
 nickserv Text,
 bindhost Text,
 networkadminaccess boolean,
-authtype Text
+authtype Text,
+networkadmins Text,
 controllers Text
 );
 

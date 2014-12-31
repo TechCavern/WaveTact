@@ -1,6 +1,5 @@
 package com.techcavern.wavetact.utils;
 
-import com.techcavern.wavetact.utils.olddatabaseUtils.PermChannelUtils;
 import com.techcavern.wavetact.objects.AuthedUser;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -97,7 +96,7 @@ public class PermUtils {
     }
 
     private static int getAutomaticPermLevel(User userObject, Channel channelObject) { //gets the Auto Detected Perm Level
-        if (userObject.isIrcop() && IRCUtils.getNetAdminAccess(userObject.getBot()).equalsIgnoreCase("true")) {
+        if (userObject.isIrcop() && databaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(userObject.getBot())).getValue(SERVERS.NETWORKADMINACCESS)) {
             return 20;
         } else if (channelObject.isOwner(userObject)) {
             return 15;
@@ -116,14 +115,14 @@ public class PermUtils {
 
     private static int getManualPermLevel(PircBotX network, Channel channelObject, String account) { //gets Manual Perm Level using the account name
         if (account != null) {
-            if (IRCUtils.getControllerByNick(account) != null) {
+            if (IRCUtils.isController(account, IRCUtils.getNetworkNameByNetwork(network))) {
                 return 9001;
             }
-            if (IRCUtils.getNetworkAdminByNick(account, IRCUtils.getNetworkNameByNetwork(network)) != null) {
+            if (IRCUtils.isNetworkAdmin(account, IRCUtils.getNetworkNameByNetwork(network))) {
                 return 20;
             }
-            if (PermChannelUtils.getPermLevelChannel(IRCUtils.getNetworkNameByNetwork(network), account, channelObject.getName()) != null) {
-                return PermChannelUtils.getPermLevelChannel(IRCUtils.getNetworkNameByNetwork(network), account, channelObject.getName()).getPermLevel();
+            if (databaseUtils.getPermUserChannel(IRCUtils.getNetworkNameByNetwork(network), channelObject.getName(),account) != null) {
+                return databaseUtils.getPermUserChannel(IRCUtils.getNetworkNameByNetwork(network), channelObject.getName(), account).getValue(PERMUSERCHANNELS.PERMLEVEL);
             } else {
                 return 0;
             }
@@ -157,21 +156,10 @@ public class PermUtils {
                 return apermlevel;
             }
         } else {
-            if (account != null) {
-                if (IRCUtils.getControllerByNick(account) != null) {
-                    return 9001;
-                } else if (IRCUtils.getNetworkAdminByNick(account, IRCUtils.getNetworkNameByNetwork(network)) != null) {
-                    return 20;
-                } else {
-                    return 3;
-                }
-            } else {
-                return 3;
-            }
+            return getManualPermLevel(network, channelObject, account);
         }
     }
-
-    public static boolean checkIfAccountEnabled(PircBotX network) { //checks if account authentication is enabled
-        return IRCUtils.getAuthType(network).equalsIgnoreCase("account");
+    public static boolean isAccountEnabled(PircBotX network) { //checks if account authentication is enabled
+        return databaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(network)).getValue(SERVERS.AUTHTYPE).equalsIgnoreCase("account");
     }
 }

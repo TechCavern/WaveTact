@@ -16,7 +16,7 @@ public class Help extends ConsoleCommand {
     }
 
     @Override
-    public void onCommand(String[] args, CommandIO commandIO) {
+    public void onCommand(String[] args, CommandIO commandIO) throws Exception{
         if (args.length > 0) {
             ConsoleCommand command = IRCUtils.getConsoleCommand(args[0]);
             if (command != null) {

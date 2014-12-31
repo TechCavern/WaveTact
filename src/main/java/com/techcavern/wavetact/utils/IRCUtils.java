@@ -3,9 +3,11 @@ package com.techcavern.wavetact.utils;
 import com.techcavern.wavetact.objects.ConsoleCommand;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.objects.NetProperty;
+import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
+import static com.techcavern.wavetactdb.Tables.*;
 import org.pircbotx.hooks.WaitForQueue;
 import org.pircbotx.hooks.events.WhoisEvent;
 import org.pircbotx.output.OutputChannel;
@@ -195,6 +197,21 @@ public class IRCUtils {
         }
         return null;
     }
+    public static boolean isController(String account, String network){
+        for(String c: StringUtils.split(databaseUtils.getServer(network).getValue(SERVERS.CONTROLLERS), ", ")){
+            if(c.equalsIgnoreCase(account))
+                return true;
+        }
+        return false;
+    }
+    public static boolean isNetworkAdmin(String account, String network){
+        for(String c: StringUtils.split(databaseUtils.getServer(network).getValue(SERVERS.NETWORKADMINS), ", ")){
+            if(c.equalsIgnoreCase(account))
+                return true;
+        }
+        return false;
+    }
+
 
 }
 

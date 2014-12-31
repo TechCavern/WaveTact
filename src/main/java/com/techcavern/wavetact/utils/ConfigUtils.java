@@ -5,21 +5,15 @@ import com.techcavern.wavetact.eventListeners.KickListener;
 import com.techcavern.wavetact.eventListeners.PartListener;
 import com.techcavern.wavetact.eventListeners.PrivMsgListener;
 import com.techcavern.wavetact.objects.NetProperty;
-import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.Registry;
 import org.jooq.Record;
-import org.jooq.Result;
 import org.jooq.tools.StringUtils;
 import org.pircbotx.Configuration;
 import org.pircbotx.PircBotX;
 
-import java.io.File;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.charset.Charset;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 import static com.techcavern.wavetactdb.Tables.*;
 
@@ -28,15 +22,15 @@ public class ConfigUtils {
     public static void registerNetworks() {
         PircBotX network;
         for(Record server:databaseUtils.getServers()) {
-            network = createBot(server.getValue(SERVERS.NICKSERV), Arrays.asList(StringUtils.split(server.getValue(SERVERS.CHANNELS), ", ")), server.getValue(SERVERS.NICK), server.getValue(SERVERS.SERVER), server.getValue(SERVERS.PORT), server.getValue(SERVERS.BINDHOST), server.getValue(SERVERS.NAME));
+            network = createNetwork(server.getValue(SERVERS.NICKSERV), Arrays.asList(StringUtils.split(server.getValue(SERVERS.CHANNELS), ", ")), server.getValue(SERVERS.NICK), server.getValue(SERVERS.SERVER), server.getValue(SERVERS.PORT), server.getValue(SERVERS.BINDHOST), server.getValue(SERVERS.NAME));
             Registry.WaveTact.addNetwork(network);
             Registry.NetworkName.add(new NetProperty(server.getValue(SERVERS.NAME), network));
         }
     }
 /** Will come back to at a future date
     public static void registerDevServer() {
-        //      PircBotX Dev = createBot(null, Arrays.asList(GeneralUtils.toArray("#techcavern #testing")), "WaveTactDev", "irc.synirc.net");
-        PircBotX Dev2 = createBot(null, Arrays.asList(GeneralUtils.toArray("")), "WaveTactDev", "irc.esper.net", 6667, null, "Esper");
+        //      PircBotX Dev = createNetwork(null, Arrays.asList(GeneralUtils.toArray("#techcavern #testing")), "WaveTactDev", "irc.synirc.net");
+        PircBotX Dev2 = createNetwork(null, Arrays.asList(GeneralUtils.toArray("")), "WaveTactDev", "irc.esper.net", 6667, null, "Esper");
         //      GeneralRegistry.WaveTact.addBot(Dev);
         Registry.WaveTact.addNetwork(Dev2);
         Registry.Controllers.add("JZTech101");
@@ -48,7 +42,7 @@ public class ConfigUtils {
         //     GeneralRegistry.NetworkName.add(new NetProperty("dev1", Dev));
     }
 **/
-    public static PircBotX createBot(String nickservPassword, List<String> channels, String nick, String server, int port, String bindhost, String networkname) {
+    public static PircBotX createNetwork(String nickservPassword, List<String> channels, String nick, String server, int port, String bindhost, String networkname) {
         Configuration.Builder Net = new Configuration.Builder();
         Net.setName(nick);
         Net.setLogin("WaveTact");

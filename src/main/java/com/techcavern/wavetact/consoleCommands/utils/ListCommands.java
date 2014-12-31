@@ -20,7 +20,7 @@ public class ListCommands extends ConsoleCommand {
     }
 
     @Override
-    public void onCommand(String[] args, CommandIO commandIO) {
+    public void onCommand(String[] args, CommandIO commandIO)throws Exception {
         List<String> commands = new ArrayList<>();
         for(ConsoleCommand cmd:Registry.ConsoleCommands){
             commands.add(cmd.getCommand());
