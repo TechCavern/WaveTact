@@ -28,7 +28,7 @@ public class ListAccess extends IRCCommand {
         boolean hasUsers = false;
         Channel chan;
         if (args.length > 1 && network.getServerInfo().getChannelTypes().contains(String.valueOf(args[0].charAt(0)))) {
-            chan = GetUtils.getChannelbyName(network, args[0]);
+            chan = IRCUtils.getChannelbyName(network, args[0]);
             args = ArrayUtils.remove(args, 0);
         }else{
             chan = channel;
@@ -36,14 +36,14 @@ public class ListAccess extends IRCCommand {
         try{
             int accesslevel = Integer.parseInt(args[0]);
             for(PermChannel acc : Registry.PermChannels){
-                if(acc.getChannelName().equals(chan.getName())&& acc.getPermLevel() == accesslevel && acc.getNetworkName().equals(GetUtils.getNetworkNameByNetwork(network))){
+                if(acc.getChannelName().equals(chan.getName())&& acc.getPermLevel() == accesslevel && acc.getNetworkName().equals(IRCUtils.getNetworkNameByNetwork(network))){
                     IRCUtils.sendMessage(user,network,channel,acc.getPermUser() + " " + acc.getPermLevel(), prefix);
                     hasUsers = true;
                 }
             }
         }catch(NumberFormatException|ArrayIndexOutOfBoundsException e){
             for(PermChannel acc : Registry.PermChannels){
-                if(acc.getChannelName().equals(chan.getName()) && acc.getNetworkName().equals(GetUtils.getNetworkNameByNetwork(network))){
+                if(acc.getChannelName().equals(chan.getName()) && acc.getNetworkName().equals(IRCUtils.getNetworkNameByNetwork(network))){
                     IRCUtils.sendMessage(user,network,channel,acc.getPermUser() + " " + acc.getPermLevel(), prefix);
                     hasUsers = true;
                 }

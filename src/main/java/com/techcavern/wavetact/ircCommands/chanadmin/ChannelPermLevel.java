@@ -19,7 +19,7 @@ public class ChannelPermLevel extends IRCCommand {
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        String networkname = GetUtils.getNetworkNameByNetwork(network);
+        String networkname = IRCUtils.getNetworkNameByNetwork(network);
         String account;
         if (args[0].startsWith("-")) {
             account = args[0].replaceFirst("-", "");

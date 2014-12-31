@@ -36,7 +36,7 @@ public class Ban extends IRCCommand {
                 hostmask = IRCUtils.getHostmask(network, args[0], true);
             }
         }
-        String networkname = GetUtils.getNetworkNameByNetwork(network);
+        String networkname = IRCUtils.getNetworkNameByNetwork(network);
         TimedBan BanTime = BanTimeUtils.getBanTime(hostmask, networkname, channel.getName());
         if (args[0].startsWith("-")) {
             if (BanTime != null) {

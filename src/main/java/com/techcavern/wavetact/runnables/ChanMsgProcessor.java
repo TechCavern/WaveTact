@@ -16,8 +16,8 @@ public class ChanMsgProcessor {
                 String[] message = StringUtils.split(Colors.removeFormattingAndColors(event.getMessage()), " ");
                 String command = message[0].toLowerCase();
                 message = ArrayUtils.remove(message, 0);
-                IRCCommand Command = GetUtils.getGenericCommand(StringUtils.replaceOnce(command, GetUtils.getCommandChar(event.getBot()), ""));
-                if (Command != null && command.startsWith(GetUtils.getCommandChar(event.getBot()))) {
+                IRCCommand Command = IRCUtils.getGenericCommand(StringUtils.replaceOnce(command, IRCUtils.getCommandChar(event.getBot()), ""));
+                if (Command != null && command.startsWith(IRCUtils.getCommandChar(event.getBot()))) {
                     int userPermLevel = PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel());
                     if (userPermLevel >= Command.getPermLevel()) {
                         try {
@@ -40,7 +40,7 @@ public class ChanMsgProcessor {
     public static void RelayMsgProcess(final MessageEvent event) {
         class process implements Runnable {
             public void run() {
-                ChannelUserProperty relayBot = GetUtils.getRelayBotbyBotName(event.getBot(), event.getChannel().getName(), PermUtils.authUser(event.getBot(), event.getUser().getNick()));
+                ChannelUserProperty relayBot = IRCUtils.getRelayBotbyBotName(event.getBot(), event.getChannel().getName(), PermUtils.authUser(event.getBot(), event.getUser().getNick()));
                 String startingmessage = event.getMessage();
                 if (relayBot != null) {
                     String[] midmessage = StringUtils.split(startingmessage, relayBot.getProperty());
@@ -54,8 +54,8 @@ public class ChanMsgProcessor {
                 String[] message = StringUtils.split(Colors.removeFormattingAndColors(startingmessage), " ");
                 String command = message[0].toLowerCase();
                 message = ArrayUtils.remove(message, 0);
-                IRCCommand Command = GetUtils.getGenericCommand(StringUtils.replaceOnce(command, GetUtils.getCommandChar(event.getBot()), ""));
-                if (Command != null && command.startsWith(GetUtils.getCommandChar(event.getBot())) && Command.getPermLevel() == 0) {
+                IRCCommand Command = IRCUtils.getGenericCommand(StringUtils.replaceOnce(command, IRCUtils.getCommandChar(event.getBot()), ""));
+                if (Command != null && command.startsWith(IRCUtils.getCommandChar(event.getBot())) && Command.getPermLevel() == 0) {
                     try {
                         Command.onCommand(event.getUser(), event.getBot(), IRCUtils.getPrefix(event.getBot(), event.getChannelSource()), event.getChannel(), false, 0, message);
                     } catch (Exception e) {

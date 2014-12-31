@@ -22,7 +22,7 @@ public class CheckUserLevel extends IRCCommand {
         String userObject;
         Channel chan;
         if (args.length > 1 && network.getServerInfo().getChannelTypes().contains(String.valueOf(args[0].charAt(0)))) {
-            chan = GetUtils.getChannelbyName(network, args[0]);
+            chan = IRCUtils.getChannelbyName(network, args[0]);
             args = ArrayUtils.remove(args, 0);
         }else{
             chan = channel;

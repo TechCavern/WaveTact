@@ -9,7 +9,7 @@ import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.annot.ChanOwnOpCMD;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.GetUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.objects.IRCCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -34,9 +34,9 @@ public class Protect extends IRCCommand {
                 if (args[0].equalsIgnoreCase("-")) {
                     channel.send().deSuperOp(user);
                 } else if (args[0].startsWith("-")) {
-                    channel.send().deSuperOp(GetUtils.getUserByNick(network, args[0].replaceFirst("-", "")));
+                    channel.send().deSuperOp(IRCUtils.getUserByNick(network, args[0].replaceFirst("-", "")));
                 } else {
-                    channel.send().superOp(GetUtils.getUserByNick(network, args[0]));
+                    channel.send().superOp(IRCUtils.getUserByNick(network, args[0]));
 
                 }
             } else {

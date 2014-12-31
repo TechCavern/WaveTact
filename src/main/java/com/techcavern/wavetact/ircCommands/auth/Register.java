@@ -22,7 +22,7 @@ public class Register extends IRCCommand {
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (!PermUtils.checkIfAccountEnabled(network)) {
-            ErrorUtils.sendError(user, "This network is set to " + GetUtils.getAuthType(network) + " authentication");
+            ErrorUtils.sendError(user, "This network is set to " + IRCUtils.getAuthType(network) + " authentication");
             return;
         }
         String userString;
@@ -40,7 +40,7 @@ public class Register extends IRCCommand {
         } else {
             Registry.Accounts.add(new Account(userString, Registry.encryptor.encryptPassword(password)));
             AccountUtils.saveAccounts();
-            Registry.AuthedUsers.add(new AuthedUser(GetUtils.getNetworkNameByNetwork(network), userString, IRCUtils.getHostmask(network, user.getNick(), false)));
+            Registry.AuthedUsers.add(new AuthedUser(IRCUtils.getNetworkNameByNetwork(network), userString, IRCUtils.getHostmask(network, user.getNick(), false)));
             IRCUtils.sendMessage(user, network, channel, "You are now registered", prefix);
         }
     }

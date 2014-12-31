@@ -8,7 +8,7 @@ package com.techcavern.wavetact.ircCommands.chanop;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.annot.ChanOPCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.GetUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.objects.IRCCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -31,9 +31,9 @@ public class Op extends IRCCommand {
             if (args[0].equalsIgnoreCase("-")) {
                 channel.send().deOp(user);
             } else if (args[0].startsWith("-")) {
-                channel.send().deOp(GetUtils.getUserByNick(network, args[0].replaceFirst("-", "")));
+                channel.send().deOp(IRCUtils.getUserByNick(network, args[0].replaceFirst("-", "")));
             } else {
-                channel.send().op(GetUtils.getUserByNick(network, args[0]));
+                channel.send().op(IRCUtils.getUserByNick(network, args[0]));
 
             }
         } else {

@@ -32,7 +32,7 @@ public class IRCBlacklistDB extends IRCCommand {
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (args.length > 0) {
             if (args[0].startsWith("-")) {
-                String Domain = GetUtils.getIRCDNSBLbyDomain(args[0].replaceFirst("-", "")).replaceAll("http://|https://", "");
+                String Domain = IRCUtils.getIRCDNSBLbyDomain(args[0].replaceFirst("-", "")).replaceAll("http://|https://", "");
                 if (Domain != null) {
                     Registry.IRCBLs.remove(Domain);
                     IRCBLUtils.saveIRCBLs();
@@ -47,7 +47,7 @@ public class IRCBlacklistDB extends IRCCommand {
                     ErrorUtils.sendError(user, "IRC blacklist is empty");
                 }
             } else {
-                String Domain = GetUtils.getIRCDNSBLbyDomain(args[0]);
+                String Domain = IRCUtils.getIRCDNSBLbyDomain(args[0]);
                 if (Domain == null) {
                     Registry.IRCBLs.add(args[0]);
                     IRCBLUtils.saveIRCBLs();

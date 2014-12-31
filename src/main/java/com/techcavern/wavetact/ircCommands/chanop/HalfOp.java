@@ -9,7 +9,7 @@ import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.annot.ChanOPCMD;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.GetUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.objects.IRCCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -33,9 +33,9 @@ public class HalfOp extends IRCCommand {
                 if (args[0].equalsIgnoreCase("-")) {
                     channel.send().deHalfOp(user);
                 } else if (args[0].startsWith("-")) {
-                    channel.send().deHalfOp(GetUtils.getUserByNick(network, args[0].replaceFirst("-", "")));
+                    channel.send().deHalfOp(IRCUtils.getUserByNick(network, args[0].replaceFirst("-", "")));
                 } else {
-                    channel.send().halfOp(GetUtils.getUserByNick(network, args[0]));
+                    channel.send().halfOp(IRCUtils.getUserByNick(network, args[0]));
 
                 }
             } else {

@@ -32,9 +32,9 @@ public class Say extends IRCCommand {
         if (args.length > 1) {
             prefix = IRCUtils.getPrefix(network, args[0]);
             if(!prefix.isEmpty())
-                chan = GetUtils.getChannelbyName(network, args[0].replace(prefix, ""));
+                chan = IRCUtils.getChannelbyName(network, args[0].replace(prefix, ""));
             else
-                chan = GetUtils.getChannelbyName(network, args[0]);
+                chan = IRCUtils.getChannelbyName(network, args[0]);
             if(chan != null)
             args = ArrayUtils.remove(args, 0);
             else

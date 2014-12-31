@@ -8,7 +8,7 @@ package com.techcavern.wavetact.ircCommands.chanhalfop;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.annot.ChanHOPCMD;
 import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.GetUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.objects.IRCCommand;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -31,7 +31,7 @@ public class Kick extends IRCCommand {
         if (args.length > 1) {
             message += ": " + GeneralUtils.buildMessage(1, args.length, args);
         }
-        channel.send().kick(GetUtils.getUserByNick(network, args[0]), message);
+        channel.send().kick(IRCUtils.getUserByNick(network, args[0]), message);
     }
 
 }

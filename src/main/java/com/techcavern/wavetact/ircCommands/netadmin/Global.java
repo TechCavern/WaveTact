@@ -9,7 +9,7 @@ import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.annot.NAdmCMD;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.GetUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.objects.IRCCommand;
 import org.pircbotx.Channel;
@@ -31,7 +31,7 @@ public class Global extends IRCCommand {
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (!args[0].equalsIgnoreCase("all")) {
-            PircBotX workingnetwork = GetUtils.getBotByNetworkName(args[0]);
+            PircBotX workingnetwork = IRCUtils.getBotByNetworkName(args[0]);
             if (workingnetwork == null) {
                 ErrorUtils.sendError(user, "Network does not exist");
                 return;

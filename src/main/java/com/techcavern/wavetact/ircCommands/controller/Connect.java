@@ -9,7 +9,7 @@ import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.GetUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.objects.IRCCommand;
 import org.pircbotx.Channel;
@@ -40,7 +40,7 @@ public class Connect extends IRCCommand {
             disconnect = true;
             args[0] = args[0].replaceFirst("-", "");
         }
-        PircBotX workingnetwork = GetUtils.getBotByNetworkName(args[0]);
+        PircBotX workingnetwork = IRCUtils.getBotByNetworkName(args[0]);
         if (workingnetwork == null) {
             ErrorUtils.sendError(user, "Network does not exist");
             return;

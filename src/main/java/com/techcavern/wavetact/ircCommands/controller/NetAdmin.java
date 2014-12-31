@@ -30,7 +30,7 @@ public class NetAdmin extends IRCCommand {
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        String networkname = GetUtils.getNetworkNameByNetwork(network);
+        String networkname = IRCUtils.getNetworkNameByNetwork(network);
         String account;
         if (args[0].startsWith("-")) {
             account = args[0].replaceFirst("-", "");
@@ -43,8 +43,8 @@ public class NetAdmin extends IRCCommand {
         }
         if (account != null) {
             if (args[0].startsWith("-")) {
-                if (GetUtils.getNetworkAdminByNick(account, networkname) != null) {
-                    Registry.NetworkAdmins.remove(GetUtils.getNetworkAdminByNick(account, networkname));
+                if (IRCUtils.getNetworkAdminByNick(account, networkname) != null) {
+                    Registry.NetworkAdmins.remove(IRCUtils.getNetworkAdminByNick(account, networkname));
                     NetAdminUtils.saveNetworkAdmins();
                     IRCUtils.sendMessage(user, network, channel, "Network admin removed", prefix);
                 } else {
@@ -65,7 +65,7 @@ public class NetAdmin extends IRCCommand {
                     ErrorUtils.sendError(user, "No network admins exist");
                 }
             } else {
-                if (GetUtils.getNetworkAdminByNick(account, networkname) != null) {
+                if (IRCUtils.getNetworkAdminByNick(account, networkname) != null) {
                     ErrorUtils.sendError(user, "User is already in database");
                 } else {
                     Registry.NetworkAdmins.add(new NetworkAdmin(networkname, account));

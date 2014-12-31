@@ -16,9 +16,9 @@ public class PrivMsgProcessor {
             public void run() {
                 String[] message = StringUtils.split(Colors.removeFormattingAndColors(event.getMessage()), " ");
                 String command = message[0].toLowerCase();
-                IRCCommand Command = GetUtils.getGenericCommand(command);
+                IRCCommand Command = IRCUtils.getGenericCommand(command);
                 if (Command == null) {
-                    Command = GetUtils.getGenericCommand(StringUtils.replaceOnce(command, GetUtils.getCommandChar(event.getBot()), ""));
+                    Command = IRCUtils.getGenericCommand(StringUtils.replaceOnce(command, IRCUtils.getCommandChar(event.getBot()), ""));
                 }
                 message = ArrayUtils.remove(message, 0);
                 if (Command != null) {
@@ -28,9 +28,9 @@ public class PrivMsgProcessor {
                         if (message.length > 0) {
                             prefix = IRCUtils.getPrefix(event.getBot(), message[0]);
                             if (!prefix.isEmpty())
-                                channel = GetUtils.getChannelbyName(event.getBot(), message[0].replace(prefix, ""));
+                                channel = IRCUtils.getChannelbyName(event.getBot(), message[0].replace(prefix, ""));
                             else
-                                channel = GetUtils.getChannelbyName(event.getBot(), message[0]);
+                                channel = IRCUtils.getChannelbyName(event.getBot(), message[0]);
                             message = ArrayUtils.remove(message, 0);
                         }
                         if (channel != null) {

@@ -32,7 +32,7 @@ public class CustomACT extends IRCCommand {
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (args[0].toLowerCase().equalsIgnoreCase("list")) {
-            List<String> SimpleCommands = GetUtils.getActionsList(userPermLevel);
+            List<String> SimpleCommands = IRCUtils.getActionsList(userPermLevel);
             IRCUtils.sendMessage(user, network, channel, StringUtils.join(SimpleCommands, ", "), prefix);
         } else {
             String command = args[0];
@@ -75,7 +75,7 @@ public class CustomACT extends IRCCommand {
                         ErrorUtils.sendError(user, "Permission denied");
                     }
                 } else {
-                    if (GetUtils.getGenericCommand(command) != null) {
+                    if (IRCUtils.getGenericCommand(command) != null) {
                         ErrorUtils.sendError(user, "Command already exists");
                         return;
                     } else

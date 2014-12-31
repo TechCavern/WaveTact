@@ -28,7 +28,7 @@ public class RelayBot extends IRCCommand {
             bot = args[0];
         }
         String account = PermUtils.authUser(network, bot);
-        ChannelUserProperty relayBot = GetUtils.getRelayBotbyBotName(network, channel.getName(), account);
+        ChannelUserProperty relayBot = IRCUtils.getRelayBotbyBotName(network, channel.getName(), account);
         if(args[0].startsWith("-")){
             if(relayBot != null) {
                 Registry.RelayBots.remove(relayBot);
@@ -49,7 +49,7 @@ public class RelayBot extends IRCCommand {
             if(relayBot != null){
                 ErrorUtils.sendError(user, "Relay bot already exists!");
             }else{
-                Registry.RelayBots.add(new ChannelUserProperty(GetUtils.getNetworkNameByNetwork(network), channel.getName(),account, args[1]));
+                Registry.RelayBots.add(new ChannelUserProperty(IRCUtils.getNetworkNameByNetwork(network), channel.getName(),account, args[1]));
                 IRCUtils.sendMessage(user, network, channel, bot + " added to relay bots list", prefix);
                 RelayUtils.saveRelayBots();
             }

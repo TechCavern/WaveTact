@@ -32,7 +32,7 @@ public class DNSBlacklistDB extends IRCCommand {
 
         if (args.length > 0) {
             if (args[0].startsWith("-")) {
-                String Domain = GetUtils.getDNSBLbyDomain(args[0].replaceFirst("-", "")).replaceAll("http://|https://", "");
+                String Domain = IRCUtils.getDNSBLbyDomain(args[0].replaceFirst("-", "")).replaceAll("http://|https://", "");
                 if (Domain != null) {
                     Registry.DNSBLs.remove(Domain);
                     DNSBLUtils.saveDNSBLs();
@@ -47,7 +47,7 @@ public class DNSBlacklistDB extends IRCCommand {
                     ErrorUtils.sendError(user, "DNS blacklist is empty");
                 }
             } else {
-                String Domain = GetUtils.getDNSBLbyDomain(args[0]);
+                String Domain = IRCUtils.getDNSBLbyDomain(args[0]);
                 if (Domain == null) {
                     Registry.DNSBLs.add(args[0]);
                     DNSBLUtils.saveDNSBLs();

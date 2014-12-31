@@ -18,7 +18,7 @@ public class Help extends ConsoleCommand {
     @Override
     public void onCommand(String[] args, CommandIO commandIO) {
         if (args.length > 0) {
-            ConsoleCommand command = GetUtils.getConsoleCommand(args[0]);
+            ConsoleCommand command = IRCUtils.getConsoleCommand(args[0]);
             if (command != null) {
                 commandIO.getPrintStream().println("Aliases: " + StringUtils.join(Arrays.asList(command.getCommandID()), ", "));
                 String syntax = command.getSyntax();

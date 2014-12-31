@@ -4,7 +4,7 @@ import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.GetUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.objects.IRCCommand;
 import org.apache.commons.lang3.StringUtils;
@@ -28,7 +28,7 @@ public class Help extends IRCCommand {
             if (args[0].equalsIgnoreCase("permissions")) {
                 IRCUtils.sendMessage(user, network, channel, "0 = Everyone, 5 = Voiced/Trusted, 7 = Half-Opped, 10 = Opped & Protected, 15 = Ownered, 18 = Network Admin,  9001 = Controller ", prefix);
             } else {
-                IRCCommand command = GetUtils.getGenericCommand(args[0]);
+                IRCCommand command = IRCUtils.getGenericCommand(args[0]);
                 if (command != null) {
                     IRCUtils.sendMessage(user, network, channel, "Aliases: " + StringUtils.join(Arrays.asList(command.getCommandID()), ", "), prefix);
                     String syntax = command.getSyntax();

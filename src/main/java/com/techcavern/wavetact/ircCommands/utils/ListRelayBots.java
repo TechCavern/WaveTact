@@ -27,14 +27,14 @@ public class ListRelayBots extends IRCCommand {
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         Channel chan;
         if (args.length > 1 && network.getServerInfo().getChannelTypes().contains(String.valueOf(args[0].charAt(0)))) {
-            chan = GetUtils.getChannelbyName(network, args[0]);
+            chan = IRCUtils.getChannelbyName(network, args[0]);
             args = ArrayUtils.remove(args, 0);
         }else{
             chan = channel;
         }
             String relaylist = "";
             for(ChannelUserProperty relay : Registry.RelayBots){
-                if(relay.getChannelName().equals(chan.getName()) && relay.getNetworkName().equals(GetUtils.getNetworkNameByNetwork(network))) {
+                if(relay.getChannelName().equals(chan.getName()) && relay.getNetworkName().equals(IRCUtils.getNetworkNameByNetwork(network))) {
                     if (relaylist.isEmpty())
                         relaylist = relay.getUser();
                     else

@@ -1,5 +1,8 @@
 package com.techcavern.wavetact.utils;
 
+import com.techcavern.wavetact.objects.ConsoleCommand;
+import com.techcavern.wavetact.objects.IRCCommand;
+import com.techcavern.wavetact.objects.NetProperty;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -109,7 +112,7 @@ public class IRCUtils {
     }
 
     public static String getIRCHostmask(PircBotX network, String userObject) {
-        User whois = GetUtils.getUserByNick(network, userObject);
+        User whois = getUserByNick(network, userObject);
         String hostmask = "";
         if (whois != null) {
             String hostname = whois.getHostname();
@@ -131,6 +134,66 @@ public class IRCUtils {
             host = null;
         }
         return host;
+    }
+    public static User getUserByNick(PircBotX networkObject, String Nick) {
+        try {
+            User userObject = networkObject.getUserChannelDao().getUser(Nick);
+            if (!userObject.getHostmask().isEmpty()) {
+                return userObject;
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public static Channel getChannelbyName(PircBotX networkObject, String channelName) {
+        return networkObject.getUserChannelDao().getChannel(channelName);
+
+    }
+
+
+    public static IRCCommand getGenericCommand(String Command) {
+        for (IRCCommand g : Registry.IRCCommands) {
+            for (String commandid : g.getCommandID()) {
+                if (commandid.equalsIgnoreCase(Command)) {
+                    return g;
+                }
+            }
+        }
+        return null;
+
+    }
+    public static ConsoleCommand getConsoleCommand(String Command) {
+        for (ConsoleCommand g : Registry.ConsoleCommands) {
+            for (String commandid : g.getCommandID()) {
+                if (commandid.equalsIgnoreCase(Command)) {
+                    return g;
+                }
+            }
+        }
+        return null;
+
+    }
+
+
+    public static PircBotX getBotByNetworkName(String name) {
+        for (NetProperty d : Registry.NetworkName) {
+            if (d.getProperty().equalsIgnoreCase(name)) {
+                return d.getBot();
+            }
+        }
+        return null;
+    }
+
+    public static String getNetworkNameByNetwork(PircBotX network) {
+        for (NetProperty d : Registry.NetworkName) {
+            if (d.getBot().equals(network)) {
+                return d.getProperty();
+            }
+        }
+        return null;
     }
 
 }

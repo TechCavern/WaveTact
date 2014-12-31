@@ -10,7 +10,7 @@ import com.techcavern.wavetact.annot.ChanHOPCMD;
 import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.GetUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.fileUtils.Configuration;
 import com.techcavern.wavetact.objects.IRCCommand;
 import org.apache.commons.lang3.StringUtils;
@@ -48,7 +48,7 @@ public class Part extends IRCCommand {
                 }
                 network.sendRaw().rawLine("PART " + args[0]);
                 if(permanent){
-                    Configuration config = Registry.configs.get(GetUtils.getNetworkNameByNetwork(network));
+                    Configuration config = Registry.configs.get(IRCUtils.getNetworkNameByNetwork(network));
                     List<String> channels = new LinkedList<>(Arrays.asList(StringUtils.split(config.getString("channels"), ", ")));
                     for(String chan:channels){
                         if(chan.equals(args[0])){

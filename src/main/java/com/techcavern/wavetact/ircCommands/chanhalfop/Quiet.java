@@ -52,7 +52,7 @@ public class Quiet extends IRCCommand {
             }
 
         }
-        String networkname = GetUtils.getNetworkNameByNetwork(network);
+        String networkname = IRCUtils.getNetworkNameByNetwork(network);
         TimedBan QuietTime = QuietTimeUtils.getQuietTime(hostmask, networkname, channel.getName());
         if (args[0].startsWith("+")) {
             if (QuietTime != null) {

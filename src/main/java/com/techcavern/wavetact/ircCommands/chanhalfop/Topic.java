@@ -55,7 +55,7 @@ public class Topic extends IRCCommand {
             channel.send().setTopic(channel.getTopic().replace(args[0], args[2]));
             saveTopic(channel, network);
         } else if (args[1].equalsIgnoreCase("r") || args[1].equalsIgnoreCase("revert")) {
-            ChannelProperty oldTopic = GetUtils.getTopic(channel.getName(), GetUtils.getNetworkNameByNetwork(network));
+            ChannelProperty oldTopic = IRCUtils.getTopic(channel.getName(), IRCUtils.getNetworkNameByNetwork(network));
             if (oldTopic != null) {
                 channel.send().setTopic(oldTopic.getProperty());
                 Registry.Topic.remove(oldTopic);

@@ -9,7 +9,7 @@ import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.annot.NAdmCMD;
 import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.GetUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.fileUtils.Configuration;
 import com.techcavern.wavetact.objects.IRCCommand;
 import org.pircbotx.Channel;
@@ -36,7 +36,7 @@ public class Join extends IRCCommand {
             permanent = true;
         }
         if(permanent){
-            Configuration config = Registry.configs.get(GetUtils.getNetworkNameByNetwork(network));
+            Configuration config = Registry.configs.get(IRCUtils.getNetworkNameByNetwork(network));
             config.set("channels", config.getString("channels") + ", " + args[0]);
             config.save();
         }

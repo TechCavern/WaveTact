@@ -1,6 +1,6 @@
 package com.techcavern.wavetact.console;
 
-import com.techcavern.wavetact.utils.GetUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.objects.CommandIO;
 import com.techcavern.wavetact.objects.ConsoleCommand;
@@ -77,7 +77,7 @@ public class ConsoleServer implements Runnable {
 		try {
 			String command = args[0].toLowerCase();
 			args = ArrayUtils.remove(args, 0);
-			ConsoleCommand cmd = GetUtils.getConsoleCommand(command);
+			ConsoleCommand cmd = IRCUtils.getConsoleCommand(command);
 			if (cmd != null) {
 				cmd.onCommand(args, commandIO);
 			} else {
