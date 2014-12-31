@@ -56,5 +56,6 @@ nickserv Text,
 bindhost Text,
 networkadminaccess boolean,
 authtype Text
+controllers Text
 );
 

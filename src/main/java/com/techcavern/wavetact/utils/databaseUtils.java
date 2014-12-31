@@ -100,6 +100,19 @@ public class databaseUtils {
     public static void deleteChannelProperty(String channel, String network, String property){
         Registry.WaveTactDB.delete(CHANNELPROPERTY).where(CHANNELPROPERTY.PROPERTY.eq(property)).and(CHANNELPROPERTY.NETWORK.eq(network)).and(CHANNELPROPERTY.CHANNEL.eq(channel)).execute();
     }
+    public static Result<Record> getServers(){
+        return Registry.WaveTactDB.select().from(SERVERS).fetch();
+    }
+    public static Record getServer(String name){
+        Result<Record> serverRecord = Registry.WaveTactDB.select().from(SERVERS).where(SERVERS.NAME.eq(name)).fetch();
+        return getRecord(serverRecord);
+    }
+    public static void deleteServer(String name){
+        Registry.WaveTactDB.delete(SERVERS).where(SERVERS.NAME.eq(name));
+    }
+    public static void addServer(String name, int port, String server, String nick, String channels, String nickserv, String bindhost, boolean netadminaccess, String authtype, String controllers){
+        Registry.WaveTactDB.insertInto(SERVERS).values(name, port,server, nick, channels, nickserv, bindhost, netadminaccess, authtype, controllers);
+    }
 
 
 }
