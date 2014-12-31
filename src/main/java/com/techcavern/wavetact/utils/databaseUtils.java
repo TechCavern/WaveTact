@@ -17,13 +17,13 @@ public class databaseUtils {
         Result<Record> accountRecord =  Registry.WaveTactDB.select().from(ACCOUNTS).where(ACCOUNTS.USERNAME.eq(account)).fetch();
         return getRecord(accountRecord);
     }
-    public static void removeAccount(String account) {
+    public static void deleteAccount(String account) {
         Registry.WaveTactDB.delete(ACCOUNTS).where(ACCOUNTS.USERNAME.eq(account)).execute();
     }
     public static void createBan(String network, String channel, String hostmask, long init, long time, boolean isMute, String property){
         Registry.WaveTactDB.insertInto(BANS).values(hostmask, network,channel,init, time,isMute, property).execute();
     }
-    public static void removeBan(String network, String channel, String hostmask, boolean isMute){
+    public static void deleteBan(String network, String channel, String hostmask, boolean isMute){
         Registry.WaveTactDB.delete(BANS).where(BANS.HOSTMASK.eq(hostmask).and(BANS.NETWORK.eq(network)).and(BANS.ISMUTE.eq(isMute).and(BANS.CHANNEL.eq(channel)))).execute();
     }
     public static Record getBan(String network, String channel, String hostmask, boolean isMute){
@@ -38,7 +38,7 @@ public class databaseUtils {
         return getRecord(configRecord);
     }
 
-    public static void removeConfig(String config){
+    public static void deleteConfig(String config){
         Registry.WaveTactDB.delete(CONFIG).where(CONFIG.PROPERTY.eq(config)).execute();
     }
 
@@ -82,7 +82,7 @@ public class databaseUtils {
         return Registry.WaveTactDB.select().from(BLACKLISTS).where(BLACKLISTS.TYPE.eq(type)).fetch();
     }
 
-    public static void removeBlacklist(String type, String blacklist){
+    public static void deleteBlacklist(String type, String blacklist){
         Registry.WaveTactDB.delete(BLACKLISTS).where(BLACKLISTS.TYPE.eq(type)).and(BLACKLISTS.URL.eq(blacklist)).execute();
     }
 

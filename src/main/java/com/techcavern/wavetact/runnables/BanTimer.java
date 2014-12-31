@@ -23,32 +23,24 @@ public class BanTimer implements Runnable {
         while (true) {
             try {
                 TimeUnit.SECONDS.sleep(5);
-                for (Record e: databaseUtils.getBans()) {
+                boolean hasNext = false;
+                for (Record banRecord: databaseUtils.getBans()) {
                     try {
-                        if (System.currentTimeMillis() >= (e.getValue(BANS.TIME) + e.getValue(BANS.INIT))) {
-                            PircBotX networkObject = GetUtils.getBotByNetworkName(utimeObject.getNetworkName());
-                            IRCUtils.setMode(GetUtils.getChannelbyName(networkObject, utimeObject.getChannelName()), networkObject, "-b ", utimeObject.getHostmask());
-                            Registry.BanTimes.remove(i);
-                            BanTimeUtils.saveBanTimes();
+                        if (System.currentTimeMillis() >= ((Long)banRecord.getValue(BANS.TIME) + (Long)banRecord.getValue(BANS.INIT))) {
+                            PircBotX networkObject = GetUtils.getBotByNetworkName(banRecord.getValue(BANS.NETWORK));
+                            if(banRecord.getValue(BANS.ISMUTE))
+                                IRCUtils.setMode(GetUtils.getChannelbyName(networkObject, banRecord.getValue(BANS.CHANNEL)), networkObject, "-" + Registry.QuietBans.get(banRecord.getValue(BANS.PROPERTY)), banRecord.getValue(BANS.HOSTMASK));
+                            else
+                                IRCUtils.setMode(GetUtils.getChannelbyName(networkObject, banRecord.getValue(BANS.CHANNEL)), networkObject, "-b ", banRecord.getValue(BANS.HOSTMASK));
+                            databaseUtils.deleteBan(banRecord.getValue(BANS.NETWORK), banRecord.getValue(BANS.CHANNEL), banRecord.getValue(BANS.HOSTMASK), banRecord.getValue(BANS.ISMUTE));
+                        }else{
+                            break;
                         }
                     } catch (IllegalArgumentException | NullPointerException e) {
                         // ignored
                     }
                 }
 
-                for (int i = 0; i < Registry.QuietTimes.size(); i++) {
-                    TimedBan utimeObject = Registry.QuietTimes.get(i);
-                    try {
-                        if (System.currentTimeMillis() >= utimeObject.getTime() + utimeObject.getInit()) {
-                            PircBotX networkObject = GetUtils.getBotByNetworkName(utimeObject.getNetworkName());
-                            IRCUtils.setMode(GetUtils.getChannelbyName(networkObject, utimeObject.getChannelName()), networkObject, "-" + Registry.QuietBans.get(utimeObject.getType().toLowerCase()), utimeObject.getHostmask());
-                            Registry.QuietTimes.remove(i);
-                            QuietTimeUtils.saveQuietTimes();
-                        }
-                    } catch (IllegalArgumentException | NullPointerException e) {
-                        // ignored
-                    }
-                }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
