@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.utils.databaseUtils;
+package com.techcavern.wavetact.utils.olddatabaseUtils;
 
 import com.google.gson.internal.LinkedTreeMap;
 import com.techcavern.wavetact.utils.ErrorUtils;

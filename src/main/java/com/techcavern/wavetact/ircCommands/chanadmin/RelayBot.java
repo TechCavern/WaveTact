@@ -3,7 +3,7 @@ package com.techcavern.wavetact.ircCommands.chanadmin;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ChanAdminCMD;
 import com.techcavern.wavetact.utils.*;
-import com.techcavern.wavetact.utils.databaseUtils.RelayUtils;
+import com.techcavern.wavetact.utils.olddatabaseUtils.RelayUtils;
 import com.techcavern.wavetact.objects.ChannelUserProperty;
 import com.techcavern.wavetact.objects.IRCCommand;
 import org.pircbotx.Channel;

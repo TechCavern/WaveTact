@@ -3,7 +3,7 @@ package com.techcavern.wavetact.ircCommands.controller;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.utils.*;
-import com.techcavern.wavetact.utils.databaseUtils.AccountUtils;
+import com.techcavern.wavetact.utils.olddatabaseUtils.AccountUtils;
 import com.techcavern.wavetact.objects.Account;
 import com.techcavern.wavetact.objects.AuthedUser;
 import com.techcavern.wavetact.objects.IRCCommand;

@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.utils.databaseUtils;
+package com.techcavern.wavetact.utils.olddatabaseUtils;
 
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.Registry;
@@ -10,24 +10,24 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-public class DNSBLUtils {
-    public static void loadDNSBLs() {
-        JSONFile file = new JSONFile("DNSBLs.json");
+public class ControllerUtils {
+    public static void loadControllers() {
+        JSONFile file = new JSONFile("Controllers.json");
         if (file.exists()) {
             try {
                 List<String> controllers = file.read();
-                Registry.DNSBLs.clear();
-                Registry.DNSBLs.addAll(controllers.stream().collect(Collectors.toList()));
+                Registry.Controllers.clear();
+                Registry.Controllers.addAll(controllers.stream().collect(Collectors.toList()));
             } catch (FileNotFoundException e) {
                 ErrorUtils.handleException(e);
             }
         }
     }
 
-    public static void saveDNSBLs() {
-        JSONFile file = new JSONFile("DNSBLs.json");
+    public static void saveControllers() {
+        JSONFile file = new JSONFile("Controllers.json");
         try {
-            file.write(Registry.DNSBLs);
+            file.write(Registry.Controllers);
         } catch (IOException e) {
             ErrorUtils.handleException(e);
         }

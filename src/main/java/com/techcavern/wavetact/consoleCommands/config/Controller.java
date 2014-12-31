@@ -4,7 +4,7 @@ import com.techcavern.wavetact.annot.CMDLine;
 import com.techcavern.wavetact.objects.CommandIO;
 import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.databaseUtils.ControllerUtils;
+import com.techcavern.wavetact.utils.olddatabaseUtils.ControllerUtils;
 import com.techcavern.wavetact.objects.ConsoleCommand;
 
 @CMDLine

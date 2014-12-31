@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.utils.databaseUtils;
+package com.techcavern.wavetact.utils.olddatabaseUtils;
 
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.Registry;
@@ -10,24 +10,24 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-public class ControllerUtils {
-    public static void loadControllers() {
-        JSONFile file = new JSONFile("Controllers.json");
+public class IRCBLUtils {
+    public static void loadIRCBLs() {
+        JSONFile file = new JSONFile("IRCBLs.json");
         if (file.exists()) {
             try {
                 List<String> controllers = file.read();
-                Registry.Controllers.clear();
-                Registry.Controllers.addAll(controllers.stream().collect(Collectors.toList()));
+                Registry.IRCBLs.clear();
+                Registry.IRCBLs.addAll(controllers.stream().collect(Collectors.toList()));
             } catch (FileNotFoundException e) {
                 ErrorUtils.handleException(e);
             }
         }
     }
 
-    public static void saveControllers() {
-        JSONFile file = new JSONFile("Controllers.json");
+    public static void saveIRCBLs() {
+        JSONFile file = new JSONFile("IRCBLs.json");
         try {
-            file.write(Registry.Controllers);
+            file.write(Registry.IRCBLs);
         } catch (IOException e) {
             ErrorUtils.handleException(e);
         }

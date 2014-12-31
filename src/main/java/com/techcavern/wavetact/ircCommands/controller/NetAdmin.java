@@ -8,7 +8,7 @@ package com.techcavern.wavetact.ircCommands.controller;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.utils.*;
-import com.techcavern.wavetact.utils.databaseUtils.NetAdminUtils;
+import com.techcavern.wavetact.utils.olddatabaseUtils.NetAdminUtils;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.objects.NetworkAdmin;
 import org.pircbotx.Channel;

@@ -3,7 +3,7 @@ package com.techcavern.wavetact.ircCommands.chanhalfop;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.ChanHOPCMD;
 import com.techcavern.wavetact.utils.*;
-import com.techcavern.wavetact.utils.databaseUtils.QuietTimeUtils;
+import com.techcavern.wavetact.utils.olddatabaseUtils.QuietTimeUtils;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.objects.TimedBan;
 import org.pircbotx.Channel;

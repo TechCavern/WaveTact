@@ -1,6 +1,6 @@
 package com.techcavern.wavetact.utils;
 
-import com.techcavern.wavetact.utils.databaseUtils.PermChannelUtils;
+import com.techcavern.wavetact.utils.olddatabaseUtils.PermChannelUtils;
 import com.techcavern.wavetact.objects.AuthedUser;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;

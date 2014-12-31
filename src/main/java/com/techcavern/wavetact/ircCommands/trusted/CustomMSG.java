@@ -8,7 +8,7 @@ package com.techcavern.wavetact.ircCommands.trusted;
 import com.techcavern.wavetact.annot.CMD;
 import com.techcavern.wavetact.annot.TruCMD;
 import com.techcavern.wavetact.utils.*;
-import com.techcavern.wavetact.utils.databaseUtils.SimpleMessageUtils;
+import com.techcavern.wavetact.utils.olddatabaseUtils.SimpleMessageUtils;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.objects.SimpleMessage;
 import org.apache.commons.lang3.StringUtils;
