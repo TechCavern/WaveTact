@@ -8,7 +8,7 @@ import static com.techcavern.wavetactdb.Tables.*;
 /**
  * Created by jztech101 on 12/30/14.
  */
-public class databaseUtils {
+public class DatabaseUtils {
     public static void createAccount(String account, String password){
         Registry.WaveTactDB.insertInto(ACCOUNTS).values(account, password).execute();
     }
@@ -33,9 +33,9 @@ public class databaseUtils {
     public static Result<Record> getBans(){
         return Registry.WaveTactDB.select().from(BANS).orderBy(BANS.HOSTMASK.asc()).fetch();
     }
-    public static Record getConfig(String config){
+    public static String getConfig(String config){
         Result<Record> configRecord = Registry.WaveTactDB.select().from(CONFIG).where(CONFIG.PROPERTY.eq(config)).fetch();
-        return getRecord(configRecord);
+        return getRecord(configRecord).getValue(CONFIG.VALUE);
     }
 
     public static void deleteConfig(String config){
@@ -99,6 +99,17 @@ public class databaseUtils {
     }
     public static void deleteChannelProperty(String channel, String network, String property){
         Registry.WaveTactDB.delete(CHANNELPROPERTY).where(CHANNELPROPERTY.PROPERTY.eq(property)).and(CHANNELPROPERTY.NETWORK.eq(network)).and(CHANNELPROPERTY.CHANNEL.eq(channel)).execute();
+    }
+    public static Record getRelayBot(String channel,String network, String property){
+        Result<Record> commandRecord = Registry.WaveTactDB.select().from(RELAYBOTS).where(RELAYBOTS.PROPERTY.eq(property)).and(RELAYBOTS.NETWORK.eq(network)).and(RELAYBOTS.CHANNEL.eq(channel)).fetch();
+        return getRecord(commandRecord);
+
+    }
+    public static void addRelayBot(String channel, String value, String property, String network){
+        Registry.WaveTactDB.insertInto(RELAYBOTS).values(network, channel, property, value).execute();
+    }
+    public static void deleteRelayBot(String channel, String network, String property){
+        Registry.WaveTactDB.delete(RELAYBOTS).where(RELAYBOTS.PROPERTY.eq(property)).and(RELAYBOTS.NETWORK.eq(network)).and(RELAYBOTS.CHANNEL.eq(channel)).execute();
     }
     public static Result<Record> getServers(){
         return Registry.WaveTactDB.select().from(SERVERS).fetch();

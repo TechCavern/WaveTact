@@ -46,6 +46,13 @@ property Text,
 value Text
 );
 
+CREATE TABLE RELAYBOTS(
+network Text,
+channel Text,
+property Text,
+value Text
+);
+
 CREATE TABLE SERVERS(
 name Text,
 port int,

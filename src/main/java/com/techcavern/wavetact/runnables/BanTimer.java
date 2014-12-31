@@ -1,9 +1,8 @@
 package com.techcavern.wavetact.runnables;
 
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.Registry;
-import com.techcavern.wavetact.utils.databaseUtils;
+import com.techcavern.wavetact.utils.DatabaseUtils;
 import static com.techcavern.wavetactdb.Tables.*;
 
 import org.jooq.Record;
@@ -24,7 +23,7 @@ public class BanTimer implements Runnable {
             try {
                 TimeUnit.SECONDS.sleep(5);
                 boolean hasNext = false;
-                for (Record banRecord: databaseUtils.getBans()) {
+                for (Record banRecord: DatabaseUtils.getBans()) {
                     try {
                         if (System.currentTimeMillis() >= ((Long)banRecord.getValue(BANS.TIME) + (Long)banRecord.getValue(BANS.INIT))) {
                             PircBotX networkObject = IRCUtils.getBotByNetworkName(banRecord.getValue(BANS.NETWORK));
@@ -32,7 +31,7 @@ public class BanTimer implements Runnable {
                                 IRCUtils.setMode(IRCUtils.getChannelbyName(networkObject, banRecord.getValue(BANS.CHANNEL)), networkObject, "-" + Registry.QuietBans.get(banRecord.getValue(BANS.PROPERTY)), banRecord.getValue(BANS.HOSTMASK));
                             else
                                 IRCUtils.setMode(IRCUtils.getChannelbyName(networkObject, banRecord.getValue(BANS.CHANNEL)), networkObject, "-b ", banRecord.getValue(BANS.HOSTMASK));
-                            databaseUtils.deleteBan(banRecord.getValue(BANS.NETWORK), banRecord.getValue(BANS.CHANNEL), banRecord.getValue(BANS.HOSTMASK), banRecord.getValue(BANS.ISMUTE));
+                            DatabaseUtils.deleteBan(banRecord.getValue(BANS.NETWORK), banRecord.getValue(BANS.CHANNEL), banRecord.getValue(BANS.HOSTMASK), banRecord.getValue(BANS.ISMUTE));
                         }else{
                             break;
                         }

@@ -11,7 +11,7 @@ import static com.techcavern.wavetactdb.Tables.*;
 public class PermUtils {
 
     public static String getAccount(PircBotX network, String userObject, String hostmask) { //gets account of user using hostmask
-        String authtype = databaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(network)).getValue(SERVERS.AUTHTYPE);
+        String authtype = DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(network)).getValue(SERVERS.AUTHTYPE);
         if (authtype == null) {
             return userObject;
         }
@@ -96,7 +96,7 @@ public class PermUtils {
     }
 
     private static int getAutomaticPermLevel(User userObject, Channel channelObject) { //gets the Auto Detected Perm Level
-        if (userObject.isIrcop() && databaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(userObject.getBot())).getValue(SERVERS.NETWORKADMINACCESS)) {
+        if (userObject.isIrcop() && DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(userObject.getBot())).getValue(SERVERS.NETWORKADMINACCESS)) {
             return 20;
         } else if (channelObject.isOwner(userObject)) {
             return 15;
@@ -121,8 +121,8 @@ public class PermUtils {
             if (IRCUtils.isNetworkAdmin(account, IRCUtils.getNetworkNameByNetwork(network))) {
                 return 20;
             }
-            if (databaseUtils.getPermUserChannel(IRCUtils.getNetworkNameByNetwork(network), channelObject.getName(),account) != null) {
-                return databaseUtils.getPermUserChannel(IRCUtils.getNetworkNameByNetwork(network), channelObject.getName(), account).getValue(PERMUSERCHANNELS.PERMLEVEL);
+            if (DatabaseUtils.getPermUserChannel(IRCUtils.getNetworkNameByNetwork(network), channelObject.getName(), account) != null) {
+                return DatabaseUtils.getPermUserChannel(IRCUtils.getNetworkNameByNetwork(network), channelObject.getName(), account).getValue(PERMUSERCHANNELS.PERMLEVEL);
             } else {
                 return 0;
             }
@@ -160,6 +160,6 @@ public class PermUtils {
         }
     }
     public static boolean isAccountEnabled(PircBotX network) { //checks if account authentication is enabled
-        return databaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(network)).getValue(SERVERS.AUTHTYPE).equalsIgnoreCase("account");
+        return DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(network)).getValue(SERVERS.AUTHTYPE).equalsIgnoreCase("account");
     }
 }

@@ -25,7 +25,7 @@ public class Network extends ConsoleCommand {
     public void onCommand(String[] args, CommandIO commandIO) throws Exception{
         Scanner input = new Scanner(commandIO.getInputStream());
         if (args[0].startsWith("+")) {
-            Record network = databaseUtils.getServer(args[0].replaceFirst("\\+", ""));
+            Record network = DatabaseUtils.getServer(args[0].replaceFirst("\\+", ""));
             boolean viewonly = false;
             if(args.length <3 ){
                 viewonly = true;
@@ -96,7 +96,7 @@ public class Network extends ConsoleCommand {
             }
 
         } else if (args[0].startsWith("-")) {
-            databaseUtils.deleteServer(args[0].replaceFirst("\\-", ""));
+            DatabaseUtils.deleteServer(args[0].replaceFirst("\\-", ""));
             IRCUtils.getBotByNetworkName(args[0]).stopBotReconnect();
         } else {
             commandIO.getPrintStream().println("Adding " + args[0]);
@@ -121,7 +121,7 @@ public class Network extends ConsoleCommand {
             boolean netadminaccess = Boolean.valueOf(input.nextLine());
             commandIO.getPrintStream().print("Network Admins: (account1, account2, etc) (Press enter to ignore): ");
             String netadmins = input.nextLine();
-            databaseUtils.addServer(name, port, server, nick, channels, nickserv, bindhost, netadminaccess, netadmins, authtype, controllers);
+            DatabaseUtils.addServer(name, port, server, nick, channels, nickserv, bindhost, netadminaccess, netadmins, authtype, controllers);
             PircBotX network = ConfigUtils.createNetwork(nickserv, Arrays.asList(StringUtils.split(channels, ", ")), nick, server, port, bindhost, name);
             Registry.WaveTact.addNetwork(network);
             network.startBot();

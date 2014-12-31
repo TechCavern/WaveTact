@@ -1,12 +1,15 @@
 package com.techcavern.wavetact.runnables;
 
 import com.techcavern.wavetact.utils.*;
-import com.techcavern.wavetact.objects.ChannelUserProperty;
+import static com.techcavern.wavetactdb.Tables.*;
 import com.techcavern.wavetact.objects.IRCCommand;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.jooq.util.Database;
 import org.pircbotx.Colors;
 import org.pircbotx.hooks.events.MessageEvent;
+
+import javax.xml.crypto.Data;
 
 
 public class ChanMsgProcessor {
@@ -16,8 +19,8 @@ public class ChanMsgProcessor {
                 String[] message = StringUtils.split(Colors.removeFormattingAndColors(event.getMessage()), " ");
                 String command = message[0].toLowerCase();
                 message = ArrayUtils.remove(message, 0);
-                IRCCommand Command = IRCUtils.getGenericCommand(StringUtils.replaceOnce(command, IRCUtils.getCommandChar(event.getBot()), ""));
-                if (Command != null && command.startsWith(IRCUtils.getCommandChar(event.getBot()))) {
+                IRCCommand Command = IRCUtils.getCommand(StringUtils.replaceOnce(command, DatabaseUtils.getConfig("commandchar"), ""), IRCUtils.getNetworkNameByNetwork(event.getBot()), event.getChannel().getName());
+                if (Command != null && command.startsWith(DatabaseUtils.getConfig("commandchar"))) {
                     int userPermLevel = PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel());
                     if (userPermLevel >= Command.getPermLevel()) {
                         try {
@@ -40,10 +43,10 @@ public class ChanMsgProcessor {
     public static void RelayMsgProcess(final MessageEvent event) {
         class process implements Runnable {
             public void run() {
-                ChannelUserProperty relayBot = IRCUtils.getRelayBotbyBotName(event.getBot(), event.getChannel().getName(), PermUtils.authUser(event.getBot(), event.getUser().getNick()));
+                String relaysplit = DatabaseUtils.getRelayBot(event.getChannel().getName(), IRCUtils.getNetworkNameByNetwork(event.getBot()), PermUtils.authUser(event.getBot(), event.getUser().getNick())).getValue(RELAYBOTS.VALUE);
                 String startingmessage = event.getMessage();
-                if (relayBot != null) {
-                    String[] midmessage = StringUtils.split(startingmessage, relayBot.getProperty());
+                if (relaysplit != null) {
+                    String[] midmessage = StringUtils.split(startingmessage, relaysplit);
                     if (midmessage.length > 1)
                         startingmessage = midmessage[1];
                     else
@@ -54,8 +57,8 @@ public class ChanMsgProcessor {
                 String[] message = StringUtils.split(Colors.removeFormattingAndColors(startingmessage), " ");
                 String command = message[0].toLowerCase();
                 message = ArrayUtils.remove(message, 0);
-                IRCCommand Command = IRCUtils.getGenericCommand(StringUtils.replaceOnce(command, IRCUtils.getCommandChar(event.getBot()), ""));
-                if (Command != null && command.startsWith(IRCUtils.getCommandChar(event.getBot())) && Command.getPermLevel() == 0) {
+                IRCCommand Command = IRCUtils.getCommand(StringUtils.replaceOnce(command, DatabaseUtils.getConfig("commandchar"), ""), IRCUtils.getNetworkNameByNetwork(event.getBot()), event.getChannel().getName());
+                if (Command != null && command.startsWith(DatabaseUtils.getConfig("commandchar")) && Command.getPermLevel() == 0) {
                     try {
                         Command.onCommand(event.getUser(), event.getBot(), IRCUtils.getPrefix(event.getBot(), event.getChannelSource()), event.getChannel(), false, 0, message);
                     } catch (Exception e) {

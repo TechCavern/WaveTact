@@ -4,6 +4,7 @@ import com.techcavern.wavetact.objects.ConsoleCommand;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.objects.NetProperty;
 import org.apache.commons.lang3.StringUtils;
+import org.jooq.Record;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -11,6 +12,9 @@ import static com.techcavern.wavetactdb.Tables.*;
 import org.pircbotx.hooks.WaitForQueue;
 import org.pircbotx.hooks.events.WhoisEvent;
 import org.pircbotx.output.OutputChannel;
+import sun.nio.ch.Net;
+
+import javax.xml.crypto.Data;
 
 
 public class IRCUtils {
@@ -167,6 +171,56 @@ public class IRCUtils {
         return null;
 
     }
+
+    public static IRCCommand getCommand(String Command, String Network, String Channel){
+        IRCCommand cmd = getCustomCommand(Command, Network, Channel);
+        if(cmd != null){
+            return cmd;
+        }else{
+            return getGenericCommand(Command);
+        }
+    }
+
+    public static IRCCommand getCustomCommand(String Command, String Network, String Channel){
+        Record cmd = DatabaseUtils.getCustomCommand(Channel, Network, Command);
+        if(cmd != null){
+                 class SimpleCommand extends  IRCCommand{
+                    public SimpleCommand() {
+                        super(GeneralUtils.toArray(cmd.getValue(CUSTOMCOMMANDS.COMMAND)), cmd.getValue(CUSTOMCOMMANDS.PERMLEVEL), cmd.getValue(CUSTOMCOMMANDS.COMMAND), "Custom Command", false);
+
+                    }
+                      @Override
+                public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+                          String action = cmd.getValue(CUSTOMCOMMANDS.VALUE);
+                          String[] message = StringUtils.split(action, " ");
+                          int i = 0;
+                          for (String g : message) {
+                              if (g.startsWith("$") && !g.contains("*")) {
+                                  action = action.replace(g, args[Integer.parseInt(g.replace("$", "")) - 1]);
+                                  if (Integer.parseInt(g.replace("$", "")) > i) {
+                                      i++;
+                                  }
+                              }
+                          }
+                          action = action.replace("$*", GeneralUtils.buildMessage(i, args.length, args));
+                          String responseprefix = DatabaseUtils.getConfig("commandchar");
+                          if (action.startsWith(responseprefix)) {
+                              action = action.replace(responseprefix, "");
+                          }
+                          if(cmd.getValue(CUSTOMCOMMANDS.ISACTION)){
+                              IRCUtils.sendAction(user,network, channel, action, prefix);
+                          }else{
+                              IRCUtils.sendMessage(user,network, channel, action, prefix);
+                          }
+
+                }
+            }
+            return new SimpleCommand();
+        }
+        else
+            return null;
+    }
+
     public static ConsoleCommand getConsoleCommand(String Command) {
         for (ConsoleCommand g : Registry.ConsoleCommands) {
             for (String commandid : g.getCommandID()) {
@@ -198,14 +252,14 @@ public class IRCUtils {
         return null;
     }
     public static boolean isController(String account, String network){
-        for(String c: StringUtils.split(databaseUtils.getServer(network).getValue(SERVERS.CONTROLLERS), ", ")){
+        for(String c: StringUtils.split(DatabaseUtils.getServer(network).getValue(SERVERS.CONTROLLERS), ", ")){
             if(c.equalsIgnoreCase(account))
                 return true;
         }
         return false;
     }
     public static boolean isNetworkAdmin(String account, String network){
-        for(String c: StringUtils.split(databaseUtils.getServer(network).getValue(SERVERS.NETWORKADMINS), ", ")){
+        for(String c: StringUtils.split(DatabaseUtils.getServer(network).getValue(SERVERS.NETWORKADMINS), ", ")){
             if(c.equalsIgnoreCase(account))
                 return true;
         }

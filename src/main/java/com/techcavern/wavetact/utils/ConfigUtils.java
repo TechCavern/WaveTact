@@ -21,7 +21,7 @@ import static com.techcavern.wavetactdb.Tables.*;
 public class ConfigUtils {
     public static void registerNetworks() {
         PircBotX network;
-        for(Record server:databaseUtils.getServers()) {
+        for(Record server: DatabaseUtils.getServers()) {
             network = createNetwork(server.getValue(SERVERS.NICKSERV), Arrays.asList(StringUtils.split(server.getValue(SERVERS.CHANNELS), ", ")), server.getValue(SERVERS.NICK), server.getValue(SERVERS.SERVER), server.getValue(SERVERS.PORT), server.getValue(SERVERS.BINDHOST), server.getValue(SERVERS.NAME));
             Registry.WaveTact.addNetwork(network);
             Registry.NetworkName.add(new NetProperty(server.getValue(SERVERS.NAME), network));

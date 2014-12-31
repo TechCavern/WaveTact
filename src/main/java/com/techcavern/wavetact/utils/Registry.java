@@ -26,10 +26,10 @@ public class Registry {
     public static final StrongPasswordEncryptor encryptor = new StrongPasswordEncryptor();
     public static final Reflections wavetactreflection = new Reflections("com.techcavern.wavetact");
     public static final List<NetProperty> NetworkName = new ArrayList<>();
-    public static String wundergroundapikey = databaseUtils.getConfig("wundergroundapikey").getValue(CONFIG.VALUE);
-    public static String wolframalphaapikey = databaseUtils.getConfig("wolframalphaapikey").getValue(CONFIG.VALUE);
-    public static String wordnikapikey = databaseUtils.getConfig("wordnikapikey").getValue(CONFIG.VALUE);;
-    public static String googleapikey = databaseUtils.getConfig("googleapikey").getValue(CONFIG.VALUE);;
+    public static String wundergroundapikey = DatabaseUtils.getConfig("wundergroundapikey");
+    public static String wolframalphaapikey = DatabaseUtils.getConfig("wolframalphaapikey");
+    public static String wordnikapikey = DatabaseUtils.getConfig("wordnikapikey");;
+    public static String googleapikey = DatabaseUtils.getConfig("googleapikey");;
     public static ConsoleServer consoleServer = new ConsoleServer();
     public static DSLContext WaveTactDB = null;
 }
