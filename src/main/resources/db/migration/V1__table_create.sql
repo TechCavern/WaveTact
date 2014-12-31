@@ -30,7 +30,7 @@ channel Text,
 command Text,
 value Text,
 network Text,
-locked Text,
+isLocked Boolean,
 isAction Boolean
 );
 
