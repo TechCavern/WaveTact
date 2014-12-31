@@ -3,9 +3,10 @@ package com.techcavern.wavetact.runnables;
 import com.techcavern.wavetact.utils.GetUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.Registry;
-import com.techcavern.wavetact.utils.olddatabaseUtils.BanTimeUtils;
-import com.techcavern.wavetact.utils.olddatabaseUtils.QuietTimeUtils;
-import com.techcavern.wavetact.objects.TimedBan;
+import com.techcavern.wavetact.utils.databaseUtils;
+import static com.techcavern.wavetactdb.Tables.*;
+
+import org.jooq.Record;
 import org.pircbotx.PircBotX;
 
 import java.util.concurrent.TimeUnit;
@@ -22,10 +23,9 @@ public class BanTimer implements Runnable {
         while (true) {
             try {
                 TimeUnit.SECONDS.sleep(5);
-                for (int i = 0; i < Registry.BanTimes.size(); i++) {
-                    TimedBan utimeObject = Registry.BanTimes.get(i);
+                for (Record e: databaseUtils.getBans()) {
                     try {
-                        if (System.currentTimeMillis() >= utimeObject.getTime() + utimeObject.getInit()) {
+                        if (System.currentTimeMillis() >= (e.getValue(BANS.TIME) + e.getValue(BANS.INIT))) {
                             PircBotX networkObject = GetUtils.getBotByNetworkName(utimeObject.getNetworkName());
                             IRCUtils.setMode(GetUtils.getChannelbyName(networkObject, utimeObject.getChannelName()), networkObject, "-b ", utimeObject.getHostmask());
                             Registry.BanTimes.remove(i);

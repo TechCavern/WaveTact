@@ -24,15 +24,14 @@ public class Main {
         if ((args.length >= 1) && args[0].equalsIgnoreCase("client")){
             ConsoleClient.go();
         }else {
-            ConfigUtils.registerConfigs();
             LoadUtils.initiateDatabaseConnection();
+            ConfigUtils.registerNetworks();
             LoadUtils.registerCommands();
             LoadUtils.registerCommandList();
             LoadUtils.registerQuiets();
             LoadUtils.registerAttacks();
             LoadUtils.registerEightball();
             Registry.WaveTact.start();
-
             Registry.threadPool.execute(Registry.consoleServer);
             Registry.threadPool.execute(new BanTimer());
             Registry.threadPool.awaitTermination(Long.MAX_VALUE, TimeUnit.DAYS);

@@ -1,7 +1,6 @@
 package com.techcavern.wavetact.utils;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import static com.techcavern.wavetactdb.Tables.*;
 import com.techcavern.wavetact.console.ConsoleServer;
 import com.techcavern.wavetact.objects.*;
 import org.jasypt.util.password.StrongPasswordEncryptor;
@@ -18,9 +17,7 @@ public class Registry {
 
     public static String LastLeftChannel = "";
     public static final HashMap<String, String> QuietBans = new HashMap<>();
-    public static final List<ChannelProperty> Topic = new ArrayList<>();
     public static final ForkJoinPool threadPool = new ForkJoinPool(15);
-    public static final List<NetworkAdmin> NetworkAdmins = new ArrayList<>();
     public static final List<IRCCommand> AllCommands = new ArrayList<>();
     public static final List<IRCCommand> GenericIRCCommands = new ArrayList<>();
     public static final List<IRCCommand> TrustedCommands = new ArrayList<>();
@@ -48,10 +45,10 @@ public class Registry {
     public static final StrongPasswordEncryptor encryptor = new StrongPasswordEncryptor();
     public static final Reflections wavetactreflection = new Reflections("com.techcavern.wavetact");
     public static final List<NetProperty> NetworkName = new ArrayList<>();
-    public static String wundergroundapikey = null;
-    public static String wolframalphaapikey = null;
-    public static String wordnikapikey = null;
-    public static String googleapikey = null;
+    public static String wundergroundapikey = databaseUtils.getConfig("wundergroundapikey").getValue(CONFIG.VALUE);
+    public static String wolframalphaapikey = databaseUtils.getConfig("wolframalphaapikey").getValue(CONFIG.VALUE);
+    public static String wordnikapikey = databaseUtils.getConfig("wordnikapikey").getValue(CONFIG.VALUE);;
+    public static String googleapikey = databaseUtils.getConfig("googleapikey").getValue(CONFIG.VALUE);;
     public static ConsoleServer consoleServer = new ConsoleServer();
     public static DSLContext WaveTactDB = null;
 }
