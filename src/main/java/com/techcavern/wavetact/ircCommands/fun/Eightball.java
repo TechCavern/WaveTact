@@ -5,7 +5,6 @@
  */
 package com.techcavern.wavetact.ircCommands.fun;
 
-import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
@@ -20,7 +19,6 @@ import org.pircbotx.User;
  * @author jztech101
  */
 @IRCCMD
-@GenCMD
 public class Eightball extends IRCCommand {
 
     public Eightball() {

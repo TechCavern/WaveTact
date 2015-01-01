@@ -5,7 +5,6 @@
  */
 package com.techcavern.wavetact.ircCommands.fun;
 
-import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.FunObject;
 import com.techcavern.wavetact.objects.IRCCommand;
@@ -21,11 +20,10 @@ import org.pircbotx.User;
  * @author jztech101
  */
 @IRCCMD
-@GenCMD
 public class Attack extends IRCCommand {
 
     public Attack() {
-        super(GeneralUtils.toArray("attack shoot"), 0, "attacks [something]", "attacks a user", false);
+        super(GeneralUtils.toArray("attack shoot slap"), 0, "attacks [something]", "attacks a user", false);
     }
 
     @Override
