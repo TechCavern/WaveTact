@@ -6,22 +6,28 @@
 package com.techcavern.wavetact.ircCommands.netadmin;
 
 import com.techcavern.wavetact.annot.IRCCMD;
-import com.techcavern.wavetact.annot.NAdmCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
+import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.Registry;
-import com.techcavern.wavetact.utils.fileUtils.Configuration;
+import org.apache.commons.lang3.StringUtils;
+import org.jooq.Record;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
+
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
+import static com.techcavern.wavetactdb.Tables.SERVERS;
 
 
 /**
  * @author jztech101
  */
 @IRCCMD
-@NAdmCMD
 public class Join extends IRCCommand {
 
     public Join() {
@@ -36,9 +42,8 @@ public class Join extends IRCCommand {
             permanent = true;
         }
         if (permanent) {
-            Configuration config = Registry.configs.get(IRCUtils.getNetworkNameByNetwork(network));
-            config.set("channels", config.getString("channels") + ", " + args[0]);
-            config.save();
+            Record server = DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(network));
+            server.setValue(SERVERS.CHANNELS, SERVERS.CHANNELS + ", " + args[0]);
         }
         network.sendIRC().joinChannel(args[0]);
     }

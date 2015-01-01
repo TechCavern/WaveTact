@@ -6,9 +6,10 @@
 package com.techcavern.wavetact.ircCommands.netadmin;
 
 import com.techcavern.wavetact.annot.IRCCMD;
-import com.techcavern.wavetact.annot.NAdmCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
+import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -17,16 +18,20 @@ import org.pircbotx.User;
  * @author jztech101
  */
 @IRCCMD
-@NAdmCMD
 public class Disconnect extends IRCCommand {
 
     public Disconnect() {
-        super(GeneralUtils.toArray("disconnect dc"), 20, "disconnect (reason)", "Disconnects from the network", false);
+        super(GeneralUtils.toArray("disconnect dc"), 20, "disconnect (%)(reason)", "Disconnects from the network", false);
     }
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        network.sendIRC().quitServer(GeneralUtils.buildMessage(1, args.length, args));
+        if(args[0].startsWith("%")){
+            args[0] = args[0].replace("%", "");
+            DatabaseUtils.removeServer(IRCUtils.getNetworkNameByNetwork(network));
+        }
+        network.sendIRC().quitServer(GeneralUtils.buildMessage(0, args.length, args));
         network.stopBotReconnect();
+
     }
 }

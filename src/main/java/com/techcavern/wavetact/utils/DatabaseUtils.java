@@ -82,6 +82,13 @@ public class DatabaseUtils {
         return Registry.WaveTactDB.select().from(BLACKLISTS).where(BLACKLISTS.TYPE.eq(type)).fetch();
     }
 
+    public static Record getBlacklist(String type, String blacklist) {
+        Result<Record> blacklists =  Registry.WaveTactDB.select().from(BLACKLISTS).where(BLACKLISTS.TYPE.eq(type)).and(BLACKLISTS.URL.eq(blacklist)).fetch();
+        return getRecord(blacklists);
+    }
+
+
+
     public static void removeBlacklist(String type, String blacklist) {
         Registry.WaveTactDB.delete(BLACKLISTS).where(BLACKLISTS.TYPE.eq(type)).and(BLACKLISTS.URL.eq(blacklist)).execute();
     }

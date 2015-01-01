@@ -3,7 +3,6 @@ package com.techcavern.wavetact.ircCommands.minecraft;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.ErrorUtils;
@@ -20,7 +19,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 @IRCCMD
-@GenCMD
 public class MCAccountInfo extends IRCCommand {
 
     public MCAccountInfo() {

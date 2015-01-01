@@ -17,6 +17,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.techcavern.wavetactdb.Tables.BLACKLISTS;
 
@@ -145,12 +147,12 @@ public class GeneralUtils {
         }
         Boolean sent = false;
         Resolver resolver = new SimpleResolver();
-        Result<Record> ircblacklist = DatabaseUtils.getBlacklists(type);
-        if (ircblacklist.isEmpty()) {
+        Result<Record> blacklist = DatabaseUtils.getBlacklists(type);
+        if (blacklist.isEmpty()) {
             ErrorUtils.sendError(user, "No "+type+" blacklists found in database");
             return;
         }
-        for (org.jooq.Record Blacklist : ircblacklist) {
+        for (org.jooq.Record Blacklist : blacklist) {
             Lookup lookup = new Lookup(IP + "." + Blacklist.getValue(BLACKLISTS.URL), Type.ANY);
             lookup.setResolver(resolver);
             lookup.setCache(null);
@@ -167,6 +169,38 @@ public class GeneralUtils {
         }
         if (!sent) {
             IRCUtils.sendMessage(user, network, channel, BeforeIP + " not found in "+type+" blacklists", prefix);
+        }
+    }
+    public static void modifyBlacklist(User user, PircBotX network, Channel channel, String[] args, String prefix,String type){
+        if (args.length > 0) {
+            if (args[0].startsWith("-")) {
+                Record blacklist = DatabaseUtils.getBlacklist(type, args[0].replaceFirst("\\-", "").replaceAll("http://|https://", ""));
+                if (blacklist != null) {
+                    DatabaseUtils.removeBlacklist(type,args[0].replaceFirst("\\-", "").replaceAll("http://|https://", ""));
+                    IRCUtils.sendMessage(user, network, channel, type + " blacklist removed", prefix);
+                } else {
+                    ErrorUtils.sendError(user, type + " blacklist does not exist on list");
+                }
+            } else if (args[0].equalsIgnoreCase("list")) {
+                List<String> blacklists = new ArrayList<>();
+                for(Record bl:DatabaseUtils.getBlacklists(type))
+                    blacklists.add(bl.getValue(BLACKLISTS.URL));
+                if (!blacklists.isEmpty()) {
+                    IRCUtils.sendMessage(user, network, channel, StringUtils.join(blacklists, ", "), prefix);
+                } else {
+                    ErrorUtils.sendError(user, type + " blacklist is empty");
+                }
+            } else {
+                Record blacklist = DatabaseUtils.getBlacklist(type, args[0].replaceFirst("\\-", "").replaceAll("http://|https://", ""));
+                if (blacklist == null) {
+                    DatabaseUtils.addBlacklist(args[0].replaceFirst("\\-", "").replaceAll("http://|https://", ""), type);
+                    IRCUtils.sendMessage(user, network, channel, type + " blacklist added", prefix);
+                } else {
+                    ErrorUtils.sendError(user, type + " blacklist is already listed");
+                }
+            }
+        } else {
+            ErrorUtils.sendError(user, "Please specify a "+type+" blacklist");
         }
     }
 }

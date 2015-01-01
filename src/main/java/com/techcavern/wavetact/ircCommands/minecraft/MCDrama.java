@@ -1,6 +1,5 @@
 package com.techcavern.wavetact.ircCommands.minecraft;
 
-import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
@@ -12,7 +11,6 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
 @IRCCMD
-@GenCMD
 public class MCDrama extends IRCCommand {
 
     public MCDrama() {
