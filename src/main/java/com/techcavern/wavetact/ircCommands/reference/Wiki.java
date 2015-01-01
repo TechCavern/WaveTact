@@ -30,7 +30,7 @@ public class Wiki extends IRCCommand {
         } else {
             String title = result.getAsJsonObject(key).get("title").getAsString();
             String text = result.getAsJsonObject(key).get("extract").getAsString();
-            String plainurl = "http://en.wikipedia.org/" + StringUtils.join(args, "%20");
+            String plainurl = "http://en.wikipedia.org/wiki/" + StringUtils.join(args, "%20");
             IRCUtils.sendMessage(user, network, channel, title + ": " + text.replaceAll("\n", ""), prefix);
             IRCUtils.sendMessage(user, network, channel, plainurl, prefix);
         }
