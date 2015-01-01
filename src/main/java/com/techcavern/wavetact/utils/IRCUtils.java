@@ -253,13 +253,6 @@ public class IRCUtils {
         return null;
     }
 
-    public static boolean isController(String account, String network) {
-        for (String c : StringUtils.split(DatabaseUtils.getServer(network).getValue(SERVERS.CONTROLLERS), ", ")) {
-            if (c.equalsIgnoreCase(account))
-                return true;
-        }
-        return false;
-    }
 
     public static boolean isNetworkAdmin(String account, String network) {
         for (String c : StringUtils.split(DatabaseUtils.getServer(network).getValue(SERVERS.NETWORKADMINS), ", ")) {

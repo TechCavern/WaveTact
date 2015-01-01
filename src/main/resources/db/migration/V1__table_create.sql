@@ -47,9 +47,10 @@ property Text,
 value Text
 );
 
-CREATE TABLE RELAYBOTS(
+CREATE TABLE CHANNELUSERPROPERTY(
 network Text,
 channel Text,
+user Text,
 property Text,
 value Text
 );

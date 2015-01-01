@@ -117,18 +117,18 @@ public class DatabaseUtils {
         Registry.WaveTactDB.delete(CHANNELPROPERTY).where(CHANNELPROPERTY.PROPERTY.eq(property)).and(CHANNELPROPERTY.NETWORK.eq(network)).and(CHANNELPROPERTY.CHANNEL.eq(channel)).execute();
     }
 
-    public static Record getRelayBot(String network, String channel, String property) {
-        Result<Record> commandRecord = Registry.WaveTactDB.select().from(RELAYBOTS).where(RELAYBOTS.PROPERTY.eq(property)).and(RELAYBOTS.NETWORK.eq(network)).and(RELAYBOTS.CHANNEL.eq(channel)).fetch();
+    public static Record getChannelUserProperty(String network, String channel, String user, String property) {
+        Result<Record> commandRecord = Registry.WaveTactDB.select().from(CHANNELUSERPROPERTY).where(CHANNELUSERPROPERTY.PROPERTY.eq(property)).and(CHANNELUSERPROPERTY.USER.eq(user)).and(CHANNELUSERPROPERTY.NETWORK.eq(network)).and(CHANNELUSERPROPERTY.CHANNEL.eq(channel)).fetch();
         return getRecord(commandRecord);
 
     }
 
-    public static void addRelayBot(String network, String channel, String property, String value) {
-        Registry.WaveTactDB.insertInto(RELAYBOTS).values(network, channel, property, value).execute();
+    public static void addChannelUserProperty(String network, String channel,String user, String property, String value) {
+        Registry.WaveTactDB.insertInto(CHANNELUSERPROPERTY).values(network, channel, property, value).execute();
     }
 
-    public static void removeRelayBot(String network, String channel, String property) {
-        Registry.WaveTactDB.delete(RELAYBOTS).where(RELAYBOTS.PROPERTY.eq(property)).and(RELAYBOTS.NETWORK.eq(network)).and(RELAYBOTS.CHANNEL.eq(channel)).execute();
+    public static void removeChannelUserProperty(String network, String channel,String user, String property) {
+        Registry.WaveTactDB.delete(CHANNELUSERPROPERTY).where(CHANNELUSERPROPERTY.PROPERTY.eq(property)).and(CHANNELUSERPROPERTY.USER.eq(user)).and(CHANNELUSERPROPERTY.NETWORK.eq(network)).and(CHANNELUSERPROPERTY.CHANNEL.eq(channel)).execute();
     }
 
     public static Result<Record> getServers() {
