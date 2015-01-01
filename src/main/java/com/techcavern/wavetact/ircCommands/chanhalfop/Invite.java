@@ -27,6 +27,6 @@ public class Invite extends IRCCommand {
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         channel.send().invite(args[0]);
-        IRCUtils.sendAction(user, network, channel, args[0] + " invited by " + user.getNick(), prefix);
+        IRCUtils.sendNotice(user, network, channel, args[0] + " invited by " + user.getNick(), prefix);
     }
 }

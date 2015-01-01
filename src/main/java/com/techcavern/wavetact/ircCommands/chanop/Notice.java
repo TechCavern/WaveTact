@@ -1,6 +1,5 @@
 package com.techcavern.wavetact.ircCommands.chanop;
 
-import com.techcavern.wavetact.annot.ChanOPCMD;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
@@ -10,7 +9,6 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
 @IRCCMD
-@ChanOPCMD
 public class Notice extends IRCCommand {
 
     public Notice() {
