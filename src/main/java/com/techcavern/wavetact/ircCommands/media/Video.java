@@ -39,10 +39,7 @@ public class Video extends IRCCommand {
             ArrayIndex = Integer.parseInt(args[0]);
             args = ArrayUtils.remove(args, 0);
         }
-        YouTube yt = new YouTube.Builder(new NetHttpTransport(), new JacksonFactory(), new HttpRequestInitializer() {
-            public void initialize(HttpRequest request) throws IOException {
-            }
-
+        YouTube yt = new YouTube.Builder(new NetHttpTransport(), new JacksonFactory(), request -> {
         }).setApplicationName("youtubesearch").build();
         YouTube.Search.List search = yt.search().list("id,snippet");
         search.setKey(Registry.googleapikey);

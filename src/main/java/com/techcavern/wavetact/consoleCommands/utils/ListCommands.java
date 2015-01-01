@@ -9,6 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @ConCMD
 public class ListCommands extends ConsoleCommand {
@@ -19,10 +20,7 @@ public class ListCommands extends ConsoleCommand {
 
     @Override
     public void onCommand(String[] args, CommandIO commandIO) throws Exception {
-        List<String> commands = new ArrayList<>();
-        for (ConsoleCommand cmd : Registry.ConsoleCommands) {
-            commands.add(cmd.getCommand());
-        }
+        List<String> commands = Registry.ConsoleCommands.stream().map(ConsoleCommand::getCommand).collect(Collectors.toList());
         commandIO.getPrintStream().println(StringUtils.join(commands, ", "));
     }
 

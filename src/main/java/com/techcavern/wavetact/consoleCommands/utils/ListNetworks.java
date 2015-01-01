@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @ConCMD
 public class ListNetworks extends ConsoleCommand {
@@ -20,10 +21,7 @@ public class ListNetworks extends ConsoleCommand {
 
     @Override
     public void onCommand(String[] args, CommandIO commandIO) throws Exception {
-        List<String> networks = new ArrayList<>();
-        for (NetProperty e : Registry.NetworkName) {
-            networks.add(e.getProperty());
-        }
+        List<String> networks = Registry.NetworkName.stream().map(NetProperty::getProperty).collect(Collectors.toList());
         commandIO.getPrintStream().println(StringUtils.join(networks, ", "));
     }
 

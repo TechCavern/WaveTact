@@ -8,8 +8,6 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-import javax.xml.crypto.Data;
-
 import java.util.UUID;
 
 import static com.techcavern.wavetactdb.Tables.SERVERS;

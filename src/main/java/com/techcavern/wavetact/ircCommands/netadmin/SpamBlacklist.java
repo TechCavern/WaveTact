@@ -8,17 +8,9 @@ package com.techcavern.wavetact.ircCommands.netadmin;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.*;
-import org.apache.commons.lang3.StringUtils;
-import org.jooq.Record;
-import org.jooq.Result;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
-import static com.techcavern.wavetactdb.Tables.BLACKLISTS;
-
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**

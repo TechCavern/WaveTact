@@ -6,18 +6,13 @@
 package com.techcavern.wavetact.consoleCommands.utils;
 
 import com.techcavern.wavetact.annot.ConCMD;
-import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.CommandIO;
 import com.techcavern.wavetact.objects.ConsoleCommand;
-import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.IRCUtils;
+
 import static com.techcavern.wavetactdb.Tables.*;
 import org.jooq.Record;
-import org.pircbotx.Channel;
-import org.pircbotx.PircBotX;
-import org.pircbotx.User;
 
 /**
  * @author jztech101

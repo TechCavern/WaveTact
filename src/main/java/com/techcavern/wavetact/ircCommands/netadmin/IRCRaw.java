@@ -1,9 +1,7 @@
 package com.techcavern.wavetact.ircCommands.netadmin;
 
 
-import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.annot.IRCCMD;
-import com.techcavern.wavetact.objects.ConsoleCommand;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import org.pircbotx.Channel;

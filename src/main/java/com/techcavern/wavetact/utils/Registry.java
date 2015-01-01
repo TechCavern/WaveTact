@@ -28,9 +28,7 @@ public class Registry {
     public static String wundergroundapikey = DatabaseUtils.getConfig("wundergroundapikey");
     public static String wolframalphaapikey = DatabaseUtils.getConfig("wolframalphaapikey");
     public static String wordnikapikey = DatabaseUtils.getConfig("wordnikapikey");
-    ;
     public static String googleapikey = DatabaseUtils.getConfig("googleapikey");
-    ;
     public static ConsoleServer consoleServer = new ConsoleServer();
     public static DSLContext WaveTactDB = null;
 }

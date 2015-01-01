@@ -10,8 +10,6 @@ import static com.techcavern.wavetactdb.Tables.*;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-import javax.xml.crypto.Data;
-
 @IRCCMD
 public class Authenticate extends IRCCommand {
 

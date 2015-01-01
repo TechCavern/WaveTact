@@ -9,8 +9,6 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-import javax.xml.crypto.Data;
-
 @IRCCMD
 public class ChannelUserProperty extends IRCCommand {
 

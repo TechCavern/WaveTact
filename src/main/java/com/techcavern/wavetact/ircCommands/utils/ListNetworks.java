@@ -12,6 +12,7 @@ import org.pircbotx.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @IRCCMD
 public class ListNetworks extends IRCCommand {
@@ -25,19 +26,11 @@ public class ListNetworks extends IRCCommand {
         String networks = "";
         List<NetProperty> bufferlist = new ArrayList<>();
         if (args[0].equalsIgnoreCase("connected")) {
-            for (NetProperty netprop : Registry.NetworkName) {
-                if (netprop.getNetwork().getState().equals(PircBotX.State.CONNECTED))
-                    bufferlist.add(netprop);
-            }
+            bufferlist.addAll(Registry.NetworkName.stream().filter(netprop -> netprop.getNetwork().getState().equals(PircBotX.State.CONNECTED)).collect(Collectors.toList()));
         } else if (args[0].equalsIgnoreCase("disconnected")) {
-            for (NetProperty netprop : Registry.NetworkName) {
-                if (netprop.getNetwork().getState().equals(PircBotX.State.DISCONNECTED))
-                    bufferlist.add(netprop);
-            }
+            bufferlist.addAll(Registry.NetworkName.stream().filter(netprop -> netprop.getNetwork().getState().equals(PircBotX.State.DISCONNECTED)).collect(Collectors.toList()));
         } else {
-            for (NetProperty netprop : Registry.NetworkName) {
-                bufferlist.add(netprop);
-            }
+            bufferlist.addAll(Registry.NetworkName.stream().collect(Collectors.toList()));
         }
         int netcount = 0;
         for (NetProperty netprop : bufferlist) {

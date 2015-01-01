@@ -77,7 +77,6 @@ public class IRCUtils {
         if (network.getServerInfo().getStatusMessage().contains(prefix)) {
             return prefix;
         }
-        ;
         return "";
     }
     public static String getHostmask(PircBotX network, String userObject, boolean isBanmask){

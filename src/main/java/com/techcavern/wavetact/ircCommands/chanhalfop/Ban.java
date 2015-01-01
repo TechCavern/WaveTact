@@ -10,9 +10,6 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-import javax.xml.crypto.Data;
-import java.sql.Time;
-
 @IRCCMD
 
 public class Ban extends IRCCommand {

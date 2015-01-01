@@ -59,10 +59,7 @@ public class ConfigUtils {
             }
         }
         Net.addServer(server, port);
-        for (String channel : channels) {
-            if (!channel.isEmpty())
-                Net.addAutoJoinChannel(channel);
-        }
+        channels.stream().filter(channel -> !channel.isEmpty()).forEach(Net::addAutoJoinChannel);
         Net.setRealName(nick);
         Net.getListenerManager().addListener(new ChanMsgListener());
         Net.setAutoReconnect(true);

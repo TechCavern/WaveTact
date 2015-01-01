@@ -16,8 +16,6 @@ import static com.techcavern.wavetactdb.Tables.*;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-import java.util.List;
-
 /**
  * @author jztech101
  */

@@ -12,7 +12,7 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 import static com.techcavern.wavetactdb.Tables.*;
-import javax.xml.crypto.Data;
+
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,16 +1,13 @@
 package com.techcavern.wavetact.consoleCommands.auth;
 
 import com.techcavern.wavetact.annot.ConCMD;
-import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.CommandIO;
 import com.techcavern.wavetact.objects.ConsoleCommand;
-import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.*;
 import static com.techcavern.wavetactdb.Tables.*;
 import org.jooq.Record;
 import java.util.UUID;
-import org.pircbotx.PircBotX;
-import org.pircbotx.User;
+
 @ConCMD
 public class ResetPass extends ConsoleCommand {
 

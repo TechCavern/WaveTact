@@ -51,7 +51,6 @@ public class CheckPort extends IRCCommand {
                 else
                     ErrorUtils.sendError(user, "Host Unreachable");
             }
-            ;
         }
 
     }

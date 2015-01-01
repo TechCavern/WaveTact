@@ -5,10 +5,7 @@
  */
 package com.techcavern.wavetact.ircCommands.chanadmin;
 
-import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.annot.IRCCMD;
-import com.techcavern.wavetact.objects.CommandIO;
-import com.techcavern.wavetact.objects.ConsoleCommand;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;

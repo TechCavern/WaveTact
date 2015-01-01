@@ -47,11 +47,7 @@ public class Part extends IRCCommand {
                 if (permanent) {
                     Record server = DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(network));
                     List<String> channels = new LinkedList<>(Arrays.asList(StringUtils.split(server.getValue(SERVERS.CHANNELS), ", ")));
-                    for (String chan : channels) {
-                        if (chan.equals(args[0])) {
-                            channels.remove(chan);
-                        }
-                    }
+                    channels.stream().filter(chan -> chan.equals(args[0])).forEach(channels::remove);
                     server.setValue(SERVERS.CHANNELS, StringUtils.join(channels, ", "));
                 }
             } else {

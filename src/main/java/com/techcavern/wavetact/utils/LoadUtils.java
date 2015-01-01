@@ -104,8 +104,8 @@ public class LoadUtils {
             Field field = ClassLoader.class.getDeclaredField("usr_paths");
             field.setAccessible(true);
             String[] paths = (String[]) field.get(null);
-            for (int i = 0; i < paths.length; i++) {
-                if (s.equals(paths[i])) {
+            for (String path : paths) {
+                if (s.equals(path)) {
                     return;
                 }
             }

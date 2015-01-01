@@ -162,7 +162,7 @@ public class GeneralUtils {
                 sent = true;
                 for (org.xbill.DNS.Record rec : records) {
                     if (rec instanceof TXTRecord) {
-                        IRCUtils.sendMessage(user, network, channel, Type.string(rec.getType()) + " - " + StringUtils.join((TXTRecord) rec, " "), prefix);
+                        IRCUtils.sendMessage(user, network, channel, Type.string(rec.getType()) + " - " + StringUtils.join(rec, " "), prefix);
                     }
                 }
             }

@@ -122,7 +122,7 @@ public class DatabaseUtils {
     }
 
     public static void addChannelUserProperty(String network, String channel,String user, String property, String value) {
-        Registry.WaveTactDB.insertInto(CHANNELUSERPROPERTY).values(network, channel, property, value).execute();
+        Registry.WaveTactDB.insertInto(CHANNELUSERPROPERTY).values(network, channel,user, property, value).execute();
     }
 
     public static void removeChannelUserProperty(String network, String channel,String user, String property) {
