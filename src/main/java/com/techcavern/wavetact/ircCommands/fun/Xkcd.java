@@ -1,7 +1,6 @@
 package com.techcavern.wavetact.ircCommands.fun;
 
 import com.google.gson.JsonObject;
-import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.ErrorUtils;
@@ -13,7 +12,6 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
 @IRCCMD
-@GenCMD
 public class Xkcd extends IRCCommand {
 
     public Xkcd() {
