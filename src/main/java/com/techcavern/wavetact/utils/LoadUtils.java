@@ -6,6 +6,7 @@ import com.techcavern.wavetact.objects.ConsoleCommand;
 import com.techcavern.wavetact.objects.FunObject;
 import com.techcavern.wavetact.objects.IRCCommand;
 import org.flywaydb.core.Flyway;
+import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 
@@ -24,14 +25,12 @@ public class LoadUtils {
         Flyway flyway = new Flyway();
         flyway.setDataSource("jdbc:sqlite:./db.sqlite", null, null);
         flyway.migrate();
-
-
         System.err.println("Getting connection...");
         Class.forName("org.sqlite.JDBC");
         Connection conn = DriverManager.getConnection("jdbc:sqlite:./db.sqlite");
-
         System.err.println("Creating DSLContext...");
-        Registry.WaveTactDB = DSL.using(conn, SQLDialect.SQLITE);
+        DSLContext create = DSL.using(conn, SQLDialect.SQLITE);
+        Registry.WaveTactDB = create;
     }
 
     public static void registerIRCCommands() {

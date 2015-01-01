@@ -14,13 +14,12 @@ out/
 pimp/
 src/META-INF/
 *.swp
-servers/
-databases/
 *.json
 classes/
 production/
 *.properties
 workingdirectory/
 *.ipr
+*.sqlite
 *.iws
 src/main/java/com/techcavern/wavetactdb/
