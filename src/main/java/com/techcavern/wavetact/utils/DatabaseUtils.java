@@ -61,19 +61,6 @@ public class DatabaseUtils {
 
     }
 
-    public static Record getPermUserChannel(String network, String channel, String account) {
-        Result<Record> permUserChannel = Registry.WaveTactDB.select().from(PERMUSERCHANNELS).where(PERMUSERCHANNELS.ACCOUNT.eq(account)).and(PERMUSERCHANNELS.CHANNEL.eq(channel)).and(PERMUSERCHANNELS.NETWORK.eq(network)).fetch();
-        return getRecord(permUserChannel);
-    }
-
-    public static void addPermUserChannel(String network, String channel, String account, String permlevel) {
-        Registry.WaveTactDB.insertInto(PERMUSERCHANNELS).values(network, channel, account, permlevel).execute();
-    }
-
-    public static void removePermUserChannel(String network, String channel, String account) {
-        Registry.WaveTactDB.delete(PERMUSERCHANNELS).where(PERMUSERCHANNELS.ACCOUNT.eq(account)).and(PERMUSERCHANNELS.CHANNEL.eq(channel)).and(PERMUSERCHANNELS.NETWORK.eq(network)).execute();
-    }
-
     public static Record getCustomCommand(String network, String channel, String command) {
         Result<Record> commandRecord = Registry.WaveTactDB.select().from(CUSTOMCOMMANDS).where(CUSTOMCOMMANDS.COMMAND.eq(command)).and(CUSTOMCOMMANDS.NETWORK.eq(network)).and(CUSTOMCOMMANDS.CHANNEL.eq(channel)).fetch();
         if (getRecord(commandRecord) == null) {

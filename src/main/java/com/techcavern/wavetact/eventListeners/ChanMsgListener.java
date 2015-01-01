@@ -14,7 +14,6 @@ import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.MessageEvent;
 
 import static com.techcavern.wavetactdb.Tables.CHANNELUSERPROPERTY;
-import static com.techcavern.wavetactdb.Tables.PERMUSERCHANNELS;
 
 /**
  * @author jztech101

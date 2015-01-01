@@ -6,7 +6,7 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 import org.pircbotx.hooks.events.WhoisEvent;
 
-import static com.techcavern.wavetactdb.Tables.PERMUSERCHANNELS;
+import static com.techcavern.wavetactdb.Tables.CHANNELUSERPROPERTY;
 import static com.techcavern.wavetactdb.Tables.SERVERS;
 
 
@@ -119,9 +119,17 @@ public class PermUtils {
         if (account != null) {
             if (IRCUtils.isNetworkAdmin(account, IRCUtils.getNetworkNameByNetwork(network))) {
                 return 20;
-            }
-            if (DatabaseUtils.getPermUserChannel(IRCUtils.getNetworkNameByNetwork(network), channelObject.getName(), account) != null) {
-                return DatabaseUtils.getPermUserChannel(IRCUtils.getNetworkNameByNetwork(network), channelObject.getName(), account).getValue(PERMUSERCHANNELS.PERMLEVEL);
+            }else if (DatabaseUtils.getChannelUserProperty(IRCUtils.getNetworkNameByNetwork(network), channelObject.getName(), account, "permlevel") != null) {
+                int permlevel = 0;
+                try {
+                    permlevel = Integer.parseInt(DatabaseUtils.getChannelUserProperty(IRCUtils.getNetworkNameByNetwork(network), channelObject.getName(), account, "permlevel").getValue(CHANNELUSERPROPERTY.VALUE));
+                }catch(Exception e){
+                }
+                    if(permlevel <= 18){
+                    return permlevel;
+                }else{
+                    return 0;
+                }
             } else {
                 return 0;
             }

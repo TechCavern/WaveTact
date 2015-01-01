@@ -18,13 +18,6 @@ property Text,
 value Text
 );
 
-CREATE TABLE PERMUSERCHANNELS(
-network Text,
-channel Text,
-account Text,
-permlevel int
-);
-
 CREATE TABLE CUSTOMCOMMANDS(
 permlevel int,
 channel Text,

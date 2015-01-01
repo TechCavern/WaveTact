@@ -31,6 +31,13 @@ PermLevels
 - 0 - Default Access. Everyone has it.
 - -1 - Banned
 
+Channel-User Properties
+=======================
+- permlevel - you can set a custom permlevel for a user (Must be integer)
+- relaybotsplit - you may assign a bot as a relaybot, and set the value as the character before the actual message is handled
+
+You are welcome to set other properties, however do beware that you may find issues in the future if the property you set happens to coincide with a new channel property
+
 Developing
 ==========
 - You will need to run `gradle idea` each time the build file is modified as intellij internal gradle support does not handle it properly. 

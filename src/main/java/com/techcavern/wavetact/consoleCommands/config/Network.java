@@ -18,7 +18,7 @@ import static com.techcavern.wavetactdb.Tables.SERVERS;
 public class Network extends ConsoleCommand {
 
     public Network() {
-        super(GeneralUtils.toArray("network"), "network (+/-)[networkname] (Property) (Value)", "Create, modifies or removes a network configuration");
+        super(GeneralUtils.toArray("network"), "network (+/-)[networkname] (Property) (Value)", "Creates, modifies or removes network configurations");
     }
 
     @Override
