@@ -16,7 +16,7 @@ public class FDrop extends ConsoleCommand {
     @Override
     public void onCommand(String[] args, CommandIO commandIO) {
         for(NetProperty e:Registry.NetworkName){
-            AuthedUser authedUser = PermUtils.getAuthedUser(e.getBot(), args[0]);
+            AuthedUser authedUser = PermUtils.getAuthedUser(e.getNetwork(), args[0]);
             if (authedUser != null) {
                 Registry.AuthedUsers.remove(authedUser);
             }

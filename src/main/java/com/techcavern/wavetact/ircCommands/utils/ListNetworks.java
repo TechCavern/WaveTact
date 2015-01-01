@@ -28,12 +28,12 @@ public class ListNetworks extends IRCCommand {
         List<NetProperty> bufferlist = new ArrayList<>();
         if (args[0].equalsIgnoreCase("connected")) {
             for (NetProperty netprop : Registry.NetworkName) {
-                if (netprop.getBot().getState().equals(PircBotX.State.CONNECTED))
+                if (netprop.getNetwork().getState().equals(PircBotX.State.CONNECTED))
                     bufferlist.add(netprop);
             }
         } else if (args[0].equalsIgnoreCase("disconnected")) {
             for (NetProperty netprop : Registry.NetworkName) {
-                if (netprop.getBot().getState().equals(PircBotX.State.DISCONNECTED))
+                if (netprop.getNetwork().getState().equals(PircBotX.State.DISCONNECTED))
                     bufferlist.add(netprop);
             }
         } else {

@@ -16,7 +16,7 @@ public class NetProperty {
         return this.chard;
     }
 
-    public PircBotX getBot() {
+    public PircBotX getNetwork() {
         return this.network;
     }
 

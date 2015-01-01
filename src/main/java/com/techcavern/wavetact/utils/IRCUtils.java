@@ -111,15 +111,15 @@ public class IRCUtils {
     }
 
     public static void sendGlobal(String message, User user) {
-        for (PircBotX network : Registry.WaveTact.getBots()) {
-            sendNetworkGlobal(message, network, user);
+        for (NetProperty network : Registry.NetworkName) {
+            sendNetworkGlobal(message, network.getNetwork(), user);
         }
 
     }
 
     public static void sendNetworkGlobal(String message, PircBotX network, User user) {
         for (Channel channel : network.getUserBot().getChannels()) {
-            channel.send().notice("[" + user.getNick() + "]: " + message);
+            channel.send().message("[" + user.getNick() + "]: " + message);
         }
     }
 
@@ -252,7 +252,7 @@ public class IRCUtils {
     public static PircBotX getBotByNetworkName(String name) {
         for (NetProperty d : Registry.NetworkName) {
             if (d.getProperty().equalsIgnoreCase(name)) {
-                return d.getBot();
+                return d.getNetwork();
             }
         }
         return null;
@@ -260,7 +260,7 @@ public class IRCUtils {
 
     public static String getNetworkNameByNetwork(PircBotX network) {
         for (NetProperty d : Registry.NetworkName) {
-            if (d.getBot().equals(network)) {
+            if (d.getNetwork().equals(network)) {
                 return d.getProperty();
             }
         }

@@ -91,7 +91,14 @@ public class Network extends ConsoleCommand {
 
         } else if (args[0].startsWith("-")) {
             DatabaseUtils.removeServer(args[0].replaceFirst("\\-", ""));
-            IRCUtils.getBotByNetworkName(args[0]).stopBotReconnect();
+            PircBotX network = IRCUtils.getBotByNetworkName(args[0]);
+            for(NetProperty e:Registry.NetworkName){
+                if(e.getNetwork().equals(network)){
+                    Registry.NetworkName.remove(e);
+                    network.stopBotReconnect();
+                    return;
+                }
+            }
         } else {
             commandIO.getPrintStream().println("Adding " + args[0]);
             String name = args[0];
