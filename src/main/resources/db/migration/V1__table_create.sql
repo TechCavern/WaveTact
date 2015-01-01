@@ -1,6 +1,7 @@
 CREATE TABLE ACCOUNTS (
 username Text,
-password Text
+password Text,
+randomstring Text
 );
 CREATE TABLE BANS (
 hostmask Text,

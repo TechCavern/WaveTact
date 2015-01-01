@@ -38,8 +38,6 @@ public class CheckUserLevel extends IRCCommand {
         }
         if (userObject == null) {
             ErrorUtils.sendError(user, "User does not exist");
-        } else if (userPermLevel >= 9001) {
-            IRCUtils.sendMessage(user, network, channel, userObject + " is a bot controller!" + " (" + userPermLevel + ")", prefix);
         } else if (userPermLevel >= 20) {
             IRCUtils.sendMessage(user, network, channel, userObject + " is a network administrator!" + " (" + userPermLevel + ")", prefix);
         } else if (userPermLevel >= 18) {

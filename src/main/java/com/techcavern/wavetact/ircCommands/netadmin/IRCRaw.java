@@ -1,26 +1,25 @@
-package com.techcavern.wavetact.ircCommands.controller;
+package com.techcavern.wavetact.ircCommands.netadmin;
+
 
 import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.annot.IRCCMD;
+import com.techcavern.wavetact.objects.ConsoleCommand;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.Registry;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
 @IRCCMD
-@ConCMD
-public class Shutdown extends IRCCommand {
+public class IRCRaw extends IRCCommand {
 
-    public Shutdown() {
-        super(GeneralUtils.toArray("shutdown stop"), 9001, null, "Shuts down the bot", false);
+    public IRCRaw() {
+        super(GeneralUtils.toArray("ircraw raw"),20, "raw [to be sent to server]", "Sends a raw msg to the server", false);
     }
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        //The consoleserver will initiate a shutdown for us.
-        Registry.consoleServer.keepConsoleRunning = false;
+        network.sendRaw().rawLine(GeneralUtils.buildMessage(0, args.length, args));
     }
 }
 

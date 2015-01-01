@@ -20,31 +20,39 @@ public class Config extends ConsoleCommand {
             case "commandchar":
                 DatabaseUtils.deleteConfig("commandchar");
                 DatabaseUtils.addConfig("commandchar", args[1]);
+                success(commandIO);
                 break;
             case "wolframalphaapikey":
                 DatabaseUtils.deleteConfig("wolframalphapikey");
                 DatabaseUtils.addConfig("wolframalphapikey", args[1]);
                 Registry.wolframalphaapikey = args[1];
+                success(commandIO);
                 break;
             case "googleapikey":
                 DatabaseUtils.deleteConfig("googleapikey");
                 DatabaseUtils.addConfig("googleapikey", args[1]);
                 Registry.googleapikey = args[1];
+                success(commandIO);
                 break;
             case "wordnikapikey":
                 DatabaseUtils.deleteConfig("wordnikapikey");
                 DatabaseUtils.addConfig("wordnikapikey", args[1]);
                 Registry.wordnikapikey = args[1];
+                success(commandIO);
                 break;
             case "wundergroundapikey":
                 DatabaseUtils.deleteConfig("wundergroundapikey");
                 DatabaseUtils.addConfig("wundergroundapikey", args[1]);
                 Registry.googleapikey = args[1];
+                success(commandIO);
                 break;
             default:
-                commandIO.getPrintStream().println("Invalid Property");
+                commandIO.getPrintStream().println("Invalid property");
 
 
         }
+    }
+    private void success(CommandIO commandIO){
+        commandIO.getPrintStream().println("Property modified");
     }
 }
