@@ -1,6 +1,5 @@
 package com.techcavern.wavetact.ircCommands.dnsinfo;
 
-import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.ErrorUtils;
@@ -12,7 +11,6 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
 @IRCCMD
-@GenCMD
 public class CheckPing extends IRCCommand {
 
     public CheckPing() {
@@ -26,9 +24,7 @@ public class CheckPing extends IRCCommand {
             ErrorUtils.sendError(user, "Host Unreachable");
         } else {
             String command = "";
-            if (System.getProperty("os.name").startsWith("Windows")) {
-                command = "ping -n 1 " + IP;
-            } else if (InetAddressUtils.isIPv6Address(IP)) {
+             if (InetAddressUtils.isIPv6Address(IP)) {
                 command = "ping6 -c 1 " + IP;
             } else if (InetAddressUtils.isIPv4Address(IP)) {
                 command = "ping -c 1 " + IP;

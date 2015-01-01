@@ -1,6 +1,5 @@
 package com.techcavern.wavetact.ircCommands.dnsinfo;
 
-import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.ErrorUtils;
@@ -16,7 +15,6 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 @IRCCMD
-@GenCMD
 public class CheckPort extends IRCCommand {
 
     public CheckPort() {

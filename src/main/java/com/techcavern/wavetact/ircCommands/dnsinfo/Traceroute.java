@@ -1,6 +1,5 @@
 package com.techcavern.wavetact.ircCommands.dnsinfo;
 
-import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.ErrorUtils;
@@ -15,7 +14,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 @IRCCMD
-@GenCMD
 public class Traceroute extends IRCCommand {
 
     public Traceroute() {
@@ -29,11 +27,7 @@ public class Traceroute extends IRCCommand {
             ErrorUtils.sendError(user, "Host Unreachable");
         } else {
             String command = "";
-            if (System.getProperty("os.name").startsWith("Windows") && InetAddressUtils.isIPv6Address(IP)) {
-                command = "tracert6 " + IP;
-            } else if (System.getProperty("os.name").startsWith("Windows") && InetAddressUtils.isIPv4Address(IP)) {
-                command = "tracert " + IP;
-            } else if (InetAddressUtils.isIPv6Address(IP)) {
+            if (InetAddressUtils.isIPv6Address(IP)) {
                 command = "traceroute6 " + IP;
             } else if (InetAddressUtils.isIPv4Address(IP)) {
                 command = "traceroute " + IP;

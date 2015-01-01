@@ -5,13 +5,20 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.conn.util.InetAddressUtils;
+import org.jooq.Record;
+import org.jooq.Result;
+import org.pircbotx.Channel;
 import org.pircbotx.Colors;
 import org.pircbotx.PircBotX;
+import org.pircbotx.User;
+import org.xbill.DNS.*;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.URL;
+
+import static com.techcavern.wavetactdb.Tables.BLACKLISTS;
 
 public class GeneralUtils {
     public static String buildMessage(int startint, int finishint, String[] args) {
@@ -118,7 +125,50 @@ public class GeneralUtils {
         return StringUtils.split(input, " ");
     }
 
-
+    public static void checkBlacklist(User user, String[] args, PircBotX network, Channel channel, String prefix, String type) throws Exception{
+        String BeforeIP = GeneralUtils.getIP(args[0], network);
+        if (BeforeIP == null) {
+            ErrorUtils.sendError(user, "Invalid ip/user");
+            return;
+        } else if (BeforeIP.contains(":")) {
+            ErrorUtils.sendError(user, "IPv6 is not supported");
+            return;
+        }
+        String[] IPString = StringUtils.split(BeforeIP, ".");
+        String IP = "";
+        for (int i = IPString.length - 1; i > -1; i--) {
+            if (IP.isEmpty()) {
+                IP = IPString[i];
+            } else {
+                IP += "." + IPString[i];
+            }
+        }
+        Boolean sent = false;
+        Resolver resolver = new SimpleResolver();
+        Result<Record> ircblacklist = DatabaseUtils.getBlacklists(type);
+        if (ircblacklist.isEmpty()) {
+            ErrorUtils.sendError(user, "No "+type+" blacklists found in database");
+            return;
+        }
+        for (org.jooq.Record Blacklist : ircblacklist) {
+            Lookup lookup = new Lookup(IP + "." + Blacklist.getValue(BLACKLISTS.URL), Type.ANY);
+            lookup.setResolver(resolver);
+            lookup.setCache(null);
+            org.xbill.DNS.Record[] records = lookup.run();
+            if (lookup.getResult() == lookup.SUCCESSFUL) {
+                IRCUtils.sendMessage(user, network, channel, BeforeIP + " found in " + Blacklist.getValue(BLACKLISTS.URL), prefix);
+                sent = true;
+                for (org.xbill.DNS.Record rec : records) {
+                    if (rec instanceof TXTRecord) {
+                        IRCUtils.sendMessage(user, network, channel, Type.string(rec.getType()) + " - " + StringUtils.join((TXTRecord) rec, " "), prefix);
+                    }
+                }
+            }
+        }
+        if (!sent) {
+            IRCUtils.sendMessage(user, network, channel, BeforeIP + " not found in "+type+" blacklists", prefix);
+        }
+    }
 }
 
 

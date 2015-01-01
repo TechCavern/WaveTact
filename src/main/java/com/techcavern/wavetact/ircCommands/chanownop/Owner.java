@@ -5,7 +5,6 @@
  */
 package com.techcavern.wavetact.ircCommands.chanownop;
 
-import com.techcavern.wavetact.annot.ChanOwnOpCMD;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.ErrorUtils;
@@ -19,7 +18,6 @@ import org.pircbotx.User;
  * @author jztech101
  */
 @IRCCMD
-@ChanOwnOpCMD
 public class Owner extends IRCCommand {
 
     public Owner() {

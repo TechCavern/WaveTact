@@ -12,7 +12,7 @@ import org.pircbotx.PircBotX;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import static com.techcavern.wavetactdb.Tables.SERVERS;
+import static com.techcavern.wavetactdb.Tables.*;
 
 @ConCMD
 public class Network extends ConsoleCommand {

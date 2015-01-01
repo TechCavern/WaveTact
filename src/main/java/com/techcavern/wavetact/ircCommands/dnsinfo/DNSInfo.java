@@ -6,7 +6,6 @@
 package com.techcavern.wavetact.ircCommands.dnsinfo;
 
 import com.techcavern.wavetact.annot.IRCCMD;
-import com.techcavern.wavetact.annot.TruCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
@@ -21,7 +20,6 @@ import org.xbill.DNS.*;
  * @author jztech101
  */
 @IRCCMD
-@TruCMD
 public class DNSInfo extends IRCCommand {
 
     public DNSInfo() {
