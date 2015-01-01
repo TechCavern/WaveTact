@@ -7,12 +7,10 @@ package com.techcavern.wavetact.ircCommands.chanhalfop;
 
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.utils.ErrorUtils;
-import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.Registry;
-import com.techcavern.wavetact.utils.fileUtils.Configuration;
+import com.techcavern.wavetact.utils.*;
+import static com.techcavern.wavetactdb.Tables.*;
 import org.apache.commons.lang3.StringUtils;
+import org.jooq.Record;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -47,15 +45,14 @@ public class Part extends IRCCommand {
                 }
                 network.sendRaw().rawLine("PART " + args[0]);
                 if (permanent) {
-                    Configuration config = Registry.configs.get(IRCUtils.getNetworkNameByNetwork(network));
-                    List<String> channels = new LinkedList<>(Arrays.asList(StringUtils.split(config.getString("channels"), ", ")));
+                    Record server = DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(network));
+                    List<String> channels = new LinkedList<>(Arrays.asList(StringUtils.split(server.getValue(SERVERS.CHANNELS), ", ")));
                     for (String chan : channels) {
                         if (chan.equals(args[0])) {
                             channels.remove(chan);
                         }
                     }
-                    config.set("channels", StringUtils.join(channels, ", "));
-                    config.save();
+                    server.setValue(SERVERS.CHANNELS, StringUtils.join(channels, ", "));
                 }
             } else {
                 ErrorUtils.sendError(user, "Permission denied");

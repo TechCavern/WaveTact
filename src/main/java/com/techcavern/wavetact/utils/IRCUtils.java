@@ -28,7 +28,6 @@ public class IRCUtils {
     }
 
     public static WhoisEvent WhoisEvent(PircBotX network, String userObject) {
-
         WhoisEvent WhoisEvent;
         network.sendIRC().whois(userObject);
         WaitForQueue waitForQueue = new WaitForQueue(network);
@@ -81,8 +80,15 @@ public class IRCUtils {
         ;
         return "";
     }
+    public static String getHostmask(PircBotX network, String userObject, boolean isBanmask){
+        String hostmask = getIRCHostmask(network, userObject, isBanmask);
+        if(hostmask == null){
+            hostmask = getWhoisHostmask(network, userObject, isBanmask);
+        }
+        return hostmask;
+    }
 
-    public static String getHostmask(PircBotX network, String userObject, boolean isBanmask) {
+    public static String getWhoisHostmask(PircBotX network, String userObject, boolean isBanmask) {
         String hostmask;
         WhoisEvent whois = WhoisEvent(network, userObject);
         if (whois != null) {
@@ -117,13 +123,21 @@ public class IRCUtils {
         }
     }
 
-    public static String getIRCHostmask(PircBotX network, String userObject) {
-        User whois = getUserByNick(network, userObject);
-        String hostmask = "";
-        if (whois != null) {
-            String hostname = whois.getHostname();
-            String Login = whois.getLogin();
-            hostmask = "*!" + Login + "@" + hostname;
+    public static String getIRCHostmask(PircBotX network, String userObject, boolean isBanmask) {
+        User user = getUserByNick(network, userObject);
+        String hostmask;
+        if (user != null) {
+            String hostname = user.getHostname();
+            String Login = user.getLogin();
+            if (isBanmask) {
+                if (!Login.startsWith("~")) {
+                    hostmask = "*!" + Login + "@" + hostname;
+                } else {
+                    hostmask = "*!*@" + hostname;
+                }
+            } else {
+                hostmask = "*!" + Login + "@" + hostname;
+            }
             hostmask = hostmask.replace(" ", "");
         } else {
             hostmask = null;
@@ -132,12 +146,9 @@ public class IRCUtils {
     }
 
     public static String getHost(PircBotX network, String userObject) {
-        String host;
-        WhoisEvent whois = WhoisEvent(network, userObject);
-        if (whois != null) {
-            host = whois.getHostname();
-        } else {
-            host = null;
+        String host = getUserByNick(network, userObject).getHostname();
+        if (host == null) {
+            host = WhoisEvent(network, userObject).getHostname();
         }
         return host;
     }
@@ -199,8 +210,11 @@ public class IRCUtils {
                     for (String g : message) {
                         if (g.startsWith("$") && !g.contains("*")) {
                             action = action.replace(g, args[Integer.parseInt(g.replace("$", "")) - 1]);
-                            if (Integer.parseInt(g.replace("$", "")) > i) {
-                                i++;
+                            try {
+                                if (Integer.parseInt(g.replace("$", "")) > i) {
+                                    i++;
+                                }
+                            }catch(Exception e){
                             }
                         }
                     }

@@ -26,10 +26,7 @@ public class BanTimeoutListener implements Runnable {
                     try {
                         if (System.currentTimeMillis() >= ((Long) banRecord.getValue(BANS.TIME) + (Long) banRecord.getValue(BANS.INIT))) {
                             PircBotX networkObject = IRCUtils.getBotByNetworkName(banRecord.getValue(BANS.NETWORK));
-                            if (banRecord.getValue(BANS.ISMUTE))
-                                IRCUtils.setMode(IRCUtils.getChannelbyName(networkObject, banRecord.getValue(BANS.CHANNEL)), networkObject, "-" + Registry.QuietBans.get(banRecord.getValue(BANS.PROPERTY)), banRecord.getValue(BANS.HOSTMASK));
-                            else
-                                IRCUtils.setMode(IRCUtils.getChannelbyName(networkObject, banRecord.getValue(BANS.CHANNEL)), networkObject, "-b ", banRecord.getValue(BANS.HOSTMASK));
+                            IRCUtils.setMode(IRCUtils.getChannelbyName(networkObject, banRecord.getValue(BANS.CHANNEL)), networkObject, "-" + Registry.QuietBans.get(banRecord.getValue(BANS.PROPERTY)), banRecord.getValue(BANS.HOSTMASK));
                             DatabaseUtils.removeBan(banRecord.getValue(BANS.NETWORK), banRecord.getValue(BANS.CHANNEL), banRecord.getValue(BANS.HOSTMASK), banRecord.getValue(BANS.ISMUTE));
                         } else {
                             break;

@@ -6,13 +6,11 @@
 package com.techcavern.wavetact.ircCommands.chanhalfop;
 
 import com.techcavern.wavetact.annot.IRCCMD;
-import com.techcavern.wavetact.objects.ChannelProperty;
+import static com.techcavern.wavetactdb.Tables.*;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.utils.ErrorUtils;
-import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.Registry;
+import com.techcavern.wavetact.utils.*;
 import org.apache.commons.lang3.StringUtils;
+import org.jooq.Record;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -57,10 +55,9 @@ public class Topic extends IRCCommand {
             channel.send().setTopic(channel.getTopic().replace(args[0], args[2]));
             saveTopic(channel, network);
         } else if (args[1].equalsIgnoreCase("r") || args[1].equalsIgnoreCase("revert")) {
-            ChannelProperty oldTopic = IRCUtils.getTopic(channel.getName(), IRCUtils.getNetworkNameByNetwork(network));
+            Record oldTopic = DatabaseUtils.getChannelProperty(IRCUtils.getNetworkNameByNetwork(network), channel.getName(), "topic");
             if (oldTopic != null) {
-                channel.send().setTopic(oldTopic.getProperty());
-                Registry.Topic.remove(oldTopic);
+                channel.send().setTopic(oldTopic.getValue(CHANNELPROPERTY.VALUE));
             } else {
                 ErrorUtils.sendError(user, "Error: no reversal possible");
             }
@@ -70,7 +67,7 @@ public class Topic extends IRCCommand {
         }
     }
 
-    void saveTopic(Channel channel, PircBotX Bot) {
-        Registry.Topic.add(new ChannelProperty(Bot.getServerInfo().getNetwork(), channel.getName(), channel.getTopic()));
+    void saveTopic(Channel channel, PircBotX network) {
+        DatabaseUtils.addChannelProperty(IRCUtils.getNetworkNameByNetwork(network), channel.getName(), "topic", channel.getTopic());
     }
 }

@@ -28,7 +28,7 @@ public class PermUtils {
     }
 
     public static String authUser(PircBotX network, String userObject) { //gets hostmask of userObject and calls getAccount using it
-        String hostmask = IRCUtils.getIRCHostmask(network, userObject);
+        String hostmask = IRCUtils.getHostmask(network, userObject, true);
         if (hostmask != null) {
             return getAccount(network, userObject, hostmask);
         } else {
@@ -68,7 +68,7 @@ public class PermUtils {
     }
 
     public static AuthedUser getAuthedUser(PircBotX network, String userObject) { //gets Authenticated User found in Authed User db
-        String hostmask = IRCUtils.getIRCHostmask(network, userObject);
+        String hostmask = IRCUtils.getHostmask(network, userObject, true);
         for (AuthedUser user : Registry.AuthedUsers) {
             if (user.getAuthHostmask().equals(hostmask) && user.getAuthNetwork().equals(IRCUtils.getNetworkNameByNetwork(network))) {
                 return user;
