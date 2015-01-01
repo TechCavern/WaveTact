@@ -117,9 +117,6 @@ public class PermUtils {
 
     private static int getManualPermLevel(PircBotX network, Channel channelObject, String account) { //gets Manual Perm Level using the account name
         if (account != null) {
-            if (IRCUtils.isController(account, IRCUtils.getNetworkNameByNetwork(network))) {
-                return 9001;
-            }
             if (IRCUtils.isNetworkAdmin(account, IRCUtils.getNetworkNameByNetwork(network))) {
                 return 20;
             }

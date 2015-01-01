@@ -61,12 +61,6 @@ public class Network extends ConsoleCommand {
                     else
                         network.setValue(SERVERS.NICKSERV, args[2]);
                     break;
-                case "controllers":
-                    if (viewonly)
-                        commandIO.getPrintStream().println(network.getValue(SERVERS.CONTROLLERS));
-                    else
-                        network.setValue(SERVERS.CONTROLLERS, args[2]);
-                    break;
                 case "netadmin":
                     if (viewonly)
                         commandIO.getPrintStream().println(network.getValue(SERVERS.NETWORKADMINS));
@@ -113,15 +107,13 @@ public class Network extends ConsoleCommand {
             String nickserv = input.nextLine();
             commandIO.getPrintStream().print("Bindhost (Press enter to use default): ");
             String bindhost = input.nextLine();
-            commandIO.getPrintStream().print("Controllers: (account1, account2, etc)");
-            String controllers = input.nextLine();
             commandIO.getPrintStream().print("AuthType (nickserv/account/nick): ");
             String authtype = input.nextLine();
             commandIO.getPrintStream().print("Auto Allow Network Operators NetAdmin Level Access? (True/False): ");
             boolean netadminaccess = Boolean.valueOf(input.nextLine());
             commandIO.getPrintStream().print("Network Admins: (account1, account2, etc) (Press enter to ignore): ");
             String netadmins = input.nextLine();
-            DatabaseUtils.addServer(name, port, server, nick, channels, nickserv, bindhost, netadminaccess, netadmins, authtype, controllers);
+            DatabaseUtils.addServer(name, port, server, nick, channels, nickserv, bindhost, netadminaccess, netadmins, authtype);
             PircBotX network = ConfigUtils.createNetwork(nickserv, Arrays.asList(StringUtils.split(channels, ", ")), nick, server, port, bindhost, name);
             Registry.WaveTact.addNetwork(network);
             network.startBot();

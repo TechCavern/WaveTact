@@ -63,7 +63,6 @@ nickserv Text,
 bindhost Text,
 networkadminaccess boolean,
 authtype Text,
-networkadmins Text,
-controllers Text
+networkadmins Text
 );
 

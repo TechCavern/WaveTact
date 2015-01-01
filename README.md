@@ -21,8 +21,7 @@ Permissions
 
 PermLevels
 ==========
-- 9001 - Bot Controller (Access to all commands everywhere)
-- 20 - Network Administrator (Access to all commands below controller on a specific network)
+- 20 - Network Administrator (Access to all commands on a specific network)
 - 18 - Channel Administrator (Access to all commands below Network Administrator on a specific channel and must be assigned by the controller per channel)
 - 15 - Channel Ownered Operator (Access to all commands below Founder on a specific channel and must be assigned by the controller per channel)
 - 13 - Channel Protected Operator (Access to all commands below Owner on a specific channel)
