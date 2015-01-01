@@ -85,8 +85,8 @@ public class PrivMsgListener extends ListenerAdapter {
         }
         Registry.threadPool.execute(new process());
     }
-}}
-        }
+}
+
 
 
 
