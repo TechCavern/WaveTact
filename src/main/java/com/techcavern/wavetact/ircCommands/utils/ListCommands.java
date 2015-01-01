@@ -2,14 +2,17 @@ package com.techcavern.wavetact.ircCommands.utils;
 
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
+import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.Registry;
 import org.apache.commons.lang3.StringUtils;
+import org.jooq.Record;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
-
+import static com.techcavern.wavetactdb.Tables.*;
+import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +35,7 @@ public class ListCommands extends IRCCommand {
             try {
                 permlevel = Integer.parseInt(args[0]);
             } catch (NumberFormatException e) {
-                permlevel = 9001;
+                permlevel = 20;
                 return;
             }
         }
@@ -40,6 +43,14 @@ public class ListCommands extends IRCCommand {
         for (IRCCommand cmd : Registry.IRCCommands) {
             if (cmd.getPermLevel() <= permlevel)
                 commands.add(cmd.getCommand());
+        }
+        for (Record cmd : DatabaseUtils.getCustomCommands(IRCUtils.getNetworkNameByNetwork(network),channel.getName())) {
+            if (cmd.getValue(CUSTOMCOMMANDS.PERMLEVEL) <= permlevel)
+                commands.add(cmd.getValue(CUSTOMCOMMANDS.COMMAND));
+        }
+        for (Record cmd : DatabaseUtils.getCustomCommands(null,null)) {
+            if (cmd.getValue(CUSTOMCOMMANDS.PERMLEVEL) <= permlevel)
+                commands.add(cmd.getValue(CUSTOMCOMMANDS.COMMAND));
         }
         IRCUtils.sendMessage(user, network, channel, StringUtils.join(commands, ", "), prefix);
     }

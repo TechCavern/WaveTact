@@ -69,6 +69,10 @@ public class DatabaseUtils {
         return getRecord(commandRecord);
 
     }
+    public static Result<Record> getCustomCommands(String network, String channel) {
+        return Registry.WaveTactDB.select().from(CUSTOMCOMMANDS).where(CUSTOMCOMMANDS.NETWORK.eq(network)).and(CUSTOMCOMMANDS.CHANNEL.eq(channel)).fetch();
+
+    }
 
     public static void addCustomCommand(String network, String channel, String command, int permlevel, String value, boolean isLocked, boolean isAction) {
         Registry.WaveTactDB.insertInto(CUSTOMCOMMANDS).values(permlevel, channel, command, value, network, isLocked, isAction).execute();
@@ -112,8 +116,8 @@ public class DatabaseUtils {
     }
 
     public static Record getChannelUserProperty(String network, String channel, String user, String property) {
-        Result<Record> commandRecord = Registry.WaveTactDB.select().from(CHANNELUSERPROPERTY).where(CHANNELUSERPROPERTY.PROPERTY.eq(property)).and(CHANNELUSERPROPERTY.USER.eq(user)).and(CHANNELUSERPROPERTY.NETWORK.eq(network)).and(CHANNELUSERPROPERTY.CHANNEL.eq(channel)).fetch();
-        return getRecord(commandRecord);
+        Result<Record> channelUserPropertyRecord = Registry.WaveTactDB.select().from(CHANNELUSERPROPERTY).where(CHANNELUSERPROPERTY.PROPERTY.eq(property)).and(CHANNELUSERPROPERTY.USER.eq(user)).and(CHANNELUSERPROPERTY.NETWORK.eq(network)).and(CHANNELUSERPROPERTY.CHANNEL.eq(channel)).fetch();
+        return getRecord(channelUserPropertyRecord);
 
     }
 

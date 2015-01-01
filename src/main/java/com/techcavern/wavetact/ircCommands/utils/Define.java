@@ -1,6 +1,5 @@
 package com.techcavern.wavetact.ircCommands.utils;
 
-import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.ErrorUtils;
@@ -19,7 +18,6 @@ import org.pircbotx.User;
 import java.util.List;
 
 @IRCCMD
-@GenCMD
 public class Define extends IRCCommand {
 
     public Define() {
