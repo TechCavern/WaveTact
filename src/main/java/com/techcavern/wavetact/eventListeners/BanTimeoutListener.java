@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.runnables;
+package com.techcavern.wavetact.eventListeners;
 
 import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 import static com.techcavern.wavetactdb.Tables.BANS;
 
-public class BanTimer implements Runnable {
+public class BanTimeoutListener implements Runnable {
 
     @Override
     public void run() {
@@ -22,7 +22,6 @@ public class BanTimer implements Runnable {
         while (true) {
             try {
                 TimeUnit.SECONDS.sleep(5);
-                boolean hasNext = false;
                 for (Record banRecord : DatabaseUtils.getBans()) {
                     try {
                         if (System.currentTimeMillis() >= ((Long) banRecord.getValue(BANS.TIME) + (Long) banRecord.getValue(BANS.INIT))) {

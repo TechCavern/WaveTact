@@ -1,7 +1,7 @@
 package com.techcavern.wavetact;
 
 import com.techcavern.wavetact.console.ConsoleClient;
-import com.techcavern.wavetact.runnables.BanTimer;
+import com.techcavern.wavetact.eventListeners.BanTimeoutListener;
 import com.techcavern.wavetact.utils.ConfigUtils;
 import com.techcavern.wavetact.utils.LoadUtils;
 import com.techcavern.wavetact.utils.Registry;
@@ -33,7 +33,7 @@ public class Main {
             LoadUtils.registerEightball();
             Registry.WaveTact.start();
             Registry.threadPool.execute(Registry.consoleServer);
-            Registry.threadPool.execute(new BanTimer());
+            Registry.threadPool.execute(new BanTimeoutListener());
             Registry.threadPool.awaitTermination(Long.MAX_VALUE, TimeUnit.DAYS);
         }
     }
