@@ -1,18 +1,18 @@
 package com.techcavern.wavetact.ircCommands.auth;
 
-import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.annot.IRCCMD;
-import com.techcavern.wavetact.objects.Account;
 import com.techcavern.wavetact.objects.AuthedUser;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.*;
-import com.techcavern.wavetact.utils.olddatabaseUtils.AccountUtils;
+import org.jooq.Record;
 import org.pircbotx.Channel;
+import static com.techcavern.wavetactdb.Tables.*;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
+import javax.xml.crypto.Data;
+
 @IRCCMD
-@GenCMD
 public class Authenticate extends IRCCommand {
 
     public Authenticate() {
@@ -22,7 +22,7 @@ public class Authenticate extends IRCCommand {
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (!PermUtils.isAccountEnabled(network)) {
-            ErrorUtils.sendError(user, "This network is set to " + IRCUtils.getAuthType(network) + " authentication");
+            ErrorUtils.sendError(user, "This network is set to " + DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(network)).getValue(SERVERS.AUTHTYPE) + " authentication");
             return;
         }
         String userString;
@@ -38,8 +38,8 @@ public class Authenticate extends IRCCommand {
             ErrorUtils.sendError(user, "Error, you are already identified");
 
         } else {
-            Account acc = AccountUtils.getAccount(userString);
-            if (acc != null && Registry.encryptor.checkPassword(password, acc.getAuthPassword())) {
+            Record account = DatabaseUtils.getAccount(args[0]);
+            if (account != null && Registry.encryptor.checkPassword(password + account.getValue(ACCOUNTS.RANDOMSTRING), account.getValue(ACCOUNTS.PASSWORD))) {
                 Registry.AuthedUsers.add(new AuthedUser(IRCUtils.getNetworkNameByNetwork(network), userString, IRCUtils.getHostmask(network, user.getNick(), false)));
                 IRCUtils.sendMessage(user, network, channel, "Identification successful", prefix);
             } else {

@@ -9,7 +9,7 @@ import static com.techcavern.wavetactdb.Tables.*;
  * Created by jztech101 on 12/30/14.
  */
 public class DatabaseUtils {
-    public static void createAccount(String account, String password) {
+    public static void addAccount(String account, String password) {
         Registry.WaveTactDB.insertInto(ACCOUNTS).values(account, password).execute();
     }
 
@@ -18,15 +18,15 @@ public class DatabaseUtils {
         return getRecord(accountRecord);
     }
 
-    public static void deleteAccount(String account) {
+    public static void removeAccount(String account) {
         Registry.WaveTactDB.delete(ACCOUNTS).where(ACCOUNTS.USERNAME.eq(account)).execute();
     }
 
-    public static void createBan(String network, String channel, String hostmask, long init, long time, boolean isMute, String property) {
+    public static void addBan(String network, String channel, String hostmask, long init, long time, boolean isMute, String property) {
         Registry.WaveTactDB.insertInto(BANS).values(hostmask, network, channel, init, time, isMute, property).execute();
     }
 
-    public static void deleteBan(String network, String channel, String hostmask, boolean isMute) {
+    public static void removeBan(String network, String channel, String hostmask, boolean isMute) {
         Registry.WaveTactDB.delete(BANS).where(BANS.HOSTMASK.eq(hostmask).and(BANS.NETWORK.eq(network)).and(BANS.ISMUTE.eq(isMute).and(BANS.CHANNEL.eq(channel)))).execute();
     }
 
@@ -44,7 +44,7 @@ public class DatabaseUtils {
         return getRecord(configRecord).getValue(CONFIG.VALUE);
     }
 
-    public static void deleteConfig(String config) {
+    public static void removeConfig(String config) {
         Registry.WaveTactDB.delete(CONFIG).where(CONFIG.PROPERTY.eq(config)).execute();
     }
 
@@ -70,7 +70,7 @@ public class DatabaseUtils {
         Registry.WaveTactDB.insertInto(PERMUSERCHANNELS).values(network, channel, account, permlevel).execute();
     }
 
-    public static void deletePermUserChannel(String network, String channel, String account) {
+    public static void removePermUserChannel(String network, String channel, String account) {
         Registry.WaveTactDB.delete(PERMUSERCHANNELS).where(PERMUSERCHANNELS.ACCOUNT.eq(account)).and(PERMUSERCHANNELS.CHANNEL.eq(channel)).and(PERMUSERCHANNELS.NETWORK.eq(network)).execute();
     }
 
@@ -87,7 +87,7 @@ public class DatabaseUtils {
         Registry.WaveTactDB.insertInto(CUSTOMCOMMANDS).values(permlevel, channel, command, value, network, isLocked, isAction).execute();
     }
 
-    public static void deleteCustomCommand(String network, String channel, String command) {
+    public static void removeCustomCommand(String network, String channel, String command) {
         Registry.WaveTactDB.delete(CUSTOMCOMMANDS).where(CUSTOMCOMMANDS.COMMAND.eq(command)).and(CUSTOMCOMMANDS.NETWORK.eq(network)).and(CUSTOMCOMMANDS.CHANNEL.eq(channel)).execute();
     }
 
@@ -95,7 +95,7 @@ public class DatabaseUtils {
         return Registry.WaveTactDB.select().from(BLACKLISTS).where(BLACKLISTS.TYPE.eq(type)).fetch();
     }
 
-    public static void deleteBlacklist(String type, String blacklist) {
+    public static void removeBlacklist(String type, String blacklist) {
         Registry.WaveTactDB.delete(BLACKLISTS).where(BLACKLISTS.TYPE.eq(type)).and(BLACKLISTS.URL.eq(blacklist)).execute();
     }
 
@@ -113,7 +113,7 @@ public class DatabaseUtils {
         Registry.WaveTactDB.insertInto(CHANNELPROPERTY).values(network, channel, property, value).execute();
     }
 
-    public static void deleteChannelProperty(String network, String channel, String property) {
+    public static void removeChannelProperty(String network, String channel, String property) {
         Registry.WaveTactDB.delete(CHANNELPROPERTY).where(CHANNELPROPERTY.PROPERTY.eq(property)).and(CHANNELPROPERTY.NETWORK.eq(network)).and(CHANNELPROPERTY.CHANNEL.eq(channel)).execute();
     }
 
@@ -127,7 +127,7 @@ public class DatabaseUtils {
         Registry.WaveTactDB.insertInto(RELAYBOTS).values(network, channel, property, value).execute();
     }
 
-    public static void deleteRelayBot(String network, String channel, String property) {
+    public static void removeRelayBot(String network, String channel, String property) {
         Registry.WaveTactDB.delete(RELAYBOTS).where(RELAYBOTS.PROPERTY.eq(property)).and(RELAYBOTS.NETWORK.eq(network)).and(RELAYBOTS.CHANNEL.eq(channel)).execute();
     }
 
@@ -140,7 +140,7 @@ public class DatabaseUtils {
         return getRecord(serverRecord);
     }
 
-    public static void deleteServer(String name) {
+    public static void removeServer(String name) {
         Registry.WaveTactDB.delete(SERVERS).where(SERVERS.NAME.eq(name));
     }
 

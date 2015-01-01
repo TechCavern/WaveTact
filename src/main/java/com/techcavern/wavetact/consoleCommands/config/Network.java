@@ -90,7 +90,7 @@ public class Network extends ConsoleCommand {
             }
 
         } else if (args[0].startsWith("-")) {
-            DatabaseUtils.deleteServer(args[0].replaceFirst("\\-", ""));
+            DatabaseUtils.removeServer(args[0].replaceFirst("\\-", ""));
             IRCUtils.getBotByNetworkName(args[0]).stopBotReconnect();
         } else {
             commandIO.getPrintStream().println("Adding " + args[0]);

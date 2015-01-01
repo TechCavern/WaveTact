@@ -1,18 +1,18 @@
 package com.techcavern.wavetact.ircCommands.auth;
 
-import com.techcavern.wavetact.annot.GenCMD;
 import com.techcavern.wavetact.annot.IRCCMD;
-import com.techcavern.wavetact.objects.Account;
 import com.techcavern.wavetact.objects.AuthedUser;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.*;
-import com.techcavern.wavetact.utils.olddatabaseUtils.AccountUtils;
+import org.jooq.Record;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
+import static com.techcavern.wavetactdb.Tables.ACCOUNTS;
+import static com.techcavern.wavetactdb.Tables.SERVERS;
+
 @IRCCMD
-@GenCMD
 public class Drop extends IRCCommand {
 
     public Drop() {
@@ -22,18 +22,16 @@ public class Drop extends IRCCommand {
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (!PermUtils.isAccountEnabled(network)) {
-            ErrorUtils.sendError(user, "This network is set to " + IRCUtils.getAuthType(network) + " authentication");
+            ErrorUtils.sendError(user, "This network is set to " + DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(network)).getValue(SERVERS.AUTHTYPE) + " authentication");
             return;
         }
         AuthedUser authedUser = PermUtils.getAuthedUser(network, user.getNick());
         if (authedUser == null) {
             ErrorUtils.sendError(user, "Error, you are not logged in");
         } else {
-            Account account = AccountUtils.getAccount(authedUser.getAuthAccount());
-            if (Registry.encryptor.checkPassword(args[0], account.getAuthPassword())) {
-                Registry.AuthedUsers.remove(authedUser);
-                Registry.Accounts.remove(account);
-                AccountUtils.saveAccounts();
+            Record account = DatabaseUtils.getAccount(authedUser.getAuthAccount());
+            if (Registry.encryptor.checkPassword(args[0] + account.getValue(ACCOUNTS.RANDOMSTRING), account.getValue(ACCOUNTS.PASSWORD))) {
+                DatabaseUtils.removeAccount(authedUser.getAuthAccount());
                 IRCUtils.sendMessage(user, network, channel, "Your account is now dropped", prefix);
             } else {
                 ErrorUtils.sendError(user, "Incorrect password");

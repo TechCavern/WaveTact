@@ -18,30 +18,30 @@ public class Config extends ConsoleCommand {
     public void onCommand(String[] args, CommandIO commandIO) throws Exception {
         switch (args[0].toLowerCase()) {
             case "commandchar":
-                DatabaseUtils.deleteConfig("commandchar");
+                DatabaseUtils.removeConfig("commandchar");
                 DatabaseUtils.addConfig("commandchar", args[1]);
                 success(commandIO);
                 break;
             case "wolframalphaapikey":
-                DatabaseUtils.deleteConfig("wolframalphapikey");
+                DatabaseUtils.removeConfig("wolframalphapikey");
                 DatabaseUtils.addConfig("wolframalphapikey", args[1]);
                 Registry.wolframalphaapikey = args[1];
                 success(commandIO);
                 break;
             case "googleapikey":
-                DatabaseUtils.deleteConfig("googleapikey");
+                DatabaseUtils.removeConfig("googleapikey");
                 DatabaseUtils.addConfig("googleapikey", args[1]);
                 Registry.googleapikey = args[1];
                 success(commandIO);
                 break;
             case "wordnikapikey":
-                DatabaseUtils.deleteConfig("wordnikapikey");
+                DatabaseUtils.removeConfig("wordnikapikey");
                 DatabaseUtils.addConfig("wordnikapikey", args[1]);
                 Registry.wordnikapikey = args[1];
                 success(commandIO);
                 break;
             case "wundergroundapikey":
-                DatabaseUtils.deleteConfig("wundergroundapikey");
+                DatabaseUtils.removeConfig("wundergroundapikey");
                 DatabaseUtils.addConfig("wundergroundapikey", args[1]);
                 Registry.googleapikey = args[1];
                 success(commandIO);

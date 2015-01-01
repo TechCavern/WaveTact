@@ -6,7 +6,6 @@
 package com.techcavern.wavetact.ircCommands.anonymonity;
 
 import com.techcavern.wavetact.annot.IRCCMD;
-import com.techcavern.wavetact.annot.TruCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
@@ -22,7 +21,6 @@ import org.pircbotx.User;
  * @author jztech101
  */
 @IRCCMD
-@TruCMD
 public class Act extends IRCCommand {
 
     public Act() {

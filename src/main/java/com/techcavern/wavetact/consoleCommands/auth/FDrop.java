@@ -1,14 +1,9 @@
 package com.techcavern.wavetact.consoleCommands.auth;
 
 import com.techcavern.wavetact.annot.ConCMD;
-import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.*;
 import com.techcavern.wavetact.utils.*;
 import org.jooq.Record;
-import static com.techcavern.wavetactdb.Tables.*;
-import org.pircbotx.Channel;
-import org.pircbotx.PircBotX;
-import org.pircbotx.User;
 
 
 @ConCMD
@@ -28,7 +23,7 @@ public class FDrop extends ConsoleCommand {
         }
         Record account = DatabaseUtils.getAccount(args[0]);
         if (account != null) {
-            DatabaseUtils.deleteAccount(args[0]);
+            DatabaseUtils.removeAccount(args[0]);
             commandIO.getPrintStream().println("Account dropped");
         } else {
             commandIO.getPrintStream().println("Account does not exist");
