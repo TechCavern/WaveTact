@@ -42,7 +42,7 @@ public class ChannelUserProperty extends IRCCommand {
         Record channelUserProperty = DatabaseUtils.getChannelUserProperty(networkname, channel.getName(),account, args[1]);
         if(channelUserProperty != null && (isDelete || isModify)){
             if(isDelete){
-                DatabaseUtils.removeChannelUserProperty(networkname, channel.getName(),account,args[0]);
+                DatabaseUtils.removeChannelUserProperty(networkname, channel.getName(),account,args[1]);
             }else if(isModify){
                 if(viewonly)
                     IRCUtils.sendMessage(user, network, channel, args[1] + ": " +channelUserProperty.getValue(CHANNELUSERPROPERTY.VALUE), prefix);

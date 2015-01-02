@@ -77,8 +77,10 @@ public class Network extends ConsoleCommand {
                     case "authtype":
                         if (viewonly)
                             commandIO.getPrintStream().println(network.getValue(SERVERS.AUTHTYPE));
-                        else
+                        else {
                             network.setValue(SERVERS.AUTHTYPE, args[2]);
+                            Registry.AuthedUsers.clear();
+                        }
                         break;
                     case "netadminaccess":
                         if (viewonly)

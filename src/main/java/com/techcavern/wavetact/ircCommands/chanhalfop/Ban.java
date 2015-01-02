@@ -67,11 +67,10 @@ public class Ban extends IRCCommand {
         Record BanRecord = DatabaseUtils.getBan(networkname, channel.getName(), hostmask, isMute);
         if (args[0].startsWith("-")) {
             if (BanRecord != null) {
-                BanRecord.setValue(BANS.TIME, Long.valueOf(0));
-                DatabaseUtils.updateBan(BanRecord);
-            } else {
-                IRCUtils.setMode(channel, network, "-" + ban, hostmask);
+                DatabaseUtils.removeBan(networkname, channel.getName(), hostmask, isMute);
             }
+                IRCUtils.setMode(channel, network, "-" + ban, hostmask);
+
         } else if (args[0].startsWith("+")) {
             if (BanRecord != null) {
                 if (args[0].startsWith("+")) {
