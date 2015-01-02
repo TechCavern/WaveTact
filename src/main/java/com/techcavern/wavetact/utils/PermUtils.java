@@ -1,6 +1,7 @@
 package com.techcavern.wavetact.utils;
 
 import com.techcavern.wavetact.objects.AuthedUser;
+import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -117,7 +118,7 @@ public class PermUtils {
 
     private static int getManualPermLevel(PircBotX network, Channel channelObject, String account) { //gets Manual Perm Level using the account name
         if (account != null) {
-            if (IRCUtils.isNetworkAdmin(account, IRCUtils.getNetworkNameByNetwork(network))) {
+            if (isNetworkAdmin(account, IRCUtils.getNetworkNameByNetwork(network))) {
                 return 20;
             }else if (DatabaseUtils.getChannelUserProperty(IRCUtils.getNetworkNameByNetwork(network), channelObject.getName(), account, "permlevel") != null) {
                 int permlevel = 0;
@@ -169,5 +170,13 @@ public class PermUtils {
 
     public static boolean isAccountEnabled(PircBotX network) { //checks if account authentication is enabled
         return DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(network)).getValue(SERVERS.AUTHTYPE).equalsIgnoreCase("account");
+    }
+
+    public static boolean isNetworkAdmin(String account, String network) {
+        for (String c : StringUtils.split(DatabaseUtils.getServer(network).getValue(SERVERS.NETWORKADMINS), ", ")) {
+            if (c.equalsIgnoreCase(account))
+                return true;
+        }
+        return false;
     }
 }

@@ -13,7 +13,6 @@ import org.pircbotx.hooks.events.WhoisEvent;
 import org.pircbotx.output.OutputChannel;
 
 import static com.techcavern.wavetactdb.Tables.CUSTOMCOMMANDS;
-import static com.techcavern.wavetactdb.Tables.SERVERS;
 
 
 public class IRCUtils {
@@ -264,15 +263,6 @@ public class IRCUtils {
             }
         }
         return null;
-    }
-
-
-    public static boolean isNetworkAdmin(String account, String network) {
-        for (String c : StringUtils.split(DatabaseUtils.getServer(network).getValue(SERVERS.NETWORKADMINS), ", ")) {
-            if (c.equalsIgnoreCase(account))
-                return true;
-        }
-        return false;
     }
 
 

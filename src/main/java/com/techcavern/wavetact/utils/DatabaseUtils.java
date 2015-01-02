@@ -9,8 +9,8 @@ import static com.techcavern.wavetactdb.Tables.*;
  * Created by jztech101 on 12/30/14.
  */
 public class DatabaseUtils {
-    public static void addAccount(String account, String password) {
-        Registry.WaveTactDB.insertInto(ACCOUNTS).values(account, password).execute();
+    public static void addAccount(String account, String password, String randomString) {
+        Registry.WaveTactDB.insertInto(ACCOUNTS).values(account, password, randomString).execute();
     }
 
     public static Record getAccount(String account) {

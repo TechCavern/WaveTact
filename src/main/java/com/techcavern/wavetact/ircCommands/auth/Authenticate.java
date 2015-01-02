@@ -34,7 +34,6 @@ public class Authenticate extends IRCCommand {
         }
         if (PermUtils.authUser(network, user.getNick()) != null) {
             ErrorUtils.sendError(user, "Error, you are already identified");
-
         } else {
             Record account = DatabaseUtils.getAccount(args[0]);
             if (account != null && Registry.encryptor.checkPassword(password + account.getValue(ACCOUNTS.RANDOMSTRING), account.getValue(ACCOUNTS.PASSWORD))) {
