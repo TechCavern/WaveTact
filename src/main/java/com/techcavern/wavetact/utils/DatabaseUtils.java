@@ -17,6 +17,9 @@ public class DatabaseUtils {
         Result<Record> accountRecord = Registry.WaveTactDB.select().from(ACCOUNTS).where(ACCOUNTS.USERNAME.eq(account)).fetch();
         return getRecord(accountRecord);
     }
+    public static void updateAccount(Record account){
+        Registry.WaveTactDB.update(ACCOUNTS).set(account).where(ACCOUNTS.USERNAME.eq(account.getValue(ACCOUNTS.USERNAME)));
+    }
 
     public static void removeAccount(String account) {
         Registry.WaveTactDB.delete(ACCOUNTS).where(ACCOUNTS.USERNAME.eq(account)).execute();
@@ -33,6 +36,10 @@ public class DatabaseUtils {
     public static Record getBan(String network, String channel, String hostmask, boolean isMute) {
         Result<Record> banRecord = Registry.WaveTactDB.select().from(BANS).where(BANS.HOSTMASK.eq(hostmask)).and(BANS.NETWORK.eq(network)).and(BANS.ISMUTE.eq(isMute).and(BANS.CHANNEL.eq(channel))).fetch();
         return getRecord(banRecord);
+    }
+
+    public static void updateBan(Record ban){
+        Registry.WaveTactDB.update(BANS).set(ban).where(BANS.HOSTMASK.eq(ban.getValue(BANS.HOSTMASK))).and(BANS.NETWORK.eq(ban.getValue(BANS.NETWORK))).and(BANS.ISMUTE.eq(ban.getValue(BANS.ISMUTE)).and(BANS.CHANNEL.eq(ban.getValue(BANS.CHANNEL)))).execute();
     }
 
     public static Result<Record> getBans() {
@@ -71,9 +78,12 @@ public class DatabaseUtils {
         return getRecord(commandRecord);
 
     }
+    public static void updateCustomCommand(Record command){
+        Registry.WaveTactDB.update(CUSTOMCOMMANDS).set(command).where(CUSTOMCOMMANDS.COMMAND.eq(command.getValue(CUSTOMCOMMANDS.COMMAND))).and(CUSTOMCOMMANDS.NETWORK.eq(command.getValue(CUSTOMCOMMANDS.NETWORK)).and(CUSTOMCOMMANDS.CHANNEL.eq(command.getValue(CUSTOMCOMMANDS.CHANNEL)))).execute();
+
+    }
     public static Result<Record> getCustomCommands(String network, String channel) {
         return Registry.WaveTactDB.select().from(CUSTOMCOMMANDS).where(CUSTOMCOMMANDS.NETWORK.eq(network)).and(CUSTOMCOMMANDS.CHANNEL.eq(channel)).fetch();
-
     }
 
     public static void addCustomCommand(String network, String channel, String command, int permlevel, String value, boolean isLocked, boolean isAction) {
@@ -93,8 +103,6 @@ public class DatabaseUtils {
         return getRecord(blacklists);
     }
 
-
-
     public static void removeBlacklist(String type, String blacklist) {
         Registry.WaveTactDB.delete(BLACKLISTS).where(BLACKLISTS.TYPE.eq(type)).and(BLACKLISTS.URL.eq(blacklist)).execute();
     }
@@ -109,6 +117,10 @@ public class DatabaseUtils {
 
     }
 
+    public static void updateChannelProperty(Record channelproperty){
+        Registry.WaveTactDB.update(CHANNELPROPERTY).set(channelproperty).where(CHANNELPROPERTY.PROPERTY.eq(channelproperty.getValue(CHANNELPROPERTY.PROPERTY))).and(CHANNELPROPERTY.NETWORK.eq(channelproperty.getValue(CHANNELPROPERTY.NETWORK))).and(CHANNELPROPERTY.CHANNEL.eq(channelproperty.getValue(CHANNELPROPERTY.CHANNEL))).execute();
+    }
+
     public static void addChannelProperty(String network, String channel, String property, String value) {
         Registry.WaveTactDB.insertInto(CHANNELPROPERTY).values(network, channel, property, value).execute();
     }
@@ -121,6 +133,9 @@ public class DatabaseUtils {
         Result<Record> channelUserPropertyRecord = Registry.WaveTactDB.select().from(CHANNELUSERPROPERTY).where(CHANNELUSERPROPERTY.PROPERTY.eq(property)).and(CHANNELUSERPROPERTY.USER.eq(user)).and(CHANNELUSERPROPERTY.NETWORK.eq(network)).and(CHANNELUSERPROPERTY.CHANNEL.eq(channel)).fetch();
         return getRecord(channelUserPropertyRecord);
 
+    }
+    public static void updateChannelUserProperty(Record channeluserproperty){
+        Registry.WaveTactDB.update(CHANNELUSERPROPERTY).set(channeluserproperty).where(CHANNELUSERPROPERTY.PROPERTY.eq(channeluserproperty.getValue(CHANNELUSERPROPERTY.PROPERTY))).and(CHANNELUSERPROPERTY.USER.eq(channeluserproperty.getValue(CHANNELUSERPROPERTY.USER))).and(CHANNELUSERPROPERTY.NETWORK.eq(channeluserproperty.getValue(CHANNELUSERPROPERTY.NETWORK))).and(CHANNELUSERPROPERTY.CHANNEL.eq(channeluserproperty.getValue(CHANNELUSERPROPERTY.CHANNEL))).execute();
     }
 
     public static void addChannelUserProperty(String network, String channel,String user, String property, String value) {
@@ -138,6 +153,10 @@ public class DatabaseUtils {
     public static Record getServer(String name) {
         Result<Record> serverRecord = Registry.WaveTactDB.select().from(SERVERS).where(SERVERS.NAME.eq(name)).fetch();
         return getRecord(serverRecord);
+    }
+
+    public static void updateServer(Record server){
+        Registry.WaveTactDB.update(SERVERS).set(server).where(SERVERS.NAME.eq(server.getValue(SERVERS.NAME))).execute();
     }
 
     public static void removeServer(String name) {

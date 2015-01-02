@@ -32,12 +32,6 @@ public class Network extends ConsoleCommand {
             }
             if(network != null) {
                 switch (args[1].toLowerCase()) {
-                    case "name":
-                        if (viewonly)
-                            commandIO.getPrintStream().println(network.getValue(SERVERS.NAME));
-                        else
-                            network.setValue(SERVERS.NAME, args[2]);
-                        break;
                     case "channels":
                         if (viewonly)
                             commandIO.getPrintStream().println(network.getValue(SERVERS.CHANNELS));
@@ -95,7 +89,7 @@ public class Network extends ConsoleCommand {
                     default:
                         commandIO.getPrintStream().println("Failed to parse property");
                 }
-                Registry.WaveTactDB.update(SERVERS).set(network);
+                DatabaseUtils.updateServer(network);
             }
 
         } else if (args[0].startsWith("-")) {

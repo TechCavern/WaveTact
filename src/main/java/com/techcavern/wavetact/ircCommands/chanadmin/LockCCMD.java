@@ -36,7 +36,7 @@ public class LockCCMD extends IRCCommand {
                 command.setValue(CUSTOMCOMMANDS.ISLOCKED, true);
                 IRCUtils.sendMessage(user, network, channel, "Custom command unlocked", prefix);
             }
-            Registry.WaveTactDB.update(CUSTOMCOMMANDS).set(command);
+            DatabaseUtils.updateCustomCommand(command);
         }
     }
 }

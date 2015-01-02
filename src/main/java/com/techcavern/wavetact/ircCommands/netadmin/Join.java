@@ -39,7 +39,7 @@ public class Join extends IRCCommand {
         if (permanent) {
             Record server = DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(network));
             server.setValue(SERVERS.CHANNELS, SERVERS.CHANNELS + ", " + args[0]);
-            Registry.WaveTactDB.update(SERVERS).set(server);
+            DatabaseUtils.updateServer(server);
         }
         network.sendIRC().joinChannel(args[0]);
     }

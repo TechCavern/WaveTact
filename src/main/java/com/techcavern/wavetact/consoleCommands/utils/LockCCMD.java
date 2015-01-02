@@ -37,7 +37,7 @@ public class LockCCMD extends ConsoleCommand {
                 command.setValue(CUSTOMCOMMANDS.ISLOCKED, true);
                 commandIO.getPrintStream().println("Custom command unlocked");
             }
-            Registry.WaveTactDB.update(CUSTOMCOMMANDS).set(command);
+            DatabaseUtils.updateCustomCommand(command);
     }
     }
 }

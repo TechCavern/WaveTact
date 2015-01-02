@@ -12,6 +12,8 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
+import javax.xml.crypto.Data;
+
 @IRCCMD
 
 public class Ban extends IRCCommand {
@@ -67,7 +69,7 @@ public class Ban extends IRCCommand {
         if (args[0].startsWith("-")) {
             if (BanRecord != null) {
                 BanRecord.setValue(BANS.TIME, 0);
-                Registry.WaveTactDB.update(BANS).set(BanRecord);
+                DatabaseUtils.updateBan(BanRecord);
             } else {
                 if(isMute)
                 IRCUtils.setMode(channel, network, "-" + ban, hostmask);
@@ -84,7 +86,7 @@ public class Ban extends IRCCommand {
                     }
                     IRCUtils.sendMessage(user, network, channel, "Ban modified", prefix);
                 }
-                Registry.WaveTactDB.update(BANS).set(BanRecord);
+                DatabaseUtils.updateBan(BanRecord);
             } else {
                 ErrorUtils.sendError(user, "Ban does not exist!");
             }

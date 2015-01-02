@@ -49,7 +49,7 @@ public class Part extends IRCCommand {
                     List<String> channels = new LinkedList<>(Arrays.asList(StringUtils.split(networkRecord.getValue(SERVERS.CHANNELS), ", ")));
                     channels.stream().filter(chan -> chan.equals(args[0])).forEach(channels::remove);
                     networkRecord.setValue(SERVERS.CHANNELS, StringUtils.join(channels, ", "));
-                    Registry.WaveTactDB.update(SERVERS).set(networkRecord);
+                    DatabaseUtils.updateServer(networkRecord);
                 }
             } else {
                 ErrorUtils.sendError(user, "Permission denied");
