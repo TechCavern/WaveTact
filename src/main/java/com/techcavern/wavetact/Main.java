@@ -3,8 +3,11 @@ package com.techcavern.wavetact;
 import com.techcavern.wavetact.console.ConsoleClient;
 import com.techcavern.wavetact.eventListeners.BanTimeoutListener;
 import com.techcavern.wavetact.utils.ConfigUtils;
+import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.LoadUtils;
 import com.techcavern.wavetact.utils.Registry;
+import static com.techcavern.wavetactdb.Tables.*;
+import org.jooq.Record;
 import org.slf4j.impl.SimpleLogger;
 
 import java.util.concurrent.TimeUnit;

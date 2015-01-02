@@ -5,8 +5,8 @@ import com.techcavern.wavetact.objects.CommandIO;
 import com.techcavern.wavetact.objects.ConsoleCommand;
 import com.techcavern.wavetact.objects.NetProperty;
 import com.techcavern.wavetact.utils.*;
+import org.apache.commons.lang3.StringUtils;
 import org.jooq.Record;
-import org.jooq.tools.StringUtils;
 import org.pircbotx.PircBotX;
 
 import java.util.Arrays;
@@ -94,11 +94,12 @@ public class Network extends ConsoleCommand {
 
         } else if (args[0].startsWith("-")) {
             DatabaseUtils.removeServer(args[0].replaceFirst("\\-", ""));
-            PircBotX network = IRCUtils.getBotByNetworkName(args[0]);
+            PircBotX network = IRCUtils.getBotByNetworkName(args[0].replaceFirst("\\-", ""));
             for(NetProperty e:Registry.NetworkName){
                 if(e.getNetwork().equals(network)){
                     Registry.NetworkName.remove(e);
                     network.stopBotReconnect();
+                    network.sendIRC().quitServer();
                     return;
                 }
             }
@@ -131,7 +132,7 @@ public class Network extends ConsoleCommand {
             commandIO.getPrintStream().print("Auto Allow Network Operators NetAdmin Level Access? (True/False): ");
             boolean netadminaccess = Boolean.valueOf(input.nextLine());
             commandIO.getPrintStream().print("Network Admins: (account1, account2, etc) (Press enter to ignore): ");
-            String netadmins = null;
+            String netadmins = "";
             String netadminsinput = input.nextLine();
             if(!netadminsinput.isEmpty())
                 netadmins = netadminsinput;

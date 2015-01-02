@@ -16,6 +16,7 @@ public class AddBasicCommands extends ConsoleCommand {
     @Override
     public void onCommand(String[] args, CommandIO commandIO) {
         DatabaseUtils.addCustomCommand(null, null, "potato", 0, "is a potato", true, true);
+  /**
         DatabaseUtils.addCustomCommand(null, null, "ping", 0, "pong", true, false);
         DatabaseUtils.addCustomCommand(null, null, "pong", 0, "ping", true, false);
         DatabaseUtils.addCustomCommand(null, null, "releases", 0, "https://github.com/TechCavern/WaveTact/releases", true, false);
@@ -24,6 +25,7 @@ public class AddBasicCommands extends ConsoleCommand {
         DatabaseUtils.addCustomCommand(null, null, "authors", 0, "Julian (JZTech101)", true, false);
         DatabaseUtils.addCustomCommand(null, null, "contributors", 0, "https://github.com/TechCavern/WaveTact/graphs/contributors", true, false);
         DatabaseUtils.addCustomCommand(null, null, "nom", 0, "noms on $*", true, true);
+     **/
         commandIO.getPrintStream().println("Basic Commands Added");
     }
 }
