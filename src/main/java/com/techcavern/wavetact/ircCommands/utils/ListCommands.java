@@ -44,14 +44,6 @@ public class ListCommands extends IRCCommand {
             if (cmd.getPermLevel() <= permlevel)
                 commands.add(cmd.getCommand());
         }
-        for (Record cmd : DatabaseUtils.getCustomCommands(IRCUtils.getNetworkNameByNetwork(network),channel.getName())) {
-            if (cmd.getValue(CUSTOMCOMMANDS.PERMLEVEL) <= permlevel)
-                commands.add(cmd.getValue(CUSTOMCOMMANDS.COMMAND));
-        }
-        for (Record cmd : DatabaseUtils.getCustomCommands(null,null)) {
-            if (cmd.getValue(CUSTOMCOMMANDS.PERMLEVEL) <= permlevel)
-                commands.add(cmd.getValue(CUSTOMCOMMANDS.COMMAND));
-        }
         IRCUtils.sendMessage(user, network, channel, StringUtils.join(commands, ", "), prefix);
     }
 }

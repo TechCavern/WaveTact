@@ -5,8 +5,8 @@ import com.techcavern.wavetact.eventListeners.KickListener;
 import com.techcavern.wavetact.eventListeners.PartListener;
 import com.techcavern.wavetact.eventListeners.PrivMsgListener;
 import com.techcavern.wavetact.objects.NetProperty;
+import org.apache.commons.lang3.StringUtils;
 import org.jooq.Record;
-import org.jooq.tools.StringUtils;
 import org.pircbotx.Configuration;
 import org.pircbotx.PircBotX;
 

@@ -9,6 +9,7 @@ import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.*;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.jooq.Record;
 import org.pircbotx.Colors;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.MessageEvent;
@@ -40,7 +41,10 @@ public class ChanMsgListener extends ListenerAdapter {
                         ErrorUtils.sendError(event.getUser(), "Permission denied");
                     }
                 } else {
-                    String relaysplit = DatabaseUtils.getChannelUserProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), event.getChannel().getName(), PermUtils.authUser(event.getBot(), event.getUser().getNick()),"relaybotsplit").getValue(CHANNELUSERPROPERTY.VALUE);
+                    Record rec = DatabaseUtils.getChannelUserProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), event.getChannel().getName(), PermUtils.authUser(event.getBot(), event.getUser().getNick()),"relaybotsplit");
+                    if(rec == null)
+                        return;
+                    String relaysplit = rec.getValue(CHANNELUSERPROPERTY.VALUE);
                     String startingmessage = event.getMessage();
                     if (relaysplit != null) {
                         String[] midmessage = StringUtils.split(startingmessage, relaysplit);
