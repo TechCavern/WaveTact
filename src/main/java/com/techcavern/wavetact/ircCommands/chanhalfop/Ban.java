@@ -59,7 +59,6 @@ public class Ban extends IRCCommand {
                 hostmask = IRCUtils.getHostmask(network, args[0].replaceFirst("\\+", ""), true);
             } else if (args[0].startsWith("-")) {
                 hostmask = IRCUtils.getHostmask(network, args[0].replaceFirst("-", ""), true);
-
             } else {
                 hostmask = IRCUtils.getHostmask(network, args[0], true);
             }
@@ -68,19 +67,18 @@ public class Ban extends IRCCommand {
         Record BanRecord = DatabaseUtils.getBan(networkname, channel.getName(), hostmask, isMute);
         if (args[0].startsWith("-")) {
             if (BanRecord != null) {
-                BanRecord.setValue(BANS.TIME, 0);
+                BanRecord.setValue(BANS.TIME, Long.valueOf(0));
                 DatabaseUtils.updateBan(BanRecord);
             } else {
-                if(isMute)
                 IRCUtils.setMode(channel, network, "-" + ban, hostmask);
             }
         } else if (args[0].startsWith("+")) {
             if (BanRecord != null) {
                 if (args[0].startsWith("+")) {
                     if (args[1].startsWith("+")) {
-                        BanRecord.setValue(BANS.TIME, (long) BanRecord.getValue(BANS.TIME) + GeneralUtils.getMilliSeconds(args[1].replace("+", "")));
+                        BanRecord.setValue(BANS.TIME, BanRecord.getValue(BANS.TIME) + GeneralUtils.getMilliSeconds(args[1].replace("+", "")));
                     } else if (args[1].startsWith("-")) {
-                        BanRecord.setValue(BANS.TIME, (long) BanRecord.getValue(BANS.TIME) - GeneralUtils.getMilliSeconds(args[1].replace("+", "")));
+                        BanRecord.setValue(BANS.TIME, BanRecord.getValue(BANS.TIME) - GeneralUtils.getMilliSeconds(args[1].replace("+", "")));
                     } else {
                         BanRecord.setValue(BANS.TIME, GeneralUtils.getMilliSeconds(args[1].replace("+", "")));
                     }

@@ -7,8 +7,8 @@ CREATE TABLE BANS (
 hostmask Text,
 network Text,
 channel Text,
-init Long,
-time Long,
+init BigInt,
+time BigInt,
 isMute Boolean,
 property Text
 );
