@@ -43,7 +43,7 @@ public class DatabaseUtils {
     }
 
     public static Result<Record> getBans() {
-        return Registry.WaveTactDB.select().from(BANS).orderBy(BANS.HOSTMASK.asc()).fetch();
+        return Registry.WaveTactDB.select().from(BANS).orderBy(BANS.TIME.asc()).fetch();
     }
 
     public static String getConfig(String config) {

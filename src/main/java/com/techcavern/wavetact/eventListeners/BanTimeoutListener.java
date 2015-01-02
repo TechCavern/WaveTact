@@ -15,27 +15,24 @@ public class BanTimeoutListener implements Runnable {
     @Override
     public void run() {
         try {
-            TimeUnit.SECONDS.sleep(30);
+            TimeUnit.SECONDS.sleep(120);
         } catch (InterruptedException c) {
             // ignored
         }
         while (true) {
             try {
-                TimeUnit.SECONDS.sleep(5);
                 for (Record banRecord : DatabaseUtils.getBans()) {
                     try {
                         if (System.currentTimeMillis() >= banRecord.getValue(BANS.TIME) + banRecord.getValue(BANS.INIT)) {
                             PircBotX networkObject = IRCUtils.getBotByNetworkName(banRecord.getValue(BANS.NETWORK));
                             IRCUtils.setMode(IRCUtils.getChannelbyName(networkObject, banRecord.getValue(BANS.CHANNEL)), networkObject, "-" + banRecord.getValue(BANS.PROPERTY), banRecord.getValue(BANS.HOSTMASK));
                             DatabaseUtils.removeBan(banRecord.getValue(BANS.NETWORK), banRecord.getValue(BANS.CHANNEL), banRecord.getValue(BANS.HOSTMASK), banRecord.getValue(BANS.ISMUTE));
-                        } else {
-                            break;
                         }
                     } catch (IllegalArgumentException | NullPointerException e) {
                         // ignored
                     }
                 }
-
+                TimeUnit.SECONDS.sleep(120);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
