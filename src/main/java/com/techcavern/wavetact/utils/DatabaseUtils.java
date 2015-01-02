@@ -40,8 +40,10 @@ public class DatabaseUtils {
     }
 
     public static String getConfig(String config) {
-        Result<Record> configRecord = Registry.WaveTactDB.select().from(CONFIG).where(CONFIG.PROPERTY.eq(config)).fetch();
-        return getRecord(configRecord).getValue(CONFIG.VALUE);
+        Record configRecord = getRecord(Registry.WaveTactDB.select().from(CONFIG).where(CONFIG.PROPERTY.eq(config)).fetch());
+        if (configRecord == null)
+            return null;
+        return configRecord.getValue(CONFIG.VALUE);
     }
 
     public static void removeConfig(String config) {
