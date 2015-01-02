@@ -63,6 +63,7 @@ public class CustomCommand extends IRCCommand {
         if(modify && customCommand != null && userPermLevel >= customCommand.getValue(CUSTOMCOMMANDS.PERMLEVEL)) {
             customCommand.setValue(CUSTOMCOMMANDS.PERMLEVEL, Integer.parseInt(args[1]));
             customCommand.setValue(CUSTOMCOMMANDS.VALUE, StringUtils.join(2, args.length, " "));
+            Registry.WaveTactDB.update(CUSTOMCOMMANDS).set(customCommand);
         }else if(remove && customCommand != null && userPermLevel >= customCommand.getValue(CUSTOMCOMMANDS.PERMLEVEL)){
             DatabaseUtils.removeCustomCommand(net, chan, command);
         }else if(customCommand == null && IRCUtils.getGenericCommand(command) == null){

@@ -4,6 +4,8 @@ import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.*;
 import static com.techcavern.wavetactdb.Tables.*;
+
+import com.techcavern.wavetactdb.tables.records.BansRecord;
 import org.apache.commons.lang3.ArrayUtils;
 import org.jooq.Record;
 import org.pircbotx.Channel;
@@ -65,6 +67,7 @@ public class Ban extends IRCCommand {
         if (args[0].startsWith("-")) {
             if (BanRecord != null) {
                 BanRecord.setValue(BANS.TIME, 0);
+                Registry.WaveTactDB.update(BANS).set(BanRecord);
             } else {
                 if(isMute)
                 IRCUtils.setMode(channel, network, "-" + ban, hostmask);
@@ -73,7 +76,7 @@ public class Ban extends IRCCommand {
             if (BanRecord != null) {
                 if (args[0].startsWith("+")) {
                     if (args[1].startsWith("+")) {
-                        BanRecord.setValue(BANS.TIME, (long)BanRecord.getValue(BANS.TIME) + GeneralUtils.getMilliSeconds(args[1].replace("+", "")));
+                        BanRecord.setValue(BANS.TIME, (long) BanRecord.getValue(BANS.TIME) + GeneralUtils.getMilliSeconds(args[1].replace("+", "")));
                     } else if (args[1].startsWith("-")) {
                         BanRecord.setValue(BANS.TIME, (long) BanRecord.getValue(BANS.TIME) - GeneralUtils.getMilliSeconds(args[1].replace("+", "")));
                     } else {
@@ -81,6 +84,7 @@ public class Ban extends IRCCommand {
                     }
                     IRCUtils.sendMessage(user, network, channel, "Ban modified", prefix);
                 }
+                Registry.WaveTactDB.update(BANS).set(BanRecord);
             } else {
                 ErrorUtils.sendError(user, "Ban does not exist!");
             }

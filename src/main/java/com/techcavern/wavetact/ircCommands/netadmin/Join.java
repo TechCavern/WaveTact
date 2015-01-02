@@ -10,6 +10,7 @@ import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.Registry;
 import org.jooq.Record;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -38,6 +39,7 @@ public class Join extends IRCCommand {
         if (permanent) {
             Record server = DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(network));
             server.setValue(SERVERS.CHANNELS, SERVERS.CHANNELS + ", " + args[0]);
+            Registry.WaveTactDB.update(SERVERS).set(server);
         }
         network.sendIRC().joinChannel(args[0]);
     }

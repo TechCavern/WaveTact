@@ -141,11 +141,11 @@ public class DatabaseUtils {
     }
 
     public static void removeServer(String name) {
-        Registry.WaveTactDB.delete(SERVERS).where(SERVERS.NAME.eq(name));
+        Registry.WaveTactDB.delete(SERVERS).where(SERVERS.NAME.eq(name)).execute();
     }
 
     public static void addServer(String name, int port, String server, String nick, String channels, String nickserv, String bindhost, boolean netadminaccess, String networkadmins, String authtype) {
-        Registry.WaveTactDB.insertInto(SERVERS).values(name, port, server, nick, channels, nickserv, bindhost, netadminaccess, authtype, networkadmins);
+        Registry.WaveTactDB.insertInto(SERVERS).values(name, port, server, nick, channels, nickserv, bindhost, netadminaccess, authtype, networkadmins).execute();
     }
 
 

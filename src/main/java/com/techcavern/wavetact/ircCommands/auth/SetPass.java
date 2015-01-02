@@ -32,6 +32,7 @@ public class SetPass extends IRCCommand {
             if (Registry.encryptor.checkPassword(args[0] + account.getValue(ACCOUNTS.RANDOMSTRING), account.getValue(ACCOUNTS.PASSWORD))) {
                 account.setValue(ACCOUNTS.RANDOMSTRING, UUID.randomUUID().toString());
                 account.setValue(ACCOUNTS.PASSWORD, Registry.encryptor.encryptPassword(args[1] + ACCOUNTS.RANDOMSTRING));
+                Registry.WaveTactDB.update(ACCOUNTS).set(account);
                 IRCUtils.sendMessage(user, network, channel, "Password changed successfully", prefix);
             } else {
                 ErrorUtils.sendError(user, "Incorrect password");

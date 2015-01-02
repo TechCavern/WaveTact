@@ -30,69 +30,72 @@ public class Network extends ConsoleCommand {
             if (args.length < 3) {
                 viewonly = true;
             }
-            switch (args[1].toLowerCase()) {
-                case "name":
-                    if (viewonly)
-                        commandIO.getPrintStream().println(network.getValue(SERVERS.NAME));
-                    else
-                        network.setValue(SERVERS.NAME, args[2]);
-                    break;
-                case "channels":
-                    if (viewonly)
-                        commandIO.getPrintStream().println(network.getValue(SERVERS.CHANNELS));
-                    else
-                        network.setValue(SERVERS.CHANNELS, args[2]);
-                    break;
-                case "server":
-                    if (viewonly)
-                        commandIO.getPrintStream().println(network.getValue(SERVERS.SERVER));
-                    else
-                        network.setValue(SERVERS.SERVER, args[2]);
-                    break;
-                case "port":
-                    if (viewonly)
-                        commandIO.getPrintStream().println(network.getValue(SERVERS.PORT));
-                    else
-                        network.setValue(SERVERS.PORT, Integer.parseInt(args[2]));
-                    break;
-                case "nick":
-                    if (viewonly)
-                        commandIO.getPrintStream().println(network.getValue(SERVERS.NICK));
-                    else
-                        network.setValue(SERVERS.NICK, args[2]);
-                    break;
-                case "nickserv":
-                    if (viewonly)
-                        commandIO.getPrintStream().println(network.getValue(SERVERS.NICKSERV));
-                    else
-                        network.setValue(SERVERS.NICKSERV, args[2]);
-                    break;
-                case "netadmin":
-                    if (viewonly)
-                        commandIO.getPrintStream().println(network.getValue(SERVERS.NETWORKADMINS));
-                    else
-                        network.setValue(SERVERS.NETWORKADMINS, args[2]);
-                    break;
-                case "bindhost":
-                    if (viewonly)
-                        commandIO.getPrintStream().println(network.getValue(SERVERS.BINDHOST));
-                    else
-                        network.setValue(SERVERS.BINDHOST, args[2]);
-                    break;
-                case "authtype":
-                    if (viewonly)
-                        commandIO.getPrintStream().println(network.getValue(SERVERS.AUTHTYPE));
-                    else
-                        network.setValue(SERVERS.AUTHTYPE, args[2]);
-                    break;
-                case "netadminaccess":
-                    if (viewonly)
-                        commandIO.getPrintStream().println(network.getValue(SERVERS.NETWORKADMINACCESS));
-                    else
-                        network.setValue(SERVERS.NETWORKADMINACCESS, Boolean.valueOf(args[2]));
-                    break;
-                default:
-                    commandIO.getPrintStream().println("Failed to parse property");
+            if(network != null) {
+                switch (args[1].toLowerCase()) {
+                    case "name":
+                        if (viewonly)
+                            commandIO.getPrintStream().println(network.getValue(SERVERS.NAME));
+                        else
+                            network.setValue(SERVERS.NAME, args[2]);
+                        break;
+                    case "channels":
+                        if (viewonly)
+                            commandIO.getPrintStream().println(network.getValue(SERVERS.CHANNELS));
+                        else
+                            network.setValue(SERVERS.CHANNELS, args[2]);
+                        break;
+                    case "server":
+                        if (viewonly)
+                            commandIO.getPrintStream().println(network.getValue(SERVERS.SERVER));
+                        else
+                            network.setValue(SERVERS.SERVER, args[2]);
+                        break;
+                    case "port":
+                        if (viewonly)
+                            commandIO.getPrintStream().println(network.getValue(SERVERS.PORT));
+                        else
+                            network.setValue(SERVERS.PORT, Integer.parseInt(args[2]));
+                        break;
+                    case "nick":
+                        if (viewonly)
+                            commandIO.getPrintStream().println(network.getValue(SERVERS.NICK));
+                        else
+                            network.setValue(SERVERS.NICK, args[2]);
+                        break;
+                    case "nickserv":
+                        if (viewonly)
+                            commandIO.getPrintStream().println(network.getValue(SERVERS.NICKSERV));
+                        else
+                            network.setValue(SERVERS.NICKSERV, args[2]);
+                        break;
+                    case "netadmin":
+                        if (viewonly)
+                            commandIO.getPrintStream().println(network.getValue(SERVERS.NETWORKADMINS));
+                        else
+                            network.setValue(SERVERS.NETWORKADMINS, args[2]);
+                        break;
+                    case "bindhost":
+                        if (viewonly)
+                            commandIO.getPrintStream().println(network.getValue(SERVERS.BINDHOST));
+                        else
+                            network.setValue(SERVERS.BINDHOST, args[2]);
+                        break;
+                    case "authtype":
+                        if (viewonly)
+                            commandIO.getPrintStream().println(network.getValue(SERVERS.AUTHTYPE));
+                        else
+                            network.setValue(SERVERS.AUTHTYPE, args[2]);
+                        break;
+                    case "netadminaccess":
+                        if (viewonly)
+                            commandIO.getPrintStream().println(network.getValue(SERVERS.NETWORKADMINACCESS));
+                        else
+                            network.setValue(SERVERS.NETWORKADMINACCESS, Boolean.valueOf(args[2]));
+                        break;
+                    default:
+                        commandIO.getPrintStream().println("Failed to parse property");
+                }
+                Registry.WaveTactDB.update(SERVERS).set(network);
             }
 
         } else if (args[0].startsWith("-")) {

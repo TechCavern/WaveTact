@@ -21,6 +21,7 @@ public class ResetPass extends ConsoleCommand {
         if (account != null) {
             account.setValue(ACCOUNTS.RANDOMSTRING, UUID.randomUUID().toString());
             account.setValue(ACCOUNTS.PASSWORD, Registry.encryptor.encryptPassword(args[1] + ACCOUNTS.RANDOMSTRING));
+            Registry.WaveTactDB.update(ACCOUNTS).set(account);
             commandIO.getPrintStream().println("Account dropped");
         } else {
             commandIO.getPrintStream().println("Account does not exist");

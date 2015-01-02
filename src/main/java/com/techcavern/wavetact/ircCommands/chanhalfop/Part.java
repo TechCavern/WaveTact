@@ -45,10 +45,11 @@ public class Part extends IRCCommand {
                 }
                 network.sendRaw().rawLine("PART " + args[0]);
                 if (permanent) {
-                    Record server = DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(network));
-                    List<String> channels = new LinkedList<>(Arrays.asList(StringUtils.split(server.getValue(SERVERS.CHANNELS), ", ")));
+                    Record networkRecord = DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(network));
+                    List<String> channels = new LinkedList<>(Arrays.asList(StringUtils.split(networkRecord.getValue(SERVERS.CHANNELS), ", ")));
                     channels.stream().filter(chan -> chan.equals(args[0])).forEach(channels::remove);
-                    server.setValue(SERVERS.CHANNELS, StringUtils.join(channels, ", "));
+                    networkRecord.setValue(SERVERS.CHANNELS, StringUtils.join(channels, ", "));
+                    Registry.WaveTactDB.update(SERVERS).set(networkRecord);
                 }
             } else {
                 ErrorUtils.sendError(user, "Permission denied");

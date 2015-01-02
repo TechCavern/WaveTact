@@ -12,6 +12,8 @@ import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 
 import static com.techcavern.wavetactdb.Tables.*;
+
+import com.techcavern.wavetact.utils.Registry;
 import org.jooq.Record;
 
 /**
@@ -26,15 +28,16 @@ public class LockCCMD extends ConsoleCommand {
 
     @Override
     public void onCommand(String[] args, CommandIO commandIO) throws Exception {
-        if (args[0].startsWith("-")) {
-            Record command = DatabaseUtils.getCustomCommand(null, null, args[0].replaceFirst("-", ""));
-            command.setValue(CUSTOMCOMMANDS.ISLOCKED, false);
-            commandIO.getPrintStream().println("Custom command unlocked");
-
-        } else {
-            Record command = DatabaseUtils.getCustomCommand(null, null, args[0]);
-            command.setValue(CUSTOMCOMMANDS.ISLOCKED, true);
-            commandIO.getPrintStream().println("Custom command unlocked");
-        }
+        Record command = DatabaseUtils.getCustomCommand(null, null, args[0].replaceFirst("-", ""));
+        if (command != null){
+            if (args[0].startsWith("-")) {
+                command.setValue(CUSTOMCOMMANDS.ISLOCKED, false);
+                commandIO.getPrintStream().println("Custom command unlocked");
+            } else {
+                command.setValue(CUSTOMCOMMANDS.ISLOCKED, true);
+                commandIO.getPrintStream().println("Custom command unlocked");
+            }
+            Registry.WaveTactDB.update(CUSTOMCOMMANDS).set(command);
+    }
     }
 }

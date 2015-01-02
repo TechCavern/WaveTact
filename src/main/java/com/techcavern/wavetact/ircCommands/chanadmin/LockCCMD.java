@@ -10,6 +10,7 @@ import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.Registry;
 import org.jooq.Record;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -26,13 +27,16 @@ public class LockCCMD extends IRCCommand {
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        if (args[0].startsWith("-")) {
-            Record command = DatabaseUtils.getCustomCommand(IRCUtils.getNetworkNameByNetwork(network), channel.getName(), args[0].replaceFirst("-", ""));
-            command.setValue(CUSTOMCOMMANDS.ISLOCKED, false);
-            IRCUtils.sendMessage(user, network, channel, "Custom command unlocked", prefix);
-        } else {
-            Record command = DatabaseUtils.getCustomCommand(IRCUtils.getNetworkNameByNetwork(network), channel.getName(), args[0]);
-            command.setValue(CUSTOMCOMMANDS.ISLOCKED, true);
-            IRCUtils.sendMessage(user, network, channel, "Custom command unlocked", prefix);        }
+        Record command = DatabaseUtils.getCustomCommand(IRCUtils.getNetworkNameByNetwork(network), channel.getName(), args[0].replaceFirst("-", ""));
+        if(command != null) {
+            if (args[0].startsWith("-")) {
+                command.setValue(CUSTOMCOMMANDS.ISLOCKED, false);
+                IRCUtils.sendMessage(user, network, channel, "Custom command unlocked", prefix);
+            } else {
+                command.setValue(CUSTOMCOMMANDS.ISLOCKED, true);
+                IRCUtils.sendMessage(user, network, channel, "Custom command unlocked", prefix);
+            }
+            Registry.WaveTactDB.update(CUSTOMCOMMANDS).set(command);
+        }
     }
 }

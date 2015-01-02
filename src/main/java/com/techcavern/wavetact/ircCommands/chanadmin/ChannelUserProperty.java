@@ -47,6 +47,7 @@ public class ChannelUserProperty extends IRCCommand {
                 if(viewonly)
                     IRCUtils.sendMessage(user, network, channel, args[1] + ": " +channelUserProperty.getValue(CHANNELUSERPROPERTY.VALUE), prefix);
                 channelUserProperty.setValue(CHANNELUSERPROPERTY.VALUE, args[2]);
+                Registry.WaveTactDB.update(CHANNELUSERPROPERTY).set(channelUserProperty);
             }
         }else if (channelUserProperty == null && (!isDelete || !isModify)) {
                 DatabaseUtils.addChannelUserProperty(networkname, channel.getName(), account, args[1], args[2]);
