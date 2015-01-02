@@ -37,6 +37,12 @@ public class Network extends ConsoleCommand {
                     else
                         network.setValue(SERVERS.NAME, args[2]);
                     break;
+                case "channels":
+                    if (viewonly)
+                        commandIO.getPrintStream().println(network.getValue(SERVERS.CHANNELS));
+                    else
+                        network.setValue(SERVERS.CHANNELS, args[2]);
+                    break;
                 case "server":
                     if (viewonly)
                         commandIO.getPrintStream().println(network.getValue(SERVERS.SERVER));
@@ -105,25 +111,36 @@ public class Network extends ConsoleCommand {
             commandIO.getPrintStream().print("Server host: ");
             String server = input.nextLine();
             commandIO.getPrintStream().print("Server port (Press enter to use default): ");
-            int port = Integer.parseInt(input.nextLine());
+            int port = 6667;
+            String portinput = input.nextLine();
+            if(!portinput.isEmpty())
+            port = Integer.parseInt(portinput);
             commandIO.getPrintStream().print("Server nick: ");
             String nick = input.nextLine();
             commandIO.getPrintStream().print("Channels (#chan1, #chan2, etc): ");
             String channels = input.nextLine();
             commandIO.getPrintStream().print("Nickserv Pass (Press enter to ignore): ");
-            String nickserv = input.nextLine();
+            String nickserv = null;
+            String nickservinput = input.nextLine();
+            if(!nickservinput.isEmpty())
+            nickserv = nickservinput;
             commandIO.getPrintStream().print("Bindhost (Press enter to use default): ");
-            String bindhost = input.nextLine();
+            String bindhost = null;
+            String bindhostinput = input.nextLine();
+            if(!bindhostinput.isEmpty())
+                bindhost = bindhostinput;
             commandIO.getPrintStream().print("AuthType (nickserv/account/nick): ");
             String authtype = input.nextLine();
             commandIO.getPrintStream().print("Auto Allow Network Operators NetAdmin Level Access? (True/False): ");
             boolean netadminaccess = Boolean.valueOf(input.nextLine());
             commandIO.getPrintStream().print("Network Admins: (account1, account2, etc) (Press enter to ignore): ");
-            String netadmins = input.nextLine();
+            String netadmins = null;
+            String netadminsinput = input.nextLine();
+            if(!netadminsinput.isEmpty())
+                netadmins = netadminsinput;
             DatabaseUtils.addServer(name, port, server, nick, channels, nickserv, bindhost, netadminaccess, netadmins, authtype);
             PircBotX network = ConfigUtils.createNetwork(nickserv, Arrays.asList(StringUtils.split(channels, ", ")), nick, server, port, bindhost, name);
             Registry.WaveTact.addNetwork(network);
-            network.startBot();
             Registry.NetworkName.add(new NetProperty(name, network));
         }
     }

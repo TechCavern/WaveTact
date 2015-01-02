@@ -38,6 +38,14 @@ Channel-User Properties
 
 You are welcome to set other properties, however do beware that you may find issues in the future if the property you set happens to coincide with a new channel property
 
+Global Config
+=================
+- commandchar - Determines the global command char
+- wolframalphaapikey - sets the Wolfram Alpha api key
+- googleapikey - sets the Google api key
+- wordnikapikey - sets the wordnik api key
+- wundergroundapikey - sets the wunderground api key
+
 Developing
 ==========
 - You will need to run `gradle idea` each time the build file is modified as intellij internal gradle support does not handle it properly. 

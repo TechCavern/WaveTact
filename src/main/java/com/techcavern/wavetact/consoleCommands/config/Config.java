@@ -5,7 +5,11 @@ import com.techcavern.wavetact.objects.CommandIO;
 import com.techcavern.wavetact.objects.ConsoleCommand;
 import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.Registry;
+import org.jooq.Record;
+
+import javax.xml.crypto.Data;
 
 @ConCMD
 public class Config extends ConsoleCommand {
@@ -16,43 +20,17 @@ public class Config extends ConsoleCommand {
 
     @Override
     public void onCommand(String[] args, CommandIO commandIO) throws Exception {
-        switch (args[0].toLowerCase()) {
-            case "commandchar":
-                DatabaseUtils.removeConfig("commandchar");
-                DatabaseUtils.addConfig("commandchar", args[1]);
-                success(commandIO);
-                break;
-            case "wolframalphaapikey":
-                DatabaseUtils.removeConfig("wolframalphapikey");
-                DatabaseUtils.addConfig("wolframalphapikey", args[1]);
-                Registry.wolframalphaapikey = args[1];
-                success(commandIO);
-                break;
-            case "googleapikey":
-                DatabaseUtils.removeConfig("googleapikey");
-                DatabaseUtils.addConfig("googleapikey", args[1]);
-                Registry.googleapikey = args[1];
-                success(commandIO);
-                break;
-            case "wordnikapikey":
-                DatabaseUtils.removeConfig("wordnikapikey");
-                DatabaseUtils.addConfig("wordnikapikey", args[1]);
-                Registry.wordnikapikey = args[1];
-                success(commandIO);
-                break;
-            case "wundergroundapikey":
-                DatabaseUtils.removeConfig("wundergroundapikey");
-                DatabaseUtils.addConfig("wundergroundapikey", args[1]);
-                Registry.googleapikey = args[1];
-                success(commandIO);
-                break;
-            default:
-                commandIO.getPrintStream().println("Invalid property");
-
-
+        if(args.length < 2){
+            String value = DatabaseUtils.getConfig(args[0]);
+            if(value != null){
+                commandIO.getPrintStream().println(value);
+            }else{
+                commandIO.getPrintStream().println("Property not found");
+            }
+        }else {
+            DatabaseUtils.removeConfig(args[0]);
+            DatabaseUtils.addConfig(args[0], args[1]);
+            commandIO.getPrintStream().println("Property modified");
         }
-    }
-    private void success(CommandIO commandIO){
-        commandIO.getPrintStream().println("Property modified");
     }
 }

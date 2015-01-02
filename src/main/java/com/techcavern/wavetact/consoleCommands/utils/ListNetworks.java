@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class ListNetworks extends ConsoleCommand {
 
     public ListNetworks() {
-        super(GeneralUtils.toArray("listnetworks networks"), "list", "lists all networks");
+        super(GeneralUtils.toArray("listnetworks networks"), "listnetworks", "lists all networks");
     }
 
     @Override
