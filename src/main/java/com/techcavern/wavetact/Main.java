@@ -25,7 +25,6 @@ public class Main {
             ConsoleClient.go();
         } else {
             LoadUtils.initiateDatabaseConnection();
-            Registry.initRegistry();
             ConfigUtils.registerNetworks();
             LoadUtils.registerConsoleCommands();
             LoadUtils.registerIRCCommands();

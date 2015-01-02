@@ -32,11 +32,4 @@ public class Registry {
     public static ConsoleServer consoleServer = new ConsoleServer();
     public static DSLContext WaveTactDB = null;
 
-    public static void initRegistry()
-    {
-        wundergroundapikey = DatabaseUtils.getConfig("wundergroundapikey");
-        wolframalphaapikey = DatabaseUtils.getConfig("wolframalphaapikey");
-        wordnikapikey = DatabaseUtils.getConfig("wordnikapikey");
-        googleapikey = DatabaseUtils.getConfig("googleapikey");
-    }
 }

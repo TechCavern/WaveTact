@@ -1,6 +1,7 @@
 package com.techcavern.wavetact.utils;
 
 import com.google.common.io.Files;
+import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.ConsoleCommand;
 import com.techcavern.wavetact.objects.FunObject;
@@ -29,8 +30,11 @@ public class LoadUtils {
         Class.forName("org.sqlite.JDBC");
         Connection conn = DriverManager.getConnection("jdbc:sqlite:./db.sqlite");
         System.err.println("Creating DSLContext...");
-        DSLContext create = DSL.using(conn, SQLDialect.SQLITE);
-        Registry.WaveTactDB = create;
+        Registry.WaveTactDB = DSL.using(conn, SQLDialect.SQLITE);
+        Registry.wundergroundapikey = DatabaseUtils.getConfig("wundergroundapikey");
+        Registry.wolframalphaapikey = DatabaseUtils.getConfig("wolframalphaapikey");
+        Registry.wordnikapikey = DatabaseUtils.getConfig("wordnikapikey");
+        Registry.googleapikey = DatabaseUtils.getConfig("googleapikey");
     }
 
     public static void registerIRCCommands() {
@@ -45,7 +49,7 @@ public class LoadUtils {
     }
 
     public static void registerConsoleCommands() {
-        Set<Class<?>> classes = Registry.wavetactreflection.getTypesAnnotatedWith(IRCCMD.class);
+        Set<Class<?>> classes = Registry.wavetactreflection.getTypesAnnotatedWith(ConCMD.class);
         for (Class<?> clss : classes) {
             try {
                 Registry.ConsoleCommands.add(((ConsoleCommand) clss.newInstance()));
