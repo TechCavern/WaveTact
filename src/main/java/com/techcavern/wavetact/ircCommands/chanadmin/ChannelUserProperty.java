@@ -55,6 +55,8 @@ public class ChannelUserProperty extends IRCCommand {
             }
         }else if (channelUserProperty == null && (!isDelete || !isModify)) {
                 DatabaseUtils.addChannelUserProperty(networkname, channel.getName(), account, args[1], args[2]);
+            IRCUtils.sendMessage(user, network, channel, "Property added", prefix);
+
         }else{
             ErrorUtils.sendError(user, "Unknown user or unknown property");
         }

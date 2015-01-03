@@ -56,15 +56,18 @@ public class CustomCommand extends IRCCommand {
         }else{
             command = args[0];
         }
-        Record customCommand= DatabaseUtils.getCustomCommand(net, chan, command);
+        Record customCommand= DatabaseUtils.getChannelCustomCommand(net, chan, command);
         if(modify && customCommand != null && userPermLevel >= customCommand.getValue(CUSTOMCOMMANDS.PERMLEVEL) && !customCommand.getValue(CUSTOMCOMMANDS.ISLOCKED)) {
             customCommand.setValue(CUSTOMCOMMANDS.PERMLEVEL, Integer.parseInt(args[1]));
             customCommand.setValue(CUSTOMCOMMANDS.VALUE, GeneralUtils.buildMessage(2, args.length, args).replace("\n", " "));
             DatabaseUtils.updateCustomCommand(customCommand);
+            IRCUtils.sendMessage(user, network, channel, "Custom Command modified", prefix);
         }else if(remove && customCommand != null && userPermLevel >= customCommand.getValue(CUSTOMCOMMANDS.PERMLEVEL) && !customCommand.getValue(CUSTOMCOMMANDS.ISLOCKED)){
             DatabaseUtils.removeCustomCommand(net, chan, command);
+            IRCUtils.sendMessage(user, network, channel, "Custom Command removed", prefix);
         }else if(customCommand == null && IRCUtils.getGenericCommand(command) == null){
             DatabaseUtils.addCustomCommand(net, chan, command, Integer.parseInt(args[1]), GeneralUtils.buildMessage(2, args.length, args).replace("\n", " "), false, isAction);
+            IRCUtils.sendMessage(user, network, channel, "Custom Command added", prefix);
         }else{
             ErrorUtils.sendError(user, "Command already exists (If you were adding) or Command does not exist, or The command is locked (Either could be the problem if you were modifing)");
         }

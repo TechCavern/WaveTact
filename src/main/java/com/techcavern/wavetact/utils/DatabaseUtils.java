@@ -79,7 +79,12 @@ public class DatabaseUtils {
 
     }
     public static Record getChannelCustomCommand(String network, String channel, String command) {
-        Result<Record> commandRecord = Registry.WaveTactDB.select().from(CUSTOMCOMMANDS).where(CUSTOMCOMMANDS.COMMAND.eq(command)).and(CUSTOMCOMMANDS.NETWORK.eq(network)).and(CUSTOMCOMMANDS.CHANNEL.eq(channel)).fetch();
+        Result<Record> commandRecord = null;
+        if(channel == null && network == null){
+            commandRecord = Registry.WaveTactDB.select().from(CUSTOMCOMMANDS).where(CUSTOMCOMMANDS.COMMAND.eq(command)).and(CUSTOMCOMMANDS.NETWORK.isNull()).and(CUSTOMCOMMANDS.CHANNEL.isNull()).fetch();
+        }else{
+            commandRecord = Registry.WaveTactDB.select().from(CUSTOMCOMMANDS).where(CUSTOMCOMMANDS.COMMAND.eq(command)).and(CUSTOMCOMMANDS.NETWORK.eq(network)).and(CUSTOMCOMMANDS.CHANNEL.eq(channel)).fetch();
+        }
         return getRecord(commandRecord);
     }
     public static void updateCustomCommand(Record command){
