@@ -39,7 +39,7 @@ public class Act extends ConsoleCommand {
             chan = IRCUtils.getChannelbyName(network, args[1].replace(prefix, ""));
         else
             chan = IRCUtils.getChannelbyName(network, args[1]);
-        IRCUtils.sendAction(network, chan, StringUtils.join(args, " ").replace("\n", " "), prefix);
+        IRCUtils.sendAction(network, chan, GeneralUtils.buildMessage(2, args.length, args).replace("\n", " "), prefix);
     }
 }
 

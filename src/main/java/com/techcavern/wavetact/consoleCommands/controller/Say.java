@@ -21,7 +21,7 @@ import org.pircbotx.PircBotX;
 public class Say extends ConsoleCommand {
 
     public Say() {
-        super(GeneralUtils.toArray("act do"), "act [network] [channel] [something]", "Makes the bot do something");
+        super(GeneralUtils.toArray("say"), "say [network] [channel] [something]", "Makes the bot say something");
     }
 
     @Override
@@ -33,7 +33,7 @@ public class Say extends ConsoleCommand {
             chan = IRCUtils.getChannelbyName(network, args[1].replace(prefix, ""));
         else
             chan = IRCUtils.getChannelbyName(network, args[1]);
-        IRCUtils.sendMessage(network, chan, StringUtils.join(args, " ").replace("\n", " "), prefix);
+        IRCUtils.sendMessage(network, chan, GeneralUtils.buildMessage(2, args.length, args).replace("\n", " "), prefix);
     }
 }
 
