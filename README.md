@@ -40,7 +40,7 @@ You are welcome to set other properties (but they will be rather useless), howev
 
 Channel Properties
 ==================
-- autounban - this will detect bans and auto-unban a ban after 24 hours
+- autounban - this will detect bans and auto-unban a ban after the specified time. (s(econds)/m(inutes)/h(ours)/d(ays)/w(eeks)
 
 You are welcome to set other properties (but they will be rather useless), however do beware that you may find issues in the future if the property you set happens to coincide with a new channel property
 

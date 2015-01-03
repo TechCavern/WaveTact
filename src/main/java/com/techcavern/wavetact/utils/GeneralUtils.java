@@ -110,7 +110,6 @@ public class GeneralUtils {
 
         } else if (input.toLowerCase().endsWith("s")) {
             return Long.parseLong(input.replace("s", "")) * 1000;
-
         } else {
             return Long.parseLong(input);
         }

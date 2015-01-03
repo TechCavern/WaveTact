@@ -37,21 +37,19 @@ public class ChannelProperty extends IRCCommand {
         } else {
             property = args[0];
         }
-        String auth = PermUtils.authUser(network, property);
-        if (auth != null) {
-            property = auth;
-        }
-        Record channelUserProperty = DatabaseUtils.getChannelProperty(networkname, channel.getName(),property);
-        if(channelUserProperty != null && (isDelete || isModify)){
+        Record channelProperty = DatabaseUtils.getChannelProperty(networkname, channel.getName(),property);
+        if(channelProperty != null && (isDelete || isModify)){
             if(isDelete){
                 DatabaseUtils.removeChannelProperty(networkname, channel.getName(), property);
             }else if(isModify){
                 if(viewonly)
-                    IRCUtils.sendMessage(user, network, channel, args[0] + ": " +channelUserProperty.getValue(CHANNELPROPERTY.VALUE), prefix);
-                channelUserProperty.setValue(CHANNELPROPERTY.VALUE, args[1]);
-                DatabaseUtils.updateChannelUserProperty(channelUserProperty);
+                    IRCUtils.sendMessage(user, network, channel, args[0] + ": " +channelProperty.getValue(CHANNELPROPERTY.VALUE), prefix);
+                else {
+                    channelProperty.setValue(CHANNELPROPERTY.VALUE, args[1]);
+                    DatabaseUtils.updateChannelProperty(channelProperty);
+                }
             }
-        }else if (channelUserProperty == null && (!isDelete || !isModify)) {
+        }else if (channelProperty == null && (!isDelete || !isModify)) {
                 DatabaseUtils.addChannelProperty(networkname, channel.getName(), property, args[1]);
         }else{
             ErrorUtils.sendError(user, "Unknown user or unknown property");

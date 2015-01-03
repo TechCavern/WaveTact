@@ -46,8 +46,10 @@ public class ChannelUserProperty extends IRCCommand {
             }else if(isModify){
                 if(viewonly)
                     IRCUtils.sendMessage(user, network, channel, args[1] + ": " +channelUserProperty.getValue(CHANNELUSERPROPERTY.VALUE), prefix);
-                channelUserProperty.setValue(CHANNELUSERPROPERTY.VALUE, args[2]);
-                DatabaseUtils.updateChannelUserProperty(channelUserProperty);
+                else {
+                    channelUserProperty.setValue(CHANNELUSERPROPERTY.VALUE, args[2]);
+                    DatabaseUtils.updateChannelUserProperty(channelUserProperty);
+                }
             }
         }else if (channelUserProperty == null && (!isDelete || !isModify)) {
                 DatabaseUtils.addChannelUserProperty(networkname, channel.getName(), account, args[1], args[2]);

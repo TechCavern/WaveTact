@@ -25,14 +25,14 @@ public class BanListener extends ListenerAdapter {
         String type = "";
         boolean ban = false;
         boolean isMute = false;
-        if(banMask.startsWith("+")){
+        if (banMask.startsWith("+")) {
             ban = true;
-            banMask.replaceFirst("\\+","");
-        }else if(banMask.startsWith("-")){
+            banMask = banMask.replaceFirst("\\+", "");
+        } else if (banMask.startsWith("-")) {
             ban = false;
-            banMask.replaceFirst("\\-","");
+            banMask = banMask.replaceFirst("-", "");
         }
-         if (banMask.startsWith("q ") && event.getBot().getServerInfo().getChannelModes().contains("q")) {
+        if (banMask.startsWith("q ") && event.getBot().getServerInfo().getChannelModes().contains("q")) {
             type = "q ";
             isMute = true;
         } else if (banMask.startsWith("b ~q:") && event.getBot().getServerInfo().getExtBanPrefix() != null && event.getBot().getServerInfo().getExtBanPrefix().equalsIgnoreCase("~") && event.getBot().getServerInfo().getExtBanList() != null && event.getBot().getServerInfo().getExtBanList().contains("q")) {
@@ -41,17 +41,17 @@ public class BanListener extends ListenerAdapter {
         } else if (banMask.startsWith("b m:") && event.getBot().getServerInfo().getExtBanList().contains("m") && event.getBot().getServerInfo().getExtBanPrefix() == null) {
             type = "b m:";
             isMute = true;
-        }else if(banMask.startsWith("b ")){
-             type = "b ";
-             isMute = false;
-        }else{
-                 return;
-             }
+        } else if (banMask.startsWith("b ")) {
+            type = "b ";
+            isMute = false;
+        } else {
+            return;
+        }
         banMask = banMask.replaceFirst(type, "");
-        if(ban && Boolean.valueOf(DatabaseUtils.getChannelProperty(network, event.getChannel().getName(), "autounban").getValue(CHANNELPROPERTY.VALUE))){
-            DatabaseUtils.addBan(network, event.getChannel().getName(), banMask, System.currentTimeMillis(), GeneralUtils.getMilliSeconds("24h"), isMute, type);
-        }else if(!ban){
+        if (!ban) {
             DatabaseUtils.removeBan(network, event.getChannel().getName(), banMask, isMute);
+        } else if (ban && DatabaseUtils.getChannelProperty(network, event.getChannel().getName(), "autounban").getValue(CHANNELPROPERTY.VALUE) != null) {
+            DatabaseUtils.addBan(network, event.getChannel().getName(), banMask, System.currentTimeMillis(), GeneralUtils.getMilliSeconds(DatabaseUtils.getChannelProperty(network, event.getChannel().getName(), "autounban").getValue(CHANNELPROPERTY.VALUE)), isMute, type);
         }
     }
 }
