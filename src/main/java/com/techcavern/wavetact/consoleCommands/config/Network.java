@@ -30,49 +30,64 @@ public class Network extends ConsoleCommand {
             if (args.length < 3) {
                 viewonly = true;
             }
+            boolean isSuccess = false;
             if(network != null) {
                 switch (args[1].toLowerCase()) {
                     case "channels":
                         if (viewonly)
                             commandIO.getPrintStream().println(network.getValue(SERVERS.CHANNELS));
-                        else
+                        else {
                             network.setValue(SERVERS.CHANNELS, args[2]);
+                            isSuccess = true;
+                        }
                         break;
                     case "server":
                         if (viewonly)
                             commandIO.getPrintStream().println(network.getValue(SERVERS.SERVER));
-                        else
+                        else {
                             network.setValue(SERVERS.SERVER, args[2]);
+                            isSuccess = true;
+                        }
                         break;
                     case "port":
                         if (viewonly)
                             commandIO.getPrintStream().println(network.getValue(SERVERS.PORT));
-                        else
+                        else {
                             network.setValue(SERVERS.PORT, Integer.parseInt(args[2]));
+                            isSuccess = true;
+                        }
                         break;
                     case "nick":
                         if (viewonly)
                             commandIO.getPrintStream().println(network.getValue(SERVERS.NICK));
-                        else
+                        else {
                             network.setValue(SERVERS.NICK, args[2]);
+                            isSuccess = true;
+                        }
                         break;
                     case "nickserv":
                         if (viewonly)
                             commandIO.getPrintStream().println(network.getValue(SERVERS.NICKSERV));
-                        else
+                        else {
                             network.setValue(SERVERS.NICKSERV, args[2]);
+                            isSuccess = true;
+                        }
                         break;
                     case "netadmin":
                         if (viewonly)
                             commandIO.getPrintStream().println(network.getValue(SERVERS.NETWORKADMINS));
-                        else
+                        else{
                             network.setValue(SERVERS.NETWORKADMINS, args[2]);
+                            isSuccess = true;
+                        }
                         break;
                     case "bindhost":
                         if (viewonly)
                             commandIO.getPrintStream().println(network.getValue(SERVERS.BINDHOST));
-                        else
+                        else {
                             network.setValue(SERVERS.BINDHOST, args[2]);
+                            isSuccess = true;
+                        }
                         break;
                     case "authtype":
                         if (viewonly)
@@ -80,18 +95,25 @@ public class Network extends ConsoleCommand {
                         else {
                             network.setValue(SERVERS.AUTHTYPE, args[2]);
                             Registry.AuthedUsers.clear();
+                            isSuccess = true;
                         }
                         break;
                     case "netadminaccess":
                         if (viewonly)
                             commandIO.getPrintStream().println(network.getValue(SERVERS.NETWORKADMINACCESS));
-                        else
+                        else {
                             network.setValue(SERVERS.NETWORKADMINACCESS, Boolean.valueOf(args[2]));
+                            isSuccess = true;
+                        }
                         break;
                     default:
                         commandIO.getPrintStream().println("Failed to parse property");
                 }
-                DatabaseUtils.updateServer(network);
+                if(isSuccess) {
+                    DatabaseUtils.updateServer(network);
+                    commandIO.getPrintStream().println("Property Modified");
+                }
+
             }
 
         } else if (args[0].startsWith("-")) {
@@ -102,6 +124,7 @@ public class Network extends ConsoleCommand {
                     Registry.NetworkName.remove(e);
                     network.stopBotReconnect();
                     network.sendIRC().quitServer();
+                    commandIO.getPrintStream().println("network removed");
                     return;
                 }
             }

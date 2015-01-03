@@ -41,12 +41,14 @@ public class ChannelProperty extends IRCCommand {
         if(channelProperty != null && (isDelete || isModify)){
             if(isDelete){
                 DatabaseUtils.removeChannelProperty(networkname, channel.getName(), property);
+                IRCUtils.sendMessage(user, network, channel, "Property deleted", prefix);
             }else if(isModify){
                 if(viewonly)
                     IRCUtils.sendMessage(user, network, channel, args[0] + ": " +channelProperty.getValue(CHANNELPROPERTY.VALUE), prefix);
                 else {
                     channelProperty.setValue(CHANNELPROPERTY.VALUE, args[1]);
                     DatabaseUtils.updateChannelProperty(channelProperty);
+                    IRCUtils.sendMessage(user, network, channel, "Property modified", prefix);
                 }
             }
         }else if (channelProperty == null && (!isDelete || !isModify)) {

@@ -28,14 +28,14 @@ public class LockCCMD extends ConsoleCommand {
 
     @Override
     public void onCommand(String[] args, CommandIO commandIO) throws Exception {
-        Record command = DatabaseUtils.getCustomCommand(null, null, args[0].replaceFirst("-", ""));
+        Record command = DatabaseUtils.getChannelCustomCommand(null, null, args[0].replaceFirst("-", ""));
         if (command != null){
             if (args[0].startsWith("-")) {
                 command.setValue(CUSTOMCOMMANDS.ISLOCKED, false);
                 commandIO.getPrintStream().println("Custom command unlocked");
             } else {
                 command.setValue(CUSTOMCOMMANDS.ISLOCKED, true);
-                commandIO.getPrintStream().println("Custom command unlocked");
+                commandIO.getPrintStream().println("Custom command locked");
             }
             DatabaseUtils.updateCustomCommand(command);
     }

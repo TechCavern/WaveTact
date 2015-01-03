@@ -12,6 +12,7 @@ dist/
 .gradle/
 out/
 pimp/
+libs/*.so
 src/META-INF/
 *.swp
 *.json
