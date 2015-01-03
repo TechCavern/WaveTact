@@ -34,7 +34,7 @@ public class Blacklistdb extends ConsoleCommand {
 
 
     public Blacklistdb() {
-        super(GeneralUtils.toArray("blacklistdb bldb spambldb ircbldb"), "blacklistdb [irc/spam] (-)[irc/spam blacklist Url]", "Adds/removes domains from blacklistdb");
+        super(GeneralUtils.toArray("blacklistdb bldb spambldb ircbldb"), "blacklistdb [type] (-)[irc/spam blacklist Url]", "Adds/removes domains from blacklistdb");
     }
 
     @Override
