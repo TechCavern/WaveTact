@@ -32,18 +32,16 @@ public class Ban extends IRCCommand {
         }
         String ban = "b ";
         if(isMute){
-            String ircd;
             if (network.getServerInfo().getChannelModes().contains("q")) {
-                ircd = "c";
+                ban = "q ";
             } else if (network.getServerInfo().getExtBanPrefix() != null && network.getServerInfo().getExtBanPrefix().equalsIgnoreCase("~") && network.getServerInfo().getExtBanList() != null && network.getServerInfo().getExtBanList().contains("q")) {
-                ircd = "u";
+                ban = "b ~q:";
             } else if (network.getServerInfo().getExtBanList().contains("m") && network.getServerInfo().getExtBanPrefix() == null) {
-                ircd = "i";
+                ban = "b m:";
             } else {
                 ErrorUtils.sendError(user, "This networks ircd is not supported for quiets.");
                 return;
             }
-            ban = Registry.QuietBans.get(ircd);
         }
 
         if (args[0].contains("!") && args[0].contains("@")) {

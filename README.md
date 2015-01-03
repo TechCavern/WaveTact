@@ -36,7 +36,13 @@ Channel-User Properties
 - permlevel - you can set a custom permlevel for a user (Must be integer)
 - relaybotsplit - you may assign a bot as a relaybot, and set the value as the character before the actual message is handled
 
-You are welcome to set other properties, however do beware that you may find issues in the future if the property you set happens to coincide with a new channel property
+You are welcome to set other properties (but they will be rather useless), however do beware that you may find issues in the future if the property you set happens to coincide with a new channel property
+
+Channel Properties
+==================
+- autounban - this will detect bans and auto-unban a ban after 24 hours
+
+You are welcome to set other properties (but they will be rather useless), however do beware that you may find issues in the future if the property you set happens to coincide with a new channel property
 
 Global Config
 =================
@@ -45,6 +51,8 @@ Global Config
 - googleapikey - sets the Google api key
 - wordnikapikey - sets the wordnik api key
 - wundergroundapikey - sets the wunderground api key
+
+You are welcome to set other properties (but they will be rather useless), however do beware that you may find issues in the future if the property you set happens to coincide with a new channel property
 
 Developing
 ==========

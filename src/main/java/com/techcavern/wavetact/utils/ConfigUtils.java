@@ -1,9 +1,6 @@
 package com.techcavern.wavetact.utils;
 
-import com.techcavern.wavetact.eventListeners.ChanMsgListener;
-import com.techcavern.wavetact.eventListeners.KickListener;
-import com.techcavern.wavetact.eventListeners.PartListener;
-import com.techcavern.wavetact.eventListeners.PrivMsgListener;
+import com.techcavern.wavetact.eventListeners.*;
 import com.techcavern.wavetact.objects.NetProperty;
 import org.apache.commons.lang3.StringUtils;
 import org.jooq.Record;
@@ -62,12 +59,13 @@ public class ConfigUtils {
         channels.stream().filter(channel -> !channel.isEmpty()).forEach(Net::addAutoJoinChannel);
         Net.setRealName(nick);
         Net.getListenerManager().addListener(new ChanMsgListener());
-        Net.setAutoReconnect(true);
-        Net.setAutoReconnectAttempts(5);
-        Net.setAutoReconnectDelay(20000);
         Net.getListenerManager().addListener(new PartListener());
         Net.getListenerManager().addListener(new PrivMsgListener());
         Net.getListenerManager().addListener(new KickListener());
+        Net.getListenerManager().addListener(new BanListener());
+        Net.setAutoReconnect(true);
+        Net.setAutoReconnectAttempts(5);
+        Net.setAutoReconnectDelay(20000);
         Net.setChannelModeMessagePrefixes("+%@&~!");
         Net.setVersion("WaveTact 0.7.0");
         Net.setAutoReconnect(true);

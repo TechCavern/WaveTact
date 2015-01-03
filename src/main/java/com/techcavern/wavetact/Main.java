@@ -31,7 +31,6 @@ public class Main {
             ConfigUtils.registerNetworks();
             LoadUtils.registerConsoleCommands();
             LoadUtils.registerIRCCommands();
-            LoadUtils.registerQuiets();
             LoadUtils.registerAttacks();
             LoadUtils.registerEightball();
             Registry.WaveTact.start();

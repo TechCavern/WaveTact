@@ -14,7 +14,6 @@ import java.util.concurrent.ForkJoinPool;
 
 public class Registry {
     public static String LastLeftChannel = "";
-    public static final HashMap<String, String> QuietBans = new HashMap<>();
     public static final ForkJoinPool threadPool = new ForkJoinPool(15);
     public static final List<IRCCommand> IRCCommands = new ArrayList<>();
     public static final List<AuthedUser> AuthedUsers = new ArrayList<>();

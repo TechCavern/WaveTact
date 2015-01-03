@@ -73,12 +73,6 @@ public class LoadUtils {
         Registry.Attacks.add(new FunObject("throws a racket at $*", false, null));
     }
 
-    public static void registerQuiets() {
-        Registry.QuietBans.put("u", "b ~q:");
-        Registry.QuietBans.put("c", "q ");
-        Registry.QuietBans.put("i", "b m:");
-    }
-
     public static void registerEightball() {
         Registry.Eightball.add("Hmm.. not today");
         Registry.Eightball.add("YES!");
