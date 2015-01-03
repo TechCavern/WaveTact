@@ -70,6 +70,17 @@ public class IRCUtils {
             userObject.send().action(message);
         }
     }
+    public static void sendAction(PircBotX networkObject, Channel channelObject, String message, String prefix) {
+        networkObject.sendRaw().rawLine("PRIVMSG " + prefix + channelObject.getName() + " :\u0001ACTION " + message + "\u0001");
+    }
+    public static void sendMessage(PircBotX networkObject, Channel channelObject, String message, String prefix) {
+            for (int i = 0; i < message.length(); i += 350) {
+                String messageToSend = message.substring(i, Math.min(message.length(), i + 350));
+                if (!messageToSend.isEmpty())
+                    networkObject.sendRaw().rawLine("PRIVMSG " + prefix + channelObject.getName() + " :" + messageToSend);
+            }
+    }
+
 
     public static String getPrefix(PircBotX network, String fullChannelName) {
         String prefix = String.valueOf(fullChannelName.charAt(0));
