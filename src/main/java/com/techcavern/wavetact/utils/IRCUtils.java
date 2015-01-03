@@ -117,7 +117,10 @@ public class IRCUtils {
 
     public static void sendNetworkGlobal(String message, PircBotX network, User user) {
         for (Channel channel : network.getUserBot().getChannels()) {
-            channel.send().message("[" + user.getNick() + "]: " + message);
+            if(user != null)
+            channel.send().message("[Network Global] " + user.getNick() + " - " + message);
+            else
+                channel.send().message("[Network Global] " + message);
         }
     }
 
