@@ -20,10 +20,10 @@ import org.jooq.Record;
  * @author jztech101
  */
 @ConCMD
-public class LockCCMD extends ConsoleCommand {
+public class LockCustomCMD extends ConsoleCommand {
 
-    public LockCCMD() {
-        super(GeneralUtils.toArray("lockmessage lcmsg lockmsg"), "lockmessage (-)[command]", "Locks a custom message");
+    public LockCustomCMD() {
+        super(GeneralUtils.toArray("lockcustomcmd lockccmd lccmd"), "lockcustomcmd (-)[command]", "Locks/Unlocks a custom command");
     }
 
     @Override

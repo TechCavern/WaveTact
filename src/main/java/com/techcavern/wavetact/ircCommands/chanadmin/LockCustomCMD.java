@@ -19,10 +19,10 @@ import org.pircbotx.User;
 import static com.techcavern.wavetactdb.Tables.CUSTOMCOMMANDS;
 
 @IRCCMD
-public class LockCCMD extends IRCCommand {
+public class LockCustomCMD extends IRCCommand {
 
-    public LockCCMD() {
-        super(GeneralUtils.toArray("lockmessage lcmsg lockmsg"),18, "lockmessage (-)[command]", "Locks a custom message", true);
+    public LockCustomCMD() {
+        super(GeneralUtils.toArray("lockcustomcmd lockccmd lccmd"),18, "lockcustomcmd (-)[command]", "Locks/Unlocks a custom command", true);
     }
 
     @Override

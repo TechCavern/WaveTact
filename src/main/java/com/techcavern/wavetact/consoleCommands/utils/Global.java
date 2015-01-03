@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.consoleCommands.controller;
+package com.techcavern.wavetact.consoleCommands.utils;
 
 import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.objects.CommandIO;

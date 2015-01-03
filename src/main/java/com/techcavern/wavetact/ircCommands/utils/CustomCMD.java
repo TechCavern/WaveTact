@@ -20,11 +20,11 @@ import org.pircbotx.User;
  * @author jztech101
  */
 @IRCCMD
-public class CustomCommand extends IRCCommand {
+public class CustomCMD extends IRCCommand {
 
 
-    public CustomCommand() {
-        super(GeneralUtils.toArray("customcommand ccmd cmsg cact"), 0, "customcommand (.) (a) (+/-)[command] [permlevel] [response]", "Responses may contain $1, $2, etc which indicate the argument separated by a space. $* indicates all remaining arguments.", false);
+    public CustomCMD() {
+        super(GeneralUtils.toArray("customcmd ccmd"), 0, "customcmd (.) (a) (+/-)[command] [permlevel] [response]", "Responses may contain $1, $2, etc which indicate the argument separated by a space. $* indicates all remaining arguments.", false);
     }
 
     @Override

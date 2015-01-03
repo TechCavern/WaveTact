@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.techcavern.wavetact.consoleCommands.controller;
+package com.techcavern.wavetact.consoleCommands.anonymity;
 
 import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.objects.CommandIO;
