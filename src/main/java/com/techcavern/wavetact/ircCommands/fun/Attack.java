@@ -27,7 +27,11 @@ public class Attack extends IRCCommand {
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+        String Something = GeneralUtils.buildMessage(0, args.length, args);
+        if (Something.toLowerCase().equalsIgnoreCase(network.getUserBot().getNick())) {
+            Something = user.getNick();
+        }
         int randomint = RandomUtils.nextInt(0, Registry.Attacks.size());
-        IRCUtils.sendAction(user, network, channel, Registry.Attacks.get(randomint), prefix);
+        IRCUtils.sendAction(user, network, channel, Registry.Attacks.get(randomint).replace("$*", Something), prefix);
     }
 }
