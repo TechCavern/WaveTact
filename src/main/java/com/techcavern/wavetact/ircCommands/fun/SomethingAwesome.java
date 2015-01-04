@@ -26,7 +26,7 @@ public class SomethingAwesome extends IRCCommand {
         } else if (channel != null && channel.getUserLevels(network.getUserBot()).contains(UserLevel.OWNER)) {
             channel.send().kick(user, "http://bit.ly/1c9vo1S");
         } else {
-            IRCUtils.sendAction(user, network, channel, "kicks " + user.getNick() + "(http://bit.ly/1c9vo1S)", prefix);
+            IRCUtils.sendAction(user, network, channel, "kicks " + user.getNick() + " (http://bit.ly/1c9vo1S)", prefix);
 
         }
     }
