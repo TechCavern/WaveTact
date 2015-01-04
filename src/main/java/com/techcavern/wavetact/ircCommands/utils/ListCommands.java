@@ -25,7 +25,7 @@ import java.util.List;
 public class ListCommands extends IRCCommand {
 
     public ListCommands() {
-        super(GeneralUtils.toArray("listcommands ircCommands list cmds"), 0, "listcommands [permlevel/all]", "Returns list of Commands specific to that permlevel or all ircCommands", false);
+        super(GeneralUtils.toArray("listcommands commands list cmds"), 0, "listcommands [permlevel/all]", "Returns list of Commands specific to that permlevel or all ircCommands", false);
     }
 
     @Override
