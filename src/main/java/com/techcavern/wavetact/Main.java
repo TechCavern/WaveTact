@@ -8,15 +8,14 @@ import com.techcavern.wavetact.utils.LoadUtils;
 import com.techcavern.wavetact.utils.Registry;
 import org.slf4j.impl.SimpleLogger;
 
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 @SuppressWarnings("ConstantConditions")
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        System.err.println("");
-        System.err.println("Welcome to WaveTact!");
-        System.err.println("");
+        System.err.println("\nWelcome to WaveTact!\n");
 
         System.setProperty(SimpleLogger.SHOW_DATE_TIME_KEY, "true");
         System.setProperty(SimpleLogger.DATE_TIME_FORMAT_KEY, "[yyyy/MM/dd HH:mm:ss]");
@@ -24,7 +23,10 @@ public class Main {
         LoadUtils.unpackNatives();
         if ((args.length >= 1) && args[0].equalsIgnoreCase("client")) {
             ConsoleClient.go();
-        } else {
+        } else if(new File("./console.unixsocket").exists()){
+            System.err.println("Instance already started");
+            System.exit(0);
+        }else{
             LoadUtils.initiateDatabaseConnection();
             ConfigUtils.registerNetworks();
             LoadUtils.registerConsoleCommands();
