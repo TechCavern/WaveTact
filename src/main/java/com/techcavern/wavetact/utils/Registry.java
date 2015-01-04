@@ -17,7 +17,7 @@ public class Registry {
     public static final ForkJoinPool threadPool = new ForkJoinPool(15);
     public static final List<IRCCommand> IRCCommands = new ArrayList<>();
     public static final List<AuthedUser> AuthedUsers = new ArrayList<>();
-    public static final List<FunObject> Attacks = new ArrayList<>();
+    public static final List<String> Attacks = new ArrayList<>();
     public static final List<String> Eightball = new ArrayList<>();
     public static final MultiBotManager WaveTact = new MultiBotManager();
     public static final List<ConsoleCommand> ConsoleCommands = new ArrayList<>();
@@ -30,5 +30,6 @@ public class Registry {
     public static String googleapikey = null;
     public static ConsoleServer consoleServer = new ConsoleServer();
     public static DSLContext WaveTactDB = null;
+    public static final List<NetProperty> MessageQueue = new ArrayList<>();
 
 }

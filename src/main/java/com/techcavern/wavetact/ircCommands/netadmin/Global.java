@@ -26,7 +26,7 @@ public class Global extends IRCCommand {
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        IRCUtils.sendNetworkGlobal(GeneralUtils.buildMessage(0, args.length, args), network, user);
+        IRCUtils.sendNetworkGlobal(GeneralUtils.buildMessage(0, args.length, args), network, user, false);
     }
 
 }

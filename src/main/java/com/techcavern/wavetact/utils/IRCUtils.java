@@ -98,41 +98,33 @@ public class IRCUtils {
         return WhoisEvent;
     }
 
-    public static void sendNotice(User userObject, PircBotX networkObject, Channel channelObject, String message, String prefix) {
-        if (channelObject != null) {
-            networkObject.sendRaw().rawLine("NOTICE " + prefix + channelObject.getName() + " :" + message);
-        } else {
-            userObject.send().notice(message);
-        }
-    }
-
     public static void sendMessage(User userObject, PircBotX networkObject, Channel channelObject, String message, String prefix) {
         if (channelObject != null) {
             for (int i = 0; i < message.length(); i += 350) {
                 String messageToSend = message.substring(i, Math.min(message.length(), i + 350));
                 if (!messageToSend.isEmpty())
-                    networkObject.sendRaw().rawLine("PRIVMSG " + prefix + channelObject.getName() + " :" + messageToSend);
+                Registry.MessageQueue.add(new NetProperty("PRIVMSG " + prefix + channelObject.getName() + " :" + messageToSend, networkObject));
             }
         } else {
-            userObject.send().message(message);
+            Registry.MessageQueue.add(new NetProperty("PRIVMSG " + userObject.getNick() + " :" + message, networkObject));
         }
     }
 
     public static void sendAction(User userObject, PircBotX networkObject, Channel channelObject, String message, String prefix) {
         if (channelObject != null) {
-            networkObject.sendRaw().rawLine("PRIVMSG " + prefix + channelObject.getName() + " :\u0001ACTION " + message + "\u0001");
+            Registry.MessageQueue.add(new NetProperty("PRIVMSG " + prefix + channelObject.getName() + " :\u0001ACTION " + message + "\u0001", networkObject));
         } else {
-            userObject.send().action(message);
+            Registry.MessageQueue.add(new NetProperty("PRIVMSG " + userObject.getNick() + " :\u0001ACTION " + message + "\u0001", networkObject));
         }
     }
     public static void sendAction(PircBotX networkObject, Channel channelObject, String message, String prefix) {
-        networkObject.sendRaw().rawLine("PRIVMSG " + prefix + channelObject.getName() + " :\u0001ACTION " + message + "\u0001");
+        Registry.MessageQueue.add(new NetProperty("PRIVMSG " + prefix + channelObject.getName() + " :\u0001ACTION " + message + "\u0001", networkObject));
     }
     public static void sendMessage(PircBotX networkObject, Channel channelObject, String message, String prefix) {
             for (int i = 0; i < message.length(); i += 350) {
                 String messageToSend = message.substring(i, Math.min(message.length(), i + 350));
                 if (!messageToSend.isEmpty())
-                    networkObject.sendRaw().rawLine("PRIVMSG " + prefix + channelObject.getName() + " :" + messageToSend);
+                    Registry.MessageQueue.add(new NetProperty("PRIVMSG " + prefix + channelObject.getName() + " :" + messageToSend, networkObject));
             }
     }
 
@@ -176,17 +168,21 @@ public class IRCUtils {
 
     public static void sendGlobal(String message, User user) {
         for (NetProperty network : Registry.NetworkName) {
-            sendNetworkGlobal(message, network.getNetwork(), user);
+            sendNetworkGlobal(message, network.getNetwork(), user, true);
         }
 
     }
 
-    public static void sendNetworkGlobal(String message, PircBotX network, User user) {
+    public static void sendNetworkGlobal(String message, PircBotX network, User user, boolean isGlobal) {
+        String beginning = "[Network Notice] ";
+        if(isGlobal){
+            beginning = "[Global Notice] ";
+        }
         for (Channel channel : network.getUserBot().getChannels()) {
             if(user != null)
-            channel.send().message("[Network Global] " + user.getNick() + " - " + message);
+            channel.send().message(beginning + user.getNick() + " - " + message);
             else
-                channel.send().message("[Network Global] " + message);
+                channel.send().message(beginning + message);
         }
     }
 

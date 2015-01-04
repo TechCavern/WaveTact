@@ -89,7 +89,6 @@ public class Ban extends IRCCommand {
             if (BanRecord == null) {
                 if (args.length == 2) {
                     DatabaseUtils.addBan(networkname,channel.getName(),hostmask,System.currentTimeMillis(), GeneralUtils.getMilliSeconds(args[1]), isMute, ban);
-
                 } else if (args.length < 2) {
                     DatabaseUtils.addBan(networkname, channel.getName(), hostmask, System.currentTimeMillis(), GeneralUtils.getMilliSeconds("24h"), isMute, ban);
                 }

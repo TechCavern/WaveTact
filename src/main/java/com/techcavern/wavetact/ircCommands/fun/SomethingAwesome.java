@@ -23,6 +23,8 @@ public class SomethingAwesome extends IRCCommand {
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (channel != null && channel.getUserLevels(network.getUserBot()).contains(UserLevel.OP) && !channel.isOwner(user) && !channel.isSuperOp(user)) {
             channel.send().kick(user, "http://bit.ly/1c9vo1S");
+        } else if (channel != null && channel.getUserLevels(network.getUserBot()).contains(UserLevel.SUPEROP) && !channel.isOwner(user) && !channel.isSuperOp(user)) {
+            channel.send().kick(user, "http://bit.ly/1c9vo1S");
         } else if (channel != null && channel.getUserLevels(network.getUserBot()).contains(UserLevel.OWNER)) {
             channel.send().kick(user, "http://bit.ly/1c9vo1S");
         } else {

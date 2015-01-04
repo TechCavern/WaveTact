@@ -4,7 +4,6 @@ import com.google.common.io.Files;
 import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.ConsoleCommand;
-import com.techcavern.wavetact.objects.FunObject;
 import com.techcavern.wavetact.objects.IRCCommand;
 import org.flywaydb.core.Flyway;
 import org.jooq.DSLContext;
@@ -60,17 +59,34 @@ public class LoadUtils {
     }
 
     public static void registerAttacks() {
-        Registry.Attacks.add(new FunObject("sends a 53 inch monitor flying at $*", false, null));
-        Registry.Attacks.add(new FunObject("shoots a rocket at $*", false, null));
-        Registry.Attacks.add(new FunObject("punches $* right in the crotch", false, null));
-        Registry.Attacks.add(new FunObject("places a bomb near $* set for 2 seconds", true, "BANG!"));
-        Registry.Attacks.add(new FunObject("packs $* up and ships it off to another galaxy", false, null));
-        Registry.Attacks.add(new FunObject("eats $* up for breakfast", false, null));
-        Registry.Attacks.add(new FunObject("sends a flying desk at $*", false, null));
-        Registry.Attacks.add(new FunObject("swallows $* whole", false, null));
-        Registry.Attacks.add(new FunObject("ties $* up and feeds it to a shark", false, null));
-        Registry.Attacks.add(new FunObject("runs over $*", true, "HEY! WATCH WHERE YOU'RE GOING!"));
-        Registry.Attacks.add(new FunObject("throws a racket at $*", false, null));
+        Registry.Attacks.add("sends a 53 inch monitor flying at $*");
+        Registry.Attacks.add("shoots a rocket at $*");
+        Registry.Attacks.add("punches $* right in the crotch");
+        Registry.Attacks.add("packs $* up and ships it off to another galaxy");
+        Registry.Attacks.add("eats $* up for breakfast");
+        Registry.Attacks.add("sends a flying desk at $*");
+        Registry.Attacks.add("swallows $* whole");
+        Registry.Attacks.add("ties $* up and feeds it to a shark");
+        Registry.Attacks.add("runs over $* with a car");
+        Registry.Attacks.add("throws a racket at $*");
+        Registry.Attacks.add("gobbles up $*");
+        Registry.Attacks.add("throws a 2000 pound object at $*");
+        Registry.Attacks.add("starts throwing punches at $*");
+        Registry.Attacks.add("sends a flying dragon at $*");
+        Registry.Attacks.add("takes over $*'s computers and blasts porn at full volume");
+        Registry.Attacks.add("packs $* up and ships them off to Apple");
+        Registry.Attacks.add("hands $* off to Lord Voldemort");
+        Registry.Attacks.add("hands $* off to a pack of a wolves");
+        Registry.Attacks.add("hands $* off to a herd of centaurs");
+        Registry.Attacks.add("drops $* off to a 2000 kilometer cliff");
+        Registry.Attacks.add("flies $* out into the middle of nowhere");
+        Registry.Attacks.add("hunts $* down with a gun");
+        Registry.Attacks.add("slaps $* around with a large trout");
+        Registry.Attacks.add("throws iphones at $*");
+        Registry.Attacks.add("fires missile at $*");
+        Registry.Attacks.add("puts $* in a rocket and sends them off to pluto");
+        Registry.Attacks.add("forcefeeds $* a plate of poisoned beef");
+        Registry.Attacks.add("mind controls $* to marry Dolores Umbridge");
     }
 
     public static void registerEightball() {

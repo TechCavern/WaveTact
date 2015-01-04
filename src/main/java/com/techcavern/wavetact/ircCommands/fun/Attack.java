@@ -6,7 +6,6 @@
 package com.techcavern.wavetact.ircCommands.fun;
 
 import com.techcavern.wavetact.annot.IRCCMD;
-import com.techcavern.wavetact.objects.FunObject;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
@@ -28,14 +27,7 @@ public class Attack extends IRCCommand {
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        String Something = GeneralUtils.buildMessage(0, args.length, args);
-        if (Something.toLowerCase().equalsIgnoreCase(network.getUserBot().getNick())) {
-            Something = user.getNick();
-        }
         int randomint = RandomUtils.nextInt(0, Registry.Attacks.size());
-        FunObject attack = Registry.Attacks.get(randomint);
-        IRCUtils.sendAction(user, network, channel, attack.getAction().replace("$*", Something), prefix);
-        if (attack.getMessageExists())
-            IRCUtils.sendMessage(user, network, channel, attack.getMessage().replace("$*", Something), prefix);
+        IRCUtils.sendAction(user, network, channel, Registry.Attacks.get(randomint), prefix);
     }
 }

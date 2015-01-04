@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.eventListeners;
+package com.techcavern.wavetact.Queues;
 
 import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 import static com.techcavern.wavetactdb.Tables.BANS;
 
-public class BanTimeoutListener implements Runnable {
+public class BanQueue implements Runnable {
 
     @Override
     public void run() {
