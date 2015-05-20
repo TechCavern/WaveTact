@@ -23,6 +23,7 @@ public class KickListener extends ListenerAdapter {
                 tries++;
                 TimeUnit.SECONDS.sleep(30);
             } while (tries < 60 && !event.getBot().getUserBot().getChannels().contains(event.getChannel()));
+            event.getChannel().send().kick(event.getUser());
         }
     }
 }
