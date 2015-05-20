@@ -43,7 +43,7 @@ public class Act extends IRCCommand {
         } else {
             chan = channel;
         }
-        if (PermUtils.getPermLevel(network, user.getNick(), chan) >= 5) {
+        if (chan == null || PermUtils.getPermLevel(network, user.getNick(), chan) >= 5) {
             IRCUtils.sendAction(user, network, chan, StringUtils.join(args, " ").replace("\n", " "), prefix);
         } else {
             ErrorUtils.sendError(user, "Permission denied");

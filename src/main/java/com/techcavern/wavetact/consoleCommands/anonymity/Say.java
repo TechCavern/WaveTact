@@ -33,6 +33,7 @@ public class Say extends ConsoleCommand {
             chan = IRCUtils.getChannelbyName(network, args[1].replace(prefix, ""));
         else
             chan = IRCUtils.getChannelbyName(network, args[1]);
+        if(chan != null)
         IRCUtils.sendMessage(network, chan, GeneralUtils.buildMessage(2, args.length, args).replace("\n", " "), prefix);
     }
 }
