@@ -1,8 +1,7 @@
-package com.techcavern.wavetact.Queues;
+package com.techcavern.wavetact.queues;
 
 import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.Registry;
 import org.jooq.Record;
 import org.pircbotx.PircBotX;
 

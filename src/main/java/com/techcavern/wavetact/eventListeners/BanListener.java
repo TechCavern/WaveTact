@@ -6,6 +6,7 @@
 package com.techcavern.wavetact.eventListeners;
 
 import com.techcavern.wavetact.utils.*;
+import org.jooq.Record;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.KickEvent;
 import org.pircbotx.hooks.events.ModeEvent;
@@ -19,9 +20,13 @@ import java.util.concurrent.TimeUnit;
  * @author jztech101
  */
 public class BanListener extends ListenerAdapter {
+
     public void onMode(ModeEvent event) throws Exception {
         String banMask = event.getMode();
         String network = IRCUtils.getNetworkNameByNetwork(event.getBot());
+        if(event.getUser() == null ||  DatabaseUtils.getChannelProperty(network, event.getChannel().getName(), "autounban").getValue(CHANNELPROPERTY.VALUE) == null ||  event.getUser().getNick().equalsIgnoreCase(event.getBot().getNick()) || !(event.getChannel().isHalfOp(event.getBot().getUserBot()) || event.getChannel().isOp(event.getBot().getUserBot()) || event.getChannel().isSuperOp(event.getBot().getUserBot()) || event.getChannel().isOwner(event.getBot().getUserBot()))){
+            return;
+        }
         String type = "";
         boolean ban = false;
         boolean isMute = false;
@@ -50,7 +55,7 @@ public class BanListener extends ListenerAdapter {
         banMask = banMask.replaceFirst(type, "");
         if (!ban) {
             DatabaseUtils.removeBan(network, event.getChannel().getName(), banMask, isMute);
-        } else if (ban && DatabaseUtils.getChannelProperty(network, event.getChannel().getName(), "autounban").getValue(CHANNELPROPERTY.VALUE) != null) {
+        } else if (ban) {
             DatabaseUtils.addBan(network, event.getChannel().getName(), banMask, System.currentTimeMillis(), GeneralUtils.getMilliSeconds(DatabaseUtils.getChannelProperty(network, event.getChannel().getName(), "autounban").getValue(CHANNELPROPERTY.VALUE)), isMute, type);
         }
     }

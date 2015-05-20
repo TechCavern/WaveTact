@@ -1,8 +1,8 @@
 package com.techcavern.wavetact;
 
-import com.techcavern.wavetact.Queues.MessageQueue;
+import com.techcavern.wavetact.queues.MessageQueue;
 import com.techcavern.wavetact.console.ConsoleClient;
-import com.techcavern.wavetact.Queues.BanQueue;
+import com.techcavern.wavetact.queues.BanQueue;
 import com.techcavern.wavetact.utils.ConfigUtils;
 import com.techcavern.wavetact.utils.LoadUtils;
 import com.techcavern.wavetact.utils.Registry;
