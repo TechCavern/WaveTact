@@ -45,11 +45,11 @@ public class DNSInfo extends IRCCommand {
                 } else if (rec instanceof AAAARecord) {
                     IRCUtils.sendMessage(user, network, channel, Type.string(rec.getType()) + " - " + ((AAAARecord) rec).getAddress(), prefix);
                 } else if (rec instanceof CNAMERecord) {
-                    IRCUtils.sendMessage(user, network, channel, Type.string(rec.getType()) + " - " + ((CNAMERecord) rec).getAlias() + ((CNAMERecord) rec).getTarget(), prefix);
+                    IRCUtils.sendMessage(user, network, channel, Type.string(rec.getType()) + " - " + ((CNAMERecord) rec).getAlias() + " - " + ((CNAMERecord) rec).getTarget(), prefix);
                 } else if (rec instanceof TXTRecord) {
                     IRCUtils.sendMessage(user, network, channel, Type.string(rec.getType()) + " - " + StringUtils.join(rec, " "), prefix);
                 } else if (rec instanceof MXRecord) {
-                    IRCUtils.sendMessage(user, network, channel, Type.string(rec.getType()) + " - " + ((MXRecord) rec).getPriority() + ((MXRecord) rec).getTarget(), prefix);
+                    IRCUtils.sendMessage(user, network, channel, Type.string(rec.getType()) + " - " + ((MXRecord) rec).getPriority() + " - " + ((MXRecord) rec).getTarget(), prefix);
                 }
             }
             isSuccessful = true;
