@@ -17,8 +17,8 @@ public class MessageQueue implements Runnable {
                 if (Registry.MessageQueue.size() > 0) {
                     Registry.MessageQueue.get(0).getNetwork().sendRaw().rawLine(Registry.MessageQueue.get(0).getProperty());
                     Registry.MessageQueue.remove(0);
-                    TimeUnit.MILLISECONDS.sleep(1500);
                 }
+                TimeUnit.MILLISECONDS.sleep(1000);
             }catch(Exception e){
             }
         }
