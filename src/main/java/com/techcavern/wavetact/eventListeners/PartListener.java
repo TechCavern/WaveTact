@@ -24,7 +24,7 @@ public class PartListener extends ListenerAdapter {
             do {
                 event.getBot().sendIRC().joinChannel(event.getChannel().getName());
                 tries++;
-                TimeUnit.SECONDS.sleep(30);
+                TimeUnit.SECONDS.sleep(5);
             } while (tries < 60 && !event.getBot().getUserBot().getChannels().contains(event.getChannel()));
         }
     }

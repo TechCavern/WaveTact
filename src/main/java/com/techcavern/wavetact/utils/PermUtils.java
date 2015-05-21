@@ -26,7 +26,7 @@ public class PermUtils {
             default:
                 return userObject;
         }
-    }
+  }
 
     public static String authUser(PircBotX network, String userObject) { //gets hostmask of userObject and calls getAccount using it
         String hostmask = IRCUtils.getHostmask(network, userObject, true);

@@ -5,6 +5,11 @@
  */
 package com.techcavern.wavetact.eventListeners;
 
+import com.techcavern.wavetact.utils.IRCUtils;
+import org.pircbotx.Channel;
+import org.pircbotx.PircBotX;
+import org.pircbotx.User;
+import org.pircbotx.UserLevel;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.KickEvent;
 
@@ -16,14 +21,28 @@ import java.util.concurrent.TimeUnit;
  */
 public class KickListener extends ListenerAdapter {
     public void onKick(KickEvent event) throws Exception {
+        Channel channel = event.getChannel();
+        PircBotX network = event.getBot();
+        User user = event.getUser();
         if (event.getRecipient().getNick().equals(event.getBot().getNick())) {
             int tries = 0;
             do {
                 event.getBot().sendIRC().joinChannel(event.getChannel().getName());
                 tries++;
-                TimeUnit.SECONDS.sleep(30);
+                TimeUnit.SECONDS.sleep(5);
             } while (tries < 60 && !event.getBot().getUserBot().getChannels().contains(event.getChannel()));
-            event.getChannel().send().kick(event.getUser());
+            if(event.getBot().getUserBot().getChannels().contains(event.getChannel())) {
+                if (channel != null && channel.getUserLevels(network.getUserBot()).contains(UserLevel.OP) && !channel.isOwner(user) && !channel.isSuperOp(user)) {
+                    channel.send().kick(user, "http://bit.ly/1c9vo1S");
+                } else if (channel != null && channel.getUserLevels(network.getUserBot()).contains(UserLevel.SUPEROP) && !channel.isOwner(user) && !channel.isSuperOp(user)) {
+                    channel.send().kick(user, "http://bit.ly/1c9vo1S");
+                } else if (channel != null && channel.getUserLevels(network.getUserBot()).contains(UserLevel.OWNER)) {
+                    channel.send().kick(user, "http://bit.ly/1c9vo1S");
+                } else {
+                    IRCUtils.sendAction(user, network, channel, "kicks " + user.getNick() + " (http://bit.ly/1c9vo1S)", "");
+
+                }
+            }
         }
     }
 }
