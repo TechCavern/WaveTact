@@ -7,6 +7,7 @@ import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.apache.commons.lang3.text.WordUtils;
 import org.pircbotx.Channel;
+import org.pircbotx.Colors;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
@@ -26,7 +27,7 @@ public class MCStatus extends IRCCommand {
         String result;
         URL url = new URL("https://status.mojang.com/check");
         BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
-        result = reader.readLine().replace("\"},{\"", " | ").replace("\":\"", ": ").replace("green", "Online").replace("red", "Offline").replace("[{\"", "").replace("\"}]", "").replace(".minecraft.net", "").replace(".mojang.com", "").replace("server", " Server").replace(".net", "");
+        result = reader.readLine().replace("\"},{\"", " | ").replace("\":\"", ": ").replace("green", Colors.GREEN + "Online" ).replace("red", Colors.RED + "Offline").replace("[{\"", "").replace("\"}]", "").replace(".minecraft.net", "").replace(".mojang.com", "").replace("server", " Server").replace(".net", "");
         result = WordUtils.capitalizeFully(result);
         if (result != null) {
             IRCUtils.sendMessage(user, network, channel, result, prefix);

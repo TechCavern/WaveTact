@@ -118,12 +118,16 @@ public class PermUtils {
 
     private static int getManualPermLevel(PircBotX network, Channel channelObject, String account) { //gets Manual Perm Level using the account name
         if (account != null) {
+            String channelName = null;
+            if(channelObject != null){
+                channelName = channelObject.getName();
+            }
             if (isNetworkAdmin(account, IRCUtils.getNetworkNameByNetwork(network))) {
                 return 20;
-            }else if (DatabaseUtils.getChannelUserProperty(IRCUtils.getNetworkNameByNetwork(network), channelObject.getName(), account, "permlevel") != null) {
+            }else if (DatabaseUtils.getChannelUserProperty(IRCUtils.getNetworkNameByNetwork(network), channelName, account, "permlevel") != null) {
                 int permlevel = 0;
                 try {
-                    permlevel = Integer.parseInt(DatabaseUtils.getChannelUserProperty(IRCUtils.getNetworkNameByNetwork(network), channelObject.getName(), account, "permlevel").getValue(CHANNELUSERPROPERTY.VALUE));
+                    permlevel = Integer.parseInt(DatabaseUtils.getChannelUserProperty(IRCUtils.getNetworkNameByNetwork(network), channelName, account, "permlevel").getValue(CHANNELUSERPROPERTY.VALUE));
                 }catch(Exception e){
                 }
                     if(permlevel <= 18){
