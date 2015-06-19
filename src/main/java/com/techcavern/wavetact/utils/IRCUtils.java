@@ -12,6 +12,7 @@ import org.pircbotx.hooks.events.WhoisEvent;
 import org.pircbotx.output.OutputChannel;
 
 import static com.techcavern.wavetactdb.Tables.CUSTOMCOMMANDS;
+import static com.techcavern.wavetactdb.Tables.NETWORKPROPERTY;
 
 
 public class IRCUtils {
@@ -101,28 +102,45 @@ public class IRCUtils {
                 String messageToSend = message.substring(i, Math.min(message.length(), i + 350));
                 if (!messageToSend.isEmpty())
                 Registry.MessageQueue.add(new NetProperty("PRIVMSG " + prefix + channelObject.getName() + " :" + messageToSend, networkObject));
+                if(userObject == null){
+                    sendRelayMessage(networkObject, message);
+                }else{
+                    sendRelayMessage(networkObject, "<-" + userObject.getNick() +"> " + message);
+                }
             }
         } else {
             Registry.MessageQueue.add(new NetProperty("PRIVMSG " + userObject.getNick() + " :" + message, networkObject));
         }
     }
 
+    public static void sendRelayMessage(PircBotX networkObject, String msg){
+        for(NetProperty net:Registry.NetworkName){
+            if(net.getNetwork() != networkObject){
+                String relaychan = DatabaseUtils.getNetworkProperty(net.getProperty(), "relaychan").getValue(NETWORKPROPERTY.VALUE);
+                if(relaychan != null)
+                    Registry.MessageQueue.add(new NetProperty("PRIVMSG " + relaychan + " :[" + net.getProperty() + "] "+msg, net.getNetwork()));
+            }
+        }
+    }
+
     public static void sendAction(User userObject, PircBotX networkObject, Channel channelObject, String message, String prefix) {
         if (channelObject != null) {
             Registry.MessageQueue.add(new NetProperty("PRIVMSG " + prefix + channelObject.getName() + " :\u0001ACTION " + message + "\u0001", networkObject));
+            if(userObject == null){
+                sendRelayMessage(networkObject, message);
+            }else{
+                sendRelayMessage(networkObject, "* " + userObject.getNick() + message);
+            }
         } else {
             Registry.MessageQueue.add(new NetProperty("PRIVMSG " + userObject.getNick() + " :\u0001ACTION " + message + "\u0001", networkObject));
         }
     }
     public static void sendAction(PircBotX networkObject, Channel channelObject, String message, String prefix) {
-        Registry.MessageQueue.add(new NetProperty("PRIVMSG " + prefix + channelObject.getName() + " :\u0001ACTION " + message + "\u0001", networkObject));
+        sendAction(null, networkObject, channelObject, message, prefix);
     }
     public static void sendMessage(PircBotX networkObject, Channel channelObject, String message, String prefix) {
-            for (int i = 0; i < message.length(); i += 350) {
-                String messageToSend = message.substring(i, Math.min(message.length(), i + 350));
-                if (!messageToSend.isEmpty())
-                    Registry.MessageQueue.add(new NetProperty("PRIVMSG " + prefix + channelObject.getName() + " :" + messageToSend, networkObject));
-            }
+        sendMessage(null, networkObject, channelObject, message, prefix);
+
     }
 
 

@@ -54,9 +54,15 @@ Global Config
 
 You are welcome to set other properties (but they will be rather useless), however do beware that you may find issues in the future if the property you set happens to coincide with a new channel property
 
+Network Properties
+=================
+- relaychan - Determines the channel from the network to relay
+
+You are welcome to set other properties (but they will be rather useless), however do beware that you may find issues in the future if the property you set happens to coincide with a new channel property
+
 Developing
 ==========
-- You will need to run `gradle idea` each time the build file is modified as intellij internal gradle support does not handle it properly. 
+- You will need to run `gradle idea` each time a db migration file is added as intellij internal gradle support does not handle it properly.
 
 Running
 =======

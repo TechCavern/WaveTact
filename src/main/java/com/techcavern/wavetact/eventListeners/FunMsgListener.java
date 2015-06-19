@@ -31,7 +31,7 @@ public class FunMsgListener extends ListenerAdapter {
             public void run() {
                 Record relaybotsplit = DatabaseUtils.getChannelUserProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), event.getChannel().getName(), PermUtils.authUser(event.getBot(), event.getUser().getNick()), "relaybotsplit");
                 if (relaybotsplit == null) {
-                    if (event.getMessage().contains("http://stop-irc-bullying.eu/stop")) {
+                    if (Colors.removeFormattingAndColors(event.getMessage()).contains("http://stop-irc-bullying.eu/stop")) {
                         if (IRCUtils.checkIfCanKick(event.getChannel(), event.getBot(), event.getUser())) {
                             event.getChannel().send().kick(event.getUser(), "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻");
                         } else {
@@ -41,10 +41,11 @@ public class FunMsgListener extends ListenerAdapter {
                 }
                 Record autourl = DatabaseUtils.getChannelProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), event.getChannel().getName(), "autourl");
                 if (autourl != null && autourl.getValue(CHANNELPROPERTY.VALUE).equalsIgnoreCase("true")) {
-                    String[] message = StringUtils.split(Colors.removeFormattingAndColors(event.getMessage()), " ");
+                    String[] message = StringUtils.split(event.getMessage(), " ");
                     for (String arg : message) {
                         try {
-                            if (!arg.startsWith("http://") || !arg.startsWith("https://")) {
+                            arg = Colors.removeFormattingAndColors(arg);
+                            if (!arg.startsWith("https://") && !arg.startsWith("http://")) {
                                 arg = "http://" + arg;
                             }
                             if(Registry.urlvalidator.isValid(arg)) {

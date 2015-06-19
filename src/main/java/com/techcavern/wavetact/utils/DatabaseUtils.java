@@ -143,6 +143,23 @@ public class DatabaseUtils {
     public static void removeChannelProperty(String network, String channel, String property) {
         Registry.WaveTactDB.delete(CHANNELPROPERTY).where(CHANNELPROPERTY.PROPERTY.eq(property)).and(CHANNELPROPERTY.NETWORK.eq(network)).and(CHANNELPROPERTY.CHANNEL.eq(channel)).execute();
     }
+    public static Record getNetworkProperty(String network, String property) {
+        Result<Record> commandRecord = Registry.WaveTactDB.select().from(NETWORKPROPERTY).where(NETWORKPROPERTY.PROPERTY.eq(property)).and(NETWORKPROPERTY.NETWORK.eq(network)).fetch();
+        return getRecord(commandRecord);
+
+    }
+
+    public static void updateNetworkProperty(Record networkproperty){
+        Registry.WaveTactDB.update(NETWORKPROPERTY).set(networkproperty).where(NETWORKPROPERTY.PROPERTY.eq(networkproperty.getValue(NETWORKPROPERTY.PROPERTY))).and(NETWORKPROPERTY.NETWORK.eq(networkproperty.getValue(NETWORKPROPERTY.NETWORK))).execute();
+    }
+
+    public static void addNetworkProperty(String network, String property, String value) {
+        Registry.WaveTactDB.insertInto(NETWORKPROPERTY).values(network, property, value).execute();
+    }
+
+    public static void removeNetworkProperty(String network, String property) {
+        Registry.WaveTactDB.delete(NETWORKPROPERTY).where(NETWORKPROPERTY.PROPERTY.eq(property)).and(NETWORKPROPERTY.NETWORK.eq(network)).execute();
+    }
 
     public static Record getChannelUserProperty(String network, String channel, String user, String property) {
         Result<Record> channelUserPropertyRecord = Registry.WaveTactDB.select().from(CHANNELUSERPROPERTY).where(CHANNELUSERPROPERTY.PROPERTY.eq(property)).and(CHANNELUSERPROPERTY.USER.eq(user)).and(CHANNELUSERPROPERTY.NETWORK.eq(network)).and(CHANNELUSERPROPERTY.CHANNEL.eq(channel)).fetch();
@@ -152,7 +169,6 @@ public class DatabaseUtils {
     public static void updateChannelUserProperty(Record channeluserproperty){
         Registry.WaveTactDB.update(CHANNELUSERPROPERTY).set(channeluserproperty).where(CHANNELUSERPROPERTY.PROPERTY.eq(channeluserproperty.getValue(CHANNELUSERPROPERTY.PROPERTY))).and(CHANNELUSERPROPERTY.USER.eq(channeluserproperty.getValue(CHANNELUSERPROPERTY.USER))).and(CHANNELUSERPROPERTY.NETWORK.eq(channeluserproperty.getValue(CHANNELUSERPROPERTY.NETWORK))).and(CHANNELUSERPROPERTY.CHANNEL.eq(channeluserproperty.getValue(CHANNELUSERPROPERTY.CHANNEL))).execute();
     }
-
     public static void addChannelUserProperty(String network, String channel,String user, String property, String value) {
         Registry.WaveTactDB.insertInto(CHANNELUSERPROPERTY).values(network, channel,user, property, value).execute();
     }
