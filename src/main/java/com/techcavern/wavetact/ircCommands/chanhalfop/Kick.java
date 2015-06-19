@@ -32,8 +32,7 @@ public class Kick extends IRCCommand {
             message += ": " + GeneralUtils.buildMessage(1, args.length, args);
         }
         if(args[0].equalsIgnoreCase(network.getNick()))
-            channel.send().kick(user, "http://bit.ly/1c9vo1S");
-
+            channel.send().kick(user, "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻");
         else
         channel.send().kick(IRCUtils.getUserByNick(network, args[0]), message);
     }

@@ -48,7 +48,6 @@ public class PermUtils {
             userString = getAccountName(network, userObject);
             if (userString != null)
                 Registry.AuthedUsers.add(new AuthedUser(IRCUtils.getNetworkNameByNetwork(network), userString, hostmask));
-            IRCUtils.getNetworkNameByNetwork(network);
         }
         return userString;
     }
@@ -99,6 +98,7 @@ public class PermUtils {
     }
 
     private static int getAutomaticPermLevel(User userObject, Channel channelObject) { //gets the Auto Detected Perm Level
+        System.out.print("testing");
         if (userObject.isIrcop() && DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(userObject.getBot())).getValue(SERVERS.NETWORKADMINACCESS)) {
             return 20;
         } else if (channelObject.isOwner(userObject)) {

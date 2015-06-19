@@ -48,9 +48,9 @@ public class ChanMsgListener extends ListenerAdapter {
                     String startingmessage = event.getMessage();
                     if (relaysplit != null) {
                         String[] midmessage = StringUtils.split(startingmessage, relaysplit);
-                        if (midmessage.length > 1)
-                            startingmessage = midmessage[1];
-                        else
+                        if (midmessage.length > 1) {
+                            startingmessage = GeneralUtils.buildMessage(1, midmessage.length, midmessage);
+                        }else
                             return;
                     } else {
                         return;

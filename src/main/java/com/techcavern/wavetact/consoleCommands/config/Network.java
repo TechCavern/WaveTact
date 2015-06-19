@@ -129,6 +129,9 @@ public class Network extends ConsoleCommand {
                 }
             }
         } else {
+            if(DatabaseUtils.getServer(args[0]) != null){
+                System.out.println("network already exists");
+            }
             commandIO.getPrintStream().println("Adding " + args[0]);
             String name = args[0];
             commandIO.getPrintStream().print("Server host: ");

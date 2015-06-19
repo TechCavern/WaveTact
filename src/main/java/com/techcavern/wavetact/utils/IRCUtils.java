@@ -6,10 +6,7 @@ import com.techcavern.wavetact.objects.NetProperty;
 import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jooq.Record;
-import org.pircbotx.Channel;
-import org.pircbotx.Colors;
-import org.pircbotx.PircBotX;
-import org.pircbotx.User;
+import org.pircbotx.*;
 import org.pircbotx.hooks.WaitForQueue;
 import org.pircbotx.hooks.events.WhoisEvent;
 import org.pircbotx.output.OutputChannel;
@@ -135,6 +132,17 @@ public class IRCUtils {
             return prefix;
         }
         return "";
+    }
+    public static boolean checkIfCanKick(Channel channel, PircBotX network, User user){
+        if (channel != null && channel.getUserLevels(network.getUserBot()).contains(UserLevel.OP) && !channel.isOwner(user) && !channel.isSuperOp(user)) {
+            return false;
+        } else if (channel != null && channel.getUserLevels(network.getUserBot()).contains(UserLevel.SUPEROP) && !channel.isOwner(user) && !channel.isSuperOp(user)) {
+            return false;
+        } else if (channel != null && channel.getUserLevels(network.getUserBot()).contains(UserLevel.OWNER)) {
+            return false;
+        }else{
+            return true;
+        }
     }
     public static String getHostmask(PircBotX network, String userObject, boolean isBanmask){
         String hostmask = getIRCHostmask(network, userObject, isBanmask);
