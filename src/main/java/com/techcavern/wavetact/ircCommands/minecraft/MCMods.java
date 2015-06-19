@@ -7,6 +7,7 @@ import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -15,15 +16,20 @@ import org.pircbotx.User;
 public class MCMods extends IRCCommand {
 
     public MCMods() {
-        super(GeneralUtils.toArray("mcmods mcmod"), 0, "mcmods (mc version#) [mod name]", "Gets info on a minecraft mod", false);
+        super(GeneralUtils.toArray("mcmods mcmod"), 0, "mcmods (--dev) (mc version#) [mod name]", "Gets info on a minecraft mod", false);
     }
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         JsonArray versions = GeneralUtils.getJsonArray("http://bot.notenoughmods.com/?json");
+        boolean isDev = false;
         String version = "";
         String modname = "";
         JsonArray mods = null;
+        if(args[0].equals("--dev")){
+            isDev = true;
+            args = ArrayUtils.remove(args, 0);
+        }
         for (int i = 0; i < versions.size(); i++) {
             String vers = versions.get(i).getAsString();
             if (vers.contains(args[0])) {
@@ -31,7 +37,6 @@ public class MCMods extends IRCCommand {
                 modname = args[1].toLowerCase();
             }
         }
-
         if (version.isEmpty()) {
             int arraysize = 0;
             int versionsize = versions.size();
@@ -49,7 +54,11 @@ public class MCMods extends IRCCommand {
         for (int i = 0; i < mods.size(); i++) {
             JsonObject mod = mods.get(i).getAsJsonObject();
             if (mod.get("name").getAsString().toLowerCase().contains(modname)) {
-                String Version = mod.get("version").getAsString();
+                String ModVersion = "";
+                if(isDev)
+                ModVersion = mod.get("dev").getAsString();
+                else
+                    ModVersion = mod.get("version").getAsString();
                 String Name = mod.get("name").getAsString();
                 String Link = mod.get("shorturl").getAsString();
                 String Author = mod.get("author").getAsString();
@@ -57,9 +66,11 @@ public class MCMods extends IRCCommand {
                     Link = mod.get("longurl").getAsString();
                 }
                 if (total < 3) {
-                    IRCUtils.sendMessage(user, network, channel, "[" + Version + "] " + Name + " by " + Author + " - " + Link, prefix);
-                }
-                total++;
+                    if(!ModVersion.isEmpty()) {
+                        IRCUtils.sendMessage(user, network, channel, "[" + ModVersion + "] " + Name + " by " + Author + " - " + Link, prefix);
+                        total++;
+                    }
+                    }
             }
         }
         if (total == 0) {
