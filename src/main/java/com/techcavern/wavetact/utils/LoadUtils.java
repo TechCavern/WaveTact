@@ -2,6 +2,7 @@ package com.techcavern.wavetact.utils;
 
 import com.google.common.io.Files;
 import com.techcavern.wavetact.annot.ConCMD;
+import org.pircbotx.Colors;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.ConsoleCommand;
 import com.techcavern.wavetact.objects.IRCCommand;
@@ -87,6 +88,46 @@ public class LoadUtils {
         Registry.Attacks.add("puts $* in a rocket and sends them off to pluto");
         Registry.Attacks.add("forcefeeds $* a plate of poisoned beef");
         Registry.Attacks.add("mind controls $* to marry Dolores Umbridge");
+        Registry.Attacks.add("throws poorly written code at $*");
+        Registry.Attacks.add("throws knives at $*");
+        Registry.Attacks.add("throws various objects at $*");
+        Registry.Attacks.add("throws rocks at $*");
+        Registry.Attacks.add("throws grenades at $*");
+        Registry.Attacks.add("throws IE6 at $*");
+        Registry.Attacks.add("throws axes at $*");
+        Registry.Attacks.add("throws evil things at $*");
+        Registry.Attacks.add("throws netsplits at $*");
+        Registry.Attacks.add("throws hammers at $*");
+        Registry.Attacks.add("throws spears at $*");
+        Registry.Attacks.add("throws spikes at $*");
+        Registry.Attacks.add("throws sharp things at $*");
+        Registry.Attacks.add("throws moldy bread at $*");
+        Registry.Attacks.add("throws mojibake at $*");
+        Registry.Attacks.add("throws floppy disks at $*");
+        Registry.Attacks.add("throws nails at $*");
+        Registry.Attacks.add("throws burning planets at $*");
+        Registry.Attacks.add("throws thorns at $*");
+        Registry.Attacks.add("throws skulls at $*");
+        Registry.Attacks.add("throws a fresh, unboxed copy of Windows Me at $*");
+        Registry.Attacks.add("casts fire at $*");
+        Registry.Attacks.add("casts ice at $*");
+        Registry.Attacks.add("casts death at $*");
+        Registry.Attacks.add("casts " + Colors.BOLD + "DEATH" + Colors.BOLD + " at $*");
+        Registry.Attacks.add("casts poison at $*");
+        Registry.Attacks.add("casts stupid at $*");
+        Registry.Attacks.add("attacks $* with knives");
+        Registry.Attacks.add("attacks $* with idiots from #freenode");
+        Registry.Attacks.add("attacks $* with an army of trolls");
+        Registry.Attacks.add("attacks $* with oper abuse");
+        Registry.Attacks.add("attacks $* with confusingly bad english");
+        Registry.Attacks.add("attacks $* with Windows Me");
+        Registry.Attacks.add("attacks $* with Quicktime for Windows");
+        Registry.Attacks.add("attacks $* with ???");
+        Registry.Attacks.add("attacks $* with segmentation faults");
+        Registry.Attacks.add("attacks $* with relentless spyware");
+        Registry.Attacks.add("attacks $* with NSA spies");
+        Registry.Attacks.add("attacks $* with tracking devices");
+        Registry.Attacks.add("attacks $* with a botnet");
     }
 
     public static void registerEightball() {
