@@ -20,7 +20,6 @@ public class Main {
         System.setProperty(SimpleLogger.SHOW_DATE_TIME_KEY, "true");
         System.setProperty(SimpleLogger.DATE_TIME_FORMAT_KEY, "[yyyy/MM/dd HH:mm:ss]");
         System.setProperty(SimpleLogger.LEVEL_IN_BRACKETS_KEY, "true");
-        LoadUtils.unpackNatives();
         if ((args.length >= 1) && args[0].equalsIgnoreCase("client")) {
             ConsoleClient.go();
         } else if(new File("./console.unixsocket").exists()){

@@ -111,9 +111,6 @@ public class LoadUtils {
 
     public static void addDir(String s) throws IOException {
         try {
-            // This enables the java.library.path to be modified at runtime
-            // From a Sun engineer at http://forums.sun.com/thread.jspa?threadID=707176
-            //
             Field field = ClassLoader.class.getDeclaredField("usr_paths");
             field.setAccessible(true);
             String[] paths = (String[]) field.get(null);
@@ -134,27 +131,4 @@ public class LoadUtils {
         }
     }
 
-    public static void unpackNatives() throws IOException {
-        System.err.println("Extracting natives...");
-        File tempDir = new File("./libs");
-        tempDir.mkdirs();
-        tempDir.mkdir();
-        Scanner files = new Scanner(LoadUtils.class.getClassLoader().getResourceAsStream("files.txt"));
-        while (files.hasNextLine()) {
-            String filename = files.nextLine();
-            if (filename.length() == 0)
-                continue;
-            System.err.println("Processing: " + filename);
-            File targetFile = new File(tempDir.getAbsolutePath() + "/" + filename);
-            if (!targetFile.exists()) {
-                InputStream source = LoadUtils.class.getResourceAsStream("/" + filename);
-                byte[] buffer = new byte[source.available()];
-                source.read(buffer);
-                Files.write(buffer, targetFile);
-            } else
-                System.err.println("-> Skipping. File exists.");
-        }
-        System.err.println("Patching java.library.path...");
-        addDir(tempDir.getAbsolutePath());
-    }
 }
