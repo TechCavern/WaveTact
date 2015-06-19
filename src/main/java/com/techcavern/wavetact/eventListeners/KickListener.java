@@ -33,13 +33,13 @@ public class KickListener extends ListenerAdapter {
             } while (tries < 60 && !event.getBot().getUserBot().getChannels().contains(event.getChannel()));
             if(event.getBot().getUserBot().getChannels().contains(event.getChannel())) {
                 if (channel != null && channel.getUserLevels(network.getUserBot()).contains(UserLevel.OP) && !channel.isOwner(user) && !channel.isSuperOp(user)) {
-                    channel.send().kick(user, "http://bit.ly/1c9vo1S");
+                    channel.send().kick(user, "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻");
                 } else if (channel != null && channel.getUserLevels(network.getUserBot()).contains(UserLevel.SUPEROP) && !channel.isOwner(user) && !channel.isSuperOp(user)) {
-                    channel.send().kick(user, "http://bit.ly/1c9vo1S");
+                    channel.send().kick(user, "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻");
                 } else if (channel != null && channel.getUserLevels(network.getUserBot()).contains(UserLevel.OWNER)) {
-                    channel.send().kick(user, "http://bit.ly/1c9vo1S");
+                    channel.send().kick(user, "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻");
                 } else {
-                    IRCUtils.sendAction(user, network, channel, "kicks " + user.getNick() + " (http://bit.ly/1c9vo1S)", "");
+                    IRCUtils.sendAction(user, network, channel, "kicks " + user.getNick() + " (┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻)", "");
 
                 }
             }
