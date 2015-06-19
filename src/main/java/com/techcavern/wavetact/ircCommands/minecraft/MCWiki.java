@@ -39,16 +39,17 @@ public class MCWiki extends IRCCommand {
                     url = "http://ftbwiki.org/" + StringUtils.join(args, "%20");
                     doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.57 Safari/537.17").get();
                 } catch (Exception ee) {
+                    ee.printStackTrace();
                     ErrorUtils.sendError(user, "Query returned no results or wikis are Down");
                     return;
                 }
             }
         }
         content = doc.select("#mw-content-text");
+        content.select(".atemplate").remove();
         content.select(".notaninfobox").remove();
         content.select(".infobox").remove();
         content = content.select("p");
-        String title = doc.title().replace(" - Feed The Beast wiki", "").replace(" - Feed The Beast Wiki", "").replace(" - Minecraft Wiki", "");
         String text = "";
         int i = 0;
         while (text.replaceAll(" ", "").isEmpty() && i <= content.size()) {
@@ -58,7 +59,7 @@ public class MCWiki extends IRCCommand {
         if (text.length() > 700) {
             text = StringUtils.substring(text, 0, 697) + "...";
         }
-        IRCUtils.sendMessage(user, network, channel, title + ": " + text, prefix);
+        IRCUtils.sendMessage(user, network, channel, text, prefix);
         IRCUtils.sendMessage(user, network, channel, url, prefix);
     }
 }
