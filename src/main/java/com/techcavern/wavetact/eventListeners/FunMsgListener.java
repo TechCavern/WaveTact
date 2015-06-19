@@ -9,6 +9,7 @@ import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.*;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.validator.routines.UrlValidator;
 import org.jooq.Record;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -43,15 +44,18 @@ public class FunMsgListener extends ListenerAdapter {
                     String[] message = StringUtils.split(Colors.removeFormattingAndColors(event.getMessage()), " ");
                     for (String arg : message) {
                         try {
-                            if(!arg.startsWith("http://")){
+                            if (!arg.startsWith("http://") || !arg.startsWith("https://")) {
                                 arg = "http://" + arg;
                             }
-                            Document doc = Jsoup.connect(arg).userAgent("Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.57 Safari/537.17").get();
-                            String title = doc.title();
-                            if (!title.isEmpty()) {
-                                IRCUtils.sendMessage(event.getBot(), event.getChannel(),"[" + event.getUser().getNick() + "] - " + title, "");
+                            if(Registry.urlvalidator.isValid(arg)) {
+                                Document doc = Jsoup.connect(arg).userAgent("Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.57 Safari/537.17").get();
+                                String title = doc.title();
+                                if (!title.isEmpty()) {
+                                    IRCUtils.sendMessage(event.getBot(), event.getChannel(), "[" + event.getUser().getNick() + "] - " + title, "");
+                                }
                             }
                         } catch (Exception e) {
+                            e.printStackTrace();
                         }
                     }
                 }
