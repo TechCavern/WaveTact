@@ -26,11 +26,7 @@ public class FunMsgListener extends ListenerAdapter {
         Record rec = DatabaseUtils.getChannelUserProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), event.getChannel().getName(), PermUtils.authUser(event.getBot(), event.getUser().getNick()),"relaybotsplit");
         if(rec == null){
             if(event.getMessage().contains("http://stop-irc-bullying.eu/stop")){
-                if (event.getChannel() != null && event.getChannel().getUserLevels(event.getBot().getUserBot()).contains(UserLevel.OP) && !event.getChannel().isOwner(event.getUser()) && !event.getChannel().isSuperOp(event.getUser())) {
-                    event.getChannel().send().kick(event.getUser(), "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻");
-                } else if (event.getChannel() != null && event.getChannel().getUserLevels(event.getBot().getUserBot()).contains(UserLevel.SUPEROP) && !event.getChannel().isOwner(event.getUser()) && !event.getChannel().isSuperOp(event.getUser())) {
-                    event.getChannel().send().kick(event.getUser(), "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻");
-                } else if (event.getChannel() != null && event.getChannel().getUserLevels(event.getBot().getUserBot()).contains(UserLevel.OWNER)) {
+                if(IRCUtils.checkIfCanKick(event.getChannel(),event.getBot(),event.getUser() )){
                     event.getChannel().send().kick(event.getUser(), "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻");
                 } else {
                     IRCUtils.sendAction(event.getUser(), event.getBot(), event.getChannel(), "kicks " + event.getUser().getNick() + " (┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻)", "");

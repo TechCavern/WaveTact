@@ -21,15 +21,10 @@ public class SomethingAwesome extends IRCCommand {
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        if (channel != null && channel.getUserLevels(network.getUserBot()).contains(UserLevel.OP) && !channel.isOwner(user) && !channel.isSuperOp(user)) {
-            channel.send().kick(user, "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻");
-        } else if (channel != null && channel.getUserLevels(network.getUserBot()).contains(UserLevel.SUPEROP) && !channel.isOwner(user) && !channel.isSuperOp(user)) {
-            channel.send().kick(user, "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻");
-        } else if (channel != null && channel.getUserLevels(network.getUserBot()).contains(UserLevel.OWNER)) {
-            channel.send().kick(user, "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻");
-        } else {
+       if(IRCUtils.checkIfCanKick(channel,network,user)){
+          channel.send().kick(user, "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻");
+       } else {
             IRCUtils.sendAction(user, network, channel, "kicks " + user.getNick() + " (┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻)", prefix);
-
         }
     }
 }
