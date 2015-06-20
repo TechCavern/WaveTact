@@ -28,10 +28,6 @@ public class Prism extends IRCCommand {
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-       String prism = "";
-        for(char c:StringUtils.join(args, " ").replace("\n", " ").toCharArray()){
-            prism += IRCUtils.prism(c);
-        }
-        IRCUtils.sendMessage(user, network, channel, prism, prefix);
+        IRCUtils.sendMessage(user, network, channel, GeneralUtils.prism(StringUtils.join(args, " ")), prefix);
     }
 }

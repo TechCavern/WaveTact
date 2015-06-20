@@ -106,6 +106,7 @@ public class LoadUtils {
         Registry.Attacks.add("throws hammers at $*");
         Registry.Attacks.add("throws spears at $*");
         Registry.Attacks.add("throws spikes at $*");
+        Registry.Attacks.add("throws $* into a burning building");
         Registry.Attacks.add("throws sharp things at $*");
         Registry.Attacks.add("throws moldy bread at $*");
         Registry.Attacks.add("throws mojibake at $*");

@@ -26,59 +26,6 @@ public class IRCUtils {
         }
     }
 
-    public static String prism(char c){
-        int number = RandomUtils.nextInt(1, 15);;
-        String result = null;
-        switch(number){
-            case 1:
-                result = Colors.BLUE + c;
-                break;
-            case 2:
-                result = Colors.BLACK + c;
-                break;
-            case 3:
-                result = Colors.BROWN + c;
-                break;
-            case 4:
-                result = Colors.CYAN + c;
-                break;
-            case 5:
-                result = Colors.DARK_BLUE + c;
-                break;
-            case 6:
-                result = Colors.DARK_GRAY + c;
-                break;
-            case 7:
-                result = Colors.DARK_GREEN + c;
-                break;
-            case 8:
-                result = Colors.GREEN + c;
-                break;
-            case 9:
-                result = Colors.LIGHT_GRAY + c;
-                break;
-            case 10:
-                result = Colors.MAGENTA + c;
-                break;
-            case 11:
-                result = Colors.OLIVE + c;
-                break;
-            case 12:
-                result = Colors.PURPLE + c;
-                break;
-            case 13:
-                result = Colors.RED + c;
-                break;
-            case 14:
-                result = Colors.TEAL + c;
-                break;
-            case 15:
-                result = Colors.YELLOW + c;
-                break;
-        }
-        return result;
-    }
-
     public static WhoisEvent WhoisEvent(PircBotX network, String userObject) {
         WhoisEvent WhoisEvent;
         network.sendIRC().whois(userObject);
@@ -109,7 +56,17 @@ public class IRCUtils {
             Registry.MessageQueue.add(new NetProperty("PRIVMSG " + userObject.getNick() + " :" + message, networkObject));
         }
     }
-
+    public static void sendKick(User userObject, User recipientObject, PircBotX networkObject, Channel channelObject, String message) {
+        if (channelObject != null) {
+            for (int i = 0; i < message.length(); i += 350) {
+                String messageToSend = message.substring(i, Math.min(message.length(), i + 350));
+                if (!messageToSend.isEmpty()) {
+                    Registry.MessageQueue.add(new NetProperty("KICK " + channelObject.getName() + userObject.getNick() + " :" + messageToSend, networkObject));
+                    sendRelayMessage(networkObject,channelObject, "* " + userObject.getNick() + " kicks " + recipientObject.getNick() + " ("+ messageToSend +")");
+                }
+            }
+        }
+    }
     public static void sendRelayMessage(PircBotX networkObject,Channel channel, String msg) {
         Record prerec = DatabaseUtils.getNetworkProperty(getNetworkNameByNetwork(networkObject), "relaychan");
         if(prerec != null) {
