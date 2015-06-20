@@ -32,9 +32,9 @@ public class Kick extends IRCCommand {
             message += ": " + GeneralUtils.buildMessage(1, args.length, args);
         }
         if(args[0].equalsIgnoreCase(network.getNick()))
-            IRCUtils.sendKick(network.getUserBot(), user, network, channel, "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻");
+            IRCUtils.sendKick(network.getUserBot(), user, network, channel, message);
         else
-            IRCUtils.sendKick(network.getUserBot(), IRCUtils.getUserByNick(network, args[0]), network, channel, "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻");
+            IRCUtils.sendKick(network.getUserBot(), IRCUtils.getUserByNick(network, args[0]), network, channel, message);
     }
 
 }
