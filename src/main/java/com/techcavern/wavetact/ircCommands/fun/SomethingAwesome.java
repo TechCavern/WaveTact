@@ -22,7 +22,7 @@ public class SomethingAwesome extends IRCCommand {
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
        if(IRCUtils.checkIfCanKick(channel,network,user)){
-          channel.send().kick(user, "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻");
+           IRCUtils.sendKick(network.getUserBot(),user, network, channel, "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻");
        } else {
             IRCUtils.sendAction(user, network, channel, "kicks " + user.getNick() + " (┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻)", prefix);
         }

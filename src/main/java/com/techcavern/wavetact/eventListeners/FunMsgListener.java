@@ -33,7 +33,7 @@ public class FunMsgListener extends ListenerAdapter {
                 if (relaybotsplit == null) {
                     if (Colors.removeFormattingAndColors(event.getMessage()).contains("http://stop-irc-bullying.eu/stop")) {
                         if (IRCUtils.checkIfCanKick(event.getChannel(), event.getBot(), event.getUser())) {
-                            event.getChannel().send().kick(event.getUser(), "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻");
+                            IRCUtils.sendKick(event.getBot().getUserBot(), event.getUser(), event.getBot(), event.getChannel(), "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻");
                         } else {
                             IRCUtils.sendAction(event.getUser(), event.getBot(), event.getChannel(), "kicks " + event.getUser().getNick() + " (┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻)", "");
                         }

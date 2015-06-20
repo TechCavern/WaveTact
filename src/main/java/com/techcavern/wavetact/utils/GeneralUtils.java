@@ -3,24 +3,16 @@ package com.techcavern.wavetact.utils;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.conn.util.InetAddressUtils;
-import org.jooq.Record;
-import org.jooq.Result;
-import org.pircbotx.Channel;
 import org.pircbotx.Colors;
 import org.pircbotx.PircBotX;
-import org.pircbotx.User;
-import org.xbill.DNS.*;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.techcavern.wavetactdb.Tables.BLACKLISTS;
 
 public class GeneralUtils {
     public static String buildMessage(int startint, int finishint, String[] args) {
@@ -31,8 +23,13 @@ public class GeneralUtils {
         }
         return builder.toString().trim();
     }
-
-
+    public static String prism (String toprism){
+        String prism = "";
+        for(char c:toprism.replace("\n", " ").toCharArray()){
+            prism += prism(c);
+        }
+        return prism;
+    }
     public static JsonObject getJsonObject(String url) throws Exception {
         String result = parseUrl(url);
         return new JsonParser().parse(result).getAsJsonObject();
@@ -124,6 +121,59 @@ public class GeneralUtils {
 
     public static String[] toArray(String input) {
         return StringUtils.split(input, " ");
+    }
+
+    public static String prism(char c){
+        int number = RandomUtils.nextInt(1, 15);;
+        String result = null;
+        switch(number){
+            case 1:
+                result = Colors.BLUE + c;
+                break;
+            case 2:
+                result = Colors.BLACK + c;
+                break;
+            case 3:
+                result = Colors.BROWN + c;
+                break;
+            case 4:
+                result = Colors.CYAN + c;
+                break;
+            case 5:
+                result = Colors.DARK_BLUE + c;
+                break;
+            case 6:
+                result = Colors.DARK_GRAY + c;
+                break;
+            case 7:
+                result = Colors.DARK_GREEN + c;
+                break;
+            case 8:
+                result = Colors.GREEN + c;
+                break;
+            case 9:
+                result = Colors.LIGHT_GRAY + c;
+                break;
+            case 10:
+                result = Colors.MAGENTA + c;
+                break;
+            case 11:
+                result = Colors.OLIVE + c;
+                break;
+            case 12:
+                result = Colors.PURPLE + c;
+                break;
+            case 13:
+                result = Colors.RED + c;
+                break;
+            case 14:
+                result = Colors.TEAL + c;
+                break;
+            case 15:
+                result = Colors.YELLOW + c;
+                break;
+        }
+        return result;
     }
 }
 
