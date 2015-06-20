@@ -103,9 +103,9 @@ public class IRCUtils {
                 if (!messageToSend.isEmpty())
                 Registry.MessageQueue.add(new NetProperty("PRIVMSG " + prefix + channelObject.getName() + " :" + messageToSend, networkObject));
                 if(userObject == null){
-                    sendRelayMessage(networkObject, message);
+                    sendRelayMessage(networkObject,channelObject, message);
                 }else{
-                    sendRelayMessage(networkObject, "<-" + userObject.getNick() +"> " + message);
+                    sendRelayMessage(networkObject,channelObject, "<-" + userObject.getNick() +"> " + message);
                 }
             }
         } else {
@@ -113,12 +113,14 @@ public class IRCUtils {
         }
     }
 
-    public static void sendRelayMessage(PircBotX networkObject, String msg){
-        for(NetProperty net:Registry.NetworkName){
-            if(net.getNetwork() != networkObject){
-                String relaychan = DatabaseUtils.getNetworkProperty(net.getProperty(), "relaychan").getValue(NETWORKPROPERTY.VALUE);
-                if(relaychan != null)
-                    Registry.MessageQueue.add(new NetProperty("PRIVMSG " + relaychan + " :[" + net.getProperty() + "] "+msg, net.getNetwork()));
+    public static void sendRelayMessage(PircBotX networkObject,Channel channel, String msg) {
+        if (DatabaseUtils.getNetworkProperty(getNetworkNameByNetwork(networkObject), "relaychan").getValue(NETWORKPROPERTY.VALUE).equalsIgnoreCase(channel.getName())) {
+            for (NetProperty net : Registry.NetworkName) {
+                if (net.getNetwork() != networkObject) {
+                    String relaychan = DatabaseUtils.getNetworkProperty(net.getProperty(), "relaychan").getValue(NETWORKPROPERTY.VALUE);
+                    if (relaychan != null)
+                    Registry.MessageQueue.add(new NetProperty("PRIVMSG " + relaychan + " :[" + getNetworkNameByNetwork(networkObject) + "] " + msg, net.getNetwork()));
+                }
             }
         }
     }
@@ -127,9 +129,9 @@ public class IRCUtils {
         if (channelObject != null) {
             Registry.MessageQueue.add(new NetProperty("PRIVMSG " + prefix + channelObject.getName() + " :\u0001ACTION " + message + "\u0001", networkObject));
             if(userObject == null){
-                sendRelayMessage(networkObject, message);
+                sendRelayMessage(networkObject,channelObject, message);
             }else{
-                sendRelayMessage(networkObject, "* " + userObject.getNick() + message);
+                sendRelayMessage(networkObject,channelObject, "* " + userObject.getNick() + message);
             }
         } else {
             Registry.MessageQueue.add(new NetProperty("PRIVMSG " + userObject.getNick() + " :\u0001ACTION " + message + "\u0001", networkObject));
