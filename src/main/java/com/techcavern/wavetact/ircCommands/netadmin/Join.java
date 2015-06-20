@@ -39,7 +39,7 @@ public class Join extends IRCCommand {
         }
         if (permanent) {
             Record server = DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(network));
-            server.setValue(SERVERS.CHANNELS, SERVERS.CHANNELS + ", " + args[0]);
+            server.setValue(SERVERS.CHANNELS, DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(network)).getValue(SERVERS.CHANNELS) + ", " + args[0]);
             DatabaseUtils.updateServer(server);
         }
         Registry.MessageQueue.add(new NetProperty("JOIN :" + args[0], network));
