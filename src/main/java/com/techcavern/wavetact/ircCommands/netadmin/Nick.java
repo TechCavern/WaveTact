@@ -24,10 +24,10 @@ import static com.techcavern.wavetactdb.Tables.SERVERS;
  * @author jztech101
  */
 @IRCCMD
-public class Join extends IRCCommand {
+public class Nick extends IRCCommand {
 
-    public Join() {
-        super(GeneralUtils.toArray("join jo"), 20, "join (+)[channel]", "Joins a channel", false);
+    public Nick() {
+        super(GeneralUtils.toArray("nick"), 20, "nick (+)[channel]", "changes nick on server", false);
     }
 
     @Override
@@ -39,9 +39,9 @@ public class Join extends IRCCommand {
         }
         if (permanent) {
             Record server = DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(network));
-            server.setValue(SERVERS.CHANNELS, SERVERS.CHANNELS + ", " + args[0]);
+            server.setValue(SERVERS.NICK, args[0]);
             DatabaseUtils.updateServer(server);
         }
-        Registry.MessageQueue.add(new NetProperty("JOIN :" + args[0], network));
+        Registry.MessageQueue.add(new NetProperty("NICK :" + args[0], network));
     }
 }

@@ -188,13 +188,12 @@ public class LoadUtils {
                     }
                     while (true) {
                         try {
-                            if (Registry.MessageQueue.size() > 0) {
-                                if(network.getNetwork().equals(Registry.MessageQueue.get(0).getNetwork())) {
+                            if (Registry.MessageQueue.size() > 0 && network.getNetwork().equals(Registry.MessageQueue.get(0).getNetwork())) {
                                     Registry.MessageQueue.get(0).getNetwork().sendRaw().rawLine(Registry.MessageQueue.get(0).getProperty());
                                     Registry.MessageQueue.remove(0);
-                                }
-                                TimeUnit.MILLISECONDS.sleep(1000);
+                                TimeUnit.MILLISECONDS.sleep(900);
                             }
+                            TimeUnit.MILLISECONDS.sleep(100);
                         } catch (Exception e) {
                         }
                     }
