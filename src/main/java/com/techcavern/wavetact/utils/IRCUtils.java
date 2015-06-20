@@ -110,13 +110,19 @@ public class IRCUtils {
     }
 
     public static void sendRelayMessage(PircBotX networkObject,Channel channel, String msg) {
-        String chnname = DatabaseUtils.getNetworkProperty(getNetworkNameByNetwork(networkObject), "relaychan").getValue(NETWORKPROPERTY.VALUE);
-        if (chnname != null && chnname.equalsIgnoreCase(channel.getName())) {
-            for (NetProperty net : Registry.NetworkName) {
-                if (net.getNetwork() != networkObject) {
-                    String relaychan = DatabaseUtils.getNetworkProperty(net.getProperty(), "relaychan").getValue(NETWORKPROPERTY.VALUE);
-                    if (relaychan != null)
-                    Registry.MessageQueue.add(new NetProperty("PRIVMSG " + relaychan + " :[" + getNetworkNameByNetwork(networkObject) + "] " + msg, net.getNetwork()));
+        Record prerec = DatabaseUtils.getNetworkProperty(getNetworkNameByNetwork(networkObject), "relaychan");
+        if(prerec != null) {
+            String chnname = prerec.getValue(NETWORKPROPERTY.VALUE);
+            if (chnname != null && chnname.equalsIgnoreCase(channel.getName())) {
+                for (NetProperty net : Registry.NetworkName) {
+                    if (net.getNetwork() != networkObject) {
+                        Record rec = DatabaseUtils.getNetworkProperty(net.getProperty(), "relaychan");
+                        if (rec != null) {
+                            String relaychan = rec.getValue(NETWORKPROPERTY.VALUE);
+                            if (relaychan != null)
+                                Registry.MessageQueue.add(new NetProperty("PRIVMSG " + relaychan + " :[" + getNetworkNameByNetwork(networkObject) + "] " + msg, net.getNetwork()));
+                        }
+                    }
                 }
             }
         }
