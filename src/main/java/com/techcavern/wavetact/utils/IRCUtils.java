@@ -100,9 +100,10 @@ public class IRCUtils {
         if (channelObject != null) {
             for (int i = 0; i < message.length(); i += 350) {
                 String messageToSend = message.substring(i, Math.min(message.length(), i + 350));
-                if (!messageToSend.isEmpty())
-                Registry.MessageQueue.add(new NetProperty("PRIVMSG " + prefix + channelObject.getName() + " :" + messageToSend, networkObject));
-                sendRelayMessage(networkObject,channelObject, "<-" + networkObject.getNick() +"> " + message);
+                if (!messageToSend.isEmpty()) {
+                    Registry.MessageQueue.add(new NetProperty("PRIVMSG " + prefix + channelObject.getName() + " :" + messageToSend, networkObject));
+                    sendRelayMessage(networkObject, channelObject, "<-" + networkObject.getNick() + "> " + message);
+                }
             }
         } else {
             Registry.MessageQueue.add(new NetProperty("PRIVMSG " + userObject.getNick() + " :" + message, networkObject));
