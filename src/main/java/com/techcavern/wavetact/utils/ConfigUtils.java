@@ -76,6 +76,7 @@ public class ConfigUtils {
         Net.getListenerManager().addListener(new KickListener());
         Net.getListenerManager().addListener(new BanListener());
         Net.getListenerManager().addListener(new FunMsgListener());
+        Net.getListenerManager().addListener(new RelayMsgListener());
         Net.setAutoReconnect(true);
         Net.setAutoReconnectAttempts(5);
         Net.setAutoReconnectDelay(20000);

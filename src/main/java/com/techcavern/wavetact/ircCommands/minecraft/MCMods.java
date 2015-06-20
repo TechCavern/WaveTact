@@ -16,7 +16,7 @@ import org.pircbotx.User;
 public class MCMods extends IRCCommand {
 
     public MCMods() {
-        super(GeneralUtils.toArray("mcmods mcmod"), 0, "mcmods (--dev) (mc version#) [mod name]", "Gets info on a minecraft mod", false);
+        super(GeneralUtils.toArray("mcmods mcmod"), 0, "mcmods (mc version#) (+)[mod name]", "Gets info on a minecraft mod", false);
     }
 
     @Override
@@ -26,10 +26,6 @@ public class MCMods extends IRCCommand {
         String version = "";
         String modname = "";
         JsonArray mods = null;
-        if(args[0].equals("--dev")){
-            isDev = true;
-            args = ArrayUtils.remove(args, 0);
-        }
         for (int i = 0; i < versions.size(); i++) {
             String vers = versions.get(i).getAsString();
             if (vers.contains(args[0])) {
@@ -49,6 +45,10 @@ public class MCMods extends IRCCommand {
             modname = args[0].toLowerCase();
         } else {
             mods = GeneralUtils.getJsonArray("http://bot.notenoughmods.com/" + version + ".json");
+        }
+        if(modname.startsWith("+")){
+            isDev = true;
+            modname= modname.replaceFirst("\\+","");
         }
         int total = 0;
         for (int i = 0; i < mods.size(); i++) {

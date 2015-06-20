@@ -2,6 +2,7 @@ package com.techcavern.wavetact.utils;
 
 import com.techcavern.wavetact.console.ConsoleServer;
 import com.techcavern.wavetact.objects.*;
+import org.apache.commons.validator.routines.UrlValidator;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 import org.jooq.DSLContext;
 import org.pircbotx.MultiBotManager;
@@ -31,5 +32,5 @@ public class Registry {
     public static ConsoleServer consoleServer = new ConsoleServer();
     public static DSLContext WaveTactDB = null;
     public static final List<NetProperty> MessageQueue = new ArrayList<>();
-
+    public static final UrlValidator urlvalidator = new UrlValidator();
 }
