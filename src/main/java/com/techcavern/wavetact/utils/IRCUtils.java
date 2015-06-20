@@ -110,7 +110,8 @@ public class IRCUtils {
     }
 
     public static void sendRelayMessage(PircBotX networkObject,Channel channel, String msg) {
-        if (DatabaseUtils.getNetworkProperty(getNetworkNameByNetwork(networkObject), "relaychan").getValue(NETWORKPROPERTY.VALUE).equalsIgnoreCase(channel.getName())) {
+        String chnname = DatabaseUtils.getNetworkProperty(getNetworkNameByNetwork(networkObject), "relaychan").getValue(NETWORKPROPERTY.VALUE);
+        if (chnname != null && chnname.equalsIgnoreCase(channel.getName())) {
             for (NetProperty net : Registry.NetworkName) {
                 if (net.getNetwork() != networkObject) {
                     String relaychan = DatabaseUtils.getNetworkProperty(net.getProperty(), "relaychan").getValue(NETWORKPROPERTY.VALUE);
