@@ -2,6 +2,8 @@ package com.techcavern.wavetact.utils;
 
 import com.google.common.io.Files;
 import com.techcavern.wavetact.annot.ConCMD;
+import com.techcavern.wavetact.objects.NetProperty;
+import org.jooq.Record;
 import org.pircbotx.Colors;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.ConsoleCommand;
@@ -10,6 +12,7 @@ import org.flywaydb.core.Flyway;
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
+import org.pircbotx.PircBotX;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,6 +22,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
+import static com.techcavern.wavetactdb.Tables.BANS;
 
 public class LoadUtils {
 
@@ -171,5 +177,64 @@ public class LoadUtils {
             throw new IOException("Failed to get field handle to set library path");
         }
     }
+    public static void initializeMessageQueue(){
+        for(NetProperty network:Registry.NetworkName) {
+            class MessageQueue implements Runnable {
+                @Override
+                public void run() {
+                    try {
+                        TimeUnit.SECONDS.sleep(30);
+                    } catch (InterruptedException c) {
+                    }
+                    while (true) {
+                        try {
+                            if (Registry.MessageQueue.size() > 0) {
+                                if(network.getNetwork().equals(Registry.MessageQueue.get(0).getNetwork())) {
+                                    Registry.MessageQueue.get(0).getNetwork().sendRaw().rawLine(Registry.MessageQueue.get(0).getProperty());
+                                    Registry.MessageQueue.remove(0);
+                                }
+                                TimeUnit.MILLISECONDS.sleep(1000);
+                            }
+                        } catch (Exception e) {
+                        }
+                    }
+                }
 
+            }
+            Registry.threadPool.execute(new MessageQueue());
+        }
+
+    }
+    public static void initalizeBanQueue() {
+        class BanQueue implements Runnable {
+
+            @Override
+            public void run() {
+                try {
+                    TimeUnit.SECONDS.sleep(120);
+                } catch (InterruptedException c) {
+                    // ignored
+                }
+                while (true) {
+                    try {
+                        for (Record banRecord : DatabaseUtils.getBans()) {
+                            try {
+                                if (System.currentTimeMillis() >= banRecord.getValue(BANS.TIME) + banRecord.getValue(BANS.INIT)) {
+                                    PircBotX networkObject = IRCUtils.getBotByNetworkName(banRecord.getValue(BANS.NETWORK));
+                                    IRCUtils.setMode(IRCUtils.getChannelbyName(networkObject, banRecord.getValue(BANS.CHANNEL)), networkObject, "-" + banRecord.getValue(BANS.PROPERTY), banRecord.getValue(BANS.HOSTMASK));
+                                    DatabaseUtils.removeBan(banRecord.getValue(BANS.NETWORK), banRecord.getValue(BANS.CHANNEL), banRecord.getValue(BANS.HOSTMASK), banRecord.getValue(BANS.ISMUTE));
+                                }
+                            } catch (IllegalArgumentException | NullPointerException e) {
+                                // ignored
+                            }
+                        }
+                        TimeUnit.SECONDS.sleep(120);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+        Registry.threadPool.execute(new BanQueue());
+    }
 }

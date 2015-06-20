@@ -1,8 +1,6 @@
 package com.techcavern.wavetact;
 
-import com.techcavern.wavetact.queues.MessageQueue;
 import com.techcavern.wavetact.console.ConsoleClient;
-import com.techcavern.wavetact.queues.BanQueue;
 import com.techcavern.wavetact.utils.ConfigUtils;
 import com.techcavern.wavetact.utils.LoadUtils;
 import com.techcavern.wavetact.utils.Registry;
@@ -34,8 +32,8 @@ public class Main {
             LoadUtils.registerEightball();
             Registry.WaveTact.start();
             Registry.threadPool.execute(Registry.consoleServer);
-            Registry.threadPool.execute(new BanQueue());
-            Registry.threadPool.execute(new MessageQueue());
+            LoadUtils.initializeMessageQueue();
+            LoadUtils.initalizeBanQueue();
             Registry.threadPool.awaitTermination(Long.MAX_VALUE, TimeUnit.DAYS);
         }
     }
