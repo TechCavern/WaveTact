@@ -6,19 +6,12 @@
 package com.techcavern.wavetact.consoleCommands.anonymity;
 
 import com.techcavern.wavetact.annot.ConCMD;
-import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.CommandIO;
 import com.techcavern.wavetact.objects.ConsoleCommand;
-import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.PermUtils;
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
-import org.pircbotx.User;
 
 /**
  * @author jztech101
@@ -39,7 +32,7 @@ public class Act extends ConsoleCommand {
             chan = IRCUtils.getChannelbyName(network, args[1].replace(prefix, ""));
         else
             chan = IRCUtils.getChannelbyName(network, args[1]);
-        if(chan != null)
+        if (chan != null)
             IRCUtils.sendAction(network, chan, GeneralUtils.buildMessage(2, args.length, args).replace("\n", " "), prefix);
     }
 }

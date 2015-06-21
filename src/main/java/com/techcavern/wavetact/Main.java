@@ -20,10 +20,10 @@ public class Main {
         System.setProperty(SimpleLogger.LEVEL_IN_BRACKETS_KEY, "true");
         if ((args.length >= 1) && args[0].equalsIgnoreCase("--client")) {
             ConsoleClient.go();
-        } else if(new File("./console.unixsocket").exists()){
+        } else if (new File("./console.unixsocket").exists()) {
             System.err.println("Instance already started");
             System.exit(0);
-        }else{
+        } else {
             LoadUtils.initiateDatabaseConnection();
             ConfigUtils.registerNetworks();
             LoadUtils.registerConsoleCommands();

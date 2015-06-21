@@ -2,17 +2,17 @@ package com.techcavern.wavetact.ircCommands.chanhalfop;
 
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.utils.*;
-import static com.techcavern.wavetactdb.Tables.*;
-
-import com.techcavern.wavetactdb.tables.records.BansRecord;
+import com.techcavern.wavetact.utils.DatabaseUtils;
+import com.techcavern.wavetact.utils.ErrorUtils;
+import com.techcavern.wavetact.utils.GeneralUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.jooq.Record;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-import javax.xml.crypto.Data;
+import static com.techcavern.wavetactdb.Tables.BANS;
 
 @IRCCMD
 
@@ -26,12 +26,12 @@ public class Ban extends IRCCommand {
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         String hostmask;
         boolean isMute = false;
-        if(args[0].equalsIgnoreCase("m")){
+        if (args[0].equalsIgnoreCase("m")) {
             isMute = true;
             args = ArrayUtils.remove(args, 0);
         }
         String ban = "b ";
-        if(isMute){
+        if (isMute) {
             if (network.getServerInfo().getChannelModes().contains("q")) {
                 ban = "q ";
             } else if (network.getServerInfo().getExtBanPrefix() != null && network.getServerInfo().getExtBanPrefix().equalsIgnoreCase("~") && network.getServerInfo().getExtBanList() != null && network.getServerInfo().getExtBanList().contains("q")) {
@@ -67,7 +67,7 @@ public class Ban extends IRCCommand {
             if (BanRecord != null) {
                 DatabaseUtils.removeBan(networkname, channel.getName(), hostmask, isMute);
             }
-                IRCUtils.setMode(channel, network, "-" + ban, hostmask);
+            IRCUtils.setMode(channel, network, "-" + ban, hostmask);
 
         } else if (args[0].startsWith("+")) {
             if (BanRecord != null) {
@@ -88,11 +88,11 @@ public class Ban extends IRCCommand {
         } else {
             if (BanRecord == null) {
                 if (args.length == 2) {
-                    DatabaseUtils.addBan(networkname,channel.getName(),hostmask,System.currentTimeMillis(), GeneralUtils.getMilliSeconds(args[1]), isMute, ban);
+                    DatabaseUtils.addBan(networkname, channel.getName(), hostmask, System.currentTimeMillis(), GeneralUtils.getMilliSeconds(args[1]), isMute, ban);
                 } else if (args.length < 2) {
                     DatabaseUtils.addBan(networkname, channel.getName(), hostmask, System.currentTimeMillis(), GeneralUtils.getMilliSeconds("24h"), isMute, ban);
                 }
-                IRCUtils.setMode(channel, network, "+" + ban , hostmask);
+                IRCUtils.setMode(channel, network, "+" + ban, hostmask);
             } else {
                 ErrorUtils.sendError(user, "Ban already exists!");
             }

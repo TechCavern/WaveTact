@@ -3,11 +3,12 @@ package com.techcavern.wavetact.ircCommands.chanadmin;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.*;
-import static com.techcavern.wavetactdb.Tables.*;
 import org.jooq.Record;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
+
+import static com.techcavern.wavetactdb.Tables.CHANNELUSERPROPERTY;
 
 @IRCCMD
 public class ChannelUserProperty extends IRCCommand {
@@ -39,24 +40,24 @@ public class ChannelUserProperty extends IRCCommand {
         if (auth != null) {
             account = auth;
         }
-        Record channelUserProperty = DatabaseUtils.getChannelUserProperty(networkname, channel.getName(),account, args[1]);
-        if(channelUserProperty != null && (isDelete || isModify)){
-            if(isDelete){
-                DatabaseUtils.removeChannelUserProperty(networkname, channel.getName(),account,args[1]);
+        Record channelUserProperty = DatabaseUtils.getChannelUserProperty(networkname, channel.getName(), account, args[1]);
+        if (channelUserProperty != null && (isDelete || isModify)) {
+            if (isDelete) {
+                DatabaseUtils.removeChannelUserProperty(networkname, channel.getName(), account, args[1]);
                 IRCUtils.sendMessage(user, network, channel, "Property deleted", prefix);
-            }else if(isModify){
-                if(viewonly)
-                    IRCUtils.sendMessage(user, network, channel, account + " " + args[1] + ": " +channelUserProperty.getValue(CHANNELUSERPROPERTY.VALUE), prefix);
+            } else if (isModify) {
+                if (viewonly)
+                    IRCUtils.sendMessage(user, network, channel, account + " " + args[1] + ": " + channelUserProperty.getValue(CHANNELUSERPROPERTY.VALUE), prefix);
                 else {
                     channelUserProperty.setValue(CHANNELUSERPROPERTY.VALUE, args[2]);
                     DatabaseUtils.updateChannelUserProperty(channelUserProperty);
                     IRCUtils.sendMessage(user, network, channel, "Property modified", prefix);
                 }
             }
-        }else if (channelUserProperty == null && !isDelete && !isModify) {
-                DatabaseUtils.addChannelUserProperty(networkname, channel.getName(), account, args[1], args[2]);
+        } else if (channelUserProperty == null && !isDelete && !isModify) {
+            DatabaseUtils.addChannelUserProperty(networkname, channel.getName(), account, args[1], args[2]);
             IRCUtils.sendMessage(user, network, channel, "Property added", prefix);
-        }else{
+        } else {
             ErrorUtils.sendError(user, "Unknown user or unknown property");
         }
 

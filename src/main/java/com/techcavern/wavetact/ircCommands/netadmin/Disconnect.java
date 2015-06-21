@@ -26,7 +26,7 @@ public class Disconnect extends IRCCommand {
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        if(args[0].startsWith("%")){
+        if (args[0].startsWith("%")) {
             args[0] = args[0].replace("%", "");
             DatabaseUtils.removeServer(IRCUtils.getNetworkNameByNetwork(network));
         }

@@ -7,7 +7,6 @@ import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import org.apache.commons.lang3.ArrayUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -46,17 +45,17 @@ public class MCMods extends IRCCommand {
         } else {
             mods = GeneralUtils.getJsonArray("http://bot.notenoughmods.com/" + version + ".json");
         }
-        if(modname.startsWith("+")){
+        if (modname.startsWith("+")) {
             isDev = true;
-            modname= modname.replaceFirst("\\+","");
+            modname = modname.replaceFirst("\\+", "");
         }
         int total = 0;
         for (int i = 0; i < mods.size(); i++) {
             JsonObject mod = mods.get(i).getAsJsonObject();
             if (mod.get("name").getAsString().toLowerCase().contains(modname)) {
                 String ModVersion = "";
-                if(isDev)
-                ModVersion = mod.get("dev").getAsString();
+                if (isDev)
+                    ModVersion = mod.get("dev").getAsString();
                 else
                     ModVersion = mod.get("version").getAsString();
                 String Name = mod.get("name").getAsString();
@@ -66,11 +65,11 @@ public class MCMods extends IRCCommand {
                     Link = mod.get("longurl").getAsString();
                 }
                 if (total < 3) {
-                    if(!ModVersion.isEmpty()) {
+                    if (!ModVersion.isEmpty()) {
                         IRCUtils.sendMessage(user, network, channel, "[" + ModVersion + "] " + Name + " by " + Author + " - " + Link, prefix);
                         total++;
                     }
-                    }
+                }
             }
         }
         if (total == 0) {

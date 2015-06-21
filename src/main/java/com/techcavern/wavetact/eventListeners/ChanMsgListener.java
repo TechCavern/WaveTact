@@ -41,8 +41,8 @@ public class ChanMsgListener extends ListenerAdapter {
                         ErrorUtils.sendError(event.getUser(), "Permission denied");
                     }
                 } else {
-                    Record rec = DatabaseUtils.getChannelUserProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), event.getChannel().getName(), PermUtils.authUser(event.getBot(), event.getUser().getNick()),"relaybotsplit");
-                    if(rec == null)
+                    Record rec = DatabaseUtils.getChannelUserProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), event.getChannel().getName(), PermUtils.authUser(event.getBot(), event.getUser().getNick()), "relaybotsplit");
+                    if (rec == null)
                         return;
                     String relaysplit = rec.getValue(CHANNELUSERPROPERTY.VALUE);
                     String startingmessage = event.getMessage();
@@ -50,7 +50,7 @@ public class ChanMsgListener extends ListenerAdapter {
                         String[] midmessage = StringUtils.split(startingmessage, relaysplit);
                         if (midmessage.length > 1) {
                             startingmessage = GeneralUtils.buildMessage(1, midmessage.length, midmessage);
-                        }else
+                        } else
                             return;
                     } else {
                         return;

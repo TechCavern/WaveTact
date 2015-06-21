@@ -7,7 +7,10 @@ package com.techcavern.wavetact.ircCommands.dnsinfo;
 
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.utils.*;
+import com.techcavern.wavetact.utils.DatabaseUtils;
+import com.techcavern.wavetact.utils.ErrorUtils;
+import com.techcavern.wavetact.utils.GeneralUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jooq.Record;
 import org.jooq.Result;
@@ -51,7 +54,7 @@ public class BlacklistLookup extends IRCCommand {
         Resolver resolver = new SimpleResolver();
         Result<Record> blacklist = DatabaseUtils.getBlacklists(args[0]);
         if (blacklist.isEmpty()) {
-            ErrorUtils.sendError(user, "No "+args[0]+" blacklists found in database");
+            ErrorUtils.sendError(user, "No " + args[0] + " blacklists found in database");
             return;
         }
         for (org.jooq.Record Blacklist : blacklist) {
@@ -70,9 +73,9 @@ public class BlacklistLookup extends IRCCommand {
             }
         }
         if (!sent) {
-            IRCUtils.sendMessage(user, network, channel, BeforeIP + " not found in "+args[0]+" blacklists", prefix);
+            IRCUtils.sendMessage(user, network, channel, BeforeIP + " not found in " + args[0] + " blacklists", prefix);
         }
-    
+
     }
 }
 

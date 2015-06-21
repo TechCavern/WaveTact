@@ -1,7 +1,10 @@
 package com.techcavern.wavetact.utils;
 
 import com.techcavern.wavetact.console.ConsoleServer;
-import com.techcavern.wavetact.objects.*;
+import com.techcavern.wavetact.objects.AuthedUser;
+import com.techcavern.wavetact.objects.ConsoleCommand;
+import com.techcavern.wavetact.objects.IRCCommand;
+import com.techcavern.wavetact.objects.NetProperty;
 import org.apache.commons.validator.routines.UrlValidator;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 import org.jooq.DSLContext;
@@ -9,7 +12,6 @@ import org.pircbotx.MultiBotManager;
 import org.reflections.Reflections;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ForkJoinPool;
 

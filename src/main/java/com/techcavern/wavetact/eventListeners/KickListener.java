@@ -31,9 +31,9 @@ public class KickListener extends ListenerAdapter {
                 tries++;
                 TimeUnit.SECONDS.sleep(5);
             } while (tries < 60 && !event.getBot().getUserBot().getChannels().contains(event.getChannel()));
-            if(event.getBot().getUserBot().getChannels().contains(event.getChannel())) {
+            if (event.getBot().getUserBot().getChannels().contains(event.getChannel())) {
                 if (channel != null && channel.getUserLevels(network.getUserBot()).contains(UserLevel.OP) && !channel.isOwner(user) && !channel.isSuperOp(user)) {
-                    IRCUtils.sendKick(event.getBot().getUserBot(),user, network, event.getChannel(), "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻");
+                    IRCUtils.sendKick(event.getBot().getUserBot(), user, network, event.getChannel(), "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻");
                 } else if (channel != null && channel.getUserLevels(network.getUserBot()).contains(UserLevel.SUPEROP) && !channel.isOwner(user) && !channel.isSuperOp(user)) {
                     IRCUtils.sendKick(event.getBot().getUserBot(), user, network, event.getChannel(), "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻");
                 } else if (channel != null && channel.getUserLevels(network.getUserBot()).contains(UserLevel.OWNER)) {

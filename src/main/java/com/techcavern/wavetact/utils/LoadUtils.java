@@ -1,26 +1,22 @@
 package com.techcavern.wavetact.utils;
 
-import com.google.common.io.Files;
 import com.techcavern.wavetact.annot.ConCMD;
-import com.techcavern.wavetact.objects.NetProperty;
-import org.jooq.Record;
-import org.pircbotx.Colors;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.ConsoleCommand;
 import com.techcavern.wavetact.objects.IRCCommand;
+import com.techcavern.wavetact.objects.NetProperty;
 import org.flywaydb.core.Flyway;
-import org.jooq.DSLContext;
+import org.jooq.Record;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
+import org.pircbotx.Colors;
 import org.pircbotx.PircBotX;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.util.Scanner;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -178,8 +174,9 @@ public class LoadUtils {
             throw new IOException("Failed to get field handle to set library path");
         }
     }
-    public static void initializeMessageQueue(){
-        for(NetProperty network:Registry.NetworkName) {
+
+    public static void initializeMessageQueue() {
+        for (NetProperty network : Registry.NetworkName) {
             class MessageQueue implements Runnable {
                 @Override
                 public void run() {
@@ -190,8 +187,8 @@ public class LoadUtils {
                     while (true) {
                         try {
                             if (Registry.MessageQueue.size() > 0 && network.getNetwork().equals(Registry.MessageQueue.get(0).getNetwork())) {
-                                    Registry.MessageQueue.get(0).getNetwork().sendRaw().rawLine(Registry.MessageQueue.get(0).getProperty());
-                                    Registry.MessageQueue.remove(0);
+                                Registry.MessageQueue.get(0).getNetwork().sendRaw().rawLine(Registry.MessageQueue.get(0).getProperty());
+                                Registry.MessageQueue.remove(0);
                                 TimeUnit.MILLISECONDS.sleep(900);
                             }
                             TimeUnit.MILLISECONDS.sleep(100);
@@ -205,6 +202,7 @@ public class LoadUtils {
         }
 
     }
+
     public static void initalizeBanQueue() {
         class BanQueue implements Runnable {
 

@@ -12,7 +12,7 @@ import org.pircbotx.PircBotX;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import static com.techcavern.wavetactdb.Tables.*;
+import static com.techcavern.wavetactdb.Tables.SERVERS;
 
 @ConCMD
 public class Network extends ConsoleCommand {
@@ -31,7 +31,7 @@ public class Network extends ConsoleCommand {
                 viewonly = true;
             }
             boolean isSuccess = false;
-            if(network != null) {
+            if (network != null) {
                 switch (args[1].toLowerCase()) {
                     case "channels":
                         if (viewonly)
@@ -76,7 +76,7 @@ public class Network extends ConsoleCommand {
                     case "netadmin":
                         if (viewonly)
                             commandIO.getPrintStream().println(network.getValue(SERVERS.NETWORKADMINS));
-                        else{
+                        else {
                             network.setValue(SERVERS.NETWORKADMINS, args[2]);
                             isSuccess = true;
                         }
@@ -109,7 +109,7 @@ public class Network extends ConsoleCommand {
                     default:
                         commandIO.getPrintStream().println("Failed to parse property");
                 }
-                if(isSuccess) {
+                if (isSuccess) {
                     DatabaseUtils.updateServer(network);
                     commandIO.getPrintStream().println("Property Modified");
                 }
@@ -119,8 +119,8 @@ public class Network extends ConsoleCommand {
         } else if (args[0].startsWith("-")) {
             DatabaseUtils.removeServer(args[0].replaceFirst("\\-", ""));
             PircBotX network = IRCUtils.getBotByNetworkName(args[0].replaceFirst("\\-", ""));
-            for(NetProperty e:Registry.NetworkName){
-                if(e.getNetwork().equals(network)){
+            for (NetProperty e : Registry.NetworkName) {
+                if (e.getNetwork().equals(network)) {
                     Registry.NetworkName.remove(e);
                     network.stopBotReconnect();
                     network.sendIRC().quitServer();
@@ -129,7 +129,7 @@ public class Network extends ConsoleCommand {
                 }
             }
         } else {
-            if(DatabaseUtils.getServer(args[0]) != null){
+            if (DatabaseUtils.getServer(args[0]) != null) {
                 commandIO.getPrintStream().println("network already exists");
                 return;
             }
@@ -140,8 +140,8 @@ public class Network extends ConsoleCommand {
             commandIO.getPrintStream().print("Server port (Press enter to use default): ");
             int port = 6667;
             String portinput = input.nextLine();
-            if(!portinput.isEmpty())
-            port = Integer.parseInt(portinput);
+            if (!portinput.isEmpty())
+                port = Integer.parseInt(portinput);
             commandIO.getPrintStream().print("Server nick: ");
             String nick = input.nextLine();
             commandIO.getPrintStream().print("Channels (#chan1, #chan2, etc): ");
@@ -149,12 +149,12 @@ public class Network extends ConsoleCommand {
             commandIO.getPrintStream().print("Nickserv Pass (Press enter to ignore): ");
             String nickserv = null;
             String nickservinput = input.nextLine();
-            if(!nickservinput.isEmpty())
-            nickserv = nickservinput;
+            if (!nickservinput.isEmpty())
+                nickserv = nickservinput;
             commandIO.getPrintStream().print("Bindhost (Press enter to use default): ");
             String bindhost = null;
             String bindhostinput = input.nextLine();
-            if(!bindhostinput.isEmpty())
+            if (!bindhostinput.isEmpty())
                 bindhost = bindhostinput;
             commandIO.getPrintStream().print("AuthType (nickserv/account/nick): ");
             String authtype = input.nextLine();
@@ -163,7 +163,7 @@ public class Network extends ConsoleCommand {
             commandIO.getPrintStream().print("Network Admins: (account1, account2, etc) (Press enter to ignore): ");
             String netadmins = "";
             String netadminsinput = input.nextLine();
-            if(!netadminsinput.isEmpty())
+            if (!netadminsinput.isEmpty())
                 netadmins = netadminsinput;
             DatabaseUtils.addServer(name, port, server, nick, channels, nickserv, bindhost, netadminaccess, netadmins, authtype);
             PircBotX network = ConfigUtils.createNetwork(nickserv, Arrays.asList(StringUtils.split(channels, ", ")), nick, server, port, bindhost, name);

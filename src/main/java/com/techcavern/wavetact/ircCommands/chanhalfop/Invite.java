@@ -23,9 +23,10 @@ public class Invite extends IRCCommand {
     public Invite() {
         super(GeneralUtils.toArray("invite inv"), 7, "invite [user]", "Invites a user to the channel", true);
     }
+
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         channel.send().invite(args[0]);
-        IRCUtils.sendAction(user, network, channel, "invites " +  args[0] + " per " + user.getNick(), prefix);
+        IRCUtils.sendAction(user, network, channel, "invites " + args[0] + " per " + user.getNick(), prefix);
     }
 }

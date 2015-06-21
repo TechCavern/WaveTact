@@ -10,11 +10,9 @@ import com.techcavern.wavetact.objects.CommandIO;
 import com.techcavern.wavetact.objects.ConsoleCommand;
 import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
-
-import static com.techcavern.wavetactdb.Tables.*;
-
-import com.techcavern.wavetact.utils.Registry;
 import org.jooq.Record;
+
+import static com.techcavern.wavetactdb.Tables.CUSTOMCOMMANDS;
 
 /**
  * @author jztech101
@@ -29,7 +27,7 @@ public class LockCustomCMD extends ConsoleCommand {
     @Override
     public void onCommand(String[] args, CommandIO commandIO) throws Exception {
         Record command = DatabaseUtils.getChannelCustomCommand(null, null, args[0].replaceFirst("-", ""));
-        if (command != null){
+        if (command != null) {
             if (args[0].startsWith("-")) {
                 command.setValue(CUSTOMCOMMANDS.ISLOCKED, false);
                 commandIO.getPrintStream().println("Custom command unlocked");
@@ -38,6 +36,6 @@ public class LockCustomCMD extends ConsoleCommand {
                 commandIO.getPrintStream().println("Custom command locked");
             }
             DatabaseUtils.updateCustomCommand(command);
-    }
+        }
     }
 }

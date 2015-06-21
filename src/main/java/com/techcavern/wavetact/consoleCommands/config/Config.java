@@ -5,11 +5,6 @@ import com.techcavern.wavetact.objects.CommandIO;
 import com.techcavern.wavetact.objects.ConsoleCommand;
 import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.Registry;
-import org.jooq.Record;
-
-import javax.xml.crypto.Data;
 
 @ConCMD
 public class Config extends ConsoleCommand {
@@ -20,14 +15,14 @@ public class Config extends ConsoleCommand {
 
     @Override
     public void onCommand(String[] args, CommandIO commandIO) throws Exception {
-        if(args.length < 2){
+        if (args.length < 2) {
             String value = DatabaseUtils.getConfig(args[0]);
-            if(value != null){
+            if (value != null) {
                 commandIO.getPrintStream().println(value);
-            }else{
+            } else {
                 commandIO.getPrintStream().println("Property not found");
             }
-        }else {
+        } else {
             DatabaseUtils.removeConfig(args[0]);
             DatabaseUtils.addConfig(args[0], args[1]);
             commandIO.getPrintStream().println("Property modified");

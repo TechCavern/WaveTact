@@ -6,9 +6,11 @@
 package com.techcavern.wavetact.ircCommands.chanhalfop;
 
 import com.techcavern.wavetact.annot.IRCCMD;
-import static com.techcavern.wavetactdb.Tables.*;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.utils.*;
+import com.techcavern.wavetact.utils.DatabaseUtils;
+import com.techcavern.wavetact.utils.ErrorUtils;
+import com.techcavern.wavetact.utils.GeneralUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jooq.Record;
 import org.pircbotx.Channel;
@@ -18,6 +20,8 @@ import org.pircbotx.User;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+
+import static com.techcavern.wavetactdb.Tables.CHANNELPROPERTY;
 
 /**
  * @author jztech101

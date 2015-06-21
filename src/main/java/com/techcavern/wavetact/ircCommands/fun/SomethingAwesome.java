@@ -7,7 +7,6 @@ import com.techcavern.wavetact.utils.IRCUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
-import org.pircbotx.UserLevel;
 
 /**
  * @author jztech101
@@ -21,9 +20,9 @@ public class SomethingAwesome extends IRCCommand {
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-       if(IRCUtils.checkIfCanKick(channel,network,user)){
-           IRCUtils.sendKick(network.getUserBot(),user, network, channel, "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻");
-       } else {
+        if (IRCUtils.checkIfCanKick(channel, network, user)) {
+            IRCUtils.sendKick(network.getUserBot(), user, network, channel, "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻");
+        } else {
             IRCUtils.sendAction(user, network, channel, "kicks " + user.getNick() + " (┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻)", prefix);
         }
     }

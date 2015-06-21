@@ -11,7 +11,6 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-import static com.techcavern.wavetactdb.Tables.CHANNELPROPERTY;
 import static com.techcavern.wavetactdb.Tables.NETWORKPROPERTY;
 
 @IRCCMD
@@ -41,23 +40,23 @@ public class NetworkProperty extends IRCCommand {
             property = args[0];
         }
         Record networkProperty = DatabaseUtils.getNetworkProperty(networkname, property);
-        if(networkProperty != null && (isDelete || isModify)){
-            if(isDelete){
+        if (networkProperty != null && (isDelete || isModify)) {
+            if (isDelete) {
                 DatabaseUtils.removeNetworkProperty(networkname, property);
                 IRCUtils.sendMessage(user, network, channel, "Property deleted", prefix);
-            }else if(isModify){
-                if(viewonly)
-                    IRCUtils.sendMessage(user, network, channel, property + ": " +networkProperty.getValue(NETWORKPROPERTY.VALUE), prefix);
+            } else if (isModify) {
+                if (viewonly)
+                    IRCUtils.sendMessage(user, network, channel, property + ": " + networkProperty.getValue(NETWORKPROPERTY.VALUE), prefix);
                 else {
                     networkProperty.setValue(NETWORKPROPERTY.VALUE, args[1]);
                     DatabaseUtils.updateNetworkProperty(networkProperty);
                     IRCUtils.sendMessage(user, network, channel, "Property modified", prefix);
                 }
             }
-        }else if (networkProperty == null && !isDelete && !isModify) {
-                DatabaseUtils.addNetworkProperty(networkname, property, args[1]);
+        } else if (networkProperty == null && !isDelete && !isModify) {
+            DatabaseUtils.addNetworkProperty(networkname, property, args[1]);
             IRCUtils.sendMessage(user, network, channel, "Property added", prefix);
-        }else{
+        } else {
             ErrorUtils.sendError(user, "Unknown user or unknown property");
         }
 

@@ -24,7 +24,7 @@ public class CheckPing extends IRCCommand {
             ErrorUtils.sendError(user, "Host Unreachable");
         } else {
             String command = "";
-             if (InetAddressUtils.isIPv6Address(IP)) {
+            if (InetAddressUtils.isIPv6Address(IP)) {
                 command = "ping6 -c 1 " + IP;
             } else if (InetAddressUtils.isIPv4Address(IP)) {
                 command = "ping -c 1 " + IP;

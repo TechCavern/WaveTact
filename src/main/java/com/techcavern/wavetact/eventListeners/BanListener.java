@@ -5,15 +5,13 @@
  */
 package com.techcavern.wavetact.eventListeners;
 
-import com.techcavern.wavetact.utils.*;
-import org.jooq.Record;
+import com.techcavern.wavetact.utils.DatabaseUtils;
+import com.techcavern.wavetact.utils.GeneralUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
 import org.pircbotx.hooks.ListenerAdapter;
-import org.pircbotx.hooks.events.KickEvent;
 import org.pircbotx.hooks.events.ModeEvent;
-import static com.techcavern.wavetactdb.Tables.*;
 
-
-import java.util.concurrent.TimeUnit;
+import static com.techcavern.wavetactdb.Tables.CHANNELPROPERTY;
 
 
 /**
@@ -24,10 +22,10 @@ public class BanListener extends ListenerAdapter {
     public void onMode(ModeEvent event) throws Exception {
         String banMask = event.getMode();
         String network = IRCUtils.getNetworkNameByNetwork(event.getBot());
-        if(event.getUser() == null ||  DatabaseUtils.getChannelProperty(network, event.getChannel().getName(), "autounban") == null ||  DatabaseUtils.getChannelProperty(network, event.getChannel().getName(), "autounban").getValue(CHANNELPROPERTY.VALUE) == null ||
+        if (event.getUser() == null || DatabaseUtils.getChannelProperty(network, event.getChannel().getName(), "autounban") == null || DatabaseUtils.getChannelProperty(network, event.getChannel().getName(), "autounban").getValue(CHANNELPROPERTY.VALUE) == null ||
                 event.getUser().getNick().equalsIgnoreCase(event.getBot().getNick()) || !(event.getChannel().isHalfOp(event.getBot().getUserBot()) ||
                 event.getChannel().isOp(event.getBot().getUserBot()) || event.getChannel().isSuperOp(event.getBot().getUserBot())
-                || event.getChannel().isOwner(event.getBot().getUserBot()))){
+                || event.getChannel().isOwner(event.getBot().getUserBot()))) {
             return;
         }
         String type = "";

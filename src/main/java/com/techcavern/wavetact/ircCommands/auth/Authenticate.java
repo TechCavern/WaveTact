@@ -6,9 +6,11 @@ import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.*;
 import org.jooq.Record;
 import org.pircbotx.Channel;
-import static com.techcavern.wavetactdb.Tables.*;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
+
+import static com.techcavern.wavetactdb.Tables.ACCOUNTS;
+import static com.techcavern.wavetactdb.Tables.SERVERS;
 
 @IRCCMD
 public class Authenticate extends IRCCommand {

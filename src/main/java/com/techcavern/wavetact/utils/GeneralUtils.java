@@ -23,13 +23,15 @@ public class GeneralUtils {
         }
         return builder.toString().trim();
     }
-    public static String prism (String toprism){
+
+    public static String prism(String toprism) {
         String prism = "";
-        for(char c:toprism.replace("\n", " ").toCharArray()){
+        for (char c : toprism.replace("\n", " ").toCharArray()) {
             prism += prism(c);
         }
         return prism;
     }
+
     public static JsonObject getJsonObject(String url) throws Exception {
         String result = parseUrl(url);
         return new JsonParser().parse(result).getAsJsonObject();
@@ -123,10 +125,11 @@ public class GeneralUtils {
         return StringUtils.split(input, " ");
     }
 
-    public static String prism(char c){
-        int number = RandomUtils.nextInt(1, 15);;
+    public static String prism(char c) {
+        int number = RandomUtils.nextInt(1, 15);
+        ;
         String result = null;
-        switch(number){
+        switch (number) {
             case 1:
                 result = Colors.BLUE + c;
                 break;

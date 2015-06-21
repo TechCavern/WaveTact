@@ -15,6 +15,7 @@ public class Connect extends ConsoleCommand {
     public Connect() {
         super(GeneralUtils.toArray("connect"), "connect (+)(-)[networkname] (reason)", "Connects, reconnects or disconnects a network from a predefined network");
     }
+
     @Override
     public void onCommand(String[] args, CommandIO commandIO) throws Exception {
         boolean reconnect = false;
@@ -53,6 +54,6 @@ public class Connect extends ConsoleCommand {
         } else {
             workingnetwork.startBot();
         }
-        commandIO.getPrintStream().println( "Reconnecting...");
+        commandIO.getPrintStream().println("Reconnecting...");
     }
 }

@@ -3,10 +3,12 @@ package com.techcavern.wavetact.utils;
 import com.techcavern.wavetact.objects.ConsoleCommand;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.objects.NetProperty;
-import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jooq.Record;
-import org.pircbotx.*;
+import org.pircbotx.Channel;
+import org.pircbotx.PircBotX;
+import org.pircbotx.User;
+import org.pircbotx.UserLevel;
 import org.pircbotx.hooks.WaitForQueue;
 import org.pircbotx.hooks.events.WhoisEvent;
 import org.pircbotx.output.OutputChannel;
@@ -56,20 +58,22 @@ public class IRCUtils {
             Registry.MessageQueue.add(new NetProperty("PRIVMSG " + userObject.getNick() + " :" + message, networkObject));
         }
     }
+
     public static void sendKick(User userObject, User recipientObject, PircBotX networkObject, Channel channelObject, String message) {
         if (channelObject != null) {
             for (int i = 0; i < message.length(); i += 350) {
                 String messageToSend = message.substring(i, Math.min(message.length(), i + 350));
                 if (!messageToSend.isEmpty()) {
                     Registry.MessageQueue.add(new NetProperty("KICK " + channelObject.getName() + " " + recipientObject.getNick() + " :" + messageToSend, networkObject));
-                    sendRelayMessage(networkObject,channelObject, "* " + userObject.getNick() + " kicks " + recipientObject.getNick() + " ("+ messageToSend +")");
+                    sendRelayMessage(networkObject, channelObject, "* " + userObject.getNick() + " kicks " + recipientObject.getNick() + " (" + messageToSend + ")");
                 }
             }
         }
     }
-    public static void sendRelayMessage(PircBotX networkObject,Channel channel, String msg) {
+
+    public static void sendRelayMessage(PircBotX networkObject, Channel channel, String msg) {
         Record prerec = DatabaseUtils.getNetworkProperty(getNetworkNameByNetwork(networkObject), "relaychan");
-        if(prerec != null) {
+        if (prerec != null) {
             String chnname = prerec.getValue(NETWORKPROPERTY.VALUE);
             if (chnname != null && chnname.equalsIgnoreCase(channel.getName())) {
                 for (NetProperty net : Registry.NetworkName) {
@@ -89,14 +93,16 @@ public class IRCUtils {
     public static void sendAction(User userObject, PircBotX networkObject, Channel channelObject, String message, String prefix) {
         if (channelObject != null) {
             Registry.MessageQueue.add(new NetProperty("PRIVMSG " + prefix + channelObject.getName() + " :\u0001ACTION " + message + "\u0001", networkObject));
-            sendRelayMessage(networkObject,channelObject, "* " + networkObject.getNick() + " " + message);
+            sendRelayMessage(networkObject, channelObject, "* " + networkObject.getNick() + " " + message);
         } else {
             Registry.MessageQueue.add(new NetProperty("PRIVMSG " + userObject.getNick() + " :\u0001ACTION " + message + "\u0001", networkObject));
         }
     }
+
     public static void sendAction(PircBotX networkObject, Channel channelObject, String message, String prefix) {
         sendAction(null, networkObject, channelObject, message, prefix);
     }
+
     public static void sendMessage(PircBotX networkObject, Channel channelObject, String message, String prefix) {
         sendMessage(null, networkObject, channelObject, message, prefix);
 
@@ -110,20 +116,22 @@ public class IRCUtils {
         }
         return "";
     }
-    public static boolean checkIfCanKick(Channel channel, PircBotX network, User user){
+
+    public static boolean checkIfCanKick(Channel channel, PircBotX network, User user) {
         if (channel != null && channel.getUserLevels(network.getUserBot()).contains(UserLevel.OP) && !channel.isOwner(user) && !channel.isSuperOp(user)) {
             return true;
         } else if (channel != null && channel.getUserLevels(network.getUserBot()).contains(UserLevel.SUPEROP) && !channel.isOwner(user) && !channel.isSuperOp(user)) {
             return true;
         } else if (channel != null && channel.getUserLevels(network.getUserBot()).contains(UserLevel.OWNER)) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
-    public static String getHostmask(PircBotX network, String userObject, boolean isBanmask){
+
+    public static String getHostmask(PircBotX network, String userObject, boolean isBanmask) {
         String hostmask = getIRCHostmask(network, userObject, isBanmask);
-        if(hostmask == null){
+        if (hostmask == null) {
             hostmask = getWhoisHostmask(network, userObject, isBanmask);
         }
         return hostmask;
@@ -160,12 +168,12 @@ public class IRCUtils {
 
     public static void sendNetworkGlobal(String message, PircBotX network, User user, boolean isGlobal) {
         String beginning = "[Network Notice] ";
-        if(isGlobal){
+        if (isGlobal) {
             beginning = "[Global Notice] ";
         }
         for (Channel channel : network.getUserBot().getChannels()) {
-            if(user != null)
-            channel.send().message(beginning + user.getNick() + " - " + message);
+            if (user != null)
+                channel.send().message(beginning + user.getNick() + " - " + message);
             else
                 channel.send().message(beginning + message);
         }
@@ -262,7 +270,7 @@ public class IRCUtils {
                                 if (Integer.parseInt(g.replace("$", "")) > i) {
                                     i++;
                                 }
-                            }catch(Exception e){
+                            } catch (Exception e) {
                             }
                         }
                     }

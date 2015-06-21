@@ -26,7 +26,7 @@ public class PermUtils {
             default:
                 return userObject;
         }
-  }
+    }
 
     public static String authUser(PircBotX network, String userObject) { //gets hostmask of userObject and calls getAccount using it
         String hostmask = IRCUtils.getHostmask(network, userObject, true);
@@ -118,20 +118,20 @@ public class PermUtils {
     private static int getManualPermLevel(PircBotX network, Channel channelObject, String account) { //gets Manual Perm Level using the account name
         if (account != null) {
             String channelName = null;
-            if(channelObject != null){
+            if (channelObject != null) {
                 channelName = channelObject.getName();
             }
             if (isNetworkAdmin(account, IRCUtils.getNetworkNameByNetwork(network))) {
                 return 20;
-            }else if (DatabaseUtils.getChannelUserProperty(IRCUtils.getNetworkNameByNetwork(network), channelName, account, "permlevel") != null) {
+            } else if (DatabaseUtils.getChannelUserProperty(IRCUtils.getNetworkNameByNetwork(network), channelName, account, "permlevel") != null) {
                 int permlevel = 0;
                 try {
                     permlevel = Integer.parseInt(DatabaseUtils.getChannelUserProperty(IRCUtils.getNetworkNameByNetwork(network), channelName, account, "permlevel").getValue(CHANNELUSERPROPERTY.VALUE));
-                }catch(Exception e){
+                } catch (Exception e) {
                 }
-                    if(permlevel <= 18){
+                if (permlevel <= 18) {
                     return permlevel;
-                }else{
+                } else {
                     return 0;
                 }
             } else {

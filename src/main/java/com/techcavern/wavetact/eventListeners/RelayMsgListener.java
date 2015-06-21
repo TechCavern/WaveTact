@@ -7,17 +7,9 @@ package com.techcavern.wavetact.eventListeners;
 
 import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.PermUtils;
-import com.techcavern.wavetact.utils.Registry;
-import org.apache.commons.lang3.StringUtils;
-import org.jooq.Record;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.pircbotx.Colors;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.*;
 
-import static com.techcavern.wavetactdb.Tables.CHANNELPROPERTY;
 import static com.techcavern.wavetactdb.Tables.NETWORKPROPERTY;
 
 /**
@@ -26,34 +18,41 @@ import static com.techcavern.wavetactdb.Tables.NETWORKPROPERTY;
 public class RelayMsgListener extends ListenerAdapter {
     @Override
     public void onMessage(MessageEvent event) throws Exception {
-        IRCUtils.sendRelayMessage(event.getBot(),event.getChannel(),"<-" + event.getUser().getNick() +"> " + event.getMessage());
+        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), "<-" + event.getUser().getNick() + "> " + event.getMessage());
     }
+
     @Override
-    public void onAction(ActionEvent event){
-        IRCUtils.sendRelayMessage(event.getBot(),event.getChannel(), "* " + "-" + event.getUser().getNick() + " " + event.getMessage());
+    public void onAction(ActionEvent event) {
+        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), "* " + "-" + event.getUser().getNick() + " " + event.getMessage());
     }
+
     @Override
-    public void onNickChange(NickChangeEvent event){
+    public void onNickChange(NickChangeEvent event) {
         String chanrelay = DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "relaychan").getValue(NETWORKPROPERTY.VALUE);
-        if(event.getUser().getChannels().contains(IRCUtils.getChannelbyName(event.getBot(), chanrelay)))
-            IRCUtils.sendRelayMessage(event.getBot(),IRCUtils.getChannelbyName(event.getBot(),chanrelay), "-" + event.getOldNick() + " is now known as " + event.getNewNick());    }
-    @Override
-    public void onKick(KickEvent event){
-        IRCUtils.sendRelayMessage(event.getBot(),event.getChannel(), "-" + event.getUser().getNick() + " kicks " + event.getRecipient().getNick() + " (" + event.getReason() + ")");
+        if (event.getUser().getChannels().contains(IRCUtils.getChannelbyName(event.getBot(), chanrelay)))
+            IRCUtils.sendRelayMessage(event.getBot(), IRCUtils.getChannelbyName(event.getBot(), chanrelay), "-" + event.getOldNick() + " is now known as " + event.getNewNick());
     }
+
     @Override
-    public void onPart(PartEvent event){
-        IRCUtils.sendRelayMessage(event.getBot(),event.getChannel(), "-" + event.getUser().getNick() + " parts " + " (" + event.getReason() + ")");
+    public void onKick(KickEvent event) {
+        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), "-" + event.getUser().getNick() + " kicks " + event.getRecipient().getNick() + " (" + event.getReason() + ")");
     }
+
     @Override
-    public void onQuit(QuitEvent event){
+    public void onPart(PartEvent event) {
+        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), "-" + event.getUser().getNick() + " parts " + " (" + event.getReason() + ")");
+    }
+
+    @Override
+    public void onQuit(QuitEvent event) {
         String chanrelay = DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "relaychan").getValue(NETWORKPROPERTY.VALUE);
-        if(event.getUser().getChannels().contains(IRCUtils.getChannelbyName(event.getBot(), chanrelay)))
-        IRCUtils.sendRelayMessage(event.getBot(),IRCUtils.getChannelbyName(event.getBot(),chanrelay), "-" + event.getUser().getNick() + " quits " + " (" + event.getReason() + ")");
+        if (event.getUser().getChannels().contains(IRCUtils.getChannelbyName(event.getBot(), chanrelay)))
+            IRCUtils.sendRelayMessage(event.getBot(), IRCUtils.getChannelbyName(event.getBot(), chanrelay), "-" + event.getUser().getNick() + " quits " + " (" + event.getReason() + ")");
     }
+
     @Override
-    public void onJoin(JoinEvent event){
-        IRCUtils.sendRelayMessage(event.getBot(),event.getChannel(), "-" + event.getUser().getNick() + " joins");
+    public void onJoin(JoinEvent event) {
+        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), "-" + event.getUser().getNick() + " joins");
     }
 }
 

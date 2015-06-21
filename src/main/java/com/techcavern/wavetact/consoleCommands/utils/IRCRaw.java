@@ -12,7 +12,6 @@ import com.techcavern.wavetact.objects.NetProperty;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.Registry;
-import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 
 /**

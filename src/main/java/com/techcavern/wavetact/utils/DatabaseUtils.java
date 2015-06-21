@@ -17,7 +17,8 @@ public class DatabaseUtils {
         Result<Record> accountRecord = Registry.WaveTactDB.select().from(ACCOUNTS).where(ACCOUNTS.USERNAME.eq(account)).fetch();
         return getRecord(accountRecord);
     }
-    public static void updateAccount(Record account){
+
+    public static void updateAccount(Record account) {
         Registry.WaveTactDB.update(ACCOUNTS).set(account).where(ACCOUNTS.USERNAME.eq(account.getValue(ACCOUNTS.USERNAME)));
     }
 
@@ -38,7 +39,7 @@ public class DatabaseUtils {
         return getRecord(banRecord);
     }
 
-    public static void updateBan(Record ban){
+    public static void updateBan(Record ban) {
         Registry.WaveTactDB.update(BANS).set(ban).where(BANS.HOSTMASK.eq(ban.getValue(BANS.HOSTMASK))).and(BANS.NETWORK.eq(ban.getValue(BANS.NETWORK))).and(BANS.ISMUTE.eq(ban.getValue(BANS.ISMUTE)).and(BANS.CHANNEL.eq(ban.getValue(BANS.CHANNEL)))).execute();
     }
 
@@ -78,21 +79,24 @@ public class DatabaseUtils {
         return getRecord(commandRecord);
 
     }
+
     public static Record getChannelCustomCommand(String network, String channel, String command) {
         Result<Record> commandRecord = null;
-        if(channel == null && network == null){
+        if (channel == null && network == null) {
             commandRecord = Registry.WaveTactDB.select().from(CUSTOMCOMMANDS).where(CUSTOMCOMMANDS.COMMAND.eq(command)).and(CUSTOMCOMMANDS.NETWORK.isNull()).and(CUSTOMCOMMANDS.CHANNEL.isNull()).fetch();
-        }else{
+        } else {
             commandRecord = Registry.WaveTactDB.select().from(CUSTOMCOMMANDS).where(CUSTOMCOMMANDS.COMMAND.eq(command)).and(CUSTOMCOMMANDS.NETWORK.eq(network)).and(CUSTOMCOMMANDS.CHANNEL.eq(channel)).fetch();
         }
         return getRecord(commandRecord);
     }
-    public static void updateCustomCommand(Record command){
-        if(command.getValue(CUSTOMCOMMANDS.NETWORK) == null && command.getValue(CUSTOMCOMMANDS.CHANNEL) == null)
+
+    public static void updateCustomCommand(Record command) {
+        if (command.getValue(CUSTOMCOMMANDS.NETWORK) == null && command.getValue(CUSTOMCOMMANDS.CHANNEL) == null)
             Registry.WaveTactDB.update(CUSTOMCOMMANDS).set(command).where(CUSTOMCOMMANDS.COMMAND.eq(command.getValue(CUSTOMCOMMANDS.COMMAND))).and(CUSTOMCOMMANDS.NETWORK.isNull()).and(CUSTOMCOMMANDS.CHANNEL.isNull()).execute();
         else
-        Registry.WaveTactDB.update(CUSTOMCOMMANDS).set(command).where(CUSTOMCOMMANDS.COMMAND.eq(command.getValue(CUSTOMCOMMANDS.COMMAND))).and(CUSTOMCOMMANDS.NETWORK.eq(command.getValue(CUSTOMCOMMANDS.NETWORK))).and(CUSTOMCOMMANDS.CHANNEL.eq(command.getValue(CUSTOMCOMMANDS.CHANNEL))).execute();
+            Registry.WaveTactDB.update(CUSTOMCOMMANDS).set(command).where(CUSTOMCOMMANDS.COMMAND.eq(command.getValue(CUSTOMCOMMANDS.COMMAND))).and(CUSTOMCOMMANDS.NETWORK.eq(command.getValue(CUSTOMCOMMANDS.NETWORK))).and(CUSTOMCOMMANDS.CHANNEL.eq(command.getValue(CUSTOMCOMMANDS.CHANNEL))).execute();
     }
+
     public static Result<Record> getCustomCommands(String network, String channel) {
         return Registry.WaveTactDB.select().from(CUSTOMCOMMANDS).where(CUSTOMCOMMANDS.NETWORK.eq(network)).and(CUSTOMCOMMANDS.CHANNEL.eq(channel)).fetch();
     }
@@ -109,12 +113,13 @@ public class DatabaseUtils {
 
         }
     }
+
     public static Result<Record> getBlacklists(String type) {
         return Registry.WaveTactDB.select().from(BLACKLISTS).where(BLACKLISTS.TYPE.eq(type)).fetch();
     }
 
     public static Record getBlacklist(String type, String blacklist) {
-        Result<Record> blacklists =  Registry.WaveTactDB.select().from(BLACKLISTS).where(BLACKLISTS.TYPE.eq(type)).and(BLACKLISTS.URL.eq(blacklist)).fetch();
+        Result<Record> blacklists = Registry.WaveTactDB.select().from(BLACKLISTS).where(BLACKLISTS.TYPE.eq(type)).and(BLACKLISTS.URL.eq(blacklist)).fetch();
         return getRecord(blacklists);
     }
 
@@ -132,7 +137,7 @@ public class DatabaseUtils {
 
     }
 
-    public static void updateChannelProperty(Record channelproperty){
+    public static void updateChannelProperty(Record channelproperty) {
         Registry.WaveTactDB.update(CHANNELPROPERTY).set(channelproperty).where(CHANNELPROPERTY.PROPERTY.eq(channelproperty.getValue(CHANNELPROPERTY.PROPERTY))).and(CHANNELPROPERTY.NETWORK.eq(channelproperty.getValue(CHANNELPROPERTY.NETWORK))).and(CHANNELPROPERTY.CHANNEL.eq(channelproperty.getValue(CHANNELPROPERTY.CHANNEL))).execute();
     }
 
@@ -143,13 +148,14 @@ public class DatabaseUtils {
     public static void removeChannelProperty(String network, String channel, String property) {
         Registry.WaveTactDB.delete(CHANNELPROPERTY).where(CHANNELPROPERTY.PROPERTY.eq(property)).and(CHANNELPROPERTY.NETWORK.eq(network)).and(CHANNELPROPERTY.CHANNEL.eq(channel)).execute();
     }
+
     public static Record getNetworkProperty(String network, String property) {
         Result<Record> commandRecord = Registry.WaveTactDB.select().from(NETWORKPROPERTY).where(NETWORKPROPERTY.PROPERTY.eq(property)).and(NETWORKPROPERTY.NETWORK.eq(network)).fetch();
         return getRecord(commandRecord);
 
     }
 
-    public static void updateNetworkProperty(Record networkproperty){
+    public static void updateNetworkProperty(Record networkproperty) {
         Registry.WaveTactDB.update(NETWORKPROPERTY).set(networkproperty).where(NETWORKPROPERTY.PROPERTY.eq(networkproperty.getValue(NETWORKPROPERTY.PROPERTY))).and(NETWORKPROPERTY.NETWORK.eq(networkproperty.getValue(NETWORKPROPERTY.NETWORK))).execute();
     }
 
@@ -166,14 +172,16 @@ public class DatabaseUtils {
         return getRecord(channelUserPropertyRecord);
 
     }
-    public static void updateChannelUserProperty(Record channeluserproperty){
+
+    public static void updateChannelUserProperty(Record channeluserproperty) {
         Registry.WaveTactDB.update(CHANNELUSERPROPERTY).set(channeluserproperty).where(CHANNELUSERPROPERTY.PROPERTY.eq(channeluserproperty.getValue(CHANNELUSERPROPERTY.PROPERTY))).and(CHANNELUSERPROPERTY.USER.eq(channeluserproperty.getValue(CHANNELUSERPROPERTY.USER))).and(CHANNELUSERPROPERTY.NETWORK.eq(channeluserproperty.getValue(CHANNELUSERPROPERTY.NETWORK))).and(CHANNELUSERPROPERTY.CHANNEL.eq(channeluserproperty.getValue(CHANNELUSERPROPERTY.CHANNEL))).execute();
     }
-    public static void addChannelUserProperty(String network, String channel,String user, String property, String value) {
-        Registry.WaveTactDB.insertInto(CHANNELUSERPROPERTY).values(network, channel,user, property, value).execute();
+
+    public static void addChannelUserProperty(String network, String channel, String user, String property, String value) {
+        Registry.WaveTactDB.insertInto(CHANNELUSERPROPERTY).values(network, channel, user, property, value).execute();
     }
 
-    public static void removeChannelUserProperty(String network, String channel,String user, String property) {
+    public static void removeChannelUserProperty(String network, String channel, String user, String property) {
         Registry.WaveTactDB.delete(CHANNELUSERPROPERTY).where(CHANNELUSERPROPERTY.PROPERTY.eq(property)).and(CHANNELUSERPROPERTY.USER.eq(user)).and(CHANNELUSERPROPERTY.NETWORK.eq(network)).and(CHANNELUSERPROPERTY.CHANNEL.eq(channel)).execute();
     }
 
@@ -186,7 +194,7 @@ public class DatabaseUtils {
         return getRecord(serverRecord);
     }
 
-    public static void updateServer(Record server){
+    public static void updateServer(Record server) {
         Registry.WaveTactDB.update(SERVERS).set(server).where(SERVERS.NAME.eq(server.getValue(SERVERS.NAME))).execute();
     }
 

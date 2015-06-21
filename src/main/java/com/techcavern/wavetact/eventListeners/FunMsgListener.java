@@ -5,21 +5,19 @@
  */
 package com.techcavern.wavetact.eventListeners;
 
-import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.utils.*;
-import org.apache.commons.lang3.ArrayUtils;
+import com.techcavern.wavetact.utils.DatabaseUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.PermUtils;
+import com.techcavern.wavetact.utils.Registry;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.validator.routines.UrlValidator;
 import org.jooq.Record;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.pircbotx.Colors;
-import org.pircbotx.UserLevel;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.MessageEvent;
 
 import static com.techcavern.wavetactdb.Tables.CHANNELPROPERTY;
-import static com.techcavern.wavetactdb.Tables.CHANNELUSERPROPERTY;
 
 /**
  * @author jztech101
@@ -48,7 +46,7 @@ public class FunMsgListener extends ListenerAdapter {
                             if (!arg.startsWith("https://") && !arg.startsWith("http://")) {
                                 arg = "http://" + arg;
                             }
-                            if(Registry.urlvalidator.isValid(arg)) {
+                            if (Registry.urlvalidator.isValid(arg)) {
                                 Document doc = Jsoup.connect(arg).userAgent("Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.57 Safari/537.17").get();
                                 String title = doc.title();
                                 if (!title.isEmpty()) {

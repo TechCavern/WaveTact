@@ -12,7 +12,6 @@ import com.techcavern.wavetact.utils.IRCUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
-import org.pircbotx.UserLevel;
 
 /**
  * @author jztech101
@@ -31,7 +30,7 @@ public class Kick extends IRCCommand {
         if (args.length > 1) {
             message += ": " + GeneralUtils.buildMessage(1, args.length, args);
         }
-        if(args[0].equalsIgnoreCase(network.getNick()))
+        if (args[0].equalsIgnoreCase(network.getNick()))
             IRCUtils.sendKick(network.getUserBot(), user, network, channel, message);
         else
             IRCUtils.sendKick(network.getUserBot(), IRCUtils.getUserByNick(network, args[0]), network, channel, message);

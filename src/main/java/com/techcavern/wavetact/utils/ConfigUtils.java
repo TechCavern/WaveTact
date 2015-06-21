@@ -21,7 +21,7 @@ public class ConfigUtils {
         PircBotX network;
         for (Record server : DatabaseUtils.getServers()) {
             network = createNetwork(server.getValue(SERVERS.NICKSERV), Arrays.asList(StringUtils.split(server.getValue(SERVERS.CHANNELS), ", ")), server.getValue(SERVERS.NICK), server.getValue(SERVERS.SERVER), server.getValue(SERVERS.PORT), server.getValue(SERVERS.BINDHOST), server.getValue(SERVERS.NAME));
-            if(network != null) {
+            if (network != null) {
                 Registry.WaveTact.addNetwork(network);
                 Registry.NetworkName.add(new NetProperty(server.getValue(SERVERS.NAME), network));
             }
@@ -45,15 +45,15 @@ public class ConfigUtils {
      * }
      */
     public static PircBotX createNetwork(String nickservPassword, List<String> channels, String nick, String server, int port, String bindhost, String networkname) {
-        if(nick.isEmpty() || server.isEmpty()) {
+        if (nick.isEmpty() || server.isEmpty()) {
             DatabaseUtils.removeServer(networkname);
             System.out.println("Removing Server " + networkname);
             return null;
-        }else if(IRCUtils.getBotByNetworkName(networkname) != null){
-                DatabaseUtils.removeServer(networkname);
+        } else if (IRCUtils.getBotByNetworkName(networkname) != null) {
+            DatabaseUtils.removeServer(networkname);
             System.out.println("Removing Server " + networkname);
             return null;
-            }
+        }
 
         Configuration.Builder Net = new Configuration.Builder();
         Net.setName(nick);
