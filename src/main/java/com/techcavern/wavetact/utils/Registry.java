@@ -1,10 +1,7 @@
 package com.techcavern.wavetact.utils;
 
 import com.techcavern.wavetact.console.ConsoleServer;
-import com.techcavern.wavetact.objects.AuthedUser;
-import com.techcavern.wavetact.objects.ConsoleCommand;
-import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.objects.NetProperty;
+import com.techcavern.wavetact.objects.*;
 import org.apache.commons.validator.routines.UrlValidator;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 import org.jooq.DSLContext;
@@ -27,6 +24,7 @@ public class Registry {
     public static final StrongPasswordEncryptor encryptor = new StrongPasswordEncryptor();
     public static final Reflections wavetactreflection = new Reflections("com.techcavern.wavetact");
     public static final List<NetProperty> NetworkName = new ArrayList<>();
+    public static List<CachedWhoisEvent> WhoisEventCache = new ArrayList<>();
     public static String wundergroundapikey = null;
     public static String wolframalphaapikey = null;
     public static String wordnikapikey = null;

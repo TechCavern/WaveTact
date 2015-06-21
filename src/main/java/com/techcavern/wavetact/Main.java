@@ -30,6 +30,7 @@ public class Main {
             LoadUtils.registerIRCCommands();
             LoadUtils.registerAttacks();
             LoadUtils.registerEightball();
+            LoadUtils.initializeAutoFlushWhoisCache();
             Registry.WaveTact.start();
             Registry.threadPool.execute(Registry.consoleServer);
             LoadUtils.initializeMessageQueue();

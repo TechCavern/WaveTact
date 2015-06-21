@@ -1,5 +1,6 @@
 package com.techcavern.wavetact.utils;
 
+import com.techcavern.wavetact.objects.CachedWhoisEvent;
 import com.techcavern.wavetact.objects.ConsoleCommand;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.objects.NetProperty;
@@ -12,6 +13,8 @@ import org.pircbotx.UserLevel;
 import org.pircbotx.hooks.WaitForQueue;
 import org.pircbotx.hooks.events.WhoisEvent;
 import org.pircbotx.output.OutputChannel;
+
+import java.util.concurrent.TimeUnit;
 
 import static com.techcavern.wavetactdb.Tables.CUSTOMCOMMANDS;
 import static com.techcavern.wavetactdb.Tables.NETWORKPROPERTY;
@@ -28,11 +31,23 @@ public class IRCUtils {
         }
     }
 
+    public static WhoisEvent getCachedWhoisEvent(PircBotX network, String userObject){
+        for(CachedWhoisEvent event:Registry.WhoisEventCache){
+            if(event.getNetwork().equals(network) && event.getUser().equals(userObject)){
+                return event.getWhoisEvent();
+            }
+        }
+        return null;
+    }
+
     public static WhoisEvent WhoisEvent(PircBotX network, String userObject) {
-        WhoisEvent WhoisEvent;
-        network.sendIRC().whois(userObject);
+        WhoisEvent WhoisEvent = getCachedWhoisEvent(network, userObject);
+        if(WhoisEvent != null){
+            return WhoisEvent;
+        }
         WaitForQueue waitForQueue = new WaitForQueue(network);
         try {
+            network.sendIRC().whois(userObject);
             WhoisEvent = waitForQueue.waitFor(WhoisEvent.class);
             waitForQueue.close();
         } catch (InterruptedException | NullPointerException ex) {
@@ -42,6 +57,7 @@ public class IRCUtils {
         if (!WhoisEvent.isExists()) {
             return null;
         }
+        Registry.WhoisEventCache.add(new CachedWhoisEvent(WhoisEvent, network, userObject));
         return WhoisEvent;
     }
 
