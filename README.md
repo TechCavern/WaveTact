@@ -28,7 +28,8 @@ PermLevels
 - 7 - Channel Half-Operator (Access to all commands below Operator on a specific channel)
 - 5 - Channel Trusted (Access to all commands below Half-Operator on a specific channel)
 - 0 - Default Access. Everyone has it (Access to all commands below Trusted on a specific channel).
-- -1 - Banned (Access to no commands)
+- -1 - Ignored (Access to no commands)
+- -2 - Ignored Completely
 
 Channel-User Properties
 =======================

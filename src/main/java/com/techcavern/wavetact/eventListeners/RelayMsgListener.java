@@ -7,6 +7,7 @@ package com.techcavern.wavetact.eventListeners;
 
 import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.PermUtils;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.*;
 
@@ -18,12 +19,14 @@ import static com.techcavern.wavetactdb.Tables.NETWORKPROPERTY;
 public class RelayMsgListener extends ListenerAdapter {
     @Override
     public void onMessage(MessageEvent event) throws Exception {
+        if(PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel()) > -2)
         IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), "<-" + event.getUser().getNick() + "> " + event.getMessage());
     }
 
     @Override
     public void onAction(ActionEvent event) {
-        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), "* " + "-" + event.getUser().getNick() + " " + event.getMessage());
+        if(PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel()) > -2)
+            IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), "* " + "-" + event.getUser().getNick() + " " + event.getMessage());
     }
 
     @Override

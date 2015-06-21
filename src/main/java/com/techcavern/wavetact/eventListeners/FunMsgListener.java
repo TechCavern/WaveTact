@@ -28,7 +28,7 @@ public class FunMsgListener extends ListenerAdapter {
         class process implements Runnable {
             public void run() {
                 Record relaybotsplit = DatabaseUtils.getChannelUserProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), event.getChannel().getName(), PermUtils.authUser(event.getBot(), event.getUser().getNick()), "relaybotsplit");
-                if (relaybotsplit == null) {
+                if (relaybotsplit == null && PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel()) > -2) {
                     if (Colors.removeFormattingAndColors(event.getMessage()).contains("http://stop-irc-bullying.eu/stop")) {
                         if (IRCUtils.checkIfCanKick(event.getChannel(), event.getBot(), event.getUser())) {
                             IRCUtils.sendKick(event.getBot().getUserBot(), event.getUser(), event.getBot(), event.getChannel(), "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻");
