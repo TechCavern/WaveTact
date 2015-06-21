@@ -135,7 +135,7 @@ public class IRCUtils {
 
     public static boolean checkIfCanKick(Channel channel, PircBotX network, User user) {
         Record relaybotsplit = DatabaseUtils.getChannelUserProperty(IRCUtils.getNetworkNameByNetwork(network), channel.getName(), PermUtils.authUser(network, user.getNick()), "relaybotsplit");
-        if(relaybotsplit != null) {
+        if(relaybotsplit == null) {
             if (channel != null && channel.getUserLevels(network.getUserBot()).contains(UserLevel.OP) && !channel.isOwner(user) && !channel.isSuperOp(user)) {
                 return true;
             } else if (channel != null && channel.getUserLevels(network.getUserBot()).contains(UserLevel.SUPEROP) && !channel.isOwner(user) && !channel.isSuperOp(user)) {
