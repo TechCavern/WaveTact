@@ -24,7 +24,7 @@ public class Config extends ConsoleCommand {
             }
         } else {
             DatabaseUtils.removeConfig(args[0]);
-            DatabaseUtils.addConfig(args[0], args[1]);
+            DatabaseUtils.addConfig(args[0], GeneralUtils.buildMessage(1, args.length, args));
             commandIO.getPrintStream().println("Property modified");
         }
     }

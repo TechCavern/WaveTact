@@ -177,7 +177,7 @@ public class PermUtils {
 
     public static boolean isNetworkAdmin(String account, String network) {
         for (String c : StringUtils.split(DatabaseUtils.getServer(network).getValue(SERVERS.NETWORKADMINS), ", ")) {
-            if (c.equalsIgnoreCase(account))
+             if (c.equalsIgnoreCase(account))
                 return true;
         }
         return false;

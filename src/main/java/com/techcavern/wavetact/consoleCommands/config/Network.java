@@ -37,7 +37,7 @@ public class Network extends ConsoleCommand {
                         if (viewonly)
                             commandIO.getPrintStream().println(network.getValue(SERVERS.CHANNELS));
                         else {
-                            network.setValue(SERVERS.CHANNELS, args[2]);
+                            network.setValue(SERVERS.CHANNELS, GeneralUtils.buildMessage(2, args.length, args));
                             isSuccess = true;
                         }
                         break;
@@ -69,7 +69,7 @@ public class Network extends ConsoleCommand {
                         if (viewonly)
                             commandIO.getPrintStream().println(network.getValue(SERVERS.NICKSERV));
                         else {
-                            network.setValue(SERVERS.NICKSERV, args[2]);
+                            network.setValue(SERVERS.NICKSERV, GeneralUtils.buildMessage(2, args.length, args));
                             isSuccess = true;
                         }
                         break;
@@ -77,7 +77,7 @@ public class Network extends ConsoleCommand {
                         if (viewonly)
                             commandIO.getPrintStream().println(network.getValue(SERVERS.NETWORKADMINS));
                         else {
-                            network.setValue(SERVERS.NETWORKADMINS, args[2]);
+                            network.setValue(SERVERS.NETWORKADMINS, GeneralUtils.buildMessage(2, args.length, args));
                             isSuccess = true;
                         }
                         break;
