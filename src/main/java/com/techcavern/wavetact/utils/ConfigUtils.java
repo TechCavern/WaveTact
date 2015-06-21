@@ -82,7 +82,7 @@ public class ConfigUtils {
         Net.setAutoReconnectDelay(20000);
         Net.setChannelPrefixes("#");
         Net.setUserLevelPrefixes("+%@&~!");
-        Net.setVersion("WaveTact 0.8.0");
+        Net.setVersion("WaveTact 0.8.0-dev");
         Net.setAutoReconnect(true);
         if (nickservPassword != null) {
             Net.setNickservPassword(nickservPassword);
