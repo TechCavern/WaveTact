@@ -28,8 +28,6 @@ public class FunMsgListener extends ListenerAdapter {
         class process implements Runnable {
             public void run() {
                 if (PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel()) > -2) {
-                    Record relaybotsplit = DatabaseUtils.getChannelUserProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), event.getChannel().getName(), PermUtils.authUser(event.getBot(), event.getUser().getNick()), "relaybotsplit");
-                    if (relaybotsplit == null) {
                         if (Colors.removeFormattingAndColors(event.getMessage()).contains("http://stop-irc-bullying.eu/stop")) {
                             if (IRCUtils.checkIfCanKick(event.getChannel(), event.getBot(), event.getUser())) {
                                 IRCUtils.sendKick(event.getBot().getUserBot(), event.getUser(), event.getBot(), event.getChannel(), "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻");
@@ -37,7 +35,7 @@ public class FunMsgListener extends ListenerAdapter {
                                 IRCUtils.sendAction(event.getUser(), event.getBot(), event.getChannel(), "kicks " + event.getUser().getNick() + " (┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻)", "");
                             }
                         }
-                    }
+
                     Record autourl = DatabaseUtils.getChannelProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), event.getChannel().getName(), "autourl");
                     if (autourl != null && autourl.getValue(CHANNELPROPERTY.VALUE).equalsIgnoreCase("true")) {
                         String[] message = StringUtils.split(event.getMessage(), " ");
