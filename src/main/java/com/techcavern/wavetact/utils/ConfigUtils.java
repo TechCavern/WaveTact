@@ -90,4 +90,11 @@ public class ConfigUtils {
         }
         return new PircBotX(Net.buildConfiguration());
     }
+
+    public static void flushApiKeys(){
+        Registry.wundergroundapikey = DatabaseUtils.getConfig("wundergroundapikey");
+        Registry.wolframalphaapikey = DatabaseUtils.getConfig("wolframalphaapikey");
+        Registry.wordnikapikey = DatabaseUtils.getConfig("wordnikapikey");
+        Registry.googleapikey = DatabaseUtils.getConfig("googleapikey");
+    }
 }

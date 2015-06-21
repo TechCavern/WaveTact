@@ -34,10 +34,6 @@ public class LoadUtils {
         Connection conn = DriverManager.getConnection("jdbc:sqlite:./db.sqlite");
         System.err.println("Creating DSLContext...");
         Registry.WaveTactDB = DSL.using(conn, SQLDialect.SQLITE);
-        Registry.wundergroundapikey = DatabaseUtils.getConfig("wundergroundapikey");
-        Registry.wolframalphaapikey = DatabaseUtils.getConfig("wolframalphaapikey");
-        Registry.wordnikapikey = DatabaseUtils.getConfig("wordnikapikey");
-        Registry.googleapikey = DatabaseUtils.getConfig("googleapikey");
     }
 
     public static void registerIRCCommands() {
