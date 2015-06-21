@@ -182,7 +182,7 @@ public class IRCUtils {
     public static String getIRCHostmask(PircBotX network, String userObject, boolean isBanmask) {
         User user = getUserByNick(network, userObject);
         String hostmask;
-        if (user != null) {
+        if (user != null && user.getHostname() != null && user.getLogin() != null) {
             String hostname = user.getHostname();
             String Login = user.getLogin();
             if (isBanmask) {
