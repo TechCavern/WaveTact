@@ -65,7 +65,7 @@ public class IRCUtils {
                 String messageToSend = message.substring(i, Math.min(message.length(), i + 350));
                 if (!messageToSend.isEmpty()) {
                     Registry.MessageQueue.add(new NetProperty("KICK " + channelObject.getName() + " " + recipientObject.getNick() + " :" + messageToSend, networkObject));
-                    sendRelayMessage(networkObject, channelObject, "* " + userObject.getNick() + " kicks " + recipientObject.getNick() + " (" + messageToSend + ")");
+             //       sendRelayMessage(networkObject, channelObject, "* " + userObject.getNick() + " kicks " + recipientObject.getNick() + " (" + messageToSend + ")");
                 }
             }
         }
