@@ -32,24 +32,27 @@ public class MCWiki extends IRCCommand {
         try {
             doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.57 Safari/537.17").get();
             if(doc.location().toLowerCase().contains("login")){
-                System.out.println("true?");
                 throw new Exception();
             }
         } catch (Exception eee) {
-            url = "http://ftb.gamepedia.com/" + StringUtils.join(args, "%20");
             try {
-                doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.57 Safari/537.17").get();
-            } catch (Exception e) {
-                try {
-                    url = "http://ftbwiki.org/" + StringUtils.join(args, "%20");
-                    doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.57 Safari/537.17").get();
-                } catch (Exception ee) {
-                    ee.printStackTrace();
-                    ErrorUtils.sendError(user, "Query returned no results or wikis are Down");
-                    return;
+                url = "http://ftb.gamepedia.com/" + StringUtils.join(args, "%20");
+                if (doc.location().toLowerCase().contains("login")) {
+                    throw new Exception();
+                }
+
+                } catch (Exception e) {
+                    try {
+                        url = "http://ftbwiki.org/" + StringUtils.join(args, "%20");
+                        doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.57 Safari/537.17").get();
+                    } catch (Exception ee) {
+                        ee.printStackTrace();
+                        ErrorUtils.sendError(user, "Query returned no results or wikis are Down");
+                        return;
+                    }
                 }
             }
-        }
+
         content = doc.select("#mw-content-text");
         content.select(".atemplate").remove();
         content.select(".notaninfobox").remove();
