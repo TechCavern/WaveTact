@@ -24,7 +24,10 @@ public class BanListener extends ListenerAdapter {
     public void onMode(ModeEvent event) throws Exception {
         String banMask = event.getMode();
         String network = IRCUtils.getNetworkNameByNetwork(event.getBot());
-        if(event.getUser() == null ||  DatabaseUtils.getChannelProperty(network, event.getChannel().getName(), "autounban").getValue(CHANNELPROPERTY.VALUE) == null ||  event.getUser().getNick().equalsIgnoreCase(event.getBot().getNick()) || !(event.getChannel().isHalfOp(event.getBot().getUserBot()) || event.getChannel().isOp(event.getBot().getUserBot()) || event.getChannel().isSuperOp(event.getBot().getUserBot()) || event.getChannel().isOwner(event.getBot().getUserBot()))){
+        if(event.getUser() == null ||  DatabaseUtils.getChannelProperty(network, event.getChannel().getName(), "autounban") == null ||  DatabaseUtils.getChannelProperty(network, event.getChannel().getName(), "autounban").getValue(CHANNELPROPERTY.VALUE) == null ||
+                event.getUser().getNick().equalsIgnoreCase(event.getBot().getNick()) || !(event.getChannel().isHalfOp(event.getBot().getUserBot()) ||
+                event.getChannel().isOp(event.getBot().getUserBot()) || event.getChannel().isSuperOp(event.getBot().getUserBot())
+                || event.getChannel().isOwner(event.getBot().getUserBot()))){
             return;
         }
         String type = "";

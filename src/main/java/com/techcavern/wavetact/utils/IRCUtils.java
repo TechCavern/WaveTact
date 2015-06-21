@@ -112,13 +112,13 @@ public class IRCUtils {
     }
     public static boolean checkIfCanKick(Channel channel, PircBotX network, User user){
         if (channel != null && channel.getUserLevels(network.getUserBot()).contains(UserLevel.OP) && !channel.isOwner(user) && !channel.isSuperOp(user)) {
-            return false;
-        } else if (channel != null && channel.getUserLevels(network.getUserBot()).contains(UserLevel.SUPEROP) && !channel.isOwner(user) && !channel.isSuperOp(user)) {
-            return false;
-        } else if (channel != null && channel.getUserLevels(network.getUserBot()).contains(UserLevel.OWNER)) {
-            return false;
-        }else{
             return true;
+        } else if (channel != null && channel.getUserLevels(network.getUserBot()).contains(UserLevel.SUPEROP) && !channel.isOwner(user) && !channel.isSuperOp(user)) {
+            return true;
+        } else if (channel != null && channel.getUserLevels(network.getUserBot()).contains(UserLevel.OWNER)) {
+            return true;
+        }else{
+            return false;
         }
     }
     public static String getHostmask(PircBotX network, String userObject, boolean isBanmask){
