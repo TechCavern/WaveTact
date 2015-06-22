@@ -22,13 +22,13 @@ public class RelayMsgListener extends ListenerAdapter {
     @Override
     public void onMessage(MessageEvent event) throws Exception {
         if(PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel()) > -2)
-        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), "<-" + GeneralUtils.replaceVowelsWithAccents(event.getUser().getNick()) + "> " + event.getMessage());
+        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), "<" + GeneralUtils.replaceVowelsWithAccents(event.getUser().getNick()) + "> " + event.getMessage());
     }
 
     @Override
     public void onAction(ActionEvent event) {
         if(PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel()) > -2)
-            IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), "* " + "-" + GeneralUtils.replaceVowelsWithAccents(event.getUser().getNick()) + " " + event.getMessage());
+            IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), "* " + GeneralUtils.replaceVowelsWithAccents(event.getUser().getNick()) + " " + event.getMessage());
     }
 
     @Override
@@ -43,12 +43,12 @@ public class RelayMsgListener extends ListenerAdapter {
 
     @Override
     public void onKick(KickEvent event) {
-        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), "-" + GeneralUtils.replaceVowelsWithAccents(event.getUser().getNick()) + " kicks " + GeneralUtils.replaceVowelsWithAccents(event.getRecipient().getNick()) + " (" + event.getReason() + ")");
+        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(),GeneralUtils.replaceVowelsWithAccents(event.getUser().getNick()) + " kicks " + GeneralUtils.replaceVowelsWithAccents(event.getRecipient().getNick()) + " (" + event.getReason() + ")");
     }
 
     @Override
     public void onPart(PartEvent event) {
-        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), "-" + GeneralUtils.replaceVowelsWithAccents(event.getUser().getNick()) + " left " + event.getChannel().getName() + " (" + event.getReason() + ")");
+        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), GeneralUtils.replaceVowelsWithAccents(event.getUser().getNick()) + " left " + event.getChannel().getName() + " (" + event.getReason() + ")");
     }
 
     @Override
@@ -58,12 +58,12 @@ public class RelayMsgListener extends ListenerAdapter {
         if(rec != null)
         chanrelay = rec.getValue(NETWORKPROPERTY.VALUE);
         if (chanrelay != null && event.getUser().getChannels().contains(IRCUtils.getChannelbyName(event.getBot(), chanrelay)))
-            IRCUtils.sendRelayMessage(event.getBot(), IRCUtils.getChannelbyName(event.getBot(), chanrelay), "-" + GeneralUtils.replaceVowelsWithAccents(event.getUser().getNick()) + " quits " + " (" + event.getReason() + ")");
+            IRCUtils.sendRelayMessage(event.getBot(), IRCUtils.getChannelbyName(event.getBot(), chanrelay), GeneralUtils.replaceVowelsWithAccents(event.getUser().getNick()) + " quits " + " (" + event.getReason() + ")");
     }
 
     @Override
     public void onJoin(JoinEvent event) {
-        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), "-" + GeneralUtils.replaceVowelsWithAccents(event.getUser().getNick()) + " joined " + event.getChannel().getName());
+        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), GeneralUtils.replaceVowelsWithAccents(event.getUser().getNick()) + " joined " + event.getChannel().getName());
     }
 }
 
