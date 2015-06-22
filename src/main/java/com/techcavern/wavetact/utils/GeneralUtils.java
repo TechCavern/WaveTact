@@ -178,6 +178,22 @@ public class GeneralUtils {
         }
         return result;
     }
+    public static String replaceVowelsWithAccents(String original){
+        original = original.replace("a", "á");
+        original = original.replace("e", "é");
+        original = original.replace("e", "é");
+        original = original.replace("i", "í");
+        original = original.replace("o","ó");
+        original = original.replace("u","ú");
+        original = original.replace("y","ý");
+        original = original.replace("A","Á");
+        original = original.replace("E","É");
+        original = original.replace("I","Í");
+        original = original.replace("O","Ó");
+        original = original.replace("U","Ú");
+        original = original.replace("Y","Ý");
+        return original;
+    }
 }
 
 
