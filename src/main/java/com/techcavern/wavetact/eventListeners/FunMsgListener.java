@@ -32,9 +32,9 @@ public class FunMsgListener extends ListenerAdapter {
                 if (PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel()) > -2) {
                         if (Colors.removeFormattingAndColors(event.getMessage()).contains("http://stop-irc-bullying.eu/stop")) {
                             if (IRCUtils.checkIfCanKick(event.getChannel(), event.getBot(), event.getUser())) {
-                                IRCUtils.sendKick(event.getBot().getUserBot(), event.getUser(), event.getBot(), event.getChannel(), "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻");
+                                IRCUtils.sendKick(event.getBot().getUserBot(), event.getUser(), event.getBot(), event.getChannel(), "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻ [https://goo.gl/Tkb9dh]");
                             } else {
-                                IRCUtils.sendAction(event.getUser(), event.getBot(), event.getChannel(), "kicks " + event.getUser().getNick() + " (┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻)", "");
+                                IRCUtils.sendAction(event.getUser(), event.getBot(), event.getChannel(), "kicks " + event.getUser().getNick() + " (┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻) [https://goo.gl/Tkb9dh]", "");
                             }
                         }
                     /**

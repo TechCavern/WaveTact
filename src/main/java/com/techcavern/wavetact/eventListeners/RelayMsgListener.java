@@ -8,6 +8,7 @@ package com.techcavern.wavetact.eventListeners;
 import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.PermUtils;
+import org.jooq.Record;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.*;
 
@@ -31,8 +32,11 @@ public class RelayMsgListener extends ListenerAdapter {
 
     @Override
     public void onNickChange(NickChangeEvent event) {
-        String chanrelay = DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "relaychan").getValue(NETWORKPROPERTY.VALUE);
-        if (event.getUser().getChannels().contains(IRCUtils.getChannelbyName(event.getBot(), chanrelay)))
+        Record rec = DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "relaychan");
+        String chanrelay = null;
+        if(rec != null)
+            chanrelay = rec.getValue(NETWORKPROPERTY.VALUE);
+        if (chanrelay != null && event.getUser().getChannels().contains(IRCUtils.getChannelbyName(event.getBot(), chanrelay)))
             IRCUtils.sendRelayMessage(event.getBot(), IRCUtils.getChannelbyName(event.getBot(), chanrelay), "-" + event.getOldNick() + " is now known as " + event.getNewNick());
     }
 
@@ -48,8 +52,11 @@ public class RelayMsgListener extends ListenerAdapter {
 
     @Override
     public void onQuit(QuitEvent event) {
-        String chanrelay = DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "relaychan").getValue(NETWORKPROPERTY.VALUE);
-        if (event.getUser().getChannels().contains(IRCUtils.getChannelbyName(event.getBot(), chanrelay)))
+        Record rec = DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "relaychan");
+        String chanrelay = null;
+        if(rec != null)
+        chanrelay = rec.getValue(NETWORKPROPERTY.VALUE);
+        if (chanrelay != null && event.getUser().getChannels().contains(IRCUtils.getChannelbyName(event.getBot(), chanrelay)))
             IRCUtils.sendRelayMessage(event.getBot(), IRCUtils.getChannelbyName(event.getBot(), chanrelay), "-" + event.getUser().getNick() + " quits " + " (" + event.getReason() + ")");
     }
 
