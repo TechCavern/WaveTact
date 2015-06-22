@@ -44,7 +44,7 @@ public class FunMsgListener extends ListenerAdapter {
                      * they ignore you, then you ignore them.
                      */
                     Record autourl = DatabaseUtils.getChannelProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), event.getChannel().getName(), "autourl");
-                    if (autourl != null && autourl.getValue(CHANNELPROPERTY.VALUE).equalsIgnoreCase("true")) {
+                    if (autourl != null && autourl.getValue(CHANNELPROPERTY.VALUE).equalsIgnoreCase("true") && !event.getMessage().startsWith(DatabaseUtils.getConfig("commandchar"))) {
                         String[] message = StringUtils.split(event.getMessage(), " ");
                         for (String arg : message) {
                             try {
