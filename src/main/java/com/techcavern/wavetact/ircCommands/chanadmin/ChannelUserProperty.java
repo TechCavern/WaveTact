@@ -39,6 +39,9 @@ public class ChannelUserProperty extends IRCCommand {
         String auth = PermUtils.authUser(network, account);
         if (auth != null) {
             account = auth;
+        }else{
+            ErrorUtils.sendError(user, "User must be identified");
+            return;
         }
         Record channelUserProperty = DatabaseUtils.getChannelUserProperty(networkname, channel.getName(), account, args[1]);
         if (channelUserProperty != null && (isDelete || isModify)) {
