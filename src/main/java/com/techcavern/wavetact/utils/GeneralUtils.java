@@ -179,19 +179,38 @@ public class GeneralUtils {
         return result;
     }
     public static String replaceVowelsWithAccents(String original){
+        if(original.contains("a"))
         original = original.replace("a", "á");
+        else if(original.contains("e"))
         original = original.replace("e", "é");
-        original = original.replace("e", "é");
+        else if(original.contains("i"))
         original = original.replace("i", "í");
-        original = original.replace("o","ó");
-        original = original.replace("u","ú");
-        original = original.replace("y","ý");
-        original = original.replace("A","Á");
-        original = original.replace("E","É");
-        original = original.replace("I","Í");
-        original = original.replace("O","Ó");
-        original = original.replace("U","Ú");
-        original = original.replace("Y","Ý");
+        else if(original.contains("o"))
+            original = original.replace("o","ó");
+        else if(original.contains("u"))
+
+            original = original.replace("u","ú");
+        else if(original.contains("y"))
+
+            original = original.replace("y","ý");
+        else if(original.contains("A"))
+
+            original = original.replace("A","Á");
+        else if(original.contains("E"))
+
+            original = original.replace("E","É");
+        else if(original.contains("I"))
+
+            original = original.replace("I","Í");
+        else if(original.contains("O"))
+
+            original = original.replace("O","Ó");
+        else if(original.contains("U"))
+
+            original = original.replace("U","Ú");
+        else if(original.contains("Y"))
+
+            original = original.replace("Y","Ý");
         return original;
     }
 }
