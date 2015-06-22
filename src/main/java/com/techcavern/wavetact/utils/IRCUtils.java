@@ -10,6 +10,7 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 import org.pircbotx.UserLevel;
+import org.pircbotx.exception.DaoException;
 import org.pircbotx.hooks.WaitForQueue;
 import org.pircbotx.hooks.events.WhoisEvent;
 import org.pircbotx.output.OutputChannel;
@@ -244,7 +245,11 @@ public class IRCUtils {
     }
 
     public static Channel getChannelbyName(PircBotX networkObject, String channelName) {
-        return networkObject.getUserChannelDao().getChannel(channelName);
+        try{
+            return networkObject.getUserChannelDao().getChannel(channelName);
+        }catch(DaoException e){
+            return null;
+        }
 
     }
 
