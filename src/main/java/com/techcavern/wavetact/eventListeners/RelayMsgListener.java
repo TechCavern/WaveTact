@@ -43,7 +43,7 @@ public class RelayMsgListener extends ListenerAdapter {
 
     @Override
     public void onPart(PartEvent event) {
-        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), "-" + event.getUser().getNick() + " parts " + " (" + event.getReason() + ")");
+        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), "-" + event.getUser().getNick() + " left " + event.getChannel().getName() + " (" + event.getReason() + ")");
     }
 
     @Override
@@ -55,7 +55,7 @@ public class RelayMsgListener extends ListenerAdapter {
 
     @Override
     public void onJoin(JoinEvent event) {
-        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), "-" + event.getUser().getNick() + " joins");
+        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), "-" + event.getUser().getNick() + " joined " + event.getChannel().getName());
     }
 }
 
