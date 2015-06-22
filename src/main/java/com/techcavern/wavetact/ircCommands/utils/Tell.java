@@ -22,13 +22,16 @@ public class Tell extends IRCCommand {
         if (sender == null) {
             ErrorUtils.sendError(user, "You must be identified");
             return;
+        }else{
+            sender = user.getNick();
         }
         String recipent = PermUtils.authUser(network, args[0]);
         if (recipent == null) {
             ErrorUtils.sendError(user, "Recipient must be identified");
             return;
         }
-
+        DatabaseUtils.addTellMessage(IRCUtils.getNetworkNameByNetwork(network),sender,recipent,GeneralUtils.buildMessage(1, args.length, args));
+        IRCUtils.sendMessage(user,network,channel, "Latent Message Sent", prefix);
     }
 
 }

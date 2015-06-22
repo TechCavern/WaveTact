@@ -46,7 +46,7 @@ public class PrivMsgListener extends ListenerAdapter {
                             int userPermLevel = PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), channel);
                             if (userPermLevel >= Command.getPermLevel()) {
                                 try {
-                                    Command.onCommand(event.getUser(), event.getBot(), prefix + channel.getName(), channel, true, userPermLevel, message);
+                                    Command.onCommand(event.getUser(), event.getBot(), prefix, channel, true, userPermLevel, message);
                                 } catch (Exception e) {
                                     ErrorUtils.sendError(event.getUser(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")");
                                     e.printStackTrace();

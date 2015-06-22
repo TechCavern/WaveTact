@@ -55,9 +55,9 @@ public class IRCUtils {
             ex.printStackTrace();
             WhoisEvent = null;
         }
-        if (!WhoisEvent.isExists()) {
+        if (!WhoisEvent.isExists() || !WhoisEvent.getNick().equals(userObject))
             return null;
-        }
+        else
         Registry.WhoisEventCache.add(new CachedWhoisEvent(WhoisEvent, network, userObject));
         return WhoisEvent;
     }

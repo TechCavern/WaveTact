@@ -206,14 +206,14 @@ public class DatabaseUtils {
         Registry.WaveTactDB.insertInto(SERVERS).values(name, port, server, nick, channels, nickserv, bindhost, netadminaccess, authtype, networkadmins).execute();
     }
 
-    public static void addTellMessage(String network, String sender, String reciever, String message){
-        Registry.WaveTactDB.insertInto(TELLMESSAGES).values(network, sender, reciever, message).execute();
+    public static void addTellMessage(String network, String sender, String receiver, String message){
+        Registry.WaveTactDB.insertInto(TELLMESSAGES).values(network, sender, receiver, message).execute();
     }
-    public static void removeTellMessage(String network, String reciever){
-        Registry.WaveTactDB.delete(TELLMESSAGES).where(TELLMESSAGES.NETWORK.eq(network).and(TELLMESSAGES.RECIEVER.eq(reciever))).execute();
+    public static void removeTellMessage(String network, String receiver){
+        Registry.WaveTactDB.delete(TELLMESSAGES).where(TELLMESSAGES.NETWORK.eq(network).and(TELLMESSAGES.RECEIVER.eq(receiver))).execute();
     }
-    public static Result<Record> getTellMessage(String network, String reciever){
-        return Registry.WaveTactDB.select().from(TELLMESSAGES).where(TELLMESSAGES.NETWORK.eq(network).and(TELLMESSAGES.RECIEVER.eq(reciever))).fetch();
+    public static Result<Record> getTellMessage(String network, String receiver){
+        return Registry.WaveTactDB.select().from(TELLMESSAGES).where(TELLMESSAGES.NETWORK.eq(network).and(TELLMESSAGES.RECEIVER.eq(receiver))).fetch();
     }
 
 }

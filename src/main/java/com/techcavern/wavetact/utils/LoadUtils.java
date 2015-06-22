@@ -215,8 +215,6 @@ public class LoadUtils {
             Registry.threadPool.execute(new MessageQueue());
         }
 
-
-
     public static void initalizeBanQueue() {
         class BanQueue implements Runnable {
 

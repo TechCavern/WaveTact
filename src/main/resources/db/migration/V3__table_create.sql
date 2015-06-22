@@ -1,6 +1,6 @@
 CREATE TABLE TELLMESSAGES (
 network Text,
 sender Text,
-reciever Text,
+receiver Text,
 message Text
 );
