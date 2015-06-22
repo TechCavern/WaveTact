@@ -14,7 +14,7 @@ import org.pircbotx.User;
 public class CheckPing extends IRCCommand {
 
     public CheckPing() {
-        super(GeneralUtils.toArray("checkping cping"), 0, "checkport [ip][domain]", " Checks ping to a server", false);
+        super(GeneralUtils.toArray("checkping cping"), 0, "checkping [ip][domain]", "Checks ping to a server", false);
     }
 
     @Override
