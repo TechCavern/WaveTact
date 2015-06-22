@@ -180,37 +180,37 @@ public class GeneralUtils {
     }
     public static String replaceVowelsWithAccents(String original){
         if(original.contains("a"))
-        original = original.replace("a", "á");
+        original = original.replaceFirst("a", "á");
         else if(original.contains("e"))
-        original = original.replace("e", "é");
+        original = original.replaceFirst("e", "é");
         else if(original.contains("i"))
-        original = original.replace("i", "í");
+        original = original.replaceFirst("i", "í");
         else if(original.contains("o"))
-            original = original.replace("o","ó");
+            original = original.replaceFirst("o", "ó");
         else if(original.contains("u"))
 
-            original = original.replace("u","ú");
+            original = original.replaceFirst("u", "ú");
         else if(original.contains("y"))
 
-            original = original.replace("y","ý");
+            original = original.replaceFirst("y", "ý");
         else if(original.contains("A"))
 
-            original = original.replace("A","Á");
+            original = original.replaceFirst("A", "Á");
         else if(original.contains("E"))
 
-            original = original.replace("E","É");
+            original = original.replaceFirst("E", "É");
         else if(original.contains("I"))
 
-            original = original.replace("I","Í");
+            original = original.replaceFirst("I", "Í");
         else if(original.contains("O"))
 
-            original = original.replace("O","Ó");
+            original = original.replaceFirst("O", "Ó");
         else if(original.contains("U"))
 
-            original = original.replace("U","Ú");
+            original = original.replaceFirst("U", "Ú");
         else if(original.contains("Y"))
 
-            original = original.replace("Y","Ý");
+            original = original.replaceFirst("Y","Ý");
         return original;
     }
 }
