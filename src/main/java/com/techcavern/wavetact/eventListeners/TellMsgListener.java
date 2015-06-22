@@ -22,6 +22,8 @@ import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.MessageEvent;
 import org.pircbotx.hooks.events.PrivateMessageEvent;
 
+import java.util.concurrent.TimeUnit;
+
 import static com.techcavern.wavetactdb.Tables.CHANNELPROPERTY;
 import static com.techcavern.wavetactdb.Tables.TELLMESSAGES;
 

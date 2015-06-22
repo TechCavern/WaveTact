@@ -17,6 +17,8 @@ import org.pircbotx.Colors;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.MessageEvent;
 
+import java.util.concurrent.TimeUnit;
+
 import static com.techcavern.wavetactdb.Tables.CHANNELPROPERTY;
 
 /**
@@ -35,7 +37,12 @@ public class FunMsgListener extends ListenerAdapter {
                                 IRCUtils.sendAction(event.getUser(), event.getBot(), event.getChannel(), "kicks " + event.getUser().getNick() + " (┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻)", "");
                             }
                         }
-
+                    /**
+                     * My apologies to those using this site responsibly. But in my experience, this site has been linked numerous times for entertainment purposes
+                     * In fact, I have yet to notice a time when it is linked for its intended purpose. And if you are using this site for its intended purpose, please think of
+                     * better of way of expressing how you feel. Linking a generic site rarely solves any problems. Instead explain to the person how and why they offended you. If
+                     * they ignore you, then you ignore them.
+                     */
                     Record autourl = DatabaseUtils.getChannelProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), event.getChannel().getName(), "autourl");
                     if (autourl != null && autourl.getValue(CHANNELPROPERTY.VALUE).equalsIgnoreCase("true")) {
                         String[] message = StringUtils.split(event.getMessage(), " ");
