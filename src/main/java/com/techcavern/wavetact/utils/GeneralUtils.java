@@ -88,7 +88,12 @@ public class GeneralUtils {
         } else {
             IP = IP.replaceAll("http://|https://", "");
             try {
-                return InetAddress.getByName(IP).getHostAddress();
+                InetAddress[] IPs = InetAddress.getAllByName(IP);
+                for(InetAddress address:IPs){
+                    if(InetAddressUtils.isIPv4Address(address.getHostAddress()))
+                        return address.getHostAddress();
+                }
+                return IPs[0].getHostAddress();
             } catch (Exception e) {
                 return null;
             }
