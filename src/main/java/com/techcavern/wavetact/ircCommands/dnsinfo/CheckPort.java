@@ -9,10 +9,7 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-import java.net.ConnectException;
-import java.net.InetAddress;
-import java.net.Socket;
-import java.net.UnknownHostException;
+import java.net.*;
 
 @IRCCMD
 public class CheckPort extends IRCCommand {
@@ -47,14 +44,12 @@ public class CheckPort extends IRCCommand {
             ErrorUtils.sendError(user, "Host Unreachable");
         } else {
             try {
-                Socket socket = new Socket(IP, port);
+                Socket socket = new Socket();
+                socket.connect(new InetSocketAddress(IP, port), 1000);
                 socket.close();
                 IRCUtils.sendMessage(user, network, channel, "Port " + port + " is open on " + IP, prefix);
-            } catch (ConnectException e) {
-                if (e.getMessage().equals("Connection refused"))
-                    IRCUtils.sendMessage(user, network, channel, "Port " + port + " is closed on " + IP, prefix);
-                else
-                    ErrorUtils.sendError(user, "Host Unreachable");
+            } catch (Exception e) {
+                IRCUtils.sendMessage(user, network, channel, "Port " + port + " is closed on " + IP, prefix);
             }
         }
 
