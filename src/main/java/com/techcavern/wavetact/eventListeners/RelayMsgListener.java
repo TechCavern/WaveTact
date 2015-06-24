@@ -22,7 +22,7 @@ public class RelayMsgListener extends ListenerAdapter {
     @Override
     public void onMessage(MessageEvent event) throws Exception {
         if(PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel()) > -2)
-        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), "<" + GeneralUtils.replaceVowelsWithAccents(event.getUser().getNick()) + "> " + event.getMessage());
+        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), GeneralUtils.replaceVowelsWithAccents(event.getUser().getNick()) + ": " + event.getMessage());
     }
 
     @Override
