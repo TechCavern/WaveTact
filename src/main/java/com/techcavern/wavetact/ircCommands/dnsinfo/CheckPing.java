@@ -5,10 +5,14 @@ import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.conn.util.InetAddressUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 @IRCCMD
 public class CheckPing extends IRCCommand {
@@ -34,12 +38,19 @@ public class CheckPing extends IRCCommand {
             } else if (InetAddressUtils.isIPv4Address(IP)) {
                 command = "ping -c 1 " + IP;
             }
-            long time = System.currentTimeMillis();
             Process pinghost = Runtime.getRuntime().exec(command);
-            pinghost.waitFor();
-            if (pinghost.exitValue() == 0) {
-                IRCUtils.sendMessage(user, network, channel, IP + ": " + (System.currentTimeMillis() - time) + " milliseconds", prefix);
-            } else {
+            BufferedReader buffereader = new BufferedReader(new InputStreamReader(pinghost.getInputStream()));
+            boolean haslines = false;
+            String line ="";
+            while ((line = buffereader.readLine()) != null) {
+                if (line.contains("time=")) {
+                    haslines = true;
+                    String[] ips = line.split(" ");
+                    IRCUtils.sendMessage(user, network, channel, IP + ": " + ips[ips.length-2].replace("time=", "") + " milliseconds", prefix);
+                }
+            }
+            buffereader.close();
+            if(!haslines || pinghost.exitValue() != 0) {
                 ErrorUtils.sendError(user, "Host Unreachable");
             }
         }
