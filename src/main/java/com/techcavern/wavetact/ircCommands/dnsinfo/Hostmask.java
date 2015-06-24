@@ -18,9 +18,9 @@ public class Hostmask extends IRCCommand {
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        if (IRCUtils.getHostmask(network, args[0].replaceFirst("\\$", ""), false) != null) {
-            if (args[0].startsWith("$")) {
-                IRCUtils.sendMessage(user, network, channel, IRCUtils.getHostmask(network, args[0].replaceFirst("\\$", ""), true), prefix);
+        if (IRCUtils.getHostmask(network, args[0].replaceFirst("\\+", ""), false) != null) {
+            if (args[0].startsWith("+")) {
+                IRCUtils.sendMessage(user, network, channel, IRCUtils.getHostmask(network, args[0].replaceFirst("\\+", ""), true), prefix);
             } else {
                 IRCUtils.sendMessage(user, network, channel, IRCUtils.getHostmask(network, args[0], false), prefix);
             }

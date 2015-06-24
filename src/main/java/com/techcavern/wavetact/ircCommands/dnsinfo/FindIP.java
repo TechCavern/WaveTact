@@ -22,21 +22,16 @@ public class FindIP extends IRCCommand {
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        String IP;
-        if (args.length > 0) {
-            if (args[0].contains(".") || args[0].contains(":")) {
-                IP = args[0].replace("http://", "").replace("https://", "");
-            } else {
-                IP = IRCUtils.getHost(network, args[0]);
-            }
-        } else {
-            IP = IRCUtils.getHost(network, user.getNick());
+        boolean IPv6Priority = false;
+        if(args[0].startsWith("+")){
+            IPv6Priority = true;
+            args[0] = args[0].replaceFirst("\\+","");
         }
+        String IP = GeneralUtils.getIP(args[0], network, IPv6Priority);
         if (IP == null) {
             ErrorUtils.sendError(user, "Please enter in an ip/user/domain as argument #1");
             return;
         }
-
         JsonObject objectJson = GeneralUtils.getJsonObject("http://ip-api.com/json/" + IP);
         List<String> results = new ArrayList<>();
         if (objectJson.get("status").getAsString().equalsIgnoreCase("success")) {

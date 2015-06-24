@@ -38,7 +38,7 @@ public class RelayMsgListener extends ListenerAdapter {
         if(rec != null)
             chanrelay = rec.getValue(NETWORKPROPERTY.VALUE);
         if (chanrelay != null && event.getUser().getChannels().contains(IRCUtils.getChannelbyName(event.getBot(), chanrelay)))
-            IRCUtils.sendRelayMessage(event.getBot(), IRCUtils.getChannelbyName(event.getBot(), chanrelay), "-" + GeneralUtils.replaceVowelsWithAccents(event.getOldNick()) + " is now known as " + GeneralUtils.replaceVowelsWithAccents(event.getNewNick()));
+            IRCUtils.sendRelayMessage(event.getBot(), IRCUtils.getChannelbyName(event.getBot(), chanrelay), GeneralUtils.replaceVowelsWithAccents(event.getOldNick()) + " is now known as " + GeneralUtils.replaceVowelsWithAccents(event.getNewNick()));
     }
 
     @Override

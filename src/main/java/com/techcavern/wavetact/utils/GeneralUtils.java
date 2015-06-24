@@ -1,6 +1,7 @@
 package com.techcavern.wavetact.utils;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.apache.commons.lang3.RandomUtils;
@@ -35,7 +36,10 @@ public class GeneralUtils {
         String result = parseUrl(url);
         return new JsonParser().parse(result).getAsJsonObject();
     }
-
+    public static JsonElement getJsonElement(String url) throws Exception {
+        String result = parseUrl(url);
+        return new JsonParser().parse(result);
+    }
     public static String getJsonString(JsonArray array, String name) {
         String returning = "";
         for (int i = 0; i < array.size(); i++) {
@@ -87,20 +91,21 @@ public class GeneralUtils {
         } else {
             IP = IP.replaceAll("http://|https://", "");
             try {
+                InetAddress[] addarray = InetAddress.getAllByName(IP);
                 String add = "";
                 if(IPv6Priority) {
-                    Inet6Address add6 = (Inet6Address) Inet6Address.getByName(IP);
-                    add = add6.getHostAddress();
-                    System.out.println(add);
-                    if (add == null || add.isEmpty()) {
-                        add = Inet4Address.getByName(IP).getHostAddress();
+                    for(InetAddress add6:addarray){
+                        if(InetAddressUtils.isIPv6Address(add6.getHostAddress()))
+                            add = add6.getHostAddress();
                     }
                 }else{
-                    Inet4Address add4 = (Inet4Address) Inet4Address.getByName(IP);
-                    add = add4.getHostAddress();
-                    if (add == null || add.isEmpty()) {
-                        add = Inet6Address.getByName(IP).getHostAddress();
+                    for(InetAddress add4:addarray){
+                        if(InetAddressUtils.isIPv4Address(add4.getHostAddress()))
+                            add = add4.getHostAddress();
                     }
+                }
+                if (add == null || add.isEmpty()) {
+                    add = InetAddress.getByName(IP).getHostAddress();
                 }
                 return add;
             } catch (Exception e) {
