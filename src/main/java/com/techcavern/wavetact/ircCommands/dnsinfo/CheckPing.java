@@ -50,7 +50,7 @@ public class CheckPing extends IRCCommand {
                 }
             }
             buffereader.close();
-            if(!haslines || pinghost.exitValue() != 0) {
+            if(!haslines) {
                 ErrorUtils.sendError(user, "Host Unreachable");
             }
         }

@@ -77,7 +77,7 @@ public class IRCUtils {
                 String messageToSend = message.substring(i, Math.min(message.length(), i + 350));
                 if (!messageToSend.isEmpty()) {
                     Registry.MessageQueue.add(new NetProperty("PRIVMSG " + prefix + channelObject.getName() + " :" + messageToSend, networkObject));
-                    sendRelayMessage(networkObject, channelObject, GeneralUtils.replaceVowelsWithAccents(networkObject.getNick()) + ": " + message);
+                    sendRelayMessage(networkObject, channelObject, GeneralUtils.replaceVowelsWithAccents(networkObject.getNick()) + " " + message);
                 }
             }
         } else {
@@ -233,9 +233,17 @@ public class IRCUtils {
     }
 
     public static String getHost(PircBotX network, String userObject) {
-        String host = getUserByNick(network, userObject).getHostname();
-        if (host == null) {
-            host = WhoisEvent(network, userObject).getHostname();
+        String host = "";
+        User use = getUserByNick(network, userObject);
+        if (use != null) {
+            host = use.getHostname();
+        }else{
+            WhoisEvent whois = WhoisEvent(network, userObject);
+            if(whois != null){
+                host = use.getHostname();
+            }else{
+                host = "";
+            }
         }
         return host;
     }
