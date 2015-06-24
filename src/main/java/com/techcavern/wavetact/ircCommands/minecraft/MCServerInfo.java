@@ -27,7 +27,7 @@ public class MCServerInfo extends IRCCommand {
         } else {
             port = 25565;
         }
-        MCServer server = StandardMCVersions.MC_18.ping(new InetSocketAddress(GeneralUtils.getIP(args[0], network), port));
+        MCServer server = StandardMCVersions.MC_18.ping(new InetSocketAddress(GeneralUtils.getIP(args[0], network, false), port));
         String gameVersion = "Version: " + server.gameVersion;
         String motd = "MOTD: " + server.motd;
         String playercount = "Players: " + Integer.toString(server.players) + "/" + Integer.toString(server.maxPlayers);

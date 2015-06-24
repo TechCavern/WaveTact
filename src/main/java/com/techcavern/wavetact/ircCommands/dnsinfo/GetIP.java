@@ -14,12 +14,17 @@ import org.pircbotx.User;
 public class GetIP extends IRCCommand {
 
     public GetIP() {
-        super(GeneralUtils.toArray("getip ip"), 0, "getip [domain]", "gets IP Address of domain", false);
+        super(GeneralUtils.toArray("getip ip"), 0, "getip (+)[domain]", "gets IP Address of domain", false);
     }
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        String IP = GeneralUtils.getIP(args[0], network);
+        boolean IPv6Priority = false;
+        if(args[0].startsWith("+")){
+            IPv6Priority = true;
+            args[0] = args[0].replaceFirst("\\+","");
+        }
+        String IP = GeneralUtils.getIP(args[0], network, IPv6Priority);
         if (IP == null) {
             ErrorUtils.sendError(user, "Host Unreachable");
         } else {

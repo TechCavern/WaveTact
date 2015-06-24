@@ -18,18 +18,23 @@ import java.net.UnknownHostException;
 public class CheckPort extends IRCCommand {
 
     public CheckPort() {
-        super(GeneralUtils.toArray("checkport cport"), 0, "checkport [ip][domain] (port)", " Checks if port is open on a certain ip and port", false);
+        super(GeneralUtils.toArray("checkport cport"), 0, "checkport (+)[ip][domain] (port)", " Checks if port is open on a certain ip and port", false);
     }
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+        boolean IPv6Priority = false;
+        if(args[0].startsWith("+")){
+            IPv6Priority = true;
+            args[0] = args[0].replaceFirst("\\+","");
+        }
         int port;
         if (args.length < 2) {
             port = 80;
         } else {
             port = Integer.parseInt(args[1]);
         }
-        String IP = GeneralUtils.getIP(args[0], network);
+        String IP = GeneralUtils.getIP(args[0], network, IPv6Priority);
         try {
             if (InetAddress.getByName(IP).isAnyLocalAddress()) {
                 IRCUtils.sendMessage(user, network, channel, "I cannot find myself! :<", prefix);

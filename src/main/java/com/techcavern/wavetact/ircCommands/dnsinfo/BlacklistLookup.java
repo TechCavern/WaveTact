@@ -33,7 +33,7 @@ public class BlacklistLookup extends IRCCommand {
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        String BeforeIP = GeneralUtils.getIP(args[0], network);
+        String BeforeIP = GeneralUtils.getIP(args[0], network, false);
         if (BeforeIP == null) {
             ErrorUtils.sendError(user, "Invalid ip/user");
             return;

@@ -14,12 +14,17 @@ import org.pircbotx.User;
 public class CheckPing extends IRCCommand {
 
     public CheckPing() {
-        super(GeneralUtils.toArray("checkping cping"), 0, "checkping [ip][domain]", "Checks ping to a server", false);
+        super(GeneralUtils.toArray("checkping cping"), 0, "checkping (+)[ip][domain]", "Checks ping to a server", false);
     }
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        String IP = GeneralUtils.getIP(args[0], network);
+        boolean IPv6Priority = false;
+        if(args[0].startsWith("+")){
+            IPv6Priority = true;
+            args[0] = args[0].replaceFirst("\\+","");
+        }
+        String IP = GeneralUtils.getIP(args[0], network, IPv6Priority);
         if (IP == null) {
             ErrorUtils.sendError(user, "Host Unreachable");
         } else {

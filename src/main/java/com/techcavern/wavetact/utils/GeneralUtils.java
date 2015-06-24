@@ -11,8 +11,7 @@ import org.pircbotx.PircBotX;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.net.InetAddress;
-import java.net.URL;
+import java.net.*;
 
 public class GeneralUtils {
     public static String buildMessage(int startint, int finishint, String[] args) {
@@ -76,7 +75,7 @@ public class GeneralUtils {
         return new JsonParser().parse(result).getAsJsonArray();
     }
 
-    public static String getIP(String input, PircBotX Bot) {
+    public static String getIP(String input, PircBotX Bot, boolean IPv6Priority) {
         String IP = "";
         if (input.contains(".") || input.contains(":")) {
             IP = input;
@@ -88,13 +87,24 @@ public class GeneralUtils {
         } else {
             IP = IP.replaceAll("http://|https://", "");
             try {
-                InetAddress[] IPs = InetAddress.getAllByName(IP);
-                for(InetAddress address:IPs){
-                    if(InetAddressUtils.isIPv4Address(address.getHostAddress()))
-                        return address.getHostAddress();
+                String add = "";
+                if(IPv6Priority) {
+                    Inet6Address add6 = (Inet6Address) Inet6Address.getByName(IP);
+                    add = add6.getHostAddress();
+                    System.out.println(add);
+                    if (add == null || add.isEmpty()) {
+                        add = Inet4Address.getByName(IP).getHostAddress();
+                    }
+                }else{
+                    Inet4Address add4 = (Inet4Address) Inet4Address.getByName(IP);
+                    add = add4.getHostAddress();
+                    if (add == null || add.isEmpty()) {
+                        add = Inet6Address.getByName(IP).getHostAddress();
+                    }
                 }
-                return IPs[0].getHostAddress();
+                return add;
             } catch (Exception e) {
+                e.printStackTrace();
                 return null;
             }
         }
