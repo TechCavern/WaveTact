@@ -76,6 +76,3 @@ You can connect to the WaveTact console by running this:
 ````
 java -jar WaveTact.jar console
 ````
-
-Note that you'll have to add a controller and network at least once.
-You will have to restart WaveTact after adding the latter, we haven't yet implemented a proper way to live-add a channel.
