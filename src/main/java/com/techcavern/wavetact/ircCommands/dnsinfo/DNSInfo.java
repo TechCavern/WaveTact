@@ -28,10 +28,15 @@ public class DNSInfo extends IRCCommand {
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-
-        Record[] records = GeneralUtils.getRecords(args[0]);
+        Resolver resolver = new SimpleResolver();
+        String domain = args[0];
+        domain = domain.replace("http://", "").replace("https://", "");
+        Lookup lookup = new Lookup(domain, Type.ANY);
+        lookup.setResolver(resolver);
+        lookup.setCache(null);
+        Record[] records = lookup.run();
         boolean isSuccessful = false;
-        if (records != null) {
+        if (lookup.getResult() == Lookup.SUCCESSFUL) {
             for (Record rec : records) {
                 if (rec instanceof ARecord) {
                     IRCUtils.sendMessage(user, network, channel, Type.string(rec.getType()) + " - " + ((ARecord) rec).getAddress(), prefix);
