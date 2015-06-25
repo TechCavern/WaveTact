@@ -27,12 +27,8 @@ public class MCServerInfo extends IRCCommand {
         if (args.length >= 2) {
             port = Integer.parseInt(args[1]);
         } else {
-            Resolver resolver = new SimpleResolver();
-            Lookup lookup = new Lookup(args[0], Type.ANY);
-            lookup.setResolver(resolver);
-            lookup.setCache(null);
-            Record[] records = lookup.run();
-            if(lookup.getResult() == Lookup.SUCCESSFUL) {
+            Record[] records = GeneralUtils.getRecords(args[0]);
+            if (records != null) {
                 int Priority = 0;
                 for (Record rec : records) {
                     if (rec instanceof SRVRecord) {

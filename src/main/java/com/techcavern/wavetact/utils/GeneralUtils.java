@@ -9,6 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.http.conn.util.InetAddressUtils;
 import org.pircbotx.Colors;
 import org.pircbotx.PircBotX;
+import org.xbill.DNS.*;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -71,6 +72,24 @@ public class GeneralUtils {
         }
         buffereader.close();
         return result;
+
+    }
+
+    public static Record[] getRecords(String domain){
+        try {
+            Resolver resolver = new SimpleResolver();
+            domain = domain.replace("http://", "").replace("https://", "");
+            Lookup lookup = new Lookup(domain, Type.ANY);
+            lookup.setResolver(resolver);
+            lookup.setCache(null);
+            if(lookup.getResult() == Lookup.SUCCESSFUL){
+                return lookup.run();
+            }else{
+                return null;
+            }
+        }catch (Exception e){
+            return null;
+        }
 
     }
 
