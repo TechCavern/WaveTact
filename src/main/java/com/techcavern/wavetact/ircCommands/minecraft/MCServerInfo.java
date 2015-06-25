@@ -9,6 +9,7 @@ import io.github.asyncronous.mcping.StandardMCVersions;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
+import org.xbill.DNS.*;
 
 import java.net.InetSocketAddress;
 
@@ -21,11 +22,33 @@ public class MCServerInfo extends IRCCommand {
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        int port;
+        int port = 25565;
+        boolean isSuccessful = false;
         if (args.length >= 2) {
             port = Integer.parseInt(args[1]);
         } else {
-            port = 25565;
+            Resolver resolver = new SimpleResolver();
+            Lookup lookup = new Lookup(args[0], Type.ANY);
+            lookup.setResolver(resolver);
+            lookup.setCache(null);
+            Record[] records = lookup.run();
+            if(lookup.getResult() == Lookup.SUCCESSFUL) {
+                int Priority = 0;
+                for (Record rec : records) {
+                    if (rec instanceof SRVRecord) {
+                        if(isSuccessful && ((SRVRecord) rec).getPriority() < Priority){
+                            args[0] = ((SRVRecord) rec).getTarget().toString();
+                            port = ((SRVRecord) rec).getPort();
+                            Priority = ((SRVRecord) rec).getPriority();
+                        }else{
+                            args[0] = ((SRVRecord) rec).getTarget().toString();
+                            port = ((SRVRecord) rec).getPort();
+                        }
+                        isSuccessful = true;
+
+                    }
+                }
+            }
         }
         MCServer server = StandardMCVersions.MC_18.ping(new InetSocketAddress(GeneralUtils.getIP(args[0], network, false), port));
         String gameVersion = "Version: " + server.gameVersion;
