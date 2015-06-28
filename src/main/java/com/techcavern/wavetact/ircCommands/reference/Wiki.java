@@ -23,14 +23,14 @@ public class Wiki extends IRCCommand {
         for (int i = 0; i < args.length; i++) {
             args[i] = StringUtils.capitalize(args[i]);
         }
-        JsonObject result = GeneralUtils.getJsonObject("http://en.wikipedia.org/w/api.php?action=query&prop=extracts&explaintext&exsectionformat=plain&exchars=697&titles=" + StringUtils.join(args, "%20") + "&format=json").getAsJsonObject("query").getAsJsonObject("pages");
+        JsonObject result = GeneralUtils.getJsonObject("https://en.wikipedia.org/w/api.php?action=query&prop=extracts&explaintext&exsectionformat=plain&exchars=697&titles=" + StringUtils.join(args, "%20") + "&format=json").getAsJsonObject("query").getAsJsonObject("pages");
         String key = result.entrySet().iterator().next().getKey();
         if (result.getAsJsonObject(key).get("missing") != null) {
             ErrorUtils.sendError(user, "Query returned no results");
         } else {
             String title = result.getAsJsonObject(key).get("title").getAsString();
             String text = result.getAsJsonObject(key).get("extract").getAsString();
-            String plainurl = "http://en.wikipedia.org/wiki/" + StringUtils.join(args, "%20");
+            String plainurl = "https://en.wikipedia.org/wiki/" + StringUtils.join(args, "%20");
             IRCUtils.sendMessage(user, network, channel, title + ": " + text.replaceAll("\n", ""), prefix);
             IRCUtils.sendMessage(user, network, channel, plainurl, prefix);
         }
