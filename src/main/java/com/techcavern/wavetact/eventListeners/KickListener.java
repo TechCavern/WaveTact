@@ -24,16 +24,16 @@ public class KickListener extends ListenerAdapter {
         Channel channel = event.getChannel();
         PircBotX network = event.getBot();
         User user = event.getUser();
-        if (event.getRecipient().getNick().equals(event.getBot().getNick())) {
+        if (event.getRecipient().getNick().equals(network.getNick())) {
             int tries = 0;
             do {
-                event.getBot().sendIRC().joinChannel(event.getChannel().getName());
+                event.getBot().sendIRC().joinChannel(channel.getName());
                 tries++;
                 TimeUnit.SECONDS.sleep(5);
-            } while (tries < 60 && !event.getBot().getUserBot().getChannels().contains(event.getChannel()));
-            if (event.getBot().getUserBot().getChannels().contains(event.getChannel()) && !event.getUser().getNick().equals(event.getBot().getNick())) {
-                if (IRCUtils.checkIfCanKick(event.getChannel(), event.getBot(), event.getUser())) {
-                    IRCUtils.sendKick(event.getBot().getUserBot(), user, network, event.getChannel(), "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻");
+            } while (tries < 60 && !network.getUserBot().getChannels().contains(channel));
+            if (network.getUserBot().getChannels().contains(channel) && !user.getNick().equals(network.getNick())) {
+                if (IRCUtils.checkIfCanKick(channel, network, user)) {
+                    IRCUtils.sendKick(network.getUserBot(), user, network, event.getChannel(), "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻");
                 }  else {
                     IRCUtils.sendAction(user, network, channel, "kicks " + user.getNick() + " (┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻)", "");
 
