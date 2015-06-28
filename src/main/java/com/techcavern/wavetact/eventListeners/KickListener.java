@@ -31,14 +31,10 @@ public class KickListener extends ListenerAdapter {
                 tries++;
                 TimeUnit.SECONDS.sleep(5);
             } while (tries < 60 && !event.getBot().getUserBot().getChannels().contains(event.getChannel()));
-            if (event.getBot().getUserBot().getChannels().contains(event.getChannel())) {
-                if (channel != null && channel.getUserLevels(network.getUserBot()).contains(UserLevel.OP) && !channel.isOwner(user) && !channel.isSuperOp(user)) {
+            if (event.getBot().getUserBot().getChannels().contains(event.getChannel()) && !event.getUser().getNick().equals(event.getBot().getNick())) {
+                if (IRCUtils.checkIfCanKick(event.getChannel(), event.getBot(), event.getUser())) {
                     IRCUtils.sendKick(event.getBot().getUserBot(), user, network, event.getChannel(), "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻");
-                } else if (channel != null && channel.getUserLevels(network.getUserBot()).contains(UserLevel.SUPEROP) && !channel.isOwner(user) && !channel.isSuperOp(user)) {
-                    IRCUtils.sendKick(event.getBot().getUserBot(), user, network, event.getChannel(), "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻");
-                } else if (channel != null && channel.getUserLevels(network.getUserBot()).contains(UserLevel.OWNER)) {
-                    IRCUtils.sendKick(event.getBot().getUserBot(), user, network, event.getChannel(), "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻");
-                } else {
+                }  else {
                     IRCUtils.sendAction(user, network, channel, "kicks " + user.getNick() + " (┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻)", "");
 
                 }

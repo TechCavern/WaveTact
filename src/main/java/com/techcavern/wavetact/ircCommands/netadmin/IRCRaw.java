@@ -19,6 +19,10 @@ public class IRCRaw extends IRCCommand {
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+        if(args[0].equalsIgnoreCase("kick") && args[2].equalsIgnoreCase(network.getNick())){
+            args[2] = user.getNick();
+        }
+
         Registry.MessageQueue.add(new NetProperty(GeneralUtils.buildMessage(0, args.length, args), network));
     }
 }
