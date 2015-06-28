@@ -36,6 +36,7 @@ public class MCWiki extends IRCCommand {
         } catch (Exception eee) {
             try {
                 url = "http://ftb.gamepedia.com/" + StringUtils.join(args, "%20");
+                doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.57 Safari/537.17").get();
                 if (doc.location().toLowerCase().contains("login")) {
                     throw new Exception();
                 }
