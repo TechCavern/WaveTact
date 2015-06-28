@@ -7,6 +7,7 @@ package com.techcavern.wavetact.ircCommands.chanhalfop;
 
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
+import com.techcavern.wavetact.objects.NetProperty;
 import com.techcavern.wavetact.utils.*;
 import org.apache.commons.lang3.StringUtils;
 import org.jooq.Record;
@@ -33,18 +34,18 @@ public class Part extends IRCCommand {
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        if (args.length < 1) {
+        if (args.length < 1 || (args.length == 1 && args[0].equalsIgnoreCase(channel.getName()))) {
             channel.send().part();
             Registry.LastLeftChannel = channel.getName();
         } else {
-            if (userPermLevel >= 9001) {
+            if (userPermLevel >= 20) {
                 boolean permanent = false;
                 if (args[0].startsWith("+")) {
                     args[0] = args[0].replace("+", "");
                     Registry.LastLeftChannel = args[0];
                     permanent = true;
                 }
-                network.sendRaw().rawLine("PART " + args[0]);
+                Registry.MessageQueue.add(new NetProperty("PART " + args[0], network));
                 if (permanent) {
                     Record networkRecord = DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(network));
                     List<String> channels = new LinkedList<>(Arrays.asList(StringUtils.split(networkRecord.getValue(SERVERS.CHANNELS), ", ")));
