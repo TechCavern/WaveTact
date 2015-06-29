@@ -20,7 +20,7 @@ import java.util.List;
 public class Question extends IRCCommand {
 
     public Question() {
-        super(GeneralUtils.toArray("question wa wolframalpha"), 0, "question (answer #) [question]", "Ask wolfram alpha a question!", false);
+        super(GeneralUtils.toArray("question q wa wolframalpha"), 0, "question (answer #) [question]", "Ask wolfram alpha a question!", false);
     }
 
     @Override
@@ -30,9 +30,9 @@ public class Question extends IRCCommand {
             ErrorUtils.sendError(user, "Wolfram Alpha api key is null - contact bot controller to fix");
             return;
         }
-        int ArrayIndex = 0;
+        int ArrayIndex = 1;
         if (GeneralUtils.isInteger(args[0])) {
-            ArrayIndex = Integer.parseInt(args[0]) - 1;
+            ArrayIndex = Integer.parseInt(args[0]);
             args = ArrayUtils.remove(args, 0);
         }
         WAEngine engine = new WAEngine();
@@ -58,9 +58,7 @@ public class Question extends IRCCommand {
                     result = StringUtils.substring(result, 0, 350) + "...";
                 }
                 IRCUtils.sendMessage(user, network, channel, waResults.get(0) + ": " + result, prefix);
-
             } else {
-                ArrayIndex = ArrayIndex - 1;
                 ErrorUtils.sendError(user, "Answer #" + ArrayIndex + " does not exist");
             }
         } else {
