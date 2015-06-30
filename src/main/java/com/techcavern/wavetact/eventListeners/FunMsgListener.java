@@ -30,7 +30,7 @@ public class FunMsgListener extends ListenerAdapter {
         class process implements Runnable {
             public void run() {
                 if (PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel()) > -2) {
-                        if (Colors.removeFormattingAndColors(event.getMessage()).contains("stop-irc-bullying.eu/stop")) {
+                        if (Colors.removeFormattingAndColors(event.getMessage()).contains("stop-irc-bullying.eu")) {
                             if (IRCUtils.checkIfCanKick(event.getChannel(), event.getBot(), event.getUser())) {
                                 IRCUtils.sendKick(event.getBot().getUserBot(), event.getUser(), event.getBot(), event.getChannel(), "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻ [https://goo.gl/Tkb9dh]");
                             } else {
@@ -52,7 +52,7 @@ public class FunMsgListener extends ListenerAdapter {
                                 if (!arg.startsWith("https://") && !arg.startsWith("http://")) {
                                     arg = "http://" + arg;
                                 }
-                                if (Registry.urlvalidator.isValid(arg) && !arg.contains("stop-irc-bullying.eu/stop")) {
+                                if (Registry.urlvalidator.isValid(arg) && !arg.contains("stop-irc-bullying.eu")) {
                                     Document doc = Jsoup.connect(arg).userAgent("Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.57 Safari/537.17").get();
                                     String title = doc.title();
                                     if (!title.isEmpty()) {
