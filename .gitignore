@@ -23,4 +23,5 @@ workingdirectory/
 *.ipr
 *.sqlite
 *.iws
+pimp/
 src/main/java/com/techcavern/wavetactdb/
