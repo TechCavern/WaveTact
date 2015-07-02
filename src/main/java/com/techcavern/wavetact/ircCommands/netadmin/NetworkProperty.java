@@ -17,7 +17,7 @@ import static com.techcavern.wavetactdb.Tables.NETWORKPROPERTY;
 public class NetworkProperty extends IRCCommand {
 
     public NetworkProperty() {
-        super(GeneralUtils.toArray("networkproperty netprop"), 20, "netprop (+)(-)[property] (value)", "creates, modifies or removes network properties", true);
+        super(GeneralUtils.toArray("networkproperty netprop"), 20, "netprop (+)(-)[property] (value)", "creates, modifies or removes network properties", false);
     }
 
     @Override
