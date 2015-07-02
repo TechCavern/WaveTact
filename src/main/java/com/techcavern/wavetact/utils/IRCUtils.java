@@ -235,7 +235,7 @@ public class IRCUtils {
     public static String getHost(PircBotX network, String userObject) {
         String host = "";
         User use = getUserByNick(network, userObject);
-        if (use != null) {
+        if (use != null && use.getHostname() != null) {
             host = use.getHostname();
         }else{
             WhoisEvent whois = WhoisEvent(network, userObject);
