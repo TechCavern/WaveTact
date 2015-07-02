@@ -318,7 +318,7 @@ public class IRCUtils {
                         }
                     }
                     action = action.replace("$*", GeneralUtils.buildMessage(i, args.length, args));
-                    String responseprefix = DatabaseUtils.getConfig("commandchar");
+                    String responseprefix = DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(network), "commandchar").getValue(NETWORKPROPERTY.VALUE);
                     if (action.startsWith(responseprefix)) {
                         action = action.replace(responseprefix, "");
                     }

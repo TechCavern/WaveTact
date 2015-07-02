@@ -20,6 +20,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 import java.util.concurrent.TimeUnit;
 
 import static com.techcavern.wavetactdb.Tables.CHANNELPROPERTY;
+import static com.techcavern.wavetactdb.Tables.NETWORKPROPERTY;
 
 /**
  * @author jztech101
@@ -29,7 +30,7 @@ public class FunMsgListener extends ListenerAdapter {
     public void onMessage(MessageEvent event) throws Exception {
         class process implements Runnable {
             public void run() {
-                if (PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel()) > -2 && !event.getMessage().startsWith(DatabaseUtils.getConfig("commandchar"))) {
+                if (PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel()) > -2 && !event.getMessage().startsWith(DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "commandchar").getValue(NETWORKPROPERTY.VALUE))) {
                         String[] message = StringUtils.split(event.getMessage(), " ");
                         for (String arg : message) {
                             try {

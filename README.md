@@ -47,7 +47,6 @@ You are welcome to set other properties (but they will be rather useless), howev
 
 Global Config
 =================
-- commandchar - Determines the global command char
 - wolframalphaapikey - sets the Wolfram Alpha api key
 - googleapikey - sets the Google api key
 - wordnikapikey - sets the wordnik api key
@@ -58,6 +57,7 @@ You are welcome to set other properties (but they will be rather useless), howev
 Network Properties
 =================
 - relaychan - Determines the channel from the network to relay
+- commandchar - Determines network command char
 
 You are welcome to set other properties (but they will be rather useless), however do beware that you may find issues in the future if the property you set happens to coincide with a new channel property
 

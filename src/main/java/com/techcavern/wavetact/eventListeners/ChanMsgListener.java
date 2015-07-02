@@ -15,6 +15,7 @@ import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.MessageEvent;
 
 import static com.techcavern.wavetactdb.Tables.CHANNELUSERPROPERTY;
+import static com.techcavern.wavetactdb.Tables.NETWORKPROPERTY;
 
 /**
  * @author jztech101
@@ -27,8 +28,8 @@ public class ChanMsgListener extends ListenerAdapter {
                 String[] message = StringUtils.split(Colors.removeFormattingAndColors(event.getMessage()), " ");
                 String command = message[0].toLowerCase();
                 message = ArrayUtils.remove(message, 0);
-                IRCCommand Command = IRCUtils.getCommand(StringUtils.replaceOnce(command, DatabaseUtils.getConfig("commandchar"), ""), IRCUtils.getNetworkNameByNetwork(event.getBot()), event.getChannel().getName());
-                if (Command != null && command.startsWith(DatabaseUtils.getConfig("commandchar"))) {
+                IRCCommand Command = IRCUtils.getCommand(StringUtils.replaceOnce(command, DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "commandchar").getValue(NETWORKPROPERTY.VALUE), ""), IRCUtils.getNetworkNameByNetwork(event.getBot()), event.getChannel().getName());
+                if (Command != null && command.startsWith(DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "commandchar").getValue(NETWORKPROPERTY.VALUE))) {
                     int userPermLevel = PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel());
                     if (userPermLevel >= Command.getPermLevel()) {
                         try {
@@ -58,8 +59,8 @@ public class ChanMsgListener extends ListenerAdapter {
                     String[] relayedmessage = StringUtils.split(Colors.removeFormattingAndColors(startingmessage), " ");
                     String relayedcommand = relayedmessage[0].toLowerCase();
                     relayedmessage = ArrayUtils.remove(relayedmessage, 0);
-                    Command = IRCUtils.getCommand(StringUtils.replaceOnce(relayedcommand, DatabaseUtils.getConfig("commandchar"), ""), IRCUtils.getNetworkNameByNetwork(event.getBot()), event.getChannel().getName());
-                    if (Command != null && relayedcommand.startsWith(DatabaseUtils.getConfig("commandchar")) && Command.getPermLevel() == 0) {
+                    Command = IRCUtils.getCommand(StringUtils.replaceOnce(relayedcommand, DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "commandchar").getValue(NETWORKPROPERTY.VALUE), ""), IRCUtils.getNetworkNameByNetwork(event.getBot()), event.getChannel().getName());
+                    if (Command != null && relayedcommand.startsWith(DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "commandchar").getValue(NETWORKPROPERTY.VALUE)) && Command.getPermLevel() == 0) {
                         try {
                             Command.onCommand(event.getUser(), event.getBot(), IRCUtils.getPrefix(event.getBot(), event.getChannelSource()), event.getChannel(), false, 0, relayedmessage);
                         } catch (Exception e) {

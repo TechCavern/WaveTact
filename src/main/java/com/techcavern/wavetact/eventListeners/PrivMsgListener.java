@@ -14,6 +14,8 @@ import org.pircbotx.Colors;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.PrivateMessageEvent;
 
+import static com.techcavern.wavetactdb.Tables.NETWORKPROPERTY;
+
 /**
  * @author jztech101
  */
@@ -27,7 +29,7 @@ public class PrivMsgListener extends ListenerAdapter {
                 String command = message[0].toLowerCase();
                 IRCCommand Command = IRCUtils.getCommand(command, IRCUtils.getNetworkNameByNetwork(event.getBot()), null);
                 if (Command == null) {
-                    Command = IRCUtils.getCommand(StringUtils.replaceOnce(command, DatabaseUtils.getConfig("commandchar"), ""), IRCUtils.getNetworkNameByNetwork(event.getBot()), null);
+                    Command = IRCUtils.getCommand(StringUtils.replaceOnce(command, DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "commandchar").getValue(NETWORKPROPERTY.VALUE), ""), IRCUtils.getNetworkNameByNetwork(event.getBot()), null);
                 }
                 message = ArrayUtils.remove(message, 0);
                 if (Command != null) {

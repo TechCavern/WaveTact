@@ -57,7 +57,7 @@ public class ConfigUtils {
 
         Configuration.Builder Net = new Configuration.Builder();
         Net.setName(nick);
-        Net.setLogin("WaveTact");
+        Net.setLogin(nick);
         Net.setEncoding(Charset.isSupported("UTF-8") ? Charset.forName("UTF-8") : Charset.defaultCharset());
         if (bindhost != null) {
             try {
