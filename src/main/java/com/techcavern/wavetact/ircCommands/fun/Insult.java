@@ -21,7 +21,7 @@ public class Insult extends IRCCommand {
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         Document doc = Jsoup.connect("http://www.insultgenerator.org/").get();
         String c = doc.select(".wrap").text();
-        if (args[0].equalsIgnoreCase(network.getNick()))
+        if (args.length < 1 || args[0].equalsIgnoreCase(network.getNick()))
             IRCUtils.sendMessage(user, network, channel, user.getNick() + ": " + c, prefix);
         else
             IRCUtils.sendMessage(user, network, channel, args[0] + ": " + c, prefix);
