@@ -20,8 +20,8 @@ public class Quote extends IRCCommand {
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         Document doc = Jsoup.connect("http://wwww.quotationspage.com/random.php3").get();
-        String c = doc.select(".quote").text();
-        String d = doc.select(".author").text();
+        String c = doc.select(".quote").get(0).text();
+        String d = doc.select(".author").get(0).text();
         IRCUtils.sendMessage(user, network, channel, c +" -" + d, prefix);
     }
 }
