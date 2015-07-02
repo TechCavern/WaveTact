@@ -54,7 +54,7 @@ public class TellMsgListener extends ListenerAdapter {
         Result<Record> TellMessages = DatabaseUtils.getTellMessage(network, PermUtils.authUser(bot, user.getNick()));
         if(TellMessages != null && TellMessages.isNotEmpty()){
             if(channel != null){
-                IRCUtils.sendMessage(user, bot,channel, "[" + user.getNick() + "] - Someone send you a latent message while you were away! Please Check your PMs", prefix);
+                IRCUtils.sendMessage(user, bot,channel, "[" + user.getNick() + "] - Someone sent you a latent message while you were away! Please Check your PMs", prefix);
             }
             for(Record rec:TellMessages){
                 IRCUtils.sendMessage(user, bot,null, "[" + rec.getValue(TELLMESSAGES.SENDER) + "] - " + rec.getValue(TELLMESSAGES.MESSAGE), null);
