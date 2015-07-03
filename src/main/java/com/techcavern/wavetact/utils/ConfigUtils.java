@@ -97,5 +97,6 @@ public class ConfigUtils {
         Registry.wolframalphaapikey = DatabaseUtils.getConfig("wolframalphaapikey");
         Registry.wordnikapikey = DatabaseUtils.getConfig("wordnikapikey");
         Registry.googleapikey = DatabaseUtils.getConfig("googleapikey");
+        Registry.yandexapikey = DatabaseUtils.getConfig("yandexapikey");
     }
 }

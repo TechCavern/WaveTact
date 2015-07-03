@@ -49,8 +49,9 @@ Global Config
 =================
 - wolframalphaapikey - sets the Wolfram Alpha api key
 - googleapikey - sets the Google api key
-- wordnikapikey - sets the wordnik api key
-- wundergroundapikey - sets the wunderground api key
+- wordnikapikey - sets the Wordnik api key
+- wundergroundapikey - sets the Wunderground api key
+- yandexapikey - sets the Yandex api key
 
 You are welcome to set other properties (but they will be rather useless), however do beware that you may find issues in the future if the property you set happens to coincide with a new global config
 
