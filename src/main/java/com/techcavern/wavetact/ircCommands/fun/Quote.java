@@ -4,6 +4,7 @@ import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.pircbotx.Channel;
@@ -22,6 +23,12 @@ public class Quote extends IRCCommand {
         Document doc = Jsoup.connect("http://wwww.quotationspage.com/random.php3").get();
         String c = doc.select(".quote").get(0).text();
         String d = doc.select(".author").get(0).text();
+        if(d.contains("-")){
+            if(!d.contains("("))
+            d = d.split("-")[0];
+            else
+                d = d.split("\\(")[0];
+        }
         IRCUtils.sendMessage(user, network, channel, c +" -" + d, prefix);
     }
 }
