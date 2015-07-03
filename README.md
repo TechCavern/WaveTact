@@ -36,7 +36,7 @@ Channel-User Properties
 - permlevel - you can set a custom permlevel for a user (Must be integer)
 - relaybotsplit - you may assign a bot as a relaybot, and set the value as the character before the actual message is handled
 
-You are welcome to set other properties (but they will be rather useless), however do beware that you may find issues in the future if the property you set happens to coincide with a new channel property
+You are welcome to set other properties (but they will be rather useless), however do beware that you may find issues in the future if the property you set happens to coincide with a new channel-user property
 
 Channel Properties
 ==================
@@ -59,7 +59,7 @@ Network Properties
 - relaychan - Determines the channel from the network to relay
 - commandchar - Determines network command char
 
-You are welcome to set other properties (but they will be rather useless), however do beware that you may find issues in the future if the property you set happens to coincide with a new channel property
+You are welcome to set other properties (but they will be rather useless), however do beware that you may find issues in the future if the property you set happens to coincide with a new network property
 
 Developing
 ==========
