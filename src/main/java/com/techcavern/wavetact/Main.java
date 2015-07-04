@@ -35,7 +35,7 @@ public class Main {
             Registry.WaveTact.start();
             Registry.threadPool.execute(Registry.consoleServer);
             LoadUtils.initializeMessageQueue();
-            LoadUtils.initalizeBanQueue();
+            LoadUtils.initializeBanQueue();
             Registry.threadPool.awaitTermination(Long.MAX_VALUE, TimeUnit.DAYS);
         }
     }

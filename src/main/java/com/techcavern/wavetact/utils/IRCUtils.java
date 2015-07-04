@@ -365,6 +365,14 @@ public class IRCUtils {
         }
         return null;
     }
+    public static NetProperty getNetPropertyByNetwork(PircBotX network) {
+        for (NetProperty d : Registry.NetworkName) {
+            if (d.getNetwork().equals(network)) {
+                return d;
+            }
+        }
+        return null;
+    }
     public static Channel getMsgChannel(Channel channel, boolean isPrivate){
         if(isPrivate){
             return null;

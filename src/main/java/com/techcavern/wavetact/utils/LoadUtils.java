@@ -181,7 +181,7 @@ public class LoadUtils {
                         TimeUnit.SECONDS.sleep(30);
                     } catch (InterruptedException c) {
                     }
-                    while (true) {
+                    while (Registry.NetworkName.contains(network)) {
                         try {
                             if (Registry.MessageQueue.size() > 0 && network.getNetwork().equals(Registry.MessageQueue.get(0).getNetwork())) {
                                 Registry.MessageQueue.get(0).getNetwork().sendRaw().rawLine(Registry.MessageQueue.get(0).getProperty());
@@ -199,6 +199,33 @@ public class LoadUtils {
         }
 
     }
+    public static void addMessageQueue(PircBotX network) {
+            class MessageQueue implements Runnable {
+                @Override
+                public void run() {
+                    try {
+                        TimeUnit.SECONDS.sleep(30);
+                    } catch (InterruptedException c) {
+                    }
+                    NetProperty netProperty = IRCUtils.getNetPropertyByNetwork(network);
+                    while (Registry.NetworkName.contains(netProperty)) {
+                        try {
+                            if (Registry.MessageQueue.size() > 0 && network.equals(Registry.MessageQueue.get(0).getNetwork())) {
+                                Registry.MessageQueue.get(0).getNetwork().sendRaw().rawLine(Registry.MessageQueue.get(0).getProperty());
+                                Registry.MessageQueue.remove(0);
+                                TimeUnit.MILLISECONDS.sleep(900);
+                            }
+                            TimeUnit.MILLISECONDS.sleep(100);
+                        } catch (Exception e) {
+                        }
+                    }
+                }
+
+            }
+            Registry.threadPool.execute(new MessageQueue());
+        }
+
+
     public static void initializeAutoFlushWhoisCache() {
             class MessageQueue implements Runnable {
                 @Override
@@ -215,7 +242,7 @@ public class LoadUtils {
             Registry.threadPool.execute(new MessageQueue());
         }
 
-    public static void initalizeBanQueue() {
+    public static void initializeBanQueue() {
         class BanQueue implements Runnable {
 
             @Override

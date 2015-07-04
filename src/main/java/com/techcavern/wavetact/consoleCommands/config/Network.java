@@ -195,6 +195,7 @@ public class Network extends ConsoleCommand {
             PircBotX network = ConfigUtils.createNetwork(serverpass, Arrays.asList(StringUtils.split(channels, ", ")), nick, server, port, bindhost, name);
             Registry.WaveTact.addNetwork(network);
             Registry.NetworkName.add(new NetProperty(name, network));
+            LoadUtils.addMessageQueue(network);
         }
     }
 }
