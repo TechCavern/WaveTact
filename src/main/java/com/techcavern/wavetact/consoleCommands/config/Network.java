@@ -65,14 +65,6 @@ public class Network extends ConsoleCommand {
                             isSuccess = true;
                         }
                         break;
-                    case "nickserv":
-                        if (viewonly)
-                            commandIO.getPrintStream().println(network.getValue(SERVERS.NICKSERV));
-                        else {
-                            network.setValue(SERVERS.NICKSERV, GeneralUtils.buildMessage(2, args.length, args));
-                            isSuccess = true;
-                        }
-                        break;
                     case "netadmin":
                         if (viewonly)
                             commandIO.getPrintStream().println(network.getValue(SERVERS.NETWORKADMINS));
@@ -146,11 +138,11 @@ public class Network extends ConsoleCommand {
             String nick = input.nextLine();
             commandIO.getPrintStream().print("Channels (#chan1, #chan2, etc): ");
             String channels = input.nextLine();
-            commandIO.getPrintStream().print("Nickserv Pass (Press enter to ignore): ");
-            String nickserv = null;
-            String nickservinput = input.nextLine();
-            if (!nickservinput.isEmpty())
-                nickserv = nickservinput;
+            commandIO.getPrintStream().print("Server Pass (Press enter to ignore): ");
+            String serverpass = null;
+            String serverpassinput = input.nextLine();
+            if (!serverpassinput.isEmpty())
+                serverpass = serverpassinput;
             commandIO.getPrintStream().print("Bindhost (Press enter to use default): ");
             String bindhost = null;
             String bindhostinput = input.nextLine();
@@ -165,8 +157,8 @@ public class Network extends ConsoleCommand {
             String netadminsinput = input.nextLine();
             if (!netadminsinput.isEmpty())
                 netadmins = netadminsinput;
-            DatabaseUtils.addServer(name, port, server, nick, channels, nickserv, bindhost, netadminaccess, netadmins, authtype);
-            PircBotX network = ConfigUtils.createNetwork(nickserv, Arrays.asList(StringUtils.split(channels, ", ")), nick, server, port, bindhost, name);
+            DatabaseUtils.addServer(name, port, server, nick, channels, bindhost, netadminaccess, netadmins, authtype);
+            PircBotX network = ConfigUtils.createNetwork(serverpass, Arrays.asList(StringUtils.split(channels, ", ")), nick, server, port, bindhost, name);
             Registry.WaveTact.addNetwork(network);
             Registry.NetworkName.add(new NetProperty(name, network));
         }

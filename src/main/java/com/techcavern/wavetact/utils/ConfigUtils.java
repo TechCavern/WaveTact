@@ -20,7 +20,7 @@ public class ConfigUtils {
     public static void registerNetworks() {
         PircBotX network;
         for (Record server : DatabaseUtils.getServers()) {
-            network = createNetwork(server.getValue(SERVERS.NICKSERV), Arrays.asList(StringUtils.split(server.getValue(SERVERS.CHANNELS), ", ")), server.getValue(SERVERS.NICK), server.getValue(SERVERS.SERVER), server.getValue(SERVERS.PORT), server.getValue(SERVERS.BINDHOST), server.getValue(SERVERS.NAME));
+            network = createNetwork(server.getValue(SERVERS.SERVERPASS), Arrays.asList(StringUtils.split(server.getValue(SERVERS.CHANNELS), ", ")), server.getValue(SERVERS.NICK), server.getValue(SERVERS.SERVER), server.getValue(SERVERS.PORT), server.getValue(SERVERS.BINDHOST), server.getValue(SERVERS.NAME));
             if (network != null) {
                 Registry.WaveTact.addNetwork(network);
                 Registry.NetworkName.add(new NetProperty(server.getValue(SERVERS.NAME), network));
@@ -44,7 +44,7 @@ public class ConfigUtils {
      * //     GeneralRegistry.NetworkName.add(new NetProperty("dev1", Dev));
      * }
      */
-    public static PircBotX createNetwork(String nickservPassword, List<String> channels, String nick, String server, int port, String bindhost, String networkname) {
+    public static PircBotX createNetwork(String serverpass, List<String> channels, String nick, String server, int port, String bindhost, String networkname) {
         if (nick.isEmpty() || server.isEmpty()) {
             DatabaseUtils.removeServer(networkname);
             System.out.println("Removing Server " + networkname);
@@ -79,16 +79,15 @@ public class ConfigUtils {
         Net.getListenerManager().addListener(new RelayMsgListener());
         Net.getListenerManager().addListener(new TellMsgListener());
         Net.setAutoReconnect(true);
+        if(serverpass != null){
+            Net.setServerPassword(serverpass);
+        }
         Net.setAutoReconnectAttempts(5);
         Net.setAutoReconnectDelay(20000);
         Net.setChannelPrefixes("#");
         Net.setUserLevelPrefixes("+%@&~!");
         Net.setVersion(Registry.Version);
         Net.setAutoReconnect(true);
-        if (nickservPassword != null) {
-            Net.setNickservPassword(nickservPassword);
-            Net.setNickservDelayJoin(true);
-        }
         return new PircBotX(Net.buildConfiguration());
     }
 
