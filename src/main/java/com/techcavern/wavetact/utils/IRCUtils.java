@@ -365,6 +365,13 @@ public class IRCUtils {
         }
         return null;
     }
+    public static Channel getMsgChannel(Channel channel, boolean isPrivate){
+        if(isPrivate){
+            return null;
+        }else{
+            return channel;
+        }
+    }
 
 
 }

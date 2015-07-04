@@ -30,10 +30,10 @@ public class LockCustomCMD extends IRCCommand {
         if (command != null) {
             if (args[0].startsWith("-")) {
                 command.setValue(CUSTOMCOMMANDS.ISLOCKED, false);
-                IRCUtils.sendMessage(user, network, channel, "Custom command unlocked", prefix);
+                IRCUtils.sendMessage(user, network, IRCUtils.getMsgChannel(channel,isPrivate), "Custom command unlocked", prefix);
             } else {
                 command.setValue(CUSTOMCOMMANDS.ISLOCKED, true);
-                IRCUtils.sendMessage(user, network, channel, "Custom command unlocked", prefix);
+                IRCUtils.sendMessage(user, network, IRCUtils.getMsgChannel(channel,isPrivate), "Custom command locked", prefix);
             }
             DatabaseUtils.updateCustomCommand(command);
         }

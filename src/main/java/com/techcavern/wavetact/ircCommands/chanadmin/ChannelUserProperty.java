@@ -47,19 +47,19 @@ public class ChannelUserProperty extends IRCCommand {
         if (channelUserProperty != null && (isDelete || isModify)) {
             if (isDelete) {
                 DatabaseUtils.removeChannelUserProperty(networkname, channel.getName(), account, args[1]);
-                IRCUtils.sendMessage(user, network, channel, "Property deleted", prefix);
+                IRCUtils.sendMessage(user, network, IRCUtils.getMsgChannel(channel,isPrivate), "Property deleted", prefix);
             } else if (isModify) {
                 if (viewonly)
-                    IRCUtils.sendMessage(user, network, channel, account + " " + args[1] + ": " + channelUserProperty.getValue(CHANNELUSERPROPERTY.VALUE), prefix);
+                    IRCUtils.sendMessage(user, network, IRCUtils.getMsgChannel(channel,isPrivate), account + " " + args[1] + ": " + channelUserProperty.getValue(CHANNELUSERPROPERTY.VALUE), prefix);
                 else {
                     channelUserProperty.setValue(CHANNELUSERPROPERTY.VALUE, args[2]);
                     DatabaseUtils.updateChannelUserProperty(channelUserProperty);
-                    IRCUtils.sendMessage(user, network, channel, "Property modified", prefix);
+                    IRCUtils.sendMessage(user, network, IRCUtils.getMsgChannel(channel,isPrivate), "Property modified", prefix);
                 }
             }
         } else if (channelUserProperty == null && !isDelete && !isModify) {
             DatabaseUtils.addChannelUserProperty(networkname, channel.getName(), account, args[1], args[2]);
-            IRCUtils.sendMessage(user, network, channel, "Property added", prefix);
+            IRCUtils.sendMessage(user, network, IRCUtils.getMsgChannel(channel,isPrivate), "Property added", prefix);
         } else {
             ErrorUtils.sendError(user, "Unknown user or unknown property");
         }
