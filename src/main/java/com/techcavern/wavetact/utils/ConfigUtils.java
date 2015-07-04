@@ -78,6 +78,7 @@ public class ConfigUtils {
         Net.getListenerManager().addListener(new FunMsgListener());
         Net.getListenerManager().addListener(new RelayMsgListener());
         Net.getListenerManager().addListener(new TellMsgListener());
+        Net.getListenerManager().addListener(new ConnectListener());
         Net.setAutoReconnect(true);
         if(serverpass != null){
             Net.setServerPassword(serverpass);

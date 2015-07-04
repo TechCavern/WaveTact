@@ -81,6 +81,30 @@ public class Network extends ConsoleCommand {
                             isSuccess = true;
                         }
                         break;
+                    case "serverpass":
+                        if (viewonly)
+                            commandIO.getPrintStream().println(network.getValue(SERVERS.SERVERPASS));
+                        else {
+                            network.setValue(SERVERS.SERVERPASS, args[2]);
+                            isSuccess = true;
+                        }
+                        break;
+                    case "nickservcommand":
+                        if (viewonly)
+                            commandIO.getPrintStream().println(network.getValue(SERVERS.NICKSERVCOMMAND));
+                        else {
+                            network.setValue(SERVERS.NICKSERVCOMMAND, GeneralUtils.buildMessage(2, args.length, args));
+                            isSuccess = true;
+                        }
+                        break;
+                    case "nickservnick":
+                        if (viewonly)
+                            commandIO.getPrintStream().println(network.getValue(SERVERS.NICKSERVNICK));
+                        else {
+                            network.setValue(SERVERS.NICKSERVNICK, args[2]);
+                            isSuccess = true;
+                        }
+                        break;
                     case "authtype":
                         if (viewonly)
                             commandIO.getPrintStream().println(network.getValue(SERVERS.AUTHTYPE));
@@ -143,6 +167,16 @@ public class Network extends ConsoleCommand {
             String serverpassinput = input.nextLine();
             if (!serverpassinput.isEmpty())
                 serverpass = serverpassinput;
+            commandIO.getPrintStream().print("NickServ Nick (Press enter to use default - NickServ): ");
+            String nickservnick = null;
+            String nickservnickinput = input.nextLine();
+            if (!nickservnickinput.isEmpty())
+                nickservnick = nickservnickinput;
+            commandIO.getPrintStream().print("NickServ Command (eg. IDENTIFY PASSWORD1234, Press enter to ignore): ");
+            String nickservcommand = null;
+            String nickservcommandinput = input.nextLine();
+            if (!nickservcommandinput.isEmpty())
+                nickservcommand = nickservcommandinput;
             commandIO.getPrintStream().print("Bindhost (Press enter to use default): ");
             String bindhost = null;
             String bindhostinput = input.nextLine();
@@ -157,10 +191,10 @@ public class Network extends ConsoleCommand {
             String netadminsinput = input.nextLine();
             if (!netadminsinput.isEmpty())
                 netadmins = netadminsinput;
-            DatabaseUtils.addServer(name, port, server, nick, channels, bindhost, netadminaccess, netadmins, authtype);
+            DatabaseUtils.addServer(name, port, server, nick, channels, bindhost, netadminaccess, netadmins, authtype, nickservcommand,serverpass, nickservnick);
             PircBotX network = ConfigUtils.createNetwork(serverpass, Arrays.asList(StringUtils.split(channels, ", ")), nick, server, port, bindhost, name);
-            Registry.WaveTact.addNetwork(network);
             Registry.NetworkName.add(new NetProperty(name, network));
+            Registry.WaveTact.addNetwork(network);
         }
     }
 }

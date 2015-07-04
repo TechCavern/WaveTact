@@ -184,6 +184,7 @@ public class LoadUtils {
                     while (true) {
                         try {
                             if (Registry.MessageQueue.size() > 0 && network.getNetwork().equals(Registry.MessageQueue.get(0).getNetwork())) {
+                                System.out.println(network.getNetwork() + network.getProperty());
                                 Registry.MessageQueue.get(0).getNetwork().sendRaw().rawLine(Registry.MessageQueue.get(0).getProperty());
                                 Registry.MessageQueue.remove(0);
                                 TimeUnit.MILLISECONDS.sleep(900);
