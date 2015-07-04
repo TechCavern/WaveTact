@@ -20,7 +20,7 @@ public class ConfigUtils {
     public static void registerNetworks() {
         PircBotX network;
         for (Record server : DatabaseUtils.getServers()) {
-            network = createNetwork(server.getValue(SERVERS.SERVERPASS), Arrays.asList(StringUtils.split(server.getValue(SERVERS.CHANNELS), ", ")), server.getValue(SERVERS.NICK), server.getValue(SERVERS.SERVER), server.getValue(SERVERS.PORT), server.getValue(SERVERS.BINDHOST), server.getValue(SERVERS.NAME));
+            network = createNetwork(server.getValue(SERVERS.SERVERPASS), server.getValue(SERVERS.NICK), server.getValue(SERVERS.SERVER), server.getValue(SERVERS.PORT), server.getValue(SERVERS.BINDHOST), server.getValue(SERVERS.NAME));
             if (network != null) {
                 Registry.WaveTact.addNetwork(network);
                 Registry.NetworkName.add(new NetProperty(server.getValue(SERVERS.NAME), network));
@@ -44,7 +44,7 @@ public class ConfigUtils {
      * //     GeneralRegistry.NetworkName.add(new NetProperty("dev1", Dev));
      * }
      */
-    public static PircBotX createNetwork(String serverpass, List<String> channels, String nick, String server, int port, String bindhost, String networkname) {
+    public static PircBotX createNetwork(String serverpass, String nick, String server, int port, String bindhost, String networkname) {
         if (nick.isEmpty() || server.isEmpty()) {
             DatabaseUtils.removeServer(networkname);
             System.out.println("Removing Server " + networkname);
@@ -68,7 +68,6 @@ public class ConfigUtils {
             }
         }
         Net.addServer(server, port);
-        channels.stream().filter(channel -> !channel.isEmpty()).forEach(Net::addAutoJoinChannel);
         Net.setRealName(nick);
         Net.getListenerManager().addListener(new ChanMsgListener());
         Net.getListenerManager().addListener(new PartListener());

@@ -244,13 +244,11 @@ public class LoadUtils {
 
     public static void initializeBanQueue() {
         class BanQueue implements Runnable {
-
             @Override
             public void run() {
                 try {
-                    TimeUnit.SECONDS.sleep(120);
+                    TimeUnit.SECONDS.sleep(10);
                 } catch (InterruptedException c) {
-                    // ignored
                 }
                 while (true) {
                     try {
@@ -260,12 +258,13 @@ public class LoadUtils {
                                     PircBotX networkObject = IRCUtils.getBotByNetworkName(banRecord.getValue(BANS.NETWORK));
                                     IRCUtils.setMode(IRCUtils.getChannelbyName(networkObject, banRecord.getValue(BANS.CHANNEL)), networkObject, "-" + banRecord.getValue(BANS.PROPERTY), banRecord.getValue(BANS.HOSTMASK));
                                     DatabaseUtils.removeBan(banRecord.getValue(BANS.NETWORK), banRecord.getValue(BANS.CHANNEL), banRecord.getValue(BANS.HOSTMASK), banRecord.getValue(BANS.ISMUTE));
+                                    TimeUnit.MILLISECONDS.sleep(900);
                                 }
                             } catch (IllegalArgumentException | NullPointerException e) {
                                 // ignored
                             }
                         }
-                        TimeUnit.SECONDS.sleep(120);
+                        TimeUnit.MILLISECONDS.sleep(100);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

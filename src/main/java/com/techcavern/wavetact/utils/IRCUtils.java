@@ -23,12 +23,10 @@ import static com.techcavern.wavetactdb.Tables.NETWORKPROPERTY;
 
 public class IRCUtils {
     public static void setMode(Channel channelObject, PircBotX networkObject, String modeToSet, String hostmask) {
-        OutputChannel o = new OutputChannel(networkObject, channelObject);
         if (hostmask != null) {
-            modeToSet = modeToSet + hostmask;
-            o.setMode(modeToSet);
+            Registry.MessageQueue.add(new NetProperty("MODE " + channelObject.getName() + " " + modeToSet + " " + hostmask, networkObject));
         } else {
-            o.setMode(modeToSet);
+            Registry.MessageQueue.add(new NetProperty("MODE " + channelObject.getName() + " " + modeToSet, networkObject));
         }
     }
 

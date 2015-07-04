@@ -192,7 +192,7 @@ public class Network extends ConsoleCommand {
             if (!netadminsinput.isEmpty())
                 netadmins = netadminsinput;
             DatabaseUtils.addServer(name, port, server, nick, channels, bindhost, netadminaccess, netadmins, authtype, nickservcommand,serverpass, nickservnick);
-            PircBotX network = ConfigUtils.createNetwork(serverpass, Arrays.asList(StringUtils.split(channels, ", ")), nick, server, port, bindhost, name);
+            PircBotX network = ConfigUtils.createNetwork(serverpass, nick, server, port, bindhost, name);
             Registry.WaveTact.addNetwork(network);
             Registry.NetworkName.add(new NetProperty(name, network));
             LoadUtils.addMessageQueue(network);
