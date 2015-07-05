@@ -20,15 +20,13 @@ import org.pircbotx.User;
 public class Op extends IRCCommand {
 
     public Op() {
-        super(GeneralUtils.toArray("op aop deop"), 10, "op (-)(user to op)", "Ops a user", true);
+        super(GeneralUtils.toArray("op aop deop"), 10, "op (user to op)", "Ops a user", true);
     }
 
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (args.length >= 1) {
-            if (args[0].equalsIgnoreCase("-")) {
-                channel.send().deOp(user);
-            } else if (args[0].startsWith("-") || command.equalsIgnoreCase("deop")) {
+            if (command.equalsIgnoreCase("deop")) {
                 channel.send().deOp(IRCUtils.getUserByNick(network, args[0].replaceFirst("-", "")));
             } else {
                 channel.send().op(IRCUtils.getUserByNick(network, args[0]));

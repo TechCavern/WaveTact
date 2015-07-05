@@ -22,16 +22,14 @@ import org.pircbotx.User;
 public class Protect extends IRCCommand {
 
     public Protect() {
-        super(GeneralUtils.toArray("protect prot sop desop deprotect"), 15, "protect (-)(user)", "Sets protect mode if it exists on a user", true);
+        super(GeneralUtils.toArray("protect prot sop desop deprotect"), 15, "protect (user)", "Sets protect mode if it exists on a user", true);
     }
 
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (network.getServerInfo().getPrefixes().contains("a")) {
             if (args.length >= 1) {
-                if (args[0].equalsIgnoreCase("-")) {
-                    channel.send().deSuperOp(user);
-                } else if (args[0].startsWith("-") || command.equalsIgnoreCase("deprotect") || command.equalsIgnoreCase("desop")) {
+                if (command.equalsIgnoreCase("deprotect") || command.equalsIgnoreCase("desop")) {
                     channel.send().deSuperOp(IRCUtils.getUserByNick(network, args[0].replaceFirst("-", "")));
                 } else {
                     channel.send().superOp(IRCUtils.getUserByNick(network, args[0]));

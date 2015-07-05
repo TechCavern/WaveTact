@@ -19,7 +19,7 @@ import static com.techcavern.wavetactdb.Tables.BANS;
 public class Ban extends IRCCommand {
 
     public Ban() {
-        super(GeneralUtils.toArray("ban unban"), 7, "ban (m) (-)(+)[user][hostmask] (-)(+)(time)", "Bans a user for a specified period of time or 24 hours, if the first parameter is m, the ban will be a mute ban", true);
+        super(GeneralUtils.toArray("ban unban"), 7, "ban (m) (+)[user][hostmask] (-)(+)(time)", "Bans a user for a specified period of time or 24 hours, if the first parameter is m, the ban will be a mute ban", true);
     }
 
     @Override
@@ -45,9 +45,7 @@ public class Ban extends IRCCommand {
         }
 
         if (args[0].contains("!") && args[0].contains("@")) {
-            if (args[0].startsWith("-")) {
-                hostmask = args[0].replaceFirst("-", "");
-            } else if (args[0].startsWith("+")) {
+            if (args[0].startsWith("+")) {
                 hostmask = args[0].replaceFirst("\\+", "");
             } else {
                 hostmask = args[0];
@@ -63,7 +61,7 @@ public class Ban extends IRCCommand {
         }
         String networkname = IRCUtils.getNetworkNameByNetwork(network);
         Record BanRecord = DatabaseUtils.getBan(networkname, channel.getName(), hostmask, isMute);
-        if (args[0].startsWith("-") || command.equalsIgnoreCase("unban")) {
+        if (command.equalsIgnoreCase("unban")) {
             if (BanRecord != null) {
                 DatabaseUtils.removeBan(networkname, channel.getName(), hostmask, isMute);
             }
@@ -75,7 +73,7 @@ public class Ban extends IRCCommand {
                     if (args[1].startsWith("+")) {
                         BanRecord.setValue(BANS.TIME, BanRecord.getValue(BANS.TIME) + GeneralUtils.getMilliSeconds(args[1].replace("+", "")));
                     } else if (args[1].startsWith("-")) {
-                        BanRecord.setValue(BANS.TIME, BanRecord.getValue(BANS.TIME) - GeneralUtils.getMilliSeconds(args[1].replace("+", "")));
+                        BanRecord.setValue(BANS.TIME, BanRecord.getValue(BANS.TIME) - GeneralUtils.getMilliSeconds(args[1].replace("-", "")));
                     } else {
                         BanRecord.setValue(BANS.TIME, GeneralUtils.getMilliSeconds(args[1].replace("+", "")));
                     }

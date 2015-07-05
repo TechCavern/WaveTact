@@ -21,16 +21,14 @@ import org.pircbotx.User;
 public class HalfOp extends IRCCommand {
 
     public HalfOp() {
-        super(GeneralUtils.toArray("halfop hop dehalfop dehop"), 10, "halfop (-)(user to  halfop)", "Sets half op mode on a user if it exists", true);
+        super(GeneralUtils.toArray("halfop hop dehalfop dehop"), 10, "halfop (user to  halfop)", "Sets half op mode on a user if it exists", true);
     }
 
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (network.getServerInfo().getPrefixes().contains("h")) {
             if (args.length >= 1) {
-                if (args[0].equalsIgnoreCase("-")) {
-                    channel.send().deHalfOp(user);
-                } else if (args[0].startsWith("-") || command.equalsIgnoreCase("dehop") || command.equalsIgnoreCase("dehalfop")) {
+                if (command.equalsIgnoreCase("dehop") || command.equalsIgnoreCase("dehalfop")) {
                     channel.send().deHalfOp(IRCUtils.getUserByNick(network, args[0].replaceFirst("-", "")));
                 } else {
                     channel.send().halfOp(IRCUtils.getUserByNick(network, args[0]));
