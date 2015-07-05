@@ -19,7 +19,7 @@ import java.util.List;
 public class MCMods extends IRCCommand {
 
     public MCMods() {
-        super(GeneralUtils.toArray("mcmods mcmod"), 0, "mcmods (+)[mod name]", "Gets info on a minecraft mod", false);
+        super(GeneralUtils.toArray("mcmods mcmod mcauthor"), 0, "mcmods (+)[mod name]", "Gets info on minecraft mods", false);
     }
 
     @Override
@@ -32,6 +32,9 @@ public class MCMods extends IRCCommand {
             isDev = true;
             modname = modname.replaceFirst("\\+", "");
         }
+        String searchPhrase = "name";
+        if(command.equalsIgnoreCase("mcauthor"))
+            searchPhrase = "author";
         MCModVersionSearch:
         for(int i = versions.size()-1; i >0; i--) {
             JsonArray mods = GeneralUtils.getJsonArray("http://bot.notenoughmods.com/" + versions.get(i).getAsString() + ".json");
@@ -45,7 +48,7 @@ public class MCMods extends IRCCommand {
                 if(mod.get("name").getAsString().equalsIgnoreCase(record.getMod().get("name").getAsString()))
                     continue MCModSearch;
                 }
-                if (mod.get("name").getAsString().toLowerCase().contains(modname) ) {
+                if (mod.get(searchPhrase).getAsString().toLowerCase().contains(modname) ) {
                     mcmods.add(new MCMod(versions.get(i).getAsString(), mod));
                 }
             }
