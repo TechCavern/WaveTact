@@ -44,12 +44,13 @@ public class IRCUtils {
         if(WhoisEvent != null){
             return WhoisEvent;
         } else if (Registry.LastWhois.equals(userObject)) {
-            while (getCachedWhoisEvent(network, userObject) == null) {
+            int i = 0;
+            while (getCachedWhoisEvent(network, userObject) == null && i < 100) {
                 try {
                     TimeUnit.MILLISECONDS.sleep(100);
                 } catch (Exception e) {
                 }
-                ;
+                i++;
             }
             return getCachedWhoisEvent(network, userObject);
         }
