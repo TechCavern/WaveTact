@@ -46,7 +46,7 @@ public class IRCUtils {
         } else if (Registry.LastWhois.equals(userObject)) {
             while (getCachedWhoisEvent(network, userObject) == null) {
                 try {
-                    TimeUnit.MILLISECONDS.sleep(500);
+                    TimeUnit.MILLISECONDS.sleep(100);
                 } catch (Exception e) {
                 }
                 ;
