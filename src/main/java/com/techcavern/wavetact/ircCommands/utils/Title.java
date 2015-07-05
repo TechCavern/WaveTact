@@ -9,6 +9,7 @@ import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.Registry;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.pircbotx.Channel;
@@ -30,7 +31,7 @@ public class Title extends IRCCommand {
         if (!args[0].startsWith("http://") && !args[0].startsWith("https://")) {
             args[0] = "http://" + args[0];
         }
-        Document doc = Jsoup.connect(args[0]).userAgent("Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.57 Safari/537.17").get();
+        Document doc = Jsoup.connect(args[0]).userAgent(Registry.userAgent).get();
         IRCUtils.sendMessage(user, network, channel, doc.title(), prefix);
     }
 }

@@ -37,7 +37,7 @@ public class FunMsgListener extends ListenerAdapter {
                                     arg = "http://" + arg;
                                 }
                                 if (Registry.urlvalidator.isValid(arg)) {
-                                    Document doc = Jsoup.connect(arg).userAgent("Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.57 Safari/537.17").get();
+                                    Document doc = Jsoup.connect(arg).userAgent(Registry.userAgent).get();
                                     if(doc.location().contains("stop-irc-bullying.eu")) {
                                         if (IRCUtils.checkIfCanKick(event.getChannel(), event.getBot(), event.getUser())) {
                                             IRCUtils.sendKick(event.getBot().getUserBot(), event.getUser(), event.getBot(), event.getChannel(), "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻ [https://goo.gl/Tkb9dh]");

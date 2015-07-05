@@ -5,6 +5,7 @@ import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.Registry;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -29,14 +30,14 @@ public class MCWiki extends IRCCommand {
         }
         String url = "http://minecraft.gamepedia.com/" + StringUtils.join(args, "%20");
         try {
-            doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.57 Safari/537.17").get();
+            doc = Jsoup.connect(url).userAgent(Registry.userAgent).get();
             if (doc.location().toLowerCase().contains("login")) {
                 throw new Exception();
             }
         } catch (Exception eee) {
             try {
                 url = "http://ftb.gamepedia.com/" + StringUtils.join(args, "%20");
-                doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.57 Safari/537.17").get();
+                doc = Jsoup.connect(url).userAgent(Registry.userAgent).get();
                 if (doc.location().toLowerCase().contains("login")) {
                     throw new Exception();
                 }
@@ -44,7 +45,7 @@ public class MCWiki extends IRCCommand {
             } catch (Exception e) {
                 try {
                     url = "http://ftbwiki.org/" + StringUtils.join(args, "%20");
-                    doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.57 Safari/537.17").get();
+                    doc = Jsoup.connect(url).userAgent(Registry.userAgent).get();
                 } catch (Exception ee) {
                     ee.printStackTrace();
                     ErrorUtils.sendError(user, "Query returned no results or wikis are Down");

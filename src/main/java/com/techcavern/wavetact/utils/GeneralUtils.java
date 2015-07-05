@@ -66,9 +66,11 @@ public class GeneralUtils {
 
     public static String parseUrl(String Url) throws Exception {
         URL url1 = new URL(Url);
+        URLConnection conn = url1.openConnection();
+        conn.addRequestProperty("user-agent", Registry.userAgent);
         String line;
         String result = "";
-        BufferedReader buffereader = new BufferedReader(new InputStreamReader(url1.openStream()));
+        BufferedReader buffereader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
         while ((line = buffereader.readLine()) != null) {
             result += line.replaceAll("\n", " ") + "\n";
         }
