@@ -52,6 +52,7 @@ public class IRCUtils {
                 }
                 i++;
             }
+            if (getCachedWhoisEvent(network, userObject) != null)
             return getCachedWhoisEvent(network, userObject);
         }
         Registry.LastWhois = userObject;
