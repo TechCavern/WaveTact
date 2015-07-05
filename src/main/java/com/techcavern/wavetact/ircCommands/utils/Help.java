@@ -27,7 +27,7 @@ public class Help extends IRCCommand {
             } else {
                 IRCCommand irCommand = IRCUtils.getGenericCommand(args[0]);
                 if (irCommand != null) {
-                    IRCUtils.sendMessage(user, network, channel, "Aliases: " + StringUtils.join(Arrays.asList(irCommand.getCommandID()), ", "), prefix);
+                    IRCUtils.sendMessage(user, network, channel, "Variations: " + StringUtils.join(Arrays.asList(irCommand.getCommandID()), ", "), prefix);
                     String syntax = irCommand.getSyntax();
                     if (!syntax.isEmpty())
                         IRCUtils.sendMessage(user, network, channel, "Syntax: " + syntax, prefix);

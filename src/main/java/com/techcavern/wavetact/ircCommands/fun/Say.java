@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.techcavern.wavetact.ircCommands.anonymonity;
+package com.techcavern.wavetact.ircCommands.fun;
 
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
@@ -21,10 +21,10 @@ import org.pircbotx.User;
  * @author jztech101
  */
 @IRCCMD
-public class Act extends IRCCommand {
+public class Say extends IRCCommand {
 
-    public Act() {
-        super(GeneralUtils.toArray("act do"), 5, "act [something]", "Makes the bot do something", false);
+    public Say() {
+        super(GeneralUtils.toArray("say msg act do"), 5, "say [something]", "Makes the bot say something", false);
     }
 
     @Override
@@ -44,10 +44,16 @@ public class Act extends IRCCommand {
             chan = channel;
         }
         if (chan == null || PermUtils.getPermLevel(network, user.getNick(), chan) >= 5) {
-            IRCUtils.sendAction(user, network, chan, StringUtils.join(args, " ").replace("\n", " "), prefix);
+            if(command.equalsIgnoreCase("act") || command.equalsIgnoreCase("do")){
+                IRCUtils.sendAction(user, network, chan, StringUtils.join(args, " ").replace("\n", " "), prefix);
+            }else {
+                IRCUtils.sendMessage(user, network, chan, StringUtils.join(args, " ").replace("\n", " "), prefix);
+            }
         } else {
             ErrorUtils.sendError(user, "Permission denied");
         }
     }
 }
+
+
 

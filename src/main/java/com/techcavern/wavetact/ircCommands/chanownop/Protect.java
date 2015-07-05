@@ -22,7 +22,7 @@ import org.pircbotx.User;
 public class Protect extends IRCCommand {
 
     public Protect() {
-        super(GeneralUtils.toArray("protect prot sop"), 15, "protect (-)(user)", "Sets protect mode if it exists on a user", true);
+        super(GeneralUtils.toArray("protect prot sop desop deprotect"), 15, "protect (-)(user)", "Sets protect mode if it exists on a user", true);
     }
 
     @Override
@@ -31,17 +31,19 @@ public class Protect extends IRCCommand {
             if (args.length >= 1) {
                 if (args[0].equalsIgnoreCase("-")) {
                     channel.send().deSuperOp(user);
-                } else if (args[0].startsWith("-")) {
+                } else if (args[0].startsWith("-") || command.equalsIgnoreCase("deprotect") || command.equalsIgnoreCase("desop")) {
                     channel.send().deSuperOp(IRCUtils.getUserByNick(network, args[0].replaceFirst("-", "")));
                 } else {
                     channel.send().superOp(IRCUtils.getUserByNick(network, args[0]));
 
                 }
-            } else {
+            } else if(command.equalsIgnoreCase("deprotect") || command.equalsIgnoreCase("desop")){
+                channel.send().deSuperOp(user);
+            }else {
                 channel.send().superOp(user);
             }
         } else {
-            ErrorUtils.sendError(user, "This server does not support superops");
+            ErrorUtils.sendError(user, "This server does not support protected ops");
         }
     }
 }

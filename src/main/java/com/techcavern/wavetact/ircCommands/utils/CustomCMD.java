@@ -27,7 +27,7 @@ public class CustomCMD extends IRCCommand {
 
 
     public CustomCMD() {
-        super(GeneralUtils.toArray("customcmd ccmd"), 0, "customcmd (.) (a) (+/-)[command] [permlevel] [response]", "Responses may contain $1, $2, etc which indicate the argument separated by a space. $* indicates all remaining arguments.", false);
+        super(GeneralUtils.toArray("custommsg cmsg cact customact"), 0, "customcmd (.) (+/-)[command] [permlevel] [response]", "Responses may contain $1, $2, etc which indicate the argument separated by a space. $* indicates all remaining arguments.", false);
     }
 
     @Override
@@ -37,39 +37,35 @@ public class CustomCMD extends IRCCommand {
         boolean isAction = false;
         boolean modify = false;
         boolean remove = false;
-        for (int i = 0; i < 1; i++) {
-            if (args[i].equalsIgnoreCase(".") && !GeneralUtils.isInteger(args[i + 1])) {
+        if (args[0].equalsIgnoreCase(".")) {
                 net = IRCUtils.getNetworkNameByNetwork(network);
                 chan = channel.getName();
-                args = ArrayUtils.remove(args, i);
-                i--;
-            } else if (args[i].equalsIgnoreCase("a") && !GeneralUtils.isInteger(args[i + 1])) {
-                isAction = true;
-                args = ArrayUtils.remove(args, i);
-                i--;
-            }
+                args = ArrayUtils.remove(args, 0);
         }
-        String commandArgs;
+        if(command.equalsIgnoreCase("cact") || command.equalsIgnoreCase("customact")){
+            isAction = true;
+        }
+        String cCommand;
         if (args[0].startsWith("+")) {
-            commandArgs = args[0].replaceFirst("\\+", "");
+            cCommand = args[0].replaceFirst("\\+", "");
             modify = true;
         } else if (args[0].startsWith("-")) {
-            commandArgs = args[0].replaceFirst("\\-", "");
+            cCommand = args[0].replaceFirst("\\-", "");
             remove = true;
         } else {
-            commandArgs = args[0];
+            cCommand = args[0];
         }
-        Record customCommand = DatabaseUtils.getChannelCustomCommand(net, chan, commandArgs);
+        Record customCommand = DatabaseUtils.getChannelCustomCommand(net, chan, cCommand);
         if (modify && customCommand != null && userPermLevel >= customCommand.getValue(CUSTOMCOMMANDS.PERMLEVEL) && !customCommand.getValue(CUSTOMCOMMANDS.ISLOCKED)) {
             customCommand.setValue(CUSTOMCOMMANDS.PERMLEVEL, Integer.parseInt(args[1]));
             customCommand.setValue(CUSTOMCOMMANDS.VALUE, GeneralUtils.buildMessage(2, args.length, args).replace("\n", " "));
             DatabaseUtils.updateCustomCommand(customCommand);
             IRCUtils.sendMessage(user, network, channel, "Custom Command modified", prefix);
         } else if (remove && customCommand != null && userPermLevel >= customCommand.getValue(CUSTOMCOMMANDS.PERMLEVEL) && !customCommand.getValue(CUSTOMCOMMANDS.ISLOCKED)) {
-            DatabaseUtils.removeCustomCommand(net, chan, commandArgs);
+            DatabaseUtils.removeCustomCommand(net, chan, cCommand);
             IRCUtils.sendMessage(user, network, channel, "Custom Command removed", prefix);
-        } else if (customCommand == null && IRCUtils.getGenericCommand(commandArgs) == null) {
-            DatabaseUtils.addCustomCommand(net, chan, commandArgs, Integer.parseInt(args[1]), GeneralUtils.buildMessage(2, args.length, args).replace("\n", " "), false, isAction);
+        } else if (customCommand == null && IRCUtils.getGenericCommand(cCommand) == null) {
+            DatabaseUtils.addCustomCommand(net, chan, cCommand, Integer.parseInt(args[1]), GeneralUtils.buildMessage(2, args.length, args).replace("\n", " "), false, isAction);
             IRCUtils.sendMessage(user, network, channel, "Custom Command added", prefix);
         } else {
             ErrorUtils.sendError(user, "Command already exists (If you were adding) or Command does not exist, or The command is locked (Either could be the problem if you were modifing)");

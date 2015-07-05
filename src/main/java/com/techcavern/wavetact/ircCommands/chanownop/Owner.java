@@ -21,7 +21,7 @@ import org.pircbotx.User;
 public class Owner extends IRCCommand {
 
     public Owner() {
-        super(GeneralUtils.toArray("owner own oop"), 15, "owner (-)(user)", "Sets owner mode if it exists on a user", true);
+        super(GeneralUtils.toArray("owner own oop deowner deoop"), 15, "owner (-)(user)", "Sets owner mode if it exists on a user", true);
     }
 
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
@@ -29,12 +29,15 @@ public class Owner extends IRCCommand {
             if (args.length >= 1) {
                 if (args[0].equalsIgnoreCase("-")) {
                     channel.send().deOwner(user);
-                } else if (args[0].startsWith("-")) {
+                } else if (args[0].startsWith("-") || command.equalsIgnoreCase("deowner") || command.equalsIgnoreCase("deoop")) {
                     channel.send().deOwner(IRCUtils.getUserByNick(network, args[0].replaceFirst("-", "")));
                 } else {
                     channel.send().owner(IRCUtils.getUserByNick(network, args[0]));
+
                 }
-            } else {
+            } else if(command.equalsIgnoreCase("deowner") || command.equalsIgnoreCase("deoop")){
+                channel.send().deOwner(user);
+            }else {
                 channel.send().owner(user);
             }
         } else {

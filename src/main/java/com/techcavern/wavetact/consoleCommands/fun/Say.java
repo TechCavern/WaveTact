@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.techcavern.wavetact.consoleCommands.anonymity;
+package com.techcavern.wavetact.consoleCommands.fun;
 
 import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.objects.CommandIO;
@@ -17,10 +17,10 @@ import org.pircbotx.PircBotX;
  * @author jztech101
  */
 @ConCMD
-public class Act extends ConsoleCommand {
+public class Say extends ConsoleCommand {
 
-    public Act() {
-        super(GeneralUtils.toArray("act do"), "act [network] [channel] [something]", "Makes the bot do something");
+    public Say() {
+        super(GeneralUtils.toArray("say act do msg"), "say [network] [channel] [something]", "Makes the bot say something");
     }
 
     @Override
@@ -32,8 +32,13 @@ public class Act extends ConsoleCommand {
             chan = IRCUtils.getChannelbyName(network, args[1].replace(prefix, ""));
         else
             chan = IRCUtils.getChannelbyName(network, args[1]);
-        if (chan != null)
-            IRCUtils.sendAction(network, chan, GeneralUtils.buildMessage(2, args.length, args).replace("\n", " "), prefix);
+        if (chan != null) {
+            if(command.equalsIgnoreCase("act") || command.equalsIgnoreCase("do")) {
+                IRCUtils.sendMessage(network, chan, GeneralUtils.buildMessage(2, args.length, args).replace("\n", " "), prefix);
+            }else{
+                IRCUtils.sendAction(network, chan, GeneralUtils.buildMessage(2, args.length, args).replace("\n", " "), prefix);
+            }
+            }
     }
 }
 

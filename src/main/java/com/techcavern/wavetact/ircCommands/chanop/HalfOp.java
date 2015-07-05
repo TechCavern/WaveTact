@@ -21,7 +21,7 @@ import org.pircbotx.User;
 public class HalfOp extends IRCCommand {
 
     public HalfOp() {
-        super(GeneralUtils.toArray("halfop hop"), 10, "halfop (-)(user to  halfop)", "Sets half op mode on a user if it exists", true);
+        super(GeneralUtils.toArray("halfop hop dehalfop dehop"), 10, "halfop (-)(user to  halfop)", "Sets half op mode on a user if it exists", true);
     }
 
     @Override
@@ -30,13 +30,15 @@ public class HalfOp extends IRCCommand {
             if (args.length >= 1) {
                 if (args[0].equalsIgnoreCase("-")) {
                     channel.send().deHalfOp(user);
-                } else if (args[0].startsWith("-")) {
+                } else if (args[0].startsWith("-") || command.equalsIgnoreCase("dehop") || command.equalsIgnoreCase("dehalfop")) {
                     channel.send().deHalfOp(IRCUtils.getUserByNick(network, args[0].replaceFirst("-", "")));
                 } else {
                     channel.send().halfOp(IRCUtils.getUserByNick(network, args[0]));
 
                 }
-            } else {
+            } else if(command.equalsIgnoreCase("dehop") || command.equalsIgnoreCase("dehalfop")){
+                channel.send().deHalfOp(user);
+            }else {
                 channel.send().halfOp(user);
             }
         } else {

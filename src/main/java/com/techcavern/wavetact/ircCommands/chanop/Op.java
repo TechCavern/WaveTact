@@ -20,7 +20,7 @@ import org.pircbotx.User;
 public class Op extends IRCCommand {
 
     public Op() {
-        super(GeneralUtils.toArray("op aop"), 10, "op (-)(user to op)", "Ops a user", true);
+        super(GeneralUtils.toArray("op aop deop"), 10, "op (-)(user to op)", "Ops a user", true);
     }
 
     @Override
@@ -28,13 +28,15 @@ public class Op extends IRCCommand {
         if (args.length >= 1) {
             if (args[0].equalsIgnoreCase("-")) {
                 channel.send().deOp(user);
-            } else if (args[0].startsWith("-")) {
+            } else if (args[0].startsWith("-") || command.equalsIgnoreCase("deop")) {
                 channel.send().deOp(IRCUtils.getUserByNick(network, args[0].replaceFirst("-", "")));
             } else {
                 channel.send().op(IRCUtils.getUserByNick(network, args[0]));
 
             }
-        } else {
+        } else if(command.equalsIgnoreCase("deop")){
+            channel.send().deOp(user);
+        }else {
             channel.send().op(user);
         }
     }

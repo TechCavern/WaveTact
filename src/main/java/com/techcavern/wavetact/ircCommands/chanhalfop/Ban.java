@@ -19,7 +19,7 @@ import static com.techcavern.wavetactdb.Tables.BANS;
 public class Ban extends IRCCommand {
 
     public Ban() {
-        super(GeneralUtils.toArray("ban b"), 7, "ban (m) (-)(+)[user][hostmask] (-)(+)(time)", "Bans a user for a specified period of time or 24 hours, if the first parameter is m, the ban will be a mute ban", true);
+        super(GeneralUtils.toArray("ban unban"), 7, "ban (m) (-)(+)[user][hostmask] (-)(+)(time)", "Bans a user for a specified period of time or 24 hours, if the first parameter is m, the ban will be a mute ban", true);
     }
 
     @Override
@@ -63,7 +63,7 @@ public class Ban extends IRCCommand {
         }
         String networkname = IRCUtils.getNetworkNameByNetwork(network);
         Record BanRecord = DatabaseUtils.getBan(networkname, channel.getName(), hostmask, isMute);
-        if (args[0].startsWith("-")) {
+        if (args[0].startsWith("-") || command.equalsIgnoreCase("unban")) {
             if (BanRecord != null) {
                 DatabaseUtils.removeBan(networkname, channel.getName(), hostmask, isMute);
             }

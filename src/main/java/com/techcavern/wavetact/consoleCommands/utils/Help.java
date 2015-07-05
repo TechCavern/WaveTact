@@ -21,7 +21,7 @@ public class Help extends ConsoleCommand {
         if (args.length > 0) {
             ConsoleCommand consolCommand = IRCUtils.getConsoleCommand(args[0]);
             if (consolCommand != null) {
-                commandIO.getPrintStream().println("Aliases: " + StringUtils.join(Arrays.asList(consolCommand.getCommandID()), ", "));
+                commandIO.getPrintStream().println("Variations: " + StringUtils.join(Arrays.asList(consolCommand.getCommandID()), ", "));
                 String syntax = consolCommand.getSyntax();
                 if (!syntax.isEmpty())
                     commandIO.getPrintStream().println("Syntax: " + syntax);

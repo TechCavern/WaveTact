@@ -21,7 +21,7 @@ import static com.techcavern.wavetactdb.Tables.CUSTOMCOMMANDS;
 public class LockCustomCMD extends IRCCommand {
 
     public LockCustomCMD() {
-        super(GeneralUtils.toArray("lockcustomcmd lockccmd lccmd"), 18, "lockcustomcmd (-)[command]", "Locks/Unlocks a custom command", true);
+        super(GeneralUtils.toArray("lockcustomcmd lockccmd lccmd"), 18, "lockcustomcmd (-)[command]", "Locks/Unlocks a channel custom command", true);
     }
 
     @Override
