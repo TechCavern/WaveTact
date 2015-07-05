@@ -43,19 +43,20 @@ public class IRCUtils {
         WhoisEvent WhoisEvent = getCachedWhoisEvent(network, userObject);
         if(WhoisEvent != null){
             return WhoisEvent;
-        } else if (Objects.equals(Registry.LastWhois, userObject)) {
-            try {
-                TimeUnit.MILLISECONDS.sleep(700);
-            }catch (Exception e){}
-            WhoisEvent = getCachedWhoisEvent(network, userObject);
-            if(WhoisEvent != null){
-                return WhoisEvent;
+        } else if (Registry.LastWhois.equals(userObject)) {
+            while (getCachedWhoisEvent(network, userObject) == null) {
+                try {
+                    TimeUnit.MILLISECONDS.sleep(500);
+                } catch (Exception e) {
+                }
+                ;
             }
+            return getCachedWhoisEvent(network, userObject);
         }
         Registry.LastWhois = userObject;
         WaitForQueue waitForQueue = new WaitForQueue(network);
         try {
-            network.sendIRC().whois(userObject);
+            Registry.MessageQueue.add(new NetProperty("WHOIS " + userObject, network));
             WhoisEvent = waitForQueue.waitFor(WhoisEvent.class);
             waitForQueue.close();
         } catch (InterruptedException | NullPointerException ex) {
