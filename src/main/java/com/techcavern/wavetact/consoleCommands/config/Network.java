@@ -63,7 +63,7 @@ public class Network extends ConsoleCommand {
                             isSuccess = true;
                         }
                         break;
-                    case "netadmin":
+                    case "netadmins":
                         if (viewonly)
                             commandIO.getPrintStream().println(network.getValue(SERVERS.NETWORKADMINS));
                         else {
