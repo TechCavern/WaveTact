@@ -11,7 +11,9 @@ import org.pircbotx.Colors;
 import org.pircbotx.PircBotX;
 
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.*;
 
 public class GeneralUtils {
@@ -36,6 +38,7 @@ public class GeneralUtils {
         String result = parseUrl(url);
         return new JsonParser().parse(result).getAsJsonObject();
     }
+
     public static JsonElement getJsonElement(String url) throws Exception {
         String result = parseUrl(url);
         return new JsonParser().parse(result);
@@ -232,6 +235,36 @@ public class GeneralUtils {
 
             original = original.replaceFirst("Y","Ý");
         return original;
+    }
+    public static int readInputStream(InputStream in)
+            throws Exception{
+        int i = 0;
+        int j = 0;
+        while (true) {
+            int k = in.read();
+            i |= (k & 0x7F) << j++ * 7;
+            if (j > 5) {
+                throw new RuntimeException("VarInt too big");
+            }
+            if ((k & 0x80) != 128){
+                break;
+            }
+        }
+        return i;
+    }
+
+    public static void writeOutputStream(OutputStream out, int i)
+            throws Exception{
+        while(true)
+        {
+            if((i & 0xFFFFFF80) == 0){
+                out.write(i);
+                return;
+            }
+
+            out.write(i & 0x7F | 0x80);
+            i >>>= 7;
+        }
     }
 }
 

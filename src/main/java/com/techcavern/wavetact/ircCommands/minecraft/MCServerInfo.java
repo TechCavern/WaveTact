@@ -1,17 +1,23 @@
 package com.techcavern.wavetact.ircCommands.minecraft;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
+import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import io.github.asyncronous.mcping.MCServer;
-import io.github.asyncronous.mcping.StandardMCVersions;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 import org.xbill.DNS.*;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.net.Socket;
 
 @IRCCMD
 public class MCServerInfo extends IRCCommand {
@@ -50,12 +56,41 @@ public class MCServerInfo extends IRCCommand {
                 }
             }
         }
-        MCServer server = StandardMCVersions.MC_18.ping(new InetSocketAddress(GeneralUtils.getIP(args[0], network, false), port));
-        String gameVersion = "Version: " + server.gameVersion;
-        String motd = "MOTD: " + server.motd;
-        String playercount = "Players: " + Integer.toString(server.players) + "/" + Integer.toString(server.maxPlayers);
+        InetSocketAddress address = new InetSocketAddress(GeneralUtils.getIP(args[0], network, false), port);
+        Socket socket = new Socket();
+            socket.connect(address, 10000);
+            DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+                DataInputStream in = new DataInputStream(socket.getInputStream());
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                DataOutputStream handshake = new DataOutputStream(bos);
+                handshake.writeByte(0x00);
+                GeneralUtils.writeOutputStream(handshake, 4);
+                GeneralUtils.writeOutputStream(handshake, address.getHostString().length());
+                handshake.writeBytes(address.getHostString());
+                handshake.writeShort(address.getPort());
+                GeneralUtils.writeOutputStream(handshake, 1);
+                GeneralUtils.writeOutputStream(out, bos.size());
+                out.write(bos.toByteArray());
+                out.writeByte(0x01);
+                out.writeByte(0x00);
+                GeneralUtils.readInputStream(in);
+                int id = GeneralUtils.readInputStream(in);
+                if (id != 0x00) {
+                    ErrorUtils.sendError(user, "Error parsing packet response");
+                    return;
+                }
+                int length = GeneralUtils.readInputStream(in);
+                if (length == 0 || length == -1) {
+                    ErrorUtils.sendError(user, "Error parsing packet response");
+                    return;
+                }
+                byte[] bits = new byte[length];
+                in.readFully(bits);
+                JsonObject response = new JsonParser().parse(new String(bits)).getAsJsonObject();
+        String gameVersion = "Version: " + response.get("version").getAsJsonObject().get("name").getAsString();
+        String motd = "MOTD: " + response.get("description").getAsString();
+        String playercount = "Players: " + response.get("players").getAsJsonObject().get("online").getAsString() + "/" + response.get("players").getAsJsonObject().get("max").getAsString();
         IRCUtils.sendMessage(user, network, channel, args[0] + ":" + port + " - " + gameVersion + " - " + motd + " - " + playercount, prefix);
-
     }
 
 }
