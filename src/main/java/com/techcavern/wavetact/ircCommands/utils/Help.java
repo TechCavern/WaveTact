@@ -37,7 +37,7 @@ public class Help extends IRCCommand {
                 }
             }
         } else {
-            IRCUtils.sendMessage(user, network, channel, "help [command] - generally a + before something means editing it, and a - means removing it. None means adding it. - Time is in [time](s/m/h/d/w) format", prefix);
+            IRCUtils.sendMessage(user, network, channel, "help [command] - generally a + before something means editing it, and a - means removing it. None means adding it. - Time is in [time](s/m/h/d/w) format. [] is a required argument. () is an optional argument.", prefix);
         }
     }
 }
