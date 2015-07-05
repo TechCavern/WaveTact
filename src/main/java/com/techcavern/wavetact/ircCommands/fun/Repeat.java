@@ -30,7 +30,7 @@ public class Repeat extends IRCCommand {
         if (args[0].startsWith("+")) {
             message = GeneralUtils.prism(message.replaceFirst("\\+", ""));
         }
-        if (times <= userPermLevel) {
+        if (times <= userPermLevel / 2) {
             if (isAction)
                 for (int i = 0; i < times; i++)
                     IRCUtils.sendAction(network, channel, message, prefix);
