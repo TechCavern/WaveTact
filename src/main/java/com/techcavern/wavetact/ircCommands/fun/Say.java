@@ -47,7 +47,7 @@ public class Say extends IRCCommand {
             if(command.equalsIgnoreCase("act") || command.equalsIgnoreCase("do")){
                 IRCUtils.sendAction(user, network, chan, StringUtils.join(args, " ").replace("\n", " "), prefix);
             } else if (command.equalsIgnoreCase("prism")) {
-                IRCUtils.sendMessage(user, network, channel, GeneralUtils.prism(StringUtils.join(args, " ")), prefix);
+                IRCUtils.sendMessage(user, network, chan, GeneralUtils.prism(StringUtils.join(args, " ")), prefix);
 
             } else {
                 IRCUtils.sendMessage(user, network, chan, StringUtils.join(args, " ").replace("\n", " "), prefix);
