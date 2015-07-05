@@ -14,7 +14,7 @@ public class Global extends ConsoleCommand {
     }
 
     @Override
-    public void onCommand(String[] args, CommandIO commandIO) throws Exception {
+    public void onCommand(String command, String[] args, CommandIO commandIO) throws Exception {
         IRCUtils.sendGlobal(GeneralUtils.buildMessage(0, args.length, args), null);
     }
 }

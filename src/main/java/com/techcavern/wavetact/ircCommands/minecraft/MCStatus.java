@@ -22,7 +22,7 @@ public class MCStatus extends IRCCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+    public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         String result;
         URL url = new URL("https://status.mojang.com/check");
         BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));

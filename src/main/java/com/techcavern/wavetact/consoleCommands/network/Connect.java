@@ -17,7 +17,7 @@ public class Connect extends ConsoleCommand {
     }
 
     @Override
-    public void onCommand(String[] args, CommandIO commandIO) throws Exception {
+    public void onCommand(String command, String[] args, CommandIO commandIO) throws Exception {
         boolean reconnect = false;
         boolean disconnect = false;
         if (args[0].startsWith("\\+")) {

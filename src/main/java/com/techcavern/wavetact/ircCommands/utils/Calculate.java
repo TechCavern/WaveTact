@@ -18,7 +18,7 @@ public class Calculate extends IRCCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+    public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         ExpressionBuilder expr = new ExpressionBuilder(StringUtils.join(args, ""));
         IRCUtils.sendMessage(user, network, channel, Double.toString(expr.build().evaluate()), prefix);
     }

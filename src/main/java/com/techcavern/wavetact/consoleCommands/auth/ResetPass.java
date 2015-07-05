@@ -20,7 +20,7 @@ public class ResetPass extends ConsoleCommand {
     }
 
     @Override
-    public void onCommand(String[] args, CommandIO commandIO) throws Exception {
+    public void onCommand(String command, String[] args, CommandIO commandIO) throws Exception {
         Record account = DatabaseUtils.getAccount(args[0]);
         if (account != null) {
             account.setValue(ACCOUNTS.RANDOMSTRING, UUID.randomUUID().toString());

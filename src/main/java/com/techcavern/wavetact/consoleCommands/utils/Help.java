@@ -17,15 +17,15 @@ public class Help extends ConsoleCommand {
     }
 
     @Override
-    public void onCommand(String[] args, CommandIO commandIO) throws Exception {
+    public void onCommand(String command, String[] args, CommandIO commandIO) throws Exception {
         if (args.length > 0) {
-            ConsoleCommand command = IRCUtils.getConsoleCommand(args[0]);
-            if (command != null) {
-                commandIO.getPrintStream().println("Aliases: " + StringUtils.join(Arrays.asList(command.getCommandID()), ", "));
-                String syntax = command.getSyntax();
+            ConsoleCommand consolCommand = IRCUtils.getConsoleCommand(args[0]);
+            if (consolCommand != null) {
+                commandIO.getPrintStream().println("Aliases: " + StringUtils.join(Arrays.asList(consolCommand.getCommandID()), ", "));
+                String syntax = consolCommand.getSyntax();
                 if (!syntax.isEmpty())
                     commandIO.getPrintStream().println("Syntax: " + syntax);
-                commandIO.getPrintStream().println(command.getDesc());
+                commandIO.getPrintStream().println(consolCommand.getDesc());
             } else {
                 commandIO.getPrintStream().println("Command does not exist");
             }

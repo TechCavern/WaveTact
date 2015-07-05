@@ -31,7 +31,7 @@ public class CustomCMD extends IRCCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+    public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         String chan = null;
         String net = null;
         boolean isAction = false;
@@ -49,27 +49,27 @@ public class CustomCMD extends IRCCommand {
                 i--;
             }
         }
-        String command;
+        String commandArgs;
         if (args[0].startsWith("+")) {
-            command = args[0].replaceFirst("\\+", "");
+            commandArgs = args[0].replaceFirst("\\+", "");
             modify = true;
         } else if (args[0].startsWith("-")) {
-            command = args[0].replaceFirst("\\-", "");
+            commandArgs = args[0].replaceFirst("\\-", "");
             remove = true;
         } else {
-            command = args[0];
+            commandArgs = args[0];
         }
-        Record customCommand = DatabaseUtils.getChannelCustomCommand(net, chan, command);
+        Record customCommand = DatabaseUtils.getChannelCustomCommand(net, chan, commandArgs);
         if (modify && customCommand != null && userPermLevel >= customCommand.getValue(CUSTOMCOMMANDS.PERMLEVEL) && !customCommand.getValue(CUSTOMCOMMANDS.ISLOCKED)) {
             customCommand.setValue(CUSTOMCOMMANDS.PERMLEVEL, Integer.parseInt(args[1]));
             customCommand.setValue(CUSTOMCOMMANDS.VALUE, GeneralUtils.buildMessage(2, args.length, args).replace("\n", " "));
             DatabaseUtils.updateCustomCommand(customCommand);
             IRCUtils.sendMessage(user, network, channel, "Custom Command modified", prefix);
         } else if (remove && customCommand != null && userPermLevel >= customCommand.getValue(CUSTOMCOMMANDS.PERMLEVEL) && !customCommand.getValue(CUSTOMCOMMANDS.ISLOCKED)) {
-            DatabaseUtils.removeCustomCommand(net, chan, command);
+            DatabaseUtils.removeCustomCommand(net, chan, commandArgs);
             IRCUtils.sendMessage(user, network, channel, "Custom Command removed", prefix);
-        } else if (customCommand == null && IRCUtils.getGenericCommand(command) == null) {
-            DatabaseUtils.addCustomCommand(net, chan, command, Integer.parseInt(args[1]), GeneralUtils.buildMessage(2, args.length, args).replace("\n", " "), false, isAction);
+        } else if (customCommand == null && IRCUtils.getGenericCommand(commandArgs) == null) {
+            DatabaseUtils.addCustomCommand(net, chan, commandArgs, Integer.parseInt(args[1]), GeneralUtils.buildMessage(2, args.length, args).replace("\n", " "), false, isAction);
             IRCUtils.sendMessage(user, network, channel, "Custom Command added", prefix);
         } else {
             ErrorUtils.sendError(user, "Command already exists (If you were adding) or Command does not exist, or The command is locked (Either could be the problem if you were modifing)");

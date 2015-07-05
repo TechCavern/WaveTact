@@ -19,7 +19,7 @@ public class Wiki extends IRCCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+    public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         for (int i = 0; i < args.length; i++) {
             args[i] = StringUtils.capitalize(args[i]);
         }

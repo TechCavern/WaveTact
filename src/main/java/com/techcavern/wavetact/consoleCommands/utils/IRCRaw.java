@@ -25,7 +25,7 @@ public class IRCRaw extends ConsoleCommand {
     }
 
     @Override
-    public void onCommand(String[] args, CommandIO commandIO) throws Exception {
+    public void onCommand(String command, String[] args, CommandIO commandIO) throws Exception {
         PircBotX network = IRCUtils.getBotByNetworkName(args[0]);
         Registry.MessageQueue.add(new NetProperty(GeneralUtils.buildMessage(1, args.length, args), network));
     }

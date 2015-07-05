@@ -33,7 +33,7 @@ public class Part extends IRCCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+    public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (args.length < 1 || (args.length == 1 && args[0].equalsIgnoreCase(channel.getName()))) {
             channel.send().part();
             Registry.LastLeftChannel = channel.getName();

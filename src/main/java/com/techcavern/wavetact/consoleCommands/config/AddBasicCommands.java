@@ -14,7 +14,7 @@ public class AddBasicCommands extends ConsoleCommand {
     }
 
     @Override
-    public void onCommand(String[] args, CommandIO commandIO) {
+    public void onCommand(String command, String[] args, CommandIO commandIO) {
         DatabaseUtils.addCustomCommand(null, null, "potato", 0, "is a potato", true, true);
 
         DatabaseUtils.addCustomCommand(null, null, "ping", 0, "pong", true, false);

@@ -21,7 +21,7 @@ public class UrbanDictionary extends IRCCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+    public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         int ArrayIndex = 0;
         if (GeneralUtils.isInteger(args[0])) {
             ArrayIndex = Integer.parseInt(args[0]) - 1;

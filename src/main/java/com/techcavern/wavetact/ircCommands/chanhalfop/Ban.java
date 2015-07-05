@@ -23,7 +23,7 @@ public class Ban extends IRCCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+    public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         String hostmask;
         boolean isMute = false;
         if (args[0].equalsIgnoreCase("m")) {

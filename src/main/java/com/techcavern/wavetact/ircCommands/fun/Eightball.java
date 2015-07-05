@@ -26,7 +26,7 @@ public class Eightball extends IRCCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+    public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         int randomint = RandomUtils.nextInt(0, Registry.Eightball.size());
         IRCUtils.sendMessage(user, network, channel, Registry.Eightball.get(randomint), prefix);
     }

@@ -21,7 +21,7 @@ public class Traceroute extends IRCCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+    public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         boolean IPv6Priority = false;
         if(args[0].startsWith("+")){
             IPv6Priority = true;
@@ -31,13 +31,13 @@ public class Traceroute extends IRCCommand {
         if (IP == null) {
             ErrorUtils.sendError(user, "Host Unreachable");
         } else {
-            String command = "";
+            String traceCommand = "";
             if (InetAddressUtils.isIPv6Address(IP)) {
-                command = "traceroute6 " + IP;
+                traceCommand = "traceroute6 " + IP;
             } else if (InetAddressUtils.isIPv4Address(IP)) {
-                command = "traceroute " + IP;
+                traceCommand = "traceroute " + IP;
             }
-            Process pinghost = Runtime.getRuntime().exec(command);
+            Process pinghost = Runtime.getRuntime().exec(traceCommand);
             BufferedReader buffereader = new BufferedReader(new InputStreamReader(pinghost.getInputStream()));
             String line = "";
             while ((line = buffereader.readLine()) != null) {

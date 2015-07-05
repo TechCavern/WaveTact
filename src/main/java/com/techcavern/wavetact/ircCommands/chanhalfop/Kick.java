@@ -25,7 +25,7 @@ public class Kick extends IRCCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+    public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         String message = "Kicked by " + user.getNick();
         if (args.length > 1) {
             message += ": " + GeneralUtils.buildMessage(1, args.length, args);

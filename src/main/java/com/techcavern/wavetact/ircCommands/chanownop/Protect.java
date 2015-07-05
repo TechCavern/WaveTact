@@ -26,7 +26,7 @@ public class Protect extends IRCCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+    public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (network.getServerInfo().getPrefixes().contains("a")) {
             if (args.length >= 1) {
                 if (args[0].equalsIgnoreCase("-")) {

@@ -26,11 +26,8 @@ public class PrivMsgListener extends ListenerAdapter {
         class process implements Runnable {
             public void run() {
                 String[] message = StringUtils.split(Colors.removeFormattingAndColors(event.getMessage()), " ");
-                String command = message[0].toLowerCase();
-                IRCCommand Command = IRCUtils.getCommand(command, IRCUtils.getNetworkNameByNetwork(event.getBot()), null);
-                if (Command == null) {
-                    Command = IRCUtils.getCommand(StringUtils.replaceOnce(command, DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "commandchar").getValue(NETWORKPROPERTY.VALUE), ""), IRCUtils.getNetworkNameByNetwork(event.getBot()), null);
-                }
+                String privcommand = StringUtils.replaceOnce(message[0].toLowerCase(), DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "commandchar").getValue(NETWORKPROPERTY.VALUE), "");
+                IRCCommand Command = IRCUtils.getCommand(privcommand, IRCUtils.getNetworkNameByNetwork(event.getBot()), null);
                 message = ArrayUtils.remove(message, 0);
                 if (Command != null) {
                     if (Command.getChannelRequired()) {
@@ -48,7 +45,7 @@ public class PrivMsgListener extends ListenerAdapter {
                             int userPermLevel = PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), channel);
                             if (userPermLevel >= Command.getPermLevel()) {
                                 try {
-                                    Command.onCommand(event.getUser(), event.getBot(), prefix, channel, true, userPermLevel, message);
+                                    Command.onCommand(privcommand, event.getUser(), event.getBot(), prefix, channel, true, userPermLevel, message);
                                 } catch (Exception e) {
                                     ErrorUtils.sendError(event.getUser(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")");
                                     e.printStackTrace();
@@ -63,7 +60,7 @@ public class PrivMsgListener extends ListenerAdapter {
                         int userPermLevel = PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), null);
                         if (Command.getPermLevel() <= 5) {
                             try {
-                                Command.onCommand(event.getUser(), event.getBot(), null, null, true, userPermLevel, message);
+                                Command.onCommand(privcommand, event.getUser(), event.getBot(), null, null, true, userPermLevel, message);
                             } catch (Exception e) {
                                 ErrorUtils.sendError(event.getUser(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")");
                                 e.printStackTrace();
@@ -71,7 +68,7 @@ public class PrivMsgListener extends ListenerAdapter {
                         } else {
                             if (userPermLevel >= Command.getPermLevel()) {
                                 try {
-                                    Command.onCommand(event.getUser(), event.getBot(), null, null, true, userPermLevel, message);
+                                    Command.onCommand(privcommand, event.getUser(), event.getBot(), null, null, true, userPermLevel, message);
                                 } catch (Exception e) {
                                     ErrorUtils.sendError(event.getUser(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")");
                                     e.printStackTrace();

@@ -19,7 +19,7 @@ public class Xkcd extends IRCCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+    public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         Integer comicnumber = 1;
         JsonObject latestcomic = GeneralUtils.getJsonObject("http://xkcd.com/info.0.json");
         Integer latest = latestcomic.get("num").getAsInt();

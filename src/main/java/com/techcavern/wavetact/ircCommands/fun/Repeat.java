@@ -18,7 +18,7 @@ public class Repeat extends IRCCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+    public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         boolean isAction = false;
         String message = GeneralUtils.buildMessage(1, args.length, args);
         if (args[0].startsWith("+")) {

@@ -27,7 +27,7 @@ public class MCServerInfo extends IRCCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+    public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         int port = 25565;
         boolean isSuccessful = false;
         if (args.length >= 2) {

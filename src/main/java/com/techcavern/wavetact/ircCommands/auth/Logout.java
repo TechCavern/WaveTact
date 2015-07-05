@@ -16,7 +16,7 @@ public class Logout extends IRCCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+    public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         AuthedUser authedUser = PermUtils.getAuthedUser(network, user.getNick());
         if (authedUser == null) {
             ErrorUtils.sendError(user, "Error, you are not logged in");

@@ -19,7 +19,7 @@ public class ListNetworks extends ConsoleCommand {
     }
 
     @Override
-    public void onCommand(String[] args, CommandIO commandIO) throws Exception {
+    public void onCommand(String command, String[] args, CommandIO commandIO) throws Exception {
         List<String> networks = Registry.NetworkName.stream().map(NetProperty::getProperty).collect(Collectors.toList());
         commandIO.getPrintStream().println(StringUtils.join(networks, ", "));
     }

@@ -22,7 +22,7 @@ public class Network extends ConsoleCommand {
     }
 
     @Override
-    public void onCommand(String[] args, CommandIO commandIO) throws Exception {
+    public void onCommand(String command, String[] args, CommandIO commandIO) throws Exception {
         Scanner input = new Scanner(commandIO.getInputStream());
         if (args[0].startsWith("+")) {
             Record network = DatabaseUtils.getServer(args[0].replaceFirst("\\+", ""));

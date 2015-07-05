@@ -14,7 +14,7 @@ public class Quit extends ConsoleCommand {
     }
 
     @Override
-    public void onCommand(String[] args, CommandIO commandIO) throws Exception {
+    public void onCommand(String command, String[] args, CommandIO commandIO) throws Exception {
         Registry.consoleServer.keepConnectionRunning = false;
         commandIO.getPrintStream().println("Bye!");
     }

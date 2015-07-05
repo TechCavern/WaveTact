@@ -21,7 +21,7 @@ public class MCWiki extends IRCCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+    public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         Document doc = null;
         Elements content = null;
         for (int i = 0; i < args.length; i++) {

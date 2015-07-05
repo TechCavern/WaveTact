@@ -18,7 +18,7 @@ public class ListCommands extends ConsoleCommand {
     }
 
     @Override
-    public void onCommand(String[] args, CommandIO commandIO) throws Exception {
+    public void onCommand(String command, String[] args, CommandIO commandIO) throws Exception {
         List<String> commands = Registry.ConsoleCommands.stream().map(ConsoleCommand::getCommand).collect(Collectors.toList());
         commandIO.getPrintStream().println(StringUtils.join(commands, ", "));
     }

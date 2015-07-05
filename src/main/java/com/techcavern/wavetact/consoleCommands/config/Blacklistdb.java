@@ -31,7 +31,7 @@ public class Blacklistdb extends ConsoleCommand {
     }
 
     @Override
-    public void onCommand(String[] args, CommandIO commandIO) {
+    public void onCommand(String command, String[] args, CommandIO commandIO) {
         if (args.length > 0) {
             if (args[1].startsWith("-")) {
                 Record blacklist = DatabaseUtils.getBlacklist(args[0], args[1].replaceFirst("\\-", "").replaceAll("http://|https://", ""));

@@ -26,7 +26,7 @@ public class Video extends IRCCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+    public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (Registry.googleapikey == null) {
             ErrorUtils.sendError(user, "Google api key is null - contact bot controller to fix");
             return;

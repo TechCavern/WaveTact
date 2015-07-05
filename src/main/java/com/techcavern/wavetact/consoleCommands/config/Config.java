@@ -14,7 +14,7 @@ public class Config extends ConsoleCommand {
     }
 
     @Override
-    public void onCommand(String[] args, CommandIO commandIO) throws Exception {
+    public void onCommand(String command, String[] args, CommandIO commandIO) throws Exception {
         if (args.length < 2) {
             String value = DatabaseUtils.getConfig(args[0]);
             if (value != null) {

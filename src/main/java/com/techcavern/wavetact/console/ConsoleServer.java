@@ -78,7 +78,7 @@ public class ConsoleServer implements Runnable {
             args = ArrayUtils.remove(args, 0);
             ConsoleCommand cmd = IRCUtils.getConsoleCommand(command);
             if (cmd != null) {
-                cmd.onCommand(args, commandIO);
+                cmd.onCommand(command, args, commandIO);
             } else {
                 commandIO.getPrintStream().print("Invalid Command");
             }

@@ -20,7 +20,7 @@ public class FDrop extends ConsoleCommand {
     }
 
     @Override
-    public void onCommand(String[] args, CommandIO commandIO) {
+    public void onCommand(String command, String[] args, CommandIO commandIO) {
         for (NetProperty e : Registry.NetworkName) {
             AuthedUser authedUser = PermUtils.getAuthedUser(e.getNetwork(), args[0]);
             if (authedUser != null) {
