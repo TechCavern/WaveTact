@@ -2,7 +2,6 @@ package com.techcavern.wavetact.utils;
 
 import com.techcavern.wavetact.eventListeners.*;
 import com.techcavern.wavetact.objects.NetProperty;
-import org.apache.commons.lang3.StringUtils;
 import org.jooq.Record;
 import org.pircbotx.Configuration;
 import org.pircbotx.PircBotX;
@@ -10,8 +9,6 @@ import org.pircbotx.PircBotX;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.charset.Charset;
-import java.util.Arrays;
-import java.util.List;
 
 import static com.techcavern.wavetactdb.Tables.SERVERS;
 

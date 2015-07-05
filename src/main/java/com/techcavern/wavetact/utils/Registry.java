@@ -25,13 +25,13 @@ public class Registry {
     public static final StrongPasswordEncryptor encryptor = new StrongPasswordEncryptor();
     public static final Reflections wavetactreflection = new Reflections("com.techcavern.wavetact");
     public static final List<NetProperty> NetworkName = new ArrayList<>();
-    public static List<CachedWhoisEvent> WhoisEventCache = new ArrayList<>();
+    public static final List<CachedWhoisEvent> WhoisEventCache = new ArrayList<>();
     public static String wundergroundapikey = null;
     public static String wolframalphaapikey = null;
     public static String wordnikapikey = null;
     public static String googleapikey = null;
     public static String yandexapikey = null;
-    public static ConsoleServer consoleServer = new ConsoleServer();
+    public static final ConsoleServer consoleServer = new ConsoleServer();
     public static DSLContext WaveTactDB = null;
     public static final List<NetProperty> MessageQueue = new ArrayList<>();
     public static final UrlValidator urlvalidator = new UrlValidator();

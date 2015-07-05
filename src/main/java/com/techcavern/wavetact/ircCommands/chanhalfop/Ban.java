@@ -6,7 +6,6 @@ import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import org.apache.commons.lang3.ArrayUtils;
 import org.jooq.Record;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -19,16 +18,15 @@ import static com.techcavern.wavetactdb.Tables.BANS;
 public class Ban extends IRCCommand {
 
     public Ban() {
-        super(GeneralUtils.toArray("ban unban"), 7, "ban (m) (+)[user][hostmask] (-)(+)(time)", "Bans a user for a specified period of time or 24 hours, if the first parameter is m, the ban will be a mute ban", true);
+        super(GeneralUtils.toArray("ban unban mute unmute"), 7, "ban (m) (+)[user][hostmask] (-)(+)(time)", "Bans a user for a specified period of time or 24 hours, if the first parameter is m, the ban will be a mute ban", true);
     }
 
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         String hostmask;
         boolean isMute = false;
-        if (args[0].equalsIgnoreCase("m")) {
+        if (command.contains("mute")) {
             isMute = true;
-            args = ArrayUtils.remove(args, 0);
         }
         String ban = "b ";
         if (isMute) {
@@ -61,7 +59,7 @@ public class Ban extends IRCCommand {
         }
         String networkname = IRCUtils.getNetworkNameByNetwork(network);
         Record BanRecord = DatabaseUtils.getBan(networkname, channel.getName(), hostmask, isMute);
-        if (command.equalsIgnoreCase("unban")) {
+        if (command.equalsIgnoreCase("unban") || command.equalsIgnoreCase("unmute")) {
             if (BanRecord != null) {
                 DatabaseUtils.removeBan(networkname, channel.getName(), hostmask, isMute);
             }

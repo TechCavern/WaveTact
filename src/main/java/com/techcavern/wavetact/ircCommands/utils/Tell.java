@@ -1,10 +1,8 @@
 package com.techcavern.wavetact.ircCommands.utils;
 
-import com.google.gson.JsonObject;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.*;
-import org.apache.commons.lang3.StringUtils;
 import org.jooq.Record;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;

@@ -1,7 +1,6 @@
 package com.techcavern.wavetact.objects;
 
 import com.google.gson.JsonObject;
-import org.pircbotx.PircBotX;
 
 
 public class MCMod {

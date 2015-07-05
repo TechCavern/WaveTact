@@ -28,13 +28,9 @@ public class HalfOp extends IRCCommand {
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (network.getServerInfo().getPrefixes().contains("h")) {
             if (args.length >= 1) {
-                if (command.equalsIgnoreCase("dehop") || command.equalsIgnoreCase("dehalfop")) {
-                    channel.send().deHalfOp(IRCUtils.getUserByNick(network, args[0].replaceFirst("-", "")));
-                } else {
-                    channel.send().halfOp(IRCUtils.getUserByNick(network, args[0]));
-
-                }
-            } else if(command.equalsIgnoreCase("dehop") || command.equalsIgnoreCase("dehalfop")){
+                user = IRCUtils.getUserByNick(network, args[0]);
+            }
+            if (command.contains("de")) {
                 channel.send().deHalfOp(user);
             }else {
                 channel.send().halfOp(user);

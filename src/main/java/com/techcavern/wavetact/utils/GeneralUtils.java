@@ -150,7 +150,6 @@ public class GeneralUtils {
 
     public static String prism(char c) {
         int number = RandomUtils.nextInt(1, 15);
-        ;
         String result = null;
         switch (number) {
             case 1:

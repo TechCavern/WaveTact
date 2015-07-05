@@ -22,20 +22,16 @@ import org.pircbotx.User;
 public class Voice extends IRCCommand {
 
     public Voice() {
-        super(GeneralUtils.toArray("voice vop"), 7, "voice (-)(user)", "Voices a user", true);
+        super(GeneralUtils.toArray("voice vop devoice devop"), 7, "voice (user)", "Voices a user", true);
     }
 
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (args.length >= 1) {
-            if (args[0].equalsIgnoreCase("-")) {
-                channel.send().deVoice(user);
-            } else if (args[0].startsWith("-")) {
-                channel.send().deVoice(IRCUtils.getUserByNick(network, args[0].replaceFirst("-", "")));
-            } else {
-                channel.send().voice(IRCUtils.getUserByNick(network, args[0]));
-
-            }
+            user = IRCUtils.getUserByNick(network, args[0]);
+        }
+        if (command.contains("de")) {
+            channel.send().deVoice(user);
         } else {
             channel.send().voice(user);
         }

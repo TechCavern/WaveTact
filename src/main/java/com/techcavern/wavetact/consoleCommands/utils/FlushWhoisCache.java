@@ -4,11 +4,7 @@ import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.objects.CommandIO;
 import com.techcavern.wavetact.objects.ConsoleCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.Registry;
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.Arrays;
 
 @ConCMD
 public class FlushWhoisCache extends ConsoleCommand {

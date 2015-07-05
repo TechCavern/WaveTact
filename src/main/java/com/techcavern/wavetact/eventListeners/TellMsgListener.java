@@ -9,22 +9,16 @@ import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.PermUtils;
 import com.techcavern.wavetact.utils.Registry;
-import org.apache.commons.lang3.StringUtils;
 import org.jooq.Record;
 import org.jooq.Result;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.pircbotx.Channel;
-import org.pircbotx.Colors;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 import org.pircbotx.hooks.ListenerAdapter;
+import org.pircbotx.hooks.events.ActionEvent;
 import org.pircbotx.hooks.events.MessageEvent;
 import org.pircbotx.hooks.events.PrivateMessageEvent;
 
-import java.util.concurrent.TimeUnit;
-
-import static com.techcavern.wavetactdb.Tables.CHANNELPROPERTY;
 import static com.techcavern.wavetactdb.Tables.TELLMESSAGES;
 
 /**
@@ -38,6 +32,16 @@ public class TellMsgListener extends ListenerAdapter {
                 TellMessageTrigger(event.getBot(), event.getUser(), event.getChannel(), IRCUtils.getPrefix(event.getBot(), event.getChannelSource()));
             }
             }
+        Registry.threadPool.execute(new process());
+    }
+
+    @Override
+    public void onAction(ActionEvent event) throws Exception {
+        class process implements Runnable {
+            public void run() {
+                TellMessageTrigger(event.getBot(), event.getUser(), event.getChannel(), IRCUtils.getPrefix(event.getBot(), event.getChannelSource()));
+            }
+        }
         Registry.threadPool.execute(new process());
     }
     @Override

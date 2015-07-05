@@ -13,8 +13,8 @@ import org.pircbotx.UserLevel;
 import org.pircbotx.exception.DaoException;
 import org.pircbotx.hooks.WaitForQueue;
 import org.pircbotx.hooks.events.WhoisEvent;
-import org.pircbotx.output.OutputChannel;
 
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import static com.techcavern.wavetactdb.Tables.CUSTOMCOMMANDS;
@@ -43,7 +43,7 @@ public class IRCUtils {
         WhoisEvent WhoisEvent = getCachedWhoisEvent(network, userObject);
         if(WhoisEvent != null){
             return WhoisEvent;
-        }else if(Registry.LastWhois == userObject){
+        } else if (Objects.equals(Registry.LastWhois, userObject)) {
             try {
                 TimeUnit.MILLISECONDS.sleep(700);
             }catch (Exception e){}
@@ -100,16 +100,14 @@ public class IRCUtils {
         if (prerec != null) {
             String chnname = prerec.getValue(NETWORKPROPERTY.VALUE);
             if (chnname != null && chnname.equalsIgnoreCase(channel.getName())) {
-                for (NetProperty net : Registry.NetworkName) {
-                    if (net.getNetwork() != networkObject) {
-                        Record rec = DatabaseUtils.getNetworkProperty(net.getProperty(), "relaychan");
-                        if (rec != null) {
-                            String relaychan = rec.getValue(NETWORKPROPERTY.VALUE);
-                            if (relaychan != null)
-                                Registry.MessageQueue.add(new NetProperty("PRIVMSG " + relaychan + " :[" + getNetworkNameByNetwork(networkObject) + "] " + msg, net.getNetwork()));
-                        }
+                Registry.NetworkName.stream().filter(net -> net.getNetwork() != networkObject).forEach(net -> {
+                    Record rec = DatabaseUtils.getNetworkProperty(net.getProperty(), "relaychan");
+                    if (rec != null) {
+                        String relaychan = rec.getValue(NETWORKPROPERTY.VALUE);
+                        if (relaychan != null)
+                            Registry.MessageQueue.add(new NetProperty("PRIVMSG " + relaychan + " :[" + getNetworkNameByNetwork(networkObject) + "] " + msg, net.getNetwork()));
                     }
-                }
+                });
             }
         }
     }

@@ -5,11 +5,9 @@ import com.techcavern.wavetact.objects.CommandIO;
 import com.techcavern.wavetact.objects.ConsoleCommand;
 import com.techcavern.wavetact.objects.NetProperty;
 import com.techcavern.wavetact.utils.*;
-import org.apache.commons.lang3.StringUtils;
 import org.jooq.Record;
 import org.pircbotx.PircBotX;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 import static com.techcavern.wavetactdb.Tables.SERVERS;

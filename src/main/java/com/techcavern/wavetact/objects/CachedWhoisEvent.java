@@ -3,17 +3,13 @@ package com.techcavern.wavetact.objects;
 import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.events.WhoisEvent;
 
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintStream;
-
 /**
  * Created by roelf on 12/27/14.
  */
 public class CachedWhoisEvent {
-    private WhoisEvent whoisEvent;
-    private PircBotX network;
-    private String user;
+    private final WhoisEvent whoisEvent;
+    private final PircBotX network;
+    private final String user;
 
     public CachedWhoisEvent(WhoisEvent who, PircBotX network, String user) {
         this.whoisEvent = who;

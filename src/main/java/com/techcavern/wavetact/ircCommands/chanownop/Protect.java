@@ -29,13 +29,9 @@ public class Protect extends IRCCommand {
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (network.getServerInfo().getPrefixes().contains("a")) {
             if (args.length >= 1) {
-                if (command.equalsIgnoreCase("deprotect") || command.equalsIgnoreCase("desop")) {
-                    channel.send().deSuperOp(IRCUtils.getUserByNick(network, args[0].replaceFirst("-", "")));
-                } else {
-                    channel.send().superOp(IRCUtils.getUserByNick(network, args[0]));
-
-                }
-            } else if(command.equalsIgnoreCase("deprotect") || command.equalsIgnoreCase("desop")){
+                user = IRCUtils.getUserByNick(network, args[0]);
+            }
+            if (command.contains("de")) {
                 channel.send().deSuperOp(user);
             }else {
                 channel.send().superOp(user);

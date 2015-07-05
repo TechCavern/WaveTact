@@ -26,13 +26,9 @@ public class Op extends IRCCommand {
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (args.length >= 1) {
-            if (command.equalsIgnoreCase("deop")) {
-                channel.send().deOp(IRCUtils.getUserByNick(network, args[0].replaceFirst("-", "")));
-            } else {
-                channel.send().op(IRCUtils.getUserByNick(network, args[0]));
-
-            }
-        } else if(command.equalsIgnoreCase("deop")){
+            user = IRCUtils.getUserByNick(network, args[0]);
+        }
+        if (command.contains("de")) {
             channel.send().deOp(user);
         }else {
             channel.send().op(user);
