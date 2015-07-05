@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
+import com.techcavern.wavetact.objects.MCMod;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
@@ -11,69 +12,58 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @IRCCMD
 public class MCMods extends IRCCommand {
 
     public MCMods() {
-        super(GeneralUtils.toArray("mcmods mcmod"), 0, "mcmods (mc version#) (+)[mod name]", "Gets info on a minecraft mod", false);
+        super(GeneralUtils.toArray("mcmods mcmod"), 0, "mcmods (+)[mod name]", "Gets info on a minecraft mod", false);
     }
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         JsonArray versions = GeneralUtils.getJsonArray("http://bot.notenoughmods.com/?json");
         boolean isDev = false;
-        String version = "";
-        String modname = "";
-        JsonArray mods = null;
-        for (int i = 0; i < versions.size(); i++) {
-            String vers = versions.get(i).getAsString();
-            if (vers.contains(args[0])) {
-                version = vers;
-                modname = args[1].toLowerCase();
-            }
-        }
-        if (version.isEmpty()) {
-            int arraysize = 0;
-            int versionsize = versions.size();
-            while (arraysize <= 100) {
-                versionsize = versionsize - 1;
-                version = versions.get(versionsize).getAsString();
-                mods = GeneralUtils.getJsonArray("http://bot.notenoughmods.com/" + version + ".json");
-                arraysize = mods.size();
-            }
-            modname = args[0].toLowerCase();
-        } else {
-            mods = GeneralUtils.getJsonArray("http://bot.notenoughmods.com/" + version + ".json");
-        }
+        String modname = args[0].toLowerCase();
+        List<MCMod> mcmods = new ArrayList<>();
         if (modname.startsWith("+")) {
             isDev = true;
             modname = modname.replaceFirst("\\+", "");
         }
-        int total = 0;
-        for (int i = 0; i < mods.size(); i++) {
-            JsonObject mod = mods.get(i).getAsJsonObject();
-            if (mod.get("name").getAsString().toLowerCase().contains(modname)) {
-                String ModVersion = "";
-                if (isDev)
-                    ModVersion = mod.get("dev").getAsString();
-                else
-                    ModVersion = mod.get("version").getAsString();
-                String Name = mod.get("name").getAsString();
-                String Link = mod.get("shorturl").getAsString();
-                String Author = mod.get("author").getAsString();
-                if (Link.isEmpty()) {
-                    Link = mod.get("longurl").getAsString();
+        MCModVersionSearch:
+        for(int i = versions.size()-1; i >0; i--) {
+            JsonArray mods = GeneralUtils.getJsonArray("http://bot.notenoughmods.com/" + versions.get(i).getAsString() + ".json");
+            MCModSearch:
+            for (int j = 0; j < mods.size(); j++) {
+                JsonObject mod = mods.get(j).getAsJsonObject();
+                if(mcmods.size() >= 3){
+                    break MCModVersionSearch;
                 }
-                if (total < 3) {
-                    if (!ModVersion.isEmpty()) {
-                        IRCUtils.sendMessage(user, network, channel, "[" + ModVersion + "] " + Name + " by " + Author + " - " + Link, prefix);
-                        total++;
-                    }
+                for(MCMod record:mcmods) {
+                if(mod.get("name").getAsString().equalsIgnoreCase(record.getMod().get("name").getAsString()))
+                    continue MCModSearch;
+                }
+                if (mod.get("name").getAsString().toLowerCase().contains(modname) ) {
+                    mcmods.add(new MCMod(versions.get(i).getAsString(), mod));
                 }
             }
         }
-        if (total == 0) {
+        if (mcmods.isEmpty()) {
             ErrorUtils.sendError(user, "No mods found");
+        }else{
+            for(MCMod mod:mcmods){
+                String ModVersion = "";
+                if (isDev)
+                    ModVersion = mod.getMod().get("dev").getAsString();
+                else
+                    ModVersion = mod.getMod().get("version").getAsString();
+                String Name = mod.getMod().get("name").getAsString();
+                String Link = mod.getMod().get("shorturl").getAsString();
+                String Author = mod.getMod().get("author").getAsString();
+                IRCUtils.sendMessage(user, network, channel, "[" + mod.getVersion() + "] " + Name + " " + ModVersion + " by " + Author + " - " + Link, prefix);
+            }
         }
     }
 }
