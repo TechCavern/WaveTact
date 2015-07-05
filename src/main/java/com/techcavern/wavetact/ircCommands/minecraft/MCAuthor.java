@@ -16,21 +16,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 @IRCCMD
-public class MCMods extends IRCCommand {
+public class MCAuthor extends IRCCommand {
 
-    public MCMods() {
-        super(GeneralUtils.toArray("mcmods mcmod"), 0, "mcmods (+)[mod name]", "Gets info on a minecraft mod", false);
+    public MCAuthor() {
+        super(GeneralUtils.toArray("mcauthor"), 0, "mcauthor (+)[author]", "Gets mods by an author", false);
     }
 
     @Override
     public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         JsonArray versions = GeneralUtils.getJsonArray("http://bot.notenoughmods.com/?json");
         boolean isDev = false;
-        String modname = args[0].toLowerCase();
+        String author = args[0].toLowerCase();
         List<MCMod> mcmods = new ArrayList<>();
-        if (modname.startsWith("+")) {
+        if (author.startsWith("+")) {
             isDev = true;
-            modname = modname.replaceFirst("\\+", "");
+            author = author.replaceFirst("\\+", "");
         }
         MCModVersionSearch:
         for(int i = versions.size()-1; i >0; i--) {
@@ -45,7 +45,7 @@ public class MCMods extends IRCCommand {
                 if(mod.get("name").getAsString().equalsIgnoreCase(record.getMod().get("name").getAsString()))
                     continue MCModSearch;
                 }
-                if (mod.get("name").getAsString().toLowerCase().contains(modname) ) {
+                if (mod.get("author").getAsString().toLowerCase().contains(author) ) {
                     mcmods.add(new MCMod(versions.get(i).getAsString(), mod));
                 }
             }
@@ -62,9 +62,6 @@ public class MCMods extends IRCCommand {
                 String Name = mod.getMod().get("name").getAsString();
                 String Link = mod.getMod().get("shorturl").getAsString();
                 String Author = mod.getMod().get("author").getAsString();
-                if(Author.isEmpty())
-                    IRCUtils.sendMessage(user, network, channel, "[" + mod.getVersion() + "] " + Name + " " + ModVersion + " - " + Link, prefix);
-else
                 IRCUtils.sendMessage(user, network, channel, "[" + mod.getVersion() + "] " + Name + " " + ModVersion + " by " + Author + " - " + Link, prefix);
             }
         }
