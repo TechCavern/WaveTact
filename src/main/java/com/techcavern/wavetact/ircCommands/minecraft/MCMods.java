@@ -19,7 +19,7 @@ import java.util.List;
 public class MCMods extends IRCCommand {
 
     public MCMods() {
-        super(GeneralUtils.toArray("mcmods mcmod mcauthor"), 0, "mcmods (+)[mod name]", "Gets info on minecraft mods", false);
+        super(GeneralUtils.toArray("mcmods mcmod mcmodauthor mcma mcm"), 0, "mcmods (+)[mod name]", "Gets info on minecraft mods", false);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class MCMods extends IRCCommand {
             modname = modname.replaceFirst("\\+", "");
         }
         String searchPhrase = "name";
-        if(command.equalsIgnoreCase("mcauthor"))
+        if (command.equalsIgnoreCase("mcmodauthor") || command.equalsIgnoreCase("mcma"))
             searchPhrase = "author";
         MCModVersionSearch:
         for(int i = versions.size()-1; i >0; i--) {
