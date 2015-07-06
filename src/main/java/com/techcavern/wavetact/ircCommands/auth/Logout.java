@@ -22,8 +22,9 @@ public class Logout extends IRCCommand {
             ErrorUtils.sendError(user, "Error, you are not logged in");
         } else {
             Registry.AuthedUsers.remove(authedUser);
+            if (IRCUtils.getCachedWhoisEvent(network, user.getNick()) != null)
+                Registry.WhoisEventCache.remove(IRCUtils.getCachedWhoisEvent(network, user.getNick()));
             IRCUtils.sendMessage(user, network, channel, "You are now logged out", prefix);
         }
     }
 }
-
