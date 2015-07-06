@@ -12,8 +12,10 @@ import com.techcavern.wavetact.utils.Registry;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.ConnectEvent;
+import org.pircbotx.hooks.managers.ListenerManager;
 
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import static com.techcavern.wavetactdb.Tables.SERVERS;
@@ -33,7 +35,18 @@ public class ConnectListener extends ListenerAdapter {
         if(NickServCommand != null) {
             event.getBot().sendRaw().rawLine("PRIVMSG " + NickServNick + " :" + NickServCommand);
         }
+        TimeUnit.SECONDS.sleep(10);
         Registry.MessageQueue.addAll(Arrays.asList(StringUtils.split(DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(event.getBot())).getValue(SERVERS.CHANNELS), ", ")).stream().map(channel -> new NetProperty("JOIN :" + channel, event.getBot())).collect(Collectors.toList()));
+        TimeUnit.SECONDS.sleep(10);
+        ListenerManager listenerManager = event.getBot().getConfiguration().getListenerManager();
+        listenerManager.addListener(new ChanMsgListener());
+        listenerManager.addListener(new PartListener());
+        listenerManager.addListener(new PrivMsgListener());
+        listenerManager.addListener(new KickListener());
+        listenerManager.addListener(new BanListener());
+        listenerManager.addListener(new FunMsgListener());
+        listenerManager.addListener(new RelayMsgListener());
+        listenerManager.addListener(new TellMsgListener());
     }
 
 }

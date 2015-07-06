@@ -176,10 +176,6 @@ public class LoadUtils {
             class MessageQueue implements Runnable {
                 @Override
                 public void run() {
-                    try {
-                        TimeUnit.SECONDS.sleep(30);
-                    } catch (InterruptedException c) {
-                    }
                     while (Registry.NetworkName.contains(network)) {
                         try {
                             if (Registry.MessageQueue.size() > 0 && network.getNetwork().equals(Registry.MessageQueue.get(0).getNetwork())) {

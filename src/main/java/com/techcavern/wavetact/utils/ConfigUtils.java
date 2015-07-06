@@ -66,14 +66,6 @@ public class ConfigUtils {
         }
         Net.addServer(server, port);
         Net.setRealName(nick);
-        Net.getListenerManager().addListener(new ChanMsgListener());
-        Net.getListenerManager().addListener(new PartListener());
-        Net.getListenerManager().addListener(new PrivMsgListener());
-        Net.getListenerManager().addListener(new KickListener());
-        Net.getListenerManager().addListener(new BanListener());
-        Net.getListenerManager().addListener(new FunMsgListener());
-        Net.getListenerManager().addListener(new RelayMsgListener());
-        Net.getListenerManager().addListener(new TellMsgListener());
         Net.getListenerManager().addListener(new ConnectListener());
         Net.setAutoReconnect(true);
         if(serverpass != null){

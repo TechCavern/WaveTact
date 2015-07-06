@@ -15,9 +15,6 @@ public class PermUtils {
 
     public static String getAccount(PircBotX network, String userObject, String hostmask) { //gets account of user using hostmask
         String authtype = DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(network)).getValue(SERVERS.AUTHTYPE);
-        if (authtype == null) {
-            return userObject;
-        }
         switch (authtype) {
             case "nickserv":
                 return getNickServAccountName(network, userObject, hostmask);
