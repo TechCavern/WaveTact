@@ -47,9 +47,16 @@ public class LoadUtils {
     }
 
     public static void removeDuplicateCommands() {
-        for (IRCCommand g : Registry.IRCCommands) {
-            for (String commandid : g.getCommandID()) {
-                DatabaseUtils.removeCustomCommand(commandid);
+        if (DatabaseUtils.getConfig("currentiteration") != null && Integer.parseInt(DatabaseUtils.getConfig("currentiteration")) >= Registry.currentiteration) {
+            return;
+        } else {
+            DatabaseUtils.removeConfig("currentiteration");
+            DatabaseUtils.addConfig("currentiteration", String.valueOf(Registry.currentiteration));
+            System.out.println("Cleaning out Custom Commands");
+            for (IRCCommand g : Registry.IRCCommands) {
+                for (String commandid : g.getCommandID()) {
+                    DatabaseUtils.removeCustomCommand(commandid);
+                }
             }
         }
     }

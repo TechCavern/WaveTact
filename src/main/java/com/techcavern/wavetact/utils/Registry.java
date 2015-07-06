@@ -31,6 +31,7 @@ public class Registry {
     public static String wordnikapikey = null;
     public static String googleapikey = null;
     public static String yandexapikey = null;
+    public static final int currentiteration = 0;
     public static final ConsoleServer consoleServer = new ConsoleServer();
     public static DSLContext WaveTactDB = null;
     public static final List<NetProperty> MessageQueue = new ArrayList<>();
