@@ -55,6 +55,10 @@ public class CustomCMD extends IRCCommand {
         } else {
             cCommand = args[0];
         }
+        if (IRCUtils.getGenericCommand(cCommand) != null) {
+            ErrorUtils.sendError(user, "Command already exists");
+            return;
+        }
         Record customCommand = DatabaseUtils.getChannelCustomCommand(net, chan, cCommand);
         if (modify && customCommand != null && userPermLevel >= customCommand.getValue(CUSTOMCOMMANDS.PERMLEVEL) && !customCommand.getValue(CUSTOMCOMMANDS.ISLOCKED)) {
             customCommand.setValue(CUSTOMCOMMANDS.PERMLEVEL, Integer.parseInt(args[1]));
