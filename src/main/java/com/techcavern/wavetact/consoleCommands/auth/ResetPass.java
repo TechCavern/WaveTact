@@ -16,7 +16,7 @@ import static com.techcavern.wavetactdb.Tables.ACCOUNTS;
 public class ResetPass extends ConsoleCommand {
 
     public ResetPass() {
-        super(GeneralUtils.toArray("resetpassword resetpass"), "setpass [user] [newpass]", "Resets password");
+        super(GeneralUtils.toArray("resetpassword resetpass"), "resetpass [user] [newpass]", "Resets password");
     }
 
     @Override
@@ -26,7 +26,7 @@ public class ResetPass extends ConsoleCommand {
             account.setValue(ACCOUNTS.RANDOMSTRING, UUID.randomUUID().toString());
             account.setValue(ACCOUNTS.PASSWORD, Registry.encryptor.encryptPassword(args[1] + ACCOUNTS.RANDOMSTRING));
             DatabaseUtils.updateAccount(account);
-            commandIO.getPrintStream().println("Account dropped");
+            commandIO.getPrintStream().println("Password Reset");
         } else {
             commandIO.getPrintStream().println("Account does not exist");
         }

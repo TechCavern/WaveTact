@@ -24,7 +24,7 @@ public class PermUtils {
             case "account":
                 return getAuthedUser(network, userObject, hostmask);
             default:
-                return userObject;
+                return hostmask;
         }
     }
 
@@ -60,7 +60,7 @@ public class PermUtils {
             }
         }
         if (hostmask == null) {
-            return userObject;
+            return null;
         } else {
             return userString;
         }

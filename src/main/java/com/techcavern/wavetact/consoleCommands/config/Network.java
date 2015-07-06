@@ -103,15 +103,6 @@ public class Network extends ConsoleCommand {
                             isSuccess = true;
                         }
                         break;
-                    case "authtype":
-                        if (viewonly)
-                            commandIO.getPrintStream().println(network.getValue(SERVERS.AUTHTYPE));
-                        else {
-                            network.setValue(SERVERS.AUTHTYPE, args[2]);
-                            Registry.AuthedUsers.clear();
-                            isSuccess = true;
-                        }
-                        break;
                     case "netadminaccess":
                         if (viewonly)
                             commandIO.getPrintStream().println(network.getValue(SERVERS.NETWORKADMINACCESS));
@@ -132,6 +123,7 @@ public class Network extends ConsoleCommand {
 
         } else if (args[0].startsWith("-")) {
             DatabaseUtils.removeServer(args[0].replaceFirst("\\-", ""));
+            DatabaseUtils.removeChannelUserProperty(args[0].replaceFirst("\\-", ""));
             PircBotX network = IRCUtils.getBotByNetworkName(args[0].replaceFirst("\\-", ""));
             for (NetProperty e : Registry.NetworkName) {
                 if (e.getNetwork().equals(network)) {
@@ -180,7 +172,7 @@ public class Network extends ConsoleCommand {
             String bindhostinput = input.nextLine();
             if (!bindhostinput.isEmpty())
                 bindhost = bindhostinput;
-            commandIO.getPrintStream().print("AuthType (nickserv/account/nick): ");
+            commandIO.getPrintStream().print("AuthType (nickserv/account/hostmask): ");
             String authtype = input.nextLine();
             commandIO.getPrintStream().print("Auto Allow Network Operators NetAdmin Level Access? (True/False): ");
             boolean netadminaccess = Boolean.valueOf(input.nextLine());

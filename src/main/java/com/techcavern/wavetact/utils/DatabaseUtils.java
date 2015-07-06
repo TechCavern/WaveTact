@@ -185,6 +185,10 @@ public class DatabaseUtils {
         Registry.WaveTactDB.delete(CHANNELUSERPROPERTY).where(CHANNELUSERPROPERTY.PROPERTY.eq(property)).and(CHANNELUSERPROPERTY.USER.eq(user)).and(CHANNELUSERPROPERTY.NETWORK.eq(network)).and(CHANNELUSERPROPERTY.CHANNEL.eq(channel)).execute();
     }
 
+    public static void removeChannelUserProperty(String network) {
+        Registry.WaveTactDB.delete(CHANNELUSERPROPERTY).where(CHANNELUSERPROPERTY.NETWORK.eq(network)).execute();
+    }
+
     public static Result<Record> getServers() {
         return Registry.WaveTactDB.select().from(SERVERS).fetch();
     }
