@@ -23,7 +23,7 @@ public class Help extends IRCCommand {
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (args.length > 0) {
             if (args[0].equalsIgnoreCase("permissions")) {
-                IRCUtils.sendMessage(user, network, channel, "0 = Everyone, 5 = Voiced/Trusted, 7 = Half-Opped, 10 = Opped & Protected, 15 = Ownered, 18 = Network Admin,  9001 = Controller ", prefix);
+                IRCUtils.sendMessage(user, network, channel, "-2 = ignored completely, -1 = commands ignored, 0 = Everyone, 5 = Voiced/Trusted, 7 = Half-Opped, 10 = Protected Operator, 15 = Senior Operator, 18 = Channel Administrator, 20 = Network Administrator", prefix);
             } else {
                 IRCCommand irCommand = IRCUtils.getGenericCommand(args[0]);
                 if (irCommand != null) {

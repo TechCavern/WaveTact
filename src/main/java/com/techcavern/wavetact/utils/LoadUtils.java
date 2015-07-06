@@ -46,6 +46,14 @@ public class LoadUtils {
         }
     }
 
+    public static void removeDuplicateCommands() {
+        for (IRCCommand g : Registry.IRCCommands) {
+            for (String commandid : g.getCommandID()) {
+                DatabaseUtils.removeCustomCommand(commandid);
+            }
+        }
+    }
+
     public static void registerConsoleCommands() {
         Set<Class<?>> classes = Registry.wavetactreflection.getTypesAnnotatedWith(ConCMD.class);
         for (Class<?> clss : classes) {
