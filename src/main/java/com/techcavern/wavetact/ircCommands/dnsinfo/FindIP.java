@@ -17,7 +17,7 @@ import java.util.List;
 public class FindIP extends IRCCommand {
 
     public FindIP() {
-        super(GeneralUtils.toArray("findip locate find loc geo geoip"), 0, "findip [IP][domain][user]", "GeoIPs a user", false);
+        super(GeneralUtils.toArray("findip locate find loc geo geoip"), 0, "findip (+)[IP][domain][user]", "GeoIPs a user", false);
     }
 
     @Override
