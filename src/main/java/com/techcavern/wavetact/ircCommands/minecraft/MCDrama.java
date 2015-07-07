@@ -4,6 +4,7 @@ import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.Registry;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.pircbotx.Channel;
@@ -19,7 +20,7 @@ public class MCDrama extends IRCCommand {
 
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        Document doc = Jsoup.connect("http://direct.techcavern.ml/drama.php").get();
+        Document doc = Jsoup.connect("http://direct.techcavern.ml/drama.php").userAgent(Registry.userAgent).get();
         String c = doc.select("h1").text();
         IRCUtils.sendMessage(user, network, channel, c, prefix);
     }

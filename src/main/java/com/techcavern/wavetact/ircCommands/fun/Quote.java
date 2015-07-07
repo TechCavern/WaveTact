@@ -4,6 +4,7 @@ import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.Registry;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.pircbotx.Channel;
@@ -19,7 +20,7 @@ public class Quote extends IRCCommand {
 
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        Document doc = Jsoup.connect("http://wwww.quotationspage.com/random.php3").get();
+        Document doc = Jsoup.connect("http://wwww.quotationspage.com/random.php3").userAgent(Registry.userAgent).get();
         String c = doc.select(".quote").get(0).text();
         String d = doc.select(".author").get(0).text();
         if(d.contains("-")){
