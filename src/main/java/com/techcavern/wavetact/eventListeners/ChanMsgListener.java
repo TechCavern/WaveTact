@@ -26,7 +26,14 @@ public class ChanMsgListener extends ListenerAdapter {
         class process implements Runnable {
             public void run() {
                 String[] message = StringUtils.split(Colors.removeFormattingAndColors(event.getMessage()), " ");
-                if(event.getMessage().startsWith(DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "commandchar").getValue(NETWORKPROPERTY.VALUE))){
+                Record commandcharRecord = DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "commandchar");
+                String commandchar = null;
+                if (commandcharRecord == null) {
+                    return;
+                }
+                commandchar = commandcharRecord.getValue(NETWORKPROPERTY.VALUE);
+
+                if (event.getMessage().startsWith(commandchar)) {
                 String chancommand = StringUtils.replaceOnce(message[0].toLowerCase(), DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "commandchar").getValue(NETWORKPROPERTY.VALUE), "");
                 message = ArrayUtils.remove(message, 0);
                 IRCCommand Command = IRCUtils.getCommand(chancommand, IRCUtils.getNetworkNameByNetwork(event.getBot()), event.getChannel().getName());
@@ -59,7 +66,7 @@ public class ChanMsgListener extends ListenerAdapter {
                         return;
                     }
                     String[] relayedmessage = StringUtils.split(Colors.removeFormattingAndColors(startingmessage), " ");
-                    if(relayedmessage[0].startsWith(DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "commandchar").getValue(NETWORKPROPERTY.VALUE)))
+                    if (relayedmessage[0].startsWith(commandchar))
                     {
                         String relayedcommand = StringUtils.replaceOnce(relayedmessage[0], DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "commandchar").getValue(NETWORKPROPERTY.VALUE), "");
                         relayedmessage = ArrayUtils.remove(relayedmessage, 0);

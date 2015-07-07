@@ -28,7 +28,13 @@ public class FunMsgListener extends ListenerAdapter {
     public void onMessage(MessageEvent event) throws Exception {
         class process implements Runnable {
             public void run() {
-                if (PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel()) > -2 && !event.getMessage().startsWith(DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "commandchar").getValue(NETWORKPROPERTY.VALUE))) {
+                Record commandcharRecord = DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "commandchar");
+                String commandchar = null;
+                if (commandcharRecord == null) {
+                    return;
+                }
+                commandchar = commandcharRecord.getValue(NETWORKPROPERTY.VALUE);
+                if (PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel()) > -2 && !event.getMessage().startsWith(commandchar)) {
                         String[] message = StringUtils.split(event.getMessage(), " ");
                         for (String arg : message) {
                             try {

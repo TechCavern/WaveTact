@@ -9,6 +9,7 @@ import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.*;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.jooq.Record;
 import org.pircbotx.Channel;
 import org.pircbotx.Colors;
 import org.pircbotx.hooks.ListenerAdapter;
@@ -26,7 +27,10 @@ public class PrivMsgListener extends ListenerAdapter {
         class process implements Runnable {
             public void run() {
                 String[] message = StringUtils.split(Colors.removeFormattingAndColors(event.getMessage()), " ");
-                String privcommand = StringUtils.replaceOnce(message[0].toLowerCase(), DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "commandchar").getValue(NETWORKPROPERTY.VALUE), "");
+                Record commandchar = DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "commandchar");
+                String privcommand = message[0].toLowerCase();
+                if (commandchar != null)
+                    privcommand = StringUtils.replaceOnce(privcommand, commandchar.getValue(NETWORKPROPERTY.VALUE), "");
                 IRCCommand Command = IRCUtils.getCommand(privcommand, IRCUtils.getNetworkNameByNetwork(event.getBot()), null);
                 message = ArrayUtils.remove(message, 0);
                 if (Command != null) {
