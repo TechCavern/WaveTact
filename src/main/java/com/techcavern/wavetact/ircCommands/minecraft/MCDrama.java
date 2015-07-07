@@ -19,7 +19,7 @@ public class MCDrama extends IRCCommand {
 
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        Document doc = Jsoup.connect("http://techcavern.ml/drama.php").get();
+        Document doc = Jsoup.connect("http://direct.techcavern.ml/drama.php").get();
         String c = doc.select("h1").text();
         IRCUtils.sendMessage(user, network, channel, c, prefix);
     }
