@@ -24,7 +24,7 @@ public class Movie extends IRCCommand {
         if (results.get("Response").getAsString().equalsIgnoreCase("false")) {
             ErrorUtils.sendError(user, "Search returned no results");
         } else {
-            String response = results.get("Title").getAsString();
+            String response = "[" + results.get("Title").getAsString() + "]";
             String runtime = results.get("Runtime").getAsString();
             if (!runtime.equalsIgnoreCase("N/A")) {
                 response += " - " + runtime;

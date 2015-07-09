@@ -34,7 +34,7 @@ public class Weather extends IRCCommand {
             String Temp = weather.get("temperature_string").getAsString();
             String Humidity = weather.get("relative_humidity").getAsString() + " humidity";
             String Wind = weather.get("wind_string").getAsString();
-            IRCUtils.sendMessage(user, network, channel, City + ": " + Weather + " - " + Temp + " - " + Humidity + " - " + Wind, prefix);
+            IRCUtils.sendMessage(user, network, channel, "[" + City + "] " + Weather + " - " + Temp + " - " + Humidity + " - " + Wind, prefix);
         } else {
             ErrorUtils.sendError(user, "Requested location not found");
         }

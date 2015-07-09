@@ -32,7 +32,7 @@ public class Google extends IRCCommand {
                 String title = results.get(ArrayIndex).getAsJsonObject().get("titleNoFormatting").getAsString();
                 String content = results.get(ArrayIndex).getAsJsonObject().get("content").getAsString().replaceAll("<.*?>", "").replaceAll("&.*?;", "");
                 String url = results.get(ArrayIndex).getAsJsonObject().get("unescapedUrl").getAsString();
-                IRCUtils.sendMessage(user, network, channel, title + " - " + content, prefix);
+                IRCUtils.sendMessage(user, network, channel, "[" + title + "] " + content, prefix);
                 IRCUtils.sendMessage(user, network, channel, url, prefix);
 
             } else {

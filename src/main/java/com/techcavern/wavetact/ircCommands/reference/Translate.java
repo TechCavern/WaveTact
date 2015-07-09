@@ -29,7 +29,7 @@ public class Translate extends IRCCommand {
         }
         JsonObject result = GeneralUtils.getJsonObject("https://translate.yandex.net/api/v1.5/tr.json/translate?key=" + yandexapikey + "&lang=en&text=" + StringUtils.join(args, "+"));
             if(result.get("code").getAsInt() == 200){
-                IRCUtils.sendMessage(user, network, channel, result.get("lang").getAsString() + ": " + result.get("text").getAsString(), prefix);
+                IRCUtils.sendMessage(user, network, channel, "[" + result.get("lang").getAsString() + "] " + result.get("text").getAsString(), prefix);
             }else{
                 ErrorUtils.sendError(user,result.get("code").getAsString() + " - Unable to translate text");
             }

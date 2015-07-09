@@ -52,7 +52,7 @@ public class FindIP extends IRCCommand {
                 }
             }
             if (!message.isEmpty()) {
-                IRCUtils.sendMessage(user, network, channel, message, prefix);
+                IRCUtils.sendMessage(user, network, channel, "[" + IP + "] " + message, prefix);
             } else {
                 ErrorUtils.sendError(user, "Unable to determine location (or you entered an invalid ip)");
             }

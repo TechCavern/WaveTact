@@ -45,7 +45,7 @@ public class CheckPing extends IRCCommand {
                 if (line.contains("time=")) {
                     haslines = true;
                     String[] ips = line.split(" ");
-                    IRCUtils.sendMessage(user, network, channel, IP + ": " + ips[ips.length-2].replace("time=", "") + " milliseconds", prefix);
+                    IRCUtils.sendMessage(user, network, channel, "[" + IP + "] " + ips[ips.length - 2].replace("time=", "") + " milliseconds", prefix);
                 }
             }
             buffereader.close();

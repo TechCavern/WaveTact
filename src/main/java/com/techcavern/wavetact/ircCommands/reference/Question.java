@@ -4,6 +4,7 @@ import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.*;
 import com.wolfram.alpha.*;
+import com.wolfram.alpha.visitor.Visitable;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
@@ -31,9 +32,9 @@ public class Question extends IRCCommand {
             ErrorUtils.sendError(user, "Wolfram Alpha api key is null - contact bot controller to fix");
             return;
         }
-        int ArrayIndex = 0;
+        int ArrayIndex = 1;
         if (GeneralUtils.isInteger(args[0])) {
-            ArrayIndex = Integer.parseInt(args[0]) - 1;
+            ArrayIndex = Integer.parseInt(args[0]);
             args = ArrayUtils.remove(args, 0);
         }
         WAEngine engine = new WAEngine();
@@ -45,9 +46,18 @@ public class Question extends IRCCommand {
         WAPod[] result = queryResult.getPods();
         if (result.length > 0) {
             if (result.length - 1 >= ArrayIndex) {
+                IRCUtils.sendMessage(user, network, channel, "[" + result[ArrayIndex].getTitle() + "] ", prefix);
+                for (WASubpod sub : result[ArrayIndex].getSubpods()) {
+                    for (Visitable visitable : sub.getContents()) {
+                        String text = ((WAPlainText) sub.getContents()[0]).getText().replaceAll("\\n", " - ").replaceAll(" \\| ", ": ");
+                        if (sub.getTitle().isEmpty())
+                            IRCUtils.sendMessage(user, network, channel, text, prefix);
+                        else
+                            IRCUtils.sendMessage(user, network, channel, "[" + sub.getTitle() + "] " + text, prefix);
 
+                    }
+                }
             } else {
-                ArrayIndex = ArrayIndex + 1;
                 ErrorUtils.sendError(user, "Answer #" + ArrayIndex + " does not exist");
             }
         } else {

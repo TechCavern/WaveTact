@@ -45,7 +45,7 @@ public class Define extends IRCCommand {
                 String word = WordUtils.capitalizeFully(Defs.get(ArrayIndex).getWord());
                 String definition = Defs.get(ArrayIndex).getText();
                 List<ExampleUsage> examples = Defs.get(ArrayIndex).getExampleUses();
-                IRCUtils.sendMessage(user, network, channel, word + ": " + definition, prefix);
+                IRCUtils.sendMessage(user, network, channel, "[" + word + "] " + definition, prefix);
                 if (examples.size() > 0) {
                     IRCUtils.sendMessage(user, network, channel, "Example: " + examples.get(0).getText(), prefix);
                 }

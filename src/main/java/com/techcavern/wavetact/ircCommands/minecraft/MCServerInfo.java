@@ -89,7 +89,7 @@ public class MCServerInfo extends IRCCommand {
         String gameVersion = "Version: " + response.get("version").getAsJsonObject().get("name").getAsString();
         String motd = "MOTD: " + response.get("description").getAsString();
         String playercount = "Players: " + response.get("players").getAsJsonObject().get("online").getAsString() + "/" + response.get("players").getAsJsonObject().get("max").getAsString();
-        IRCUtils.sendMessage(user, network, channel, args[0] + ":" + port + " - " + gameVersion + " - " + motd + " - " + playercount, prefix);
+        IRCUtils.sendMessage(user, network, channel, "[" + address.getHostString() + ":" + port + "] " + gameVersion + " - " + motd + " - " + playercount, prefix);
     }
 
 }

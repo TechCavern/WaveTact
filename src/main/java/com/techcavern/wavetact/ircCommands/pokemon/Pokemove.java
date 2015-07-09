@@ -25,7 +25,7 @@ public class Pokemove extends IRCCommand {
         String accuracy = pokemon.get("accuracy").getAsString();
         String power = pokemon.get("power").getAsString();
         String pp = pokemon.get("pp").getAsString();
-        IRCUtils.sendMessage(user, network, channel, name + "(" + id + "): " + description, prefix);
+        IRCUtils.sendMessage(user, network, channel, "[" + name + "(" + id + ")] " + description, prefix);
         IRCUtils.sendMessage(user, network, channel, "Accuracy: " + accuracy + " - Power: " + power + " - PP: " + pp, prefix);
     }
 }

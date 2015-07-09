@@ -27,7 +27,7 @@ public class Pokemon extends IRCCommand {
         String name = pokemon.get("name").getAsString();
         String id = pokemon.get("national_id").getAsString();
         List<String> response = new ArrayList<>();
-        response.add(name + "(" + id + ")");
+        response.add("[" + name + " (" + id + ")]");
         String description = pokemon.get("species").getAsString();
         if (!description.isEmpty())
             response.add(description);

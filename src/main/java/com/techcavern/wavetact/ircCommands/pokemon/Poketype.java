@@ -22,7 +22,7 @@ public class Poketype extends IRCCommand {
         JsonObject pokemon = GeneralUtils.getJsonObject("http://pokeapi.co/api/v1/type/" + args[0]);
         String name = pokemon.get("name").getAsString();
         String id = pokemon.get("id").getAsString();
-        IRCUtils.sendMessage(user, network, channel, name + "(" + id + "):", prefix);
+        IRCUtils.sendMessage(user, network, channel, "[" + name + "(" + id + ")] ", prefix);
         JsonArray preineffective = pokemon.getAsJsonArray("ineffective");
         String ineffective = GeneralUtils.getJsonString(preineffective, "name");
         if (ineffective.isEmpty())

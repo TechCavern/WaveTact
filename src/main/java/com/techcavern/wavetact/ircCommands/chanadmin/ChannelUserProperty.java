@@ -50,7 +50,7 @@ public class ChannelUserProperty extends IRCCommand {
                 IRCUtils.sendMessage(user, network, IRCUtils.getMsgChannel(channel,isPrivate), "Property deleted", prefix);
             } else if (isModify) {
                 if (viewonly)
-                    IRCUtils.sendMessage(user, network, IRCUtils.getMsgChannel(channel,isPrivate), account + " " + args[1] + ": " + channelUserProperty.getValue(CHANNELUSERPROPERTY.VALUE), prefix);
+                    IRCUtils.sendMessage(user, network, IRCUtils.getMsgChannel(channel, isPrivate), "[" + account + "] " + args[1] + ": " + channelUserProperty.getValue(CHANNELUSERPROPERTY.VALUE), prefix);
                 else {
                     channelUserProperty.setValue(CHANNELUSERPROPERTY.VALUE, args[2]);
                     DatabaseUtils.updateChannelUserProperty(channelUserProperty);

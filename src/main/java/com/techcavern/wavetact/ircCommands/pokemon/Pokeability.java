@@ -21,6 +21,6 @@ public class Pokeability extends IRCCommand {
         JsonObject pokemon = GeneralUtils.getJsonObject("http://pokeapi.co/api/v1/ability/" + args[0]);
         String name = pokemon.get("name").getAsString();
         String id = pokemon.get("id").getAsString();
-        IRCUtils.sendMessage(user, network, channel, name + "(" + id + ")", prefix);
+        IRCUtils.sendMessage(user, network, channel, "[" + id + "] " + name, prefix);
     }
 }
