@@ -16,7 +16,7 @@ import java.util.Arrays;
 public class Help extends IRCCommand {
 
     public Help() {
-        super(GeneralUtils.toArray("help halp"), 0, "help (command)", "Gets help on a command - generally a + before something means editing it, and a - means removing it. None means adding it. Time is in [time](s/m/h/d/w) format", false);
+        super(GeneralUtils.toArray("help halp"), 0, "help (command)", "Gets help on a command", false);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class Help extends IRCCommand {
                 }
             }
         } else {
-            IRCUtils.sendMessage(user, network, channel, "help [command] - generally a + before something means editing it, and a - means removing it. None means adding it. - Time is in [time](s/m/h/d/w) format. [] is a required argument. () is an optional argument.", prefix);
+            IRCUtils.sendMessage(user, network, channel, "help (command) - Run list for available commands, generally a + before something means editing it, and a - means removing it. None means adding it. Time is in [time](s/m/h/d/w) format. [] is a required argument. () is an optional argument.", prefix);
         }
     }
 }

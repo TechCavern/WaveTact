@@ -30,7 +30,7 @@ public class Help extends ConsoleCommand {
                 commandIO.getPrintStream().println("Command does not exist");
             }
         } else {
-            commandIO.getPrintStream().println("help (command) - gets help on a specific command");
+            commandIO.getPrintStream().println("help (command) - Run list for available commands, generally a + before something means editing it, and a - means removing it. None means adding it. Time is in [time](s/m/h/d/w) format. [] is a required argument. () is an optional argument.");
         }
     }
 
