@@ -10,6 +10,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.charset.Charset;
 
+import static com.techcavern.wavetactdb.Tables.CONFIG;
 import static com.techcavern.wavetactdb.Tables.SERVERS;
 
 
@@ -80,11 +81,4 @@ public class ConfigUtils {
         return new PircBotX(Net.buildConfiguration());
     }
 
-    public static void flushApiKeys(){
-        Registry.wundergroundapikey = DatabaseUtils.getConfig("wundergroundapikey");
-        Registry.wolframalphaapikey = DatabaseUtils.getConfig("wolframalphaapikey");
-        Registry.wordnikapikey = DatabaseUtils.getConfig("wordnikapikey");
-        Registry.googleapikey = DatabaseUtils.getConfig("googleapikey");
-        Registry.yandexapikey = DatabaseUtils.getConfig("yandexapikey");
-    }
 }

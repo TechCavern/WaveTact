@@ -3,14 +3,13 @@ package com.techcavern.wavetact.ircCommands.reference;
 import com.google.gson.JsonObject;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.utils.ErrorUtils;
-import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.Registry;
+import com.techcavern.wavetact.utils.*;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
+
+import static com.techcavern.wavetactdb.Tables.CONFIG;
 
 @IRCCMD
 public class Weather extends IRCCommand {
@@ -21,11 +20,14 @@ public class Weather extends IRCCommand {
 
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        if (Registry.wundergroundapikey == null) {
-            ErrorUtils.sendError(user, "Wunderground API key is null - contact bot controller to fix");
+        String wundergroundapikey;
+        if (DatabaseUtils.getConfig("wundergroundapikey") != null)
+            wundergroundapikey = DatabaseUtils.getConfig("wundergroundapikey").getValue(CONFIG.VALUE);
+        else {
+            ErrorUtils.sendError(user, "Wunderground api key is null - contact bot controller to fix");
             return;
         }
-        JsonObject weather = GeneralUtils.getJsonObject("http://api.wunderground.com/api/" + Registry.wundergroundapikey + "/conditions/q/" + StringUtils.join(args, "%20") + ".json").getAsJsonObject("current_observation");
+        JsonObject weather = GeneralUtils.getJsonObject("http://api.wunderground.com/api/" + wundergroundapikey + "/conditions/q/" + StringUtils.join(args, "%20") + ".json").getAsJsonObject("current_observation");
         if (weather != null) {
             String City = weather.get("display_location").getAsJsonObject().get("full").getAsString();
             String Weather = weather.get("weather").getAsString();

@@ -21,6 +21,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import static com.techcavern.wavetactdb.Tables.BANS;
+import static com.techcavern.wavetactdb.Tables.CONFIG;
 
 public class LoadUtils {
 
@@ -47,7 +48,7 @@ public class LoadUtils {
     }
 
     public static void removeDuplicateCommands() {
-        if (DatabaseUtils.getConfig("currentiteration") != null && Integer.parseInt(DatabaseUtils.getConfig("currentiteration")) >= Registry.currentiteration) {
+        if (DatabaseUtils.getConfig("currentiteration") != null && Integer.parseInt(DatabaseUtils.getConfig("currentiteration").getValue(CONFIG.VALUE)) >= Registry.currentiteration) {
             return;
         } else {
             DatabaseUtils.removeConfig("currentiteration");

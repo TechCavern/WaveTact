@@ -57,7 +57,7 @@ public class ChannelProperty extends IRCCommand {
             DatabaseUtils.addChannelProperty(networkname, channel.getName(), property, args[1]);
             IRCUtils.sendMessage(user, network, IRCUtils.getMsgChannel(channel,isPrivate), "Property added", prefix);
         } else {
-            ErrorUtils.sendError(user, "Unknown user or unknown property");
+            ErrorUtils.sendError(user, "property already exists (If you were adding) or property does not exist");
         }
 
     }

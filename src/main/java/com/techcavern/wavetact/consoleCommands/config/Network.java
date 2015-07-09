@@ -119,6 +119,8 @@ public class Network extends ConsoleCommand {
                     commandIO.getPrintStream().println("Property Modified");
                 }
 
+            } else {
+                commandIO.getPrintStream().println("Network does not exist");
             }
 
         } else if (args[0].startsWith("-")) {

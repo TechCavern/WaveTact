@@ -33,14 +33,8 @@ public class UrbanDictionary extends IRCCommand {
                 String Word = WordUtils.capitalizeFully(objectJSON.getAsJsonArray("list").get(ArrayIndex).getAsJsonObject().get("word").getAsString().replaceAll("\\n|\\r|\\t", " ").replaceAll("  ", " "));
                 String Definition = objectJSON.getAsJsonArray("list").get(ArrayIndex).getAsJsonObject().get("definition").getAsString().replaceAll("\\n|\\r|\\t", " ").replaceAll("  ", " ");
                 String Examples = objectJSON.getAsJsonArray("list").get(ArrayIndex).getAsJsonObject().get("example").getAsString().replaceAll("\\n|\\r|\\t", " ").replaceAll("  ", " ");
-                if (Definition.length() > 700) {
-                    Definition = Definition.substring(0, 697) + "...";
-                }
                 IRCUtils.sendMessage(user, network, channel, Word + ": " + Definition, prefix);
                 if (!Examples.isEmpty()) {
-                    if (Examples.length() > 700) {
-                        Examples = Examples.substring(0, 697) + "...";
-                    }
                     IRCUtils.sendMessage(user, network, channel, "Example: " + Examples, prefix);
                 }
             } else {

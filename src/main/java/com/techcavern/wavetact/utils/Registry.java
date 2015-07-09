@@ -26,11 +26,6 @@ public class Registry {
     public static final Reflections wavetactreflection = new Reflections("com.techcavern.wavetact");
     public static final List<NetProperty> NetworkName = new ArrayList<>();
     public static final List<CachedWhoisEvent> WhoisEventCache = new ArrayList<>();
-    public static String wundergroundapikey = null;
-    public static String wolframalphaapikey = null;
-    public static String wordnikapikey = null;
-    public static String googleapikey = null;
-    public static String yandexapikey = null;
     public static final int currentiteration = 0;
     public static final ConsoleServer consoleServer = new ConsoleServer();
     public static DSLContext WaveTactDB = null;

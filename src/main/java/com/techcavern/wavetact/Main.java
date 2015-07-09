@@ -26,7 +26,6 @@ public class Main {
         } else {
             LoadUtils.initiateDatabaseConnection();
             ConfigUtils.registerNetworks();
-            ConfigUtils.flushApiKeys();
             LoadUtils.registerConsoleCommands();
             LoadUtils.registerIRCCommands();
             LoadUtils.registerAttacks();

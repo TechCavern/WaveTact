@@ -47,11 +47,9 @@ public class DatabaseUtils {
         return Registry.WaveTactDB.select().from(BANS).orderBy(BANS.TIME.asc()).fetch();
     }
 
-    public static String getConfig(String config) {
-        Record configRecord = getRecord(Registry.WaveTactDB.select().from(CONFIG).where(CONFIG.PROPERTY.eq(config)).fetch());
-        if (configRecord == null)
-            return null;
-        return configRecord.getValue(CONFIG.VALUE);
+    public static Record getConfig(String config) {
+        Result<Record> configRecord = Registry.WaveTactDB.select().from(CONFIG).where(CONFIG.PROPERTY.eq(config)).fetch();
+        return getRecord(configRecord);
     }
 
     public static void removeConfig(String config) {
@@ -60,6 +58,10 @@ public class DatabaseUtils {
 
     public static void addConfig(String config, String value) {
         Registry.WaveTactDB.insertInto(CONFIG).values(config, value).execute();
+    }
+
+    public static void updateConfig(Record config) {
+        Registry.WaveTactDB.update(CONFIG).set(config).where(CONFIG.PROPERTY.eq(config.getValue(CONFIG.PROPERTY)));
     }
 
     public static Record getRecord(Result<Record> record) {

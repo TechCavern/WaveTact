@@ -2,10 +2,7 @@ package com.techcavern.wavetact.ircCommands.reference;
 
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.utils.ErrorUtils;
-import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.Registry;
+import com.techcavern.wavetact.utils.*;
 import com.wordnik.client.api.WordApi;
 import com.wordnik.client.model.Definition;
 import com.wordnik.client.model.ExampleUsage;
@@ -17,6 +14,8 @@ import org.pircbotx.User;
 
 import java.util.List;
 
+import static com.techcavern.wavetactdb.Tables.CONFIG;
+
 @IRCCMD
 public class Define extends IRCCommand {
 
@@ -26,8 +25,12 @@ public class Define extends IRCCommand {
 
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        if (Registry.wordnikapikey == null) {
+        String wordnikapikey;
+        if (DatabaseUtils.getConfig("wordnikapikey") != null)
+            wordnikapikey = DatabaseUtils.getConfig("wordnikapikey").getValue(CONFIG.VALUE);
+        else {
             ErrorUtils.sendError(user, "Wordnik api key is null - contact bot controller to fix");
+            return;
         }
         int ArrayIndex = 0;
         if (GeneralUtils.isInteger(args[0])) {
@@ -35,7 +38,7 @@ public class Define extends IRCCommand {
             args = ArrayUtils.remove(args, 0);
         }
         WordApi api = new WordApi();
-        api.getInvoker().addDefaultHeader("api_key", Registry.wordnikapikey);
+        api.getInvoker().addDefaultHeader("api_key", wordnikapikey);
         List<Definition> Defs = api.getDefinitions(args[0], null, null, null, null, null, null);
         if (Defs.size() > 0) {
             if (Defs.size() - 1 >= ArrayIndex) {
