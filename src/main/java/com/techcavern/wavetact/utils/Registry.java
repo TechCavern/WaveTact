@@ -36,6 +36,6 @@ public class Registry {
     public static DSLContext WaveTactDB = null;
     public static final List<NetProperty> MessageQueue = new ArrayList<>();
     public static final UrlValidator urlvalidator = new UrlValidator();
-    public static final String Version = "WaveTact 0.9";
+    public static final String Version = "WaveTact 1.0-dev";
     public static final String userAgent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36";
 }

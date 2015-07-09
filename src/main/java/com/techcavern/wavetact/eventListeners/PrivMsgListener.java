@@ -62,7 +62,14 @@ public class PrivMsgListener extends ListenerAdapter {
                         }
                     } else {
                         int userPermLevel = PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), null);
-                        if (Command.getPermLevel() <= 5) {
+                        if (Command.getPermLevel() == 0) {
+                            try {
+                                Command.onCommand(privcommand, event.getUser(), event.getBot(), null, null, true, userPermLevel, message);
+                            } catch (Exception e) {
+                                ErrorUtils.sendError(event.getUser(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")");
+                                e.printStackTrace();
+                            }
+                        } else if (Command.getPermLevel() <= 5 && userPermLevel >= 1) {
                             try {
                                 Command.onCommand(privcommand, event.getUser(), event.getBot(), null, null, true, userPermLevel, message);
                             } catch (Exception e) {

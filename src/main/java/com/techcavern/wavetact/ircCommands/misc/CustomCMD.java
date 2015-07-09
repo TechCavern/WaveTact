@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.techcavern.wavetact.ircCommands.utils;
+package com.techcavern.wavetact.ircCommands.misc;
 
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
@@ -27,7 +27,7 @@ public class CustomCMD extends IRCCommand {
 
 
     public CustomCMD() {
-        super(GeneralUtils.toArray("custommsg cmsg cact customact"), 0, "customcmd (.) (+/-)[command] [permlevel] [response]", "Responses may contain $1, $2, etc which indicate the argument separated by a space. $* indicates all remaining arguments.", false);
+        super(GeneralUtils.toArray("custommsg cmsg cact customact"), 1, "customcmd (.) (+/-)[command] [permlevel] [response]", "Responses may contain $1, $2, etc which indicate the argument separated by a space. $* indicates all remaining arguments.", false);
     }
 
     @Override

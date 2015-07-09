@@ -17,7 +17,7 @@ import static com.techcavern.wavetactdb.Tables.SERVERS;
 public class SetPass extends IRCCommand {
 
     public SetPass() {
-        super(GeneralUtils.toArray("setpassword setpass changepassword changepass"), 0, "setpass [oldpass] [newpass]", "Sets password", false);
+        super(GeneralUtils.toArray("setpassword setpass changepassword changepass"), 1, "setpass [oldpass] [newpass]", "Sets password", false);
     }
 
     @Override
@@ -27,7 +27,6 @@ public class SetPass extends IRCCommand {
             return;
         }
         String AuthUser = PermUtils.authUser(network, user.getNick());
-        if (AuthUser != null) {
             Record account = DatabaseUtils.getAccount(args[0]);
             if (Registry.encryptor.checkPassword(args[0] + account.getValue(ACCOUNTS.RANDOMSTRING), account.getValue(ACCOUNTS.PASSWORD))) {
                 account.setValue(ACCOUNTS.RANDOMSTRING, UUID.randomUUID().toString());
@@ -37,9 +36,6 @@ public class SetPass extends IRCCommand {
             } else {
                 ErrorUtils.sendError(user, "Incorrect password");
             }
-        } else {
-            ErrorUtils.sendError(user, "Error - you must be identified to use this command");
-        }
     }
 }
 

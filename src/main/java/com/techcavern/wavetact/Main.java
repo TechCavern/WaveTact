@@ -31,7 +31,6 @@ public class Main {
             LoadUtils.registerIRCCommands();
             LoadUtils.registerAttacks();
             LoadUtils.registerEightball();
-            //Compatibility Patch
             LoadUtils.removeDuplicateCommands();
             LoadUtils.initializeAutoFlushWhoisCache();
             Registry.WaveTact.start();

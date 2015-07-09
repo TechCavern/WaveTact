@@ -12,19 +12,15 @@ import org.pircbotx.User;
 public class Logout extends IRCCommand {
 
     public Logout() {
-        super(GeneralUtils.toArray("logout"), 0, "logout", "Logs you out", false);
+        super(GeneralUtils.toArray("logout"), 1, "logout", "Logs you out", false);
     }
 
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         AuthedUser authedUser = PermUtils.getAuthedUser(network, user.getNick());
-        if (authedUser == null) {
-            ErrorUtils.sendError(user, "Error, you are not logged in");
-        } else {
             Registry.AuthedUsers.remove(authedUser);
             if (IRCUtils.getCachedWhoisEvent(network, user.getNick()) != null)
                 Registry.WhoisEventCache.remove(IRCUtils.getCachedWhoisEvent(network, user.getNick()));
             IRCUtils.sendMessage(user, network, channel, "You are now logged out", prefix);
-        }
     }
 }

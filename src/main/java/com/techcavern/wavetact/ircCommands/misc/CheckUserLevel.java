@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.ircCommands.utils;
+package com.techcavern.wavetact.ircCommands.misc;
 
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
@@ -50,6 +50,8 @@ public class CheckUserLevel extends IRCCommand {
             IRCUtils.sendMessage(user, network, channel, userObject + " is a Channel Half-Operator" + " (" + userPermLevel + ")", prefix);
         } else if (userPermLevel >= 5) {
             IRCUtils.sendMessage(user, network, channel, userObject + " is a Channel Trusted User!" + " (" + userPermLevel + ")", prefix);
+        } else if (userPermLevel >= 1) {
+            IRCUtils.sendMessage(user, network, channel, userObject + " is a Registered User!" + " (" + userPermLevel + ")", prefix);
         } else if (userPermLevel >= 0) {
             IRCUtils.sendMessage(user, network, channel, userObject + " is a Regular User!" + " (" + userPermLevel + ")", prefix);
         } else {

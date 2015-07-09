@@ -121,18 +121,17 @@ public class PermUtils {
             if (isNetworkAdmin(account, IRCUtils.getNetworkNameByNetwork(network))) {
                 return 20;
             } else if (DatabaseUtils.getChannelUserProperty(IRCUtils.getNetworkNameByNetwork(network), channelName, account, "permlevel") != null) {
-                int permlevel = 0;
+                int permlevel = 1;
                 try {
                     permlevel = Integer.parseInt(DatabaseUtils.getChannelUserProperty(IRCUtils.getNetworkNameByNetwork(network), channelName, account, "permlevel").getValue(CHANNELUSERPROPERTY.VALUE));
                 } catch (Exception e) {
                 }
-                if (permlevel <= 18) {
-                    return permlevel;
-                } else {
-                    return 0;
+                if (permlevel > 18) {
+                    permlevel = 18;
                 }
+                return permlevel;
             } else {
-                return 0;
+                return 1;
             }
         } else {
             return 0;
@@ -141,11 +140,7 @@ public class PermUtils {
 
     public static int getPermLevel(PircBotX network, String userObject, Channel channelObject) { //gets the permlevel of the user in question
         String auth = PermUtils.authUser(network, userObject);
-        if (auth != null) {
             return getLevel(network, userObject, channelObject, auth);
-        } else {
-            return 0;
-        }
     }
 
     public static int getLevel(PircBotX network, String userObject, Channel channelObject, String account) { //gets the actual Perm Level

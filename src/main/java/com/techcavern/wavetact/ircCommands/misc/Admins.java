@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.ircCommands.utils;
+package com.techcavern.wavetact.ircCommands.misc;
 
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
@@ -7,9 +7,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
-
-import java.util.Arrays;
-import java.util.List;
 
 import static com.techcavern.wavetactdb.Tables.SERVERS;
 

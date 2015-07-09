@@ -16,7 +16,7 @@ import static com.techcavern.wavetactdb.Tables.SERVERS;
 public class Drop extends IRCCommand {
 
     public Drop() {
-        super(GeneralUtils.toArray("drop"), 0, "drop [password]", "Drops a user", false);
+        super(GeneralUtils.toArray("drop"), 1, "drop [password]", "Drops a user", false);
     }
 
     @Override
@@ -26,9 +26,6 @@ public class Drop extends IRCCommand {
             return;
         }
         AuthedUser authedUser = PermUtils.getAuthedUser(network, user.getNick());
-        if (authedUser == null) {
-            ErrorUtils.sendError(user, "Error, you are not logged in");
-        } else {
             Record account = DatabaseUtils.getAccount(authedUser.getAuthAccount());
             if (Registry.encryptor.checkPassword(args[0] + account.getValue(ACCOUNTS.RANDOMSTRING), account.getValue(ACCOUNTS.PASSWORD))) {
                 DatabaseUtils.removeAccount(authedUser.getAuthAccount());
@@ -36,7 +33,6 @@ public class Drop extends IRCCommand {
             } else {
                 ErrorUtils.sendError(user, "Incorrect password");
             }
-        }
     }
 }
 

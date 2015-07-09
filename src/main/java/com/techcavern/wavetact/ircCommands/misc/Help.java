@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.ircCommands.utils;
+package com.techcavern.wavetact.ircCommands.misc;
 
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
@@ -23,7 +23,7 @@ public class Help extends IRCCommand {
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (args.length > 0) {
             if (args[0].equalsIgnoreCase("permissions")) {
-                IRCUtils.sendMessage(user, network, channel, "-2 = Ignored Completely, -1 = Commands Ignored, 0 = Everyone, 5 = Voiced/Trusted, 7 = Channel Half-Operator, 10 = Operator, 13 = Protected Channel Operator, 15 = Senior Channel Operator, 18 = Channel Administrator, 20 = Network Administrator", prefix);
+                IRCUtils.sendMessage(user, network, channel, "-2 = Ignored Completely, -1 = Commands Ignored, 0 = Everyone, 1 = Registered, 5 = Voiced/Trusted, 7 = Channel Half-Operator, 10 = Operator, 13 = Protected Channel Operator, 15 = Senior Channel Operator, 18 = Channel Administrator, 20 = Network Administrator", prefix);
             } else {
                 IRCCommand irCommand = IRCUtils.getGenericCommand(args[0]);
                 if (irCommand != null) {

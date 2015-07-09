@@ -17,7 +17,7 @@ import java.io.InputStreamReader;
 public class CheckPing extends IRCCommand {
 
     public CheckPing() {
-        super(GeneralUtils.toArray("checkping cping"), 0, "checkping (+)[ip][domain]", "Checks ping to a server", false);
+        super(GeneralUtils.toArray("checkping cping"), 1, "checkping (+)[ip][domain]", "Checks ping to a server", false);
     }
 
     @Override

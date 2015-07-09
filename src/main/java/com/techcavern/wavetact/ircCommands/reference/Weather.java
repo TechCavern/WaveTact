@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.ircCommands.utils;
+package com.techcavern.wavetact.ircCommands.reference;
 
 import com.google.gson.JsonObject;
 import com.techcavern.wavetact.annot.IRCCMD;
