@@ -32,7 +32,7 @@ public class MCModStats extends IRCCommand {
             if (mods.size() > 10)
                 mcModStats.add(versions.get(i).getAsString() + ": " + mods.size() + " mods");
         }
-        IRCUtils.sendMessage(user, network, channel, StringUtils.join(mcModStats, ", "), prefix);
+        IRCUtils.sendMessage(user, network, channel, StringUtils.join(mcModStats, " - "), prefix);
     }
 }
 
