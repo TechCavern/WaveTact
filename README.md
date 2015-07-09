@@ -74,5 +74,5 @@ Running
 
 You can connect to the WaveTact console by running this:
 ````
-java -jar WaveTact.jar console
+java -jar WaveTact.jar --client
 ````
