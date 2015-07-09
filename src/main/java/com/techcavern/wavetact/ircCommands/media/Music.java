@@ -16,9 +16,6 @@ import org.pircbotx.User;
 
 import static com.techcavern.wavetactdb.Tables.CONFIG;
 
-/**
- * Created by tom on 7/9/15.
- */
 @IRCCMD
 public class Music extends IRCCommand {
 
