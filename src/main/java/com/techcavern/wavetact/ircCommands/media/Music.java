@@ -44,9 +44,15 @@ public class Music extends IRCCommand {
             JsonArray albumlist = GeneralUtils.getJsonObject("http://ws.audioscrobbler.com/2.0/?method=album.search&album=" + StringUtils.join(args, "%20") + "&api_key=" + lastfmapikey + "&format=json").get("results").getAsJsonObject().get("albummatches").getAsJsonObject().get("album").getAsJsonArray();
             if (albumlist.size() - 1 >= ArrayIndex) {
                 JsonObject album = albumlist.get(ArrayIndex).getAsJsonObject();
-                JsonArray albumtracks = GeneralUtils.getJsonObject("http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=" + lastfmapikey + "&artist=" + album.get("artist").getAsString() + "&album=" + album.get("name").getAsString() + "&format=json").get("album").getAsJsonObject().get("tracks").getAsJsonObject().get("track").getAsJsonArray();
-                for (int i = 0; i < 3; i++) {
-                    IRCUtils.sendMessage(user, network, channel, "[" + album.get("name").getAsString() + "] " + albumtracks.get(i).getAsJsonObject().get("name").getAsString() + " by " + album.get("artist").getAsString(), prefix);
+                try {
+                    JsonArray albumtracks = GeneralUtils.getJsonObject("http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=" + lastfmapikey + "&artist=" + album.get("artist").getAsString().replaceAll(" ", "%20") + "&album=" + album.get("name").getAsString().replaceAll(" ", "%20") + "&format=json").get("album").getAsJsonObject().get("tracks").getAsJsonObject().get("track").getAsJsonArray();
+                    for (int i = 0; i < 3; i++) {
+                        IRCUtils.sendMessage(user, network, channel, "[" + album.get("name").getAsString() + "] " + albumtracks.get(i).getAsJsonObject().get("name").getAsString() + " by " + album.get("artist").getAsString(), prefix);
+                    }
+                } catch (IllegalStateException e) {
+                    JsonObject song = GeneralUtils.getJsonObject("http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=" + lastfmapikey + "&artist=" + album.get("artist").getAsString().replaceAll(" ", "%20") + "&album=" + album.get("name").getAsString().replaceAll(" ", "%20") + "&format=json").get("album").getAsJsonObject().get("tracks").getAsJsonObject().get("track").getAsJsonObject();
+                    IRCUtils.sendMessage(user, network, channel, "[" + album.get("name").getAsString() + "] " + song.get("name").getAsString() + " by " + album.get("artist").getAsString(), prefix);
+
                 }
             } else {
                 ArrayIndex = ArrayIndex + 1;
@@ -57,7 +63,7 @@ public class Music extends IRCCommand {
             JsonArray artistlist = GeneralUtils.getJsonObject("http://ws.audioscrobbler.com/2.0/?method=artist.search&artist=" + StringUtils.join(args, "%20") + "&api_key=" + lastfmapikey + "&format=json").get("results").getAsJsonObject().get("artistmatches").getAsJsonObject().get("artist").getAsJsonArray();
             if (artistlist.size() - 1 >= ArrayIndex) {
                 JsonObject artist = artistlist.get(ArrayIndex).getAsJsonObject();
-                JsonArray toptracks = GeneralUtils.getJsonObject("http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=" + artist.get("name").getAsString() + "&api_key=" + lastfmapikey + "&format=json").get("toptracks").getAsJsonObject().get("track").getAsJsonArray();
+                JsonArray toptracks = GeneralUtils.getJsonObject("http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=" + artist.get("name").getAsString().replaceAll(" ", "%20") + "&api_key=" + lastfmapikey + "&format=json").get("toptracks").getAsJsonObject().get("track").getAsJsonArray();
                 for (int i = 0; i < 3; i++) {
                     IRCUtils.sendMessage(user, network, channel, toptracks.get(i).getAsJsonObject().get("name").getAsString() + " by " + artist.get("name").getAsString(), prefix);
                 }
