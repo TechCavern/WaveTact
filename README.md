@@ -72,8 +72,6 @@ Running
 - Make sure you have the WaveTact jar in your current directory.
 - Run `java -jar WaveTact.jar`
 
-If you wish to populate the custom commands database with some prechosen commands use the console command ````addbasiccommands```` ONCE.
-
 You can connect to the WaveTact console by running this:
 ````
 java -jar WaveTact.jar console
