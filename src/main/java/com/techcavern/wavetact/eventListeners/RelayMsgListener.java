@@ -21,13 +21,13 @@ import static com.techcavern.wavetactdb.Tables.NETWORKPROPERTY;
 public class RelayMsgListener extends ListenerAdapter {
     @Override
     public void onMessage(MessageEvent event) throws Exception {
-        if(PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel()) > -2)
+        if (PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel()) > -2 && IRCUtils.getPrefix(event.getBot(), event.getChannelSource()).isEmpty())
         IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), GeneralUtils.replaceVowelsWithAccents(event.getUser().getNick()) + ": " + event.getMessage());
     }
 
     @Override
     public void onAction(ActionEvent event) {
-        if(PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel()) > -2)
+        if (PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel()) > -2 && IRCUtils.getPrefix(event.getBot(), event.getChannelSource()).isEmpty())
             IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), "* " + GeneralUtils.replaceVowelsWithAccents(event.getUser().getNick()) + " " + event.getMessage());
     }
 

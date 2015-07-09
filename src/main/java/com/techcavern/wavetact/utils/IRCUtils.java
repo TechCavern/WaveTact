@@ -78,7 +78,8 @@ public class IRCUtils {
                 String messageToSend = message.substring(i, Math.min(message.length(), i + 350));
                 if (!messageToSend.isEmpty()) {
                     Registry.MessageQueue.add(new NetProperty("PRIVMSG " + prefix + channelObject.getName() + " :" + messageToSend, networkObject));
-                    sendRelayMessage(networkObject, channelObject, GeneralUtils.replaceVowelsWithAccents(networkObject.getNick()) + ": " + message);
+                    if (prefix.isEmpty())
+                        sendRelayMessage(networkObject, channelObject, GeneralUtils.replaceVowelsWithAccents(networkObject.getNick()) + ": " + message);
                 }
             }
         } else {
@@ -118,7 +119,8 @@ public class IRCUtils {
     public static void sendAction(User userObject, PircBotX networkObject, Channel channelObject, String message, String prefix) {
         if (channelObject != null) {
             Registry.MessageQueue.add(new NetProperty("PRIVMSG " + prefix + channelObject.getName() + " :\u0001ACTION " + message + "\u0001", networkObject));
-            sendRelayMessage(networkObject, channelObject, "* " + GeneralUtils.replaceVowelsWithAccents(networkObject.getNick()) + " " + message);
+            if (prefix.isEmpty())
+                sendRelayMessage(networkObject, channelObject, "* " + GeneralUtils.replaceVowelsWithAccents(networkObject.getNick()) + " " + message);
         } else {
             Registry.MessageQueue.add(new NetProperty("PRIVMSG " + userObject.getNick() + " :\u0001ACTION " + message + "\u0001", networkObject));
         }
