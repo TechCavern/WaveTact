@@ -18,7 +18,7 @@ import org.pircbotx.User;
 public class MCWiki extends IRCCommand {
 
     public MCWiki() {
-        super(GeneralUtils.toArray("mcwiki mwiki"), 0, "mcwiki [string to search minecraft wikis]", "Searches official minecraft wiki & official & unofficial ftb wikis", false);
+        super(GeneralUtils.toArray("mcwiki mwiki"), 0, "mcwiki [query minecraft wikis]", "Searches official minecraft wiki & official & unofficial ftb wikis", false);
     }
 
     @Override

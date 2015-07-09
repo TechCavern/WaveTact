@@ -16,7 +16,7 @@ import org.pircbotx.User;
 public class Image extends IRCCommand {
 
     public Image() {
-        super(GeneralUtils.toArray("image images gimages googleimages"), 0, "image (result #) [string to search]", "Searches google images", false);
+        super(GeneralUtils.toArray("image images gimages googleimages"), 0, "image (result #) [query]", "Searches google images", false);
     }
 
     @Override
@@ -28,7 +28,7 @@ public class Image extends IRCCommand {
         }
         JsonArray results = GeneralUtils.getJsonObject("https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + StringUtils.join(args, "%20")).getAsJsonObject("responseData").getAsJsonArray("results");
         if (results.size() - 1 > 0) {
-            if (results.size() >= ArrayIndex) {
+            if (results.size() - 1 >= ArrayIndex) {
                 String title = results.get(ArrayIndex).getAsJsonObject().get("titleNoFormatting").getAsString();
                 String size = results.get(ArrayIndex).getAsJsonObject().get("width").getAsString() + "x" + results.get(ArrayIndex).getAsJsonObject().get("height").getAsString();
                 String url = results.get(ArrayIndex).getAsJsonObject().get("unescapedUrl").getAsString();

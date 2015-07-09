@@ -13,10 +13,10 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
 @IRCCMD
-public class Google extends IRCCommand {
+public class Search extends IRCCommand {
 
-    public Google() {
-        super(GeneralUtils.toArray("google gsearch"), 0, "google (result #) [string to google]", "Googles something", false);
+    public Search() {
+        super(GeneralUtils.toArray("search google gsearch"), 0, "search (result #) [string to google]", "Googles something", false);
     }
 
     @Override

@@ -61,7 +61,7 @@ public class FunMsgListener extends ListenerAdapter {
                                         if (autourl != null && autourl.getValue(CHANNELPROPERTY.VALUE).equalsIgnoreCase("true")) {
                                             String title = doc.title();
                                             if (!title.isEmpty()) {
-                                                IRCUtils.sendMessage(event.getBot(), event.getChannel(), "[" + event.getUser().getNick() + "] - " + title, "");
+                                                IRCUtils.sendMessage(event.getBot(), event.getChannel(), "[" + event.getUser().getNick() + "] " + title, "");
                                             }
                                         }
                                     }

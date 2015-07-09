@@ -15,7 +15,7 @@ import org.pircbotx.User;
 public class Movie extends IRCCommand {
 
     public Movie() {
-        super(GeneralUtils.toArray("movie imdb"), 0, "movie [string to search movies]", "Searches imdb", false);
+        super(GeneralUtils.toArray("movie imdb"), 0, "movie [query movies]", "Searches imdb", false);
     }
 
     @Override
