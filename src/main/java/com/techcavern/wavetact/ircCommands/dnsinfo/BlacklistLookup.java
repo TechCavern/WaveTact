@@ -28,7 +28,7 @@ import static com.techcavern.wavetactdb.Tables.BLACKLISTS;
 public class BlacklistLookup extends IRCCommand {
 
     public BlacklistLookup() {
-        super(GeneralUtils.toArray("blacklist bl"), 1, "blacklist [type] [ip/domain/user]", "Looks up a domain or ip in blacklist database", false);
+        super(GeneralUtils.toArray("blacklistlookup bll"), 1, "blacklistlookup [type] [ip/domain/user]", "Looks up a domain or ip in blacklist database", false);
     }
 
     @Override
