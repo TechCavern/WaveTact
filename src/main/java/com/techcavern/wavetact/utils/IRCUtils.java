@@ -241,7 +241,7 @@ public class IRCUtils {
         }else{
             WhoisEvent whois = WhoisEvent(network, userObject);
             if(whois != null){
-                host = use.getHostname();
+                host = whois.getHostname();
             }else{
                 host = "";
             }

@@ -17,17 +17,27 @@ import java.util.List;
 public class FindIP extends IRCCommand {
 
     public FindIP() {
-        super(GeneralUtils.toArray("findip locate find loc geo geoip"), 1, "findip (+)[IP][domain][user]", "GeoIPs a user", false);
+        super(GeneralUtils.toArray("findip locate find loc geo geoip"), 1, "findip (+)(IP)(domain)(user)", "GeoIPs a user", false);
     }
 
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         boolean IPv6Priority = false;
-        if(args[0].startsWith("+")){
-            IPv6Priority = true;
-            args[0] = args[0].replaceFirst("\\+","");
+        String hostmask = null;
+        if (args.length < 1)
+            hostmask = user.getNick();
+        else {
+            if (args[0].equalsIgnoreCase("+")) {
+                hostmask = user.getNick();
+                IPv6Priority = true;
+            } else if (args[0].startsWith("+")) {
+                hostmask = args[0].replaceFirst("\\+", "");
+                IPv6Priority = true;
+            } else {
+                hostmask = args[0];
+            }
         }
-        String IP = GeneralUtils.getIP(args[0], network, IPv6Priority);
+        String IP = GeneralUtils.getIP(hostmask, network, IPv6Priority);
         if (IP == null) {
             ErrorUtils.sendError(user, "Please enter in an ip/user/domain as argument #1");
             return;
