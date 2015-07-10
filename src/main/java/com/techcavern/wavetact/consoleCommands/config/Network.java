@@ -82,7 +82,10 @@ public class Network extends ConsoleCommand {
                     case "serverpass":
                         if (viewonly)
                             commandIO.getPrintStream().println(network.getValue(SERVERS.SERVERPASS));
-                        else {
+                        else if (args[2].equalsIgnoreCase("null")) {
+                            network.setValue(SERVERS.SERVERPASS, null);
+                            isSuccess = true;
+                        } else {
                             network.setValue(SERVERS.SERVERPASS, args[2]);
                             isSuccess = true;
                         }
@@ -90,7 +93,10 @@ public class Network extends ConsoleCommand {
                     case "nickservcommand":
                         if (viewonly)
                             commandIO.getPrintStream().println(network.getValue(SERVERS.NICKSERVCOMMAND));
-                        else {
+                        else if (args[2].equalsIgnoreCase("null")) {
+                            network.setValue(SERVERS.NICKSERVCOMMAND, null);
+                            isSuccess = true;
+                        } else {
                             network.setValue(SERVERS.NICKSERVCOMMAND, GeneralUtils.buildMessage(2, args.length, args));
                             isSuccess = true;
                         }
