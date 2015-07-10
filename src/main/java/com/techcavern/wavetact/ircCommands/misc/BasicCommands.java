@@ -26,9 +26,6 @@ public class BasicCommands extends IRCCommand {
             case "potato":
                 IRCUtils.sendAction(user, network, channel, "is a potato", prefix);
                 break;
-            case "ping":
-                IRCUtils.sendMessage(user, network, channel, "pong", prefix);
-                break;
             case "pong":
                 IRCUtils.sendMessage(user, network, channel, "ping", prefix);
                 break;

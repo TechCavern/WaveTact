@@ -25,5 +25,10 @@ public class SomethingAwesome extends IRCCommand {
         } else {
             IRCUtils.sendAction(user, network, channel, "kicks " + user.getNick() + " (┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻)", prefix);
         }
+        IRCUtils.sendMessage(user, network, channel, GeneralUtils.prism("    __   ______ ______  ___     ___  ____  ________"), prefix);
+        IRCUtils.sendMessage(user, network, channel, GeneralUtils.prism("   / /  /  _/ //_/ __/ / _ |   / _ )/ __ \\/ __/ __/"), prefix);
+        IRCUtils.sendMessage(user, network, channel, GeneralUtils.prism("  / /___/ // ,< / _/  / __ |  / _  / /_/ /\\ \\_\\ \\  "), prefix);
+        IRCUtils.sendMessage(user, network, channel, GeneralUtils.prism(" /____/___/_/|_/___/ /_/ |_| /____/\\____/___/___/"), prefix);
+        IRCUtils.sendMessage(user, network, channel, GeneralUtils.prism("                                                  "), prefix);
     }
 }

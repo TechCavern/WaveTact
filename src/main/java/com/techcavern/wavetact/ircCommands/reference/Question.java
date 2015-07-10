@@ -46,10 +46,9 @@ public class Question extends IRCCommand {
         WAPod[] result = queryResult.getPods();
         if (result.length > 0) {
             if (result.length - 1 >= ArrayIndex) {
-                IRCUtils.sendMessage(user, network, channel, "[" + result[ArrayIndex].getTitle() + "] ", prefix);
                 for (WASubpod sub : result[ArrayIndex].getSubpods()) {
                     for (Visitable visitable : sub.getContents()) {
-                        String text = ((WAPlainText) sub.getContents()[0]).getText().replaceAll("\\n", " - ").replaceAll(" \\| ", ": ");
+                        String text = "[" + result[ArrayIndex].getTitle() + "] " + ((WAPlainText) sub.getContents()[0]).getText().replaceAll("\\n", " - ").replaceAll(" \\| ", ": ");
                         if (sub.getTitle().isEmpty())
                             IRCUtils.sendMessage(user, network, channel, text, prefix);
                         else
