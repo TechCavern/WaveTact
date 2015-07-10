@@ -14,11 +14,10 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.net.*;
-import java.text.Format;
-import java.text.SimpleDateFormat;
+import java.net.InetAddress;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -34,8 +33,21 @@ public class GeneralUtils {
 
     public static String prism(String toprism) {
         String prism = "";
+        int i = 0;
+        int j = RandomUtils.nextInt(1, 7);
         for (char c : toprism.replace("\n", " ").toCharArray()) {
-            prism += prism(c);
+            if (i % 2 == 0 && i != 0) {
+                j++;
+                if (j > 6) {
+                    j = j % 6;
+                    if (j == 0) {
+                        j = 1;
+                    }
+                }
+            }
+            System.out.println(j);
+            prism += prism(c, j);
+            i++;
         }
         return prism;
     }
@@ -156,54 +168,27 @@ public class GeneralUtils {
         return StringUtils.split(input, " ");
     }
 
-    public static String prism(char c) {
-        int number = RandomUtils.nextInt(1, 15);
+    public static String prism(char c, int number) {
         String result = null;
+        System.out.println(number);
         switch (number) {
             case 1:
-                result = Colors.BLUE + c;
+                result = Colors.RED + c;
                 break;
             case 2:
-                result = Colors.BLACK + c;
+                result = Colors.YELLOW + c;
                 break;
             case 3:
-                result = Colors.BROWN + c;
+                result = Colors.DARK_GREEN + c;
                 break;
             case 4:
                 result = Colors.CYAN + c;
                 break;
             case 5:
-                result = Colors.DARK_BLUE + c;
+                result = Colors.BLUE + c;
                 break;
             case 6:
-                result = Colors.DARK_GRAY + c;
-                break;
-            case 7:
-                result = Colors.DARK_GREEN + c;
-                break;
-            case 8:
-                result = Colors.GREEN + c;
-                break;
-            case 9:
-                result = Colors.LIGHT_GRAY + c;
-                break;
-            case 10:
                 result = Colors.MAGENTA + c;
-                break;
-            case 11:
-                result = Colors.OLIVE + c;
-                break;
-            case 12:
-                result = Colors.PURPLE + c;
-                break;
-            case 13:
-                result = Colors.RED + c;
-                break;
-            case 14:
-                result = Colors.TEAL + c;
-                break;
-            case 15:
-                result = Colors.YELLOW + c;
                 break;
         }
         return result;
