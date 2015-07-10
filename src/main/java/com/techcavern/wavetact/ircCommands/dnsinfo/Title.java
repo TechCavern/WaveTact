@@ -23,7 +23,7 @@ import org.pircbotx.User;
 public class Title extends IRCCommand {
 
     public Title() {
-        super(GeneralUtils.toArray("title"), 1, "title [url]", "gets title", false);
+        super(GeneralUtils.toArray("title ti"), 1, "title [url]", "gets title", false);
     }
 
     @Override

@@ -28,9 +28,10 @@ public class Main {
             ConfigUtils.registerNetworks();
             LoadUtils.registerConsoleCommands();
             LoadUtils.registerIRCCommands();
+            // LoadUtils.checkDuplicateIRCCommands();
             LoadUtils.registerAttacks();
             LoadUtils.registerEightball();
-            LoadUtils.removeDuplicateCommands();
+            LoadUtils.removeDuplicateCustomCommands();
             LoadUtils.initializeAutoFlushWhoisCache();
             Registry.WaveTact.start();
             Registry.threadPool.execute(Registry.consoleServer);

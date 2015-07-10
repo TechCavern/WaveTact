@@ -15,7 +15,7 @@ import org.pircbotx.User;
 public class Xkcd extends IRCCommand {
 
     public Xkcd() {
-        super(GeneralUtils.toArray("xkcd randomxkcd"), 0, "xkcd [comic num#]", "Returns random xkcd comic or specified comic #", false);
+        super(GeneralUtils.toArray("xkcd x randomxkcd"), 0, "xkcd [comic num#]", "Returns random xkcd comic or specified comic #", false);
     }
 
     @Override

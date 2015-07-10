@@ -14,7 +14,7 @@ import org.pircbotx.User;
 public class Calculate extends IRCCommand {
 
     public Calculate() {
-        super(GeneralUtils.toArray("calculate calc math"), 0, "calculate [expression]", "calculates a math expression", false);
+        super(GeneralUtils.toArray("calculate calc c math"), 0, "calculate [expression]", "calculates a math expression", false);
     }
 
     @Override

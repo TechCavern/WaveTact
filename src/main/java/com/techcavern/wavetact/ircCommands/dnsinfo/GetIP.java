@@ -13,7 +13,7 @@ import org.pircbotx.User;
 public class GetIP extends IRCCommand {
 
     public GetIP() {
-        super(GeneralUtils.toArray("getip ip"), 1, "getip (+)[domain]", "gets IP Address of domain", false);
+        super(GeneralUtils.toArray("getip gip ip"), 1, "getip (+)[domain]", "gets IP Address of domain", false);
     }
 
     @Override

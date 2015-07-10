@@ -15,7 +15,7 @@ import org.pircbotx.User;
 public class Wiki extends IRCCommand {
 
     public Wiki() {
-        super(GeneralUtils.toArray("wiki wikipedia"), 0, "wiki [query wiki]", "Searches wikipedia for something", false);
+        super(GeneralUtils.toArray("wiki wi wikipedia"), 0, "wiki [query wiki]", "Searches wikipedia for something", false);
     }
 
     @Override

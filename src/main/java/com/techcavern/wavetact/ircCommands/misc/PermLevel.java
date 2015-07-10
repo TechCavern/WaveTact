@@ -15,7 +15,7 @@ import org.pircbotx.User;
 public class PermLevel extends IRCCommand {
 
     public PermLevel() {
-        super(GeneralUtils.toArray("permlevel perm level"), 0, "permlevel (user)", "Checks Perm Level of the specified user or yourself if unspecified", false);
+        super(GeneralUtils.toArray("permlevel pl perm level"), 0, "permlevel (user)", "Checks Perm Level of the specified user or yourself if unspecified", false);
     }
 
     @Override

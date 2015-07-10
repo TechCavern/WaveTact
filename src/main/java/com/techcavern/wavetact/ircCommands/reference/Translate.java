@@ -15,7 +15,7 @@ import static com.techcavern.wavetactdb.Tables.CONFIG;
 public class Translate extends IRCCommand {
 
     public Translate() {
-        super(GeneralUtils.toArray("translate trans yandex"), 0, "translate [Text]", "Translates text to English", false);
+        super(GeneralUtils.toArray("translate trans t yandex"), 0, "translate [Text]", "Translates text to English", false);
     }
 
     @Override

@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class ListNetworks extends IRCCommand {
 
     public ListNetworks() {
-        super(GeneralUtils.toArray("listnetworks netlist"), 0, "listnetworks [connected/all/disconnected]", "Lists the networks a bot is on", false);
+        super(GeneralUtils.toArray("listnetworks ln netlist"), 0, "listnetworks [connected/all/disconnected]", "Lists the networks a bot is on", false);
     }
 
     @Override

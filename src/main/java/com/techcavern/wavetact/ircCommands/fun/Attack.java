@@ -22,7 +22,7 @@ import org.pircbotx.User;
 public class Attack extends IRCCommand {
 
     public Attack() {
-        super(GeneralUtils.toArray("attack shoot slap"), 0, "attacks [something]", "attacks a user", false);
+        super(GeneralUtils.toArray("attack shoot slap at"), 0, "attacks [something]", "attacks a user", false);
     }
 
     @Override

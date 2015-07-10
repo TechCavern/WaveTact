@@ -19,7 +19,7 @@ import java.util.Random;
 public class Reddit extends IRCCommand {
 
     public Reddit() {
-        super(GeneralUtils.toArray("reddit subreddit"), 0, "reddit [subreddit]", "gets a random message from a subreddit", false);
+        super(GeneralUtils.toArray("reddit re subreddit"), 0, "reddit [subreddit]", "gets a random message from a subreddit", false);
     }
 
     @Override

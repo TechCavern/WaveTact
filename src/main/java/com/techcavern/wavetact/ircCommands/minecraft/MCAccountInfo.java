@@ -22,7 +22,7 @@ import java.net.URL;
 public class MCAccountInfo extends IRCCommand {
 
     public MCAccountInfo() {
-        super(GeneralUtils.toArray("mcaccountinfo mcuserinfo mcpremium mcuuid mcmigrated"), 0, "mcaccountinfo [user]", "Gets info on a minecraft account", false);
+        super(GeneralUtils.toArray("mcaccountinfo mca mcuserinfo mcpremium mcuuid mcmigrated"), 0, "mcaccountinfo [user]", "Gets info on a minecraft account", false);
     }
 
     @Override

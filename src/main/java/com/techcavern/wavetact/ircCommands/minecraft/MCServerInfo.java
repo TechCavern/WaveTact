@@ -22,7 +22,7 @@ import java.net.Socket;
 public class MCServerInfo extends IRCCommand {
 
     public MCServerInfo() {
-        super(GeneralUtils.toArray("mcserverinfo mcserver mcping"), 0, "mcserverinfo [address] (port)", "Gets info on minecraft server", false);
+        super(GeneralUtils.toArray("mcserverinfo mcsi mcserver mcping"), 0, "mcserverinfo [address] (port)", "Gets info on minecraft server", false);
     }
 
     @Override

@@ -15,7 +15,7 @@ import org.pircbotx.User;
 public class SomethingAwesome extends IRCCommand {
 
     public SomethingAwesome() {
-        super(GeneralUtils.toArray("somethingawesome awesome something"), 1, null, "Something AWESOME!", false);
+        super(GeneralUtils.toArray("somethingawesome sa awesome something"), 1, null, "Something AWESOME!", false);
     }
 
     @Override

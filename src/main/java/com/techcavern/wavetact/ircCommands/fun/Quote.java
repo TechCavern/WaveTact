@@ -15,7 +15,7 @@ import org.pircbotx.User;
 public class Quote extends IRCCommand {
 
     public Quote() {
-        super(GeneralUtils.toArray("quote randquote"), 0, "quote", "Gets a random quote", false);
+        super(GeneralUtils.toArray("quote quo randquote"), 0, "quote", "Gets a random quote", false);
     }
 
     @Override

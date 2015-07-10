@@ -23,7 +23,7 @@ import org.xbill.DNS.*;
 public class DNSInfo extends IRCCommand {
 
     public DNSInfo() {
-        super(GeneralUtils.toArray("dnsinfo dns"), 5, "dns [domain]", "Looks up a domain for information", false);
+        super(GeneralUtils.toArray("dnsinfo di dns"), 5, "dns [domain]", "Looks up a domain for information", false);
     }
 
     @Override

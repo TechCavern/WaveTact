@@ -13,7 +13,7 @@ import org.pircbotx.User;
 public class Hostmask extends IRCCommand {
 
     public Hostmask() {
-        super(GeneralUtils.toArray("hostmask host"), 0, "hostmask (+)(nick)", "Gets the hostmask of a user - + before gets the ban mask of a user", false);
+        super(GeneralUtils.toArray("hostmask h hm host"), 0, "hostmask (+)(nick)", "Gets the hostmask of a user - + before gets the ban mask of a user", false);
     }
 
     @Override

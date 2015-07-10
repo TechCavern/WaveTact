@@ -18,7 +18,7 @@ import java.net.URL;
 public class MCStatus extends IRCCommand {
 
     public MCStatus() {
-        super(GeneralUtils.toArray("mcstatus"), 0, null, "Checks status of mojang servers", false);
+        super(GeneralUtils.toArray("mcstatus mcs"), 0, null, "Checks status of mojang servers", false);
     }
 
     @Override

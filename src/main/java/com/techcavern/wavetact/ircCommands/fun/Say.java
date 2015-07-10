@@ -24,7 +24,7 @@ import org.pircbotx.User;
 public class Say extends IRCCommand {
 
     public Say() {
-        super(GeneralUtils.toArray("say msg act do prism"), 5, "say [something]", "Makes the bot say something", false);
+        super(GeneralUtils.toArray("say msg s a act do prism"), 5, "say [something]", "Makes the bot say something", false);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class Say extends IRCCommand {
             chan = channel;
         }
         if (chan == null || PermUtils.getPermLevel(network, user.getNick(), chan) >= 5) {
-            if(command.equalsIgnoreCase("act") || command.equalsIgnoreCase("do")){
+            if (command.equalsIgnoreCase("act") || command.equalsIgnoreCase("do") || command.equalsIgnoreCase("s")) {
                 IRCUtils.sendAction(user, network, chan, StringUtils.join(args, " ").replace("\n", " "), prefix);
             } else if (command.equalsIgnoreCase("prism")) {
                 IRCUtils.sendMessage(user, network, chan, GeneralUtils.prism(StringUtils.join(args, " ")), prefix);

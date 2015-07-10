@@ -47,13 +47,27 @@ public class LoadUtils {
         }
     }
 
-    public static void removeDuplicateCommands() {
+    public static void checkDuplicateIRCCommands() {
+        for (IRCCommand g : Registry.IRCCommands) {
+            for (String commandid : g.getCommandID()) {
+                for (IRCCommand subg : Registry.IRCCommands) {
+                    for (String subcommandid : subg.getCommandID()) {
+                        if (commandid.equalsIgnoreCase(subcommandid) && subg.getCommand() != g.getCommand()) {
+                            System.out.println(g.getCommand() + " has a duplicate in " + subg.getCommand());
+                        }
+                    }
+                }
+            }
+        }
+        System.exit(0);
+    }
+
+    public static void removeDuplicateCustomCommands() {
         if (DatabaseUtils.getConfig("currentiteration") != null && Integer.parseInt(DatabaseUtils.getConfig("currentiteration").getValue(CONFIG.VALUE)) >= Registry.currentiteration) {
             return;
         } else {
             DatabaseUtils.removeConfig("currentiteration");
             DatabaseUtils.addConfig("currentiteration", String.valueOf(Registry.currentiteration));
-            System.out.println("Cleaning out Custom Commands");
             for (IRCCommand g : Registry.IRCCommands) {
                 for (String commandid : g.getCommandID()) {
                     DatabaseUtils.removeCustomCommand(commandid);

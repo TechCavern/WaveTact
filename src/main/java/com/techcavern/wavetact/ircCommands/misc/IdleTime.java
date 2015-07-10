@@ -14,7 +14,7 @@ import org.pircbotx.hooks.events.WhoisEvent;
 public class IdleTime extends IRCCommand {
 
     public IdleTime() {
-        super(GeneralUtils.toArray("idletime idle"), 1, "idle (user)", "Gets idle time", false);
+        super(GeneralUtils.toArray("idletime idt idle"), 1, "idle (user)", "Gets idle time", false);
     }
 
     @Override
