@@ -36,27 +36,27 @@ public class MCMods extends IRCCommand {
         if (command.equalsIgnoreCase("mcmodauthor") || command.equalsIgnoreCase("mcma"))
             searchPhrase = "author";
         MCModVersionSearch:
-        for(int i = versions.size()-1; i >0; i--) {
+        for (int i = versions.size() - 1; i > 0; i--) {
             JsonArray mods = GeneralUtils.getJsonArray("http://bot.notenoughmods.com/" + versions.get(i).getAsString() + ".json");
             MCModSearch:
             for (int j = 0; j < mods.size(); j++) {
                 JsonObject mod = mods.get(j).getAsJsonObject();
-                if(mcmods.size() >= 3){
+                if (mcmods.size() >= 3) {
                     break MCModVersionSearch;
                 }
-                for(MCMod record:mcmods) {
-                if(mod.get("name").getAsString().equalsIgnoreCase(record.getMod().get("name").getAsString()))
-                    continue MCModSearch;
+                for (MCMod record : mcmods) {
+                    if (mod.get("name").getAsString().equalsIgnoreCase(record.getMod().get("name").getAsString()))
+                        continue MCModSearch;
                 }
-                if (mod.get(searchPhrase).getAsString().toLowerCase().contains(modname) ) {
+                if (mod.get(searchPhrase).getAsString().toLowerCase().contains(modname)) {
                     mcmods.add(new MCMod(versions.get(i).getAsString(), mod));
                 }
             }
         }
         if (mcmods.isEmpty()) {
             ErrorUtils.sendError(user, "No mods found");
-        }else{
-            for(MCMod mod:mcmods){
+        } else {
+            for (MCMod mod : mcmods) {
                 String ModVersion = "";
                 if (isDev)
                     ModVersion = mod.getMod().get("dev").getAsString();
@@ -65,10 +65,10 @@ public class MCMods extends IRCCommand {
                 String Name = mod.getMod().get("name").getAsString();
                 String Link = mod.getMod().get("shorturl").getAsString();
                 String Author = mod.getMod().get("author").getAsString();
-                if(Author.isEmpty())
+                if (Author.isEmpty())
                     IRCUtils.sendMessage(user, network, channel, "[" + mod.getVersion() + "] " + Name + " " + ModVersion + " - " + Link, prefix);
-else
-                IRCUtils.sendMessage(user, network, channel, "[" + mod.getVersion() + "] " + Name + " " + ModVersion + " by " + Author + " - " + Link, prefix);
+                else
+                    IRCUtils.sendMessage(user, network, channel, "[" + mod.getVersion() + "] " + Name + " " + ModVersion + " by " + Author + " - " + Link, prefix);
             }
         }
     }

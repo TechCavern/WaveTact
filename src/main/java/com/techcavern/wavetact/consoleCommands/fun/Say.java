@@ -33,12 +33,12 @@ public class Say extends ConsoleCommand {
         else
             chan = IRCUtils.getChannelbyName(network, args[1]);
         if (chan != null) {
-            if(command.equalsIgnoreCase("act") || command.equalsIgnoreCase("do")) {
+            if (command.equalsIgnoreCase("act") || command.equalsIgnoreCase("do")) {
                 IRCUtils.sendAction(network, chan, GeneralUtils.buildMessage(2, args.length, args).replace("\n", " "), prefix);
-            }else{
+            } else {
                 IRCUtils.sendMessage(network, chan, GeneralUtils.buildMessage(2, args.length, args).replace("\n", " "), prefix);
             }
-            }
+        }
     }
 }
 

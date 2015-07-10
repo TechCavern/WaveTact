@@ -4,8 +4,10 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.utils.*;
-import org.apache.commons.lang3.RandomUtils;
+import com.techcavern.wavetact.utils.DatabaseUtils;
+import com.techcavern.wavetact.utils.ErrorUtils;
+import com.techcavern.wavetact.utils.GeneralUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -27,14 +29,14 @@ public class NowPlaying extends IRCCommand {
         String lastfmapikey;
         if (DatabaseUtils.getConfig("lastfmapikey") != null)
             lastfmapikey = DatabaseUtils.getConfig("lastfmapikey").getValue(CONFIG.VALUE);
-        else{
+        else {
             ErrorUtils.sendError(user, "API key is not defined.");
             return;
         }
 
         JsonObject jsonObject = GeneralUtils.getJsonObject("http://ws.audioscrobbler.com/2.0/?format=json&method=user.getrecenttracks&api_key=" + lastfmapikey + "&user=" + args[0]);
-        if(jsonObject.get("error") != null){
-            ErrorUtils.sendError(user, "LastFM API returned an error: "+jsonObject.get("message").toString());
+        if (jsonObject.get("error") != null) {
+            ErrorUtils.sendError(user, "LastFM API returned an error: " + jsonObject.get("message").toString());
             return;
         }
 

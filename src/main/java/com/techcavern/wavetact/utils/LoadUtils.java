@@ -224,48 +224,49 @@ public class LoadUtils {
         }
 
     }
+
     public static void addMessageQueue(PircBotX network) {
-            class MessageQueue implements Runnable {
-                @Override
-                public void run() {
+        class MessageQueue implements Runnable {
+            @Override
+            public void run() {
+                try {
+                    TimeUnit.SECONDS.sleep(30);
+                } catch (InterruptedException c) {
+                }
+                NetProperty netProperty = IRCUtils.getNetPropertyByNetwork(network);
+                while (Registry.NetworkName.contains(netProperty)) {
                     try {
-                        TimeUnit.SECONDS.sleep(30);
-                    } catch (InterruptedException c) {
-                    }
-                    NetProperty netProperty = IRCUtils.getNetPropertyByNetwork(network);
-                    while (Registry.NetworkName.contains(netProperty)) {
-                        try {
-                            if (Registry.MessageQueue.size() > 0 && network.equals(Registry.MessageQueue.get(0).getNetwork())) {
-                                Registry.MessageQueue.get(0).getNetwork().sendRaw().rawLine(Registry.MessageQueue.get(0).getProperty());
-                                Registry.MessageQueue.remove(0);
-                                TimeUnit.MILLISECONDS.sleep(900);
-                            }
-                            TimeUnit.MILLISECONDS.sleep(100);
-                        } catch (Exception e) {
+                        if (Registry.MessageQueue.size() > 0 && network.equals(Registry.MessageQueue.get(0).getNetwork())) {
+                            Registry.MessageQueue.get(0).getNetwork().sendRaw().rawLine(Registry.MessageQueue.get(0).getProperty());
+                            Registry.MessageQueue.remove(0);
+                            TimeUnit.MILLISECONDS.sleep(900);
                         }
+                        TimeUnit.MILLISECONDS.sleep(100);
+                    } catch (Exception e) {
                     }
                 }
-
             }
-            Registry.threadPool.execute(new MessageQueue());
+
         }
+        Registry.threadPool.execute(new MessageQueue());
+    }
 
 
     public static void initializeAutoFlushWhoisCache() {
-            class MessageQueue implements Runnable {
-                @Override
-                public void run() {
-                    try {
-                        TimeUnit.MINUTES.sleep(30);
-                        Registry.WhoisEventCache.clear();
-                    }catch(Exception e){
+        class MessageQueue implements Runnable {
+            @Override
+            public void run() {
+                try {
+                    TimeUnit.MINUTES.sleep(30);
+                    Registry.WhoisEventCache.clear();
+                } catch (Exception e) {
 
-                    }
                 }
-
             }
-            Registry.threadPool.execute(new MessageQueue());
+
         }
+        Registry.threadPool.execute(new MessageQueue());
+    }
 
     public static void initializeBanQueue() {
         class BanQueue implements Runnable {

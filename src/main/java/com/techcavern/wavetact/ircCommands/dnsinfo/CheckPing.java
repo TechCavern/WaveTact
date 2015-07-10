@@ -23,9 +23,9 @@ public class CheckPing extends IRCCommand {
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         boolean IPv6Priority = false;
-        if(args[0].startsWith("+")){
+        if (args[0].startsWith("+")) {
             IPv6Priority = true;
-            args[0] = args[0].replaceFirst("\\+","");
+            args[0] = args[0].replaceFirst("\\+", "");
         }
         String IP = GeneralUtils.getIP(args[0], network, IPv6Priority);
         if (IP == null) {
@@ -40,7 +40,7 @@ public class CheckPing extends IRCCommand {
             Process pinghost = Runtime.getRuntime().exec(pingCommand);
             BufferedReader buffereader = new BufferedReader(new InputStreamReader(pinghost.getInputStream()));
             boolean haslines = false;
-            String line ="";
+            String line = "";
             while ((line = buffereader.readLine()) != null) {
                 if (line.contains("time=")) {
                     haslines = true;
@@ -49,7 +49,7 @@ public class CheckPing extends IRCCommand {
                 }
             }
             buffereader.close();
-            if(!haslines) {
+            if (!haslines) {
                 ErrorUtils.sendError(user, "Host Unreachable");
             }
         }

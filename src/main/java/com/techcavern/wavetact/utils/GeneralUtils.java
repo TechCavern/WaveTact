@@ -61,6 +61,7 @@ public class GeneralUtils {
         String result = parseUrl(url);
         return new JsonParser().parse(result);
     }
+
     public static String getJsonString(JsonArray array, String name) {
         String returning = "";
         for (int i = 0; i < array.size(); i++) {
@@ -116,14 +117,14 @@ public class GeneralUtils {
             try {
                 InetAddress[] addarray = InetAddress.getAllByName(IP);
                 String add = "";
-                if(IPv6Priority) {
-                    for(InetAddress add6:addarray){
-                        if(InetAddressUtils.isIPv6Address(add6.getHostAddress()))
+                if (IPv6Priority) {
+                    for (InetAddress add6 : addarray) {
+                        if (InetAddressUtils.isIPv6Address(add6.getHostAddress()))
                             add = add6.getHostAddress();
                     }
-                }else{
-                    for(InetAddress add4:addarray){
-                        if(InetAddressUtils.isIPv4Address(add4.getHostAddress()))
+                } else {
+                    for (InetAddress add4 : addarray) {
+                        if (InetAddressUtils.isIPv4Address(add4.getHostAddress()))
                             add = add4.getHostAddress();
                     }
                 }
@@ -193,43 +194,45 @@ public class GeneralUtils {
         }
         return result;
     }
-    public static String replaceVowelsWithAccents(String original){
-        if(original.contains("a"))
-        original = original.replaceFirst("a", "á");
-        else if(original.contains("e"))
-        original = original.replaceFirst("e", "é");
-        else if(original.contains("i"))
-        original = original.replaceFirst("i", "í");
-        else if(original.contains("o"))
+
+    public static String replaceVowelsWithAccents(String original) {
+        if (original.contains("a"))
+            original = original.replaceFirst("a", "á");
+        else if (original.contains("e"))
+            original = original.replaceFirst("e", "é");
+        else if (original.contains("i"))
+            original = original.replaceFirst("i", "í");
+        else if (original.contains("o"))
             original = original.replaceFirst("o", "ó");
-        else if(original.contains("u"))
+        else if (original.contains("u"))
 
             original = original.replaceFirst("u", "ú");
-        else if(original.contains("y"))
+        else if (original.contains("y"))
 
             original = original.replaceFirst("y", "ý");
-        else if(original.contains("A"))
+        else if (original.contains("A"))
 
             original = original.replaceFirst("A", "Á");
-        else if(original.contains("E"))
+        else if (original.contains("E"))
 
             original = original.replaceFirst("E", "É");
-        else if(original.contains("I"))
+        else if (original.contains("I"))
 
             original = original.replaceFirst("I", "Í");
-        else if(original.contains("O"))
+        else if (original.contains("O"))
 
             original = original.replaceFirst("O", "Ó");
-        else if(original.contains("U"))
+        else if (original.contains("U"))
 
             original = original.replaceFirst("U", "Ú");
-        else if(original.contains("Y"))
+        else if (original.contains("Y"))
 
-            original = original.replaceFirst("Y","Ý");
+            original = original.replaceFirst("Y", "Ý");
         return original;
     }
+
     public static int readInputStream(InputStream in)
-            throws Exception{
+            throws Exception {
         int i = 0;
         int j = 0;
         while (true) {
@@ -238,7 +241,7 @@ public class GeneralUtils {
             if (j > 5) {
                 throw new RuntimeException("VarInt too big");
             }
-            if ((k & 0x80) != 128){
+            if ((k & 0x80) != 128) {
                 break;
             }
         }
@@ -246,10 +249,9 @@ public class GeneralUtils {
     }
 
     public static void writeOutputStream(OutputStream out, int i)
-            throws Exception{
-        while(true)
-        {
-            if((i & 0xFFFFFF80) == 0){
+            throws Exception {
+        while (true) {
+            if ((i & 0xFFFFFF80) == 0) {
                 out.write(i);
                 return;
             }

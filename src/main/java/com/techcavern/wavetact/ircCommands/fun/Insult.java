@@ -27,9 +27,9 @@ public class Insult extends IRCCommand {
         int chance = new Random().nextInt(10);
         if (args.length < 1 || args[0].equalsIgnoreCase(network.getNick()))
             IRCUtils.sendMessage(user, network, channel, user.getNick() + ": " + c, prefix);
-        else if(userPermLevel >= 20 || chance != 1)
+        else if (userPermLevel >= 20 || chance != 1)
             IRCUtils.sendMessage(user, network, channel, args[0] + ": " + c, prefix);
         else
             IRCUtils.sendMessage(user, network, channel, user.getNick() + ": " + c, prefix);
-        }
+    }
 }

@@ -1,6 +1,6 @@
 package com.techcavern.wavetact.utils;
 
-import com.techcavern.wavetact.eventListeners.*;
+import com.techcavern.wavetact.eventListeners.ConnectListener;
 import com.techcavern.wavetact.objects.NetProperty;
 import org.jooq.Record;
 import org.pircbotx.Configuration;
@@ -10,7 +10,6 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.charset.Charset;
 
-import static com.techcavern.wavetactdb.Tables.CONFIG;
 import static com.techcavern.wavetactdb.Tables.SERVERS;
 
 
@@ -69,7 +68,7 @@ public class ConfigUtils {
         Net.setRealName(nick);
         Net.getListenerManager().addListener(new ConnectListener());
         Net.setAutoReconnect(true);
-        if(serverpass != null){
+        if (serverpass != null) {
             Net.setServerPassword(serverpass);
         }
         Net.setAutoReconnectAttempts(5);

@@ -38,11 +38,11 @@ public class CustomCMD extends IRCCommand {
         boolean isModify = false;
         boolean isDelete = false;
         if (args[0].equalsIgnoreCase(".")) {
-                net = IRCUtils.getNetworkNameByNetwork(network);
-                chan = channel.getName();
-                args = ArrayUtils.remove(args, 0);
+            net = IRCUtils.getNetworkNameByNetwork(network);
+            chan = channel.getName();
+            args = ArrayUtils.remove(args, 0);
         }
-        if(command.equalsIgnoreCase("cact") || command.equalsIgnoreCase("customact")){
+        if (command.equalsIgnoreCase("cact") || command.equalsIgnoreCase("customact")) {
             isAction = true;
         }
         String cCommand;

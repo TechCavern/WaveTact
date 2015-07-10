@@ -29,10 +29,10 @@ public class ConnectListener extends ListenerAdapter {
     public void onConnect(ConnectEvent event) throws Exception {
         String NickServCommand = DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(event.getBot())).getValue(SERVERS.NICKSERVCOMMAND);
         String NickServNick = DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(event.getBot())).getValue(SERVERS.NICKSERVNICK);
-        if(NickServNick == null){
+        if (NickServNick == null) {
             NickServNick = "NickServ";
         }
-        if(NickServCommand != null) {
+        if (NickServCommand != null) {
             event.getBot().sendRaw().rawLine("PRIVMSG " + NickServNick + " :" + NickServCommand);
         }
         TimeUnit.SECONDS.sleep(10);

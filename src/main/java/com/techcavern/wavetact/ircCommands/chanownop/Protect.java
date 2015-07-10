@@ -33,7 +33,7 @@ public class Protect extends IRCCommand {
             }
             if (command.contains("de")) {
                 channel.send().deSuperOp(user);
-            }else {
+            } else {
                 channel.send().superOp(user);
             }
         } else {

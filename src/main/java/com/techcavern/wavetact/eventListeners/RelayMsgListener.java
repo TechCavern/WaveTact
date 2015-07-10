@@ -22,7 +22,7 @@ public class RelayMsgListener extends ListenerAdapter {
     @Override
     public void onMessage(MessageEvent event) throws Exception {
         if (PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel()) > -2 && IRCUtils.getPrefix(event.getBot(), event.getChannelSource()).isEmpty())
-        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), GeneralUtils.replaceVowelsWithAccents(event.getUser().getNick()) + ": " + event.getMessage());
+            IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), GeneralUtils.replaceVowelsWithAccents(event.getUser().getNick()) + ": " + event.getMessage());
     }
 
     @Override
@@ -35,7 +35,7 @@ public class RelayMsgListener extends ListenerAdapter {
     public void onNickChange(NickChangeEvent event) {
         Record rec = DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "relaychan");
         String chanrelay = null;
-        if(rec != null)
+        if (rec != null)
             chanrelay = rec.getValue(NETWORKPROPERTY.VALUE);
         if (chanrelay != null && event.getUser().getChannels().contains(IRCUtils.getChannelbyName(event.getBot(), chanrelay)))
             IRCUtils.sendRelayMessage(event.getBot(), IRCUtils.getChannelbyName(event.getBot(), chanrelay), GeneralUtils.replaceVowelsWithAccents(event.getOldNick()) + " is now known as " + GeneralUtils.replaceVowelsWithAccents(event.getNewNick()));
@@ -43,7 +43,7 @@ public class RelayMsgListener extends ListenerAdapter {
 
     @Override
     public void onKick(KickEvent event) {
-        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(),GeneralUtils.replaceVowelsWithAccents(event.getUser().getNick()) + " kicks " + GeneralUtils.replaceVowelsWithAccents(event.getRecipient().getNick()) + " (" + event.getReason() + ")");
+        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), GeneralUtils.replaceVowelsWithAccents(event.getUser().getNick()) + " kicks " + GeneralUtils.replaceVowelsWithAccents(event.getRecipient().getNick()) + " (" + event.getReason() + ")");
     }
 
     @Override
@@ -55,8 +55,8 @@ public class RelayMsgListener extends ListenerAdapter {
     public void onQuit(QuitEvent event) {
         Record rec = DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "relaychan");
         String chanrelay = null;
-        if(rec != null)
-        chanrelay = rec.getValue(NETWORKPROPERTY.VALUE);
+        if (rec != null)
+            chanrelay = rec.getValue(NETWORKPROPERTY.VALUE);
         if (chanrelay != null && event.getUser().getChannels().contains(IRCUtils.getChannelbyName(event.getBot(), chanrelay)))
             IRCUtils.sendRelayMessage(event.getBot(), IRCUtils.getChannelbyName(event.getBot(), chanrelay), GeneralUtils.replaceVowelsWithAccents(event.getUser().getNick()) + " quits " + " (" + event.getReason() + ")");
     }

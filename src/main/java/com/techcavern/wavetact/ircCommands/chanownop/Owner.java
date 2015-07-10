@@ -31,7 +31,7 @@ public class Owner extends IRCCommand {
             }
             if (command.contains("de")) {
                 channel.send().deOwner(user);
-            }else {
+            } else {
                 channel.send().owner(user);
             }
         } else {

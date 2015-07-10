@@ -32,7 +32,7 @@ public class HalfOp extends IRCCommand {
             }
             if (command.contains("de")) {
                 channel.send().deHalfOp(user);
-            }else {
+            } else {
                 channel.send().halfOp(user);
             }
         } else {

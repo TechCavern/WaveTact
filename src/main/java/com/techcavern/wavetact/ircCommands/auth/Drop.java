@@ -26,13 +26,13 @@ public class Drop extends IRCCommand {
             return;
         }
         AuthedUser authedUser = PermUtils.getAuthedUser(network, user.getNick());
-            Record account = DatabaseUtils.getAccount(authedUser.getAuthAccount());
-            if (Registry.encryptor.checkPassword(args[0] + account.getValue(ACCOUNTS.RANDOMSTRING), account.getValue(ACCOUNTS.PASSWORD))) {
-                DatabaseUtils.removeAccount(authedUser.getAuthAccount());
-                IRCUtils.sendMessage(user, network, channel, "Your account is now dropped", prefix);
-            } else {
-                ErrorUtils.sendError(user, "Incorrect password");
-            }
+        Record account = DatabaseUtils.getAccount(authedUser.getAuthAccount());
+        if (Registry.encryptor.checkPassword(args[0] + account.getValue(ACCOUNTS.RANDOMSTRING), account.getValue(ACCOUNTS.PASSWORD))) {
+            DatabaseUtils.removeAccount(authedUser.getAuthAccount());
+            IRCUtils.sendMessage(user, network, channel, "Your account is now dropped", prefix);
+        } else {
+            ErrorUtils.sendError(user, "Incorrect password");
+        }
     }
 }
 

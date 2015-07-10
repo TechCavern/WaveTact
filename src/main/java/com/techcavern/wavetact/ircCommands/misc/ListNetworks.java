@@ -25,13 +25,13 @@ public class ListNetworks extends IRCCommand {
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         String networks = "";
         List<NetProperty> bufferlist = new ArrayList<>();
-        if(args.length < 1){
+        if (args.length < 1) {
             bufferlist.addAll(Registry.NetworkName.stream().collect(Collectors.toList()));
         } else if (args[0].equalsIgnoreCase("connected")) {
             bufferlist.addAll(Registry.NetworkName.stream().filter(netprop -> netprop.getNetwork().getState().equals(PircBotX.State.CONNECTED)).collect(Collectors.toList()));
         } else if (args[0].equalsIgnoreCase("disconnected")) {
             bufferlist.addAll(Registry.NetworkName.stream().filter(netprop -> netprop.getNetwork().getState().equals(PircBotX.State.DISCONNECTED)).collect(Collectors.toList()));
-        }else{
+        } else {
             bufferlist.addAll(Registry.NetworkName.stream().collect(Collectors.toList()));
         }
         int netcount = 0;

@@ -30,7 +30,7 @@ public class Op extends IRCCommand {
         }
         if (command.contains("de")) {
             channel.send().deOp(user);
-        }else {
+        } else {
             channel.send().op(user);
         }
     }

@@ -23,12 +23,12 @@ public class Quote extends IRCCommand {
         Document doc = Jsoup.connect("http://wwww.quotationspage.com/random.php3").userAgent(Registry.userAgent).get();
         String c = doc.select(".quote").get(0).text();
         String d = doc.select(".author").get(0).text();
-        if(d.contains("-")){
-            if(!d.contains("("))
-            d = d.split("-")[0];
+        if (d.contains("-")) {
+            if (!d.contains("("))
+                d = d.split("-")[0];
             else
                 d = d.split("\\(")[0];
         }
-        IRCUtils.sendMessage(user, network, channel, c +" -" + d, prefix);
+        IRCUtils.sendMessage(user, network, channel, c + " -" + d, prefix);
     }
 }

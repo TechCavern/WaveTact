@@ -27,15 +27,15 @@ public class SetPass extends IRCCommand {
             return;
         }
         String AuthUser = PermUtils.authUser(network, user.getNick());
-            Record account = DatabaseUtils.getAccount(args[0]);
-            if (Registry.encryptor.checkPassword(args[0] + account.getValue(ACCOUNTS.RANDOMSTRING), account.getValue(ACCOUNTS.PASSWORD))) {
-                account.setValue(ACCOUNTS.RANDOMSTRING, UUID.randomUUID().toString());
-                account.setValue(ACCOUNTS.PASSWORD, Registry.encryptor.encryptPassword(args[1] + ACCOUNTS.RANDOMSTRING));
-                DatabaseUtils.updateAccount(account);
-                IRCUtils.sendMessage(user, network, channel, "Password changed successfully", prefix);
-            } else {
-                ErrorUtils.sendError(user, "Incorrect password");
-            }
+        Record account = DatabaseUtils.getAccount(args[0]);
+        if (Registry.encryptor.checkPassword(args[0] + account.getValue(ACCOUNTS.RANDOMSTRING), account.getValue(ACCOUNTS.PASSWORD))) {
+            account.setValue(ACCOUNTS.RANDOMSTRING, UUID.randomUUID().toString());
+            account.setValue(ACCOUNTS.PASSWORD, Registry.encryptor.encryptPassword(args[1] + ACCOUNTS.RANDOMSTRING));
+            DatabaseUtils.updateAccount(account);
+            IRCUtils.sendMessage(user, network, channel, "Password changed successfully", prefix);
+        } else {
+            ErrorUtils.sendError(user, "Incorrect password");
+        }
     }
 }
 

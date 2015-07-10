@@ -19,6 +19,21 @@ public class ConsoleServer implements Runnable {
     public boolean keepConsoleRunning = true;
     public boolean keepConnectionRunning = true;
 
+    public static void parseCommandLineArguments(String[] args, CommandIO commandIO) {
+        try {
+            String command = args[0].toLowerCase();
+            args = ArrayUtils.remove(args, 0);
+            ConsoleCommand cmd = IRCUtils.getConsoleCommand(command);
+            if (cmd != null) {
+                cmd.onCommand(command, args, commandIO);
+            } else {
+                commandIO.getPrintStream().print("Invalid Command");
+            }
+        } catch (Exception e) {
+            commandIO.getPrintStream().print("Failed to execute command");
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void run() {
@@ -70,22 +85,6 @@ public class ConsoleServer implements Runnable {
         Registry.WaveTact.stop();
         socketFile.delete();
         System.exit(0);
-    }
-
-    public static void parseCommandLineArguments(String[] args, CommandIO commandIO) {
-        try {
-            String command = args[0].toLowerCase();
-            args = ArrayUtils.remove(args, 0);
-            ConsoleCommand cmd = IRCUtils.getConsoleCommand(command);
-            if (cmd != null) {
-                cmd.onCommand(command, args, commandIO);
-            } else {
-                commandIO.getPrintStream().print("Invalid Command");
-            }
-        } catch (Exception e) {
-            commandIO.getPrintStream().print("Failed to execute command");
-            e.printStackTrace();
-        }
     }
 
 }

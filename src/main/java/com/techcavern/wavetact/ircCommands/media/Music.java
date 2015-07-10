@@ -8,7 +8,6 @@ import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import javassist.bytecode.stackmap.BasicBlock;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;

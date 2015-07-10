@@ -33,7 +33,7 @@ public class KickListener extends ListenerAdapter {
             if (network.getUserBot().getChannels().contains(channel) && !user.getNick().equals(network.getNick())) {
                 if (IRCUtils.checkIfCanKick(channel, network, user)) {
                     IRCUtils.sendKick(network.getUserBot(), user, network, event.getChannel(), "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻");
-                }  else {
+                } else {
                     IRCUtils.sendAction(user, network, channel, "kicks " + user.getNick() + " (┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻)", "");
 
                 }

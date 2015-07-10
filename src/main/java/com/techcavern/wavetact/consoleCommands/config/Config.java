@@ -4,9 +4,7 @@ import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.objects.CommandIO;
 import com.techcavern.wavetact.objects.ConsoleCommand;
 import com.techcavern.wavetact.utils.DatabaseUtils;
-import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.IRCUtils;
 import org.jooq.Record;
 
 import static com.techcavern.wavetactdb.Tables.CONFIG;

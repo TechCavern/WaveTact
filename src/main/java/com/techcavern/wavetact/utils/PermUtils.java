@@ -140,7 +140,7 @@ public class PermUtils {
 
     public static int getPermLevel(PircBotX network, String userObject, Channel channelObject) { //gets the permlevel of the user in question
         String auth = PermUtils.authUser(network, userObject);
-            return getLevel(network, userObject, channelObject, auth);
+        return getLevel(network, userObject, channelObject, auth);
     }
 
     public static int getLevel(PircBotX network, String userObject, Channel channelObject, String account) { //gets the actual Perm Level
@@ -169,7 +169,7 @@ public class PermUtils {
 
     public static boolean isNetworkAdmin(String account, String network) {
         for (String c : StringUtils.split(DatabaseUtils.getServer(network).getValue(SERVERS.NETWORKADMINS), ", ")) {
-             if (c.equalsIgnoreCase(account))
+            if (c.equalsIgnoreCase(account))
                 return true;
         }
         return false;

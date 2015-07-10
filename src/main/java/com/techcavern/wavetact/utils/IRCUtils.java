@@ -14,7 +14,6 @@ import org.pircbotx.exception.DaoException;
 import org.pircbotx.hooks.WaitForQueue;
 import org.pircbotx.hooks.events.WhoisEvent;
 
-import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import static com.techcavern.wavetactdb.Tables.CUSTOMCOMMANDS;
@@ -30,9 +29,9 @@ public class IRCUtils {
         }
     }
 
-    public static WhoisEvent getCachedWhoisEvent(PircBotX network, String userObject){
-        for(CachedWhoisEvent event:Registry.WhoisEventCache){
-            if(event.getNetwork().equals(network) && event.getUser().equals(userObject)){
+    public static WhoisEvent getCachedWhoisEvent(PircBotX network, String userObject) {
+        for (CachedWhoisEvent event : Registry.WhoisEventCache) {
+            if (event.getNetwork().equals(network) && event.getUser().equals(userObject)) {
                 return event.getWhoisEvent();
             }
         }
@@ -72,7 +71,7 @@ public class IRCUtils {
         if (WhoisEvent == null || !WhoisEvent.isExists() || !WhoisEvent.getNick().equals(userObject))
             return null;
         else
-        Registry.WhoisEventCache.add(new CachedWhoisEvent(WhoisEvent, network, userObject));
+            Registry.WhoisEventCache.add(new CachedWhoisEvent(WhoisEvent, network, userObject));
         return WhoisEvent;
     }
 
@@ -97,7 +96,7 @@ public class IRCUtils {
                 String messageToSend = message.substring(i, Math.min(message.length(), i + 350));
                 if (!messageToSend.isEmpty()) {
                     Registry.MessageQueue.add(new NetProperty("KICK " + channelObject.getName() + " " + recipientObject.getNick() + " :" + messageToSend, networkObject));
-             //       sendRelayMessage(networkObject, channelObject, "* " + userObject.getNick() + " kicks " + recipientObject.getNick() + " (" + messageToSend + ")");
+                    //       sendRelayMessage(networkObject, channelObject, "* " + userObject.getNick() + " kicks " + recipientObject.getNick() + " (" + messageToSend + ")");
                 }
             }
         }
@@ -150,17 +149,13 @@ public class IRCUtils {
 
     public static boolean checkIfCanKick(Channel channel, PircBotX network, User user) {
         Record relaybotsplit = DatabaseUtils.getChannelUserProperty(IRCUtils.getNetworkNameByNetwork(network), channel.getName(), PermUtils.authUser(network, user.getNick()), "relaybotsplit");
-        if(relaybotsplit == null) {
+        if (relaybotsplit == null) {
             if (channel != null && channel.getUserLevels(network.getUserBot()).contains(UserLevel.OP) && !channel.isOwner(user) && !channel.isSuperOp(user)) {
                 return true;
             } else if (channel != null && channel.getUserLevels(network.getUserBot()).contains(UserLevel.SUPEROP) && !channel.isOwner(user) && !channel.isSuperOp(user)) {
                 return true;
-            } else if (channel != null && channel.getUserLevels(network.getUserBot()).contains(UserLevel.OWNER)) {
-                return true;
-            } else {
-                return false;
-            }
-        }else{
+            } else return channel != null && channel.getUserLevels(network.getUserBot()).contains(UserLevel.OWNER);
+        } else {
             return false;
         }
     }
@@ -242,11 +237,11 @@ public class IRCUtils {
         User use = getUserByNick(network, userObject);
         if (use != null && use.getHostname() != null) {
             host = use.getHostname();
-        }else{
+        } else {
             WhoisEvent whois = WhoisEvent(network, userObject, true);
-            if(whois != null){
+            if (whois != null) {
                 host = whois.getHostname();
-            }else{
+            } else {
                 host = "";
             }
         }
@@ -267,9 +262,9 @@ public class IRCUtils {
     }
 
     public static Channel getChannelbyName(PircBotX networkObject, String channelName) {
-        try{
+        try {
             return networkObject.getUserChannelDao().getChannel(channelName);
-        }catch(DaoException e){
+        } catch (DaoException e) {
             return null;
         }
 
@@ -370,6 +365,7 @@ public class IRCUtils {
         }
         return null;
     }
+
     public static NetProperty getNetPropertyByNetwork(PircBotX network) {
         for (NetProperty d : Registry.NetworkName) {
             if (d.getNetwork().equals(network)) {
@@ -378,10 +374,11 @@ public class IRCUtils {
         }
         return null;
     }
-    public static Channel getMsgChannel(Channel channel, boolean isPrivate){
-        if(isPrivate){
+
+    public static Channel getMsgChannel(Channel channel, boolean isPrivate) {
+        if (isPrivate) {
             return null;
-        }else{
+        } else {
             return channel;
         }
     }

@@ -16,13 +16,16 @@ public class CachedWhoisEvent {
         this.network = network;
         this.user = user;
     }
-    public String getUser(){
+
+    public String getUser() {
         return this.user;
     }
-    public PircBotX getNetwork(){
+
+    public PircBotX getNetwork() {
         return this.network;
     }
-    public WhoisEvent getWhoisEvent(){
+
+    public WhoisEvent getWhoisEvent() {
         return whoisEvent;
     }
 }

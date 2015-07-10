@@ -2,7 +2,10 @@ package com.techcavern.wavetact.ircCommands.reference;
 
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.utils.*;
+import com.techcavern.wavetact.utils.DatabaseUtils;
+import com.techcavern.wavetact.utils.ErrorUtils;
+import com.techcavern.wavetact.utils.GeneralUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
 import com.wordnik.client.api.WordApi;
 import com.wordnik.client.model.Definition;
 import com.wordnik.client.model.ExampleUsage;

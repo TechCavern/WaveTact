@@ -50,7 +50,7 @@ public class DNSInfo extends IRCCommand {
                     IRCUtils.sendMessage(user, network, channel, "[" + Type.string(rec.getType()) + "] " + StringUtils.join(rec, " "), prefix);
                 } else if (rec instanceof MXRecord) {
                     IRCUtils.sendMessage(user, network, channel, "[" + Type.string(rec.getType()) + "] " + ((MXRecord) rec).getPriority() + " - " + ((MXRecord) rec).getTarget(), prefix);
-                }else if (rec instanceof SRVRecord) {
+                } else if (rec instanceof SRVRecord) {
                     IRCUtils.sendMessage(user, network, channel, "[" + Type.string(rec.getType()) + "] " + ((SRVRecord) rec).getPriority() + " - " + ((SRVRecord) rec).getTarget() + " - " + ((SRVRecord) rec).getPort(), prefix);
                 }
             }

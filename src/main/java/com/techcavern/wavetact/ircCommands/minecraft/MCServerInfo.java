@@ -37,15 +37,15 @@ public class MCServerInfo extends IRCCommand {
             lookup.setResolver(resolver);
             lookup.setCache(null);
             Record[] records = lookup.run();
-            if(lookup.getResult() == Lookup.SUCCESSFUL) {
+            if (lookup.getResult() == Lookup.SUCCESSFUL) {
                 int Priority = 0;
                 for (Record rec : records) {
                     if (rec instanceof SRVRecord) {
-                        if(isSuccessful && ((SRVRecord) rec).getPriority() < Priority){
+                        if (isSuccessful && ((SRVRecord) rec).getPriority() < Priority) {
                             args[0] = ((SRVRecord) rec).getTarget().toString();
                             port = ((SRVRecord) rec).getPort();
                             Priority = ((SRVRecord) rec).getPriority();
-                        }else{
+                        } else {
                             args[0] = ((SRVRecord) rec).getTarget().toString();
                             port = ((SRVRecord) rec).getPort();
                         }
@@ -57,35 +57,35 @@ public class MCServerInfo extends IRCCommand {
         }
         InetSocketAddress address = new InetSocketAddress(GeneralUtils.getIP(args[0], network, false), port);
         Socket socket = new Socket();
-            socket.connect(address, 10000);
-            DataOutputStream out = new DataOutputStream(socket.getOutputStream());
-                DataInputStream in = new DataInputStream(socket.getInputStream());
-                ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                DataOutputStream handshake = new DataOutputStream(bos);
-                handshake.writeByte(0x00);
-                GeneralUtils.writeOutputStream(handshake, 4);
-                GeneralUtils.writeOutputStream(handshake, address.getHostString().length());
-                handshake.writeBytes(address.getHostString());
-                handshake.writeShort(address.getPort());
-                GeneralUtils.writeOutputStream(handshake, 1);
-                GeneralUtils.writeOutputStream(out, bos.size());
-                out.write(bos.toByteArray());
-                out.writeByte(0x01);
-                out.writeByte(0x00);
-                GeneralUtils.readInputStream(in);
-                int id = GeneralUtils.readInputStream(in);
-                if (id != 0x00) {
-                    ErrorUtils.sendError(user, "Error parsing packet response");
-                    return;
-                }
-                int length = GeneralUtils.readInputStream(in);
-                if (length == 0 || length == -1) {
-                    ErrorUtils.sendError(user, "Error parsing packet response");
-                    return;
-                }
-                byte[] bits = new byte[length];
-                in.readFully(bits);
-                JsonObject response = new JsonParser().parse(new String(bits)).getAsJsonObject();
+        socket.connect(address, 10000);
+        DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+        DataInputStream in = new DataInputStream(socket.getInputStream());
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        DataOutputStream handshake = new DataOutputStream(bos);
+        handshake.writeByte(0x00);
+        GeneralUtils.writeOutputStream(handshake, 4);
+        GeneralUtils.writeOutputStream(handshake, address.getHostString().length());
+        handshake.writeBytes(address.getHostString());
+        handshake.writeShort(address.getPort());
+        GeneralUtils.writeOutputStream(handshake, 1);
+        GeneralUtils.writeOutputStream(out, bos.size());
+        out.write(bos.toByteArray());
+        out.writeByte(0x01);
+        out.writeByte(0x00);
+        GeneralUtils.readInputStream(in);
+        int id = GeneralUtils.readInputStream(in);
+        if (id != 0x00) {
+            ErrorUtils.sendError(user, "Error parsing packet response");
+            return;
+        }
+        int length = GeneralUtils.readInputStream(in);
+        if (length == 0 || length == -1) {
+            ErrorUtils.sendError(user, "Error parsing packet response");
+            return;
+        }
+        byte[] bits = new byte[length];
+        in.readFully(bits);
+        JsonObject response = new JsonParser().parse(new String(bits)).getAsJsonObject();
         String gameVersion = "Version: " + response.get("version").getAsJsonObject().get("name").getAsString();
         String motd = "MOTD: " + response.get("description").getAsString();
         String playercount = "Players: " + response.get("players").getAsJsonObject().get("online").getAsString() + "/" + response.get("players").getAsJsonObject().get("max").getAsString();

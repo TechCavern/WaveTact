@@ -3,7 +3,10 @@ package com.techcavern.wavetact.ircCommands.reference;
 import com.google.gson.JsonObject;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.utils.*;
+import com.techcavern.wavetact.utils.DatabaseUtils;
+import com.techcavern.wavetact.utils.ErrorUtils;
+import com.techcavern.wavetact.utils.GeneralUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -28,10 +31,10 @@ public class Translate extends IRCCommand {
             return;
         }
         JsonObject result = GeneralUtils.getJsonObject("https://translate.yandex.net/api/v1.5/tr.json/translate?key=" + yandexapikey + "&lang=en&text=" + StringUtils.join(args, "+"));
-            if(result.get("code").getAsInt() == 200){
-                IRCUtils.sendMessage(user, network, channel, "[" + result.get("lang").getAsString() + "] " + result.get("text").getAsString(), prefix);
-            }else{
-                ErrorUtils.sendError(user,result.get("code").getAsString() + " - Unable to translate text");
-            }
+        if (result.get("code").getAsInt() == 200) {
+            IRCUtils.sendMessage(user, network, channel, "[" + result.get("lang").getAsString() + "] " + result.get("text").getAsString(), prefix);
+        } else {
+            ErrorUtils.sendError(user, result.get("code").getAsString() + " - Unable to translate text");
         }
+    }
 }

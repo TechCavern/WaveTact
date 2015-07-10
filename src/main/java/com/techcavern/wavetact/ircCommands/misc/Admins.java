@@ -2,7 +2,9 @@ package com.techcavern.wavetact.ircCommands.misc;
 
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.utils.*;
+import com.techcavern.wavetact.utils.DatabaseUtils;
+import com.techcavern.wavetact.utils.GeneralUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;

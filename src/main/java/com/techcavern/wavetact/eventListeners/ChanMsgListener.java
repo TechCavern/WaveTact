@@ -34,22 +34,22 @@ public class ChanMsgListener extends ListenerAdapter {
                 commandchar = commandcharRecord.getValue(NETWORKPROPERTY.VALUE);
 
                 if (event.getMessage().startsWith(commandchar)) {
-                String chancommand = StringUtils.replaceOnce(message[0].toLowerCase(), DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "commandchar").getValue(NETWORKPROPERTY.VALUE), "");
-                message = ArrayUtils.remove(message, 0);
-                IRCCommand Command = IRCUtils.getCommand(chancommand, IRCUtils.getNetworkNameByNetwork(event.getBot()), event.getChannel().getName());
-                if (Command != null) {
-                    int userPermLevel = PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel());
-                    if (userPermLevel >= Command.getPermLevel()) {
-                        try {
-                            Command.onCommand(chancommand, event.getUser(), event.getBot(), IRCUtils.getPrefix(event.getBot(), event.getChannelSource()), event.getChannel(), false, userPermLevel, message);
-                        } catch (Exception e) {
-                            ErrorUtils.sendError(event.getUser(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")");
-                            e.printStackTrace();
+                    String chancommand = StringUtils.replaceOnce(message[0].toLowerCase(), DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "commandchar").getValue(NETWORKPROPERTY.VALUE), "");
+                    message = ArrayUtils.remove(message, 0);
+                    IRCCommand Command = IRCUtils.getCommand(chancommand, IRCUtils.getNetworkNameByNetwork(event.getBot()), event.getChannel().getName());
+                    if (Command != null) {
+                        int userPermLevel = PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel());
+                        if (userPermLevel >= Command.getPermLevel()) {
+                            try {
+                                Command.onCommand(chancommand, event.getUser(), event.getBot(), IRCUtils.getPrefix(event.getBot(), event.getChannelSource()), event.getChannel(), false, userPermLevel, message);
+                            } catch (Exception e) {
+                                ErrorUtils.sendError(event.getUser(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")");
+                                e.printStackTrace();
+                            }
+                        } else {
+                            ErrorUtils.sendError(event.getUser(), "Permission denied");
                         }
-                    } else {
-                        ErrorUtils.sendError(event.getUser(), "Permission denied");
                     }
-                }
                 } else {
                     Record rec = DatabaseUtils.getChannelUserProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), event.getChannel().getName(), PermUtils.authUser(event.getBot(), event.getUser().getNick()), "relaybotsplit");
                     if (rec == null)
@@ -66,8 +66,7 @@ public class ChanMsgListener extends ListenerAdapter {
                         return;
                     }
                     String[] relayedmessage = StringUtils.split(Colors.removeFormattingAndColors(startingmessage), " ");
-                    if (relayedmessage[0].startsWith(commandchar))
-                    {
+                    if (relayedmessage[0].startsWith(commandchar)) {
                         String relayedcommand = StringUtils.replaceOnce(relayedmessage[0], DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "commandchar").getValue(NETWORKPROPERTY.VALUE), "");
                         relayedmessage = ArrayUtils.remove(relayedmessage, 0);
                         IRCCommand Command = IRCUtils.getCommand(relayedcommand, IRCUtils.getNetworkNameByNetwork(event.getBot()), event.getChannel().getName());
