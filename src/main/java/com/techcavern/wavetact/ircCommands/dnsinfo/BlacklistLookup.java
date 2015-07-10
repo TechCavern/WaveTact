@@ -28,12 +28,12 @@ import static com.techcavern.wavetactdb.Tables.BLACKLISTS;
 public class BlacklistLookup extends IRCCommand {
 
     public BlacklistLookup() {
-        super(GeneralUtils.toArray("blacklistlookup sbl spambl ibl ircbl"), 1, "blacklistlookup [type] [ip/domain/user]", "Looks up a domain or ip in blacklist database", false);
+        super(GeneralUtils.toArray("blacklist bl"), 1, "blacklist [type] [ip/domain/user]", "Looks up a domain or ip in blacklist database", false);
     }
 
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        String BeforeIP = GeneralUtils.getIP(args[0], network, false);
+        String BeforeIP = GeneralUtils.getIP(args[1], network, false);
         if (BeforeIP == null) {
             ErrorUtils.sendError(user, "Invalid ip/user");
             return;

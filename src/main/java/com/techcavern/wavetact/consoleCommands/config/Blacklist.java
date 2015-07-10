@@ -23,11 +23,11 @@ import static com.techcavern.wavetactdb.Tables.BLACKLISTS;
  * @author jztech101
  */
 @ConCMD
-public class Blacklistdb extends ConsoleCommand {
+public class Blacklist extends ConsoleCommand {
 
 
-    public Blacklistdb() {
-        super(GeneralUtils.toArray("blacklistdb bldb spambldb ircbldb"), "blacklistdb [type] (-)[irc/spam blacklist Url]", "Adds/removes domains from blacklistdb");
+    public Blacklist() {
+        super(GeneralUtils.toArray("blacklist bl"), "blacklist [type] (-)[blacklist Url]", "Adds/removes domains from blacklist database");
     }
 
     @Override
