@@ -23,21 +23,19 @@ public class FindIP extends IRCCommand {
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         boolean IPv6Priority = false;
-        String hostmask = null;
-        if (args.length < 1)
-            hostmask = user.getNick();
-        else {
+        String nick = user.getNick();
+        ;
+        if (args.length > 0) {
             if (args[0].equalsIgnoreCase("+")) {
-                hostmask = user.getNick();
                 IPv6Priority = true;
             } else if (args[0].startsWith("+")) {
-                hostmask = args[0].replaceFirst("\\+", "");
+                nick = args[0].replaceFirst("\\+", "");
                 IPv6Priority = true;
             } else {
-                hostmask = args[0];
+                nick = args[0];
             }
         }
-        String IP = GeneralUtils.getIP(hostmask, network, IPv6Priority);
+        String IP = GeneralUtils.getIP(nick, network, IPv6Priority);
         if (IP == null) {
             ErrorUtils.sendError(user, "Please enter in an ip/user/domain as argument #1");
             return;

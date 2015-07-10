@@ -15,6 +15,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.*;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class GeneralUtils {
     public static String buildMessage(int startint, int finishint, String[] args) {
@@ -265,6 +271,44 @@ public class GeneralUtils {
 
             out.write(i & 0x7F | 0x80);
             i >>>= 7;
+        }
+    }
+
+    public static String getTimeFromSeconds(int seconds) {
+        if (seconds > 60) {
+            int minutes = seconds / 60;
+            seconds = seconds % 60;
+            if (minutes > 60) {
+                int hours = minutes / 60;
+                minutes = minutes % 60;
+                if (hours > 24) {
+                    int days = hours / 24;
+                    hours = hours % 24;
+                    return days + " days, " + hours + " hours, " + minutes + " minutes, " + seconds + " seconds";
+                } else {
+                    return hours + " hours, " + minutes + " minutes, " + seconds + " seconds";
+                }
+            } else {
+                return minutes + " minutes, " + seconds + " seconds";
+            }
+        } else {
+            return seconds + " seconds";
+        }
+    }
+
+    public static String getDateFromSeconds(long time) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeZone(TimeZone.getTimeZone("UTC"));
+        cal.setTimeInMillis(time * 1000);
+        Locale locale = Locale.ENGLISH;
+        return cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, locale) + ", " + cal.getDisplayName(Calendar.MONTH, Calendar.LONG, locale) + " " + (cal.get(Calendar.DAY_OF_MONTH) + 1) + ", " + cal.get(Calendar.YEAR) + " at " + cal.get(Calendar.HOUR_OF_DAY) + ":" + formatTime(cal.get(Calendar.MINUTE)) + ":" + formatTime(cal.get(Calendar.SECOND));
+    }
+
+    public static String formatTime(int time) {
+        if (time < 10) {
+            return 0 + String.valueOf(time);
+        } else {
+            return String.valueOf(time);
         }
     }
 }

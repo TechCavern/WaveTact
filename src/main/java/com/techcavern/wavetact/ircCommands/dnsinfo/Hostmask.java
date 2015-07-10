@@ -18,13 +18,11 @@ public class Hostmask extends IRCCommand {
 
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        String nick = null;
+        String nick = user.getNick();
+        ;
         boolean isBanmask = false;
-        if (args.length < 1)
-            nick = user.getNick();
-        else {
+        if (args.length > 0) {
             if (args[0].equalsIgnoreCase("+")) {
-                nick = user.getNick();
                 isBanmask = true;
             } else if (args[0].startsWith("+")) {
                 nick = args[0].replaceFirst("\\+", "");

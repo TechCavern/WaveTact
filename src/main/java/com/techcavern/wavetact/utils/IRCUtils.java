@@ -39,33 +39,37 @@ public class IRCUtils {
         return null;
     }
 
-    public static WhoisEvent WhoisEvent(PircBotX network, String userObject) {
+    public static WhoisEvent WhoisEvent(PircBotX network, String userObject, boolean useCache) {
         WhoisEvent WhoisEvent = getCachedWhoisEvent(network, userObject);
-        if(WhoisEvent != null){
-            return WhoisEvent;
-        } else if (Registry.LastWhois.equals(userObject)) {
-            int i = 0;
-            while (getCachedWhoisEvent(network, userObject) == null && i < 20) {
-                try {
-                    TimeUnit.MILLISECONDS.sleep(100);
-                } catch (Exception e) {
+        if (useCache) {
+            if (WhoisEvent != null) {
+                return WhoisEvent;
+            } else if (Registry.LastWhois.equals(userObject)) {
+                int i = 0;
+                while (getCachedWhoisEvent(network, userObject) == null && i < 20) {
+                    try {
+                        TimeUnit.MILLISECONDS.sleep(100);
+                    } catch (Exception e) {
+                    }
+                    i++;
                 }
-                i++;
+                if (getCachedWhoisEvent(network, userObject) != null)
+                    return getCachedWhoisEvent(network, userObject);
             }
-            if (getCachedWhoisEvent(network, userObject) != null)
-            return getCachedWhoisEvent(network, userObject);
+            Registry.LastWhois = userObject;
+        } else if (WhoisEvent != null) {
+            Registry.WhoisEventCache.remove(WhoisEvent);
         }
-        Registry.LastWhois = userObject;
         WaitForQueue waitForQueue = new WaitForQueue(network);
         try {
-            Registry.MessageQueue.add(new NetProperty("WHOIS " + userObject, network));
+            Registry.MessageQueue.add(new NetProperty("WHOIS " + userObject + " " + userObject, network));
             WhoisEvent = waitForQueue.waitFor(WhoisEvent.class);
             waitForQueue.close();
         } catch (InterruptedException | NullPointerException ex) {
             ex.printStackTrace();
             WhoisEvent = null;
         }
-        if (!WhoisEvent.isExists() || !WhoisEvent.getNick().equals(userObject))
+        if (WhoisEvent == null || !WhoisEvent.isExists() || !WhoisEvent.getNick().equals(userObject))
             return null;
         else
         Registry.WhoisEventCache.add(new CachedWhoisEvent(WhoisEvent, network, userObject));
@@ -171,7 +175,7 @@ public class IRCUtils {
 
     public static String getWhoisHostmask(PircBotX network, String userObject, boolean isBanmask) {
         String hostmask;
-        WhoisEvent whois = WhoisEvent(network, userObject);
+        WhoisEvent whois = WhoisEvent(network, userObject, true);
         if (whois != null) {
             String hostname = whois.getHostname();
             String Login = whois.getLogin();
@@ -239,7 +243,7 @@ public class IRCUtils {
         if (use != null && use.getHostname() != null) {
             host = use.getHostname();
         }else{
-            WhoisEvent whois = WhoisEvent(network, userObject);
+            WhoisEvent whois = WhoisEvent(network, userObject, true);
             if(whois != null){
                 host = whois.getHostname();
             }else{

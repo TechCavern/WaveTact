@@ -76,7 +76,7 @@ public class PermUtils {
 
     @SuppressWarnings("unchecked")
     public static String getAccountName(PircBotX network, String userObject) { //gets the actual NickServ ACcount Name
-        WhoisEvent whois = IRCUtils.WhoisEvent(network, userObject);
+        WhoisEvent whois = IRCUtils.WhoisEvent(network, userObject, true);
         String userString;
         if (whois != null) {
             userString = whois.getRegisteredAs();

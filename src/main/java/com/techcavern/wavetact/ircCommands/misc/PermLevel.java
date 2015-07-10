@@ -12,10 +12,10 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
 @IRCCMD
-public class CheckUserLevel extends IRCCommand {
+public class PermLevel extends IRCCommand {
 
-    public CheckUserLevel() {
-        super(GeneralUtils.toArray("checkuserlevel level checklevel perm permlevel"), 0, "checkuserlevel (user)", "Checks User Level of the specified user or yourself if unspecified", false);
+    public PermLevel() {
+        super(GeneralUtils.toArray("permlevel perm level"), 0, "permlevel (user)", "Checks Perm Level of the specified user or yourself if unspecified", false);
     }
 
     @Override
