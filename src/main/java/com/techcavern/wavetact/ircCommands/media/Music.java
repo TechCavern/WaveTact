@@ -46,7 +46,7 @@ public class Music extends IRCCommand {
                     JsonArray albumtracks = GeneralUtils.getJsonObject("http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=" + lastfmapikey + "&artist=" + album.get("artist").getAsString().replaceAll(" ", "%20") + "&album=" + album.get("name").getAsString().replaceAll(" ", "%20") + "&format=json").get("album").getAsJsonObject().get("tracks").getAsJsonObject().get("track").getAsJsonArray();
                     for (int i = 0; i < 3; i++) {
                         try {
-                            IRCUtils.sendMessage(user, network, channel, "[" + album.get("name").getAsString() + "] " + albumtracks.get(i).getAsJsonObject().get("name").getAsString() + " by " + album.get("artist").getAsString(), prefix);
+                            IRCUtils.sendMessage(user, network, channel, "[" + album.get("name").getAsString() + "] " + albumtracks.get(i).getAsJsonObject().get("name").getAsString() + " by " + albumtracks.get(i).getAsJsonObject().get("artist").getAsJsonObject().get("name").getAsString(), prefix);
                         } catch (ArrayIndexOutOfBoundsException e) {
                             return;
                         }
