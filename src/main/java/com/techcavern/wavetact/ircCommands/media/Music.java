@@ -8,6 +8,7 @@ import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
+import javassist.bytecode.stackmap.BasicBlock;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
@@ -44,7 +45,11 @@ public class Music extends IRCCommand {
                 try {
                     JsonArray albumtracks = GeneralUtils.getJsonObject("http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=" + lastfmapikey + "&artist=" + album.get("artist").getAsString().replaceAll(" ", "%20") + "&album=" + album.get("name").getAsString().replaceAll(" ", "%20") + "&format=json").get("album").getAsJsonObject().get("tracks").getAsJsonObject().get("track").getAsJsonArray();
                     for (int i = 0; i < 3; i++) {
-                        IRCUtils.sendMessage(user, network, channel, "[" + album.get("name").getAsString() + "] " + albumtracks.get(i).getAsJsonObject().get("name").getAsString() + " by " + album.get("artist").getAsString(), prefix);
+                        try {
+                            IRCUtils.sendMessage(user, network, channel, "[" + album.get("name").getAsString() + "] " + albumtracks.get(i).getAsJsonObject().get("name").getAsString() + " by " + album.get("artist").getAsString(), prefix);
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            return;
+                        }
                     }
                 } catch (IllegalStateException e) {
                     JsonObject song = GeneralUtils.getJsonObject("http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=" + lastfmapikey + "&artist=" + album.get("artist").getAsString().replaceAll(" ", "%20") + "&album=" + album.get("name").getAsString().replaceAll(" ", "%20") + "&format=json").get("album").getAsJsonObject().get("tracks").getAsJsonObject().get("track").getAsJsonObject();
@@ -62,7 +67,11 @@ public class Music extends IRCCommand {
                 JsonObject artist = artistlist.get(ArrayIndex).getAsJsonObject();
                 JsonArray toptracks = GeneralUtils.getJsonObject("http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=" + artist.get("name").getAsString().replaceAll(" ", "%20") + "&api_key=" + lastfmapikey + "&format=json").get("toptracks").getAsJsonObject().get("track").getAsJsonArray();
                 for (int i = 0; i < 3; i++) {
-                    IRCUtils.sendMessage(user, network, channel, toptracks.get(i).getAsJsonObject().get("name").getAsString() + " by " + artist.get("name").getAsString(), prefix);
+                    try {
+                        IRCUtils.sendMessage(user, network, channel, toptracks.get(i).getAsJsonObject().get("name").getAsString() + " by " + artist.get("name").getAsString(), prefix);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        return;
+                    }
                 }
             } else {
                 ArrayIndex = ArrayIndex + 1;
@@ -72,7 +81,11 @@ public class Music extends IRCCommand {
         } else {
             JsonArray tracklist = GeneralUtils.getJsonObject("http://ws.audioscrobbler.com/2.0/?method=track.search&track=" + StringUtils.join(args, "%20") + "&api_key=" + lastfmapikey + "&format=json").get("results").getAsJsonObject().get("trackmatches").getAsJsonObject().get("track").getAsJsonArray();
             for (int i = 0; i < 3; i++) {
-                IRCUtils.sendMessage(user, network, channel, tracklist.get(i).getAsJsonObject().get("name").getAsString() + " by " + tracklist.get(i).getAsJsonObject().get("artist").getAsString(), prefix);
+                try {
+                    IRCUtils.sendMessage(user, network, channel, tracklist.get(i).getAsJsonObject().get("name").getAsString() + " by " + tracklist.get(i).getAsJsonObject().get("artist").getAsString(), prefix);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    return;
+                }
             }
         }
 

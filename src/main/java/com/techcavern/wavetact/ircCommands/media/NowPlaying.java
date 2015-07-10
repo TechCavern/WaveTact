@@ -46,8 +46,8 @@ public class NowPlaying extends IRCCommand {
                 String artist = tracks.get(i).getAsJsonObject().get("artist").getAsJsonObject().get("#text").getAsString();
                 String album = tracks.get(i).getAsJsonObject().get("album").getAsJsonObject().get("#text").getAsString();
                 IRCUtils.sendMessage(user, network, channel, "[" + album + "] " + trackname + " by " + artist, prefix);
-            } catch (Exception e) {
-
+            } catch (ArrayIndexOutOfBoundsException e) {
+                return;
             }
         }
     }
