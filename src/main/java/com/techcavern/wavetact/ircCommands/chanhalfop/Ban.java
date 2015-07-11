@@ -12,6 +12,7 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
 import static com.techcavern.wavetactdb.Tables.BANS;
+import static com.techcavern.wavetactdb.Tables.CHANNELPROPERTY;
 
 @IRCCMD
 
@@ -86,7 +87,11 @@ public class Ban extends IRCCommand {
                 if (args.length == 2) {
                     DatabaseUtils.addBan(networkname, channel.getName(), hostmask, System.currentTimeMillis(), GeneralUtils.getMilliSeconds(args[1]), isMute, ban);
                 } else if (args.length < 2) {
-                    DatabaseUtils.addBan(networkname, channel.getName(), hostmask, System.currentTimeMillis(), GeneralUtils.getMilliSeconds("24h"), isMute, ban);
+                    Record autounban = DatabaseUtils.getChannelProperty(IRCUtils.getNetworkNameByNetwork(network), channel.getName(), "autounban");
+                    if (autounban != null)
+                        DatabaseUtils.addBan(networkname, channel.getName(), hostmask, System.currentTimeMillis(), GeneralUtils.getMilliSeconds(autounban.getValue(CHANNELPROPERTY.VALUE)), isMute, ban);
+                    else
+                        DatabaseUtils.addBan(networkname, channel.getName(), hostmask, System.currentTimeMillis(), GeneralUtils.getMilliSeconds("30s"), isMute, ban);
                 }
                 IRCUtils.setMode(channel, network, "+" + ban, hostmask);
             } else {
