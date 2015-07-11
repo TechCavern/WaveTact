@@ -48,11 +48,10 @@ public class Question extends IRCCommand {
             if (result.length - 1 >= ArrayIndex) {
                 for (WASubpod sub : result[ArrayIndex].getSubpods()) {
                     for (Visitable visitable : sub.getContents()) {
-                        String text = "[" + result[ArrayIndex].getTitle() + "] " + ((WAPlainText) sub.getContents()[0]).getText().replaceAll("\\n", " - ").replaceAll(" \\| ", ": ");
                         if (sub.getTitle().isEmpty())
-                            IRCUtils.sendMessage(user, network, channel, text, prefix);
+                            IRCUtils.sendMessage(user, network, channel, "[" + result[ArrayIndex].getTitle() + "] " + ((WAPlainText) sub.getContents()[0]).getText().replaceAll("\\n", " - ").replaceAll(" \\| ", ": "), prefix);
                         else
-                            IRCUtils.sendMessage(user, network, channel, "[" + sub.getTitle() + "] " + text, prefix);
+                            IRCUtils.sendMessage(user, network, channel, "[" + result[ArrayIndex].getTitle() + " - " + sub.getTitle() + "] " + ((WAPlainText) sub.getContents()[0]).getText().replaceAll("\\n", " - ").replaceAll(" \\| ", ": "), prefix);
 
                     }
                 }

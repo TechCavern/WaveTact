@@ -27,7 +27,7 @@ public class CustomCMD extends IRCCommand {
 
 
     public CustomCMD() {
-        super(GeneralUtils.toArray("custommsg cmsg cact customact"), 1, "customcmd (.) (+/-)[command] [permlevel] [response]", "Responses may contain $1, $2, etc which indicate the argument separated by a space. $* indicates all remaining arguments.", false);
+        super(GeneralUtils.toArray("custommsg cmsg cact customact"), 1, "custommsg (.) (+)(-)[command] [permlevel] [response]", "Responses may contain $1, $2, etc which indicate the argument separated by a space. $* indicates all remaining arguments.", false);
     }
 
     @Override
