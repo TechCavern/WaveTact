@@ -41,6 +41,7 @@ public class ConnectListener extends ListenerAdapter {
         ListenerManager listenerManager = event.getBot().getConfiguration().getListenerManager();
         listenerManager.addListener(new ChanMsgListener());
         listenerManager.addListener(new PartListener());
+        listenerManager.addListener(new PrivMsgLogger());
         listenerManager.addListener(new PrivMsgListener());
         listenerManager.addListener(new KickListener());
         listenerManager.addListener(new BanListener());

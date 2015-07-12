@@ -62,6 +62,11 @@ Network Properties
 =================
 - relaychan - Determines the channel from the network to relay
 - commandchar - Determines network command char
+- pmlog - Logs PMs to a channel
+
+Network User Properties
+=================
+- permlevel - you can set a custom permlevel for a user (Must be integer)
 
 You are welcome to set other properties (but they will be rather useless), however do beware that you may find issues in the future if the property you set happens to coincide with a new network property
 
