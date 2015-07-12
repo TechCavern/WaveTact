@@ -52,8 +52,6 @@ public class Ban extends IRCCommand {
         } else {
             if (args[0].startsWith("+")) {
                 hostmask = IRCUtils.getHostmask(network, args[0].replaceFirst("\\+", ""), true);
-            } else if (args[0].startsWith("-")) {
-                hostmask = IRCUtils.getHostmask(network, args[0].replaceFirst("-", ""), true);
             } else {
                 hostmask = IRCUtils.getHostmask(network, args[0], true);
             }
