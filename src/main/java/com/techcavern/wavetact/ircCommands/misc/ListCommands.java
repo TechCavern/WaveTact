@@ -11,6 +11,7 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -41,6 +42,7 @@ public class ListCommands extends IRCCommand {
             if (cmd.getPermLevel() <= permlevel)
                 commands.add(cmd.getCommand());
         }
+        Collections.sort(commands);
         IRCUtils.sendMessage(user, network, channel, StringUtils.join(commands, ", "), prefix);
     }
 }
