@@ -131,7 +131,8 @@ public class Network extends ConsoleCommand {
 
         } else if (args[0].startsWith("-")) {
             DatabaseUtils.removeServer(args[0].replaceFirst("\\-", ""));
-            DatabaseUtils.removeChannelUserProperty(args[0].replaceFirst("\\-", ""));
+            DatabaseUtils.removeChannelUserPropertyByNetwork(args[0].replaceFirst("\\-", ""));
+            DatabaseUtils.removeNetworkUserPropertyByNetwork(args[0].replaceFirst("\\-", ""));
             PircBotX network = IRCUtils.getBotByNetworkName(args[0].replaceFirst("\\-", ""));
             for (NetProperty e : Registry.NetworkName) {
                 if (e.getNetwork().equals(network)) {

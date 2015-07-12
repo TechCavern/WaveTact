@@ -30,6 +30,8 @@ public class FDrop extends ConsoleCommand {
         Record account = DatabaseUtils.getAccount(args[0]);
         if (account != null) {
             DatabaseUtils.removeAccount(args[0]);
+            DatabaseUtils.removeNetworkUserPropertyByUser(args[0]);
+            DatabaseUtils.removeChannelUserPropertyByUser(args[0]);
             commandIO.getPrintStream().println("Account dropped");
         } else {
             commandIO.getPrintStream().println("Account does not exist");

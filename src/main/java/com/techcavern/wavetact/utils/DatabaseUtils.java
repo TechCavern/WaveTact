@@ -191,8 +191,12 @@ public class DatabaseUtils {
         Registry.WaveTactDB.delete(CHANNELUSERPROPERTY).where(CHANNELUSERPROPERTY.PROPERTY.eq(property)).and(CHANNELUSERPROPERTY.USER.eq(user)).and(CHANNELUSERPROPERTY.NETWORK.eq(network)).and(CHANNELUSERPROPERTY.CHANNEL.eq(channel)).execute();
     }
 
-    public static void removeChannelUserProperty(String network) {
+    public static void removeChannelUserPropertyByNetwork(String network) {
         Registry.WaveTactDB.delete(CHANNELUSERPROPERTY).where(CHANNELUSERPROPERTY.NETWORK.eq(network)).execute();
+    }
+
+    public static void removeChannelUserPropertyByUser(String user) {
+        Registry.WaveTactDB.delete(CHANNELUSERPROPERTY).where(CHANNELUSERPROPERTY.USER.eq(user)).execute();
     }
 
     public static Result<Record> getServers() {
@@ -226,6 +230,32 @@ public class DatabaseUtils {
 
     public static Result<Record> getTellMessage(String network, String receiver) {
         return Registry.WaveTactDB.select().from(TELLMESSAGES).where(TELLMESSAGES.NETWORK.eq(network).and(TELLMESSAGES.RECEIVER.eq(receiver))).fetch();
+    }
+
+    public static Record getNetworkUserProperty(String network, String user, String property) {
+        Result<Record> networkUserPropertyRecord = Registry.WaveTactDB.select().from(NETWORKUSERPROPERTY).where(NETWORKUSERPROPERTY.PROPERTY.eq(property)).and(NETWORKUSERPROPERTY.USER.eq(user)).and(NETWORKUSERPROPERTY.NETWORK.eq(network)).fetch();
+        return getRecord(networkUserPropertyRecord);
+
+    }
+
+    public static void updateNetworkUserProperty(Record networkuserproperty) {
+        Registry.WaveTactDB.update(NETWORKUSERPROPERTY).set(networkuserproperty).where(NETWORKUSERPROPERTY.PROPERTY.eq(networkuserproperty.getValue(NETWORKUSERPROPERTY.PROPERTY))).and(NETWORKUSERPROPERTY.USER.eq(networkuserproperty.getValue(NETWORKUSERPROPERTY.USER))).and(NETWORKUSERPROPERTY.NETWORK.eq(networkuserproperty.getValue(NETWORKUSERPROPERTY.NETWORK))).execute();
+    }
+
+    public static void addNetworkUserProperty(String network, String user, String property, String value) {
+        Registry.WaveTactDB.insertInto(NETWORKUSERPROPERTY).values(network, user, property, value).execute();
+    }
+
+    public static void removeNetworkUserProperty(String network, String user, String property) {
+        Registry.WaveTactDB.delete(NETWORKUSERPROPERTY).where(NETWORKUSERPROPERTY.PROPERTY.eq(property)).and(NETWORKUSERPROPERTY.USER.eq(user)).and(NETWORKUSERPROPERTY.NETWORK.eq(network)).execute();
+    }
+
+    public static void removeNetworkUserPropertyByNetwork(String network) {
+        Registry.WaveTactDB.delete(NETWORKUSERPROPERTY).where(NETWORKUSERPROPERTY.NETWORK.eq(network)).execute();
+    }
+
+    public static void removeNetworkUserPropertyByUser(String user) {
+        Registry.WaveTactDB.delete(NETWORKUSERPROPERTY).where(NETWORKUSERPROPERTY.USER.eq(user)).execute();
     }
 
 }
