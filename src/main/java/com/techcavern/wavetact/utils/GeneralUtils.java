@@ -7,6 +7,8 @@ import com.google.gson.JsonParser;
 import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.conn.util.InetAddressUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.pircbotx.Colors;
 import org.pircbotx.PircBotX;
 
@@ -297,6 +299,42 @@ public class GeneralUtils {
         } else {
             return String.valueOf(time);
         }
+    }
+
+    public static String getMediaWikiTitle(String url, String query, int querynumber) {
+        try {
+            JsonObject results = getJsonObject(url + "api.php?action=query&list=search&format=json&srprop=snippet&srinterwiki=true&srsearch=" + query.replaceAll(" ", "%20")).getAsJsonObject().get("query").getAsJsonObject();
+            if (results.get("searchinfo").getAsJsonObject().get("totalhits").getAsInt() >= querynumber) {
+                return results.get("search").getAsJsonArray().get(querynumber - 1).getAsJsonObject().get("title").getAsString();
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public static String getMediaWikiContentFromTitle(String url, String title) {
+        try {
+            JsonObject results = getJsonObject(url + "api.php?action=parse&format=json&page=" + title.replaceAll(" ", "%20")).getAsJsonObject().get("parse").getAsJsonObject().get("text").getAsJsonObject();
+            Document doc = Jsoup.parse(results.get("*").getAsString());
+            doc.select(".notaninfobox").remove();
+            doc.select(".hatnote").remove();
+            doc.select(".atemplate").remove();
+            doc.select(".infobox").remove();
+            int i = 0;
+            while (stripHTML(doc.select("p").get(i).toString()).isEmpty()) {
+                i++;
+            }
+            return stripHTML(doc.select("p").get(i).toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static String stripHTML(String htmltext) {
+        return htmltext.replaceAll("(?s)<[^>]*>(\\s*<[^>]*>)*", " ").replaceAll("\\[.*\\]", "").trim().replaceAll(" +", " ").replaceAll(" ,", "").replaceAll(" \\.", "");
     }
 }
 

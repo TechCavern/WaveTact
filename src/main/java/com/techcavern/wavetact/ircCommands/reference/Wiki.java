@@ -1,11 +1,11 @@
 package com.techcavern.wavetact.ircCommands.reference;
 
-import com.google.gson.JsonObject;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -15,24 +15,46 @@ import org.pircbotx.User;
 public class Wiki extends IRCCommand {
 
     public Wiki() {
-        super(GeneralUtils.toArray("wiki wi wikipedia"), 0, "wiki [query wiki]", "Searches wikipedia for something", false);
+        super(GeneralUtils.toArray("wiki wi mcwiki mcw mcmodwiki mcmw"), 0, "wiki (result #) [query wiki]", "Searches wikis for something", false);
     }
 
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        for (int i = 0; i < args.length; i++) {
-            args[i] = StringUtils.capitalize(args[i]);
+        int ArrayIndex = 1;
+        if (GeneralUtils.isInteger(args[0])) {
+            ArrayIndex = Integer.parseInt(args[0]);
+            args = ArrayUtils.remove(args, 0);
         }
-        JsonObject result = GeneralUtils.getJsonObject("https://en.wikipedia.org/w/api.php?action=query&prop=extracts&explaintext&exsectionformat=plain&exchars=650&titles=" + StringUtils.join(args, "%20") + "&format=json").getAsJsonObject("query").getAsJsonObject("pages");
-        String key = result.entrySet().iterator().next().getKey();
-        if (result.getAsJsonObject(key).get("missing") != null) {
-            ErrorUtils.sendError(user, "Query returned no results");
+        String url = "https://en.wikipedia.org/w/";
+        String userurl = "https://en.wikipedia.org/wiki/";
+        String title = GeneralUtils.getMediaWikiTitle(url, StringUtils.join(args, "%20"), ArrayIndex);
+        String content = GeneralUtils.getMediaWikiContentFromTitle(url, title);
+        String urljoin = "%20";
+        if (command.equalsIgnoreCase("mcmodwiki") || command.equalsIgnoreCase("mcmw")) {
+            url = "http://ftb.gamepedia.com/";
+            userurl = url;
+            title = GeneralUtils.getMediaWikiTitle(url, StringUtils.join(args, "%20"), ArrayIndex);
+            content = GeneralUtils.getMediaWikiContentFromTitle(url, title);
+            urljoin = "_";
+            if (title == null || content == null) {
+                url = "http://ftbwiki.org/";
+                title = GeneralUtils.getMediaWikiTitle(url, StringUtils.join(args, "%20"), ArrayIndex);
+                content = GeneralUtils.getMediaWikiContentFromTitle(url, title);
+            }
+        } else if (command.equalsIgnoreCase("mcwiki") || command.equalsIgnoreCase("mcw")) {
+            url = "http://minecraft.gamepedia.com/";
+            userurl = url;
+            title = GeneralUtils.getMediaWikiTitle(url, StringUtils.join(args, "%20"), ArrayIndex);
+            content = GeneralUtils.getMediaWikiContentFromTitle(url, title);
+            urljoin = "_";
+        }
+        if (title != null && content != null) {
+            IRCUtils.sendMessage(user, network, channel, "[" + title + "] " + content, prefix);
+            IRCUtils.sendMessage(user, network, channel, userurl + title.replace(" ", "%20"), prefix);
+        } else if (ArrayIndex > 1) {
+            ErrorUtils.sendError(user, "Result #" + ArrayIndex + " does not exist");
         } else {
-            String title = result.getAsJsonObject(key).get("title").getAsString();
-            String text = result.getAsJsonObject(key).get("extract").getAsString();
-            String plainurl = "https://en.wikipedia.org/wiki/" + StringUtils.join(args, "%20");
-            IRCUtils.sendMessage(user, network, channel, "[" + title + "] " + text.replaceAll("\n", " "), prefix);
-            IRCUtils.sendMessage(user, network, channel, plainurl, prefix);
+            ErrorUtils.sendError(user, "No results found");
         }
     }
 }
