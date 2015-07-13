@@ -25,22 +25,6 @@ public class ConfigUtils {
         }
     }
 
-    /**
-     * Will come back to at a future date
-     * public static void registerDevServer() {
-     * //      PircBotX Dev = createNetwork(null, Arrays.asList(GeneralUtils.toArray("#techcavern #testing")), "WaveTactDev", "irc.synirc.net");
-     * PircBotX Dev2 = createNetwork(null, Arrays.asList(GeneralUtils.toArray("")), "WaveTactDev", "irc.esper.net", 6667, null, "Esper");
-     * //      GeneralRegistry.WaveTact.addBot(Dev);
-     * Registry.WaveTact.addNetwork(Dev2);
-     * Registry.Controllers.add("JZTech101");
-     * //      GeneralRegistry.CommandChars.add(new NetProperty("@", Dev));
-     * Registry.CommandChars.add(new NetProperty("@", Dev2));
-     * Registry.AuthType.add(new NetProperty("nickserv", Dev2));
-     * Registry.NetworkName.add(new NetProperty("dev2", Dev2));
-     * Registry.NetAdminAccess.add(new NetProperty("True", Dev2));
-     * //     GeneralRegistry.NetworkName.add(new NetProperty("dev1", Dev));
-     * }
-     */
     public static PircBotX createNetwork(String serverpass, String nick, String server, int port, String bindhost, String networkname) {
         if (nick.isEmpty() || server.isEmpty()) {
             DatabaseUtils.removeServer(networkname);

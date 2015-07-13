@@ -30,22 +30,19 @@ PermLevels
 - 1 - Registered Access. Everyone has it (Access to all commands below Trusted on a specific channel).
 - 0 - Default Access. Everyone has it (Access to all commands below Registered on a specific channel).
 - -1 - Ignored (Access to no commands)
-- -2 - Ignored Completely
+- -2 - Ignored by everything except the relay
+- -3 - Ignored by everything
 
 Channel-User Properties
 =======================
 - permlevel - you can set a custom permlevel for a user (Must be integer)
 - relaybotsplit - you may assign a bot as a relaybot, and set the value as the character before the actual message is handled
 
-You are welcome to set other properties (but they will be rather useless), however do beware that you may find issues in the future if the property you set happens to coincide with a new channel-user property
-
 Channel Properties
 ==================
 - autounban - this will detect bans and auto-unban a ban after the specified time. (s(econds)/m(inutes)/h(ours)/d(ays)/w(eeks)
 - autourl - this will detect and print the title of urls found in channel messages. (True/False)
 - topicseparator - this will determine the separator between topic parts
-
-You are welcome to set other properties (but they will be rather useless), however do beware that you may find issues in the future if the property you set happens to coincide with a new channel property
 
 Global Config
 =================
@@ -56,19 +53,16 @@ Global Config
 - yandexapikey - sets the Yandex api key
 - lastfmapikey - sets the Last.fm api key
 
-You are welcome to set other properties (but they will be rather useless), however do beware that you may find issues in the future if the property you set happens to coincide with a new global config
-
 Network Properties
 =================
 - relaychan - Determines the channel from the network to relay
 - commandchar - Determines network command char
 - pmlog - Logs PMs to a channel
+- ignoredhosts - list of ignored hostmasks
 
 Network User Properties
 =================
 - permlevel - you can set a custom permlevel for a user (Must be integer)
-
-You are welcome to set other properties (but they will be rather useless), however do beware that you may find issues in the future if the property you set happens to coincide with a new network property
 
 Developing
 ==========

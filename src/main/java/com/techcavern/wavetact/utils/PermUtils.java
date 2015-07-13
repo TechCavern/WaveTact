@@ -29,12 +29,7 @@ public class PermUtils {
         if (hostmask != null) {
             return getAccount(network, userObject, hostmask);
         } else {
-            hostmask = IRCUtils.getHostmask(network, userObject, false);
-            if (hostmask != null) {
-                return getAccount(network, userObject, hostmask);
-            } else {
-                return null;
-            }
+            return null;
         }
     }
 
@@ -111,8 +106,10 @@ public class PermUtils {
         }
     }
 
-    private static int getManualPermLevel(PircBotX network, Channel channelObject, String account) { //gets Manual Perm Level using the account name
-        if (account != null) {
+    private static int getManualPermLevel(String userObject, PircBotX network, Channel channelObject, String account) { //gets Manual Perm Level using the account name
+        if (isIgnored(IRCUtils.getHostmask(network, userObject, true), IRCUtils.getNetworkNameByNetwork(network))) {
+            return -2;
+        } else if (account != null) {
             String channelName = null;
             if (channelObject != null) {
                 channelName = channelObject.getName();
@@ -154,7 +151,7 @@ public class PermUtils {
 
     public static int getLevel(PircBotX network, String userObject, Channel channelObject, String account) { //gets the actual Perm Level
         if (channelObject != null) {
-            int mpermlevel = getManualPermLevel(network, channelObject, account);
+            int mpermlevel = getManualPermLevel(userObject, network, channelObject, account);
             User user = IRCUtils.getUserByNick(network, userObject);
             int apermlevel = 0;
             if (user != null) {
@@ -168,7 +165,7 @@ public class PermUtils {
                 return apermlevel;
             }
         } else {
-            return getManualPermLevel(network, channelObject, account);
+            return getManualPermLevel(userObject, network, channelObject, account);
         }
     }
 
@@ -181,6 +178,17 @@ public class PermUtils {
             if (c.equalsIgnoreCase(account))
                 return true;
         }
+        return false;
+    }
+
+    public static boolean isIgnored(String hostmask, String network) {
+        if (DatabaseUtils.getNetworkProperty(network, "ignoredhosts") == null) {
+            return false;
+        } else
+            for (String c : StringUtils.split(DatabaseUtils.getNetworkProperty(network, "ignoredhosts").getValue(NETWORKPROPERTY.VALUE), ", ")) {
+                if (c.equalsIgnoreCase(hostmask))
+                    return true;
+            }
         return false;
     }
 }
