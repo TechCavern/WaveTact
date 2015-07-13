@@ -6,6 +6,7 @@
 package com.techcavern.wavetact.eventListeners;
 
 import com.techcavern.wavetact.utils.DatabaseUtils;
+import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.jooq.Record;
 import org.pircbotx.hooks.ListenerAdapter;
@@ -22,7 +23,7 @@ public class PrivMsgLogger extends ListenerAdapter {
     public void onPrivateMessage(PrivateMessageEvent event) throws Exception {
         Record pmlog = DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "pmlog");
         if (pmlog != null && IRCUtils.getChannelbyName(event.getBot(), pmlog.getValue(NETWORKPROPERTY.VALUE)) != null)
-            IRCUtils.sendMessage(null, event.getBot(), IRCUtils.getChannelbyName(event.getBot(), pmlog.getValue(NETWORKPROPERTY.VALUE)), "[" + event.getUser().getNick() + "] " + event.getMessage(), "");
+            IRCUtils.sendMessage(null, event.getBot(), IRCUtils.getChannelbyName(event.getBot(), pmlog.getValue(NETWORKPROPERTY.VALUE)), "[" + GeneralUtils.replaceVowelsWithAccents(event.getUser().getNick()) + "] " + event.getMessage(), "");
     }
 }
 
