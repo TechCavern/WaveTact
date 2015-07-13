@@ -2,6 +2,7 @@ package com.techcavern.wavetact.ircCommands.misc;
 
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
+import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.Registry;
@@ -33,17 +34,21 @@ public class ListCommands extends IRCCommand {
             try {
                 permlevel = Integer.parseInt(args[0]);
             } catch (NumberFormatException e) {
-                permlevel = 20;
+                permlevel = 0;
                 return;
             }
         }
         List<String> commands = new ArrayList<>();
         for (IRCCommand cmd : Registry.IRCCommands) {
-            if (cmd.getPermLevel() <= permlevel)
+            if (cmd.getPermLevel() == permlevel)
                 commands.add(cmd.getCommand());
         }
-        Collections.sort(commands);
+        if (commands.isEmpty()) {
+            ErrorUtils.sendError(user, "No commands found with that perm level");
+        } else {
+            Collections.sort(commands);
         IRCUtils.sendMessage(user, network, channel, StringUtils.join(commands, ", "), prefix);
+        }
     }
 }
 
