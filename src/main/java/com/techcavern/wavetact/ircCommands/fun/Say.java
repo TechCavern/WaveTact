@@ -44,7 +44,7 @@ public class Say extends IRCCommand {
             chan = channel;
         }
         if (chan == null || PermUtils.getPermLevel(network, user.getNick(), chan) >= 5) {
-            if (command.equalsIgnoreCase("act") || command.equalsIgnoreCase("do") || command.equalsIgnoreCase("s")) {
+            if (command.equalsIgnoreCase("act") || command.equalsIgnoreCase("do") || command.equalsIgnoreCase("a")) {
                 IRCUtils.sendAction(user, network, chan, StringUtils.join(args, " ").replace("\n", " "), prefix);
             } else if (command.equalsIgnoreCase("prism")) {
                 IRCUtils.sendMessage(user, network, chan, GeneralUtils.prism(StringUtils.join(args, " ")), prefix);
