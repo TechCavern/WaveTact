@@ -47,6 +47,7 @@ public class ConnectListener extends ListenerAdapter {
         listenerManager.addListener(new FunMsgListener());
         listenerManager.addListener(new RelayMsgListener());
         listenerManager.addListener(new TellMsgListener());
+        IRCUtils.sendLogChanMsg(event.getBot(), "MOOOOOOOOOOOOOOOOOOOOO");
     }
 
 }

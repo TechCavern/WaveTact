@@ -43,7 +43,7 @@ public class Authenticate extends IRCCommand {
                 IRCUtils.sendMessage(user, network, channel, "Identification successful", prefix);
             } else {
                 ErrorUtils.sendError(user, "Unable to identify (incorrect user/password combination)");
-                GeneralUtils.sendLogChanMsg(network, "[" + user.getNick() + "] Authenticate FAILED");
+                IRCUtils.sendLogChanMsg(network, "[" + user.getNick() + "] Authenticate FAILED");
             }
         }
     }

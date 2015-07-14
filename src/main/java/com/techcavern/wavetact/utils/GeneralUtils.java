@@ -9,7 +9,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.fluent.Request;
 import org.apache.http.conn.util.InetAddressUtils;
 import org.apache.http.entity.ContentType;
-import org.jooq.Record;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.pircbotx.Colors;
@@ -27,7 +26,6 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import static com.techcavern.wavetactdb.Tables.CONFIG;
-import static com.techcavern.wavetactdb.Tables.NETWORKPROPERTY;
 
 public class GeneralUtils {
     public static String buildMessage(int startint, int finishint, String[] args) {
@@ -340,12 +338,6 @@ public class GeneralUtils {
 
     public static String stripHTML(String htmltext) {
         return htmltext.replaceAll("(?s)<[^>]*>(\\s*<[^>]*>)*", " ").replaceAll("\\[.*\\]", "").trim().replaceAll(" +", " ").replaceAll(" ,", "").replaceAll(" \\.", "");
-    }
-
-    public static void sendLogChanMsg(PircBotX network, String message) {
-        Record pmlog = DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(network), "pmlog");
-        if (pmlog != null && IRCUtils.getChannelbyName(network, pmlog.getValue(NETWORKPROPERTY.VALUE)) != null)
-            IRCUtils.sendMessage(network, IRCUtils.getChannelbyName(network, pmlog.getValue(NETWORKPROPERTY.VALUE)), GeneralUtils.replaceVowelsWithAccents(message), "");
     }
 
     public static String shortenURL(String Url){
