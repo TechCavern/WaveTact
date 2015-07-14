@@ -29,7 +29,7 @@ public class Music extends IRCCommand {
         if (DatabaseUtils.getConfig("lastfmapikey") != null)
             lastfmapikey = DatabaseUtils.getConfig("lastfmapikey").getValue(CONFIG.VALUE);
         else {
-            ErrorUtils.sendError(user, "API key is not defined.");
+            ErrorUtils.sendError(user, "Last.fm API key is not defined - Contact Bot Controller to fix.");
             return;
         }
         int ArrayIndex = 0;

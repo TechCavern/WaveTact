@@ -6,6 +6,10 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.fluent.Form;
+import org.apache.http.client.fluent.Request;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.util.InetAddressUtils;
 import org.jooq.Record;
 import org.jsoup.Jsoup;
@@ -24,6 +28,7 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import static com.techcavern.wavetactdb.Tables.CONFIG;
 import static com.techcavern.wavetactdb.Tables.NETWORKPROPERTY;
 
 public class GeneralUtils {
@@ -210,7 +215,6 @@ public class GeneralUtils {
         else if (original.contains("o"))
             original = original.replaceFirst("o", "ó");
         else if (original.contains("u"))
-
             original = original.replaceFirst("u", "ú");
         else if (original.contains("y"))
 
@@ -345,6 +349,20 @@ public class GeneralUtils {
         if (pmlog != null && IRCUtils.getChannelbyName(network, pmlog.getValue(NETWORKPROPERTY.VALUE)) != null)
             IRCUtils.sendMessage(network, IRCUtils.getChannelbyName(network, pmlog.getValue(NETWORKPROPERTY.VALUE)), GeneralUtils.replaceVowelsWithAccents(message), "");
     }
+
+    public static String shortenURL(String Url){
+        try {
+            String response  = Request.Post("https://www.googleapis.com/urlshortener/v1/url?key=" + DatabaseUtils.getConfig("googleapikey").getValue(CONFIG.VALUE))
+                    .bodyForm(Form.form().add("longUrl", Url).build())
+                    .execute()
+                    .returnContent().toString();
+            return response;
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }
 
 

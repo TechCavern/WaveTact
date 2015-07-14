@@ -72,6 +72,7 @@ Running
 =======
 - Make sure you have the WaveTact jar in your current directory.
 - Run `java -jar WaveTact.jar`
+- Any urls provided by the bot will not show up until you have set the bitly apikey
 
 You can connect to the WaveTact console by running this:
 ````
