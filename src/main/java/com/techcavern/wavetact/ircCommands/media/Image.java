@@ -32,8 +32,7 @@ public class Image extends IRCCommand {
                 String title = results.get(ArrayIndex).getAsJsonObject().get("titleNoFormatting").getAsString();
                 String size = results.get(ArrayIndex).getAsJsonObject().get("width").getAsString() + "x" + results.get(ArrayIndex).getAsJsonObject().get("height").getAsString();
                 String url = results.get(ArrayIndex).getAsJsonObject().get("unescapedUrl").getAsString();
-                IRCUtils.sendMessage(user, network, channel, "[" + title + "] " + size, prefix);
-                IRCUtils.sendMessage(user, network, channel, url, prefix);
+                IRCUtils.sendMessage(user, network, channel, "[" + title + "] " + size + GeneralUtils.shortenUrlwithChar(url), prefix);
 
             } else {
                 ArrayIndex = ArrayIndex + 1;

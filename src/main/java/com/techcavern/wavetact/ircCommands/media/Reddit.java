@@ -23,9 +23,7 @@ public class Reddit extends IRCCommand {
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         JsonArray results = GeneralUtils.getJsonObject("http://api.reddit.com/r/" + args[0] + "/?limit=100").get("data").getAsJsonObject().get("children").getAsJsonArray();
         JsonObject result = results.get(new Random().nextInt(results.size() - 1)).getAsJsonObject().get("data").getAsJsonObject();
-        IRCUtils.sendMessage(user, network, channel, result.get("title").getAsString() + " by " + result.get("author").getAsString(), prefix);
-        IRCUtils.sendMessage(user, network, channel, result.get("url").getAsString(), prefix);
-
+        IRCUtils.sendMessage(user, network, channel, result.get("title").getAsString() + " by " + result.get("author").getAsString() + GeneralUtils.shortenUrlwithChar(result.get("url").getAsString()), prefix);
     }
 }
 

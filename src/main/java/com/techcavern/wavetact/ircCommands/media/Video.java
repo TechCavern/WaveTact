@@ -59,9 +59,10 @@ public class Video extends IRCCommand {
                 }
                 String title = result.getSnippet().getTitle();
                 String content = result.getSnippet().getDescription();
-                IRCUtils.sendMessage(user, network, channel, title + " - " + content, prefix);
                 if (!url.isEmpty())
-                    IRCUtils.sendMessage(user, network, channel, url, prefix);
+                    IRCUtils.sendMessage(user, network, channel, title + " - " + content + GeneralUtils.shortenUrlwithChar(url), prefix);
+                else
+                    IRCUtils.sendMessage(user, network, channel, title + " - " + content, prefix);
             } else {
                 ErrorUtils.sendError(user, "Search #" + ArrayIndex + " does not exist");
             }

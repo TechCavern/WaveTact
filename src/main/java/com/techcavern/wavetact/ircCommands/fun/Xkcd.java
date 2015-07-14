@@ -36,6 +36,6 @@ public class Xkcd extends IRCCommand {
         String date = "Date: " + comic.get("day") + "/" + comic.get("month") + "/" + comic.get("year");
         String num = comic.get("num").getAsString();
         String title = comic.get("title").getAsString();
-        IRCUtils.sendMessage(user, network, channel, "[" + num + "] " + date + " - " + title + " - " + "http://xkcd.com/" + num, prefix);
+        IRCUtils.sendMessage(user, network, channel, "[" + num + "] " + date + " - " + title + GeneralUtils.shortenUrlwithChar("http://xkcd.com/" + num), prefix);
     }
 }

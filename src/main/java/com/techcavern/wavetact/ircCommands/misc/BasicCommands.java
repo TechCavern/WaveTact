@@ -30,13 +30,13 @@ public class BasicCommands extends IRCCommand {
                 IRCUtils.sendMessage(user, network, channel, "ping", prefix);
                 break;
             case "releases":
-                IRCUtils.sendMessage(user, network, channel, "https://github.com/TechCavern/WaveTact/releases", prefix);
+                IRCUtils.sendMessage(user, network, channel, GeneralUtils.shortenURL("https://github.com/TechCavern/WaveTact/releases"), prefix);
                 break;
             case "license":
-                IRCUtils.sendMessage(user, network, channel, "MIT License (https://github.com/TechCavern/WaveTact/blob/master/license.md)", prefix);
+                IRCUtils.sendMessage(user, network, channel, "MIT License" + GeneralUtils.shortenUrlwithChar("https://github.com/TechCavern/WaveTact/blob/master/license.md)"), prefix);
                 break;
             case "source":
-                IRCUtils.sendMessage(user, network, channel, "http://github.com/TechCavern/WaveTact", prefix);
+                IRCUtils.sendMessage(user, network, channel, GeneralUtils.shortenURL("http://github.com/TechCavern/WaveTact"), prefix);
                 break;
             default:
                 IRCUtils.sendMessage(user, network, channel, "pong", prefix);

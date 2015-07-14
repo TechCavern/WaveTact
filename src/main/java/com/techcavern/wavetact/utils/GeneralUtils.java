@@ -6,11 +6,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.fluent.Form;
 import org.apache.http.client.fluent.Request;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.util.InetAddressUtils;
+import org.apache.http.entity.ContentType;
 import org.jooq.Record;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -351,16 +349,27 @@ public class GeneralUtils {
     }
 
     public static String shortenURL(String Url){
+        if (DatabaseUtils.getConfig("googleapikey") == null)
+            return "";
         try {
             String response  = Request.Post("https://www.googleapis.com/urlshortener/v1/url?key=" + DatabaseUtils.getConfig("googleapikey").getValue(CONFIG.VALUE))
-                    .bodyForm(Form.form().add("longUrl", Url).build())
+                    .bodyString("{\"longUrl\": \"" + Url + "\"}", ContentType.APPLICATION_JSON)
                     .execute()
                     .returnContent().toString();
+            response = new JsonParser().parse(response).getAsJsonObject().get("id").getAsString();
             return response;
         }catch(Exception e){
             e.printStackTrace();
-            return null;
+            return "";
         }
+    }
+
+    public static String shortenUrlwithChar(String Url) {
+        String url = shortenURL(Url);
+        if (!url.isEmpty())
+            return " - " + shortenURL(Url);
+        else
+            return "";
     }
 
 }
