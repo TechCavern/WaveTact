@@ -49,7 +49,7 @@ public class Wiki extends IRCCommand {
             urljoin = "_";
         }
         if (title != null && content != null) {
-            IRCUtils.sendMessage(user, network, channel, "[" + title + "] " + content + GeneralUtils.shortenUrlwithChar(userurl + title.replace(" ", urljoin)), prefix);
+            IRCUtils.sendMessage(user, network, channel, "[" + title + "] " + content + " - " + GeneralUtils.shortenURL(userurl + title.replace(" ", urljoin)), prefix);
         } else if (ArrayIndex > 1) {
             ErrorUtils.sendError(user, "Result #" + ArrayIndex + " does not exist");
         } else {

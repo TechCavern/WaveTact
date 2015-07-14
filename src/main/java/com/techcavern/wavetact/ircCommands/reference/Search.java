@@ -32,7 +32,7 @@ public class Search extends IRCCommand {
                 String title = results.get(ArrayIndex).getAsJsonObject().get("titleNoFormatting").getAsString();
                 String content = results.get(ArrayIndex).getAsJsonObject().get("content").getAsString().replaceAll("<.*?>", "").replaceAll("&.*?;", "");
                 String url = results.get(ArrayIndex).getAsJsonObject().get("unescapedUrl").getAsString();
-                IRCUtils.sendMessage(user, network, channel, "[" + title + "] " + content + GeneralUtils.shortenUrlwithChar(url), prefix);
+                IRCUtils.sendMessage(user, network, channel, "[" + title + "] " + content + " - " + GeneralUtils.shortenURL(url), prefix);
 
             } else {
                 ArrayIndex = ArrayIndex + 1;

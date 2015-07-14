@@ -47,7 +47,7 @@ Channel Properties
 Global Config
 =================
 - wolframalphaapikey - sets the Wolfram Alpha api key
-- googleapikey - sets the Google api key
+- googleapikey - sets the Google api key (Must be set for any Urls to be displayed)
 - wordnikapikey - sets the Wordnik api key
 - wundergroundapikey - sets the Wunderground api key
 - yandexapikey - sets the Yandex api key

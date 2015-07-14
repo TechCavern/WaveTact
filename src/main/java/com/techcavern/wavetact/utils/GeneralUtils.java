@@ -350,7 +350,7 @@ public class GeneralUtils {
 
     public static String shortenURL(String Url){
         if (DatabaseUtils.getConfig("googleapikey") == null)
-            return "";
+            return Url;
         try {
             String response  = Request.Post("https://www.googleapis.com/urlshortener/v1/url?key=" + DatabaseUtils.getConfig("googleapikey").getValue(CONFIG.VALUE))
                     .bodyString("{\"longUrl\": \"" + Url + "\"}", ContentType.APPLICATION_JSON)
@@ -360,18 +360,9 @@ public class GeneralUtils {
             return response;
         }catch(Exception e){
             e.printStackTrace();
-            return "";
+            return Url;
         }
     }
-
-    public static String shortenUrlwithChar(String Url) {
-        String url = shortenURL(Url);
-        if (!url.isEmpty())
-            return " - " + shortenURL(Url);
-        else
-            return "";
-    }
-
 }
 
 

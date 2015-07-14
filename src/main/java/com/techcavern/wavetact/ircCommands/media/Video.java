@@ -60,7 +60,7 @@ public class Video extends IRCCommand {
                 String title = result.getSnippet().getTitle();
                 String content = result.getSnippet().getDescription();
                 if (!url.isEmpty())
-                    IRCUtils.sendMessage(user, network, channel, title + " - " + content + GeneralUtils.shortenUrlwithChar(url), prefix);
+                    IRCUtils.sendMessage(user, network, channel, title + " - " + content + " - " + GeneralUtils.shortenURL(url), prefix);
                 else
                     IRCUtils.sendMessage(user, network, channel, title + " - " + content, prefix);
             } else {
