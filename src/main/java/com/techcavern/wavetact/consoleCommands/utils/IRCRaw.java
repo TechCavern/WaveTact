@@ -8,7 +8,7 @@ package com.techcavern.wavetact.consoleCommands.utils;
 import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.objects.CommandIO;
 import com.techcavern.wavetact.objects.ConsoleCommand;
-import com.techcavern.wavetact.objects.NetProperty;
+import com.techcavern.wavetact.objects.NetString;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.Registry;
@@ -27,7 +27,7 @@ public class IRCRaw extends ConsoleCommand {
     @Override
     public void onCommand(String command, String[] args, CommandIO commandIO) throws Exception {
         PircBotX network = IRCUtils.getBotByNetworkName(args[0]);
-        Registry.MessageQueue.add(new NetProperty(GeneralUtils.buildMessage(1, args.length, args), network));
+        Registry.MessageQueue.add(new NetString(GeneralUtils.buildMessage(1, args.length, args), network));
     }
 }
 

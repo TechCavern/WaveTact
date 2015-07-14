@@ -4,7 +4,7 @@ import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.ConsoleCommand;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.objects.NetProperty;
+import com.techcavern.wavetact.objects.NetString;
 import org.flywaydb.core.Flyway;
 import org.jooq.Record;
 import org.jooq.SQLDialect;
@@ -202,7 +202,7 @@ public class LoadUtils {
     }
 
     public static void initializeMessageQueue() {
-        for (NetProperty network : Registry.NetworkName) {
+        for (NetString network : Registry.NetworkName) {
             class MessageQueue implements Runnable {
                 @Override
                 public void run() {
@@ -233,7 +233,7 @@ public class LoadUtils {
                     TimeUnit.SECONDS.sleep(30);
                 } catch (InterruptedException c) {
                 }
-                NetProperty netProperty = IRCUtils.getNetPropertyByNetwork(network);
+                NetString netProperty = IRCUtils.getNetPropertyByNetwork(network);
                 while (Registry.NetworkName.contains(netProperty)) {
                     try {
                         if (Registry.MessageQueue.size() > 0 && network.equals(Registry.MessageQueue.get(0).getNetwork())) {

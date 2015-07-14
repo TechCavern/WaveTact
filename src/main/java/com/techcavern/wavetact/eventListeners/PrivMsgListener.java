@@ -34,6 +34,11 @@ public class PrivMsgListener extends ListenerAdapter {
                 IRCCommand Command = IRCUtils.getCommand(privcommand, IRCUtils.getNetworkNameByNetwork(event.getBot()), null);
                 message = ArrayUtils.remove(message, 0);
                 if (Command != null) {
+                    if (!Command.getCommand().equalsIgnoreCase("authenticate") && !Command.getCommand().equalsIgnoreCase("drop") && !Command.getCommand().equalsIgnoreCase("register") && !Command.getCommand().equalsIgnoreCase("setpassword")) {
+                        GeneralUtils.sendLogChanMsg(event.getBot(), "[" + event.getUser().getNick() + " - " + Command.getCommand() + "] " + StringUtils.join(message, " "));
+                    } else {
+                        GeneralUtils.sendLogChanMsg(event.getBot(), "[" + event.getUser().getNick() + " - " + Command.getCommand() + "]");
+                    }
                     if (Command.getChannelRequired()) {
                         Channel channel = null;
                         String prefix = null;
@@ -89,6 +94,8 @@ public class PrivMsgListener extends ListenerAdapter {
                             }
                         }
                     }
+                } else {
+                    GeneralUtils.sendLogChanMsg(event.getBot(), "[" + event.getUser().getNick() + "] " + event.getMessage());
                 }
             }
 

@@ -3,11 +3,11 @@ package com.techcavern.wavetact.objects;
 import org.pircbotx.PircBotX;
 
 
-public class NetProperty {
+public class NetString {
     private final String chard;
     private final PircBotX network;
 
-    public NetProperty(String c, PircBotX d) {
+    public NetString(String c, PircBotX d) {
         this.chard = c;
         this.network = d;
     }

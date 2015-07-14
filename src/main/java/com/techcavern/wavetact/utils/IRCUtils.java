@@ -3,7 +3,7 @@ package com.techcavern.wavetact.utils;
 import com.techcavern.wavetact.objects.CachedWhoisEvent;
 import com.techcavern.wavetact.objects.ConsoleCommand;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.objects.NetProperty;
+import com.techcavern.wavetact.objects.NetString;
 import org.apache.commons.lang3.StringUtils;
 import org.jooq.Record;
 import org.pircbotx.Channel;
@@ -23,9 +23,9 @@ import static com.techcavern.wavetactdb.Tables.NETWORKPROPERTY;
 public class IRCUtils {
     public static void setMode(Channel channelObject, PircBotX networkObject, String modeToSet, String hostmask) {
         if (hostmask != null) {
-            Registry.MessageQueue.add(new NetProperty("MODE " + channelObject.getName() + " " + modeToSet + " " + hostmask, networkObject));
+            Registry.MessageQueue.add(new NetString("MODE " + channelObject.getName() + " " + modeToSet + " " + hostmask, networkObject));
         } else {
-            Registry.MessageQueue.add(new NetProperty("MODE " + channelObject.getName() + " " + modeToSet, networkObject));
+            Registry.MessageQueue.add(new NetString("MODE " + channelObject.getName() + " " + modeToSet, networkObject));
         }
     }
 
@@ -61,7 +61,7 @@ public class IRCUtils {
         }
         WaitForQueue waitForQueue = new WaitForQueue(network);
         try {
-            Registry.MessageQueue.add(new NetProperty("WHOIS " + userObject + " " + userObject, network));
+            Registry.MessageQueue.add(new NetString("WHOIS " + userObject + " " + userObject, network));
             WhoisEvent = waitForQueue.waitFor(WhoisEvent.class);
             waitForQueue.close();
         } catch (InterruptedException | NullPointerException ex) {
@@ -80,13 +80,13 @@ public class IRCUtils {
             for (int i = 0; i < message.length(); i += 350) {
                 String messageToSend = message.substring(i, Math.min(message.length(), i + 350));
                 if (!messageToSend.isEmpty()) {
-                    Registry.MessageQueue.add(new NetProperty("PRIVMSG " + prefix + channelObject.getName() + " :" + messageToSend, networkObject));
+                    Registry.MessageQueue.add(new NetString("PRIVMSG " + prefix + channelObject.getName() + " :" + messageToSend, networkObject));
                     if (prefix.isEmpty())
                         sendRelayMessage(networkObject, channelObject, GeneralUtils.replaceVowelsWithAccents(networkObject.getNick()) + ": " + message);
                 }
             }
         } else {
-            Registry.MessageQueue.add(new NetProperty("PRIVMSG " + userObject.getNick() + " :" + message, networkObject));
+            Registry.MessageQueue.add(new NetString("PRIVMSG " + userObject.getNick() + " :" + message, networkObject));
         }
     }
 
@@ -95,7 +95,7 @@ public class IRCUtils {
             for (int i = 0; i < message.length(); i += 350) {
                 String messageToSend = message.substring(i, Math.min(message.length(), i + 350));
                 if (!messageToSend.isEmpty()) {
-                    Registry.MessageQueue.add(new NetProperty("KICK " + channelObject.getName() + " " + recipientObject.getNick() + " :" + messageToSend, networkObject));
+                    Registry.MessageQueue.add(new NetString("KICK " + channelObject.getName() + " " + recipientObject.getNick() + " :" + messageToSend, networkObject));
                     //       sendRelayMessage(networkObject, channelObject, "* " + userObject.getNick() + " kicks " + recipientObject.getNick() + " (" + messageToSend + ")");
                 }
             }
@@ -112,7 +112,7 @@ public class IRCUtils {
                     if (rec != null) {
                         String relaychan = rec.getValue(NETWORKPROPERTY.VALUE);
                         if (relaychan != null)
-                            Registry.MessageQueue.add(new NetProperty("PRIVMSG " + relaychan + " :[" + getNetworkNameByNetwork(networkObject) + "] " + msg, net.getNetwork()));
+                            Registry.MessageQueue.add(new NetString("PRIVMSG " + relaychan + " :[" + getNetworkNameByNetwork(networkObject) + "] " + msg, net.getNetwork()));
                     }
                 });
             }
@@ -121,11 +121,11 @@ public class IRCUtils {
 
     public static void sendAction(User userObject, PircBotX networkObject, Channel channelObject, String message, String prefix) {
         if (channelObject != null) {
-            Registry.MessageQueue.add(new NetProperty("PRIVMSG " + prefix + channelObject.getName() + " :\u0001ACTION " + message + "\u0001", networkObject));
+            Registry.MessageQueue.add(new NetString("PRIVMSG " + prefix + channelObject.getName() + " :\u0001ACTION " + message + "\u0001", networkObject));
             if (prefix.isEmpty())
                 sendRelayMessage(networkObject, channelObject, "* " + GeneralUtils.replaceVowelsWithAccents(networkObject.getNick()) + " " + message);
         } else {
-            Registry.MessageQueue.add(new NetProperty("PRIVMSG " + userObject.getNick() + " :\u0001ACTION " + message + "\u0001", networkObject));
+            Registry.MessageQueue.add(new NetString("PRIVMSG " + userObject.getNick() + " :\u0001ACTION " + message + "\u0001", networkObject));
         }
     }
 
@@ -191,7 +191,7 @@ public class IRCUtils {
     }
 
     public static void sendGlobal(String message, User user) {
-        for (NetProperty network : Registry.NetworkName) {
+        for (NetString network : Registry.NetworkName) {
             sendNetworkGlobal(message, network.getNetwork(), user, true);
         }
 
@@ -349,7 +349,7 @@ public class IRCUtils {
 
 
     public static PircBotX getBotByNetworkName(String name) {
-        for (NetProperty d : Registry.NetworkName) {
+        for (NetString d : Registry.NetworkName) {
             if (d.getProperty().equalsIgnoreCase(name)) {
                 return d.getNetwork();
             }
@@ -358,7 +358,7 @@ public class IRCUtils {
     }
 
     public static String getNetworkNameByNetwork(PircBotX network) {
-        for (NetProperty d : Registry.NetworkName) {
+        for (NetString d : Registry.NetworkName) {
             if (d.getNetwork().equals(network)) {
                 return d.getProperty();
             }
@@ -366,8 +366,8 @@ public class IRCUtils {
         return null;
     }
 
-    public static NetProperty getNetPropertyByNetwork(PircBotX network) {
-        for (NetProperty d : Registry.NetworkName) {
+    public static NetString getNetPropertyByNetwork(PircBotX network) {
+        for (NetString d : Registry.NetworkName) {
             if (d.getNetwork().equals(network)) {
                 return d;
             }

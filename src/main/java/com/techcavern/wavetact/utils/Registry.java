@@ -22,11 +22,11 @@ public class Registry {
     public static final List<ConsoleCommand> ConsoleCommands = new ArrayList<>();
     public static final StrongPasswordEncryptor encryptor = new StrongPasswordEncryptor();
     public static final Reflections wavetactreflection = new Reflections("com.techcavern.wavetact");
-    public static final List<NetProperty> NetworkName = new ArrayList<>();
+    public static final List<NetString> NetworkName = new ArrayList<>();
     public static final List<CachedWhoisEvent> WhoisEventCache = new ArrayList<>();
-    public static final int currentiteration = 1;
+    public static final int currentiteration = 2;
     public static final ConsoleServer consoleServer = new ConsoleServer();
-    public static final List<NetProperty> MessageQueue = new ArrayList<>();
+    public static final List<NetString> MessageQueue = new ArrayList<>();
     public static final UrlValidator urlvalidator = new UrlValidator();
     public static final String Version = "WaveTact 1.0-dev";
     public static final String userAgent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36";
