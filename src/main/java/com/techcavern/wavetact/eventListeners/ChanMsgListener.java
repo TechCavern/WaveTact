@@ -27,7 +27,7 @@ public class ChanMsgListener extends ListenerAdapter {
             public void run() {
                 //sends Relay Message
                 if (PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel()) > -3 && IRCUtils.getPrefix(event.getBot(), event.getChannelSource()).isEmpty())
-                    IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), GeneralUtils.replaceVowelsWithAccents(event.getUser().getNick()) + ": " + event.getMessage());
+                    IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), IRCUtils.noPing(event.getUser().getNick()) + ": " + event.getMessage());
 
                 //Begin Input Parsing
                 String[] message = StringUtils.split(Colors.removeFormattingAndColors(event.getMessage()), " ");

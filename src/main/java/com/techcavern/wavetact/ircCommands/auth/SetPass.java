@@ -33,7 +33,7 @@ public class SetPass extends IRCCommand {
             account.setValue(ACCOUNTS.PASSWORD, Registry.encryptor.encryptPassword(args[1] + account.getValue(ACCOUNTS.RANDOMSTRING)));
             DatabaseUtils.updateAccount(account);
             IRCUtils.sendMessage(user, network, channel, "Password changed successfully", prefix);
-            IRCUtils.sendLogChanMsg(network, "[PASS CHANGE] " + GeneralUtils.replaceVowelsWithAccents(user.getNick()));
+            IRCUtils.sendLogChanMsg(network, "[PASS CHANGE] " + IRCUtils.noPing(user.getNick()));
         } else {
             ErrorUtils.sendError(user, "Incorrect password");
         }

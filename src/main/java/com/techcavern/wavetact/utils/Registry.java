@@ -26,7 +26,7 @@ public class Registry {
     public static final Map<PircBotX, String> NetworkName = new HashMap<>();
     public static final Map<String, PircBotX> NetworkBot = new HashMap<>();
     public static final List<CachedWhoisEvent> WhoisEventCache = new ArrayList<>();
-    public static final int currentiteration = 3;
+    public static final int currentiteration = 4;
     public static final ConsoleServer consoleServer = new ConsoleServer();
     public static final Queue<NetMessage> MessageQueue = new LinkedList<>();
     public static final UrlValidator urlvalidator = new UrlValidator();

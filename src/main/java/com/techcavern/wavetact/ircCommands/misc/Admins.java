@@ -23,7 +23,7 @@ public class Admins extends IRCCommand {
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         String[] admins = StringUtils.split(DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(network)).getValue(SERVERS.NETWORKADMINS), ",");
         for (int i = 0; i < admins.length; i++) {
-            admins[i] = GeneralUtils.replaceVowelsWithAccents(admins[i].replace(" ", ""));
+            admins[i] = IRCUtils.noPing(admins[i].replace(" ", ""));
         }
         IRCUtils.sendMessage(user, network, channel, StringUtils.join(admins, ", "), prefix);
     }

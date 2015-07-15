@@ -45,12 +45,12 @@ public class Say extends IRCCommand {
         }
         if (chan == null || PermUtils.getPermLevel(network, user.getNick(), chan) >= 5) {
             if (command.equalsIgnoreCase("act") || command.equalsIgnoreCase("do") || command.equalsIgnoreCase("a")) {
-                IRCUtils.sendAction(user, network, chan, StringUtils.join(args, " ").replace("\n", " "), prefix);
+                IRCUtils.sendAction(user, network, chan, GeneralUtils.stripHTML(StringUtils.join(args, " ")) + " [" + user.getNick() + "]", prefix);
             } else if (command.equalsIgnoreCase("prism")) {
-                IRCUtils.sendMessage(user, network, chan, GeneralUtils.prism(StringUtils.join(args, " ")), prefix);
+                IRCUtils.sendMessage(user, network, chan, GeneralUtils.prism(GeneralUtils.stripHTML(StringUtils.join(args, " ")) + " [" + user.getNick() + "]"), prefix);
 
             } else {
-                IRCUtils.sendMessage(user, network, chan, StringUtils.join(args, " ").replace("\n", " "), prefix);
+                IRCUtils.sendMessage(user, network, chan, GeneralUtils.stripHTML(StringUtils.join(args, " ")) + " [" + user.getNick() + "]", prefix);
             }
         } else {
             ErrorUtils.sendError(user, "Permission denied");

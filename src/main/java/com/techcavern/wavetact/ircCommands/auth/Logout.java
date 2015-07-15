@@ -25,6 +25,6 @@ public class Logout extends IRCCommand {
         if (IRCUtils.getCachedWhoisEvent(network, user.getNick()) != null)
             Registry.WhoisEventCache.remove(IRCUtils.getCachedWhoisEvent(network, user.getNick()));
         IRCUtils.sendMessage(user, network, channel, "You are now logged out", prefix);
-        IRCUtils.sendLogChanMsg(network, "[LOGOUT] " + GeneralUtils.replaceVowelsWithAccents(user.getNick()));
+        IRCUtils.sendLogChanMsg(network, "[LOGOUT] " + IRCUtils.noPing(user.getNick()));
     }
 }

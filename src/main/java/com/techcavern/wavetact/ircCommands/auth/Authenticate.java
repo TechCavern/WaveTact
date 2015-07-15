@@ -41,10 +41,10 @@ public class Authenticate extends IRCCommand {
             if (account != null && Registry.encryptor.checkPassword(password + account.getValue(ACCOUNTS.RANDOMSTRING), account.getValue(ACCOUNTS.PASSWORD))) {
                 Registry.AuthedUsers.add(new AuthedUser(IRCUtils.getNetworkNameByNetwork(network), userString, IRCUtils.getHostmask(network, user.getNick(), false)));
                 IRCUtils.sendMessage(user, network, channel, "Identification successful", prefix);
-                IRCUtils.sendLogChanMsg(network, "[AUTH SUCCESS] " + GeneralUtils.replaceVowelsWithAccents(user.getNick()));
+                IRCUtils.sendLogChanMsg(network, "[AUTH SUCCESS] " + IRCUtils.noPing(user.getNick()));
             } else {
                 ErrorUtils.sendError(user, "Unable to identify (incorrect user/password combination)");
-                IRCUtils.sendLogChanMsg(network, "[AUTH FAILURE] " + GeneralUtils.replaceVowelsWithAccents(user.getNick()));
+                IRCUtils.sendLogChanMsg(network, "[AUTH FAILURE] " + IRCUtils.noPing(user.getNick()));
             }
         }
     }

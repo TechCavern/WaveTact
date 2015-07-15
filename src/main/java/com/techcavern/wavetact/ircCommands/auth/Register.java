@@ -42,7 +42,7 @@ public class Register extends IRCCommand {
             DatabaseUtils.addAccount(userString, Registry.encryptor.encryptPassword(password + randomString), randomString);
             Registry.AuthedUsers.add(new AuthedUser(IRCUtils.getNetworkNameByNetwork(network), userString, IRCUtils.getHostmask(network, user.getNick(), false)));
             IRCUtils.sendMessage(user, network, channel, "You are now registered", prefix);
-            IRCUtils.sendLogChanMsg(network, "[REGISTRATION] " + GeneralUtils.replaceVowelsWithAccents(user.getNick()));
+            IRCUtils.sendLogChanMsg(network, "[REGISTRATION] " + IRCUtils.noPing(user.getNick()));
         }
     }
 }

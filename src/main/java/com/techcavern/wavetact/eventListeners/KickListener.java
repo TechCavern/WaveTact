@@ -5,7 +5,6 @@
  */
 package com.techcavern.wavetact.eventListeners;
 
-import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -21,7 +20,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class KickListener extends ListenerAdapter {
     public void onKick(KickEvent event) throws Exception {
-        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), GeneralUtils.replaceVowelsWithAccents(event.getUser().getNick()) + " kicked " + GeneralUtils.replaceVowelsWithAccents(event.getRecipient().getNick()) + " (" + event.getReason() + ")");
+        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), IRCUtils.noPing(event.getUser().getNick()) + " kicked " + IRCUtils.noPing(event.getRecipient().getNick()) + " (" + event.getReason() + ")");
         Channel channel = event.getChannel();
         PircBotX network = event.getBot();
         User user = event.getUser();

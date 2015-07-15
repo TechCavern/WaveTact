@@ -83,7 +83,7 @@ public class IRCUtils {
                 if (!messageToSend.isEmpty()) {
                     Registry.MessageQueue.add(new NetMessage("PRIVMSG " + prefix + channelObject.getName() + " :" + messageToSend, networkObject));
                     if (prefix.isEmpty())
-                        sendRelayMessage(networkObject, channelObject, GeneralUtils.replaceVowelsWithAccents(networkObject.getNick()) + ": " + message);
+                        sendRelayMessage(networkObject, channelObject, noPing(networkObject.getNick()) + ": " + message);
                 }
             }
         } else {
@@ -128,7 +128,7 @@ public class IRCUtils {
         if (channelObject != null) {
             Registry.MessageQueue.add(new NetMessage("PRIVMSG " + prefix + channelObject.getName() + " :\u0001ACTION " + message + "\u0001", networkObject));
             if (prefix.isEmpty())
-                sendRelayMessage(networkObject, channelObject, "* " + GeneralUtils.replaceVowelsWithAccents(networkObject.getNick()) + " " + message);
+                sendRelayMessage(networkObject, channelObject, "* " + noPing(networkObject.getNick()) + " " + message);
         } else {
             Registry.MessageQueue.add(new NetMessage("PRIVMSG " + userObject.getNick() + " :\u0001ACTION " + message + "\u0001", networkObject));
         }
@@ -373,6 +373,17 @@ public class IRCUtils {
         Record pmlog = DatabaseUtils.getNetworkProperty(getNetworkNameByNetwork(network), "pmlog");
         if (pmlog != null && getChannelbyName(network, pmlog.getValue(NETWORKPROPERTY.VALUE)) != null)
             sendMessage(network, getChannelbyName(network, pmlog.getValue(NETWORKPROPERTY.VALUE)), message, "");
+    }
+
+    public static String noPing(String original) {
+        char[] originChars = original.toCharArray();
+        for (int i = 0; i < originChars.length; i++) {
+            if (Registry.CharReplacements.get(String.valueOf(originChars[i])) != null) {
+                original = original.replaceFirst(String.valueOf(originChars[i]), Registry.CharReplacements.get(String.valueOf(originChars[i])));
+                break;
+            }
+        }
+        return original;
     }
 }
 

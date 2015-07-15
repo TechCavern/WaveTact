@@ -42,7 +42,7 @@ public class Drop extends IRCCommand {
             }
             DatabaseUtils.removeAccount(authedUser);
             IRCUtils.sendMessage(user, network, channel, "Your account is now dropped", prefix);
-            IRCUtils.sendLogChanMsg(network, "[ACCOUNT DROPPED] " + GeneralUtils.replaceVowelsWithAccents(user.getNick()));
+            IRCUtils.sendLogChanMsg(network, "[ACCOUNT DROPPED] " + IRCUtils.noPing(user.getNick()));
         } else {
             ErrorUtils.sendError(user, "Incorrect password");
         }

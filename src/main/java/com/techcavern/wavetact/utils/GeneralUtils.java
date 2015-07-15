@@ -201,17 +201,6 @@ public class GeneralUtils {
         return result;
     }
 
-    public static String replaceVowelsWithAccents(String original) {
-        char[] originChars = original.toCharArray();
-        for (int i = 0; i < originChars.length; i++) {
-            if (Registry.CharReplacements.get(String.valueOf(originChars[i])) != null) {
-                original = original.replaceFirst(String.valueOf(originChars[i]), Registry.CharReplacements.get(String.valueOf(originChars[i])));
-                break;
-            }
-        }
-        return original;
-    }
-
     public static int readInputStream(InputStream in)
             throws Exception {
         int i = 0;

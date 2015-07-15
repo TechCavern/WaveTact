@@ -1,6 +1,5 @@
-package com.techcavern.wavetact.ircCommands.fun;
+package com.techcavern.wavetact.ircCommands.misc;
 
-import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
@@ -10,11 +9,11 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-@IRCCMD
-public class Repeat extends IRCCommand {
+//@IRCCMD
+public class Test extends IRCCommand {
 
-    public Repeat() {
-        super(GeneralUtils.toArray("repeat rep"), 0, "repeat (+)[#] (+)[message]", "repeat something a specified number of times", false);
+    public Test() {
+        super(GeneralUtils.toArray("test dev"), 0, "test", "Test Command (This should not show up in a production environment. If it does, report it", false);
     }
 
     @Override
@@ -30,7 +29,7 @@ public class Repeat extends IRCCommand {
         if (args[0].startsWith("+")) {
             message = GeneralUtils.prism(message.replaceFirst("\\+", ""));
         }
-        if (times >= userPermLevel / 2) {
+        if (times <= userPermLevel / 2) {
             if (isAction)
                 for (int i = 0; i < times; i++)
                     IRCUtils.sendAction(network, channel, message, prefix);
