@@ -201,6 +201,57 @@ public class LoadUtils {
         }
     }
 
+    public static void registerCharReplacements() {
+        Registry.CharReplacements.put("a", "á");
+        Registry.CharReplacements.put("b", "ḃ");
+        Registry.CharReplacements.put("c", "ƈ");
+        Registry.CharReplacements.put("d", "ḋ");
+        Registry.CharReplacements.put("f", "ḟ");
+        Registry.CharReplacements.put("g", "ǧ");
+        Registry.CharReplacements.put("h", "ĥ");
+        Registry.CharReplacements.put("j", "ĵ");
+        Registry.CharReplacements.put("k", "ķ");
+        Registry.CharReplacements.put("l", "ĺ");
+        Registry.CharReplacements.put("m", "ṁ");
+        Registry.CharReplacements.put("n", "ǹ");
+        Registry.CharReplacements.put("p", "ṗ");
+        Registry.CharReplacements.put("q", "ɋ");
+        Registry.CharReplacements.put("r", "ȓ");
+        Registry.CharReplacements.put("s", "ș");
+        Registry.CharReplacements.put("t", "ț");
+        Registry.CharReplacements.put("w", "ŵ");
+        Registry.CharReplacements.put("z", "ƶ");
+        Registry.CharReplacements.put("B", "Ɓ");
+        Registry.CharReplacements.put("C", "Ƈ");
+        Registry.CharReplacements.put("D", "Ḋ");
+        Registry.CharReplacements.put("F", "Ḟ");
+        Registry.CharReplacements.put("G", "Ǵ");
+        Registry.CharReplacements.put("H", "Ĥ");
+        Registry.CharReplacements.put("J", "Ĵ");
+        Registry.CharReplacements.put("K", "Ƙ");
+        Registry.CharReplacements.put("L", "Ŀ");
+        Registry.CharReplacements.put("M", "Ṁ");
+        Registry.CharReplacements.put("N", "Ǹ");
+        Registry.CharReplacements.put("P", "Ṗ");
+        Registry.CharReplacements.put("Q", "Ɋ");
+        Registry.CharReplacements.put("R", "Ɍ");
+        Registry.CharReplacements.put("S", "Ṡ");
+        Registry.CharReplacements.put("T", "Ṫ");
+        Registry.CharReplacements.put("W", "Ẅ");
+        Registry.CharReplacements.put("Z", "Ƶ");
+        Registry.CharReplacements.put("e", "é");
+        Registry.CharReplacements.put("i", "í");
+        Registry.CharReplacements.put("o", "ó");
+        Registry.CharReplacements.put("u", "ú");
+        Registry.CharReplacements.put("y", "ý");
+        Registry.CharReplacements.put("A", "Á");
+        Registry.CharReplacements.put("E", "É");
+        Registry.CharReplacements.put("I", "Í");
+        Registry.CharReplacements.put("O", "Ó");
+        Registry.CharReplacements.put("U", "Ú");
+        Registry.CharReplacements.put("Y", "Ý");
+
+    }
     public static void initializeMessageQueue() {
         for (NetRecord network : Registry.NetworkName) {
             class MessageQueue implements Runnable {
@@ -208,9 +259,9 @@ public class LoadUtils {
                 public void run() {
                     while (Registry.NetworkName.contains(network)) {
                         try {
-                            if (Registry.MessageQueue.size() > 0 && network.getNetwork().equals(Registry.MessageQueue.get(0).getNetwork())) {
-                                Registry.MessageQueue.get(0).getNetwork().sendRaw().rawLine(Registry.MessageQueue.get(0).getProperty());
-                                Registry.MessageQueue.remove(0);
+                            if (Registry.MessageQueue.size() > 0 && network.getNetwork().equals(Registry.MessageQueue.element().getNetwork())) {
+                                NetRecord Message = Registry.MessageQueue.remove();
+                                Message.getNetwork().sendRaw().rawLine(Message.getProperty());
                                 TimeUnit.MILLISECONDS.sleep(900);
                             }
                             TimeUnit.MILLISECONDS.sleep(100);
@@ -236,9 +287,9 @@ public class LoadUtils {
                 NetRecord netProperty = IRCUtils.getNetPropertyByNetwork(network);
                 while (Registry.NetworkName.contains(netProperty)) {
                     try {
-                        if (Registry.MessageQueue.size() > 0 && network.equals(Registry.MessageQueue.get(0).getNetwork())) {
-                            Registry.MessageQueue.get(0).getNetwork().sendRaw().rawLine(Registry.MessageQueue.get(0).getProperty());
-                            Registry.MessageQueue.remove(0);
+                        if (Registry.MessageQueue.size() > 0 && network.equals(Registry.MessageQueue.element().getNetwork())) {
+                            NetRecord Message = Registry.MessageQueue.remove();
+                            Message.getNetwork().sendRaw().rawLine(Message.getProperty());
                             TimeUnit.MILLISECONDS.sleep(900);
                         }
                         TimeUnit.MILLISECONDS.sleep(100);

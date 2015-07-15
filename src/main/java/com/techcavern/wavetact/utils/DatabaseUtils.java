@@ -19,7 +19,7 @@ public class DatabaseUtils {
     }
 
     public static void updateAccount(Record account) {
-        Registry.WaveTactDB.update(ACCOUNTS).set(account).where(ACCOUNTS.USERNAME.eq(account.getValue(ACCOUNTS.USERNAME)));
+        Registry.WaveTactDB.update(ACCOUNTS).set(account).where(ACCOUNTS.USERNAME.eq(account.getValue(ACCOUNTS.USERNAME))).execute();
     }
 
     public static void removeAccount(String account) {
@@ -61,7 +61,7 @@ public class DatabaseUtils {
     }
 
     public static void updateConfig(Record config) {
-        Registry.WaveTactDB.update(CONFIG).set(config).where(CONFIG.PROPERTY.eq(config.getValue(CONFIG.PROPERTY)));
+        Registry.WaveTactDB.update(CONFIG).set(config).where(CONFIG.PROPERTY.eq(config.getValue(CONFIG.PROPERTY))).execute();
     }
 
     public static Record getRecord(Result<Record> record) {
@@ -195,8 +195,8 @@ public class DatabaseUtils {
         Registry.WaveTactDB.delete(CHANNELUSERPROPERTY).where(CHANNELUSERPROPERTY.NETWORK.eq(network)).execute();
     }
 
-    public static void removeChannelUserPropertyByUser(String user) {
-        Registry.WaveTactDB.delete(CHANNELUSERPROPERTY).where(CHANNELUSERPROPERTY.USER.eq(user)).execute();
+    public static void removeChannelUserPropertyByUser(String network, String user) {
+        Registry.WaveTactDB.delete(CHANNELUSERPROPERTY).where(CHANNELUSERPROPERTY.NETWORK.eq(network)).and(CHANNELUSERPROPERTY.USER.eq(user)).execute();
     }
 
     public static Result<Record> getServers() {
@@ -254,8 +254,8 @@ public class DatabaseUtils {
         Registry.WaveTactDB.delete(NETWORKUSERPROPERTY).where(NETWORKUSERPROPERTY.NETWORK.eq(network)).execute();
     }
 
-    public static void removeNetworkUserPropertyByUser(String user) {
-        Registry.WaveTactDB.delete(NETWORKUSERPROPERTY).where(NETWORKUSERPROPERTY.USER.eq(user)).execute();
+    public static void removeNetworkUserPropertyByUser(String network, String user) {
+        Registry.WaveTactDB.delete(NETWORKUSERPROPERTY).where(NETWORKUSERPROPERTY.NETWORK.eq(network)).and(NETWORKUSERPROPERTY.USER.eq(user)).execute();
     }
 
 }

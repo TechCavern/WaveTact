@@ -35,13 +35,14 @@ public class Register extends IRCCommand {
             password = args[1];
         }
         if (DatabaseUtils.getAccount(userString) != null) {
-            ErrorUtils.sendError(user, "Error, you are already registered");
+            ErrorUtils.sendError(user, "Error, account already exists!");
 
         } else {
             String randomString = UUID.randomUUID().toString();
             DatabaseUtils.addAccount(userString, Registry.encryptor.encryptPassword(password + randomString), randomString);
             Registry.AuthedUsers.add(new AuthedUser(IRCUtils.getNetworkNameByNetwork(network), userString, IRCUtils.getHostmask(network, user.getNick(), false)));
             IRCUtils.sendMessage(user, network, channel, "You are now registered", prefix);
+            IRCUtils.sendLogChanMsg(network, "[REGISTRATION] " + GeneralUtils.replaceVowelsWithAccents(user.getNick()));
         }
     }
 }

@@ -24,7 +24,7 @@ public class ResetPass extends ConsoleCommand {
         Record account = DatabaseUtils.getAccount(args[0]);
         if (account != null) {
             account.setValue(ACCOUNTS.RANDOMSTRING, UUID.randomUUID().toString());
-            account.setValue(ACCOUNTS.PASSWORD, Registry.encryptor.encryptPassword(args[1] + ACCOUNTS.RANDOMSTRING));
+            account.setValue(ACCOUNTS.PASSWORD, Registry.encryptor.encryptPassword(args[1] + account.getValue(ACCOUNTS.RANDOMSTRING)));
             DatabaseUtils.updateAccount(account);
             commandIO.getPrintStream().println("Password Reset");
         } else {

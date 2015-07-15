@@ -22,7 +22,7 @@ public class PermLevel extends IRCCommand {
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         String userObject;
         Channel chan;
-        if (args.length > 1 && network.getServerInfo().getChannelTypes().contains(String.valueOf(args[0].charAt(0)))) {
+        if (args.length > 0 && network.getConfiguration().getChannelPrefixes().contains(String.valueOf(args[0].charAt(0)))) {
             chan = IRCUtils.getChannelbyName(network, args[0]);
             args = ArrayUtils.remove(args, 0);
         } else {
@@ -32,8 +32,8 @@ public class PermLevel extends IRCCommand {
             userObject = user.getNick();
         } else {
             userObject = args[0];
-            userPermLevel = PermUtils.getPermLevel(network, userObject, chan);
         }
+        userPermLevel = PermUtils.getPermLevel(network, userObject, chan);
         if (userObject == null) {
             ErrorUtils.sendError(user, "User does not exist");
         } else if (userPermLevel >= 20) {

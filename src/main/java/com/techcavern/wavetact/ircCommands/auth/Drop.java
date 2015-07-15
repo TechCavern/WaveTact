@@ -1,8 +1,8 @@
 package com.techcavern.wavetact.ircCommands.auth;
 
 import com.techcavern.wavetact.annot.IRCCMD;
-import com.techcavern.wavetact.objects.AuthedUser;
 import com.techcavern.wavetact.objects.IRCCommand;
+import com.techcavern.wavetact.objects.NetRecord;
 import com.techcavern.wavetact.utils.*;
 import org.jooq.Record;
 import org.pircbotx.Channel;
@@ -25,13 +25,20 @@ public class Drop extends IRCCommand {
             ErrorUtils.sendError(user, "This network is set to " + DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(network)).getValue(SERVERS.AUTHTYPE) + " authentication");
             return;
         }
-        AuthedUser authedUser = PermUtils.getAuthedUser(network, user.getNick());
-        Record account = DatabaseUtils.getAccount(authedUser.getAuthAccount());
+        String authedUser = PermUtils.authUser(network, user.getNick());
+        Record account = DatabaseUtils.getAccount(authedUser);
         if (Registry.encryptor.checkPassword(args[0] + account.getValue(ACCOUNTS.RANDOMSTRING), account.getValue(ACCOUNTS.PASSWORD))) {
-            DatabaseUtils.removeAccount(authedUser.getAuthAccount());
-            DatabaseUtils.removeNetworkUserPropertyByUser(authedUser.getAuthAccount());
-            DatabaseUtils.removeChannelUserPropertyByUser(authedUser.getAuthAccount());
+            for (NetRecord e : Registry.NetworkName) {
+                if (PermUtils.isAccountEnabled(e.getNetwork())) {
+                    if (authedUser != null) {
+                        Registry.AuthedUsers.remove(PermUtils.getAuthedUser(network, authedUser));
+                        DatabaseUtils.removeNetworkUserPropertyByUser(e.getProperty(), authedUser);
+                        DatabaseUtils.removeChannelUserPropertyByUser(e.getProperty(), authedUser);
+                    }
+                }
+            }
             IRCUtils.sendMessage(user, network, channel, "Your account is now dropped", prefix);
+            IRCUtils.sendLogChanMsg(network, "[ACCOUNT DROPPED] " + GeneralUtils.replaceVowelsWithAccents(user.getNick()));
         } else {
             ErrorUtils.sendError(user, "Incorrect password");
         }

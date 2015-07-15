@@ -22,16 +22,18 @@ public class FDrop extends ConsoleCommand {
     @Override
     public void onCommand(String command, String[] args, CommandIO commandIO) {
         for (NetRecord e : Registry.NetworkName) {
-            AuthedUser authedUser = PermUtils.getAuthedUser(e.getNetwork(), args[0]);
-            if (authedUser != null) {
-                Registry.AuthedUsers.remove(authedUser);
+            if (PermUtils.isAccountEnabled(e.getNetwork())) {
+                AuthedUser authedUser = PermUtils.getAuthedUser(e.getNetwork(), args[0]);
+                if (authedUser != null) {
+                    Registry.AuthedUsers.remove(authedUser);
+                    DatabaseUtils.removeNetworkUserPropertyByUser(e.getProperty(), authedUser.getAuthAccount());
+                    DatabaseUtils.removeChannelUserPropertyByUser(e.getProperty(), authedUser.getAuthAccount());
+                }
             }
         }
         Record account = DatabaseUtils.getAccount(args[0]);
         if (account != null) {
             DatabaseUtils.removeAccount(args[0]);
-            DatabaseUtils.removeNetworkUserPropertyByUser(args[0]);
-            DatabaseUtils.removeChannelUserPropertyByUser(args[0]);
             commandIO.getPrintStream().println("Account dropped");
         } else {
             commandIO.getPrintStream().println("Account does not exist");

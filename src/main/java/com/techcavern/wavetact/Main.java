@@ -28,6 +28,7 @@ public class Main {
             ConfigUtils.registerNetworks();
             LoadUtils.registerConsoleCommands();
             LoadUtils.registerIRCCommands();
+            LoadUtils.registerCharReplacements();
             // LoadUtils.checkDuplicateIRCCommands();
             LoadUtils.registerAttacks();
             LoadUtils.registerEightball();
