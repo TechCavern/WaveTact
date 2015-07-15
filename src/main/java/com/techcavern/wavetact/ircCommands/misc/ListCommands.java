@@ -47,7 +47,7 @@ public class ListCommands extends IRCCommand {
             ErrorUtils.sendError(user, "No commands found with that perm level");
         } else {
             Collections.sort(commands);
-        IRCUtils.sendMessage(user, network, channel, StringUtils.join(commands, ", "), prefix);
+            IRCUtils.sendMessage(user, network, channel, StringUtils.join(commands, ", "), prefix);
         }
     }
 }

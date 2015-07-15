@@ -141,9 +141,9 @@ public class Network extends ConsoleCommand {
                     Registry.MessageQueue.remove(msg);
                 }
             }
-                    network.stopBotReconnect();
-                    network.sendIRC().quitServer();
-                    commandIO.getPrintStream().println("network removed");
+            network.stopBotReconnect();
+            network.sendIRC().quitServer();
+            commandIO.getPrintStream().println("network removed");
         } else {
             if (DatabaseUtils.getServer(args[0]) != null) {
                 commandIO.getPrintStream().println("network already exists");

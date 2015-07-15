@@ -305,17 +305,17 @@ public class GeneralUtils {
         return htmltext.replaceAll("(?s)<[^>]*>(\\s*<[^>]*>)*", " ").replaceAll("\\[.*\\]", "").trim().replaceAll(" +", " ").replaceAll(" ,", "").replaceAll(" \\.", "").replaceAll("\n", " ").replaceAll("\r", " ");
     }
 
-    public static String shortenURL(String Url){
+    public static String shortenURL(String Url) {
         if (DatabaseUtils.getConfig("googleapikey") == null)
             return Url;
         try {
-            String response  = Request.Post("https://www.googleapis.com/urlshortener/v1/url?key=" + DatabaseUtils.getConfig("googleapikey").getValue(CONFIG.VALUE))
+            String response = Request.Post("https://www.googleapis.com/urlshortener/v1/url?key=" + DatabaseUtils.getConfig("googleapikey").getValue(CONFIG.VALUE))
                     .bodyString("{\"longUrl\": \"" + Url + "\"}", ContentType.APPLICATION_JSON)
                     .execute()
                     .returnContent().toString();
             response = new JsonParser().parse(response).getAsJsonObject().get("id").getAsString();
             return response;
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return Url;
         }

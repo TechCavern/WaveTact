@@ -253,6 +253,7 @@ public class LoadUtils {
         Registry.CharReplacements.put("Y", "Ý");
 
     }
+
     public static void initializeMessageQueue() {
         Iterator iterator = Registry.NetworkName.keySet().iterator();
         while (iterator.hasNext()) {
