@@ -387,7 +387,7 @@ public class IRCUtils {
     public static void sendLogChanMsg(PircBotX network, String message) {
         Record pmlog = DatabaseUtils.getNetworkProperty(getNetworkNameByNetwork(network), "pmlog");
         if (pmlog != null && getChannelbyName(network, pmlog.getValue(NETWORKPROPERTY.VALUE)) != null)
-            sendMessage(network, getChannelbyName(network, pmlog.getValue(NETWORKPROPERTY.VALUE)), GeneralUtils.replaceVowelsWithAccents(message), "");
+            sendMessage(network, getChannelbyName(network, pmlog.getValue(NETWORKPROPERTY.VALUE)), message, "");
     }
 }
 

@@ -5,6 +5,8 @@
  */
 package com.techcavern.wavetact.eventListeners;
 
+import com.techcavern.wavetact.utils.GeneralUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.Registry;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.PartEvent;
@@ -17,6 +19,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class PartListener extends ListenerAdapter {
     public void onPart(PartEvent event) throws Exception {
+        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), GeneralUtils.replaceVowelsWithAccents(event.getUser().getNick()) + " left " + event.getChannel().getName() + " (" + event.getReason() + ")");
         if (Registry.LastLeftChannel.equals(event.getChannel().getName())) {
             Registry.LastLeftChannel = "";
         } else if (event.getUser().getNick().equals(event.getBot().getNick())) {

@@ -11,7 +11,10 @@ import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.PermUtils;
 import org.jooq.Record;
 import org.pircbotx.hooks.ListenerAdapter;
-import org.pircbotx.hooks.events.*;
+import org.pircbotx.hooks.events.ActionEvent;
+import org.pircbotx.hooks.events.JoinEvent;
+import org.pircbotx.hooks.events.NickChangeEvent;
+import org.pircbotx.hooks.events.QuitEvent;
 
 import static com.techcavern.wavetactdb.Tables.NETWORKPROPERTY;
 
@@ -19,11 +22,6 @@ import static com.techcavern.wavetactdb.Tables.NETWORKPROPERTY;
  * @author jztech101
  */
 public class RelayMsgListener extends ListenerAdapter {
-    @Override
-    public void onMessage(MessageEvent event) throws Exception {
-        if (PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel()) > -3 && IRCUtils.getPrefix(event.getBot(), event.getChannelSource()).isEmpty())
-            IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), GeneralUtils.replaceVowelsWithAccents(event.getUser().getNick()) + ": " + event.getMessage());
-    }
 
     @Override
     public void onAction(ActionEvent event) {
@@ -39,16 +37,6 @@ public class RelayMsgListener extends ListenerAdapter {
             chanrelay = rec.getValue(NETWORKPROPERTY.VALUE);
         if (chanrelay != null && event.getUser().getChannels().contains(IRCUtils.getChannelbyName(event.getBot(), chanrelay)))
             IRCUtils.sendRelayMessage(event.getBot(), IRCUtils.getChannelbyName(event.getBot(), chanrelay), GeneralUtils.replaceVowelsWithAccents(event.getOldNick()) + " is now known as " + GeneralUtils.replaceVowelsWithAccents(event.getNewNick()));
-    }
-
-    @Override
-    public void onKick(KickEvent event) {
-        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), GeneralUtils.replaceVowelsWithAccents(event.getUser().getNick()) + " kicks " + GeneralUtils.replaceVowelsWithAccents(event.getRecipient().getNick()) + " (" + event.getReason() + ")");
-    }
-
-    @Override
-    public void onPart(PartEvent event) {
-        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), GeneralUtils.replaceVowelsWithAccents(event.getUser().getNick()) + " left " + event.getChannel().getName() + " (" + event.getReason() + ")");
     }
 
     @Override
