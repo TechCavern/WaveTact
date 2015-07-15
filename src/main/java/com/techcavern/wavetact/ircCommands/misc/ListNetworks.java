@@ -2,7 +2,7 @@ package com.techcavern.wavetact.ircCommands.misc;
 
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.objects.NetString;
+import com.techcavern.wavetact.objects.NetRecord;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.Registry;
@@ -24,7 +24,7 @@ public class ListNetworks extends IRCCommand {
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         String networks = "";
-        List<NetString> bufferlist = new ArrayList<>();
+        List<NetRecord> bufferlist = new ArrayList<>();
         if (args.length < 1) {
             bufferlist.addAll(Registry.NetworkName.stream().collect(Collectors.toList()));
         } else if (args[0].equalsIgnoreCase("connected")) {
@@ -35,7 +35,7 @@ public class ListNetworks extends IRCCommand {
             bufferlist.addAll(Registry.NetworkName.stream().collect(Collectors.toList()));
         }
         int netcount = 0;
-        for (NetString netprop : bufferlist) {
+        for (NetRecord netprop : bufferlist) {
             if (netcount > 0) {
                 networks += ", " + netprop.getProperty();
             } else {

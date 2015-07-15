@@ -3,7 +3,7 @@ package com.techcavern.wavetact.consoleCommands.config;
 import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.objects.CommandIO;
 import com.techcavern.wavetact.objects.ConsoleCommand;
-import com.techcavern.wavetact.objects.NetString;
+import com.techcavern.wavetact.objects.NetRecord;
 import com.techcavern.wavetact.utils.*;
 import org.jooq.Record;
 import org.pircbotx.PircBotX;
@@ -134,7 +134,7 @@ public class Network extends ConsoleCommand {
             DatabaseUtils.removeChannelUserPropertyByNetwork(args[0].replaceFirst("\\-", ""));
             DatabaseUtils.removeNetworkUserPropertyByNetwork(args[0].replaceFirst("\\-", ""));
             PircBotX network = IRCUtils.getBotByNetworkName(args[0].replaceFirst("\\-", ""));
-            for (NetString e : Registry.NetworkName) {
+            for (NetRecord e : Registry.NetworkName) {
                 if (e.getNetwork().equals(network)) {
                     Registry.NetworkName.remove(e);
                     network.stopBotReconnect();
@@ -193,7 +193,7 @@ public class Network extends ConsoleCommand {
             DatabaseUtils.addServer(name, port, server, nick, channels, bindhost, netadminaccess, netadmins, authtype, nickservcommand, serverpass, nickservnick);
             PircBotX network = ConfigUtils.createNetwork(serverpass, nick, server, port, bindhost, name);
             Registry.WaveTact.addNetwork(network);
-            Registry.NetworkName.add(new NetString(name, network));
+            Registry.NetworkName.add(new NetRecord(name, network));
             LoadUtils.addMessageQueue(network);
         }
     }

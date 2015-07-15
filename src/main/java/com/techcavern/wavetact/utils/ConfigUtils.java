@@ -1,7 +1,7 @@
 package com.techcavern.wavetact.utils;
 
 import com.techcavern.wavetact.eventListeners.ConnectListener;
-import com.techcavern.wavetact.objects.NetString;
+import com.techcavern.wavetact.objects.NetRecord;
 import org.jooq.Record;
 import org.pircbotx.Configuration;
 import org.pircbotx.PircBotX;
@@ -20,7 +20,7 @@ public class ConfigUtils {
             network = createNetwork(server.getValue(SERVERS.SERVERPASS), server.getValue(SERVERS.NICK), server.getValue(SERVERS.SERVER), server.getValue(SERVERS.PORT), server.getValue(SERVERS.BINDHOST), server.getValue(SERVERS.NAME));
             if (network != null) {
                 Registry.WaveTact.addNetwork(network);
-                Registry.NetworkName.add(new NetString(server.getValue(SERVERS.NAME), network));
+                Registry.NetworkName.add(new NetRecord(server.getValue(SERVERS.NAME), network));
             }
         }
     }

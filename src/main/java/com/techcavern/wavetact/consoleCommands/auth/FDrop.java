@@ -4,7 +4,7 @@ import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.objects.AuthedUser;
 import com.techcavern.wavetact.objects.CommandIO;
 import com.techcavern.wavetact.objects.ConsoleCommand;
-import com.techcavern.wavetact.objects.NetString;
+import com.techcavern.wavetact.objects.NetRecord;
 import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.PermUtils;
@@ -21,7 +21,7 @@ public class FDrop extends ConsoleCommand {
 
     @Override
     public void onCommand(String command, String[] args, CommandIO commandIO) {
-        for (NetString e : Registry.NetworkName) {
+        for (NetRecord e : Registry.NetworkName) {
             AuthedUser authedUser = PermUtils.getAuthedUser(e.getNetwork(), args[0]);
             if (authedUser != null) {
                 Registry.AuthedUsers.remove(authedUser);
