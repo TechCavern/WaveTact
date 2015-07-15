@@ -3,6 +3,7 @@ package com.techcavern.wavetact.consoleCommands.config;
 import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.objects.CommandIO;
 import com.techcavern.wavetact.objects.ConsoleCommand;
+import com.techcavern.wavetact.objects.NetMessage;
 import com.techcavern.wavetact.utils.*;
 import org.jooq.Record;
 import org.pircbotx.PircBotX;
@@ -135,6 +136,11 @@ public class Network extends ConsoleCommand {
             PircBotX network = IRCUtils.getBotByNetworkName(args[0].replaceFirst("\\-", ""));
             Registry.NetworkBot.remove(Registry.NetworkName.get(network));
             Registry.NetworkName.remove(network);
+            for (NetMessage msg : Registry.MessageQueue) {
+                if (msg.getNetwork().equals(network)) {
+                    Registry.MessageQueue.remove(msg);
+                }
+            }
                     network.stopBotReconnect();
                     network.sendIRC().quitServer();
                     commandIO.getPrintStream().println("network removed");
