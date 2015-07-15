@@ -4,7 +4,7 @@ import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.ConsoleCommand;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.objects.NetRecord;
+import com.techcavern.wavetact.objects.NetMessage;
 import org.flywaydb.core.Flyway;
 import org.jooq.Record;
 import org.jooq.SQLDialect;
@@ -263,7 +263,7 @@ public class LoadUtils {
                     while (Registry.NetworkName.get(network) != null) {
                         try {
                             if (Registry.MessageQueue.size() > 0 && network.equals(Registry.MessageQueue.element().getNetwork())) {
-                                NetRecord Message = Registry.MessageQueue.remove();
+                                NetMessage Message = Registry.MessageQueue.remove();
                                 Message.getNetwork().sendRaw().rawLine(Message.getProperty());
                                 TimeUnit.MILLISECONDS.sleep(900);
                             }
@@ -290,7 +290,7 @@ public class LoadUtils {
                 while (Registry.NetworkName.get(network) != null) {
                     try {
                         if (Registry.MessageQueue.size() > 0 && network.equals(Registry.MessageQueue.element().getNetwork())) {
-                            NetRecord Message = Registry.MessageQueue.remove();
+                            NetMessage Message = Registry.MessageQueue.remove();
                             Message.getNetwork().sendRaw().rawLine(Message.getProperty());
                             TimeUnit.MILLISECONDS.sleep(900);
                         }

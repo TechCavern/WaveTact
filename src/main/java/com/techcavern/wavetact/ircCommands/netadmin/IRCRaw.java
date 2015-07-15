@@ -3,7 +3,7 @@ package com.techcavern.wavetact.ircCommands.netadmin;
 
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.objects.NetRecord;
+import com.techcavern.wavetact.objects.NetMessage;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.Registry;
 import org.pircbotx.Channel;
@@ -23,7 +23,7 @@ public class IRCRaw extends IRCCommand {
             args[2] = user.getNick();
         }
 
-        Registry.MessageQueue.add(new NetRecord(GeneralUtils.buildMessage(0, args.length, args), network));
+        Registry.MessageQueue.add(new NetMessage(GeneralUtils.buildMessage(0, args.length, args), network));
     }
 }
 

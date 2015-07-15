@@ -7,7 +7,7 @@ package com.techcavern.wavetact.ircCommands.chanhalfop;
 
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.objects.NetRecord;
+import com.techcavern.wavetact.objects.NetMessage;
 import com.techcavern.wavetact.utils.*;
 import org.apache.commons.lang3.StringUtils;
 import org.jooq.Record;
@@ -45,7 +45,7 @@ public class Part extends IRCCommand {
                     Registry.LastLeftChannel = args[0];
                     permanent = true;
                 }
-                Registry.MessageQueue.add(new NetRecord("PART " + args[0], network));
+                Registry.MessageQueue.add(new NetMessage("PART " + args[0], network));
                 if (permanent) {
                     Record networkRecord = DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(network));
                     List<String> channels = new LinkedList<>(Arrays.asList(StringUtils.split(networkRecord.getValue(SERVERS.CHANNELS), ", ")));

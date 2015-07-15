@@ -28,7 +28,7 @@ public class Registry {
     public static final List<CachedWhoisEvent> WhoisEventCache = new ArrayList<>();
     public static final int currentiteration = 3;
     public static final ConsoleServer consoleServer = new ConsoleServer();
-    public static final Queue<NetRecord> MessageQueue = new LinkedList<>();
+    public static final Queue<NetMessage> MessageQueue = new LinkedList<>();
     public static final UrlValidator urlvalidator = new UrlValidator();
     public static final String Version = "WaveTact 1.0-dev";
     public static final String userAgent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36";

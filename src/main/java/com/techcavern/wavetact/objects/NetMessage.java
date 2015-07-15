@@ -3,17 +3,17 @@ package com.techcavern.wavetact.objects;
 import org.pircbotx.PircBotX;
 
 
-public class NetRecord {
-    private final String chard;
+public class NetMessage {
+    private final String message;
     private final PircBotX network;
 
-    public NetRecord(String c, PircBotX d) {
-        this.chard = c;
+    public NetMessage(String c, PircBotX d) {
+        this.message = c;
         this.network = d;
     }
 
     public String getProperty() {
-        return this.chard;
+        return this.message;
     }
 
     public PircBotX getNetwork() {
