@@ -9,7 +9,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.PircBotX;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @ConCMD
@@ -22,9 +21,7 @@ public class ListNetworks extends ConsoleCommand {
     @Override
     public void onCommand(String command, String[] args, CommandIO commandIO) throws Exception {
         List<String> networks = new ArrayList<>();
-        Iterator iterator = Registry.NetworkName.keySet().iterator();
-        while (iterator.hasNext()) {
-            PircBotX net = (PircBotX) iterator.next();
+        for (PircBotX net : Registry.NetworkName.keySet()) {
             if (args.length < 1) {
                 networks.add(Registry.NetworkName.get(net));
             } else if (args[0].equalsIgnoreCase("connected")) {

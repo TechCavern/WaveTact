@@ -24,7 +24,6 @@ public class FindIP extends IRCCommand {
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         boolean IPv6Priority = false;
         String nick = user.getNick();
-        ;
         if (args.length > 0) {
             if (args[0].equalsIgnoreCase("+")) {
                 IPv6Priority = true;

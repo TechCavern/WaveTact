@@ -31,9 +31,9 @@ public class BanListener extends ListenerAdapter {
                         || event.getChannel().isOwner(event.getBot().getUserBot()))) {
                     return;
                 }
-                String type = "";
+                String type;
                 boolean ban = false;
-                boolean isMute = false;
+                boolean isMute;
                 if (banMask.startsWith("+")) {
                     ban = true;
                     banMask = banMask.replaceFirst("\\+", "");

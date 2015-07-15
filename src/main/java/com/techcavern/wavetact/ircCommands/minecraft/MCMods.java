@@ -12,7 +12,6 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 @IRCCMD
@@ -44,9 +43,8 @@ public class MCMods extends IRCCommand {
                 if (mcmods.size() >= 3) {
                     break MCModVersionSearch;
                 }
-                Iterator iterator = mcmods.keySet().iterator();
-                while (iterator.hasNext()) {
-                    if (mod.get("name").getAsString().equalsIgnoreCase(((JsonObject) iterator.next()).get("name").getAsString()))
+                for (JsonObject o : mcmods.keySet()) {
+                    if (mod.get("name").getAsString().equalsIgnoreCase((o).get("name").getAsString()))
                         continue MCModSearch;
                 }
                 if (mod.get(searchPhrase).getAsString().toLowerCase().contains(modname)) {
@@ -57,10 +55,8 @@ public class MCMods extends IRCCommand {
         if (mcmods.isEmpty()) {
             ErrorUtils.sendError(user, "No mods found");
         } else {
-            Iterator iterator = mcmods.keySet().iterator();
-            while (iterator.hasNext()) {
-                JsonObject mod = (JsonObject) iterator.next();
-                String ModVersion = "";
+            for (JsonObject mod : mcmods.keySet()) {
+                String ModVersion;
                 if (isDev)
                     ModVersion = mod.get("dev").getAsString();
                 else

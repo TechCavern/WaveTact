@@ -40,7 +40,7 @@ public class MCAccountInfo extends IRCCommand {
         writer.close();
         BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
         String result = "";
-        String line = "";
+        String line;
         while ((line = br.readLine()) != null) {
             result += line.replaceAll("\n", " ") + "\n";
         }

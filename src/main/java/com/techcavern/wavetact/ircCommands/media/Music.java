@@ -53,12 +53,10 @@ public class Music extends IRCCommand {
                 } catch (IllegalStateException e) {
                     JsonObject song = GeneralUtils.getJsonObject("http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=" + lastfmapikey + "&artist=" + album.get("artist").getAsString().replaceAll(" ", "%20") + "&album=" + album.get("name").getAsString().replaceAll(" ", "%20") + "&format=json").get("album").getAsJsonObject().get("tracks").getAsJsonObject().get("track").getAsJsonObject();
                     IRCUtils.sendMessage(user, network, channel, "[" + album.get("name").getAsString() + "] " + song.get("name").getAsString() + " by " + album.get("artist").getAsString(), prefix);
-
                 }
             } else {
                 ArrayIndex = ArrayIndex + 1;
                 ErrorUtils.sendError(user, "result " + ArrayIndex + " does not exist");
-                return;
             }
         } else if (command.equalsIgnoreCase("artist")) {
             JsonArray artistlist = GeneralUtils.getJsonObject("http://ws.audioscrobbler.com/2.0/?method=artist.search&artist=" + StringUtils.join(args, "%20") + "&api_key=" + lastfmapikey + "&format=json").get("results").getAsJsonObject().get("artistmatches").getAsJsonObject().get("artist").getAsJsonArray();
@@ -75,7 +73,6 @@ public class Music extends IRCCommand {
             } else {
                 ArrayIndex = ArrayIndex + 1;
                 ErrorUtils.sendError(user, "result " + ArrayIndex + " does not exist");
-                return;
             }
         } else {
             JsonArray tracklist = GeneralUtils.getJsonObject("http://ws.audioscrobbler.com/2.0/?method=track.search&track=" + StringUtils.join(args, "%20") + "&api_key=" + lastfmapikey + "&format=json").get("results").getAsJsonObject().get("trackmatches").getAsJsonObject().get("track").getAsJsonArray();

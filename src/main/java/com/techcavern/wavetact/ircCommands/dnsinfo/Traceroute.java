@@ -39,7 +39,7 @@ public class Traceroute extends IRCCommand {
             }
             Process pinghost = Runtime.getRuntime().exec(traceCommand);
             BufferedReader buffereader = new BufferedReader(new InputStreamReader(pinghost.getInputStream()));
-            String line = "";
+            String line;
             while ((line = buffereader.readLine()) != null) {
                 if (!line.contains("* * *"))
                     IRCUtils.sendMessage(user, network, channel, line, prefix);

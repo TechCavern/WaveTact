@@ -11,7 +11,6 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @IRCCMD
@@ -24,9 +23,7 @@ public class ListNetworks extends IRCCommand {
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         List<String> networks = new ArrayList<>();
-        Iterator iterator = Registry.NetworkName.keySet().iterator();
-        while (iterator.hasNext()) {
-            PircBotX net = (PircBotX) iterator.next();
+        for (PircBotX net : Registry.NetworkName.keySet()) {
             if (args.length < 1) {
                 networks.add(Registry.NetworkName.get(net));
             } else if (args[0].equalsIgnoreCase("connected")) {

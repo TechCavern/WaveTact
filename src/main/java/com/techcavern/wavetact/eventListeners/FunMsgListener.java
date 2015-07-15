@@ -29,7 +29,7 @@ public class FunMsgListener extends ListenerAdapter {
         class process implements Runnable {
             public void run() {
                 Record commandcharRecord = DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "commandchar");
-                String commandchar = null;
+                String commandchar;
                 if (commandcharRecord == null) {
                     return;
                 }

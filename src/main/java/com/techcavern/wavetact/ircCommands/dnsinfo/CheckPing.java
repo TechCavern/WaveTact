@@ -40,7 +40,7 @@ public class CheckPing extends IRCCommand {
             Process pinghost = Runtime.getRuntime().exec(pingCommand);
             BufferedReader buffereader = new BufferedReader(new InputStreamReader(pinghost.getInputStream()));
             boolean haslines = false;
-            String line = "";
+            String line;
             while ((line = buffereader.readLine()) != null) {
                 if (line.contains("time=")) {
                     haslines = true;

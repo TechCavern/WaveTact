@@ -138,7 +138,6 @@ public class Network extends ConsoleCommand {
                     network.stopBotReconnect();
                     network.sendIRC().quitServer();
                     commandIO.getPrintStream().println("network removed");
-                    return;
         } else {
             if (DatabaseUtils.getServer(args[0]) != null) {
                 commandIO.getPrintStream().println("network already exists");

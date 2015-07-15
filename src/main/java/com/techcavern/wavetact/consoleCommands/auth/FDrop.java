@@ -10,8 +10,6 @@ import com.techcavern.wavetact.utils.PermUtils;
 import com.techcavern.wavetact.utils.Registry;
 import org.jooq.Record;
 
-import java.util.Iterator;
-
 
 @ConCMD
 public class FDrop extends ConsoleCommand {
@@ -22,9 +20,7 @@ public class FDrop extends ConsoleCommand {
 
     @Override
     public void onCommand(String command, String[] args, CommandIO commandIO) {
-        Iterator iterator = Registry.NetworkBot.keySet().iterator();
-        while (iterator.hasNext()) {
-            String net = (String) iterator.next();
+        for (String net : Registry.NetworkBot.keySet()) {
             if (PermUtils.isAccountEnabled(Registry.NetworkBot.get(net))) {
                 AuthedUser authedUser = PermUtils.getAuthedUser(Registry.NetworkBot.get(net), args[0]);
                 if (authedUser != null) {

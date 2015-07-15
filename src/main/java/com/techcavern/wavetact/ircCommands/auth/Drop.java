@@ -8,8 +8,6 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-import java.util.Iterator;
-
 import static com.techcavern.wavetactdb.Tables.ACCOUNTS;
 import static com.techcavern.wavetactdb.Tables.SERVERS;
 
@@ -29,9 +27,7 @@ public class Drop extends IRCCommand {
         String authedUser = PermUtils.authUser(network, user.getNick());
         Record account = DatabaseUtils.getAccount(authedUser);
         if (Registry.encryptor.checkPassword(args[0] + account.getValue(ACCOUNTS.RANDOMSTRING), account.getValue(ACCOUNTS.PASSWORD))) {
-            Iterator iterator = Registry.NetworkBot.keySet().iterator();
-            while (iterator.hasNext()) {
-                String net = (String) iterator.next();
+            for (String net : Registry.NetworkBot.keySet()) {
                 if (authedUser != null) {
                     if (PermUtils.isAccountEnabled(Registry.NetworkBot.get(net))) {
                         Registry.AuthedUsers.remove(PermUtils.getAuthedUser(network, authedUser));

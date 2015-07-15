@@ -32,7 +32,7 @@ public class ChanMsgListener extends ListenerAdapter {
                 //Begin Input Parsing
                 String[] message = StringUtils.split(Colors.removeFormattingAndColors(event.getMessage()), " ");
                 Record commandcharRecord = DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "commandchar");
-                String commandchar = null;
+                String commandchar;
                 if (commandcharRecord == null) {
                     return;
                 }
