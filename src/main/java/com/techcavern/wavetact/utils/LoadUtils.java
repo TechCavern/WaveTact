@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -253,13 +254,15 @@ public class LoadUtils {
 
     }
     public static void initializeMessageQueue() {
-        for (NetRecord network : Registry.NetworkName) {
+        Iterator iterator = Registry.NetworkName.keySet().iterator();
+        while (iterator.hasNext()) {
+            PircBotX network = (PircBotX) iterator.next();
             class MessageQueue implements Runnable {
                 @Override
                 public void run() {
-                    while (Registry.NetworkName.contains(network)) {
+                    while (Registry.NetworkName.get(network) != null) {
                         try {
-                            if (Registry.MessageQueue.size() > 0 && network.getNetwork().equals(Registry.MessageQueue.element().getNetwork())) {
+                            if (Registry.MessageQueue.size() > 0 && network.equals(Registry.MessageQueue.element().getNetwork())) {
                                 NetRecord Message = Registry.MessageQueue.remove();
                                 Message.getNetwork().sendRaw().rawLine(Message.getProperty());
                                 TimeUnit.MILLISECONDS.sleep(900);
@@ -284,8 +287,7 @@ public class LoadUtils {
                     TimeUnit.SECONDS.sleep(30);
                 } catch (InterruptedException c) {
                 }
-                NetRecord netProperty = IRCUtils.getNetPropertyByNetwork(network);
-                while (Registry.NetworkName.contains(netProperty)) {
+                while (Registry.NetworkName.get(network) != null) {
                     try {
                         if (Registry.MessageQueue.size() > 0 && network.equals(Registry.MessageQueue.element().getNetwork())) {
                             NetRecord Message = Registry.MessageQueue.remove();

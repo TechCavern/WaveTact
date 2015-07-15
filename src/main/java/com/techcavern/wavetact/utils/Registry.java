@@ -6,6 +6,7 @@ import org.apache.commons.validator.routines.UrlValidator;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 import org.jooq.DSLContext;
 import org.pircbotx.MultiBotManager;
+import org.pircbotx.PircBotX;
 import org.reflections.Reflections;
 
 import java.util.*;
@@ -22,7 +23,8 @@ public class Registry {
     public static final List<ConsoleCommand> ConsoleCommands = new ArrayList<>();
     public static final StrongPasswordEncryptor encryptor = new StrongPasswordEncryptor();
     public static final Reflections wavetactreflection = new Reflections("com.techcavern.wavetact");
-    public static final List<NetRecord> NetworkName = new ArrayList<>();
+    public static final Map<PircBotX, String> NetworkName = new HashMap<>();
+    public static final Map<String, PircBotX> NetworkBot = new HashMap<>();
     public static final List<CachedWhoisEvent> WhoisEventCache = new ArrayList<>();
     public static final int currentiteration = 3;
     public static final ConsoleServer consoleServer = new ConsoleServer();

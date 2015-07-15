@@ -4,12 +4,13 @@ import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.objects.AuthedUser;
 import com.techcavern.wavetact.objects.CommandIO;
 import com.techcavern.wavetact.objects.ConsoleCommand;
-import com.techcavern.wavetact.objects.NetRecord;
 import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.PermUtils;
 import com.techcavern.wavetact.utils.Registry;
 import org.jooq.Record;
+
+import java.util.Iterator;
 
 
 @ConCMD
@@ -21,13 +22,15 @@ public class FDrop extends ConsoleCommand {
 
     @Override
     public void onCommand(String command, String[] args, CommandIO commandIO) {
-        for (NetRecord e : Registry.NetworkName) {
-            if (PermUtils.isAccountEnabled(e.getNetwork())) {
-                AuthedUser authedUser = PermUtils.getAuthedUser(e.getNetwork(), args[0]);
+        Iterator iterator = Registry.NetworkBot.keySet().iterator();
+        while (iterator.hasNext()) {
+            String net = (String) iterator.next();
+            if (PermUtils.isAccountEnabled(Registry.NetworkBot.get(net))) {
+                AuthedUser authedUser = PermUtils.getAuthedUser(Registry.NetworkBot.get(net), args[0]);
                 if (authedUser != null) {
                     Registry.AuthedUsers.remove(authedUser);
-                    DatabaseUtils.removeNetworkUserPropertyByUser(e.getProperty(), authedUser.getAuthAccount());
-                    DatabaseUtils.removeChannelUserPropertyByUser(e.getProperty(), authedUser.getAuthAccount());
+                    DatabaseUtils.removeNetworkUserPropertyByUser(net, authedUser.getAuthAccount());
+                    DatabaseUtils.removeChannelUserPropertyByUser(net, authedUser.getAuthAccount());
                 }
             }
         }

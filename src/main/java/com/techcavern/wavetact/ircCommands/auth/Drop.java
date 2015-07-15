@@ -2,12 +2,13 @@ package com.techcavern.wavetact.ircCommands.auth;
 
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.objects.NetRecord;
 import com.techcavern.wavetact.utils.*;
 import org.jooq.Record;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
+
+import java.util.Iterator;
 
 import static com.techcavern.wavetactdb.Tables.ACCOUNTS;
 import static com.techcavern.wavetactdb.Tables.SERVERS;
@@ -28,12 +29,14 @@ public class Drop extends IRCCommand {
         String authedUser = PermUtils.authUser(network, user.getNick());
         Record account = DatabaseUtils.getAccount(authedUser);
         if (Registry.encryptor.checkPassword(args[0] + account.getValue(ACCOUNTS.RANDOMSTRING), account.getValue(ACCOUNTS.PASSWORD))) {
-            for (NetRecord e : Registry.NetworkName) {
+            Iterator iterator = Registry.NetworkBot.keySet().iterator();
+            while (iterator.hasNext()) {
+                String net = (String) iterator.next();
                 if (authedUser != null) {
-                    if (PermUtils.isAccountEnabled(e.getNetwork())) {
+                    if (PermUtils.isAccountEnabled(Registry.NetworkBot.get(net))) {
                         Registry.AuthedUsers.remove(PermUtils.getAuthedUser(network, authedUser));
-                        DatabaseUtils.removeNetworkUserPropertyByUser(e.getProperty(), authedUser);
-                        DatabaseUtils.removeChannelUserPropertyByUser(e.getProperty(), authedUser);
+                        DatabaseUtils.removeNetworkUserPropertyByUser(net, authedUser);
+                        DatabaseUtils.removeChannelUserPropertyByUser(net, authedUser);
                     }
                 }
             }

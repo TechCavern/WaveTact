@@ -14,6 +14,7 @@ import org.pircbotx.exception.DaoException;
 import org.pircbotx.hooks.WaitForQueue;
 import org.pircbotx.hooks.events.WhoisEvent;
 
+import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 
 import static com.techcavern.wavetactdb.Tables.CUSTOMCOMMANDS;
@@ -107,14 +108,18 @@ public class IRCUtils {
         if (prerec != null) {
             String chnname = prerec.getValue(NETWORKPROPERTY.VALUE);
             if (chnname != null && chnname.equalsIgnoreCase(channel.getName())) {
-                Registry.NetworkName.stream().filter(net -> net.getNetwork() != networkObject).forEach(net -> {
-                    Record rec = DatabaseUtils.getNetworkProperty(net.getProperty(), "relaychan");
-                    if (rec != null) {
-                        String relaychan = rec.getValue(NETWORKPROPERTY.VALUE);
-                        if (relaychan != null)
-                            Registry.MessageQueue.add(new NetRecord("PRIVMSG " + relaychan + " :[" + getNetworkNameByNetwork(networkObject) + "] " + msg, net.getNetwork()));
+                Iterator iterator = Registry.NetworkName.keySet().iterator();
+                while (iterator.hasNext()) {
+                    PircBotX net = (PircBotX) iterator.next();
+                    if (net != networkObject) {
+                        Record rec = DatabaseUtils.getNetworkProperty(Registry.NetworkName.get(net), "relaychan");
+                        if (rec != null) {
+                            String relaychan = rec.getValue(NETWORKPROPERTY.VALUE);
+                            if (relaychan != null)
+                                Registry.MessageQueue.add(new NetRecord("PRIVMSG " + relaychan + " :[" + getNetworkNameByNetwork(networkObject) + "] " + msg, net));
+                        }
                     }
-                });
+                }
             }
         }
     }
@@ -191,10 +196,9 @@ public class IRCUtils {
     }
 
     public static void sendGlobal(String message, User user) {
-        for (NetRecord network : Registry.NetworkName) {
-            sendNetworkGlobal(message, network.getNetwork(), user, true);
-        }
-
+        Iterator iterator = Registry.NetworkName.keySet().iterator();
+        while (iterator.hasNext())
+            sendNetworkGlobal(message, (PircBotX) iterator.next(), user, true);
     }
 
     public static void sendNetworkGlobal(String message, PircBotX network, User user, boolean isGlobal) {
@@ -349,30 +353,11 @@ public class IRCUtils {
 
 
     public static PircBotX getBotByNetworkName(String name) {
-        for (NetRecord d : Registry.NetworkName) {
-            if (d.getProperty().equalsIgnoreCase(name)) {
-                return d.getNetwork();
-            }
-        }
-        return null;
+        return Registry.NetworkBot.get(name);
     }
 
     public static String getNetworkNameByNetwork(PircBotX network) {
-        for (NetRecord d : Registry.NetworkName) {
-            if (d.getNetwork().equals(network)) {
-                return d.getProperty();
-            }
-        }
-        return null;
-    }
-
-    public static NetRecord getNetPropertyByNetwork(PircBotX network) {
-        for (NetRecord d : Registry.NetworkName) {
-            if (d.getNetwork().equals(network)) {
-                return d;
-            }
-        }
-        return null;
+        return Registry.NetworkName.get(network);
     }
 
     public static Channel getMsgChannel(Channel channel, boolean isPrivate) {
