@@ -29,14 +29,15 @@ public class Drop extends IRCCommand {
         Record account = DatabaseUtils.getAccount(authedUser);
         if (Registry.encryptor.checkPassword(args[0] + account.getValue(ACCOUNTS.RANDOMSTRING), account.getValue(ACCOUNTS.PASSWORD))) {
             for (NetRecord e : Registry.NetworkName) {
-                if (PermUtils.isAccountEnabled(e.getNetwork())) {
-                    if (authedUser != null) {
+                if (authedUser != null) {
+                    if (PermUtils.isAccountEnabled(e.getNetwork())) {
                         Registry.AuthedUsers.remove(PermUtils.getAuthedUser(network, authedUser));
                         DatabaseUtils.removeNetworkUserPropertyByUser(e.getProperty(), authedUser);
                         DatabaseUtils.removeChannelUserPropertyByUser(e.getProperty(), authedUser);
                     }
                 }
             }
+            DatabaseUtils.removeAccount(authedUser);
             IRCUtils.sendMessage(user, network, channel, "Your account is now dropped", prefix);
             IRCUtils.sendLogChanMsg(network, "[ACCOUNT DROPPED] " + GeneralUtils.replaceVowelsWithAccents(user.getNick()));
         } else {

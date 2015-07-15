@@ -14,7 +14,7 @@ import static com.techcavern.wavetactdb.Tables.NETWORKUSERPROPERTY;
 public class NetworkUserProperty extends IRCCommand {
 
     public NetworkUserProperty() {
-        super(GeneralUtils.toArray("networkuserproperty netuserprop nup"), 18, "networkuserproperty (+)(-)[user] [property] (value)", "creates, modifies or removes network-user properties", true);
+        super(GeneralUtils.toArray("networkuserproperty netuserprop nup"), 18, "networkuserproperty (+)(-)[user] [property] (value)", "creates, modifies or removes network-user properties", false);
     }
 
     @Override
