@@ -30,10 +30,9 @@ public class Search extends IRCCommand {
         if (results.size() > 0) {
             if (results.size() - 1 >= ArrayIndex) {
                 String title = results.get(ArrayIndex).getAsJsonObject().get("titleNoFormatting").getAsString();
-                String content = results.get(ArrayIndex).getAsJsonObject().get("content").getAsString().replaceAll("<.*?>", "").replaceAll("&.*?;", "");
+                String content = GeneralUtils.stripHTML(results.get(ArrayIndex).getAsJsonObject().get("content").getAsString());
                 String url = results.get(ArrayIndex).getAsJsonObject().get("unescapedUrl").getAsString();
                 IRCUtils.sendMessage(user, network, channel, "[" + title + "] " + content + " - " + GeneralUtils.shortenURL(url), prefix);
-
             } else {
                 ArrayIndex = ArrayIndex + 1;
                 ErrorUtils.sendError(user, "Search #" + ArrayIndex + " does not exist");
