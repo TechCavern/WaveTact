@@ -7,7 +7,6 @@ package com.techcavern.wavetact.ircCommands.netadmin;
 
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.objects.NetMessage;
 import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
@@ -42,6 +41,6 @@ public class Nick extends IRCCommand {
             server.setValue(SERVERS.NICK, args[0]);
             DatabaseUtils.updateServer(server);
         }
-        Registry.MessageQueue.add(new NetMessage("NICK :" + args[0], network));
+        Registry.messageQueue.get(network).add("NICK :" + args[0]);
     }
 }

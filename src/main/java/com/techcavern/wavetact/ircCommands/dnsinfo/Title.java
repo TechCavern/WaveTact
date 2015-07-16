@@ -31,7 +31,7 @@ public class Title extends IRCCommand {
         if (!args[0].startsWith("http://") && !args[0].startsWith("https://")) {
             args[0] = "http://" + args[0];
         }
-        Document doc = Jsoup.connect(args[0]).userAgent(Registry.userAgent).get();
+        Document doc = Jsoup.connect(args[0]).userAgent(Registry.USER_AGENT).get();
         IRCUtils.sendMessage(user, network, channel, doc.title(), prefix);
     }
 }

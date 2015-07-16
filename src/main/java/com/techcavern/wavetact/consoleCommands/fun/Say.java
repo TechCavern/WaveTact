@@ -25,7 +25,7 @@ public class Say extends ConsoleCommand {
 
     @Override
     public void onCommand(String command, String[] args, CommandIO commandIO) throws Exception {
-        PircBotX network = IRCUtils.getBotByNetworkName(args[0]);
+        PircBotX network = IRCUtils.getNetworkByNetworkName(args[0]);
         String prefix = IRCUtils.getPrefix(network, args[1]);
         Channel chan;
         if (!prefix.isEmpty())

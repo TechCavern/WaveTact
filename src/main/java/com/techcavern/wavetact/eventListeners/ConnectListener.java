@@ -5,7 +5,6 @@
  */
 package com.techcavern.wavetact.eventListeners;
 
-import com.techcavern.wavetact.objects.NetMessage;
 import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.Registry;
@@ -36,7 +35,7 @@ public class ConnectListener extends ListenerAdapter {
             event.getBot().sendRaw().rawLine("PRIVMSG " + NickServNick + " :" + NickServCommand);
         }
         TimeUnit.SECONDS.sleep(10);
-        Registry.MessageQueue.addAll(Arrays.asList(StringUtils.split(DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(event.getBot())).getValue(SERVERS.CHANNELS), ", ")).stream().map(channel -> new NetMessage("JOIN :" + channel, event.getBot())).collect(Collectors.toList()));
+        Registry.messageQueue.get(event.getBot()).addAll(Arrays.asList(StringUtils.split(DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(event.getBot())).getValue(SERVERS.CHANNELS), ", ")).stream().map(channel -> ("JOIN :" + channel)).collect(Collectors.toList()));
         TimeUnit.SECONDS.sleep(10);
         ListenerManager listenerManager = event.getBot().getConfiguration().getListenerManager();
         listenerManager.addListener(new ChanMsgListener());

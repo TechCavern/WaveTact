@@ -1,6 +1,5 @@
 package com.techcavern.wavetact.utils;
 
-import com.techcavern.wavetact.objects.AuthedUser;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -18,7 +17,7 @@ public class PermUtils {
             case "nickserv":
                 return getNickServAccountName(network, userObject, hostmask);
             case "account":
-                return getAuthedUser(network, userObject, hostmask);
+                return getAuthedUser(network, hostmask);
             default:
                 return hostmask;
         }
@@ -34,38 +33,23 @@ public class PermUtils {
     }
 
     public static String getNickServAccountName(PircBotX network, String userObject, String hostmask) { //calls getAccoutName() IF its not already found in get AuthedUser
-        String userString = getAuthedUser(network, userObject, hostmask);
+        String userString = getAuthedUser(network, hostmask);
         if (userString == null) {
             userString = getAccountName(network, userObject);
             if (userString != null)
-                Registry.AuthedUsers.add(new AuthedUser(IRCUtils.getNetworkNameByNetwork(network), userString, hostmask));
+                Registry.authedUsers.get(network).put(hostmask, userString);
         }
         return userString;
     }
 
-    public static String getAuthedUser(PircBotX network, String userObject, String hostmask) { //gets Authenticated Account Name found in the Authed User db.
-        String userString = null;
-        for (AuthedUser user : Registry.AuthedUsers) {
-            if (user.getAuthHostmask().equals(hostmask) && user.getAuthNetwork().equals(IRCUtils.getNetworkNameByNetwork(network))) {
-                userString = user.getAuthAccount();
-            }
-        }
+    public static String getAuthedUser(PircBotX network, String hostmask) { //gets Authenticated Account Name found in the Authed User db.
+        String userString = Registry.authedUsers.get(network).get(hostmask);
         if (hostmask == null) {
             return null;
         } else {
             return userString;
         }
 
-    }
-
-    public static AuthedUser getAuthedUser(PircBotX network, String userObject) { //gets Authenticated User found in Authed User db
-        String hostmask = IRCUtils.getHostmask(network, userObject, true);
-        for (AuthedUser user : Registry.AuthedUsers) {
-            if (user.getAuthHostmask().equals(hostmask) && user.getAuthNetwork().equals(IRCUtils.getNetworkNameByNetwork(network))) {
-                return user;
-            }
-        }
-        return null;
     }
 
     @SuppressWarnings("unchecked")

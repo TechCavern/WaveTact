@@ -39,7 +39,7 @@ public class ListCommands extends IRCCommand {
             }
         }
         List<String> commands = new ArrayList<>();
-        for (IRCCommand cmd : Registry.IRCCommands) {
+        for (IRCCommand cmd : Registry.ircCommands) {
             if (cmd.getPermLevel() == permlevel)
                 commands.add(cmd.getCommand());
         }

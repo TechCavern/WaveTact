@@ -7,7 +7,6 @@ package com.techcavern.wavetact.ircCommands.netadmin;
 
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.objects.NetMessage;
 import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
@@ -42,6 +41,6 @@ public class Join extends IRCCommand {
             server.setValue(SERVERS.CHANNELS, DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(network)).getValue(SERVERS.CHANNELS) + ", " + args[0]);
             DatabaseUtils.updateServer(server);
         }
-        Registry.MessageQueue.add(new NetMessage("JOIN :" + args[0], network));
+        Registry.messageQueue.get(network).add("JOIN :" + args[0]);
     }
 }

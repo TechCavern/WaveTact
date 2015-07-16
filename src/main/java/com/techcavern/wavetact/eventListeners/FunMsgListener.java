@@ -42,8 +42,8 @@ public class FunMsgListener extends ListenerAdapter {
                             if (!arg.startsWith("https://") && !arg.startsWith("http://")) {
                                 arg = "http://" + arg;
                             }
-                            if (Registry.urlvalidator.isValid(arg)) {
-                                Document doc = Jsoup.connect(arg).userAgent(Registry.userAgent).get();
+                            if (Registry.urlValidator.isValid(arg)) {
+                                Document doc = Jsoup.connect(arg).userAgent(Registry.USER_AGENT).get();
                                 if (doc.location().contains("stop-irc-bullying.eu")) {
                                     if (IRCUtils.checkIfCanKick(event.getChannel(), event.getBot(), event.getUser())) {
                                         IRCUtils.sendKick(event.getBot().getUserBot(), event.getUser(), event.getBot(), event.getChannel(), "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻ [https://goo.gl/Tkb9dh]");

@@ -1,9 +1,7 @@
 package com.techcavern.wavetact.utils;
 
-import com.techcavern.wavetact.objects.CachedWhoisEvent;
 import com.techcavern.wavetact.objects.ConsoleCommand;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.objects.NetMessage;
 import org.apache.commons.lang3.StringUtils;
 import org.jooq.Record;
 import org.pircbotx.Channel;
@@ -24,45 +22,36 @@ import static com.techcavern.wavetactdb.Tables.NETWORKPROPERTY;
 public class IRCUtils {
     public static void setMode(Channel channelObject, PircBotX networkObject, String modeToSet, String hostmask) {
         if (hostmask != null) {
-            Registry.MessageQueue.add(new NetMessage("MODE " + channelObject.getName() + " " + modeToSet + " " + hostmask, networkObject));
+            Registry.messageQueue.get(networkObject).add("MODE " + channelObject.getName() + " " + modeToSet + " " + hostmask);
         } else {
-            Registry.MessageQueue.add(new NetMessage("MODE " + channelObject.getName() + " " + modeToSet, networkObject));
+            Registry.messageQueue.get(networkObject).add("MODE " + channelObject.getName() + " " + modeToSet);
         }
-    }
-
-    public static WhoisEvent getCachedWhoisEvent(PircBotX network, String userObject) {
-        for (CachedWhoisEvent event : Registry.WhoisEventCache) {
-            if (event.getNetwork().equals(network) && event.getUser().equals(userObject)) {
-                return event.getWhoisEvent();
-            }
-        }
-        return null;
     }
 
     public static WhoisEvent WhoisEvent(PircBotX network, String userObject, boolean useCache) {
-        WhoisEvent WhoisEvent = getCachedWhoisEvent(network, userObject);
+        WhoisEvent WhoisEvent = Registry.whoisEventCache.get(network).get(userObject);
         if (useCache) {
             if (WhoisEvent != null) {
                 return WhoisEvent;
-            } else if (Registry.LastWhois.equals(userObject)) {
+            } else if (Registry.lastWhois.equals(userObject)) {
                 int i = 0;
-                while (getCachedWhoisEvent(network, userObject) == null && i < 20) {
+                while (Registry.whoisEventCache.get(network).get(userObject) == null && i < 20) {
                     try {
                         TimeUnit.MILLISECONDS.sleep(100);
                     } catch (Exception e) {
                     }
                     i++;
                 }
-                if (getCachedWhoisEvent(network, userObject) != null)
-                    return getCachedWhoisEvent(network, userObject);
+                if (Registry.whoisEventCache.get(network).get(userObject) != null)
+                    return Registry.whoisEventCache.get(network).get(userObject);
             }
-            Registry.LastWhois = userObject;
+            Registry.lastWhois = userObject;
         } else if (WhoisEvent != null) {
-            Registry.WhoisEventCache.remove(WhoisEvent);
+            Registry.whoisEventCache.remove(WhoisEvent);
         }
         WaitForQueue waitForQueue = new WaitForQueue(network);
         try {
-            Registry.MessageQueue.add(new NetMessage("WHOIS " + userObject + " " + userObject, network));
+            Registry.messageQueue.get(network).add("WHOIS " + userObject + " " + userObject);
             WhoisEvent = waitForQueue.waitFor(WhoisEvent.class);
             waitForQueue.close();
         } catch (InterruptedException | NullPointerException ex) {
@@ -72,7 +61,7 @@ public class IRCUtils {
         if (WhoisEvent == null || !WhoisEvent.isExists() || !WhoisEvent.getNick().equals(userObject))
             return null;
         else
-            Registry.WhoisEventCache.add(new CachedWhoisEvent(WhoisEvent, network, userObject));
+            Registry.whoisEventCache.get(network).put(userObject, WhoisEvent);
         return WhoisEvent;
     }
 
@@ -81,13 +70,13 @@ public class IRCUtils {
             for (int i = 0; i < message.length(); i += 350) {
                 String messageToSend = message.substring(i, Math.min(message.length(), i + 350));
                 if (!messageToSend.isEmpty()) {
-                    Registry.MessageQueue.add(new NetMessage("PRIVMSG " + prefix + channelObject.getName() + " :" + messageToSend, networkObject));
+                    Registry.messageQueue.get(networkObject).add("PRIVMSG " + prefix + channelObject.getName() + " :" + messageToSend);
                     if (prefix.isEmpty())
                         sendRelayMessage(networkObject, channelObject, noPing(networkObject.getNick()) + ": " + message);
                 }
             }
         } else {
-            Registry.MessageQueue.add(new NetMessage("PRIVMSG " + userObject.getNick() + " :" + message, networkObject));
+            Registry.messageQueue.get(networkObject).add(("PRIVMSG " + userObject.getNick() + " :" + message));
         }
     }
 
@@ -96,7 +85,7 @@ public class IRCUtils {
             for (int i = 0; i < message.length(); i += 350) {
                 String messageToSend = message.substring(i, Math.min(message.length(), i + 350));
                 if (!messageToSend.isEmpty()) {
-                    Registry.MessageQueue.add(new NetMessage("KICK " + channelObject.getName() + " " + recipientObject.getNick() + " :" + messageToSend, networkObject));
+                    Registry.messageQueue.get(networkObject).add("KICK " + channelObject.getName() + " " + recipientObject.getNick() + " :" + messageToSend);
                     //       sendRelayMessage(networkObject, channelObject, "* " + userObject.getNick() + " kicks " + recipientObject.getNick() + " (" + messageToSend + ")");
                 }
             }
@@ -108,15 +97,15 @@ public class IRCUtils {
         if (prerec != null) {
             String chnname = prerec.getValue(NETWORKPROPERTY.VALUE);
             if (chnname != null && chnname.equalsIgnoreCase(channel.getName())) {
-                Iterator iterator = Registry.NetworkName.keySet().iterator();
+                Iterator iterator = Registry.networkName.keySet().iterator();
                 while (iterator.hasNext()) {
                     PircBotX net = (PircBotX) iterator.next();
                     if (net != networkObject) {
-                        Record rec = DatabaseUtils.getNetworkProperty(Registry.NetworkName.get(net), "relaychan");
+                        Record rec = DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(net), "relaychan");
                         if (rec != null) {
                             String relaychan = rec.getValue(NETWORKPROPERTY.VALUE);
                             if (relaychan != null)
-                                Registry.MessageQueue.add(new NetMessage("PRIVMSG " + relaychan + " :[" + getNetworkNameByNetwork(networkObject) + "] " + msg, net));
+                                Registry.messageQueue.get(net).add("PRIVMSG " + relaychan + " :[" + getNetworkNameByNetwork(networkObject) + "] " + msg);
                         }
                     }
                 }
@@ -126,11 +115,11 @@ public class IRCUtils {
 
     public static void sendAction(User userObject, PircBotX networkObject, Channel channelObject, String message, String prefix) {
         if (channelObject != null) {
-            Registry.MessageQueue.add(new NetMessage("PRIVMSG " + prefix + channelObject.getName() + " :\u0001ACTION " + message + "\u0001", networkObject));
+            Registry.messageQueue.get(networkObject).add("PRIVMSG " + prefix + channelObject.getName() + " :\u0001ACTION " + message + "\u0001");
             if (prefix.isEmpty())
                 sendRelayMessage(networkObject, channelObject, "* " + noPing(networkObject.getNick()) + " " + message);
         } else {
-            Registry.MessageQueue.add(new NetMessage("PRIVMSG " + userObject.getNick() + " :\u0001ACTION " + message + "\u0001", networkObject));
+            Registry.messageQueue.get(networkObject).add("PRIVMSG " + userObject.getNick() + " :\u0001ACTION " + message + "\u0001");
         }
     }
 
@@ -196,7 +185,7 @@ public class IRCUtils {
     }
 
     public static void sendGlobal(String message, User user) {
-        Iterator iterator = Registry.NetworkName.keySet().iterator();
+        Iterator iterator = Registry.networkName.keySet().iterator();
         while (iterator.hasNext())
             sendNetworkGlobal(message, (PircBotX) iterator.next(), user, true);
     }
@@ -276,7 +265,7 @@ public class IRCUtils {
 
 
     public static IRCCommand getGenericCommand(String Command) {
-        for (IRCCommand g : Registry.IRCCommands) {
+        for (IRCCommand g : Registry.ircCommands) {
             for (String commandid : g.getCommandID()) {
                 if (commandid.equalsIgnoreCase(Command)) {
                     return g;
@@ -340,7 +329,7 @@ public class IRCUtils {
     }
 
     public static ConsoleCommand getConsoleCommand(String Command) {
-        for (ConsoleCommand g : Registry.ConsoleCommands) {
+        for (ConsoleCommand g : Registry.consoleCommands) {
             for (String commandid : g.getCommandID()) {
                 if (commandid.equalsIgnoreCase(Command)) {
                     return g;
@@ -352,12 +341,12 @@ public class IRCUtils {
     }
 
 
-    public static PircBotX getBotByNetworkName(String name) {
-        return Registry.NetworkBot.get(name);
+    public static PircBotX getNetworkByNetworkName(String name) {
+        return Registry.networkBot.get(name);
     }
 
     public static String getNetworkNameByNetwork(PircBotX network) {
-        return Registry.NetworkName.get(network);
+        return Registry.networkName.get(network);
     }
 
     public static Channel getMsgChannel(Channel channel, boolean isPrivate) {
@@ -378,8 +367,8 @@ public class IRCUtils {
     public static String noPing(String original) {
         char[] originChars = original.toCharArray();
         for (int i = 0; i < originChars.length; i++) {
-            if (Registry.CharReplacements.get(String.valueOf(originChars[i])) != null) {
-                original = original.replaceFirst(String.valueOf(originChars[i]), Registry.CharReplacements.get(String.valueOf(originChars[i])));
+            if (Registry.charReplacements.get(String.valueOf(originChars[i])) != null) {
+                original = original.replaceFirst(String.valueOf(originChars[i]), Registry.charReplacements.get(String.valueOf(originChars[i])));
                 break;
             }
         }

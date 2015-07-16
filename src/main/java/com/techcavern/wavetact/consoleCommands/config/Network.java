@@ -3,7 +3,6 @@ package com.techcavern.wavetact.consoleCommands.config;
 import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.objects.CommandIO;
 import com.techcavern.wavetact.objects.ConsoleCommand;
-import com.techcavern.wavetact.objects.NetMessage;
 import com.techcavern.wavetact.utils.*;
 import org.jooq.Record;
 import org.pircbotx.PircBotX;
@@ -133,14 +132,10 @@ public class Network extends ConsoleCommand {
             DatabaseUtils.removeServer(args[0].replaceFirst("\\-", ""));
             DatabaseUtils.removeChannelUserPropertyByNetwork(args[0].replaceFirst("\\-", ""));
             DatabaseUtils.removeNetworkUserPropertyByNetwork(args[0].replaceFirst("\\-", ""));
-            PircBotX network = IRCUtils.getBotByNetworkName(args[0].replaceFirst("\\-", ""));
-            Registry.NetworkBot.remove(Registry.NetworkName.get(network));
-            Registry.NetworkName.remove(network);
-            for (NetMessage msg : Registry.MessageQueue) {
-                if (msg.getNetwork().equals(network)) {
-                    Registry.MessageQueue.remove(msg);
-                }
-            }
+            PircBotX network = IRCUtils.getNetworkByNetworkName(args[0].replaceFirst("\\-", ""));
+            Registry.networkBot.remove(IRCUtils.getNetworkNameByNetwork(network));
+            Registry.networkName.remove(network);
+            Registry.messageQueue.remove(network);
             network.stopBotReconnect();
             network.sendIRC().quitServer();
             commandIO.getPrintStream().println("network removed");
@@ -194,8 +189,8 @@ public class Network extends ConsoleCommand {
             DatabaseUtils.addServer(name, port, server, nick, channels, bindhost, netadminaccess, netadmins, authtype, nickservcommand, serverpass, nickservnick);
             PircBotX network = ConfigUtils.createNetwork(serverpass, nick, server, port, bindhost, name);
             Registry.WaveTact.addNetwork(network);
-            Registry.NetworkName.put(network, name);
-            Registry.NetworkBot.put(name, network);
+            Registry.networkName.put(network, name);
+            Registry.networkBot.put(name, network);
             LoadUtils.addMessageQueue(network);
         }
     }

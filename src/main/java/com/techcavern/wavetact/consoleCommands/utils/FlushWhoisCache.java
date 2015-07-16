@@ -15,7 +15,7 @@ public class FlushWhoisCache extends ConsoleCommand {
 
     @Override
     public void onCommand(String command, String[] args, CommandIO commandIO) throws Exception {
-        Registry.WhoisEventCache.clear();
+        Registry.whoisEventCache.clear();
     }
 
 }

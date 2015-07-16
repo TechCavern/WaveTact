@@ -86,7 +86,7 @@ public class MCServerInfo extends IRCCommand {
         byte[] bits = new byte[length];
         in.readFully(bits);
         JsonObject response = new JsonParser().parse(new String(bits)).getAsJsonObject();
-        String gameVersion = "Version: " + response.get("version").getAsJsonObject().get("name").getAsString();
+        String gameVersion = "VERSION: " + response.get("version").getAsJsonObject().get("name").getAsString();
         String motd = "MOTD: " + response.get("description").getAsString();
         String playercount = "Players: " + response.get("players").getAsJsonObject().get("online").getAsString() + "/" + response.get("players").getAsJsonObject().get("max").getAsString();
         IRCUtils.sendMessage(user, network, channel, "[" + address.getHostString() + ":" + port + "] " + gameVersion + " - " + motd + " - " + playercount, prefix);

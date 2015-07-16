@@ -21,7 +21,7 @@ public class BasicCommands extends IRCCommand {
         command = command.toLowerCase();
         switch (command) {
             case "version":
-                IRCUtils.sendMessage(user, network, channel, Registry.Version, prefix);
+                IRCUtils.sendMessage(user, network, channel, Registry.VERSION, prefix);
                 break;
             case "potato":
                 IRCUtils.sendAction(user, network, channel, "is a potato", prefix);

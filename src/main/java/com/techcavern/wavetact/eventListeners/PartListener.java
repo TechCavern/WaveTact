@@ -19,8 +19,8 @@ import java.util.concurrent.TimeUnit;
 public class PartListener extends ListenerAdapter {
     public void onPart(PartEvent event) throws Exception {
         IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), IRCUtils.noPing(event.getUser().getNick()) + " left " + event.getChannel().getName() + " (" + event.getReason() + ")");
-        if (Registry.LastLeftChannel.equals(event.getChannel().getName())) {
-            Registry.LastLeftChannel = "";
+        if (Registry.lastLeftChannel.equals(event.getChannel().getName())) {
+            Registry.lastLeftChannel = "";
         } else if (event.getUser().getNick().equals(event.getBot().getNick())) {
             int tries = 0;
             do {

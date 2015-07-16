@@ -22,7 +22,7 @@ public class Insult extends IRCCommand {
 
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        Document doc = Jsoup.connect("http://www.insultgenerator.org/").userAgent(Registry.userAgent).get();
+        Document doc = Jsoup.connect("http://www.insultgenerator.org/").userAgent(Registry.USER_AGENT).get();
         String c = doc.select(".wrap").text();
         int chance = new Random().nextInt(10);
         if (args.length < 1 || args[0].equalsIgnoreCase(network.getNick()))

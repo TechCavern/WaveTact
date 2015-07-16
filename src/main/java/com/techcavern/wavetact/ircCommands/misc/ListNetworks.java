@@ -23,23 +23,23 @@ public class ListNetworks extends IRCCommand {
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         List<String> networks = new ArrayList<>();
-        for (PircBotX net : Registry.NetworkName.keySet()) {
+        for (PircBotX net : Registry.networkName.keySet()) {
             if (args.length < 1) {
-                networks.add(Registry.NetworkName.get(net));
+                networks.add(IRCUtils.getNetworkNameByNetwork(net));
             } else if (args[0].equalsIgnoreCase("connected")) {
                 if (net.getState().equals(PircBotX.State.CONNECTED))
-                    networks.add(Registry.NetworkName.get(net));
+                    networks.add(IRCUtils.getNetworkNameByNetwork(net));
             } else if (args[0].equalsIgnoreCase("disconnected")) {
                 if (net.getState().equals(PircBotX.State.DISCONNECTED))
-                    networks.add(Registry.NetworkName.get(net));
+                    networks.add(IRCUtils.getNetworkNameByNetwork(net));
             } else {
-                networks.add(Registry.NetworkName.get(net));
+                networks.add(IRCUtils.getNetworkNameByNetwork(net));
             }
         }
         if (networks.isEmpty())
             IRCUtils.sendMessage(user, network, channel, "No networks found" + networks, prefix);
         else
-            IRCUtils.sendMessage(user, network, channel, Registry.NetworkName.size() + " network(s) found with those network(s) being " + StringUtils.join(networks, ", "), prefix);
+            IRCUtils.sendMessage(user, network, channel, Registry.networkName.size() + " network(s) found with those network(s) being " + StringUtils.join(networks, ", "), prefix);
     }
 
 }

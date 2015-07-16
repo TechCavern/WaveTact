@@ -25,7 +25,7 @@ public class Connect extends ConsoleCommand {
         } else if (command.equalsIgnoreCase("disconnect")) {
             disconnect = true;
         }
-        PircBotX workingnetwork = IRCUtils.getBotByNetworkName(args[0]);
+        PircBotX workingnetwork = IRCUtils.getNetworkByNetworkName(args[0]);
         if (workingnetwork == null) {
             commandIO.getPrintStream().println("Network does not exist");
             return;

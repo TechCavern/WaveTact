@@ -31,7 +31,7 @@ public class Attack extends IRCCommand {
         if (Something.toLowerCase().equalsIgnoreCase(network.getUserBot().getNick())) {
             Something = user.getNick();
         }
-        int randomint = RandomUtils.nextInt(0, Registry.Attacks.size());
-        IRCUtils.sendAction(user, network, channel, Registry.Attacks.get(randomint).replace("$*", Something), prefix);
+        int randomint = RandomUtils.nextInt(0, Registry.attacks.size());
+        IRCUtils.sendAction(user, network, channel, Registry.attacks.get(randomint).replace("$*", Something), prefix);
     }
 }

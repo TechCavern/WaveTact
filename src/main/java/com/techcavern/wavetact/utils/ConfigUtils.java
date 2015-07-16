@@ -19,8 +19,8 @@ public class ConfigUtils {
             network = createNetwork(server.getValue(SERVERS.SERVERPASS), server.getValue(SERVERS.NICK), server.getValue(SERVERS.SERVER), server.getValue(SERVERS.PORT), server.getValue(SERVERS.BINDHOST), server.getValue(SERVERS.NAME));
             if (network != null) {
                 Registry.WaveTact.addNetwork(network);
-                Registry.NetworkName.put(network, server.getValue(SERVERS.NAME));
-                Registry.NetworkBot.put(server.getValue(SERVERS.NAME), network);
+                Registry.networkName.put(network, server.getValue(SERVERS.NAME));
+                Registry.networkBot.put(server.getValue(SERVERS.NAME), network);
             }
         }
     }
@@ -30,7 +30,7 @@ public class ConfigUtils {
             DatabaseUtils.removeServer(networkname);
             System.out.println("Removing Server " + networkname);
             return null;
-        } else if (IRCUtils.getBotByNetworkName(networkname) != null) {
+        } else if (IRCUtils.getNetworkByNetworkName(networkname) != null) {
             DatabaseUtils.removeServer(networkname);
             System.out.println("Removing Server " + networkname);
             return null;
@@ -59,7 +59,7 @@ public class ConfigUtils {
         Net.setAutoReconnectDelay(20000);
         Net.setChannelPrefixes("#");
         Net.setUserLevelPrefixes("+%@&~!");
-        Net.setVersion(Registry.Version);
+        Net.setVersion(Registry.VERSION);
         Net.setAutoReconnect(true);
         return new PircBotX(Net.buildConfiguration());
     }

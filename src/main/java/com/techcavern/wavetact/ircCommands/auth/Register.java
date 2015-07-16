@@ -1,7 +1,6 @@
 package com.techcavern.wavetact.ircCommands.auth;
 
 import com.techcavern.wavetact.annot.IRCCMD;
-import com.techcavern.wavetact.objects.AuthedUser;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.*;
 import org.pircbotx.Channel;
@@ -40,7 +39,7 @@ public class Register extends IRCCommand {
         } else {
             String randomString = UUID.randomUUID().toString();
             DatabaseUtils.addAccount(userString, Registry.encryptor.encryptPassword(password + randomString), randomString);
-            Registry.AuthedUsers.add(new AuthedUser(IRCUtils.getNetworkNameByNetwork(network), userString, IRCUtils.getHostmask(network, user.getNick(), false)));
+            Registry.authedUsers.get(network).put(IRCUtils.getHostmask(network, user.getNick(), false), userString);
             IRCUtils.sendMessage(user, network, channel, "You are now registered", prefix);
             IRCUtils.sendLogChanMsg(network, "[REGISTRATION] " + IRCUtils.noPing(user.getNick()));
         }

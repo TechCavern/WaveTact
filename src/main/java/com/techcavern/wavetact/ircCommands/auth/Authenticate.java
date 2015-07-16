@@ -1,7 +1,6 @@
 package com.techcavern.wavetact.ircCommands.auth;
 
 import com.techcavern.wavetact.annot.IRCCMD;
-import com.techcavern.wavetact.objects.AuthedUser;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.*;
 import org.jooq.Record;
@@ -39,7 +38,7 @@ public class Authenticate extends IRCCommand {
         } else {
             Record account = DatabaseUtils.getAccount(userString);
             if (account != null && Registry.encryptor.checkPassword(password + account.getValue(ACCOUNTS.RANDOMSTRING), account.getValue(ACCOUNTS.PASSWORD))) {
-                Registry.AuthedUsers.add(new AuthedUser(IRCUtils.getNetworkNameByNetwork(network), userString, IRCUtils.getHostmask(network, user.getNick(), false)));
+                Registry.authedUsers.get(network).put(IRCUtils.getHostmask(network, user.getNick(), true), userString);
                 IRCUtils.sendMessage(user, network, channel, "Identification successful", prefix);
                 IRCUtils.sendLogChanMsg(network, "[AUTH SUCCESS] " + IRCUtils.noPing(user.getNick()));
             } else {

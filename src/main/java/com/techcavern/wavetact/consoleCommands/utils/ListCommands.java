@@ -20,7 +20,7 @@ public class ListCommands extends ConsoleCommand {
 
     @Override
     public void onCommand(String command, String[] args, CommandIO commandIO) throws Exception {
-        List<String> commands = Registry.ConsoleCommands.stream().map(ConsoleCommand::getCommand).collect(Collectors.toList());
+        List<String> commands = Registry.consoleCommands.stream().map(ConsoleCommand::getCommand).collect(Collectors.toList());
         Collections.sort(commands);
         commandIO.getPrintStream().println(StringUtils.join(commands, ", "));
     }
