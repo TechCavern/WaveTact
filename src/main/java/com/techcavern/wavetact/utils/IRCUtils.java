@@ -46,7 +46,7 @@ public class IRCUtils {
             }
             Registry.lastWhois = userObject;
         } else if (WhoisEvent != null) {
-            Registry.whoisEventCache.remove(WhoisEvent);
+            Registry.whoisEventCache.get(network).remove(WhoisEvent);
         }
         WaitForQueue waitForQueue = new WaitForQueue(network);
         try {
