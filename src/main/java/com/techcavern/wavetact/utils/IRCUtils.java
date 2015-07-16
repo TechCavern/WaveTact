@@ -1,6 +1,5 @@
 package com.techcavern.wavetact.utils;
 
-import com.techcavern.wavetact.objects.ConsoleCommand;
 import com.techcavern.wavetact.objects.IRCCommand;
 import org.apache.commons.lang3.StringUtils;
 import org.jooq.Record;
@@ -263,25 +262,12 @@ public class IRCUtils {
 
     }
 
-
-    public static IRCCommand getGenericCommand(String Command) {
-        for (IRCCommand g : Registry.ircCommands) {
-            for (String commandid : g.getCommandID()) {
-                if (commandid.equalsIgnoreCase(Command)) {
-                    return g;
-                }
-            }
-        }
-        return null;
-
-    }
-
     public static IRCCommand getCommand(String Command, String Network, String Channel) {
         IRCCommand cmd = getCustomCommand(Command, Network, Channel);
         if (cmd != null) {
             return cmd;
         } else {
-            return getGenericCommand(Command);
+            return Registry.ircCommands.get(Command);
         }
     }
 
@@ -326,18 +312,6 @@ public class IRCUtils {
             return new SimpleCommand();
         } else
             return null;
-    }
-
-    public static ConsoleCommand getConsoleCommand(String Command) {
-        for (ConsoleCommand g : Registry.consoleCommands) {
-            for (String commandid : g.getCommandID()) {
-                if (commandid.equalsIgnoreCase(Command)) {
-                    return g;
-                }
-            }
-        }
-        return null;
-
     }
 
 

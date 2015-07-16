@@ -2,7 +2,6 @@ package com.techcavern.wavetact.console;
 
 import com.techcavern.wavetact.objects.CommandIO;
 import com.techcavern.wavetact.objects.ConsoleCommand;
-import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.Registry;
 import org.apache.commons.lang3.ArrayUtils;
 import org.newsclub.net.unix.AFUNIXServerSocket;
@@ -23,7 +22,7 @@ public class ConsoleServer implements Runnable {
         try {
             String command = args[0].toLowerCase();
             args = ArrayUtils.remove(args, 0);
-            ConsoleCommand cmd = IRCUtils.getConsoleCommand(command);
+            ConsoleCommand cmd = Registry.consoleCommands.get(command);
             if (cmd != null) {
                 cmd.onCommand(command, args, commandIO);
             } else {

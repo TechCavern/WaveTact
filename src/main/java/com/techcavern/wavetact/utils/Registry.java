@@ -17,13 +17,15 @@ import java.util.concurrent.ForkJoinPool;
 
 public class Registry {
     public static final ForkJoinPool threadPool = new ForkJoinPool(20);
-    public static final List<IRCCommand> ircCommands = new ArrayList<>();
+    public static final Map<String, IRCCommand> ircCommands = new HashMap<>();
+    public static final List<IRCCommand> ircCommandList = new ArrayList<>();
+    public static final List<ConsoleCommand> consoleCommandList = new ArrayList<>();
     public static final Map<PircBotX, Map<String, String>> authedUsers = new ConcurrentHashMap<>();
     public static final List<String> attacks = new ArrayList<>();
     public static final List<String> eightBall = new ArrayList<>();
     public static final Map<String, String> charReplacements = new HashMap<>();
     public static final MultiBotManager WaveTact = new MultiBotManager();
-    public static final List<ConsoleCommand> consoleCommands = new ArrayList<>();
+    public static final Map<String, ConsoleCommand> consoleCommands = new HashMap<>();
     public static final StrongPasswordEncryptor encryptor = new StrongPasswordEncryptor();
     public static final Reflections wavetactReflection = new Reflections("com.techcavern.wavetact");
     public static final Map<PircBotX, String> networkName = new HashMap<>();

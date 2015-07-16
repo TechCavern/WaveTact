@@ -25,7 +25,7 @@ public class Help extends IRCCommand {
             if (args[0].equalsIgnoreCase("permissions")) {
                 IRCUtils.sendMessage(user, network, channel, "-2 = Ignored Completely, -1 = Commands Ignored, 0 = Everyone, 1 = Registered, 5 = Voiced/Trusted, 7 = Channel Half-Operator, 10 = Operator, 13 = Protected Channel Operator, 15 = Senior Channel Operator, 18 = Channel Administrator, 20 = Network Administrator", prefix);
             } else {
-                IRCCommand irCommand = IRCUtils.getGenericCommand(args[0]);
+                IRCCommand irCommand = IRCUtils.getCommand(args[0], IRCUtils.getNetworkNameByNetwork(network), channel.getName());
                 if (irCommand != null) {
                     IRCUtils.sendMessage(user, network, channel, "Variations: " + StringUtils.join(Arrays.asList(irCommand.getCommandID()), ", "), prefix);
                     String syntax = irCommand.getSyntax();

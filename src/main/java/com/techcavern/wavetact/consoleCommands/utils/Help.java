@@ -4,7 +4,7 @@ import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.objects.CommandIO;
 import com.techcavern.wavetact.objects.ConsoleCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.Registry;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
@@ -19,7 +19,7 @@ public class Help extends ConsoleCommand {
     @Override
     public void onCommand(String command, String[] args, CommandIO commandIO) throws Exception {
         if (args.length > 0) {
-            ConsoleCommand consolCommand = IRCUtils.getConsoleCommand(args[0]);
+            ConsoleCommand consolCommand = Registry.consoleCommands.get(args[0]);
             if (consolCommand != null) {
                 commandIO.getPrintStream().println("Variations: " + StringUtils.join(Arrays.asList(consolCommand.getCommandID()), ", "));
                 String syntax = consolCommand.getSyntax();

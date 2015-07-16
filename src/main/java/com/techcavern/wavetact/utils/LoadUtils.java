@@ -42,26 +42,16 @@ public class LoadUtils {
         Set<Class<?>> classes = Registry.wavetactReflection.getTypesAnnotatedWith(IRCCMD.class);
         for (Class<?> clss : classes) {
             try {
-                Registry.ircCommands.add(((IRCCommand) clss.newInstance()));
+                IRCCommand command = (IRCCommand) clss.newInstance();
+                Registry.ircCommandList.add(command);
+                String[] comids = command.getCommandID();
+                for (String comid : comids) {
+                    Registry.ircCommands.put(comid, command);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-    }
-
-    public static void checkDuplicateIRCCommands() {
-        for (IRCCommand g : Registry.ircCommands) {
-            for (String commandid : g.getCommandID()) {
-                for (IRCCommand subg : Registry.ircCommands) {
-                    for (String subcommandid : subg.getCommandID()) {
-                        if (commandid.equalsIgnoreCase(subcommandid) && subg.getCommand() != g.getCommand()) {
-                            System.out.println(g.getCommand() + " has a duplicate in " + subg.getCommand());
-                        }
-                    }
-                }
-            }
-        }
-        System.exit(0);
     }
 
     public static void removeDuplicateCustomCommands() {
@@ -70,11 +60,9 @@ public class LoadUtils {
         } else {
             DatabaseUtils.removeConfig("CURRENT_ITERATION");
             DatabaseUtils.addConfig("CURRENT_ITERATION", String.valueOf(Registry.CURRENT_ITERATION));
-            for (IRCCommand g : Registry.ircCommands) {
-                for (String commandid : g.getCommandID()) {
-                    DatabaseUtils.removeCustomCommand(commandid);
-                }
-            }
+            Registry.ircCommands.keySet().stream().forEach(commandid -> {
+                DatabaseUtils.removeCustomCommand(commandid);
+            });
         }
     }
 
@@ -82,7 +70,12 @@ public class LoadUtils {
         Set<Class<?>> classes = Registry.wavetactReflection.getTypesAnnotatedWith(ConCMD.class);
         for (Class<?> clss : classes) {
             try {
-                Registry.consoleCommands.add(((ConsoleCommand) clss.newInstance()));
+                ConsoleCommand command = (ConsoleCommand) clss.newInstance();
+                Registry.consoleCommandList.add(command);
+                String[] comids = command.getCommandID();
+                for (String comid : comids) {
+                    Registry.consoleCommands.put(comid, command);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }

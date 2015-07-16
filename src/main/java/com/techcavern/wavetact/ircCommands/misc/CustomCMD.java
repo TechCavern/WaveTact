@@ -55,20 +55,17 @@ public class CustomCMD extends IRCCommand {
         } else {
             cCommand = args[0];
         }
-        if (IRCUtils.getGenericCommand(cCommand) != null) {
-            ErrorUtils.sendError(user, "Command already exists");
-            return;
-        }
         Record customCommand = DatabaseUtils.getChannelCustomCommand(net, chan, cCommand);
         if (isModify && customCommand != null && userPermLevel >= customCommand.getValue(CUSTOMCOMMANDS.PERMLEVEL) && !customCommand.getValue(CUSTOMCOMMANDS.ISLOCKED)) {
             customCommand.setValue(CUSTOMCOMMANDS.PERMLEVEL, Integer.parseInt(args[1]));
+            customCommand.setValue(CUSTOMCOMMANDS.ISACTION, isAction);
             customCommand.setValue(CUSTOMCOMMANDS.VALUE, GeneralUtils.buildMessage(2, args.length, args).replace("\n", " "));
             DatabaseUtils.updateCustomCommand(customCommand);
             IRCUtils.sendMessage(user, network, channel, "Custom Command modified", prefix);
         } else if (isDelete && customCommand != null && userPermLevel >= customCommand.getValue(CUSTOMCOMMANDS.PERMLEVEL) && !customCommand.getValue(CUSTOMCOMMANDS.ISLOCKED)) {
             DatabaseUtils.removeCustomCommand(net, chan, cCommand);
             IRCUtils.sendMessage(user, network, channel, "Custom Command removed", prefix);
-        } else if (customCommand == null && IRCUtils.getGenericCommand(cCommand) == null && !isDelete && !isModify) {
+        } else if (customCommand == null && IRCUtils.getCommand(cCommand, net, chan) == null && !isDelete && !isModify) {
             DatabaseUtils.addCustomCommand(net, chan, cCommand, Integer.parseInt(args[1]), GeneralUtils.buildMessage(2, args.length, args).replace("\n", " "), false, isAction);
             IRCUtils.sendMessage(user, network, channel, "Custom Command added", prefix);
         } else {

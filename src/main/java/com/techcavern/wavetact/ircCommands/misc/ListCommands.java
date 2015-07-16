@@ -11,9 +11,9 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by jztech101 on 6/23/14.
@@ -38,11 +38,8 @@ public class ListCommands extends IRCCommand {
                 return;
             }
         }
-        List<String> commands = new ArrayList<>();
-        for (IRCCommand cmd : Registry.ircCommands) {
-            if (cmd.getPermLevel() == permlevel)
-                commands.add(cmd.getCommand());
-        }
+        final int fpermlevel = permlevel;
+        List<String> commands = Registry.ircCommandList.stream().filter(cmd -> cmd.getPermLevel() == fpermlevel).map(IRCCommand::getCommand).collect(Collectors.toList());
         if (commands.isEmpty()) {
             ErrorUtils.sendError(user, "No commands found with that perm level");
         } else {
