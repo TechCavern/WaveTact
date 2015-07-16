@@ -312,7 +312,9 @@ public class LoadUtils {
             public void run() {
                 try {
                     TimeUnit.MINUTES.sleep(30);
-                    Registry.whoisEventCache.clear();
+                    Registry.whoisEventCache.keySet().stream().forEach(net -> {
+                        Registry.whoisEventCache.get(net).clear();
+                    });
                 } catch (Exception e) {
 
                 }
