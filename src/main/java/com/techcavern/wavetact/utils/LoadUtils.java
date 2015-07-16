@@ -307,7 +307,7 @@ public class LoadUtils {
 
 
     public static void initializeAutoFlushWhoisCache() {
-        class MessageQueue implements Runnable {
+        class flushWhoisCache implements Runnable {
             @Override
             public void run() {
                 try {
@@ -321,7 +321,7 @@ public class LoadUtils {
             }
 
         }
-        Registry.threadPool.execute(new MessageQueue());
+        Registry.threadPool.execute(new flushWhoisCache());
     }
 
     public static void initializeBanQueue() {
