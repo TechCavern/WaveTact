@@ -26,11 +26,12 @@ public class KickListener extends ListenerAdapter {
         User user = event.getUser();
         if (event.getRecipient().getNick().equals(network.getNick())) {
             int tries = 0;
-            do {
+            event.getBot().sendIRC().joinChannel(channel.getName());
+            while (tries < 60 && !network.getUserBot().getChannels().contains(channel)) {
                 event.getBot().sendIRC().joinChannel(channel.getName());
                 tries++;
                 TimeUnit.SECONDS.sleep(5);
-            } while (tries < 60 && !network.getUserBot().getChannels().contains(channel));
+            }
             if (network.getUserBot().getChannels().contains(channel) && !user.getNick().equals(network.getNick())) {
                 if (IRCUtils.checkIfCanKick(channel, network, user)) {
                     IRCUtils.sendKick(network.getUserBot(), user, network, event.getChannel(), "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻");
