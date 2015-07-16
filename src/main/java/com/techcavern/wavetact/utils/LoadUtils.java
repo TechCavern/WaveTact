@@ -285,6 +285,9 @@ public class LoadUtils {
     }
 
     public static void addMessageQueue(PircBotX network) {
+        Registry.whoisEventCache.put(network, new HashMap<>());
+        Registry.authedUsers.put(network, new HashMap<>());
+        Registry.messageQueue.put(network, new LinkedList<>());
         class MessageQueue implements Runnable {
             @Override
             public void run() {
@@ -292,9 +295,6 @@ public class LoadUtils {
                     TimeUnit.SECONDS.sleep(30);
                 } catch (InterruptedException c) {
                 }
-                Registry.messageQueue.put(network, new LinkedList<>());
-                Registry.whoisEventCache.put(network, new HashMap<>());
-                Registry.authedUsers.put(network, new HashMap<>());
                 while (IRCUtils.getNetworkNameByNetwork(network) != null) {
                     try {
                         if (Registry.messageQueue.get(network).size() > 0) {
