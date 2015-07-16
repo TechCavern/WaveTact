@@ -12,12 +12,13 @@ import org.pircbotx.hooks.events.WhoisEvent;
 import org.reflections.Reflections;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ForkJoinPool;
 
 public class Registry {
     public static final ForkJoinPool threadPool = new ForkJoinPool(20);
     public static final List<IRCCommand> ircCommands = new ArrayList<>();
-    public static final Map<PircBotX, Map<String, String>> authedUsers = new HashMap<>();
+    public static final Map<PircBotX, Map<String, String>> authedUsers = new ConcurrentHashMap<>();
     public static final List<String> attacks = new ArrayList<>();
     public static final List<String> eightBall = new ArrayList<>();
     public static final Map<String, String> charReplacements = new HashMap<>();
@@ -27,7 +28,7 @@ public class Registry {
     public static final Reflections wavetactReflection = new Reflections("com.techcavern.wavetact");
     public static final Map<PircBotX, String> networkName = new HashMap<>();
     public static final Map<String, PircBotX> networkBot = new HashMap<>();
-    public static final Map<PircBotX, Map<String, WhoisEvent>> whoisEventCache = new HashMap<>();
+    public static final Map<PircBotX, Map<String, WhoisEvent>> whoisEventCache = new ConcurrentHashMap<>();
     public static final int CURRENT_ITERATION = 4;
     public static final ConsoleServer consoleServer = new ConsoleServer();
     public static final Map<PircBotX, Queue<String>> messageQueue = new HashMap<>();

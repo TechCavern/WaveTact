@@ -16,10 +16,10 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
 import static com.techcavern.wavetactdb.Tables.BANS;
@@ -259,8 +259,8 @@ public class LoadUtils {
         Iterator iterator = Registry.networkName.keySet().iterator();
         while (iterator.hasNext()) {
             PircBotX network = (PircBotX) iterator.next();
-            Registry.whoisEventCache.put(network, new HashMap<>());
-            Registry.authedUsers.put(network, new HashMap<>());
+            Registry.whoisEventCache.put(network, new ConcurrentHashMap<>());
+            Registry.authedUsers.put(network, new ConcurrentHashMap<>());
             Registry.messageQueue.put(network, new LinkedList<>());
             class MessageQueue implements Runnable {
                 @Override
@@ -285,8 +285,8 @@ public class LoadUtils {
     }
 
     public static void addMessageQueue(PircBotX network) {
-        Registry.whoisEventCache.put(network, new HashMap<>());
-        Registry.authedUsers.put(network, new HashMap<>());
+        Registry.whoisEventCache.put(network, new ConcurrentHashMap<>());
+        Registry.authedUsers.put(network, new ConcurrentHashMap<>());
         Registry.messageQueue.put(network, new LinkedList<>());
         class MessageQueue implements Runnable {
             @Override
