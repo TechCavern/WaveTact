@@ -9,7 +9,7 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
 import static com.techcavern.wavetactdb.Tables.ACCOUNTS;
-import static com.techcavern.wavetactdb.Tables.SERVERS;
+import static com.techcavern.wavetactdb.Tables.NETWORKS;
 
 @IRCCMD
 public class Drop extends IRCCommand {
@@ -21,7 +21,7 @@ public class Drop extends IRCCommand {
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (!PermUtils.isAccountEnabled(network)) {
-            ErrorUtils.sendError(user, "This network is set to " + DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(network)).getValue(SERVERS.AUTHTYPE) + " authentication");
+            ErrorUtils.sendError(user, "This network is set to " + DatabaseUtils.getNetwork(IRCUtils.getNetworkNameByNetwork(network)).getValue(NETWORKS.AUTHTYPE) + " authentication");
             return;
         }
         String authedUser = PermUtils.authUser(network, user.getNick());

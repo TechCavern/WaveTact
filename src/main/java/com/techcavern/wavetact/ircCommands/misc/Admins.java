@@ -10,7 +10,7 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-import static com.techcavern.wavetactdb.Tables.SERVERS;
+import static com.techcavern.wavetactdb.Tables.NETWORKS;
 
 @IRCCMD
 public class Admins extends IRCCommand {
@@ -21,7 +21,7 @@ public class Admins extends IRCCommand {
 
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        String[] admins = StringUtils.split(DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(network)).getValue(SERVERS.NETWORKADMINS), ",");
+        String[] admins = StringUtils.split(DatabaseUtils.getNetwork(IRCUtils.getNetworkNameByNetwork(network)).getValue(NETWORKS.NETWORKADMINS), ",");
         for (int i = 0; i < admins.length; i++) {
             admins[i] = IRCUtils.noPing(admins[i].replace(" ", ""));
         }

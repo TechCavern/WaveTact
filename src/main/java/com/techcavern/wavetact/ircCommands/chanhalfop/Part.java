@@ -18,7 +18,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import static com.techcavern.wavetactdb.Tables.SERVERS;
+import static com.techcavern.wavetactdb.Tables.NETWORKS;
 
 /**
  * @author jztech101
@@ -46,11 +46,11 @@ public class Part extends IRCCommand {
                 }
                 Registry.messageQueue.get(network).add("PART " + args[0]);
                 if (permanent) {
-                    Record networkRecord = DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(network));
-                    List<String> channels = new LinkedList<>(Arrays.asList(StringUtils.split(networkRecord.getValue(SERVERS.CHANNELS), ", ")));
+                    Record netRecord = DatabaseUtils.getNetwork(IRCUtils.getNetworkNameByNetwork(network));
+                    List<String> channels = new LinkedList<>(Arrays.asList(StringUtils.split(netRecord.getValue(NETWORKS.CHANNELS), ", ")));
                     channels.stream().filter(chan -> chan.equals(args[0])).forEach(channels::remove);
-                    networkRecord.setValue(SERVERS.CHANNELS, StringUtils.join(channels, ", "));
-                    DatabaseUtils.updateServer(networkRecord);
+                    netRecord.setValue(NETWORKS.CHANNELS, StringUtils.join(channels, ", "));
+                    DatabaseUtils.updateNetwork(netRecord);
                 }
             } else {
                 ErrorUtils.sendError(user, "Permission denied");

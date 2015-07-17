@@ -9,29 +9,29 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.charset.Charset;
 
-import static com.techcavern.wavetactdb.Tables.SERVERS;
+import static com.techcavern.wavetactdb.Tables.NETWORKS;
 
 
 public class ConfigUtils {
     public static void registerNetworks() {
         PircBotX network;
-        for (Record server : DatabaseUtils.getServers()) {
-            network = createNetwork(server.getValue(SERVERS.SERVERPASS), server.getValue(SERVERS.NICK), server.getValue(SERVERS.SERVER), server.getValue(SERVERS.PORT), server.getValue(SERVERS.BINDHOST), server.getValue(SERVERS.NAME));
-            if (network != null) {
+        for (Record netRecord : DatabaseUtils.getNetworks()) {
+            network = createNetwork(netRecord.getValue(NETWORKS.SERVERPASS), netRecord.getValue(NETWORKS.NICK), netRecord.getValue(NETWORKS.SERVER), netRecord.getValue(NETWORKS.PORT), netRecord.getValue(NETWORKS.BINDHOST), netRecord.getValue(NETWORKS.NAME));
+            if (netRecord != null) {
                 Registry.WaveTact.addNetwork(network);
-                Registry.networkName.put(network, server.getValue(SERVERS.NAME));
-                Registry.networkBot.put(server.getValue(SERVERS.NAME), network);
+                Registry.networkName.put(network, netRecord.getValue(NETWORKS.NAME));
+                Registry.networkBot.put(netRecord.getValue(NETWORKS.NAME), network);
             }
         }
     }
 
     public static PircBotX createNetwork(String serverpass, String nick, String server, int port, String bindhost, String networkname) {
         if (nick.isEmpty() || server.isEmpty()) {
-            DatabaseUtils.removeServer(networkname);
+            DatabaseUtils.removeNetwork(networkname);
             System.out.println("Removing Server " + networkname);
             return null;
         } else if (IRCUtils.getNetworkByNetworkName(networkname) != null) {
-            DatabaseUtils.removeServer(networkname);
+            DatabaseUtils.removeNetwork(networkname);
             System.out.println("Removing Server " + networkname);
             return null;
         }

@@ -16,7 +16,7 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-import static com.techcavern.wavetactdb.Tables.SERVERS;
+import static com.techcavern.wavetactdb.Tables.NETWORKS;
 
 
 /**
@@ -37,9 +37,9 @@ public class Join extends IRCCommand {
             permanent = true;
         }
         if (permanent) {
-            Record server = DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(network));
-            server.setValue(SERVERS.CHANNELS, DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(network)).getValue(SERVERS.CHANNELS) + ", " + args[0]);
-            DatabaseUtils.updateServer(server);
+            Record netRecord = DatabaseUtils.getNetwork(IRCUtils.getNetworkNameByNetwork(network));
+            netRecord.setValue(NETWORKS.CHANNELS, DatabaseUtils.getNetwork(IRCUtils.getNetworkNameByNetwork(network)).getValue(NETWORKS.CHANNELS) + ", " + args[0]);
+            DatabaseUtils.updateNetwork(netRecord);
         }
         Registry.messageQueue.get(network).add("JOIN :" + args[0]);
     }

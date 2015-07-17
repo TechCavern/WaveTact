@@ -17,7 +17,7 @@ import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-import static com.techcavern.wavetactdb.Tables.SERVERS;
+import static com.techcavern.wavetactdb.Tables.NETWORKS;
 
 
 /**
@@ -26,8 +26,8 @@ import static com.techcavern.wavetactdb.Tables.SERVERS;
 public class ConnectListener extends ListenerAdapter {
 
     public void onConnect(ConnectEvent event) throws Exception {
-        String NickServCommand = DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(event.getBot())).getValue(SERVERS.NICKSERVCOMMAND);
-        String NickServNick = DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(event.getBot())).getValue(SERVERS.NICKSERVNICK);
+        String NickServCommand = DatabaseUtils.getNetwork(IRCUtils.getNetworkNameByNetwork(event.getBot())).getValue(NETWORKS.NICKSERVCOMMAND);
+        String NickServNick = DatabaseUtils.getNetwork(IRCUtils.getNetworkNameByNetwork(event.getBot())).getValue(NETWORKS.NICKSERVNICK);
         if (NickServNick == null) {
             NickServNick = "NickServ";
         }
@@ -35,7 +35,7 @@ public class ConnectListener extends ListenerAdapter {
             event.getBot().sendRaw().rawLine("PRIVMSG " + NickServNick + " :" + NickServCommand);
         }
         TimeUnit.SECONDS.sleep(10);
-        Registry.messageQueue.get(event.getBot()).addAll(Arrays.asList(StringUtils.split(DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(event.getBot())).getValue(SERVERS.CHANNELS), ", ")).stream().map(channel -> ("JOIN :" + channel)).collect(Collectors.toList()));
+        Registry.messageQueue.get(event.getBot()).addAll(Arrays.asList(StringUtils.split(DatabaseUtils.getNetwork(IRCUtils.getNetworkNameByNetwork(event.getBot())).getValue(NETWORKS.CHANNELS), ", ")).stream().map(channel -> ("JOIN :" + channel)).collect(Collectors.toList()));
         TimeUnit.SECONDS.sleep(10);
         ListenerManager listenerManager = event.getBot().getConfiguration().getListenerManager();
         listenerManager.addListener(new ChanMsgListener());

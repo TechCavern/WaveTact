@@ -12,7 +12,7 @@ import static com.techcavern.wavetactdb.Tables.*;
 public class PermUtils {
 
     public static String getAccount(PircBotX network, String userObject, String hostmask) { //gets account of user using hostmask
-        String authtype = DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(network)).getValue(SERVERS.AUTHTYPE);
+        String authtype = DatabaseUtils.getNetwork(IRCUtils.getNetworkNameByNetwork(network)).getValue(NETWORKS.AUTHTYPE);
         switch (authtype) {
             case "nickserv":
                 return getNickServAccountName(network, userObject, hostmask);
@@ -73,7 +73,7 @@ public class PermUtils {
     }
 
     private static int getAutomaticPermLevel(User userObject, Channel channelObject) { //gets the Auto Detected Perm Level
-        if (userObject.isIrcop() && DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(userObject.getBot())).getValue(SERVERS.NETWORKADMINACCESS)) {
+        if (userObject.isIrcop() && DatabaseUtils.getNetwork(IRCUtils.getNetworkNameByNetwork(userObject.getBot())).getValue(NETWORKS.NETWORKADMINACCESS)) {
             return 20;
         } else if (channelObject.isOwner(userObject)) {
             return 15;
@@ -154,11 +154,11 @@ public class PermUtils {
     }
 
     public static boolean isAccountEnabled(PircBotX network) { //checks if account authentication is enabled
-        return DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(network)).getValue(SERVERS.AUTHTYPE).equalsIgnoreCase("account");
+        return DatabaseUtils.getNetwork(IRCUtils.getNetworkNameByNetwork(network)).getValue(NETWORKS.AUTHTYPE).equalsIgnoreCase("account");
     }
 
     public static boolean isNetworkAdmin(String account, String network) {
-        for (String c : StringUtils.split(DatabaseUtils.getServer(network).getValue(SERVERS.NETWORKADMINS), ", ")) {
+        for (String c : StringUtils.split(DatabaseUtils.getNetwork(network).getValue(NETWORKS.NETWORKADMINS), ", ")) {
             if (c.equalsIgnoreCase(account))
                 return true;
         }

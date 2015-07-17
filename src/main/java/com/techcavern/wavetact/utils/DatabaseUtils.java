@@ -199,25 +199,25 @@ public class DatabaseUtils {
         Registry.wavetactDB.delete(CHANNELUSERPROPERTY).where(CHANNELUSERPROPERTY.NETWORK.eq(network)).and(CHANNELUSERPROPERTY.USER.eq(user)).execute();
     }
 
-    public static Result<Record> getServers() {
-        return Registry.wavetactDB.select().from(SERVERS).fetch();
+    public static Result<Record> getNetworks() {
+        return Registry.wavetactDB.select().from(NETWORKS).fetch();
     }
 
-    public static Record getServer(String name) {
-        Result<Record> serverRecord = Registry.wavetactDB.select().from(SERVERS).where(SERVERS.NAME.eq(name)).fetch();
+    public static Record getNetwork(String name) {
+        Result<Record> serverRecord = Registry.wavetactDB.select().from(NETWORKS).where(NETWORKS.NAME.eq(name)).fetch();
         return getRecord(serverRecord);
     }
 
-    public static void updateServer(Record server) {
-        Registry.wavetactDB.update(SERVERS).set(server).where(SERVERS.NAME.eq(server.getValue(SERVERS.NAME))).execute();
+    public static void updateNetwork(Record server) {
+        Registry.wavetactDB.update(NETWORKS).set(server).where(NETWORKS.NAME.eq(server.getValue(NETWORKS.NAME))).execute();
     }
 
-    public static void removeServer(String name) {
-        Registry.wavetactDB.delete(SERVERS).where(SERVERS.NAME.eq(name)).execute();
+    public static void removeNetwork(String name) {
+        Registry.wavetactDB.delete(NETWORKS).where(NETWORKS.NAME.eq(name)).execute();
     }
 
-    public static void addServer(String name, int port, String server, String nick, String channels, String bindhost, boolean netadminaccess, String networkadmins, String authtype, String nickservcommand, String serverpass, String nickservnick) {
-        Registry.wavetactDB.insertInto(SERVERS).values(name, port, server, nick, channels, bindhost, netadminaccess, authtype, networkadmins, nickservcommand, serverpass, nickservnick).execute();
+    public static void addNetwork(String name, int port, String server, String nick, String channels, String bindhost, boolean netadminaccess, String networkadmins, String authtype, String nickservcommand, String serverpass, String nickservnick) {
+        Registry.wavetactDB.insertInto(NETWORKS).values(name, port, server, nick, channels, bindhost, netadminaccess, authtype, networkadmins, nickservcommand, serverpass, nickservnick).execute();
     }
 
     public static void addTellMessage(String network, String sender, String receiver, String message) {

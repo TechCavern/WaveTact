@@ -9,7 +9,7 @@ import org.pircbotx.PircBotX;
 
 import java.util.Scanner;
 
-import static com.techcavern.wavetactdb.Tables.SERVERS;
+import static com.techcavern.wavetactdb.Tables.NETWORKS;
 
 @ConCMD
 public class Network extends ConsoleCommand {
@@ -22,7 +22,7 @@ public class Network extends ConsoleCommand {
     public void onCommand(String command, String[] args, CommandIO commandIO) throws Exception {
         Scanner input = new Scanner(commandIO.getInputStream());
         if (args[0].startsWith("+")) {
-            Record network = DatabaseUtils.getServer(args[0].replaceFirst("\\+", ""));
+            Record network = DatabaseUtils.getNetwork(args[0].replaceFirst("\\+", ""));
             boolean viewonly = false;
             if (args.length < 3) {
                 viewonly = true;
@@ -32,87 +32,87 @@ public class Network extends ConsoleCommand {
                 switch (args[1].toLowerCase()) {
                     case "channels":
                         if (viewonly)
-                            commandIO.getPrintStream().println(network.getValue(SERVERS.CHANNELS));
+                            commandIO.getPrintStream().println(network.getValue(NETWORKS.CHANNELS));
                         else {
-                            network.setValue(SERVERS.CHANNELS, GeneralUtils.buildMessage(2, args.length, args));
+                            network.setValue(NETWORKS.CHANNELS, GeneralUtils.buildMessage(2, args.length, args));
                             isSuccess = true;
                         }
                         break;
                     case "server":
                         if (viewonly)
-                            commandIO.getPrintStream().println(network.getValue(SERVERS.SERVER));
+                            commandIO.getPrintStream().println(network.getValue(NETWORKS.SERVER));
                         else {
-                            network.setValue(SERVERS.SERVER, args[2]);
+                            network.setValue(NETWORKS.SERVER, args[2]);
                             isSuccess = true;
                         }
                         break;
                     case "port":
                         if (viewonly)
-                            commandIO.getPrintStream().println(network.getValue(SERVERS.PORT));
+                            commandIO.getPrintStream().println(network.getValue(NETWORKS.PORT));
                         else {
-                            network.setValue(SERVERS.PORT, Integer.parseInt(args[2]));
+                            network.setValue(NETWORKS.PORT, Integer.parseInt(args[2]));
                             isSuccess = true;
                         }
                         break;
                     case "nick":
                         if (viewonly)
-                            commandIO.getPrintStream().println(network.getValue(SERVERS.NICK));
+                            commandIO.getPrintStream().println(network.getValue(NETWORKS.NICK));
                         else {
-                            network.setValue(SERVERS.NICK, args[2]);
+                            network.setValue(NETWORKS.NICK, args[2]);
                             isSuccess = true;
                         }
                         break;
                     case "netadmins":
                         if (viewonly)
-                            commandIO.getPrintStream().println(network.getValue(SERVERS.NETWORKADMINS));
+                            commandIO.getPrintStream().println(network.getValue(NETWORKS.NETWORKADMINS));
                         else {
-                            network.setValue(SERVERS.NETWORKADMINS, GeneralUtils.buildMessage(2, args.length, args));
+                            network.setValue(NETWORKS.NETWORKADMINS, GeneralUtils.buildMessage(2, args.length, args));
                             isSuccess = true;
                         }
                         break;
                     case "bindhost":
                         if (viewonly)
-                            commandIO.getPrintStream().println(network.getValue(SERVERS.BINDHOST));
+                            commandIO.getPrintStream().println(network.getValue(NETWORKS.BINDHOST));
                         else {
-                            network.setValue(SERVERS.BINDHOST, args[2]);
+                            network.setValue(NETWORKS.BINDHOST, args[2]);
                             isSuccess = true;
                         }
                         break;
                     case "serverpass":
                         if (viewonly)
-                            commandIO.getPrintStream().println(network.getValue(SERVERS.SERVERPASS));
+                            commandIO.getPrintStream().println(network.getValue(NETWORKS.SERVERPASS));
                         else if (args[2].equalsIgnoreCase("null")) {
-                            network.setValue(SERVERS.SERVERPASS, null);
+                            network.setValue(NETWORKS.SERVERPASS, null);
                             isSuccess = true;
                         } else {
-                            network.setValue(SERVERS.SERVERPASS, args[2]);
+                            network.setValue(NETWORKS.SERVERPASS, args[2]);
                             isSuccess = true;
                         }
                         break;
                     case "nickservcommand":
                         if (viewonly)
-                            commandIO.getPrintStream().println(network.getValue(SERVERS.NICKSERVCOMMAND));
+                            commandIO.getPrintStream().println(network.getValue(NETWORKS.NICKSERVCOMMAND));
                         else if (args[2].equalsIgnoreCase("null")) {
-                            network.setValue(SERVERS.NICKSERVCOMMAND, null);
+                            network.setValue(NETWORKS.NICKSERVCOMMAND, null);
                             isSuccess = true;
                         } else {
-                            network.setValue(SERVERS.NICKSERVCOMMAND, GeneralUtils.buildMessage(2, args.length, args));
+                            network.setValue(NETWORKS.NICKSERVCOMMAND, GeneralUtils.buildMessage(2, args.length, args));
                             isSuccess = true;
                         }
                         break;
                     case "nickservnick":
                         if (viewonly)
-                            commandIO.getPrintStream().println(network.getValue(SERVERS.NICKSERVNICK));
+                            commandIO.getPrintStream().println(network.getValue(NETWORKS.NICKSERVNICK));
                         else {
-                            network.setValue(SERVERS.NICKSERVNICK, args[2]);
+                            network.setValue(NETWORKS.NICKSERVNICK, args[2]);
                             isSuccess = true;
                         }
                         break;
                     case "netadminaccess":
                         if (viewonly)
-                            commandIO.getPrintStream().println(network.getValue(SERVERS.NETWORKADMINACCESS));
+                            commandIO.getPrintStream().println(network.getValue(NETWORKS.NETWORKADMINACCESS));
                         else {
-                            network.setValue(SERVERS.NETWORKADMINACCESS, Boolean.valueOf(args[2]));
+                            network.setValue(NETWORKS.NETWORKADMINACCESS, Boolean.valueOf(args[2]));
                             isSuccess = true;
                         }
                         break;
@@ -120,7 +120,7 @@ public class Network extends ConsoleCommand {
                         commandIO.getPrintStream().println("Failed to parse property");
                 }
                 if (isSuccess) {
-                    DatabaseUtils.updateServer(network);
+                    DatabaseUtils.updateNetwork(network);
                     commandIO.getPrintStream().println("Property Modified");
                 }
 
@@ -129,7 +129,7 @@ public class Network extends ConsoleCommand {
             }
 
         } else if (args[0].startsWith("-")) {
-            DatabaseUtils.removeServer(args[0].replaceFirst("\\-", ""));
+            DatabaseUtils.removeNetwork(args[0].replaceFirst("\\-", ""));
             DatabaseUtils.removeChannelUserPropertyByNetwork(args[0].replaceFirst("\\-", ""));
             DatabaseUtils.removeNetworkUserPropertyByNetwork(args[0].replaceFirst("\\-", ""));
             PircBotX network = IRCUtils.getNetworkByNetworkName(args[0].replaceFirst("\\-", ""));
@@ -142,7 +142,7 @@ public class Network extends ConsoleCommand {
             network.sendIRC().quitServer();
             commandIO.getPrintStream().println("network removed");
         } else {
-            if (DatabaseUtils.getServer(args[0]) != null) {
+            if (DatabaseUtils.getNetwork(args[0]) != null) {
                 commandIO.getPrintStream().println("network already exists");
                 return;
             }
@@ -188,7 +188,7 @@ public class Network extends ConsoleCommand {
             String netadminsinput = input.nextLine();
             if (!netadminsinput.isEmpty())
                 netadmins = netadminsinput;
-            DatabaseUtils.addServer(name, port, server, nick, channels, bindhost, netadminaccess, netadmins, authtype, nickservcommand, serverpass, nickservnick);
+            DatabaseUtils.addNetwork(name, port, server, nick, channels, bindhost, netadminaccess, netadmins, authtype, nickservcommand, serverpass, nickservnick);
             PircBotX network = ConfigUtils.createNetwork(serverpass, nick, server, port, bindhost, name);
             Registry.networkName.put(network, name);
             Registry.networkBot.put(name, network);
