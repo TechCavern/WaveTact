@@ -62,7 +62,7 @@ public class CustomCMD extends IRCCommand {
             customCommand.setValue(CUSTOMCOMMANDS.VALUE, GeneralUtils.buildMessage(2, args.length, args).replace("\n", " "));
             DatabaseUtils.updateCustomCommand(customCommand);
 
-            IRCUtils.sendMessage(user, network, channel, GeneralUtils.buildMessage(2, args.length, args).replace("\n", " ") + "Custom Command modified", prefix);
+            IRCUtils.sendMessage(user, network, channel, "Custom Command modified", prefix);
         } else if (isDelete && customCommand != null && userPermLevel >= customCommand.getValue(CUSTOMCOMMANDS.PERMLEVEL) && !customCommand.getValue(CUSTOMCOMMANDS.ISLOCKED)) {
             DatabaseUtils.removeCustomCommand(net, chan, cCommand);
             IRCUtils.sendMessage(user, network, channel, "Custom Command removed", prefix);
