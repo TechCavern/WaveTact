@@ -29,12 +29,11 @@ import static com.techcavern.wavetactdb.Tables.CONFIG;
 
 public class GeneralUtils {
     public static String buildMessage(int startint, int finishint, String[] args) {
-        StringBuilder builder = new StringBuilder();
+        String message = "";
         for (int i = startint; i < finishint; i++) {
-            builder.append(args[i]);
-            builder.append(' ');
+            message += args[i] + " ";
         }
-        return builder.toString().trim();
+        return message;
     }
 
     public static String prism(String toprism) {
