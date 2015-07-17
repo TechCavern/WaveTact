@@ -8,15 +8,11 @@ import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
+import org.apache.http.client.fluent.Request;
+import org.apache.http.entity.ContentType;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 @IRCCMD
 public class MCAccountInfo extends IRCCommand {
@@ -27,25 +23,10 @@ public class MCAccountInfo extends IRCCommand {
 
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        URL url = new URL("https://api.mojang.com/profiles/minecraft");
-
-        String payload = "[\"" + args[0] + "\",\"egewewhewhwe\"]";
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setDoInput(true);
-        connection.setDoOutput(true);
-        connection.setRequestMethod("POST");
-        connection.setRequestProperty("Content-Type", "application/json");
-        OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream(), "UTF-8");
-        writer.write(payload);
-        writer.close();
-        BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-        String result = "";
-        String line;
-        while ((line = br.readLine()) != null) {
-            result += line.replaceAll("\n", " ") + "\n";
-        }
-        br.close();
-        connection.disconnect();
+        String result = Request.Post("https://api.mojang.com/profiles/minecraft")
+                .bodyString("[\"" + args[0] + "\",\"egewewhewhwe\"]", ContentType.APPLICATION_JSON)
+                .execute()
+                .returnContent().toString();
         JsonArray mcapipre = new JsonParser().parse(result).getAsJsonArray();
         if (mcapipre.size() > 0) {
             JsonObject mcapi = mcapipre.get(0).getAsJsonObject();
