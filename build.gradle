@@ -107,7 +107,10 @@ idea {
         downloadSources = true
     }
 }
-
+task copyDeps(type: Copy) {
+    from configurations.runtime
+    into 'build/lib'
+}
 jar {
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     manifest {
