@@ -26,7 +26,7 @@ public class PrivMsgListener extends ListenerAdapter {
     public void onPrivateMessage(PrivateMessageEvent event) throws Exception {
         class process implements Runnable {
             public void run() {
-                String[] message = StringUtils.split(Colors.removeFormattingAndColors(event.getMessage()), " ");
+                String[] message = StringUtils.split(Colors.removeFormatting(event.getMessage()), " ");
                 Record commandchar = DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "commandchar");
                 String privcommand = message[0].toLowerCase();
                 if (commandchar != null)

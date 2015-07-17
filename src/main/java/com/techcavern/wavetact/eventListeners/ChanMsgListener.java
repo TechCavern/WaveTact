@@ -30,7 +30,7 @@ public class ChanMsgListener extends ListenerAdapter {
                     IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), IRCUtils.noPing(event.getUser().getNick()) + ": " + event.getMessage());
 
                 //Begin Input Parsing
-                String[] message = StringUtils.split(Colors.removeFormattingAndColors(event.getMessage()), " ");
+                String[] message = StringUtils.split(Colors.removeFormatting(event.getMessage()), " ");
                 Record commandcharRecord = DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "commandchar");
                 String commandchar;
                 if (commandcharRecord == null) {
@@ -70,7 +70,7 @@ public class ChanMsgListener extends ListenerAdapter {
                     } else {
                         return;
                     }
-                    String[] relayedmessage = StringUtils.split(Colors.removeFormattingAndColors(startingmessage), " ");
+                    String[] relayedmessage = StringUtils.split(Colors.removeFormatting(startingmessage), " ");
                     if (relayedmessage[0].startsWith(commandchar)) {
                         String relayedcommand = StringUtils.replaceOnce(relayedmessage[0], DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "commandchar").getValue(NETWORKPROPERTY.VALUE), "");
                         relayedmessage = ArrayUtils.remove(relayedmessage, 0);
