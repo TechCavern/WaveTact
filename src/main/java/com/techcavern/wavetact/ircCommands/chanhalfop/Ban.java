@@ -19,13 +19,14 @@ import static com.techcavern.wavetactdb.Tables.CHANNELPROPERTY;
 public class Ban extends IRCCommand {
 
     public Ban() {
-        super(GeneralUtils.toArray("ban unban mute unmute"), 7, "ban (m) (+)[user][hostmask] (-)(+)(time)", "Bans a user for a specified period of time or 24 hours, if the first parameter is m, the ban will be a mute ban", true);
+        super(GeneralUtils.toArray("ban kban kickban unban mute unmute"), 7, "ban (m) (+)[user][hostmask] (-)(+)(time)", "Bans a user for a specified period of time or 24 hours, if the first parameter is m, the ban will be a mute ban", true);
     }
 
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         String hostmask;
         boolean isMute = false;
+        boolean isUser = false;
         if (command.contains("mute")) {
             isMute = true;
         }
@@ -50,6 +51,7 @@ public class Ban extends IRCCommand {
                 hostmask = args[0];
             }
         } else {
+            isUser = true;
             if (args[0].startsWith("+")) {
                 hostmask = IRCUtils.getHostmask(network, args[0].replaceFirst("\\+", ""), true);
             } else {
@@ -74,7 +76,10 @@ public class Ban extends IRCCommand {
                     } else {
                         BanRecord.setValue(BANS.TIME, GeneralUtils.getMilliSeconds(args[1].replace("+", "")));
                     }
-                    IRCUtils.sendMessage(user, network, channel, "Ban modified", prefix);
+                    if (isPrivate)
+                        IRCUtils.sendMessage(user, network, null, "Ban modified", prefix);
+                    else
+                        IRCUtils.sendMessage(user, network, channel, "Ban modified", prefix);
                 }
                 DatabaseUtils.updateBan(BanRecord);
             } else {
@@ -92,6 +97,9 @@ public class Ban extends IRCCommand {
                         DatabaseUtils.addBan(networkname, channel.getName(), hostmask, System.currentTimeMillis(), GeneralUtils.getMilliSeconds("30s"), isMute, ban);
                 }
                 IRCUtils.setMode(channel, network, "+" + ban, hostmask);
+                if ((command.equalsIgnoreCase("kban") || command.equalsIgnoreCase("kickban")) && isUser && channel.getUsersNicks().contains(args[0])) {
+                    IRCUtils.sendKick(user, IRCUtils.getUserByNick(network, args[0]), network, channel, "Your behavior is not conductive to the desired environment");
+                }
             } else {
                 ErrorUtils.sendError(user, "Ban already exists!");
             }
