@@ -23,6 +23,7 @@ sourceSets {
     }
 }
 
+
 dependencies {
     compile 'junit:junit:4.11'
     compile 'org.apache.commons:commons-lang3:3.3.2'
@@ -48,9 +49,9 @@ dependencies {
     compile 'com.kohlschutter.junixsocket:junixsocket-native-common:2.0.4'
     compile 'org.xerial:sqlite-jdbc:3.8.7'
 }
+
 buildscript {
     repositories {
-        mavenLocal()
         mavenCentral()
     }
     dependencies {
@@ -100,6 +101,13 @@ project.afterEvaluate {
     flywayClean.dependsOn -= testClasses
     flywayMigrate.dependsOn = [processResources, processTestResources]
 }
+idea {
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
+
 jar {
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     manifest {
