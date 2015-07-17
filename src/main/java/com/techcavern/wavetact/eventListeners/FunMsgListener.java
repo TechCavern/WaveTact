@@ -38,7 +38,7 @@ public class FunMsgListener extends ListenerAdapter {
                     String[] message = StringUtils.split(event.getMessage(), " ");
                     for (String arg : message) {
                         try {
-                            arg = Colors.removeFormatting(arg);
+                            arg = Colors.removeFormattingAndColors(arg);
                             if (!arg.startsWith("https://") && !arg.startsWith("http://")) {
                                 arg = "http://" + arg;
                             }

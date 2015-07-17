@@ -170,6 +170,14 @@ public class GeneralUtils {
         return input;
     }
 
+    public static String[] removeFormatting(String[] input) {
+        for (int i = 0; i < input.length; i++) {
+            input[i] = Colors.removeFormatting(input[i]);
+        }
+        return input;
+    }
+
+
     public static String[] toArray(String input) {
         return StringUtils.split(input, " ");
     }
