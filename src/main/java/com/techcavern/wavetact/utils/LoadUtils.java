@@ -311,7 +311,7 @@ public class LoadUtils {
             @Override
             public void run() {
                 try {
-                    TimeUnit.MINUTES.sleep(30);
+                    TimeUnit.HOURS.sleep(1);
                     Registry.whoisEventCache.keySet().stream().forEach(net -> {
                         Registry.whoisEventCache.get(net).clear();
                     });
