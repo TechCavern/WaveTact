@@ -19,8 +19,7 @@ public class ConfigUtils {
             network = createNetwork(netRecord.getValue(NETWORKS.SERVERPASS), netRecord.getValue(NETWORKS.NICK), netRecord.getValue(NETWORKS.SERVER), netRecord.getValue(NETWORKS.PORT), netRecord.getValue(NETWORKS.BINDHOST), netRecord.getValue(NETWORKS.NAME));
             if (netRecord != null) {
                 Registry.WaveTact.addNetwork(network);
-                Registry.networkName.put(network, netRecord.getValue(NETWORKS.NAME));
-                Registry.networkBot.put(netRecord.getValue(NETWORKS.NAME), network);
+                Registry.networks.put(netRecord.getValue(NETWORKS.NAME), network);
             }
         }
     }

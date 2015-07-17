@@ -109,12 +109,12 @@ public class GeneralUtils {
         return new JsonParser().parse(result).getAsJsonArray();
     }
 
-    public static String getIP(String input, PircBotX Bot, boolean IPv6Priority) {
+    public static String getIP(String input, PircBotX network, boolean IPv6Priority) {
         String IP = "";
         if (input.contains(".") || input.contains(":")) {
             IP = input;
         } else {
-            IP = IRCUtils.getHost(Bot, input);
+            IP = IRCUtils.getHost(network, input);
         }
         if (InetAddressUtils.isIPv4Address(IP) || InetAddressUtils.isIPv6Address(IP)) {
             return IP;

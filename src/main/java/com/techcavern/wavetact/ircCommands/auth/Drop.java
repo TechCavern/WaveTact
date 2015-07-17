@@ -28,12 +28,12 @@ public class Drop extends IRCCommand {
         Record account = DatabaseUtils.getAccount(authedUser);
         if (Registry.encryptor.checkPassword(args[0] + account.getValue(ACCOUNTS.RANDOMSTRING), account.getValue(ACCOUNTS.PASSWORD))) {
             if (authedUser != null) {
-                Registry.networkBot.keySet().stream().filter(net -> PermUtils.isAccountEnabled(IRCUtils.getNetworkByNetworkName(net))).forEach(net -> {
-                    Registry.authedUsers.get(IRCUtils.getNetworkByNetworkName(net)).keySet().stream().filter(key -> Registry.authedUsers.get(IRCUtils.getNetworkByNetworkName(net)).get(key).equals(authedUser)).forEach(key ->
-                                    Registry.authedUsers.get(IRCUtils.getNetworkByNetworkName(net)).remove(key)
+                Registry.networks.inverse().keySet().stream().filter(net -> PermUtils.isAccountEnabled(net)).forEach(net -> {
+                    Registry.authedUsers.get(net).keySet().stream().filter(key -> Registry.authedUsers.get(net).get(key).equals(authedUser)).forEach(key ->
+                                    Registry.authedUsers.get(net).remove(key)
                     );
-                    DatabaseUtils.removeNetworkUserPropertyByUser(net, authedUser);
-                    DatabaseUtils.removeChannelUserPropertyByUser(net, authedUser);
+                    DatabaseUtils.removeNetworkUserPropertyByUser(IRCUtils.getNetworkNameByNetwork(net), authedUser);
+                    DatabaseUtils.removeChannelUserPropertyByUser(IRCUtils.getNetworkNameByNetwork(net), authedUser);
                 });
                 DatabaseUtils.removeAccount(authedUser);
             }

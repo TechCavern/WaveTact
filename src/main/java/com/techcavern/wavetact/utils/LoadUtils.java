@@ -249,7 +249,7 @@ public class LoadUtils {
     }
 
     public static void initializeMessageQueue() {
-        Iterator iterator = Registry.networkName.keySet().iterator();
+        Iterator iterator = Registry.networks.inverse().keySet().iterator();
         while (iterator.hasNext()) {
             PircBotX network = (PircBotX) iterator.next();
             Registry.whoisEventCache.put(network, new ConcurrentHashMap<>());

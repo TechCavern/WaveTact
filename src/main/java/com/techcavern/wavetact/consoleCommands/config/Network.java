@@ -133,8 +133,7 @@ public class Network extends ConsoleCommand {
             DatabaseUtils.removeChannelUserPropertyByNetwork(args[0].replaceFirst("\\-", ""));
             DatabaseUtils.removeNetworkUserPropertyByNetwork(args[0].replaceFirst("\\-", ""));
             PircBotX network = IRCUtils.getNetworkByNetworkName(args[0].replaceFirst("\\-", ""));
-            Registry.networkBot.remove(IRCUtils.getNetworkNameByNetwork(network));
-            Registry.networkName.remove(network);
+            Registry.networks.inverse().remove(network);
             Registry.messageQueue.remove(network);
             Registry.authedUsers.remove(network);
             Registry.whoisEventCache.remove(network);
@@ -190,8 +189,7 @@ public class Network extends ConsoleCommand {
                 netadmins = netadminsinput;
             DatabaseUtils.addNetwork(name, port, server, nick, channels, bindhost, netadminaccess, netadmins, authtype, nickservcommand, serverpass, nickservnick);
             PircBotX network = ConfigUtils.createNetwork(serverpass, nick, server, port, bindhost, name);
-            Registry.networkName.put(network, name);
-            Registry.networkBot.put(name, network);
+            Registry.networks.put(name, network);
             LoadUtils.addMessageQueue(network);
             Registry.WaveTact.addNetwork(network);
         }

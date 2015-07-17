@@ -96,7 +96,7 @@ public class IRCUtils {
         if (prerec != null) {
             String chnname = prerec.getValue(NETWORKPROPERTY.VALUE);
             if (chnname != null && chnname.equalsIgnoreCase(channel.getName())) {
-                Iterator iterator = Registry.networkName.keySet().iterator();
+                Iterator iterator = Registry.networks.inverse().keySet().iterator();
                 while (iterator.hasNext()) {
                     PircBotX net = (PircBotX) iterator.next();
                     if (net != networkObject) {
@@ -184,7 +184,7 @@ public class IRCUtils {
     }
 
     public static void sendGlobal(String message, User user) {
-        Iterator iterator = Registry.networkName.keySet().iterator();
+        Iterator iterator = Registry.networks.inverse().keySet().iterator();
         while (iterator.hasNext())
             sendNetworkGlobal(message, (PircBotX) iterator.next(), user, true);
     }
@@ -316,11 +316,11 @@ public class IRCUtils {
 
 
     public static PircBotX getNetworkByNetworkName(String name) {
-        return Registry.networkBot.get(name);
+        return Registry.networks.get(name);
     }
 
     public static String getNetworkNameByNetwork(PircBotX network) {
-        return Registry.networkName.get(network);
+        return Registry.networks.inverse().get(network);
     }
 
     public static Channel getMsgChannel(Channel channel, boolean isPrivate) {

@@ -22,7 +22,7 @@ public class ListNetworks extends ConsoleCommand {
     @Override
     public void onCommand(String command, String[] args, CommandIO commandIO) throws Exception {
         List<String> networks = new ArrayList<>();
-        for (PircBotX net : Registry.networkName.keySet()) {
+        for (PircBotX net : Registry.networks.inverse().keySet()) {
             if (args.length < 1) {
                 networks.add(IRCUtils.getNetworkNameByNetwork(net));
             } else if (args[0].equalsIgnoreCase("connected")) {

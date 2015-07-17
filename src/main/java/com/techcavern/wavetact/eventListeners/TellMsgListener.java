@@ -25,17 +25,17 @@ import static com.techcavern.wavetactdb.Tables.TELLMESSAGES;
  * @author jztech101
  */
 public class TellMsgListener extends ListenerAdapter {
-    public static void TellMessageTrigger(PircBotX bot, User user, Channel channel, String prefix) {
-        String network = IRCUtils.getNetworkNameByNetwork(bot);
-        Result<Record> TellMessages = DatabaseUtils.getTellMessage(network, PermUtils.authUser(bot, user.getNick()));
+    public static void TellMessageTrigger(PircBotX network, User user, Channel channel, String prefix) {
+        String networkName = IRCUtils.getNetworkNameByNetwork(network);
+        Result<Record> TellMessages = DatabaseUtils.getTellMessage(networkName, PermUtils.authUser(network, user.getNick()));
         if (TellMessages != null && TellMessages.isNotEmpty()) {
             if (channel != null) {
-                IRCUtils.sendMessage(user, bot, channel, "[" + user.getNick() + "] - Someone sent you a latent message while you were away! Please Check your PMs", prefix);
+                IRCUtils.sendMessage(user, network, channel, "[" + user.getNick() + "] - Someone sent you a latent message while you were away! Please Check your PMs", prefix);
             }
             for (Record rec : TellMessages) {
-                IRCUtils.sendMessage(user, bot, null, "[" + rec.getValue(TELLMESSAGES.SENDER) + "] - " + rec.getValue(TELLMESSAGES.MESSAGE), null);
+                IRCUtils.sendMessage(user, network, null, "[" + rec.getValue(TELLMESSAGES.SENDER) + "] - " + rec.getValue(TELLMESSAGES.MESSAGE), null);
             }
-            DatabaseUtils.removeTellMessage(network, PermUtils.authUser(bot, user.getNick()));
+            DatabaseUtils.removeTellMessage(networkName, PermUtils.authUser(network, user.getNick()));
         }
     }
 

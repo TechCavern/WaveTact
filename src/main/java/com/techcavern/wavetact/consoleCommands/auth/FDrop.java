@@ -16,13 +16,13 @@ public class FDrop extends ConsoleCommand {
 
     @Override
     public void onCommand(String command, String[] args, CommandIO commandIO) {
-        Registry.networkBot.keySet().stream().filter(net -> PermUtils.isAccountEnabled(IRCUtils.getNetworkByNetworkName(net))).forEach(net -> {
-            String authedUser = PermUtils.getAuthedUser(IRCUtils.getNetworkByNetworkName(net), IRCUtils.getHostmask(IRCUtils.getNetworkByNetworkName(net), args[0], true));
-            Registry.authedUsers.get(IRCUtils.getNetworkByNetworkName(net)).keySet().stream().filter(key -> Registry.authedUsers.get(IRCUtils.getNetworkByNetworkName(net)).get(key).equals(authedUser)).forEach(key ->
-                            Registry.authedUsers.get(IRCUtils.getNetworkByNetworkName(net)).remove(key)
+        Registry.networks.inverse().keySet().stream().filter(net -> PermUtils.isAccountEnabled(net)).forEach(net -> {
+            String authedUser = PermUtils.getAuthedUser((net), IRCUtils.getHostmask(net, args[0], true));
+            Registry.authedUsers.get(net).keySet().stream().filter(key -> Registry.authedUsers.get(net).get(key).equals(authedUser)).forEach(key ->
+                            Registry.authedUsers.get(net).remove(key)
             );
-            DatabaseUtils.removeNetworkUserPropertyByUser(net, authedUser);
-            DatabaseUtils.removeChannelUserPropertyByUser(net, authedUser);
+            DatabaseUtils.removeNetworkUserPropertyByUser(IRCUtils.getNetworkNameByNetwork(net), authedUser);
+            DatabaseUtils.removeChannelUserPropertyByUser(IRCUtils.getNetworkNameByNetwork(net), authedUser);
         });
         Record account = DatabaseUtils.getAccount(args[0]);
         if (account != null) {
