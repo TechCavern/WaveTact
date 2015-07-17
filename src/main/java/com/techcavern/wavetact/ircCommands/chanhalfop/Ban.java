@@ -94,7 +94,7 @@ public class Ban extends IRCCommand {
                     if (autounban != null)
                         DatabaseUtils.addBan(networkname, channel.getName(), hostmask, System.currentTimeMillis(), GeneralUtils.getMilliSeconds(autounban.getValue(CHANNELPROPERTY.VALUE)), isMute, ban);
                     else
-                        DatabaseUtils.addBan(networkname, channel.getName(), hostmask, System.currentTimeMillis(), GeneralUtils.getMilliSeconds("30s"), isMute, ban);
+                        DatabaseUtils.addBan(networkname, channel.getName(), hostmask, System.currentTimeMillis(), GeneralUtils.getMilliSeconds("12h"), isMute, ban);
                 }
                 IRCUtils.setMode(channel, network, "+" + ban, hostmask);
                 if ((command.equalsIgnoreCase("kban") || command.equalsIgnoreCase("kickban")) && isUser && channel.getUsersNicks().contains(args[0])) {

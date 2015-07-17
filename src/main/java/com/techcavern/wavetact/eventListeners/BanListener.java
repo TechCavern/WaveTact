@@ -25,7 +25,7 @@ public class BanListener extends ListenerAdapter {
             public void run() {
                 String banMask = event.getMode();
                 String network = IRCUtils.getNetworkNameByNetwork(event.getBot());
-                if (event.getUser() == null || DatabaseUtils.getChannelProperty(network, event.getChannel().getName(), "autounban") == null || DatabaseUtils.getChannelProperty(network, event.getChannel().getName(), "autounban").getValue(CHANNELPROPERTY.VALUE) == null ||
+                if (event.getUser() == null ||
                         event.getUser().getNick().equalsIgnoreCase(event.getBot().getNick()) || !(event.getChannel().isHalfOp(event.getBot().getUserBot()) ||
                         event.getChannel().isOp(event.getBot().getUserBot()) || event.getChannel().isSuperOp(event.getBot().getUserBot())
                         || event.getChannel().isOwner(event.getBot().getUserBot()))) {
@@ -40,6 +40,9 @@ public class BanListener extends ListenerAdapter {
                 } else if (banMask.startsWith("-")) {
                     ban = false;
                     banMask = banMask.replaceFirst("-", "");
+                }
+                if (ban && (DatabaseUtils.getChannelProperty(network, event.getChannel().getName(), "autounban") == null || DatabaseUtils.getChannelProperty(network, event.getChannel().getName(), "autounban").getValue(CHANNELPROPERTY.VALUE) == null)) {
+                    return;
                 }
                 if (banMask.startsWith("q ") && event.getBot().getServerInfo().getChannelModes().contains("q")) {
                     type = "q ";
