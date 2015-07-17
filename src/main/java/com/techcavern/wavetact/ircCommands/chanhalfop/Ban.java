@@ -98,7 +98,7 @@ public class Ban extends IRCCommand {
                 }
                 IRCUtils.setMode(channel, network, "+" + ban, hostmask);
                 if ((command.equalsIgnoreCase("kban") || command.equalsIgnoreCase("kickban")) && isUser && channel.getUsersNicks().contains(args[0])) {
-                    IRCUtils.sendKick(user, IRCUtils.getUserByNick(network, args[0]), network, channel, "[" + user.getNick() + "] Banned");
+                    IRCUtils.sendKick(user, IRCUtils.getUserByNick(network, args[0]), network, channel, "[" + user.getNick() + "] Banned - Your behavior is not conductive to the desired environment");
                 }
             } else {
                 ErrorUtils.sendError(user, "Ban already exists!");
