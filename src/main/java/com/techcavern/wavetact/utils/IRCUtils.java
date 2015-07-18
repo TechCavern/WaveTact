@@ -51,7 +51,7 @@ public class IRCUtils {
         WaitForQueue waitForQueue = new WaitForQueue(network);
         try {
             Registry.messageQueue.get(network).add("WHOIS " + userObject + " " + userObject);
-            WhoisEvent = waitForQueue.waitFor(WhoisEvent.class);
+            WhoisEvent = waitForQueue.waitFor(WhoisEvent.class, 1000, TimeUnit.MILLISECONDS);
             waitForQueue.close();
         } catch (InterruptedException | NullPointerException ex) {
             ex.printStackTrace();
