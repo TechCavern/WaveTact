@@ -20,12 +20,17 @@ public class Tell extends IRCCommand {
         Record relaybotsplit = DatabaseUtils.getChannelUserProperty(IRCUtils.getNetworkNameByNetwork(network), channel.getName(), PermUtils.authUser(network, user.getNick()), "relaybotsplit");
         if (relaybotsplit == null) {
             String sender = PermUtils.authUser(network, user.getNick());
-            String recipent = PermUtils.authUser(network, args[0]);
-            if (recipent == null) {
+            String recipient;
+            if (Registry.authedUsers.get(network).keySet().stream().filter(key -> Registry.authedUsers.get(network).get(key).equals(args[0].toLowerCase())).toArray().length > 0) {
+                recipient = args[0].toLowerCase();
+            } else {
+                recipient = PermUtils.authUser(network, args[0]);
+            }
+            if (recipient == null) {
                 ErrorUtils.sendError(user, "Recipient must be identified");
                 return;
             }
-            DatabaseUtils.addTellMessage(IRCUtils.getNetworkNameByNetwork(network), sender, recipent, GeneralUtils.buildMessage(1, args.length, args));
+            DatabaseUtils.addTellMessage(IRCUtils.getNetworkNameByNetwork(network), sender, recipient, GeneralUtils.buildMessage(1, args.length, args));
             IRCUtils.sendMessage(user, network, channel, "Latent Message Sent", prefix);
         }
     }
