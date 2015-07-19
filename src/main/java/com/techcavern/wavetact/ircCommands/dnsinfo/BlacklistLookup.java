@@ -42,7 +42,7 @@ public class BlacklistLookup extends IRCCommand {
         }
         String[] IPString = StringUtils.split(BeforeIP, ".");
         String IP = "";
-        for (int i = IPString.length - 1; i > -1; i--) {
+        for (int i = IPString.length - 1; i >= 0; i--) {
             if (IP.isEmpty()) {
                 IP = IPString[i];
             } else {

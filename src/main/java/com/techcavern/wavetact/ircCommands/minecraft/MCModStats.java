@@ -24,7 +24,7 @@ public class MCModStats extends IRCCommand {
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         JsonArray versions = GeneralUtils.getJsonArray("http://bot.notenoughmods.com/?json&count");
         List<String> mcModStats = new ArrayList<>();
-        for (int i = versions.size() - 1; i > 0; i--) {
+        for (int i = versions.size() - 1; i >= 0; i--) {
             int size = versions.get(i).getAsJsonObject().get("count").getAsInt();
             if (size > 10)
                 mcModStats.add(versions.get(i).getAsJsonObject().get("name").getAsString() + ": " + size + " mods");
