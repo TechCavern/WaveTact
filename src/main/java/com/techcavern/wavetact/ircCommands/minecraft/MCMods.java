@@ -40,6 +40,7 @@ public class MCMods extends IRCCommand {
             if (size > 10) {
                 String version = versions.get(i).getAsJsonObject().get("name").getAsString();
                 JsonArray mods = GeneralUtils.getJsonArray("http://bot.notenoughmods.com/" + version + ".json");
+                JsonArray mods2 = GeneralUtils.getJsonArray("http://modlist.mcf.li/api/v3/" + version + ".json");
                 MCModSearch:
                 for (int j = 0; j < mods.size(); j++) {
                     JsonObject mod = mods.get(j).getAsJsonObject();
@@ -53,27 +54,56 @@ public class MCMods extends IRCCommand {
                     if (mod.get(searchPhrase).getAsString().toLowerCase().replaceAll("[^a-zA-Z0-9]", "").contains(modname)) {
                         mcmods.put(mod, version);
                     }
+                    }
+                McModSearch:
+                for (int j = 0; j < mods.size(); j++) {
+                    JsonObject mod = mods2.get(j).getAsJsonObject();
+                    if (mcmods.size() >= 3) {
+                        break MCModVersionSearch;
+                    }
+                    for (JsonObject o : mcmods.keySet()) {
+                        if (mod.get("name").getAsString().equalsIgnoreCase((o).get("name").getAsString()))
+                            continue McModSearch;
+                    }
+                    if (mod.get(searchPhrase).getAsString().toLowerCase().replaceAll("[^a-zA-Z0-9]", "").contains(modname)) {
+                        mcmods.put(mod, version);
+                    }
+                    }
                 }
             }
-        }
         if (mcmods.isEmpty()) {
             IRCUtils.sendError(user, network, channel, "No mods found", prefix);
         } else {
             for (JsonObject mod : mcmods.keySet()) {
-                String ModVersion;
-                if (isDev)
-                    ModVersion = mod.get("dev").getAsString();
-                else
-                    ModVersion = mod.get("version").getAsString();
+                boolean isNEM = true;
+                if (mod.get("version") == null) {
+                    isNEM = false;
+                }
+                String ModVersion = "";
+                if (isNEM) {
+                    if (isDev)
+                        ModVersion = " " + mod.get("dev").getAsString();
+                    else
+                        ModVersion = " " + mod.get("version").getAsString();
+                }
                 String Name = mod.get("name").getAsString();
-                String Link = mod.get("shorturl").getAsString();
-                if (Link.isEmpty())
-                    Link = mod.get("longurl").getAsString();
-                String Author = mod.get("author").getAsString();
-                if (Author.isEmpty())
-                    IRCUtils.sendMessage(user, network, channel, "[" + mcmods.get(mod) + "] " + Name + " " + ModVersion + " - " + Link, prefix);
+                String Link;
+                if (isNEM) {
+                    Link = mod.get("shorturl").getAsString();
+                    if (Link != null && Link.isEmpty())
+                        Link = mod.get("longurl").getAsString();
+                } else {
+                    Link = GeneralUtils.shortenURL(mod.get("link").getAsString());
+                }
+                String Author;
+                if (isNEM)
+                    Author = mod.get("author").getAsString();
                 else
-                    IRCUtils.sendMessage(user, network, channel, "[" + mcmods.get(mod) + "] " + Name + " " + ModVersion + " by " + Author + " - " + Link, prefix);
+                    Author = StringUtils.join(mod.get("author").getAsJsonArray(), ", ").replaceAll("\"", "");
+                if (Author.isEmpty())
+                    IRCUtils.sendMessage(user, network, channel, "[" + mcmods.get(mod) + "] " + Name + ModVersion + " - " + Link, prefix);
+                else
+                    IRCUtils.sendMessage(user, network, channel, "[" + mcmods.get(mod) + "] " + Name + ModVersion + " by " + Author + " - " + Link, prefix);
             }
         }
     }
