@@ -8,7 +8,6 @@ package com.techcavern.wavetact.ircCommands.dnsinfo;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.DatabaseUtils;
-import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -35,10 +34,10 @@ public class BlacklistLookup extends IRCCommand {
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         String BeforeIP = GeneralUtils.getIP(args[1], network, false);
         if (BeforeIP == null) {
-            ErrorUtils.sendError(user, "Invalid ip/user");
+            IRCUtils.sendError(user, "Invalid ip/user");
             return;
         } else if (BeforeIP.contains(":")) {
-            ErrorUtils.sendError(user, "IPv6 is not supported");
+            IRCUtils.sendError(user, "IPv6 is not supported");
             return;
         }
         String[] IPString = StringUtils.split(BeforeIP, ".");
@@ -54,7 +53,7 @@ public class BlacklistLookup extends IRCCommand {
         Resolver resolver = new SimpleResolver();
         Result<Record> blacklist = DatabaseUtils.getBlacklists(args[0]);
         if (blacklist.isEmpty()) {
-            ErrorUtils.sendError(user, "No " + args[0] + " blacklists found in database");
+            IRCUtils.sendError(user, "No " + args[0] + " blacklists found in database");
             return;
         }
         for (org.jooq.Record Blacklist : blacklist) {
@@ -62,7 +61,7 @@ public class BlacklistLookup extends IRCCommand {
             lookup.setResolver(resolver);
             lookup.setCache(null);
             org.xbill.DNS.Record[] records = lookup.run();
-            if (lookup.getResult() == lookup.SUCCESSFUL) {
+            if (lookup.getResult() == Lookup.SUCCESSFUL) {
                 IRCUtils.sendMessage(user, network, channel, BeforeIP + " found in " + Blacklist.getValue(BLACKLISTS.URL), prefix);
                 sent = true;
                 for (org.xbill.DNS.Record rec : records) {

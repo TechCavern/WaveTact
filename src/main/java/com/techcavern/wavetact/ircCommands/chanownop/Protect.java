@@ -7,7 +7,6 @@ package com.techcavern.wavetact.ircCommands.chanownop;
 
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.pircbotx.Channel;
@@ -37,7 +36,7 @@ public class Protect extends IRCCommand {
                 channel.send().superOp(user);
             }
         } else {
-            ErrorUtils.sendError(user, "This server does not support protected ops");
+            IRCUtils.sendError(user, "This server does not support protected ops");
         }
     }
 }

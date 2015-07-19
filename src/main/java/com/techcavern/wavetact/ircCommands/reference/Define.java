@@ -3,7 +3,6 @@ package com.techcavern.wavetact.ircCommands.reference;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.DatabaseUtils;
-import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.wordnik.client.api.WordApi;
@@ -32,7 +31,7 @@ public class Define extends IRCCommand {
         if (DatabaseUtils.getConfig("wordnikapikey") != null)
             wordnikapikey = DatabaseUtils.getConfig("wordnikapikey").getValue(CONFIG.VALUE);
         else {
-            ErrorUtils.sendError(user, "Wordnik api key is null - contact bot controller to fix");
+            IRCUtils.sendError(user, "Wordnik api key is null - contact bot controller to fix");
             return;
         }
         int ArrayIndex = 0;
@@ -54,10 +53,10 @@ public class Define extends IRCCommand {
                 }
             } else {
                 ArrayIndex = ArrayIndex + 1;
-                ErrorUtils.sendError(user, "Def #" + ArrayIndex + " does not exist");
+                IRCUtils.sendError(user, "Def #" + ArrayIndex + " does not exist");
             }
         } else {
-            ErrorUtils.sendError(user, "Not defined");
+            IRCUtils.sendError(user, "Not defined");
         }
 
     }

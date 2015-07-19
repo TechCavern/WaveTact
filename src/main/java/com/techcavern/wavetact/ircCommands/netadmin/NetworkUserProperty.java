@@ -2,7 +2,10 @@ package com.techcavern.wavetact.ircCommands.netadmin;
 
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.utils.*;
+import com.techcavern.wavetact.utils.DatabaseUtils;
+import com.techcavern.wavetact.utils.GeneralUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.PermUtils;
 import org.jooq.Record;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -40,7 +43,7 @@ public class NetworkUserProperty extends IRCCommand {
         if (auth != null) {
             account = auth;
         } else {
-            ErrorUtils.sendError(user, "User must be identified");
+            IRCUtils.sendError(user, "User must be identified");
             return;
         }
         Record networkUserProperty = DatabaseUtils.getNetworkUserProperty(networkname, account, args[1]);
@@ -61,7 +64,7 @@ public class NetworkUserProperty extends IRCCommand {
             DatabaseUtils.addNetworkUserProperty(networkname, account, args[1], args[2]);
             IRCUtils.sendMessage(user, network, IRCUtils.getMsgChannel(channel, isPrivate), "Property added", prefix);
         } else {
-            ErrorUtils.sendError(user, "property already exists (If you were adding) or property does not exist");
+            IRCUtils.sendError(user, "property already exists (If you were adding) or property does not exist");
         }
 
     }

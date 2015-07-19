@@ -3,7 +3,6 @@ package com.techcavern.wavetact.ircCommands.misc;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.DatabaseUtils;
-import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.pircbotx.Channel;
@@ -20,7 +19,7 @@ public class ShortenUrl extends IRCCommand {
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (DatabaseUtils.getConfig("googleapikey") == null) {
-            ErrorUtils.sendError(user, "Google API Key is null - Contact bot controller to fix");
+            IRCUtils.sendError(user, "Google API Key is null - Contact bot controller to fix");
             return;
         }
         String shortUrl = GeneralUtils.shortenURL(args[0]);

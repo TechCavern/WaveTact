@@ -7,7 +7,10 @@ package com.techcavern.wavetact.ircCommands.chanhalfop;
 
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.utils.*;
+import com.techcavern.wavetact.utils.DatabaseUtils;
+import com.techcavern.wavetact.utils.GeneralUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.Registry;
 import org.apache.commons.lang3.StringUtils;
 import org.jooq.Record;
 import org.pircbotx.Channel;
@@ -53,7 +56,7 @@ public class Part extends IRCCommand {
                     DatabaseUtils.updateNetwork(netRecord);
                 }
             } else {
-                ErrorUtils.sendError(user, "Permission denied");
+                IRCUtils.sendError(user, "Permission denied");
             }
         }
     }

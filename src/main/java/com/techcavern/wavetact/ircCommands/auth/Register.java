@@ -21,7 +21,7 @@ public class Register extends IRCCommand {
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (!PermUtils.isAccountEnabled(network)) {
-            ErrorUtils.sendError(user, "This network is set to " + DatabaseUtils.getNetwork(IRCUtils.getNetworkNameByNetwork(network)).getValue(NETWORKS.AUTHTYPE) + " authentication");
+            IRCUtils.sendError(user, "This network is set to " + DatabaseUtils.getNetwork(IRCUtils.getNetworkNameByNetwork(network)).getValue(NETWORKS.AUTHTYPE) + " authentication");
             return;
         }
         String userString;
@@ -34,7 +34,7 @@ public class Register extends IRCCommand {
             password = args[1];
         }
         if (DatabaseUtils.getAccount(userString) != null) {
-            ErrorUtils.sendError(user, "Error, account already exists!");
+            IRCUtils.sendError(user, "Error, account already exists!");
 
         } else {
             String randomString = UUID.randomUUID().toString();

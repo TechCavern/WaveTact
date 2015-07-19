@@ -5,7 +5,6 @@ import com.google.gson.JsonObject;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.DatabaseUtils;
-import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.pircbotx.Channel;
@@ -30,13 +29,13 @@ public class NowPlaying extends IRCCommand {
         if (DatabaseUtils.getConfig("lastfmapikey") != null)
             lastfmapikey = DatabaseUtils.getConfig("lastfmapikey").getValue(CONFIG.VALUE);
         else {
-            ErrorUtils.sendError(user, "Last.fm API key is not defined - Contact Bot Controller to fix.");
+            IRCUtils.sendError(user, "Last.fm API key is not defined - Contact Bot Controller to fix.");
             return;
         }
 
         JsonObject jsonObject = GeneralUtils.getJsonObject("http://ws.audioscrobbler.com/2.0/?format=json&method=user.getrecenttracks&api_key=" + lastfmapikey + "&user=" + args[0]);
         if (jsonObject.get("error") != null) {
-            ErrorUtils.sendError(user, "LastFM API returned an error: " + jsonObject.get("message").toString());
+            IRCUtils.sendError(user, "LastFM API returned an error: " + jsonObject.get("message").toString());
             return;
         }
 

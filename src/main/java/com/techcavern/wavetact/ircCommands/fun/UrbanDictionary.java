@@ -3,7 +3,6 @@ package com.techcavern.wavetact.ircCommands.fun;
 import com.google.gson.JsonObject;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.apache.commons.lang3.ArrayUtils;
@@ -39,10 +38,10 @@ public class UrbanDictionary extends IRCCommand {
                 }
             } else {
                 ArrayIndex = ArrayIndex + 1;
-                ErrorUtils.sendError(user, "Def #" + ArrayIndex + " does not exist");
+                IRCUtils.sendError(user, "Def #" + ArrayIndex + " does not exist");
             }
         } else {
-            ErrorUtils.sendError(user, "Not defined in the urban dictionary");
+            IRCUtils.sendError(user, "Not defined in the urban dictionary");
         }
 
     }

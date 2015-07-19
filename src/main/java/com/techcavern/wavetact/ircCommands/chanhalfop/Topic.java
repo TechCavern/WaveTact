@@ -8,7 +8,6 @@ package com.techcavern.wavetact.ircCommands.chanhalfop;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.DatabaseUtils;
-import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -38,7 +37,7 @@ public class Topic extends IRCCommand {
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         Record topicseparator = DatabaseUtils.getChannelProperty(IRCUtils.getNetworkNameByNetwork(network), channel.getName(), "topicseparator");
         if (topicseparator == null) {
-            ErrorUtils.sendError(user, "Please set the topic separator before using this command");
+            IRCUtils.sendError(user, "Please set the topic separator before using this command");
             return;
         }
         StringUtils.split(channel.getTopic(), topicseparator.getValue(CHANNELPROPERTY.VALUE));
@@ -65,7 +64,7 @@ public class Topic extends IRCCommand {
             if (oldTopic != null) {
                 channel.send().setTopic(oldTopic.getValue(CHANNELPROPERTY.VALUE));
             } else {
-                ErrorUtils.sendError(user, "Error: no reversal possible");
+                IRCUtils.sendError(user, "Error: no reversal possible");
             }
         } else {
             channel.send().setTopic(GeneralUtils.buildMessage(0, args.length, args));

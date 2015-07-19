@@ -7,7 +7,6 @@ import com.google.api.services.youtube.model.SearchResult;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.DatabaseUtils;
-import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.apache.commons.lang3.ArrayUtils;
@@ -33,7 +32,7 @@ public class Video extends IRCCommand {
         if (DatabaseUtils.getConfig("googleapikey") != null)
             googleapikey = DatabaseUtils.getConfig("googleapikey").getValue(CONFIG.VALUE);
         else {
-            ErrorUtils.sendError(user, "Google api key is null - contact bot controller to fix");
+            IRCUtils.sendError(user, "Google api key is null - contact bot controller to fix");
             return;
         }
         int ArrayIndex = 1;
@@ -64,10 +63,10 @@ public class Video extends IRCCommand {
                 else
                     IRCUtils.sendMessage(user, network, channel, title + " - " + content, prefix);
             } else {
-                ErrorUtils.sendError(user, "Search #" + ArrayIndex + " does not exist");
+                IRCUtils.sendError(user, "Search #" + ArrayIndex + " does not exist");
             }
         } else {
-            ErrorUtils.sendError(user, "Search returned no results");
+            IRCUtils.sendError(user, "Search returned no results");
         }
     }
 }

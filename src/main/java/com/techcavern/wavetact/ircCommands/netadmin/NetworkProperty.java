@@ -3,7 +3,6 @@ package com.techcavern.wavetact.ircCommands.netadmin;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.DatabaseUtils;
-import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.jooq.Record;
@@ -57,7 +56,7 @@ public class NetworkProperty extends IRCCommand {
             DatabaseUtils.addNetworkProperty(networkname, property, args[1]);
             IRCUtils.sendMessage(user, network, channel, "Property added", prefix);
         } else {
-            ErrorUtils.sendError(user, "property already exists (If you were adding) or property does not exist");
+            IRCUtils.sendError(user, "property already exists (If you were adding) or property does not exist");
         }
 
     }

@@ -7,7 +7,6 @@ package com.techcavern.wavetact.ircCommands.dnsinfo;
 
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -57,7 +56,7 @@ public class DNSInfo extends IRCCommand {
             isSuccessful = true;
         }
         if (!isSuccessful) {
-            ErrorUtils.sendError(user, "Invalid domain");
+            IRCUtils.sendError(user, "Invalid domain");
         }
 
     }

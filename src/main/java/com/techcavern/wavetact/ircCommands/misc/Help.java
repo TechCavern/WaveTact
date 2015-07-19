@@ -2,7 +2,6 @@ package com.techcavern.wavetact.ircCommands.misc;
 
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -33,7 +32,7 @@ public class Help extends IRCCommand {
                         IRCUtils.sendMessage(user, network, channel, "Syntax: " + syntax, prefix);
                     IRCUtils.sendMessage(user, network, channel, irCommand.getDesc(), prefix);
                 } else {
-                    ErrorUtils.sendError(user, "Command does not exist");
+                    IRCUtils.sendError(user, "Command does not exist");
                 }
             }
         } else {

@@ -7,7 +7,6 @@ package com.techcavern.wavetact.ircCommands.chanop;
 
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.pircbotx.Channel;
@@ -36,7 +35,7 @@ public class HalfOp extends IRCCommand {
                 channel.send().halfOp(user);
             }
         } else {
-            ErrorUtils.sendError(user, "This server does not support half ops");
+            IRCUtils.sendError(user, "This server does not support half ops");
         }
     }
 }

@@ -3,7 +3,6 @@ package com.techcavern.wavetact.ircCommands.dnsinfo;
 import com.google.gson.JsonObject;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.pircbotx.Channel;
@@ -36,7 +35,7 @@ public class FindIP extends IRCCommand {
         }
         String IP = GeneralUtils.getIP(nick, network, IPv6Priority);
         if (IP == null) {
-            ErrorUtils.sendError(user, "Please enter in an ip/user/domain as argument #1");
+            IRCUtils.sendError(user, "Please enter in an ip/user/domain as argument #1");
             return;
         }
         JsonObject objectJson = GeneralUtils.getJsonObject("http://ip-api.com/json/" + IP);
@@ -61,10 +60,10 @@ public class FindIP extends IRCCommand {
             if (!message.isEmpty()) {
                 IRCUtils.sendMessage(user, network, channel, "[" + IP + "] " + message, prefix);
             } else {
-                ErrorUtils.sendError(user, "Unable to determine location (or you entered an invalid ip)");
+                IRCUtils.sendError(user, "Unable to determine location (or you entered an invalid ip)");
             }
         } else {
-            ErrorUtils.sendError(user, "Unable to determine location (or you entered an invalid ip)");
+            IRCUtils.sendError(user, "Unable to determine location (or you entered an invalid ip)");
         }
 
 

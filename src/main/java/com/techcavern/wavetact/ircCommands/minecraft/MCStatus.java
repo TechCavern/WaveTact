@@ -2,7 +2,6 @@ package com.techcavern.wavetact.ircCommands.minecraft;
 
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.apache.commons.lang3.text.WordUtils;
@@ -31,7 +30,7 @@ public class MCStatus extends IRCCommand {
         if (result != null) {
             IRCUtils.sendMessage(user, network, channel, result, prefix);
         } else {
-            ErrorUtils.sendError(user, "MC status currently unavailable");
+            IRCUtils.sendError(user, "MC status currently unavailable");
         }
     }
 

@@ -3,7 +3,6 @@ package com.techcavern.wavetact.ircCommands.media;
 import com.google.gson.JsonArray;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.apache.commons.lang3.ArrayUtils;
@@ -36,10 +35,10 @@ public class Image extends IRCCommand {
 
             } else {
                 ArrayIndex = ArrayIndex + 1;
-                ErrorUtils.sendError(user, "Search #" + ArrayIndex + " does not exist");
+                IRCUtils.sendError(user, "Search #" + ArrayIndex + " does not exist");
             }
         } else {
-            ErrorUtils.sendError(user, "Search returned no results");
+            IRCUtils.sendError(user, "Search returned no results");
         }
     }
 }

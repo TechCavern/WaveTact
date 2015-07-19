@@ -3,7 +3,6 @@ package com.techcavern.wavetact.ircCommands.fun;
 import com.google.gson.JsonObject;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.apache.commons.lang3.RandomUtils;
@@ -28,7 +27,7 @@ public class Xkcd extends IRCCommand {
         if (args.length > 0) {
             comicnumber = Integer.parseInt(args[0]);
             if (latest < comicnumber) {
-                ErrorUtils.sendError(user, "Comic does not exist");
+                IRCUtils.sendError(user, "Comic does not exist");
                 return;
             }
         } else {
@@ -43,7 +42,7 @@ public class Xkcd extends IRCCommand {
             String title = comic.get("title").getAsString();
             IRCUtils.sendMessage(user, network, channel, "[" + num + "] " + date + " - " + title + " - " + GeneralUtils.shortenURL("http://xkcd.com/" + num), prefix);
         } catch (FileNotFoundException e) {
-            ErrorUtils.sendError(user, "Comic does not exist");
+            IRCUtils.sendError(user, "Comic does not exist");
         }
     }
 }

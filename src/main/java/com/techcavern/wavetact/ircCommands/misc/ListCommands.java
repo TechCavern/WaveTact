@@ -2,7 +2,6 @@ package com.techcavern.wavetact.ircCommands.misc;
 
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.Registry;
@@ -41,7 +40,7 @@ public class ListCommands extends IRCCommand {
         final int fpermlevel = permlevel;
         List<String> commands = Registry.ircCommandList.stream().filter(cmd -> cmd.getPermLevel() == fpermlevel).map(IRCCommand::getCommand).collect(Collectors.toList());
         if (commands.isEmpty()) {
-            ErrorUtils.sendError(user, "No commands found with that perm level");
+            IRCUtils.sendError(user, "No commands found with that perm level");
         } else {
             Collections.sort(commands);
             IRCUtils.sendMessage(user, network, channel, StringUtils.join(commands, ", "), prefix);

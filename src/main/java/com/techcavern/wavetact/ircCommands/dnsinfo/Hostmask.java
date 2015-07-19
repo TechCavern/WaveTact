@@ -2,7 +2,6 @@ package com.techcavern.wavetact.ircCommands.dnsinfo;
 
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.pircbotx.Channel;
@@ -34,7 +33,7 @@ public class Hostmask extends IRCCommand {
         if (hostmask != null) {
             IRCUtils.sendMessage(user, network, channel, hostmask, prefix);
         } else {
-            ErrorUtils.sendError(user, "User not found");
+            IRCUtils.sendError(user, "User not found");
         }
 
     }

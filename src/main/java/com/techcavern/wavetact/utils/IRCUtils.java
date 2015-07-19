@@ -348,5 +348,9 @@ public class IRCUtils {
         }
         return original;
     }
+
+    public static void sendError(User user, String error) {
+        user.send().notice(error);
+    }
 }
 

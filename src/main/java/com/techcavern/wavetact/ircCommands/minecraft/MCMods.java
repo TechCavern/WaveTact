@@ -4,7 +4,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.pircbotx.Channel;
@@ -53,7 +52,7 @@ public class MCMods extends IRCCommand {
             }
         }
         if (mcmods.isEmpty()) {
-            ErrorUtils.sendError(user, "No mods found");
+            IRCUtils.sendError(user, "No mods found");
         } else {
             for (JsonObject mod : mcmods.keySet()) {
                 String ModVersion;

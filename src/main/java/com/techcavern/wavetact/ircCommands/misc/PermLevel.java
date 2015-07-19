@@ -2,7 +2,6 @@ package com.techcavern.wavetact.ircCommands.misc;
 
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.PermUtils;
@@ -35,7 +34,7 @@ public class PermLevel extends IRCCommand {
         }
         userPermLevel = PermUtils.getPermLevel(network, userObject, chan);
         if (userObject == null) {
-            ErrorUtils.sendError(user, "User does not exist");
+            IRCUtils.sendError(user, "User does not exist");
         } else if (userPermLevel >= 20) {
             IRCUtils.sendMessage(user, network, channel, userObject + " is a Network Administrator!" + " (" + userPermLevel + ")", prefix);
         } else if (userPermLevel >= 18) {

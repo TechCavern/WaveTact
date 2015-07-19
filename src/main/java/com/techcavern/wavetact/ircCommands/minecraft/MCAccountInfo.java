@@ -5,7 +5,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.apache.http.client.fluent.Request;
@@ -42,7 +41,7 @@ public class MCAccountInfo extends IRCCommand {
             }
             IRCUtils.sendMessage(user, network, channel, "[" + User + "] " + "UUID: " + UUID + " - " + "Paid: " + Premium + " - " + "Mojang Account: " + Migrated, prefix);
         } else {
-            ErrorUtils.sendError(user, "User does not exist");
+            IRCUtils.sendError(user, "User does not exist");
         }
     }
 

@@ -2,7 +2,6 @@ package com.techcavern.wavetact.ircCommands.reference;
 
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.apache.commons.lang3.ArrayUtils;
@@ -51,9 +50,9 @@ public class Wiki extends IRCCommand {
         if (title != null && content != null) {
             IRCUtils.sendMessage(user, network, channel, "[" + title + "] " + content + " - " + GeneralUtils.shortenURL(userurl + title.replace(" ", urljoin)), prefix);
         } else if (ArrayIndex > 1) {
-            ErrorUtils.sendError(user, "Result #" + ArrayIndex + " does not exist");
+            IRCUtils.sendError(user, "Result #" + ArrayIndex + " does not exist");
         } else {
-            ErrorUtils.sendError(user, "No results found");
+            IRCUtils.sendError(user, "No results found");
         }
     }
 }

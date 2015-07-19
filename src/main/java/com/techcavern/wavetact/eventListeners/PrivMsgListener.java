@@ -6,7 +6,10 @@
 package com.techcavern.wavetact.eventListeners;
 
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.utils.*;
+import com.techcavern.wavetact.utils.DatabaseUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.PermUtils;
+import com.techcavern.wavetact.utils.Registry;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jooq.Record;
@@ -57,14 +60,14 @@ public class PrivMsgListener extends ListenerAdapter {
                                 try {
                                     Command.onCommand(privcommand, event.getUser(), event.getBot(), prefix, channel, true, userPermLevel, message);
                                 } catch (Exception e) {
-                                    ErrorUtils.sendError(event.getUser(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")");
+                                    IRCUtils.sendError(event.getUser(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")");
                                     e.printStackTrace();
                                 }
                             } else {
-                                ErrorUtils.sendError(event.getUser(), "Permission denied");
+                                IRCUtils.sendError(event.getUser(), "Permission denied");
                             }
                         } else {
-                            ErrorUtils.sendError(event.getUser(), "Please specify channel as argument #1 in front of all the other arguments");
+                            IRCUtils.sendError(event.getUser(), "Please specify channel as argument #1 in front of all the other arguments");
                         }
                     } else {
                         int userPermLevel = PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), null);
@@ -72,14 +75,14 @@ public class PrivMsgListener extends ListenerAdapter {
                             try {
                                 Command.onCommand(privcommand, event.getUser(), event.getBot(), null, null, true, userPermLevel, message);
                             } catch (Exception e) {
-                                ErrorUtils.sendError(event.getUser(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")");
+                                IRCUtils.sendError(event.getUser(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")");
                                 e.printStackTrace();
                             }
                         } else if (Command.getPermLevel() <= 5 && userPermLevel >= 1) {
                             try {
                                 Command.onCommand(privcommand, event.getUser(), event.getBot(), null, null, true, userPermLevel, message);
                             } catch (Exception e) {
-                                ErrorUtils.sendError(event.getUser(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")");
+                                IRCUtils.sendError(event.getUser(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")");
                                 e.printStackTrace();
                             }
                         } else {
@@ -87,11 +90,11 @@ public class PrivMsgListener extends ListenerAdapter {
                                 try {
                                     Command.onCommand(privcommand, event.getUser(), event.getBot(), null, null, true, userPermLevel, message);
                                 } catch (Exception e) {
-                                    ErrorUtils.sendError(event.getUser(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")");
+                                    IRCUtils.sendError(event.getUser(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")");
                                     e.printStackTrace();
                                 }
                             } else {
-                                ErrorUtils.sendError(event.getUser(), "Permission denied");
+                                IRCUtils.sendError(event.getUser(), "Permission denied");
                             }
                         }
                     }

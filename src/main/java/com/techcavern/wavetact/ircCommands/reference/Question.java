@@ -3,7 +3,6 @@ package com.techcavern.wavetact.ircCommands.reference;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.DatabaseUtils;
-import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.wolfram.alpha.*;
@@ -29,7 +28,7 @@ public class Question extends IRCCommand {
         if (DatabaseUtils.getConfig("wolframalphaapikey") != null)
             wolframalphaapikey = DatabaseUtils.getConfig("wolframalphaapikey").getValue(CONFIG.VALUE);
         else {
-            ErrorUtils.sendError(user, "Wolfram Alpha api key is null - contact bot controller to fix");
+            IRCUtils.sendError(user, "Wolfram Alpha api key is null - contact bot controller to fix");
             return;
         }
         int ArrayIndex = 1;
@@ -56,10 +55,10 @@ public class Question extends IRCCommand {
                     }
                 }
             } else {
-                ErrorUtils.sendError(user, "Answer #" + ArrayIndex + " does not exist");
+                IRCUtils.sendError(user, "Answer #" + ArrayIndex + " does not exist");
             }
         } else {
-            ErrorUtils.sendError(user, "Question returned no answers");
+            IRCUtils.sendError(user, "Question returned no answers");
         }
     }
 

@@ -2,7 +2,6 @@ package com.techcavern.wavetact.ircCommands.misc;
 
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.pircbotx.Channel;
@@ -25,7 +24,7 @@ public class IdleTime extends IRCCommand {
         }
         WhoisEvent event = IRCUtils.WhoisEvent(network, nick, false);
         if (event == null) {
-            ErrorUtils.sendError(user, "User does not exist");
+            IRCUtils.sendError(user, "User does not exist");
         } else {
             IRCUtils.sendMessage(user, network, channel, nick + " signed on " + GeneralUtils.getDateFromSeconds(event.getSignOnTime()), prefix);
             IRCUtils.sendMessage(user, network, channel, nick + " has been idle for " + GeneralUtils.getTimeFromSeconds((int) event.getIdleSeconds()), prefix);

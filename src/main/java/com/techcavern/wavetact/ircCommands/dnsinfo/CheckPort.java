@@ -2,7 +2,6 @@ package com.techcavern.wavetact.ircCommands.dnsinfo;
 
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.pircbotx.Channel;
@@ -44,7 +43,7 @@ public class CheckPort extends IRCCommand {
             //do nothing
         }
         if (IP == null) {
-            ErrorUtils.sendError(user, "Host Unreachable");
+            IRCUtils.sendError(user, "Host Unreachable");
         } else {
             try {
                 Socket socket = new Socket();

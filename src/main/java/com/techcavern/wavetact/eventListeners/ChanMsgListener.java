@@ -48,11 +48,11 @@ public class ChanMsgListener extends ListenerAdapter {
                             try {
                                 Command.onCommand(chancommand, event.getUser(), event.getBot(), IRCUtils.getPrefix(event.getBot(), event.getChannelSource()), event.getChannel(), false, userPermLevel, message);
                             } catch (Exception e) {
-                                ErrorUtils.sendError(event.getUser(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")");
+                                IRCUtils.sendError(event.getUser(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")");
                                 e.printStackTrace();
                             }
                         } else {
-                            ErrorUtils.sendError(event.getUser(), "Permission denied");
+                            IRCUtils.sendError(event.getUser(), "Permission denied");
                         }
                     }
                 } else {

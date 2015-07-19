@@ -7,7 +7,6 @@ package com.techcavern.wavetact.ircCommands.fun;
 
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.PermUtils;
@@ -53,7 +52,7 @@ public class Say extends IRCCommand {
                 IRCUtils.sendMessage(user, network, chan, "[" + IRCUtils.noPing(user.getNick()) + "] " + GeneralUtils.stripHTML(StringUtils.join(args, " ")), prefix);
             }
         } else {
-            ErrorUtils.sendError(user, "Permission denied");
+            IRCUtils.sendError(user, "Permission denied");
         }
     }
 }

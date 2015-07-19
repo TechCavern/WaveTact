@@ -3,7 +3,6 @@ package com.techcavern.wavetact.ircCommands.media;
 import com.google.gson.JsonObject;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -22,7 +21,7 @@ public class Movie extends IRCCommand {
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         JsonObject results = GeneralUtils.getJsonObject("http://www.omdbapi.com/?t=" + StringUtils.join(args, "%20") + "&y=&plot=full&r=json");
         if (results.get("Response").getAsString().equalsIgnoreCase("false")) {
-            ErrorUtils.sendError(user, "Search returned no results");
+            IRCUtils.sendError(user, "Search returned no results");
         } else {
             String response = "[" + results.get("Title").getAsString() + "]";
             String runtime = results.get("Runtime").getAsString();

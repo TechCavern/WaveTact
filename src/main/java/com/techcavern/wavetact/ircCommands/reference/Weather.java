@@ -4,7 +4,6 @@ import com.google.gson.JsonObject;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.DatabaseUtils;
-import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -27,7 +26,7 @@ public class Weather extends IRCCommand {
         if (DatabaseUtils.getConfig("wundergroundapikey") != null)
             wundergroundapikey = DatabaseUtils.getConfig("wundergroundapikey").getValue(CONFIG.VALUE);
         else {
-            ErrorUtils.sendError(user, "Wunderground api key is null - contact bot controller to fix");
+            IRCUtils.sendError(user, "Wunderground api key is null - contact bot controller to fix");
             return;
         }
         JsonObject weather = GeneralUtils.getJsonObject("http://api.wunderground.com/api/" + wundergroundapikey + "/conditions/q/" + StringUtils.join(args, "%20") + ".json").getAsJsonObject("current_observation");
@@ -39,7 +38,7 @@ public class Weather extends IRCCommand {
             String Wind = weather.get("wind_string").getAsString();
             IRCUtils.sendMessage(user, network, channel, "[" + City + "] " + Weather + " - " + Temp + " - " + Humidity + " - " + Wind, prefix);
         } else {
-            ErrorUtils.sendError(user, "Requested location not found");
+            IRCUtils.sendError(user, "Requested location not found");
         }
     }
 

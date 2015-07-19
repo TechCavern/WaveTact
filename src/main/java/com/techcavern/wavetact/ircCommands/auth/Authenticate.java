@@ -21,7 +21,7 @@ public class Authenticate extends IRCCommand {
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (!PermUtils.isAccountEnabled(network)) {
-            ErrorUtils.sendError(user, "This network is set to " + DatabaseUtils.getNetwork(IRCUtils.getNetworkNameByNetwork(network)).getValue(NETWORKS.AUTHTYPE) + " authentication");
+            IRCUtils.sendError(user, "This network is set to " + DatabaseUtils.getNetwork(IRCUtils.getNetworkNameByNetwork(network)).getValue(NETWORKS.AUTHTYPE) + " authentication");
             return;
         }
         String userString;
@@ -34,7 +34,7 @@ public class Authenticate extends IRCCommand {
             password = args[1];
         }
         if (PermUtils.authUser(network, user.getNick()) != null) {
-            ErrorUtils.sendError(user, "Error, you are already identified");
+            IRCUtils.sendError(user, "Error, you are already identified");
         } else {
             Record account = DatabaseUtils.getAccount(userString);
             if (account != null && Registry.encryptor.checkPassword(password + account.getValue(ACCOUNTS.RANDOMSTRING), account.getValue(ACCOUNTS.PASSWORD))) {
@@ -42,7 +42,7 @@ public class Authenticate extends IRCCommand {
                 IRCUtils.sendMessage(user, network, channel, "Identification successful", prefix);
                 IRCUtils.sendLogChanMsg(network, "[AUTH SUCCESS] " + IRCUtils.noPing(user.getNick()));
             } else {
-                ErrorUtils.sendError(user, "Unable to identify (incorrect user/password combination)");
+                IRCUtils.sendError(user, "Unable to identify (incorrect user/password combination)");
                 IRCUtils.sendLogChanMsg(network, "[AUTH FAILURE] " + IRCUtils.noPing(user.getNick()));
             }
         }

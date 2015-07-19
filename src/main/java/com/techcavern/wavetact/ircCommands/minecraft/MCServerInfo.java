@@ -4,7 +4,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.pircbotx.Channel;
@@ -75,12 +74,12 @@ public class MCServerInfo extends IRCCommand {
         GeneralUtils.readInputStream(in);
         int id = GeneralUtils.readInputStream(in);
         if (id != 0x00) {
-            ErrorUtils.sendError(user, "Error parsing packet response");
+            IRCUtils.sendError(user, "Error parsing packet response");
             return;
         }
         int length = GeneralUtils.readInputStream(in);
         if (length == 0 || length == -1) {
-            ErrorUtils.sendError(user, "Error parsing packet response");
+            IRCUtils.sendError(user, "Error parsing packet response");
             return;
         }
         byte[] bits = new byte[length];

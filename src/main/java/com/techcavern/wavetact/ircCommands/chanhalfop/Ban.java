@@ -3,7 +3,6 @@ package com.techcavern.wavetact.ircCommands.chanhalfop;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.DatabaseUtils;
-import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.jooq.Record;
@@ -39,7 +38,7 @@ public class Ban extends IRCCommand {
             } else if (network.getServerInfo().getExtBanList().contains("m") && network.getServerInfo().getExtBanPrefix() == null) {
                 ban = "b m:";
             } else {
-                ErrorUtils.sendError(user, "This networks ircd is not supported for quiets.");
+                IRCUtils.sendError(user, "This networks ircd is not supported for quiets.");
                 return;
             }
         }
@@ -83,7 +82,7 @@ public class Ban extends IRCCommand {
                 }
                 DatabaseUtils.updateBan(BanRecord);
             } else {
-                ErrorUtils.sendError(user, "Ban does not exist!");
+                IRCUtils.sendError(user, "Ban does not exist!");
             }
         } else {
             if (BanRecord == null) {
@@ -101,7 +100,7 @@ public class Ban extends IRCCommand {
                     IRCUtils.sendKick(user, IRCUtils.getUserByNick(network, args[0]), network, channel, "[" + user.getNick() + "] Banned - Your behavior is not conductive to the desired environment");
                 }
             } else {
-                ErrorUtils.sendError(user, "Ban already exists!");
+                IRCUtils.sendError(user, "Ban already exists!");
             }
         }
     }

@@ -5,7 +5,6 @@ import com.google.gson.JsonObject;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.DatabaseUtils;
-import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.apache.commons.lang3.ArrayUtils;
@@ -29,7 +28,7 @@ public class Music extends IRCCommand {
         if (DatabaseUtils.getConfig("lastfmapikey") != null)
             lastfmapikey = DatabaseUtils.getConfig("lastfmapikey").getValue(CONFIG.VALUE);
         else {
-            ErrorUtils.sendError(user, "Last.fm API key is not defined - Contact Bot Controller to fix.");
+            IRCUtils.sendError(user, "Last.fm API key is not defined - Contact Bot Controller to fix.");
             return;
         }
         int ArrayIndex = 0;
@@ -56,7 +55,7 @@ public class Music extends IRCCommand {
                 }
             } else {
                 ArrayIndex = ArrayIndex + 1;
-                ErrorUtils.sendError(user, "result " + ArrayIndex + " does not exist");
+                IRCUtils.sendError(user, "result " + ArrayIndex + " does not exist");
             }
         } else if (command.equalsIgnoreCase("artist")) {
             JsonArray artistlist = GeneralUtils.getJsonObject("http://ws.audioscrobbler.com/2.0/?method=artist.search&artist=" + StringUtils.join(args, "%20") + "&api_key=" + lastfmapikey + "&format=json").get("results").getAsJsonObject().get("artistmatches").getAsJsonObject().get("artist").getAsJsonArray();
@@ -72,7 +71,7 @@ public class Music extends IRCCommand {
                 }
             } else {
                 ArrayIndex = ArrayIndex + 1;
-                ErrorUtils.sendError(user, "result " + ArrayIndex + " does not exist");
+                IRCUtils.sendError(user, "result " + ArrayIndex + " does not exist");
             }
         } else {
             JsonArray tracklist = GeneralUtils.getJsonObject("http://ws.audioscrobbler.com/2.0/?method=track.search&track=" + StringUtils.join(args, "%20") + "&api_key=" + lastfmapikey + "&format=json").get("results").getAsJsonObject().get("trackmatches").getAsJsonObject().get("track").getAsJsonArray();
