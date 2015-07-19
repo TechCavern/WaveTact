@@ -56,7 +56,7 @@ public class MCMods extends IRCCommand {
                     }
                     }
                 if (mcmods.size() > 0) {
-                    break MCModVersionSearch;
+                    break;
                 }
                 McModSearch:
                 for (int j = 0; j < mods.size(); j++) {
@@ -72,10 +72,10 @@ public class MCMods extends IRCCommand {
                         mcmods.put(mod, version);
                     }
                     }
+                if (mcmods.size() > 0) {
+                    break;
                 }
-            if (mcmods.size() > 0) {
-                break MCModVersionSearch;
-            }
+                }
 
             }
         if (mcmods.isEmpty()) {
