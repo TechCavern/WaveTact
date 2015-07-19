@@ -34,7 +34,7 @@ public class MCMods extends IRCCommand {
         if (command.equalsIgnoreCase("mcmodauthor") || command.equalsIgnoreCase("mcma"))
             searchPhrase = "author";
         MCModVersionSearch:
-        for (int i = versions.size() - 1; i > 0; i--) {
+        for (int i = versions.size() - 1; i >= 0; i--) {
             int size = versions.get(i).getAsJsonObject().get("count").getAsInt();
             if (size > 10) {
                 String version = versions.get(i).getAsJsonObject().get("name").getAsString();
