@@ -6,6 +6,7 @@ import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -24,7 +25,7 @@ public class MCMods extends IRCCommand {
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         JsonArray versions = GeneralUtils.getJsonArray("http://bot.notenoughmods.com/?json&count");
         boolean isDev = false;
-        String modname = args[0].toLowerCase();
+        String modname = StringUtils.join(args).toLowerCase();
         Map<JsonObject, String> mcmods = new HashMap<>();
         if (modname.startsWith("+")) {
             isDev = true;

@@ -3,7 +3,6 @@ package com.techcavern.wavetact.ircCommands.misc;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
-import com.techcavern.wavetact.utils.IRCUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -17,7 +16,28 @@ public class Test extends IRCCommand {
 
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        IRCUtils.sendError(user, network, channel, "Yandex api key is null - contact bot controller to fix", prefix);
-
+        /**
+         for (int i = versions.size() - 1; i >= 0; i--) {
+         int size = versions.get(i).getAsJsonObject().get("count").getAsInt();
+         if (size > 10) {
+         String version = versions.get(i).getAsJsonObject().get("name").getAsString();
+         JsonArray mods = GeneralUtils.getJsonArray("http://bot.notenoughmods.com/" + version + ".json");
+         MCModSearch:
+         for (int j = 0; j < mods.size(); j++) {
+         JsonObject mod = mods.get(j).getAsJsonObject();
+         if (mcmods.size() >= 3) {
+         break MCModVersionSearch;
+         }
+         for (JsonObject o : mcmods.keySet()) {
+         if (mod.get("name").getAsString().equalsIgnoreCase((o).get("name").getAsString()))
+         continue MCModSearch;
+         }
+         if (mod.get(searchPhrase).getAsString().toLowerCase().contains(modname)) {
+         mcmods.put(mod, version);
+         }
+         }
+         }
+         }
+         **/
     }
 }
