@@ -11,6 +11,8 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
+import java.io.FileNotFoundException;
+
 @IRCCMD
 public class Xkcd extends IRCCommand {
 
@@ -34,10 +36,14 @@ public class Xkcd extends IRCCommand {
                 comicnumber = RandomUtils.nextInt(1, latest);
             } while (comicnumber == 404);
         }
-        JsonObject comic = GeneralUtils.getJsonObject("http://xkcd.com/" + comicnumber + "/info.0.json");
-        String date = "Date: " + comic.get("day").getAsString() + "/" + comic.get("month").getAsString() + "/" + comic.get("year").getAsString();
-        String num = comic.get("num").getAsString();
-        String title = comic.get("title").getAsString();
-        IRCUtils.sendMessage(user, network, channel, "[" + num + "] " + date + " - " + title + " - " + GeneralUtils.shortenURL("http://xkcd.com/" + num), prefix);
+        try {
+            JsonObject comic = GeneralUtils.getJsonObject("http://xkcd.com/" + comicnumber + "/info.0.json");
+            String date = "Date: " + comic.get("day").getAsString() + "/" + comic.get("month").getAsString() + "/" + comic.get("year").getAsString();
+            String num = comic.get("num").getAsString();
+            String title = comic.get("title").getAsString();
+            IRCUtils.sendMessage(user, network, channel, "[" + num + "] " + date + " - " + title + " - " + GeneralUtils.shortenURL("http://xkcd.com/" + num), prefix);
+        } catch (FileNotFoundException e) {
+            ErrorUtils.sendError(user, "Comic does not exist");
+        }
     }
 }
