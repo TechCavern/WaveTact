@@ -22,12 +22,12 @@ public class MCModStats extends IRCCommand {
 
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        JsonArray versions = GeneralUtils.getJsonArray("http://bot.notenoughmods.com/?json");
+        JsonArray versions = GeneralUtils.getJsonArray("http://bot.notenoughmods.com/?json&count");
         List<String> mcModStats = new ArrayList<>();
         for (int i = versions.size() - 1; i > 0; i--) {
-            JsonArray mods = GeneralUtils.getJsonArray("http://bot.notenoughmods.com/" + versions.get(i).getAsString() + ".json");
-            if (mods.size() > 10)
-                mcModStats.add(versions.get(i).getAsString() + ": " + mods.size() + " mods");
+            int size = versions.get(i).getAsJsonObject().get("count").getAsInt();
+            if (size > 10)
+                mcModStats.add(versions.get(i).getAsJsonObject().get("name").getAsString() + ": " + size + " mods");
         }
         IRCUtils.sendMessage(user, network, channel, StringUtils.join(mcModStats, " - "), prefix);
     }

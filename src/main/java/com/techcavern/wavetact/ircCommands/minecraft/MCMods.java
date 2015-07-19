@@ -22,7 +22,7 @@ public class MCMods extends IRCCommand {
 
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        JsonArray versions = GeneralUtils.getJsonArray("http://bot.notenoughmods.com/?json");
+        JsonArray versions = GeneralUtils.getJsonArray("http://bot.notenoughmods.com/?json&count");
         boolean isDev = false;
         String modname = args[0].toLowerCase();
         Map<JsonObject, String> mcmods = new HashMap<>();
@@ -35,19 +35,23 @@ public class MCMods extends IRCCommand {
             searchPhrase = "author";
         MCModVersionSearch:
         for (int i = versions.size() - 1; i > 0; i--) {
-            JsonArray mods = GeneralUtils.getJsonArray("http://bot.notenoughmods.com/" + versions.get(i).getAsString() + ".json");
-            MCModSearch:
-            for (int j = 0; j < mods.size(); j++) {
-                JsonObject mod = mods.get(j).getAsJsonObject();
-                if (mcmods.size() >= 3) {
-                    break MCModVersionSearch;
-                }
-                for (JsonObject o : mcmods.keySet()) {
-                    if (mod.get("name").getAsString().equalsIgnoreCase((o).get("name").getAsString()))
-                        continue MCModSearch;
-                }
-                if (mod.get(searchPhrase).getAsString().toLowerCase().contains(modname)) {
-                    mcmods.put(mod, versions.get(i).getAsString());
+            int size = versions.get(i).getAsJsonObject().get("count").getAsInt();
+            if (size > 10) {
+                String version = versions.get(i).getAsJsonObject().get("name").getAsString();
+                JsonArray mods = GeneralUtils.getJsonArray("http://bot.notenoughmods.com/" + version + ".json");
+                MCModSearch:
+                for (int j = 0; j < mods.size(); j++) {
+                    JsonObject mod = mods.get(j).getAsJsonObject();
+                    if (mcmods.size() >= 3) {
+                        break MCModVersionSearch;
+                    }
+                    for (JsonObject o : mcmods.keySet()) {
+                        if (mod.get("name").getAsString().equalsIgnoreCase((o).get("name").getAsString()))
+                            continue MCModSearch;
+                    }
+                    if (mod.get(searchPhrase).getAsString().toLowerCase().contains(modname)) {
+                        mcmods.put(mod, version);
+                    }
                 }
             }
         }
@@ -62,6 +66,8 @@ public class MCMods extends IRCCommand {
                     ModVersion = mod.get("version").getAsString();
                 String Name = mod.get("name").getAsString();
                 String Link = mod.get("shorturl").getAsString();
+                if (Link.isEmpty())
+                    Link = mod.get("longurl").getAsString();
                 String Author = mod.get("author").getAsString();
                 if (Author.isEmpty())
                     IRCUtils.sendMessage(user, network, channel, "[" + mcmods.get(mod) + "] " + Name + " " + ModVersion + " - " + Link, prefix);
