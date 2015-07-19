@@ -55,6 +55,9 @@ public class MCMods extends IRCCommand {
                         mcmods.put(mod, version);
                     }
                     }
+                if (mcmods.size() > 0) {
+                    break MCModVersionSearch;
+                }
                 McModSearch:
                 for (int j = 0; j < mods.size(); j++) {
                     JsonObject mod = mods2.get(j).getAsJsonObject();
