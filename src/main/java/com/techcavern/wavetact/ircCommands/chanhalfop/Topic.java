@@ -74,6 +74,12 @@ public class Topic extends IRCCommand {
     }
 
     void saveTopic(Channel channel, PircBotX network) {
-        DatabaseUtils.addChannelProperty(IRCUtils.getNetworkNameByNetwork(network), channel.getName(), "topic", channel.getTopic());
+        Record topic = DatabaseUtils.getChannelProperty(IRCUtils.getNetworkNameByNetwork(network), channel.getName(), "topic");
+        if (topic == null) {
+            DatabaseUtils.addChannelProperty(IRCUtils.getNetworkNameByNetwork(network), channel.getName(), "topic", channel.getTopic());
+        } else {
+            topic.setValue(CHANNELPROPERTY.VALUE, channel.getTopic());
+            DatabaseUtils.updateChannelProperty(topic);
+        }
     }
 }
