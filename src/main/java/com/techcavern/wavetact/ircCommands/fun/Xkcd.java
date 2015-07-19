@@ -11,6 +11,8 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
+import java.io.FileNotFoundException;
+
 @IRCCMD
 public class Xkcd extends IRCCommand {
 
@@ -20,7 +22,7 @@ public class Xkcd extends IRCCommand {
 
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        Integer comicnumber = 1;
+        Integer comicnumber = 404;
         JsonObject latestcomic = GeneralUtils.getJsonObject("http://xkcd.com/info.0.json");
         Integer latest = latestcomic.get("num").getAsInt();
         if (args.length > 0) {
@@ -30,12 +32,18 @@ public class Xkcd extends IRCCommand {
                 return;
             }
         } else {
-            comicnumber = RandomUtils.nextInt(1, latest);
+            do {
+                comicnumber = RandomUtils.nextInt(1, latest);
+            } while (comicnumber == 404);
         }
-        JsonObject comic = GeneralUtils.getJsonObject("http://xkcd.com/" + comicnumber + "/info.0.json");
-        String date = "Date: " + comic.get("day") + "/" + comic.get("month") + "/" + comic.get("year");
-        String num = comic.get("num").getAsString();
-        String title = comic.get("title").getAsString();
-        IRCUtils.sendMessage(user, network, channel, "[" + num + "] " + date + " - " + title + " - " + GeneralUtils.shortenURL("http://xkcd.com/" + num), prefix);
+        try {
+            JsonObject comic = GeneralUtils.getJsonObject("http://xkcd.com/" + comicnumber + "/info.0.json");
+            String date = "Date: " + comic.get("day").getAsString() + "/" + comic.get("month").getAsString() + "/" + comic.get("year").getAsString();
+            String num = comic.get("num").getAsString();
+            String title = comic.get("title").getAsString();
+            IRCUtils.sendMessage(user, network, channel, "[" + num + "] " + date + " - " + title + " - " + GeneralUtils.shortenURL("http://xkcd.com/" + num), prefix);
+        } catch (FileNotFoundException e) {
+            ErrorUtils.sendError(user, "Comic does not exist");
+        }
     }
 }
