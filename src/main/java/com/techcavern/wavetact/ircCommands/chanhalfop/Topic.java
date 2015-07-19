@@ -37,7 +37,7 @@ public class Topic extends IRCCommand {
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         Record topicseparator = DatabaseUtils.getChannelProperty(IRCUtils.getNetworkNameByNetwork(network), channel.getName(), "topicseparator");
         if (topicseparator == null) {
-            IRCUtils.sendError(user, "Please set the topic separator before using this command");
+            IRCUtils.sendError(user, network, channel, "Please set the topic separator before using this command", prefix);
             return;
         }
         StringUtils.split(channel.getTopic(), topicseparator.getValue(CHANNELPROPERTY.VALUE));
@@ -64,7 +64,7 @@ public class Topic extends IRCCommand {
             if (oldTopic != null) {
                 channel.send().setTopic(oldTopic.getValue(CHANNELPROPERTY.VALUE));
             } else {
-                IRCUtils.sendError(user, "Error: no reversal possible");
+                IRCUtils.sendError(user, network, channel, "Error: no reversal possible", prefix);
             }
         } else {
             channel.send().setTopic(GeneralUtils.buildMessage(0, args.length, args));

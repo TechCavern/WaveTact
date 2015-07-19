@@ -21,7 +21,7 @@ public class Movie extends IRCCommand {
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         JsonObject results = GeneralUtils.getJsonObject("http://www.omdbapi.com/?t=" + StringUtils.join(args, "%20") + "&y=&plot=full&r=json");
         if (results.get("Response").getAsString().equalsIgnoreCase("false")) {
-            IRCUtils.sendError(user, "Search returned no results");
+            IRCUtils.sendError(user, network, channel, "Search returned no results", prefix);
         } else {
             String response = "[" + results.get("Title").getAsString() + "]";
             String runtime = results.get("Runtime").getAsString();

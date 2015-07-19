@@ -43,7 +43,7 @@ public class ChannelUserProperty extends IRCCommand {
         if (auth != null) {
             account = auth;
         } else {
-            IRCUtils.sendError(user, "User must be identified");
+            IRCUtils.sendError(user, network, channel, "User must be identified", prefix);
             return;
         }
         Record channelUserProperty = DatabaseUtils.getChannelUserProperty(networkname, channel.getName(), account, args[1]);
@@ -64,7 +64,7 @@ public class ChannelUserProperty extends IRCCommand {
             DatabaseUtils.addChannelUserProperty(networkname, channel.getName(), account, args[1], args[2]);
             IRCUtils.sendMessage(user, network, IRCUtils.getMsgChannel(channel, isPrivate), "Property added", prefix);
         } else {
-            IRCUtils.sendError(user, "property already exists (If you were adding) or property does not exist");
+            IRCUtils.sendError(user, network, channel, "property already exists (If you were adding) or property does not exist", prefix);
         }
 
     }

@@ -38,7 +38,7 @@ public class Ban extends IRCCommand {
             } else if (network.getServerInfo().getExtBanList().contains("m") && network.getServerInfo().getExtBanPrefix() == null) {
                 ban = "b m:";
             } else {
-                IRCUtils.sendError(user, "This networks ircd is not supported for quiets.");
+                IRCUtils.sendError(user, network, channel, "This networks ircd is not supported for mute bans.", prefix);
                 return;
             }
         }
@@ -82,7 +82,7 @@ public class Ban extends IRCCommand {
                 }
                 DatabaseUtils.updateBan(BanRecord);
             } else {
-                IRCUtils.sendError(user, "Ban does not exist!");
+                IRCUtils.sendError(user, network, channel, "Ban does not exist!", prefix);
             }
         } else {
             if (BanRecord == null) {
@@ -100,7 +100,7 @@ public class Ban extends IRCCommand {
                     IRCUtils.sendKick(user, IRCUtils.getUserByNick(network, args[0]), network, channel, "[" + user.getNick() + "] Banned - Your behavior is not conductive to the desired environment");
                 }
             } else {
-                IRCUtils.sendError(user, "Ban already exists!");
+                IRCUtils.sendError(user, network, channel, "Ban already exists!", prefix);
             }
         }
     }

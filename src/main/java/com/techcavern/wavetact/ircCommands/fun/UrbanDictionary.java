@@ -38,10 +38,10 @@ public class UrbanDictionary extends IRCCommand {
                 }
             } else {
                 ArrayIndex = ArrayIndex + 1;
-                IRCUtils.sendError(user, "Def #" + ArrayIndex + " does not exist");
+                IRCUtils.sendError(user, network, channel, "Def #" + ArrayIndex + " does not exist", prefix);
             }
         } else {
-            IRCUtils.sendError(user, "Not defined in the urban dictionary");
+            IRCUtils.sendError(user, network, channel, "Not defined in the urban dictionary", prefix);
         }
 
     }

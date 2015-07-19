@@ -52,7 +52,7 @@ public class Say extends IRCCommand {
                 IRCUtils.sendMessage(user, network, chan, "[" + IRCUtils.noPing(user.getNick()) + "] " + GeneralUtils.stripHTML(StringUtils.join(args, " ")), prefix);
             }
         } else {
-            IRCUtils.sendError(user, "Permission denied");
+            IRCUtils.sendError(user, network, channel, "Permission denied", prefix);
         }
     }
 }

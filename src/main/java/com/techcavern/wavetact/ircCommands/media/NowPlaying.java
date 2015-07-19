@@ -29,13 +29,13 @@ public class NowPlaying extends IRCCommand {
         if (DatabaseUtils.getConfig("lastfmapikey") != null)
             lastfmapikey = DatabaseUtils.getConfig("lastfmapikey").getValue(CONFIG.VALUE);
         else {
-            IRCUtils.sendError(user, "Last.fm API key is not defined - Contact Bot Controller to fix.");
+            IRCUtils.sendError(user, network, channel, "Last.fm API key is not defined - Contact Bot Controller to fix.", prefix);
             return;
         }
 
         JsonObject jsonObject = GeneralUtils.getJsonObject("http://ws.audioscrobbler.com/2.0/?format=json&method=user.getrecenttracks&api_key=" + lastfmapikey + "&user=" + args[0]);
         if (jsonObject.get("error") != null) {
-            IRCUtils.sendError(user, "LastFM API returned an error: " + jsonObject.get("message").toString());
+            IRCUtils.sendError(user, network, channel, "LastFM API returned an error: " + jsonObject.get("message").toString(), prefix);
             return;
         }
 

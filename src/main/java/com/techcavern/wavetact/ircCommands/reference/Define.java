@@ -31,7 +31,7 @@ public class Define extends IRCCommand {
         if (DatabaseUtils.getConfig("wordnikapikey") != null)
             wordnikapikey = DatabaseUtils.getConfig("wordnikapikey").getValue(CONFIG.VALUE);
         else {
-            IRCUtils.sendError(user, "Wordnik api key is null - contact bot controller to fix");
+            IRCUtils.sendError(user, network, channel, "Wordnik api key is null - contact bot controller to fix", prefix);
             return;
         }
         int ArrayIndex = 0;
@@ -53,10 +53,10 @@ public class Define extends IRCCommand {
                 }
             } else {
                 ArrayIndex = ArrayIndex + 1;
-                IRCUtils.sendError(user, "Def #" + ArrayIndex + " does not exist");
+                IRCUtils.sendError(user, network, channel, "Def #" + ArrayIndex + " does not exist", prefix);
             }
         } else {
-            IRCUtils.sendError(user, "Not defined");
+            IRCUtils.sendError(user, network, channel, "Not defined", prefix);
         }
 
     }

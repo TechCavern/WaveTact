@@ -34,7 +34,7 @@ public class PermLevel extends IRCCommand {
         }
         userPermLevel = PermUtils.getPermLevel(network, userObject, chan);
         if (userObject == null) {
-            IRCUtils.sendError(user, "User does not exist");
+            IRCUtils.sendError(user, network, channel, "User does not exist", prefix);
         } else if (userPermLevel >= 20) {
             IRCUtils.sendMessage(user, network, channel, userObject + " is a Network Administrator!" + " (" + userPermLevel + ")", prefix);
         } else if (userPermLevel >= 18) {

@@ -19,7 +19,7 @@ public class ShortenUrl extends IRCCommand {
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (DatabaseUtils.getConfig("googleapikey") == null) {
-            IRCUtils.sendError(user, "Google API Key is null - Contact bot controller to fix");
+            IRCUtils.sendError(user, network, channel, "Google API Key is null - Contact bot controller to fix", prefix);
             return;
         }
         String shortUrl = GeneralUtils.shortenURL(args[0]);

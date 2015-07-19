@@ -32,7 +32,7 @@ public class Help extends IRCCommand {
                         IRCUtils.sendMessage(user, network, channel, "Syntax: " + syntax, prefix);
                     IRCUtils.sendMessage(user, network, channel, irCommand.getDesc(), prefix);
                 } else {
-                    IRCUtils.sendError(user, "Command does not exist");
+                    IRCUtils.sendError(user, network, channel, "Command does not exist", prefix);
                 }
             }
         } else {

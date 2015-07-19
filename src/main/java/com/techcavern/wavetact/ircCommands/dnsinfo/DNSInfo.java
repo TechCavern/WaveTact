@@ -56,7 +56,7 @@ public class DNSInfo extends IRCCommand {
             isSuccessful = true;
         }
         if (!isSuccessful) {
-            IRCUtils.sendError(user, "Invalid domain");
+            IRCUtils.sendError(user, network, channel, "Invalid domain", prefix);
         }
 
     }

@@ -43,6 +43,7 @@ Channel Properties
 - autounban - this will detect bans and auto-unban a ban after the specified time. (s(econds)/m(inutes)/h(ours)/d(ays)/w(eeks)
 - autourl - this will detect and print the title of urls found in channel messages. (True/False)
 - topicseparator - this will determine the separator between topic parts
+- verboseerrors - send errors to channel instead of notice
 
 Global Config
 =================

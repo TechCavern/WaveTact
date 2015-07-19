@@ -28,7 +28,7 @@ public class CheckPing extends IRCCommand {
         }
         String IP = GeneralUtils.getIP(args[0], network, IPv6Priority);
         if (IP == null) {
-            IRCUtils.sendError(user, "Host Unreachable");
+            IRCUtils.sendError(user, network, channel, "Host Unreachable", prefix);
         } else {
             String pingCommand = "";
             if (InetAddressUtils.isIPv6Address(IP)) {
@@ -49,7 +49,7 @@ public class CheckPing extends IRCCommand {
             }
             buffereader.close();
             if (!haslines) {
-                IRCUtils.sendError(user, "Host Unreachable");
+                IRCUtils.sendError(user, network, channel, "Host Unreachable", prefix);
             }
         }
 

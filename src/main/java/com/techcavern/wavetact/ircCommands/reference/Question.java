@@ -28,7 +28,7 @@ public class Question extends IRCCommand {
         if (DatabaseUtils.getConfig("wolframalphaapikey") != null)
             wolframalphaapikey = DatabaseUtils.getConfig("wolframalphaapikey").getValue(CONFIG.VALUE);
         else {
-            IRCUtils.sendError(user, "Wolfram Alpha api key is null - contact bot controller to fix");
+            IRCUtils.sendError(user, network, channel, "Wolfram Alpha api key is null - contact bot controller to fix", prefix);
             return;
         }
         int ArrayIndex = 1;
@@ -55,10 +55,10 @@ public class Question extends IRCCommand {
                     }
                 }
             } else {
-                IRCUtils.sendError(user, "Answer #" + ArrayIndex + " does not exist");
+                IRCUtils.sendError(user, network, channel, "Answer #" + ArrayIndex + " does not exist", prefix);
             }
         } else {
-            IRCUtils.sendError(user, "Question returned no answers");
+            IRCUtils.sendError(user, network, channel, "Question returned no answers", prefix);
         }
     }
 

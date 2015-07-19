@@ -24,7 +24,7 @@ public class IdleTime extends IRCCommand {
         }
         WhoisEvent event = IRCUtils.WhoisEvent(network, nick, false);
         if (event == null) {
-            IRCUtils.sendError(user, "User does not exist");
+            IRCUtils.sendError(user, network, channel, "User does not exist", prefix);
         } else {
             IRCUtils.sendMessage(user, network, channel, nick + " signed on " + GeneralUtils.getDateFromSeconds(event.getSignOnTime()), prefix);
             IRCUtils.sendMessage(user, network, channel, nick + " has been idle for " + GeneralUtils.getTimeFromSeconds((int) event.getIdleSeconds()), prefix);

@@ -32,7 +32,7 @@ public class Video extends IRCCommand {
         if (DatabaseUtils.getConfig("googleapikey") != null)
             googleapikey = DatabaseUtils.getConfig("googleapikey").getValue(CONFIG.VALUE);
         else {
-            IRCUtils.sendError(user, "Google api key is null - contact bot controller to fix");
+            IRCUtils.sendError(user, network, channel, "Google api key is null - contact bot controller to fix", prefix);
             return;
         }
         int ArrayIndex = 1;
@@ -63,10 +63,10 @@ public class Video extends IRCCommand {
                 else
                     IRCUtils.sendMessage(user, network, channel, title + " - " + content, prefix);
             } else {
-                IRCUtils.sendError(user, "Search #" + ArrayIndex + " does not exist");
+                IRCUtils.sendError(user, network, channel, "Search #" + ArrayIndex + " does not exist", prefix);
             }
         } else {
-            IRCUtils.sendError(user, "Search returned no results");
+            IRCUtils.sendError(user, network, channel, "Search returned no results", prefix);
         }
     }
 }

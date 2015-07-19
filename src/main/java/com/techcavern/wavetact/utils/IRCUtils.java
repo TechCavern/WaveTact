@@ -14,8 +14,7 @@ import org.pircbotx.hooks.events.WhoisEvent;
 import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 
-import static com.techcavern.wavetactdb.Tables.CUSTOMCOMMANDS;
-import static com.techcavern.wavetactdb.Tables.NETWORKPROPERTY;
+import static com.techcavern.wavetactdb.Tables.*;
 
 
 public class IRCUtils {
@@ -349,8 +348,25 @@ public class IRCUtils {
         return original;
     }
 
-    public static void sendError(User user, String error) {
-        user.send().notice(error);
+    public static void sendError(User userObject, PircBotX networkObject, Channel channelObject, String message, String prefix) {
+        if (channelObject != null) {
+            Record verbose = DatabaseUtils.getChannelProperty(IRCUtils.getNetworkNameByNetwork(networkObject), channelObject.getName(), "verboseerrors");
+            if (verbose != null && verbose.getValue(CHANNELPROPERTY.VALUE).equalsIgnoreCase("true")) {
+                sendMessage(userObject, networkObject, channelObject, message, prefix);
+            } else {
+                sendNotice(userObject, networkObject, null, message, prefix);
+            }
+        } else {
+            sendMessage(userObject, networkObject, channelObject, message, prefix);
+        }
+    }
+
+    public static void sendNotice(User userObject, PircBotX networkObject, Channel channelObject, String message, String prefix) {
+        if (channelObject != null) {
+            Registry.messageQueue.get(networkObject).add("NOTICE " + prefix + channelObject.getName() + " :" + message);
+        } else {
+            Registry.messageQueue.get(networkObject).add("NOTICE " + userObject.getNick() + " :" + message);
+        }
     }
 }
 

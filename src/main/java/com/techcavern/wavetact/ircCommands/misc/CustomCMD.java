@@ -69,7 +69,7 @@ public class CustomCMD extends IRCCommand {
             DatabaseUtils.addCustomCommand(net, chan, cCommand, Integer.parseInt(args[1]), GeneralUtils.buildMessage(2, args.length, args).replace("\n", " "), false, isAction);
             IRCUtils.sendMessage(user, network, channel, "Custom Command added", prefix);
         } else {
-            IRCUtils.sendError(user, "Command already exists (If you were adding) or Command does not exist, or The command is locked (Either could be the problem if you were modifying)");
+            IRCUtils.sendError(user, network, channel, "Command already exists (If you were adding) or Command does not exist, or The command is locked (Either could be the problem if you were modifying)", prefix);
         }
     }
 

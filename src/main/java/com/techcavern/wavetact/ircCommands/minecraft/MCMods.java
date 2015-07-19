@@ -52,7 +52,7 @@ public class MCMods extends IRCCommand {
             }
         }
         if (mcmods.isEmpty()) {
-            IRCUtils.sendError(user, "No mods found");
+            IRCUtils.sendError(user, network, channel, "No mods found", prefix);
         } else {
             for (JsonObject mod : mcmods.keySet()) {
                 String ModVersion;

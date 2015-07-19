@@ -43,7 +43,7 @@ public class CheckPort extends IRCCommand {
             //do nothing
         }
         if (IP == null) {
-            IRCUtils.sendError(user, "Host Unreachable");
+            IRCUtils.sendError(user, network, channel, "Host Unreachable", prefix);
         } else {
             try {
                 Socket socket = new Socket();

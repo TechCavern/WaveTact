@@ -28,7 +28,7 @@ public class Music extends IRCCommand {
         if (DatabaseUtils.getConfig("lastfmapikey") != null)
             lastfmapikey = DatabaseUtils.getConfig("lastfmapikey").getValue(CONFIG.VALUE);
         else {
-            IRCUtils.sendError(user, "Last.fm API key is not defined - Contact Bot Controller to fix.");
+            IRCUtils.sendError(user, network, channel, "Last.fm API key is not defined - Contact Bot Controller to fix.", prefix);
             return;
         }
         int ArrayIndex = 0;
@@ -55,7 +55,7 @@ public class Music extends IRCCommand {
                 }
             } else {
                 ArrayIndex = ArrayIndex + 1;
-                IRCUtils.sendError(user, "result " + ArrayIndex + " does not exist");
+                IRCUtils.sendError(user, network, channel, "result " + ArrayIndex + " does not exist", prefix);
             }
         } else if (command.equalsIgnoreCase("artist")) {
             JsonArray artistlist = GeneralUtils.getJsonObject("http://ws.audioscrobbler.com/2.0/?method=artist.search&artist=" + StringUtils.join(args, "%20") + "&api_key=" + lastfmapikey + "&format=json").get("results").getAsJsonObject().get("artistmatches").getAsJsonObject().get("artist").getAsJsonArray();
@@ -71,7 +71,7 @@ public class Music extends IRCCommand {
                 }
             } else {
                 ArrayIndex = ArrayIndex + 1;
-                IRCUtils.sendError(user, "result " + ArrayIndex + " does not exist");
+                IRCUtils.sendError(user, network, channel, "result " + ArrayIndex + " does not exist", prefix);
             }
         } else {
             JsonArray tracklist = GeneralUtils.getJsonObject("http://ws.audioscrobbler.com/2.0/?method=track.search&track=" + StringUtils.join(args, "%20") + "&api_key=" + lastfmapikey + "&format=json").get("results").getAsJsonObject().get("trackmatches").getAsJsonObject().get("track").getAsJsonArray();

@@ -34,10 +34,10 @@ public class BlacklistLookup extends IRCCommand {
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         String BeforeIP = GeneralUtils.getIP(args[1], network, false);
         if (BeforeIP == null) {
-            IRCUtils.sendError(user, "Invalid ip/user");
+            IRCUtils.sendError(user, network, channel, "Invalid ip/user", prefix);
             return;
         } else if (BeforeIP.contains(":")) {
-            IRCUtils.sendError(user, "IPv6 is not supported");
+            IRCUtils.sendError(user, network, channel, "IPv6 is not supported", prefix);
             return;
         }
         String[] IPString = StringUtils.split(BeforeIP, ".");
@@ -53,7 +53,7 @@ public class BlacklistLookup extends IRCCommand {
         Resolver resolver = new SimpleResolver();
         Result<Record> blacklist = DatabaseUtils.getBlacklists(args[0]);
         if (blacklist.isEmpty()) {
-            IRCUtils.sendError(user, "No " + args[0] + " blacklists found in database");
+            IRCUtils.sendError(user, network, channel, "No " + args[0] + " blacklists found in database", prefix);
             return;
         }
         for (org.jooq.Record Blacklist : blacklist) {

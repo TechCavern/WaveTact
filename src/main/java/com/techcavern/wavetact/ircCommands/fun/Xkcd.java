@@ -27,7 +27,7 @@ public class Xkcd extends IRCCommand {
         if (args.length > 0) {
             comicnumber = Integer.parseInt(args[0]);
             if (latest < comicnumber) {
-                IRCUtils.sendError(user, "Comic does not exist");
+                IRCUtils.sendError(user, network, channel, "Comic does not exist", prefix);
                 return;
             }
         } else {
@@ -42,7 +42,7 @@ public class Xkcd extends IRCCommand {
             String title = comic.get("title").getAsString();
             IRCUtils.sendMessage(user, network, channel, "[" + num + "] " + date + " - " + title + " - " + GeneralUtils.shortenURL("http://xkcd.com/" + num), prefix);
         } catch (FileNotFoundException e) {
-            IRCUtils.sendError(user, "Comic does not exist");
+            IRCUtils.sendError(user, network, channel, "Comic does not exist", prefix);
         }
     }
 }

@@ -40,7 +40,7 @@ public class ListCommands extends IRCCommand {
         final int fpermlevel = permlevel;
         List<String> commands = Registry.ircCommandList.stream().filter(cmd -> cmd.getPermLevel() == fpermlevel).map(IRCCommand::getCommand).collect(Collectors.toList());
         if (commands.isEmpty()) {
-            IRCUtils.sendError(user, "No commands found with that perm level");
+            IRCUtils.sendError(user, network, channel, "No commands found with that perm level", prefix);
         } else {
             Collections.sort(commands);
             IRCUtils.sendMessage(user, network, channel, StringUtils.join(commands, ", "), prefix);

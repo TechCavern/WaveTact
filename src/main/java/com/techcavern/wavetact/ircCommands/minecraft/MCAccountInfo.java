@@ -41,7 +41,7 @@ public class MCAccountInfo extends IRCCommand {
             }
             IRCUtils.sendMessage(user, network, channel, "[" + User + "] " + "UUID: " + UUID + " - " + "Paid: " + Premium + " - " + "Mojang Account: " + Migrated, prefix);
         } else {
-            IRCUtils.sendError(user, "User does not exist");
+            IRCUtils.sendError(user, network, channel, "User does not exist", prefix);
         }
     }
 

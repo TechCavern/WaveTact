@@ -35,7 +35,7 @@ public class HalfOp extends IRCCommand {
                 channel.send().halfOp(user);
             }
         } else {
-            IRCUtils.sendError(user, "This server does not support half ops");
+            IRCUtils.sendError(user, network, channel, "This server does not support half ops", prefix);
         }
     }
 }

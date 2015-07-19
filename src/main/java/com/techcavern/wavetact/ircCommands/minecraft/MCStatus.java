@@ -30,7 +30,7 @@ public class MCStatus extends IRCCommand {
         if (result != null) {
             IRCUtils.sendMessage(user, network, channel, result, prefix);
         } else {
-            IRCUtils.sendError(user, "MC status currently unavailable");
+            IRCUtils.sendError(user, network, channel, "MC status currently unavailable", prefix);
         }
     }
 

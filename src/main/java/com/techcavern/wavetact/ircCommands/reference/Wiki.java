@@ -50,9 +50,9 @@ public class Wiki extends IRCCommand {
         if (title != null && content != null) {
             IRCUtils.sendMessage(user, network, channel, "[" + title + "] " + content + " - " + GeneralUtils.shortenURL(userurl + title.replace(" ", urljoin)), prefix);
         } else if (ArrayIndex > 1) {
-            IRCUtils.sendError(user, "Result #" + ArrayIndex + " does not exist");
+            IRCUtils.sendError(user, network, channel, "Result #" + ArrayIndex + " does not exist", prefix);
         } else {
-            IRCUtils.sendError(user, "No results found");
+            IRCUtils.sendError(user, network, channel, "No results found", prefix);
         }
     }
 }

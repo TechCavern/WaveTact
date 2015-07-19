@@ -33,7 +33,7 @@ public class Hostmask extends IRCCommand {
         if (hostmask != null) {
             IRCUtils.sendMessage(user, network, channel, hostmask, prefix);
         } else {
-            IRCUtils.sendError(user, "User not found");
+            IRCUtils.sendError(user, network, channel, "User not found", prefix);
         }
 
     }

@@ -60,14 +60,14 @@ public class PrivMsgListener extends ListenerAdapter {
                                 try {
                                     Command.onCommand(privcommand, event.getUser(), event.getBot(), prefix, channel, true, userPermLevel, message);
                                 } catch (Exception e) {
-                                    IRCUtils.sendError(event.getUser(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")");
+                                    IRCUtils.sendError(event.getUser(), event.getBot(), null, "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")", "");
                                     e.printStackTrace();
                                 }
                             } else {
-                                IRCUtils.sendError(event.getUser(), "Permission denied");
+                                IRCUtils.sendError(event.getUser(), event.getBot(), null, "Permission denied", "");
                             }
                         } else {
-                            IRCUtils.sendError(event.getUser(), "Please specify channel as argument #1 in front of all the other arguments");
+                            IRCUtils.sendError(event.getUser(), event.getBot(), null, "Please specify channel as argument #1 in front of all the other arguments", "");
                         }
                     } else {
                         int userPermLevel = PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), null);
@@ -75,14 +75,14 @@ public class PrivMsgListener extends ListenerAdapter {
                             try {
                                 Command.onCommand(privcommand, event.getUser(), event.getBot(), null, null, true, userPermLevel, message);
                             } catch (Exception e) {
-                                IRCUtils.sendError(event.getUser(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")");
+                                IRCUtils.sendError(event.getUser(), event.getBot(), null, "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")", "");
                                 e.printStackTrace();
                             }
                         } else if (Command.getPermLevel() <= 5 && userPermLevel >= 1) {
                             try {
                                 Command.onCommand(privcommand, event.getUser(), event.getBot(), null, null, true, userPermLevel, message);
                             } catch (Exception e) {
-                                IRCUtils.sendError(event.getUser(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")");
+                                IRCUtils.sendError(event.getUser(), event.getBot(), null, "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")", "");
                                 e.printStackTrace();
                             }
                         } else {
@@ -90,11 +90,11 @@ public class PrivMsgListener extends ListenerAdapter {
                                 try {
                                     Command.onCommand(privcommand, event.getUser(), event.getBot(), null, null, true, userPermLevel, message);
                                 } catch (Exception e) {
-                                    IRCUtils.sendError(event.getUser(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")");
+                                    IRCUtils.sendError(event.getUser(), event.getBot(), null, "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")", "");
                                     e.printStackTrace();
                                 }
                             } else {
-                                IRCUtils.sendError(event.getUser(), "Permission denied");
+                                IRCUtils.sendError(event.getUser(), event.getBot(), null, "Permission denied", "");
                             }
                         }
                     }

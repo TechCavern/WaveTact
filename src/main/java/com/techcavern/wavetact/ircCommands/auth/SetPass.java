@@ -23,7 +23,7 @@ public class SetPass extends IRCCommand {
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (!PermUtils.isAccountEnabled(network)) {
-            IRCUtils.sendError(user, "This network is set to " + DatabaseUtils.getNetwork(IRCUtils.getNetworkNameByNetwork(network)).getValue(NETWORKS.AUTHTYPE) + " authentication");
+            IRCUtils.sendError(user, network, channel, "This network is set to " + DatabaseUtils.getNetwork(IRCUtils.getNetworkNameByNetwork(network)).getValue(NETWORKS.AUTHTYPE) + " authentication", prefix);
             return;
         }
         String AuthUser = PermUtils.authUser(network, user.getNick());
@@ -35,7 +35,7 @@ public class SetPass extends IRCCommand {
             IRCUtils.sendMessage(user, network, channel, "Password changed successfully", prefix);
             IRCUtils.sendLogChanMsg(network, "[PASS CHANGE] " + IRCUtils.noPing(user.getNick()));
         } else {
-            IRCUtils.sendError(user, "Incorrect password");
+            IRCUtils.sendError(user, network, channel, "Incorrect password", prefix);
         }
     }
 }

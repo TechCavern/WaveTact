@@ -34,7 +34,7 @@ public class Owner extends IRCCommand {
                 channel.send().owner(user);
             }
         } else {
-            IRCUtils.sendError(user, "This server does not support owners");
+            IRCUtils.sendError(user, network, channel, "This server does not support owners", prefix);
         }
     }
 }

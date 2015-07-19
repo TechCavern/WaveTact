@@ -24,7 +24,7 @@ public class GetIP extends IRCCommand {
         }
         String IP = GeneralUtils.getIP(args[0], network, IPv6Priority);
         if (IP == null) {
-            IRCUtils.sendError(user, "Host Unreachable");
+            IRCUtils.sendError(user, network, channel, "Host Unreachable", prefix);
         } else {
             IRCUtils.sendMessage(user, network, channel, IP, prefix);
         }

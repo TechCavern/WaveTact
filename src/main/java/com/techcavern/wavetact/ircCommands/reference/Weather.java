@@ -26,7 +26,7 @@ public class Weather extends IRCCommand {
         if (DatabaseUtils.getConfig("wundergroundapikey") != null)
             wundergroundapikey = DatabaseUtils.getConfig("wundergroundapikey").getValue(CONFIG.VALUE);
         else {
-            IRCUtils.sendError(user, "Wunderground api key is null - contact bot controller to fix");
+            IRCUtils.sendError(user, network, channel, "Wunderground api key is null - contact bot controller to fix", prefix);
             return;
         }
         JsonObject weather = GeneralUtils.getJsonObject("http://api.wunderground.com/api/" + wundergroundapikey + "/conditions/q/" + StringUtils.join(args, "%20") + ".json").getAsJsonObject("current_observation");
@@ -38,7 +38,7 @@ public class Weather extends IRCCommand {
             String Wind = weather.get("wind_string").getAsString();
             IRCUtils.sendMessage(user, network, channel, "[" + City + "] " + Weather + " - " + Temp + " - " + Humidity + " - " + Wind, prefix);
         } else {
-            IRCUtils.sendError(user, "Requested location not found");
+            IRCUtils.sendError(user, network, channel, "Requested location not found", prefix);
         }
     }
 

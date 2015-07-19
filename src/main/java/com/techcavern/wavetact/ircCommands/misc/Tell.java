@@ -27,7 +27,7 @@ public class Tell extends IRCCommand {
                 recipient = PermUtils.authUser(network, args[0]);
             }
             if (recipient == null) {
-                IRCUtils.sendError(user, "Recipient must be identified");
+                IRCUtils.sendError(user, network, channel, "Recipient must be identified", prefix);
                 return;
             }
             DatabaseUtils.addTellMessage(IRCUtils.getNetworkNameByNetwork(network), sender, recipient, GeneralUtils.buildMessage(1, args.length, args));

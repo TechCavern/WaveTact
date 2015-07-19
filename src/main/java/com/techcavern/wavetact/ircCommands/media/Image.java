@@ -35,10 +35,10 @@ public class Image extends IRCCommand {
 
             } else {
                 ArrayIndex = ArrayIndex + 1;
-                IRCUtils.sendError(user, "Search #" + ArrayIndex + " does not exist");
+                IRCUtils.sendError(user, network, channel, "Search #" + ArrayIndex + " does not exist", prefix);
             }
         } else {
-            IRCUtils.sendError(user, "Search returned no results");
+            IRCUtils.sendError(user, network, channel, "Search returned no results", prefix);
         }
     }
 }

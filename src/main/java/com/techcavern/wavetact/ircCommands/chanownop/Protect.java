@@ -36,7 +36,7 @@ public class Protect extends IRCCommand {
                 channel.send().superOp(user);
             }
         } else {
-            IRCUtils.sendError(user, "This server does not support protected ops");
+            IRCUtils.sendError(user, network, channel, "This server does not support protected ops", prefix);
         }
     }
 }

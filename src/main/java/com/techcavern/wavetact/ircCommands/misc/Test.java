@@ -1,12 +1,14 @@
 package com.techcavern.wavetact.ircCommands.misc;
 
+import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-//@IRCCMD
+@IRCCMD
 public class Test extends IRCCommand {
 
     public Test() {
@@ -15,13 +17,7 @@ public class Test extends IRCCommand {
 
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        /**
-        for (PircBotX bot : Registry.networkName.keySet()) {
-            if (bot != network) {
-                channel.send().message("^dev");
-                channel.send().kick(bot.getUserBot());
-            }
-        }
-         **/
+        IRCUtils.sendError(user, network, channel, "Yandex api key is null - contact bot controller to fix", prefix);
+
     }
 }

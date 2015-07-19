@@ -26,14 +26,14 @@ public class Translate extends IRCCommand {
         if (DatabaseUtils.getConfig("yandexapikey") != null)
             yandexapikey = DatabaseUtils.getConfig("yandexapikey").getValue(CONFIG.VALUE);
         else {
-            IRCUtils.sendError(user, "Yandex api key is null - contact bot controller to fix");
+            IRCUtils.sendError(user, network, channel, "Yandex api key is null - contact bot controller to fix", prefix);
             return;
         }
         JsonObject result = GeneralUtils.getJsonObject("https://translate.yandex.net/api/v1.5/tr.json/translate?key=" + yandexapikey + "&lang=en&text=" + StringUtils.join(args, "+"));
         if (result.get("code").getAsInt() == 200) {
             IRCUtils.sendMessage(user, network, channel, "[" + result.get("lang").getAsString() + "] " + result.get("text").getAsString(), prefix);
         } else {
-            IRCUtils.sendError(user, result.get("code").getAsString() + " - Unable to translate text");
+            IRCUtils.sendError(user, network, channel, result.get("code").getAsString() + " - Unable to translate text", prefix);
         }
     }
 }

@@ -48,11 +48,11 @@ public class ChanMsgListener extends ListenerAdapter {
                             try {
                                 Command.onCommand(chancommand, event.getUser(), event.getBot(), IRCUtils.getPrefix(event.getBot(), event.getChannelSource()), event.getChannel(), false, userPermLevel, message);
                             } catch (Exception e) {
-                                IRCUtils.sendError(event.getUser(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")");
+                                IRCUtils.sendError(event.getUser(), event.getBot(), event.getChannel(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")", IRCUtils.getPrefix(event.getBot(), event.getChannelSource()));
                                 e.printStackTrace();
                             }
                         } else {
-                            IRCUtils.sendError(event.getUser(), "Permission denied");
+                            IRCUtils.sendError(event.getUser(), event.getBot(), event.getChannel(), "Permission denied", IRCUtils.getPrefix(event.getBot(), event.getChannelSource()));
                         }
                     }
                 } else {
@@ -79,7 +79,7 @@ public class ChanMsgListener extends ListenerAdapter {
                             try {
                                 Command.onCommand(relayedcommand, event.getUser(), event.getBot(), IRCUtils.getPrefix(event.getBot(), event.getChannelSource()), event.getChannel(), false, 0, relayedmessage);
                             } catch (Exception e) {
-                                e.printStackTrace();
+                                IRCUtils.sendError(event.getUser(), event.getBot(), event.getChannel(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")", IRCUtils.getPrefix(event.getBot(), event.getChannelSource()));
                             }
                         }
 

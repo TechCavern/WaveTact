@@ -56,7 +56,7 @@ public class Part extends IRCCommand {
                     DatabaseUtils.updateNetwork(netRecord);
                 }
             } else {
-                IRCUtils.sendError(user, "Permission denied");
+                IRCUtils.sendError(user, network, channel, "Permission denied", prefix);
             }
         }
     }

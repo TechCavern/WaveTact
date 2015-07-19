@@ -74,12 +74,12 @@ public class MCServerInfo extends IRCCommand {
         GeneralUtils.readInputStream(in);
         int id = GeneralUtils.readInputStream(in);
         if (id != 0x00) {
-            IRCUtils.sendError(user, "Error parsing packet response");
+            IRCUtils.sendError(user, network, channel, "Error parsing packet response", prefix);
             return;
         }
         int length = GeneralUtils.readInputStream(in);
         if (length == 0 || length == -1) {
-            IRCUtils.sendError(user, "Error parsing packet response");
+            IRCUtils.sendError(user, network, channel, "Error parsing packet response", prefix);
             return;
         }
         byte[] bits = new byte[length];
