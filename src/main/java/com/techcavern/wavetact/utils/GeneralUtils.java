@@ -31,7 +31,10 @@ public class GeneralUtils {
     public static String buildMessage(int startint, int finishint, String[] args) {
         String message = "";
         for (int i = startint; i < finishint; i++) {
-            message += args[i] + " ";
+            if (i == finishint - 1)
+                message += args[i];
+            else
+                message += args[i] + " ";
         }
         return message;
     }

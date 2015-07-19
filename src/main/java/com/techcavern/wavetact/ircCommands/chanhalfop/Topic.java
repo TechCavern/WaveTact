@@ -45,7 +45,7 @@ public class Topic extends IRCCommand {
         List<String> topic = new LinkedList(Arrays.asList(StringUtils.split(channel.getTopic(), topicseparator.getValue(CHANNELPROPERTY.VALUE))));
         List<String> newtopic = new LinkedList(Arrays.asList(StringUtils.split(channel.getTopic(), topicseparator.getValue(CHANNELPROPERTY.VALUE))));
         if (args[0].equalsIgnoreCase("a") || args[0].equalsIgnoreCase("add")) {
-            channel.send().setTopic(channel.getTopic() + " " + topicseparator.getValue(CHANNELPROPERTY.VALUE) + " " + GeneralUtils.buildMessage(1, args.length, args) + " ");
+            channel.send().setTopic(channel.getTopic() + " " + topicseparator.getValue(CHANNELPROPERTY.VALUE) + " " + GeneralUtils.buildMessage(1, args.length, args));
             saveTopic(channel, network);
         } else if (args[0].startsWith("+")) {
             newtopic.set(Integer.parseInt(args[0].replaceFirst("\\+", "")) - 1, " " + GeneralUtils.buildMessage(1, args.length, args) + " ");
