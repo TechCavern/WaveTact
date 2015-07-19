@@ -41,7 +41,7 @@ public class Define extends IRCCommand {
         }
         WordApi api = new WordApi();
         api.getInvoker().addDefaultHeader("api_key", wordnikapikey);
-        List<Definition> Defs = api.getDefinitions(args[0], null, null, null, null, null, null);
+        List<Definition> Defs = api.getDefinitions(args[0].toLowerCase(), null, null, null, null, null, null);
         if (Defs.size() > 0) {
             if (Defs.size() - 1 >= ArrayIndex) {
                 String word = WordUtils.capitalizeFully(Defs.get(ArrayIndex).getWord());
