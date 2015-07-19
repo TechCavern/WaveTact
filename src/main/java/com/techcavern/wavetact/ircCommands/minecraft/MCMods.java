@@ -25,7 +25,7 @@ public class MCMods extends IRCCommand {
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         JsonArray versions = GeneralUtils.getJsonArray("http://bot.notenoughmods.com/?json&count");
         boolean isDev = false;
-        String modname = StringUtils.join(args).toLowerCase();
+        String modname = StringUtils.join(args).toLowerCase().replaceAll("[^a-zA-Z0-9]", "");
         Map<JsonObject, String> mcmods = new HashMap<>();
         if (modname.startsWith("+")) {
             isDev = true;
@@ -50,7 +50,7 @@ public class MCMods extends IRCCommand {
                         if (mod.get("name").getAsString().equalsIgnoreCase((o).get("name").getAsString()))
                             continue MCModSearch;
                     }
-                    if (mod.get(searchPhrase).getAsString().toLowerCase().contains(modname)) {
+                    if (mod.get(searchPhrase).getAsString().toLowerCase().replaceAll("[^a-zA-Z0-9]", "").contains(modname)) {
                         mcmods.put(mod, version);
                     }
                 }
