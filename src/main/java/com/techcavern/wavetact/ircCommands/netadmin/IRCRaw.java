@@ -5,6 +5,7 @@ import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.Registry;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -22,7 +23,7 @@ public class IRCRaw extends IRCCommand {
             args[2] = user.getNick();
         }
 
-        Registry.messageQueue.get(network).add(GeneralUtils.buildMessage(0, args.length, args));
+        Registry.messageQueue.get(network).add(StringEscapeUtils.unescapeJava(GeneralUtils.buildMessage(0, args.length, args)));
     }
 }
 
