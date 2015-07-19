@@ -70,6 +70,10 @@ public class MCMods extends IRCCommand {
                     }
                     }
                 }
+            if (mcmods.size() > 0) {
+                break MCModVersionSearch;
+            }
+
             }
         if (mcmods.isEmpty()) {
             IRCUtils.sendError(user, network, channel, "No mods found", prefix);
