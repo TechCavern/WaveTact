@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class KickListener extends ListenerAdapter {
     public void onKick(KickEvent event) throws Exception {
-        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), IRCUtils.noPing(event.getUser().getNick()) + " kicked " + IRCUtils.noPing(event.getRecipient().getNick()) + " (" + event.getReason() + ")");
+        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), IRCUtils.noPing(event.getRecipient().getNick()) + " was kicked by " + IRCUtils.noPing(event.getUser().getNick()) + " (" + event.getReason() + ")");
         Channel channel = event.getChannel();
         PircBotX network = event.getBot();
         User user = event.getUser();
