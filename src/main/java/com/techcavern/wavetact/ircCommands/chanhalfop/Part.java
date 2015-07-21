@@ -31,7 +31,7 @@ import static com.techcavern.wavetactdb.Tables.NETWORKS;
 public class Part extends IRCCommand {
 
     public Part() {
-        super(GeneralUtils.toArray("part pa"), 7, "part (+)[channel]", "Parts a channel", false);
+        super(GeneralUtils.toArray("part pa"), 7, "part (+)[channel]", "Parts a channel", true);
     }
 
     @Override
