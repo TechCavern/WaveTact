@@ -25,13 +25,14 @@ public class Owner extends IRCCommand {
 
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (network.getServerInfo().getPrefixes().contains("q")) {
+            String nick = user.getNick();
             if (args.length >= 1) {
-                user = IRCUtils.getUserByNick(network, args[0]);
+                nick = args[0];
             }
             if (command.contains("de")) {
-                channel.send().deOwner(user);
+                IRCUtils.setMode(channel, network, "-qo", nick + " " + nick);
             } else {
-                channel.send().owner(user);
+                IRCUtils.setMode(channel, network, "+qo", nick + " " + nick);
             }
         } else {
             IRCUtils.sendError(user, network, channel, "This server does not support owners", prefix);
