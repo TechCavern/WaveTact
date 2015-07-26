@@ -56,7 +56,7 @@ public class IRCUtils {
             ex.printStackTrace();
             WhoisEvent = null;
         }
-        if (WhoisEvent == null || !WhoisEvent.isExists() || !WhoisEvent.getNick().equals(userObject))
+        if (WhoisEvent == null || !WhoisEvent.isExists() || !WhoisEvent.getNick().equalsIgnoreCase(userObject))
             return null;
         else
             Registry.whoisEventCache.get(network).put(userObject, WhoisEvent);
