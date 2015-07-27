@@ -28,16 +28,26 @@ public class IRCUtils {
 
     public static WhoisEvent WhoisEvent(PircBotX network, String userObject, boolean useCache) {
         WhoisEvent WhoisEvent = Registry.whoisEventCache.get(network).get(userObject);
-        if (useCache && WhoisEvent != null) {
+        if (useCache) {
+            if (WhoisEvent != null) {
                 return WhoisEvent;
+            } else {
+                try {
+                    while (!Registry.messageQueue.get(network).isEmpty()) {
+                        TimeUnit.MILLISECONDS.sleep(100);
+                    }
+                } catch (Exception e) {
+                    return null;
+                }
+                WhoisEvent = Registry.whoisEventCache.get(network).get(userObject);
+                if (WhoisEvent != null)
+                    return WhoisEvent;
+            }
         } else if (WhoisEvent != null) {
             Registry.whoisEventCache.get(network).remove(WhoisEvent);
         }
         WaitForQueue waitForQueue = new WaitForQueue(network);
         try {
-            while (!Registry.messageQueue.get(network).isEmpty()) {
-                TimeUnit.MILLISECONDS.sleep(100);
-            }
             Registry.messageQueue.get(network).add("WHOIS " + userObject + " " + userObject);
             WhoisEvent = waitForQueue.waitFor(WhoisEvent.class, 2, TimeUnit.SECONDS);
             waitForQueue.close();

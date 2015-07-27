@@ -11,7 +11,6 @@ import com.techcavern.wavetact.utils.PermUtils;
 import org.jooq.Record;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.ActionEvent;
-import org.pircbotx.hooks.events.JoinEvent;
 import org.pircbotx.hooks.events.NickChangeEvent;
 import org.pircbotx.hooks.events.QuitEvent;
 
@@ -46,11 +45,6 @@ public class RelayMsgListener extends ListenerAdapter {
             chanrelay = rec.getValue(NETWORKPROPERTY.VALUE);
         if (chanrelay != null && event.getUser().getChannels().contains(IRCUtils.getChannelbyName(event.getBot(), chanrelay)))
             IRCUtils.sendRelayMessage(event.getBot(), IRCUtils.getChannelbyName(event.getBot(), chanrelay), IRCUtils.noPing(event.getUser().getNick()) + " quits " + " (" + event.getReason() + ")");
-    }
-
-    @Override
-    public void onJoin(JoinEvent event) {
-        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), IRCUtils.noPing(event.getUser().getNick()) + " joined " + event.getChannel().getName());
     }
 }
 

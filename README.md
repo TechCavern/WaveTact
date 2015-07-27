@@ -32,11 +32,13 @@ PermLevels
 - -1 - Ignored (Access to no commands)
 - -2 - Ignored by everything except the relay
 - -3 - Ignored by everything
+- -4 - Banned
 
 Channel-User Properties
 =======================
 - permlevel - you can set a custom permlevel for a user (Must be integer)
 - relaybotsplit - you may assign a bot as a relaybot, and set the value as the character before the actual message is handled
+- autoop - determines whether or not the user is gets automatically opped/voiced/ownered/protected depending on their permlevel
 
 Channel Properties
 ==================

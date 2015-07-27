@@ -43,6 +43,7 @@ public class ConnectListener extends ListenerAdapter {
         listenerManager.addListener(new PrivMsgListener());
         listenerManager.addListener(new KickListener());
         listenerManager.addListener(new BanListener());
+        listenerManager.addListener(new JoinListener());
         listenerManager.addListener(new FunMsgListener());
         listenerManager.addListener(new RelayMsgListener());
         listenerManager.addListener(new TellMsgListener());
