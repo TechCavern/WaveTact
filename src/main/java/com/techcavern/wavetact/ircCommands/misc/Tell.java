@@ -17,7 +17,9 @@ public class Tell extends IRCCommand {
 
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        Record relaybotsplit = DatabaseUtils.getChannelUserProperty(IRCUtils.getNetworkNameByNetwork(network), channel.getName(), PermUtils.authUser(network, user.getNick()), "relaybotsplit");
+        Record relaybotsplit = null;
+        if (!isPrivate)
+            relaybotsplit = DatabaseUtils.getChannelUserProperty(IRCUtils.getNetworkNameByNetwork(network), channel.getName(), PermUtils.authUser(network, user.getNick()), "relaybotsplit");
         if (relaybotsplit == null) {
             String sender = PermUtils.authUser(network, user.getNick());
             String recipient;
