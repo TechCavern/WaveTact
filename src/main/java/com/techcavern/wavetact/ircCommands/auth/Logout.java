@@ -13,7 +13,7 @@ import org.pircbotx.User;
 public class Logout extends IRCCommand {
 
     public Logout() {
-        super(GeneralUtils.toArray("logout"), 1, "logout", "Logs you out", false);
+        super(GeneralUtils.toArray("logout"), 0, "logout", "Logs you out", false);
     }
 
     @Override

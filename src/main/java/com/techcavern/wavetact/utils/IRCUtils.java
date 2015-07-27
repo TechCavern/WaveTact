@@ -69,7 +69,7 @@ public class IRCUtils {
                 if (!messageToSend.isEmpty()) {
                     Registry.messageQueue.get(networkObject).add("PRIVMSG " + prefix + channelObject.getName() + " :" + messageToSend);
                     if (prefix.isEmpty())
-                        sendRelayMessage(networkObject, channelObject, noPing(networkObject.getNick()) + ": " + message);
+                        sendRelayMessage(networkObject, channelObject, noPing(networkObject.getNick()) + ": " + messageToSend);
                 }
             }
         } else {
