@@ -100,20 +100,20 @@ public class PermUtils {
             }
             if (isNetworkAdmin(account, IRCUtils.getNetworkNameByNetwork(network))) {
                 return 20;
-            } else if (DatabaseUtils.getNetworkUserProperty(IRCUtils.getNetworkNameByNetwork(network), account, "permlevel") != null) {
+            } else if (DatabaseUtils.getChannelUserProperty(IRCUtils.getNetworkNameByNetwork(network), channelName, account, "permlevel") != null) {
                 int permlevel = 1;
                 try {
-                    permlevel = Integer.parseInt(DatabaseUtils.getNetworkUserProperty(IRCUtils.getNetworkNameByNetwork(network), account, "permlevel").getValue(NETWORKUSERPROPERTY.VALUE));
+                    permlevel = Integer.parseInt(DatabaseUtils.getChannelUserProperty(IRCUtils.getNetworkNameByNetwork(network), channelName, account, "permlevel").getValue(CHANNELUSERPROPERTY.VALUE));
                 } catch (Exception e) {
                 }
                 if (permlevel > 18) {
                     permlevel = 18;
                 }
                 return permlevel;
-            } else if (DatabaseUtils.getChannelUserProperty(IRCUtils.getNetworkNameByNetwork(network), channelName, account, "permlevel") != null) {
+            } else if (DatabaseUtils.getNetworkUserProperty(IRCUtils.getNetworkNameByNetwork(network), account, "permlevel") != null) {
                 int permlevel = 1;
                 try {
-                    permlevel = Integer.parseInt(DatabaseUtils.getChannelUserProperty(IRCUtils.getNetworkNameByNetwork(network), channelName, account, "permlevel").getValue(CHANNELUSERPROPERTY.VALUE));
+                    permlevel = Integer.parseInt(DatabaseUtils.getNetworkUserProperty(IRCUtils.getNetworkNameByNetwork(network), account, "permlevel").getValue(NETWORKUSERPROPERTY.VALUE));
                 } catch (Exception e) {
                 }
                 if (permlevel > 18) {
