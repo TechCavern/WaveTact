@@ -53,7 +53,7 @@ public class PermLevel extends IRCCommand {
             IRCUtils.sendMessage(user, network, channel, userObject + " is a Registered User!" + " (" + userPermLevel + ")", prefix);
         } else if (userPermLevel >= 0) {
             IRCUtils.sendMessage(user, network, channel, userObject + " is a Regular User!" + " (" + userPermLevel + ")", prefix);
-        } else if (userPermLevel >= 3) {
+        } else if (userPermLevel >= -3) {
             IRCUtils.sendMessage(user, network, channel, userObject + " is an Ignored User!" + " (" + userPermLevel + ")", prefix);
         } else {
             IRCUtils.sendMessage(user, network, channel, userObject + " is Banned!" + " (" + userPermLevel + ")", prefix);
