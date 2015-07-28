@@ -338,7 +338,7 @@ public class LoadUtils {
                             try {
                                 if (System.currentTimeMillis() >= banRecord.getValue(BANS.TIME) + banRecord.getValue(BANS.INIT)) {
                                     PircBotX networkObject = IRCUtils.getNetworkByNetworkName(banRecord.getValue(BANS.NETWORK));
-                                    if (!banRecord.getValue(BANS.HOSTMASK).isEmpty())
+                                    if (!banRecord.getValue(BANS.HOSTMASK).isEmpty() && banRecord.getValue(BANS.HOSTMASK) != null)
                                         IRCUtils.setMode(IRCUtils.getChannelbyName(networkObject, banRecord.getValue(BANS.CHANNEL)), networkObject, "-" + banRecord.getValue(BANS.PROPERTY), banRecord.getValue(BANS.HOSTMASK));
                                     DatabaseUtils.removeBan(banRecord.getValue(BANS.NETWORK), banRecord.getValue(BANS.CHANNEL), banRecord.getValue(BANS.HOSTMASK), banRecord.getValue(BANS.ISMUTE));
                                 }
