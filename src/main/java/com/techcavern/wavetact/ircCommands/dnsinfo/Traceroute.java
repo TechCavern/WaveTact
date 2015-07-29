@@ -16,7 +16,7 @@ import java.io.InputStreamReader;
 public class Traceroute extends IRCCommand {
 
     public Traceroute() {
-        super(GeneralUtils.toArray("traceroute trace tr"), 1, "traceroute (+)[ip][domain]", "traces route to a server ", false);
+        super(GeneralUtils.toArray("traceroute trace"), 1, "traceroute (+)[ip][domain]", "traces route to a server ", false);
     }
 
     @Override
