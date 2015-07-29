@@ -33,16 +33,20 @@ public class ListCommands extends IRCCommand {
             try {
                 permlevel = Integer.parseInt(args[0]);
             } catch (NumberFormatException e) {
-                permlevel = 0;
-                return;
+                permlevel = -1;
             }
         }
-        final int fpermlevel = permlevel;
-        List<String> commands = Registry.ircCommandList.stream().filter(cmd -> cmd.getPermLevel() == fpermlevel).map(IRCCommand::getCommand).collect(Collectors.toList());
-        if (commands.isEmpty()) {
-            IRCUtils.sendError(user, network, channel, "No commands found with that perm level", prefix);
+        if (permlevel >= 0) {
+            final int fpermlevel = permlevel;
+            List<String> commands = Registry.ircCommandList.stream().filter(cmd -> cmd.getPermLevel() == fpermlevel).map(IRCCommand::getCommand).collect(Collectors.toList());
+            if (commands.isEmpty()) {
+                IRCUtils.sendError(user, network, channel, "No commands found with that perm level", prefix);
+            } else {
+                Collections.sort(commands);
+                IRCUtils.sendMessage(user, network, channel, StringUtils.join(commands, ", "), prefix);
+            }
         } else {
-            Collections.sort(commands);
+            List<String> commands = Registry.ircCommandList.stream().map(IRCCommand::getCommand).collect(Collectors.toList());
             IRCUtils.sendMessage(user, network, channel, StringUtils.join(commands, ", "), prefix);
         }
     }
