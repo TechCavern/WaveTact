@@ -255,6 +255,8 @@ public class LoadUtils {
             Registry.whoisEventCache.put(network, new ConcurrentHashMap<>());
             Registry.authedUsers.put(network, new ConcurrentHashMap<>());
             Registry.messageQueue.put(network, new LinkedList<>());
+            Registry.lastLeftChannel.put(network, "");
+            Registry.lastWhois.put(network, "");
             class MessageQueue implements Runnable {
                 @Override
                 public void run() {
@@ -281,6 +283,8 @@ public class LoadUtils {
         Registry.whoisEventCache.put(network, new ConcurrentHashMap<>());
         Registry.authedUsers.put(network, new ConcurrentHashMap<>());
         Registry.messageQueue.put(network, new LinkedList<>());
+        Registry.lastLeftChannel.put(network, "");
+        Registry.lastWhois.put(network, "");
         class MessageQueue implements Runnable {
             @Override
             public void run() {

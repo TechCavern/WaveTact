@@ -40,12 +40,28 @@ public class IRCUtils {
                     return null;
                 }
                 WhoisEvent = Registry.whoisEventCache.get(network).get(userObject);
-                if (WhoisEvent != null)
+                if (WhoisEvent != null) {
                     return WhoisEvent;
+                } else {
+                    if (Registry.lastWhois.get(network).equalsIgnoreCase(userObject)) {
+                        int i = 0;
+                        while (WhoisEvent == null && i < 10) {
+                            try {
+                                TimeUnit.MILLISECONDS.sleep(100);
+                            } catch (Exception e) {
+                            }
+                            WhoisEvent = Registry.whoisEventCache.get(network).get(userObject);
+                            i++;
+                        }
+                        if (WhoisEvent != null)
+                            return WhoisEvent;
+                    }
+                }
             }
         } else if (WhoisEvent != null) {
             Registry.whoisEventCache.get(network).remove(WhoisEvent);
         }
+        Registry.lastWhois.put(network, userObject);
         WaitForQueue waitForQueue = new WaitForQueue(network);
         try {
             Registry.messageQueue.get(network).add("WHOIS " + userObject + " " + userObject);

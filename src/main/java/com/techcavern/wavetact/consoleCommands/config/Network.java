@@ -137,6 +137,8 @@ public class Network extends ConsoleCommand {
             Registry.messageQueue.remove(network);
             Registry.authedUsers.remove(network);
             Registry.whoisEventCache.remove(network);
+            Registry.lastWhois.remove(network);
+            Registry.lastLeftChannel.remove(network);
             network.stopBotReconnect();
             network.sendIRC().quitServer();
             commandIO.getPrintStream().println("network removed");

@@ -38,7 +38,7 @@ public class Part extends IRCCommand {
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (args.length < 1 || (args.length == 1 && args[0].equalsIgnoreCase(channel.getName()))) {
             channel.send().part();
-            Registry.lastLeftChannel = channel.getName();
+            Registry.lastLeftChannel.put(network, channel.getName());
         } else {
             if (userPermLevel >= 20) {
                 boolean permanent = false;
@@ -46,7 +46,7 @@ public class Part extends IRCCommand {
                     args[0] = args[0].replace("+", "");
                     permanent = true;
                 }
-                Registry.lastLeftChannel = args[0];
+                Registry.lastLeftChannel.put(network, args[0]);
                 Registry.messageQueue.get(network).add("PART " + args[0]);
                 if (permanent) {
                     Record netRecord = DatabaseUtils.getNetwork(IRCUtils.getNetworkNameByNetwork(network));

@@ -37,6 +37,7 @@ public class Registry {
     public static final UrlValidator urlValidator = new UrlValidator();
     public static final String VERSION = "WaveTact 1.0-dev";
     public static final String USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36";
-    public static String lastLeftChannel = "";
+    public static Map<PircBotX, String> lastLeftChannel = new HashMap<>();
     public static DSLContext wavetactDB = null;
+    public static Map<PircBotX, String> lastWhois = new HashMap<>();
 }

@@ -48,15 +48,15 @@ public class Test extends IRCCommand {
                 Registry.messageQueue.get(network).add("PRIVMSG ##powder-moo :./use cow");
             }
         };
+        Timer timer1 = new Timer();
         if (command.equalsIgnoreCase("company")) {
             network.getConfiguration().getListenerManager().addListener(new CrackbotListener());
             Registry.messageQueue.get(network).add("PRIVMSG ##powder-moo :./start");
         } else if (command.equalsIgnoreCase("timer")) {
-            Timer timer1 = new Timer();
             timer1.scheduleAtFixedRate(buy24cow, 0, 60000);
             timer1.scheduleAtFixedRate(usecow, 0, 3000);
-        } else if (command.equalsIgnoreCase("worldfarm")) {
-
+        } else if (command.equalsIgnoreCase("stoptimer")) {
+            timer1.purge();
         }
     }
 }
