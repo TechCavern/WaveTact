@@ -44,9 +44,9 @@ public class Part extends IRCCommand {
                 boolean permanent = false;
                 if (args[0].startsWith("+")) {
                     args[0] = args[0].replace("+", "");
-                    Registry.lastLeftChannel = args[0];
                     permanent = true;
                 }
+                Registry.lastLeftChannel = args[0];
                 Registry.messageQueue.get(network).add("PART " + args[0]);
                 if (permanent) {
                     Record netRecord = DatabaseUtils.getNetwork(IRCUtils.getNetworkNameByNetwork(network));

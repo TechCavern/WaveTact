@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 public class Test extends IRCCommand {
 
     public Test() {
-        super(GeneralUtils.toArray("test company timer dev"), 20, "test", "Test Command (This should not show up in a production environment. If it does, report it", false);
+        super(GeneralUtils.toArray("test company timer dev worldfarm"), 20, "test", "Test Command (This should not show up in a production environment. If it does, report it", false);
     }
 
     @Override
@@ -55,6 +55,8 @@ public class Test extends IRCCommand {
             Timer timer1 = new Timer();
             timer1.scheduleAtFixedRate(buy24cow, 0, 60000);
             timer1.scheduleAtFixedRate(usecow, 0, 3000);
+        } else if (command.equalsIgnoreCase("worldfarm")) {
+
         }
     }
 }
