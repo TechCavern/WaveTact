@@ -39,7 +39,7 @@ public class ListNetworks extends IRCCommand {
         if (networks.isEmpty())
             IRCUtils.sendMessage(user, network, channel, "No networks found" + networks, prefix);
         else
-            IRCUtils.sendMessage(user, network, channel, Registry.networks.size() + " network(s) found with those network(s) being " + StringUtils.join(networks, ", "), prefix);
+            IRCUtils.sendMessage(user, network, channel, Registry.networks.size() + " network(s) found: " + StringUtils.join(networks, ", "), prefix);
     }
 
 }
