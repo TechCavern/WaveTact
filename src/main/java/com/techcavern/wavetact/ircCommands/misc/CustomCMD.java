@@ -54,6 +54,7 @@ public class CustomCMD extends IRCCommand {
         } else {
             cCommand = args[0];
         }
+        cCommand = cCommand.toLowerCase();
         Record customCommand = DatabaseUtils.getChannelCustomCommand(net, chan, cCommand);
         if (isModify && customCommand != null && userPermLevel >= customCommand.getValue(CUSTOMCOMMANDS.PERMLEVEL) && !customCommand.getValue(CUSTOMCOMMANDS.ISLOCKED)) {
             customCommand.setValue(CUSTOMCOMMANDS.PERMLEVEL, Integer.parseInt(args[1]));
