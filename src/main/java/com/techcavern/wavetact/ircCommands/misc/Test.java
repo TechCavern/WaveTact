@@ -11,7 +11,6 @@ import org.pircbotx.hooks.events.PrivateMessageEvent;
 
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
 
 //@IRCCMD
 public class Test extends IRCCommand {
@@ -34,13 +33,15 @@ public class Test extends IRCCommand {
         }
         TimerTask buy24cow = new TimerTask() {
             public void run() {
+                TimerTask sellall = new TimerTask() {
+                    public void run() {
+                        Registry.messageQueue.get(network).add("PRIVMSG ##powder-moo :./sellall");
+                        Registry.messageQueue.get(network).add("PRIVMSG ##powder-moo :./bc24");
+                    }
+                };
                 Registry.messageQueue.get(network).add("PRIVMSG ##powder-moo :./bc24");
-                try {
-                    TimeUnit.MILLISECONDS.sleep(30000);
-                } catch (Exception e) {
-                }
-                Registry.messageQueue.get(network).add("PRIVMSG ##powder-moo :./sellall");
-                Registry.messageQueue.get(network).add("PRIVMSG ##powder-moo :./bc24");
+                Timer timer2 = new Timer();
+                timer2.schedule(sellall, 30000);
             }
         };
         TimerTask usecow = new TimerTask() {

@@ -300,13 +300,18 @@ public class IRCUtils {
                     String[] message = StringUtils.split(action, " ");
                     int i = 0;
                     for (String g : message) {
-                        if (g.startsWith("$") && !g.contains("*")) {
-                            action = action.replace(g, args[Integer.parseInt(g.replace("$", "")) - 1]);
-                            try {
-                                if (Integer.parseInt(g.replace("$", "")) > i) {
-                                    i++;
+                        if (g.contains("$")) {
+                            char[] chars = g.toCharArray();
+                            for (int v = 0; v < chars.length; v++) {
+                                if (chars[v] == ("$").charAt(0) && chars[v + 1] != ("*").charAt(0)) {
+                                    action = action.replace(String.valueOf(chars[v]) + String.valueOf(chars[v + 1]), args[Integer.valueOf(String.valueOf(chars[v + 1])) - 1]);
+                                    try {
+                                        if (Integer.valueOf(chars[v + 1]) > i) {
+                                            i++;
+                                        }
+                                    } catch (Exception e) {
+                                    }
                                 }
-                            } catch (Exception e) {
                             }
                         }
                     }
