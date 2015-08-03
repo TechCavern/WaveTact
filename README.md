@@ -2,7 +2,6 @@ WaveTact [![Build Status](https://travis-ci.org/TechCavern/WaveTact.svg?branch=m
 --------
 
 An IRC bot that is based upon PircBotX and sits in #techcavern on the following networks:
-- ElectroCode (irc.electrocode.net)
 - EsperNET (irc.esper.net)
 - SynIRC (irc.synirc.net)
 - Freenode (irc.freenode.net)
