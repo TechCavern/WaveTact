@@ -39,6 +39,14 @@ public class FunMsgListener extends ListenerAdapter {
                     for (String arg : message) {
                         try {
                             arg = Colors.removeFormattingAndColors(arg);
+                            if (arg.contains("yolo")) {
+                                if (IRCUtils.checkIfCanKick(event.getChannel(), event.getBot(), event.getUser())) {
+                                    IRCUtils.sendKick(event.getBot().getUserBot(), event.getUser(), event.getBot(), event.getChannel(), "YOLO");
+                                } else {
+                                    IRCUtils.sendAction(event.getUser(), event.getBot(), event.getChannel(), "kicks " + event.getUser().getNick() + "YOLO", "");
+                                }
+                                return;
+                            }
                             if (!arg.startsWith("https://") && !arg.startsWith("http://")) {
                                 arg = "http://" + arg;
                             }
