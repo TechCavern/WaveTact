@@ -34,9 +34,9 @@ public class Say extends ConsoleCommand {
             chan = IRCUtils.getChannelbyName(network, args[1]);
         if (chan != null) {
             if (command.equalsIgnoreCase("act") || command.equalsIgnoreCase("do")) {
-                IRCUtils.sendAction(network, chan, GeneralUtils.buildMessage(2, args.length, args).replace("\n", " "), prefix);
+                IRCUtils.sendAction(network, chan,"[Console] " +  GeneralUtils.buildMessage(2, args.length, args).replace("\n", " "), prefix);
             } else {
-                IRCUtils.sendMessage(network, chan, GeneralUtils.buildMessage(2, args.length, args).replace("\n", " "), prefix);
+                IRCUtils.sendMessage(network, chan, "[Console] " + GeneralUtils.buildMessage(2, args.length, args).replace("\n", " "), prefix);
             }
         }
     }
