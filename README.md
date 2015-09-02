@@ -6,6 +6,21 @@ An IRC bot that is based upon PircBotX and sits in #techcavern on the following 
 - SynIRC (irc.synirc.net)
 - Freenode (irc.freenode.net)
 
+Supported IRCds and Services
+============================
+
+Fully Supported:
+- Inspircd
+- Charybdis
+- Shalture
+- Atheme (Legacy Support)
+
+Partially Supported:
+- Anope
+- Unrealircd
+
+Forks of the above may or may not work.
+
 Building
 ========
 - Run `./gradlew jar`
