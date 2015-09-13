@@ -45,6 +45,7 @@ Channel Properties
 - autourl - this will detect and print the title of urls found in channel messages. (True/False)
 - topicseparator - this will determine the separator between topic parts
 - verboseerrors - send errors to channel instead of notice
+- notifymc - send mc notifications
 
 Global Config
 =================

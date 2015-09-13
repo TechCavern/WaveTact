@@ -42,7 +42,7 @@ public class MCStatus extends IRCCommand {
             if (value.equalsIgnoreCase("green")) {
                 value = "Online";
             } else if (value.equalsIgnoreCase("yellow")) {
-                value = "Slow";
+                value = "Overloaded";
             } else {
                 value = "Offline";
             }

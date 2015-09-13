@@ -1,6 +1,7 @@
 package com.techcavern.wavetact;
 
 import com.techcavern.wavetact.console.ConsoleClient;
+import com.techcavern.wavetact.eventListeners.MCStatusListener;
 import com.techcavern.wavetact.utils.ConfigUtils;
 import com.techcavern.wavetact.utils.LoadUtils;
 import com.techcavern.wavetact.utils.Registry;
@@ -34,6 +35,7 @@ public class Main {
             LoadUtils.registerEightball();
             LoadUtils.removeDuplicateCustomCommands();
             LoadUtils.initializeAutoFlushWhoisCache();
+            Registry.threadPool.execute(new MCStatusListener());
             Registry.WaveTact.start();
             Registry.threadPool.execute(Registry.consoleServer);
             LoadUtils.initializeMessageQueue();
