@@ -64,11 +64,11 @@ public class LoadUtils {
             Registry.ircCommands.keySet().stream().forEach(commandid -> {
                 DatabaseUtils.removeCustomCommand(commandid);
             });
-
-        }
-        for (Record netRecord : DatabaseUtils.getNetworks()) {
-            if(netRecord.getValue(NETWORKS.SSL) == null){
-                netRecord.setValue(NETWORKS.SSL, false);
+            for (Record netRecord : DatabaseUtils.getNetworks()) {
+                if(netRecord.getValue(NETWORKS.SSL) == null){
+                    netRecord.setValue(NETWORKS.SSL, false);
+                    DatabaseUtils.updateNetwork(netRecord);
+                }
             }
         }
     }

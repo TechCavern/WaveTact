@@ -18,6 +18,7 @@ public class ConfigUtils {
     public static void registerNetworks() {
         PircBotX network;
         for (Record netRecord : DatabaseUtils.getNetworks()) {
+            System.out.println(netRecord.getValue(NETWORKS.SSL));
             network = createNetwork(netRecord.getValue(NETWORKS.SERVERPASS), netRecord.getValue(NETWORKS.NICK), netRecord.getValue(NETWORKS.SERVER), netRecord.getValue(NETWORKS.PORT), netRecord.getValue(NETWORKS.BINDHOST), netRecord.getValue(NETWORKS.NAME), netRecord.getValue(NETWORKS.SSL));
             if (netRecord != null) {
                 Registry.WaveTact.addNetwork(network);
