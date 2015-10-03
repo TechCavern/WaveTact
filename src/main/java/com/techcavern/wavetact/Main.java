@@ -26,6 +26,7 @@ public class Main {
             System.exit(0);
         } else {
             LoadUtils.initiateDatabaseConnection();
+            LoadUtils.migrate();
             ConfigUtils.registerNetworks();
             LoadUtils.registerConsoleCommands();
             LoadUtils.registerIRCCommands();
@@ -33,7 +34,6 @@ public class Main {
             // LoadUtils.checkDuplicateIRCCommands();
             LoadUtils.registerAttacks();
             LoadUtils.registerEightball();
-            LoadUtils.removeDuplicateCustomCommands();
             LoadUtils.initializeAutoFlushWhoisCache();
             Registry.threadPool.execute(new MCStatusListener());
             Registry.WaveTact.start();

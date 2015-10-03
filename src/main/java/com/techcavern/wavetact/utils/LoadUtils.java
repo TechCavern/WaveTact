@@ -24,6 +24,7 @@ import java.util.concurrent.TimeUnit;
 
 import static com.techcavern.wavetactdb.Tables.BANS;
 import static com.techcavern.wavetactdb.Tables.CONFIG;
+import static com.techcavern.wavetactdb.Tables.NETWORKS;
 
 public class LoadUtils {
 
@@ -54,7 +55,7 @@ public class LoadUtils {
         }
     }
 
-    public static void removeDuplicateCustomCommands() {
+    public static void migrate() {
         if (DatabaseUtils.getConfig("CURRENT_ITERATION") != null && Integer.parseInt(DatabaseUtils.getConfig("CURRENT_ITERATION").getValue(CONFIG.VALUE)) >= Registry.CURRENT_ITERATION) {
             return;
         } else {
@@ -63,6 +64,12 @@ public class LoadUtils {
             Registry.ircCommands.keySet().stream().forEach(commandid -> {
                 DatabaseUtils.removeCustomCommand(commandid);
             });
+
+        }
+        for (Record netRecord : DatabaseUtils.getNetworks()) {
+            if(netRecord.getValue(NETWORKS.SSL) == null){
+                netRecord.setValue(NETWORKS.SSL, false);
+            }
         }
     }
 
