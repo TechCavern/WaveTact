@@ -50,7 +50,18 @@ public class Network extends ConsoleCommand {
                         if (viewonly)
                             commandIO.getPrintStream().println(network.getValue(NETWORKS.PORT));
                         else {
-                            network.setValue(NETWORKS.PORT, Integer.parseInt(args[2]));
+                            int port = 6667;
+                            boolean SSL = false;
+                            String portinput = args[2];
+                            if (!portinput.isEmpty()) {
+                                if(portinput.startsWith("+")){
+                                    SSL = true;
+                                    portinput = portinput.replaceFirst("\\+","");
+                                }
+                                port = Integer.parseInt(portinput);
+                            }
+                            network.setValue(NETWORKS.PORT, port);
+                            network.setValue(NETWORKS.SSL, SSL);
                             isSuccess = true;
                         }
                         break;
@@ -151,11 +162,17 @@ public class Network extends ConsoleCommand {
             String name = args[0];
             commandIO.getPrintStream().print("Server host: ");
             String server = input.nextLine();
-            commandIO.getPrintStream().print("Server port (Press enter to use default): ");
+            commandIO.getPrintStream().print("Server port (Press enter to use default, insert + beforehand for SSL): ");
             int port = 6667;
+            boolean SSL = false;
             String portinput = input.nextLine();
-            if (!portinput.isEmpty())
+            if (!portinput.isEmpty()) {
+                if(portinput.startsWith("+")){
+                    SSL = true;
+                    portinput = portinput.replaceFirst("\\+","");
+                }
                 port = Integer.parseInt(portinput);
+            }
             commandIO.getPrintStream().print("Server nick: ");
             String nick = input.nextLine();
             commandIO.getPrintStream().print("Channels (#chan1, #chan2, etc): ");
@@ -189,8 +206,8 @@ public class Network extends ConsoleCommand {
             String netadminsinput = input.nextLine();
             if (!netadminsinput.isEmpty())
                 netadmins = netadminsinput;
-            DatabaseUtils.addNetwork(name, port, server, nick, channels, bindhost, netadminaccess, netadmins, authtype, nickservcommand, serverpass, nickservnick);
-            PircBotX network = ConfigUtils.createNetwork(serverpass, nick, server, port, bindhost, name);
+            DatabaseUtils.addNetwork(name, port, server, nick, channels, bindhost, netadminaccess, netadmins, authtype, nickservcommand, serverpass, nickservnick, SSL);
+            PircBotX network = ConfigUtils.createNetwork(serverpass, nick, server, port, bindhost, name, SSL);
             Registry.networks.put(name, network);
             LoadUtils.addMessageQueue(network);
             Registry.WaveTact.addNetwork(network);

@@ -216,8 +216,8 @@ public class DatabaseUtils {
         Registry.wavetactDB.delete(NETWORKS).where(NETWORKS.NAME.eq(name)).execute();
     }
 
-    public static void addNetwork(String name, int port, String server, String nick, String channels, String bindhost, boolean netadminaccess, String networkadmins, String authtype, String nickservcommand, String serverpass, String nickservnick) {
-        Registry.wavetactDB.insertInto(NETWORKS).values(name, port, server, nick, channels, bindhost, netadminaccess, authtype, networkadmins, nickservcommand, serverpass, nickservnick).execute();
+    public static void addNetwork(String name, int port, String server, String nick, String channels, String bindhost, boolean netadminaccess, String networkadmins, String authtype, String nickservcommand, String serverpass, String nickservnick, boolean SSL) {
+        Registry.wavetactDB.insertInto(NETWORKS).values(name, port, server, nick, channels, bindhost, netadminaccess, authtype, networkadmins, nickservcommand, serverpass, nickservnick, SSL).execute();
     }
 
     public static void addTellMessage(String network, String sender, String receiver, String message) {
