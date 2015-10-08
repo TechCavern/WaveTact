@@ -13,7 +13,7 @@ import org.pircbotx.User;
 public class BasicCommands extends IRCCommand {
 
     public BasicCommands() {
-        super(GeneralUtils.toArray("version ping pong releases license source"), 0, "ping", "some basic commands", false);
+        super(GeneralUtils.toArray("version ping pong permissions releases license source"), 0, "ping", "some basic commands", false);
     }
 
     @Override
@@ -37,6 +37,9 @@ public class BasicCommands extends IRCCommand {
                 break;
             case "source":
                 IRCUtils.sendMessage(user, network, channel, "http://goo.gl/YP7t4N", prefix);
+                break;
+            case "permissions":
+                IRCUtils.sendMessage(user, network, channel, "-4 Banned, -3 = Ignored by Everything, -2 = Ignored by Everything except Relay, -1 = Commands Ignored, 0 = Everyone, 1 = Registered, 5 = Voiced/Trusted, 7 = Channel Half-Operator, 10 = Operator, 13 = Protected Channel Operator, 15 = Senior Channel Operator, 18 = Channel Administrator, 20 = Network Administrator", prefix);
                 break;
             default:
                 IRCUtils.sendMessage(user, network, channel, "pong", prefix);

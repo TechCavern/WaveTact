@@ -21,9 +21,6 @@ public class Help extends IRCCommand {
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (args.length > 0) {
-            if (args[0].equalsIgnoreCase("permissions")) {
-                IRCUtils.sendMessage(user, network, channel, "-2 = Ignored Completely, -1 = Commands Ignored, 0 = Everyone, 1 = Registered, 5 = Voiced/Trusted, 7 = Channel Half-Operator, 10 = Operator, 13 = Protected Channel Operator, 15 = Senior Channel Operator, 18 = Channel Administrator, 20 = Network Administrator", prefix);
-            } else {
                 IRCCommand irCommand = IRCUtils.getCommand(args[0], IRCUtils.getNetworkNameByNetwork(network), channel.getName());
                 if (irCommand != null) {
                     IRCUtils.sendMessage(user, network, channel, "Variations: " + StringUtils.join(Arrays.asList(irCommand.getCommandID()), ", "), prefix);
@@ -34,7 +31,6 @@ public class Help extends IRCCommand {
                 } else {
                     IRCUtils.sendError(user, network, channel, "Command does not exist", prefix);
                 }
-            }
         } else {
             IRCUtils.sendMessage(user, network, channel, "help (command) - Run list for available commands, generally a + before something means editing it, and a - means removing it. None means adding it. Time is in [time](s/m/h/d/w) format. [] is a required argument. () is an optional argument.", prefix);
         }
