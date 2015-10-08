@@ -254,7 +254,11 @@ public class LoadUtils {
         Registry.charReplacements.put("Y", "Ý");
 
     }
-
+    public static void registerDisconnectedBots(){
+        Registry.networks.values().stream().forEach(network -> {
+            Registry.hasConnected.put(network, false);
+        });
+    }
     public static void initializeMessageQueue() {
         Iterator iterator = Registry.networks.inverse().keySet().iterator();
         while (iterator.hasNext()) {

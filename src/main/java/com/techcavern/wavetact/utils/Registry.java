@@ -40,4 +40,5 @@ public class Registry {
     public static Map<PircBotX, String> lastLeftChannel = new HashMap<>();
     public static DSLContext wavetactDB = null;
     public static Map<PircBotX, String> lastWhois = new HashMap<>();
+    public static Map<PircBotX, Boolean> hasConnected = new HashMap();
 }

@@ -28,6 +28,7 @@ public class Main {
             LoadUtils.initiateDatabaseConnection();
             LoadUtils.migrate();
             ConfigUtils.registerNetworks();
+            LoadUtils.registerDisconnectedBots();
             LoadUtils.registerConsoleCommands();
             LoadUtils.registerIRCCommands();
             LoadUtils.registerCharReplacements();
