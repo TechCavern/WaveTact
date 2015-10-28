@@ -5,10 +5,12 @@
  */
 package com.techcavern.wavetact.eventListeners;
 
+import com.techcavern.wavetact.consoleCommands.network.Connect;
 import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.Registry;
 import org.apache.commons.lang3.StringUtils;
+import org.pircbotx.hooks.Listener;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.ConnectEvent;
 import org.pircbotx.hooks.managers.ListenerManager;
@@ -37,8 +39,8 @@ public class ConnectListener extends ListenerAdapter {
         TimeUnit.SECONDS.sleep(10);
         Registry.messageQueue.get(event.getBot()).addAll(Arrays.asList(StringUtils.split(DatabaseUtils.getNetwork(IRCUtils.getNetworkNameByNetwork(event.getBot())).getValue(NETWORKS.CHANNELS), ", ")).stream().map(channel -> ("JOIN :" + channel)).collect(Collectors.toList()));
         TimeUnit.SECONDS.sleep(10);
-        if(!Registry.hasConnected.get(event.getBot())) {
             ListenerManager listenerManager = event.getBot().getConfiguration().getListenerManager();
+            listenerManager.getListeners().stream().filter(lis -> !(lis instanceof ConnectListener)).forEach(listener->listenerManager.removeListener(listener));
             listenerManager.addListener(new ChanMsgListener());
             listenerManager.addListener(new PartListener());
             listenerManager.addListener(new PrivMsgListener());
@@ -48,8 +50,6 @@ public class ConnectListener extends ListenerAdapter {
             listenerManager.addListener(new FunMsgListener());
             listenerManager.addListener(new RelayMsgListener());
             listenerManager.addListener(new TellMsgListener());
-            Registry.hasConnected.put(event.getBot(), false);
-        }
         IRCUtils.sendLogChanMsg(event.getBot(), "[Connection Successful]");
     }
 
