@@ -10,6 +10,7 @@ import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.Registry;
 import org.apache.commons.lang3.StringUtils;
+import org.pircbotx.hooks.CoreHooks;
 import org.pircbotx.hooks.Listener;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.ConnectEvent;
@@ -40,7 +41,7 @@ public class ConnectListener extends ListenerAdapter {
         Registry.messageQueue.get(event.getBot()).addAll(Arrays.asList(StringUtils.split(DatabaseUtils.getNetwork(IRCUtils.getNetworkNameByNetwork(event.getBot())).getValue(NETWORKS.CHANNELS), ", ")).stream().map(channel -> ("JOIN :" + channel)).collect(Collectors.toList()));
         TimeUnit.SECONDS.sleep(10);
             ListenerManager listenerManager = event.getBot().getConfiguration().getListenerManager();
-            listenerManager.getListeners().stream().filter(lis -> !(lis instanceof ConnectListener)).forEach(listener->listenerManager.removeListener(listener));
+            listenerManager.getListeners().stream().filter(lis -> !(lis instanceof ConnectListener || lis instanceof CoreHooks)).forEach(listener->listenerManager.removeListener(listener));
             listenerManager.addListener(new ChanMsgListener());
             listenerManager.addListener(new PartListener());
             listenerManager.addListener(new PrivMsgListener());

@@ -50,8 +50,9 @@ public class Connect extends ConsoleCommand {
         if (workingnetwork.getState().equals(PircBotX.State.CONNECTED)) {
             commandIO.getPrintStream().println("Bot currently connected");
         } else {
+            commandIO.getPrintStream().println("Reconnecting...");
             workingnetwork.startBot();
+            return;
         }
-        commandIO.getPrintStream().println("Reconnecting...");
     }
 }
