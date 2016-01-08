@@ -37,7 +37,7 @@ public class Main {
             LoadUtils.registerAttacks();
             LoadUtils.registerEightball();
             LoadUtils.initializeAutoFlushWhoisCache();
-        //    Registry.threadPool.execute(new MCStatusListener());
+           Registry.threadPool.execute(new MCStatusListener());
      //   DatabaseUtils.addNetwork("Esper", 6697, "irc.esper.net", "WTTest", "#tctest", null, false, "JZTech101", "nickserv", null, null, null, true);
 
         Registry.WaveTact.start();
