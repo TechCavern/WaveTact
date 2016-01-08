@@ -3,6 +3,7 @@ package com.techcavern.wavetact;
 import com.techcavern.wavetact.console.ConsoleClient;
 import com.techcavern.wavetact.eventListeners.MCStatusListener;
 import com.techcavern.wavetact.utils.ConfigUtils;
+import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.LoadUtils;
 import com.techcavern.wavetact.utils.Registry;
 import org.slf4j.impl.SimpleLogger;
@@ -14,6 +15,7 @@ import java.util.concurrent.TimeUnit;
 public class Main {
 
     public static void main(String[] args) throws Exception {
+
         System.err.println("\nWelcome to WaveTact!\n");
 
         System.setProperty(SimpleLogger.SHOW_DATE_TIME_KEY, "true");
@@ -28,19 +30,21 @@ public class Main {
             LoadUtils.initiateDatabaseConnection();
             LoadUtils.migrate();
             ConfigUtils.registerNetworks();
-            LoadUtils.registerConsoleCommands();
+          LoadUtils.registerConsoleCommands();
             LoadUtils.registerIRCCommands();
             LoadUtils.registerCharReplacements();
             // LoadUtils.checkDuplicateIRCCommands();
             LoadUtils.registerAttacks();
             LoadUtils.registerEightball();
             LoadUtils.initializeAutoFlushWhoisCache();
-            Registry.threadPool.execute(new MCStatusListener());
-            Registry.WaveTact.start();
+        //    Registry.threadPool.execute(new MCStatusListener());
+     //   DatabaseUtils.addNetwork("Esper", 6697, "irc.esper.net", "WTTest", "#tctest", null, false, "JZTech101", "nickserv", null, null, null, true);
+
+        Registry.WaveTact.start();
             Registry.threadPool.execute(Registry.consoleServer);
             LoadUtils.initializeMessageQueue();
             LoadUtils.initializeBanQueue();
             Registry.threadPool.awaitTermination(Long.MAX_VALUE, TimeUnit.DAYS);
-        }
+ //  }
     }
 }

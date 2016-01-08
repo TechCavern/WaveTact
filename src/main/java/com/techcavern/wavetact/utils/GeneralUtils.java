@@ -21,6 +21,7 @@ import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.ByteBuffer;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
