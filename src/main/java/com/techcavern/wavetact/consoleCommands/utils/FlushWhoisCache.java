@@ -10,7 +10,7 @@ import com.techcavern.wavetact.utils.Registry;
 public class FlushWhoisCache extends ConsoleCommand {
 
     public FlushWhoisCache() {
-        super(GeneralUtils.toArray("flushwhois"), "flushwois)", "Flushes Whois Cache");
+        super(GeneralUtils.toArray("flushwhois"), "flushwhois)", "Flushes Whois Cache");
     }
 
     @Override
