@@ -20,7 +20,7 @@ public class MCMods extends IRCCommand {
 
     private static Map<JsonObject, String> mcmods = new HashMap<>();
     public MCMods() {
-        super(GeneralUtils.toArray("mcmods mcmod mclmod mclm mclma mclmodauthor mcmodauthor mcma mcm"), 0, "mcmods (+)[name]", "Gets info on minecraft mods", false);
+        super(GeneralUtils.toArray("mcmods mcmod mclmod mclm mclma mclmodauthor mcmodauthor mcma mcm"), 0, "mcmods (version) (+)[name]", "Gets info on minecraft mods", false);
     }
 
     public static boolean searchMCVersion(String version, String searchPhrase, String modname) throws Exception {
