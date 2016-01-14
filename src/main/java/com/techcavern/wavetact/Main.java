@@ -45,7 +45,11 @@ public class Main {
         LoadUtils.registerEightball();
         LoadUtils.initializeAutoFlushWhoisCache();
         Registry.threadPool.execute(new MCStatusListener());
-        //   DatabaseUtils.addNetwork("Esper", 6697, "irc.esper.net", "WTTest", "#tctest", null, false, "JZTech101", "nickserv", null, null, null, true);
+        /**
+      DatabaseUtils.addNetwork("Freenode", 6697, "irc.freenode.net", "WTTest", "#tctest", null, false, "JZTech101", "nickserv", , null, "nickserv", true);
+        DatabaseUtils.addNetwork("Freenode3", 6697, "irc.freenode.net", "WTTest2", "#tctest", null, false, "JZTech101", "nickserv", null, null, null, true);
+        DatabaseUtils.addNetwork("Freenode2", 6697, "irc.freenode.net", "WTTest3", "#tctest", null, false, "JZTech101", "nickserv", null, null, null, true);
+         **/
         if(!isWindows)
             Registry.threadPool.execute(Registry.consoleServer);
         Registry.WaveTact.start();

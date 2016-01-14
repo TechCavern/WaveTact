@@ -8,70 +8,64 @@ import com.techcavern.wavetact.utils.Registry;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
+import org.pircbotx.hooks.ListenerAdapter;
+import org.pircbotx.hooks.events.PrivateMessageEvent;
 import org.pircbotx.hooks.events.WhoisEvent;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 //@IRCCMD
 public class Test extends IRCCommand {
 
     public Test() {
-        super(GeneralUtils.toArray("test"), 0, "test", "moooo", false);
+        super(GeneralUtils.toArray("test timer project"), 0, "test", "moooo", false);
     }
-    public static int  boo = 0;
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        class RunOne implements Runnable {
-            public void run() {
-                runloop(1000000000L,2999999999L, user, network,channel,prefix);
-            }
-        }
-        class RunTwo implements Runnable {
-            public void run() {
-                runloop(3000000000L,4999999999L, user, network,channel,prefix);
-            }
-        }
-        class RunThree implements Runnable {
-            public void run() {
-                runloop(5000000000L,6999999999L, user, network,channel,prefix);
-            }
-        }
-        class RunFour implements Runnable {
-            public void run() {
-                runloop(7000000000L,8999999999L, user, network,channel,prefix);
-            }
-        }
-        class RunFive implements Runnable {
-            public void run() {
-                runloop(9000000000L,9999999999L, user, network,channel,prefix);
-            }
-        }
-        Registry.threadPool.execute(new RunOne());
-        Registry.threadPool.execute(new RunTwo());
-        Registry.threadPool.execute(new RunThree());
-        Registry.threadPool.execute(new RunFour());
-        Registry.threadPool.execute(new RunFive());
-        System.out.println("Finished. Found a grand total of " + boo);
-    }
-    public static void runloop(long a, long d, User user, PircBotX network, Channel channel, String prefix){
-        System.out.println("Starting...");
-
-        loop:
-        for (long i = a; i < d; i++) {
-            char[] c = Long.toString(i).toCharArray();
-            for (int j = 0; j < c.length; j++) {
-                for (int k = j + 1; k < c.length; k++) {
-                    if (c[j] == c[k]) {
-                        //  IRCUtils.sendMessage(user, network, channel, c[j] + " "  + c[k], prefix);
-                        continue loop;
-                    }
+        class CrackbotListener extends ListenerAdapter {
+            @Override
+            public void onPrivateMessage(PrivateMessageEvent event) throws Exception {
+                if (event.getUser().getNick().equalsIgnoreCase("Crackbot")) {
+                    IRCUtils.sendMessage(user, network, channel, "./start", prefix);
                 }
             }
-            //     IRCUtils.sendMessage(user, network, channel, , prefix);
-            System.out.println("Found One! " + i + " Count: " + boo);
-            boo++;
         }
-        System.out.println("Finished. Found a grand total of " + boo);
+        TimerTask buy = new TimerTask() {
+            public void run() {
+                IRCUtils.sendMessage(user, network, channel, "./bc24", prefix);
+                IRCUtils.sendMessage(user, network, channel, "./buy company 10", prefix);
+            }
+        };
+        TimerTask use = new TimerTask() {
+            public void run() {
+                IRCUtils.sendMessage(user, network, channel, "./use cow", prefix);
+                IRCUtils.sendMessage(user, network, channel, "./use company", prefix);
+            }
+        };
+        TimerTask sellall = new TimerTask() {
+            public void run() {
+                IRCUtils.sendMessage(user, network, channel, "./sellall <<buy company 12>>", prefix);
+            }
+        };
+        TimerTask givejz = new TimerTask() {
+            public void run() {
+                IRCUtils.sendMessage(user, network, channel, "./give WTTest <<calc $cash-800000000>>", prefix);
+            }
+        };
+        Timer timer1 = new Timer();
+        if (command.equalsIgnoreCase("project")) {
+            network.getConfiguration().getListenerManager().addListener(new CrackbotListener());
+            IRCUtils.sendMessage(user, network, channel, "./start", prefix);
+        } else if (command.equalsIgnoreCase("timer")) {
+            timer1.scheduleAtFixedRate(sellall, 0, 60000);
+            timer1.scheduleAtFixedRate(buy, 0, 30000);
+            timer1.scheduleAtFixedRate(use, 0, 3000);
+            timer1.scheduleAtFixedRate(givejz, 0, 600000);
+        } else if (command.equalsIgnoreCase("stoptimer")) {
+            timer1.purge();
+        }
     }
 }

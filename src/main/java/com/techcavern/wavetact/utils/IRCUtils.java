@@ -32,13 +32,6 @@ public class IRCUtils {
             if (WhoisEvent != null) {
                 return WhoisEvent;
             } else {
-                try {
-                    while (!Registry.messageQueue.get(network).isEmpty()) {
-                        TimeUnit.MILLISECONDS.sleep(100);
-                    }
-                } catch (Exception e) {
-                    return null;
-                }
                 WhoisEvent = Registry.whoisEventCache.get(network).get(userObject);
                 if (WhoisEvent != null) {
                     return WhoisEvent;
