@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-//@IRCCMD
+@IRCCMD
 public class Test extends IRCCommand {
 
     public Test() {
@@ -38,11 +38,11 @@ public class Test extends IRCCommand {
                 TimerTask sellall = new TimerTask() {
                     public void run() {
                         IRCUtils.sendMessage(user, network, channel, "./sellall <<buy company 10>>", prefix);
-                        Registry.messageQueue.get(network).add("PRIVMSG ##powder-moo :./bc24");
+                        IRCUtils.sendMessage(user, network, channel, "./bc24", prefix);
                         IRCUtils.sendMessage(user, network, channel, "./buy company 10", prefix);
                     }
                 };
-                Registry.messageQueue.get(network).add("PRIVMSG ##powder-moo :./bc24");
+                IRCUtils.sendMessage(user, network, channel, "./bc24", prefix);
                 IRCUtils.sendMessage(user, network, channel, "./buy company 10", prefix);
                 Timer timer2 = new Timer();
                 timer2.schedule(sellall, 40000);
@@ -56,7 +56,7 @@ public class Test extends IRCCommand {
         };
         TimerTask givejz = new TimerTask() {
             public void run() {
-                IRCUtils.sendMessage(user, network, channel, "./give Ginvera <<calc $cash-800000000>>", prefix);
+                IRCUtils.sendMessage(user, network, channel, "./give WTTest <<calc $cash-800000000>>", prefix);
             }
         };
         Timer timer1 = new Timer();
