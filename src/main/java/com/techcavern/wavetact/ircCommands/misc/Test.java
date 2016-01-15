@@ -21,7 +21,7 @@ import java.util.TimerTask;
 public class Test extends IRCCommand {
 
     public Test() {
-        super(GeneralUtils.toArray("test timer project"), 0, "test", "moooo", false);
+        super(GeneralUtils.toArray("test timer project refillcash"), 0, "test", "moooo", false);
     }
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
@@ -37,13 +37,13 @@ public class Test extends IRCCommand {
             public void run() {
                 TimerTask sellall = new TimerTask() {
                     public void run() {
-                        IRCUtils.sendMessage(user, network, channel, "./sellall <<buy company 10>>", prefix);
-                        IRCUtils.sendMessage(user, network, channel, "./bc24", prefix);
-                        IRCUtils.sendMessage(user, network, channel, "./buy company 10", prefix);
+                        IRCUtils.sendMessage(user, network, channel, "./sellall", prefix);
+                        IRCUtils.sendMessage(user, network, channel, "./buy cow <<calc 48-$inv[cow]>>", prefix);
+                        IRCUtils.sendMessage(user, network, channel, "./buy company <<calc 20-$inv[company]>>", prefix);
                     }
                 };
-                IRCUtils.sendMessage(user, network, channel, "./bc24", prefix);
-                IRCUtils.sendMessage(user, network, channel, "./buy company 10", prefix);
+                IRCUtils.sendMessage(user, network, channel, "./buy cow <<calc 48-$inv[cow]>>", prefix);
+                IRCUtils.sendMessage(user, network, channel, "./buy company <<calc 20-$inv[company]>>", prefix);
                 Timer timer2 = new Timer();
                 timer2.schedule(sellall, 40000);
             }
@@ -56,7 +56,12 @@ public class Test extends IRCCommand {
         };
         TimerTask givejz = new TimerTask() {
             public void run() {
-                IRCUtils.sendMessage(user, network, channel, "./give WTTest <<calc $cash-800000000>>", prefix);
+                IRCUtils.sendMessage(user, network, channel, "./give WTTest <<calc $cash-4000000000000>>", prefix);
+            }
+        };
+        TimerTask refillcash = new TimerTask() {
+            public void run() {
+                IRCUtils.sendMessage(user, network, channel, "./give WTTest3 4000000000000", prefix);
             }
         };
         Timer timer1 = new Timer();
@@ -69,6 +74,8 @@ public class Test extends IRCCommand {
             timer1.scheduleAtFixedRate(givejz, 0, 800000);
         } else if (command.equalsIgnoreCase("stoptimer")) {
             timer1.purge();
+        } else if (command.equalsIgnoreCase("refillcash")) {
+            timer1.scheduleAtFixedRate(refillcash, 0, 1000000);
         }
     }
 }
