@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-@IRCCMD
+//@IRCCMD
 public class Test extends IRCCommand {
 
     public Test() {
@@ -45,7 +45,7 @@ public class Test extends IRCCommand {
                 Registry.messageQueue.get(network).add("PRIVMSG ##powder-moo :./bc24");
                 IRCUtils.sendMessage(user, network, channel, "./buy company 10", prefix);
                 Timer timer2 = new Timer();
-                timer2.schedule(sellall, 30000);
+                timer2.schedule(sellall, 40000);
             }
         };
         TimerTask use = new TimerTask() {
@@ -56,7 +56,7 @@ public class Test extends IRCCommand {
         };
         TimerTask givejz = new TimerTask() {
             public void run() {
-                IRCUtils.sendMessage(user, network, channel, "./give WTTest <<calc $cash-800000000>>", prefix);
+                IRCUtils.sendMessage(user, network, channel, "./give Ginvera <<calc $cash-800000000>>", prefix);
             }
         };
         Timer timer1 = new Timer();
@@ -64,9 +64,9 @@ public class Test extends IRCCommand {
             network.getConfiguration().getListenerManager().addListener(new CrackbotListener());
             IRCUtils.sendMessage(user, network, channel, "./start", prefix);
         } else if (command.equalsIgnoreCase("timer")) {
-            timer1.scheduleAtFixedRate(buy, 0, 60000);
+            timer1.scheduleAtFixedRate(buy, 0, 80000);
             timer1.scheduleAtFixedRate(use, 0, 4000);
-            timer1.scheduleAtFixedRate(givejz, 0, 600000);
+            timer1.scheduleAtFixedRate(givejz, 0, 800000);
         } else if (command.equalsIgnoreCase("stoptimer")) {
             timer1.purge();
         }
