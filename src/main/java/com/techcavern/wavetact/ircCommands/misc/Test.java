@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-@IRCCMD
+//@IRCCMD
 public class Test extends IRCCommand {
 
     public Test() {
