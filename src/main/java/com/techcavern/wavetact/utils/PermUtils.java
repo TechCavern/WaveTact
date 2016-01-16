@@ -169,7 +169,7 @@ public class PermUtils {
         if (DatabaseUtils.getNetworkProperty(network, "ignoredhosts") == null) {
             return false;
         } else
-            for (String c : StringUtils.split(DatabaseUtils.getNetworkProperty(network, "ignoredhosts").getValue(NETWORKPROPERTY.VALUE), ", ")) {
+            for (String c : StringUtils.split(DatabaseUtils.getNetworkProperty(network, "ignoredhosts").getValue(NETWORKPROPERTY.VALUE), ",")) {
                 if (c.equalsIgnoreCase(hostmask))
                     return true;
             }
