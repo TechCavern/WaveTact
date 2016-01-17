@@ -37,11 +37,11 @@ public class Test extends IRCCommand {
                 TimerTask sellall = new TimerTask() {
                     public void run() {
                         IRCUtils.sendMessage(user, network, channel, "./sellall", prefix);
-                //        IRCUtils.sendMessage(user, network, channel, "./buy cow <<calc 48-$inv[cow]>>", prefix);
+                //        IRCUtils.sendMessage(user, network, channel, "./buy cow <<calc 24-$inv[cow]>>", prefix);
                         IRCUtils.sendMessage(user, network, channel, "./buy company <<calc 20-$inv[company]>>", prefix);
                     }
                 };
-           //     IRCUtils.sendMessage(user, network, channel, "./buy cow <<calc 48-$inv[cow]>>", prefix);
+           //     IRCUtils.sendMessage(user, network, channel, "./buy cow <<calc 24-$inv[cow]>>", prefix);
                 IRCUtils.sendMessage(user, network, channel, "./buy company <<calc 20-$inv[company]>>", prefix);
                 Timer timer2 = new Timer();
                 timer2.schedule(sellall, 40000);
