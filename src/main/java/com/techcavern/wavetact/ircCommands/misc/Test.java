@@ -16,7 +16,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
-
 //@IRCCMD
 public class Test extends IRCCommand {
 
@@ -38,11 +37,11 @@ public class Test extends IRCCommand {
                 TimerTask sellall = new TimerTask() {
                     public void run() {
                         IRCUtils.sendMessage(user, network, channel, "./sellall", prefix);
-                        IRCUtils.sendMessage(user, network, channel, "./buy cow <<calc 48-$inv[cow]>>", prefix);
+                //        IRCUtils.sendMessage(user, network, channel, "./buy cow <<calc 48-$inv[cow]>>", prefix);
                         IRCUtils.sendMessage(user, network, channel, "./buy company <<calc 20-$inv[company]>>", prefix);
                     }
                 };
-                IRCUtils.sendMessage(user, network, channel, "./buy cow <<calc 48-$inv[cow]>>", prefix);
+           //     IRCUtils.sendMessage(user, network, channel, "./buy cow <<calc 48-$inv[cow]>>", prefix);
                 IRCUtils.sendMessage(user, network, channel, "./buy company <<calc 20-$inv[company]>>", prefix);
                 Timer timer2 = new Timer();
                 timer2.schedule(sellall, 40000);
@@ -50,7 +49,8 @@ public class Test extends IRCCommand {
         };
         TimerTask use = new TimerTask() {
             public void run() {
-                IRCUtils.sendMessage(user, network, channel, "./use cow", prefix);
+             //   IRCUtils.sendMessage(user, network, channel, "./use cow", prefix);
+                IRCUtils.sendMessage(user, network, channel, "./use company", prefix);
                 IRCUtils.sendMessage(user, network, channel, "./use company", prefix);
             }
         };
@@ -69,13 +69,13 @@ public class Test extends IRCCommand {
             network.getConfiguration().getListenerManager().addListener(new CrackbotListener());
             IRCUtils.sendMessage(user, network, channel, "./start", prefix);
         } else if (command.equalsIgnoreCase("timer")) {
-            timer1.scheduleAtFixedRate(buy, 0, 80000);
+            timer1.scheduleAtFixedRate(buy, 0, 40000);
             timer1.scheduleAtFixedRate(use, 0, 4000);
-            timer1.scheduleAtFixedRate(givejz, 0, 800000);
+            timer1.scheduleAtFixedRate(givejz, 0, 400000);
         } else if (command.equalsIgnoreCase("stoptimer")) {
             timer1.purge();
         } else if (command.equalsIgnoreCase("refillcash")) {
-            timer1.scheduleAtFixedRate(refillcash, 0, 1000000);
+            timer1.scheduleAtFixedRate(refillcash, 0, 500000);
         }
     }
 }
