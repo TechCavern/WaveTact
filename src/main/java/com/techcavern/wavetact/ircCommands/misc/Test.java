@@ -56,7 +56,7 @@ public class Test extends IRCCommand {
         };
         TimerTask givejz = new TimerTask() {
             public void run() {
-                IRCUtils.sendMessage(user, network, channel, "./give WTTest <<calc $cash-4000000000000>>", prefix);
+                IRCUtils.sendMessage(user, network, channel, "./give JZTech1O1 <<calc $cash-4000000000000>>", prefix);
             }
         };
         TimerTask refillcash = new TimerTask() {
