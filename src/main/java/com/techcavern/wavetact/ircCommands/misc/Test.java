@@ -20,7 +20,7 @@ import java.util.TimerTask;
 public class Test extends IRCCommand {
 
     public Test() {
-        super(GeneralUtils.toArray("test timer project refillcash"), 0, "test", "moooo", false);
+        super(GeneralUtils.toArray("test timer project refillcash "), 0, "test", "moooo", false);
     }
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {

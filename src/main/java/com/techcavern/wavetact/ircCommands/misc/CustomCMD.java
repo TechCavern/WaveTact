@@ -10,6 +10,7 @@ import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.Registry;
 import org.apache.commons.lang3.ArrayUtils;
 import org.jooq.Record;
 import org.pircbotx.Channel;
@@ -66,7 +67,7 @@ public class CustomCMD extends IRCCommand {
         } else if (isDelete && customCommand != null && userPermLevel >= customCommand.getValue(CUSTOMCOMMANDS.PERMLEVEL) && !customCommand.getValue(CUSTOMCOMMANDS.ISLOCKED)) {
             DatabaseUtils.removeCustomCommand(net, chan, cCommand);
             IRCUtils.sendMessage(user, network, channel, "Custom Command removed", prefix);
-        } else if (customCommand == null && IRCUtils.getCommand(cCommand, net, chan) == null && !isDelete && !isModify) {
+        } else if (customCommand == null && Registry.ircCommands.get(cCommand) == null && !isDelete && !isModify) {
             DatabaseUtils.addCustomCommand(net, chan, cCommand, Integer.parseInt(args[1]), GeneralUtils.buildMessage(2, args.length, args).replace("\n", " "), false, isAction);
             IRCUtils.sendMessage(user, network, channel, "Custom Command added", prefix);
         } else {
