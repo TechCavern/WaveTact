@@ -175,13 +175,9 @@ public class IRCUtils {
             String hostname = whois.getHostname();
             String Login = whois.getLogin();
             if (isBanmask) {
-                if (!Login.startsWith("~")) {
-                    hostmask = "*!" + Login + "@" + hostname;
-                } else {
-                    hostmask = "*!*@" + hostname;
-                }
+                hostmask =  getBanmask(hostname, Login);
             } else {
-                hostmask = "*!" + Login + "@" + hostname;
+                hostmask = getLoginmask(hostname, Login);
             }
             hostmask = hostmask.replace(" ", "");
         } else {
@@ -189,6 +185,21 @@ public class IRCUtils {
         }
         return hostmask;
     }
+
+    public static String getBanmask(String hostname, String ident){
+        String hostmask;
+        if (!ident.startsWith("~")) {
+            hostmask = "*!" + ident + "@" + hostname;
+        } else {
+            hostmask = "*!*@" + hostname;
+        }
+        return hostmask;
+    }
+
+    public static String getLoginmask(String hostname, String ident){
+        return "*!" + ident + "@" + hostname;
+    }
+
 
     public static void sendGlobal(String message, User user) {
         Iterator iterator = Registry.networks.inverse().keySet().iterator();
@@ -216,13 +227,9 @@ public class IRCUtils {
             String hostname = user.getHostname();
             String Login = user.getLogin();
             if (isBanmask) {
-                if (!Login.startsWith("~")) {
-                    hostmask = "*!" + Login + "@" + hostname;
-                } else {
-                    hostmask = "*!*@" + hostname;
-                }
+                hostmask =  getBanmask(hostname, Login);
             } else {
-                hostmask = "*!" + Login + "@" + hostname;
+                hostmask = getLoginmask(hostname, Login);
             }
             hostmask = hostmask.replace(" ", "");
         } else {

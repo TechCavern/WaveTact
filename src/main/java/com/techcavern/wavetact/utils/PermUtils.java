@@ -24,7 +24,7 @@ public class PermUtils {
     }
 
     public static String authUser(PircBotX network, String userObject) { //gets hostmask of userObject and calls getAccount using it
-        String hostmask = IRCUtils.getHostmask(network, userObject, true);
+        String hostmask = IRCUtils.getHostmask(network, userObject, false);
         if (hostmask != null) {
             return getAccount(network, userObject, hostmask);
         } else {
@@ -91,7 +91,7 @@ public class PermUtils {
     }
 
     private static int getManualPermLevel(String userObject, PircBotX network, Channel channelObject, String account) { //gets Manual Perm Level using the account name
-        if (isIgnored(IRCUtils.getHostmask(network, userObject, true), IRCUtils.getNetworkNameByNetwork(network))) {
+        if (isIgnored(IRCUtils.getHostmask(network, userObject, false), IRCUtils.getNetworkNameByNetwork(network))) {
             return -2;
         } else if (account != null) {
             String channelName = null;

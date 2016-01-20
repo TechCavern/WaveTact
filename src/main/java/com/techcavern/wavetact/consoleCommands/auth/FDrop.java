@@ -17,7 +17,7 @@ public class FDrop extends ConsoleCommand {
     @Override
     public void onCommand(String command, String[] args, CommandIO commandIO) {
         Registry.networks.inverse().keySet().stream().filter(net -> PermUtils.isAccountEnabled(net)).forEach(net -> {
-            String authedUser = PermUtils.getAuthedUser((net), IRCUtils.getHostmask(net, args[0], true));
+            String authedUser = PermUtils.getAuthedUser((net), IRCUtils.getHostmask(net, args[0], false));
             Registry.authedUsers.get(net).keySet().stream().filter(key -> Registry.authedUsers.get(net).get(key).equals(authedUser)).forEach(key ->
                             Registry.authedUsers.get(net).remove(key)
             );

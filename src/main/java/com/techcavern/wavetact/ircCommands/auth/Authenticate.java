@@ -38,7 +38,7 @@ public class Authenticate extends IRCCommand {
         } else {
             Record account = DatabaseUtils.getAccount(userString);
             if (account != null && Registry.encryptor.checkPassword(password + account.getValue(ACCOUNTS.RANDOMSTRING), account.getValue(ACCOUNTS.PASSWORD))) {
-                Registry.authedUsers.get(network).put(IRCUtils.getHostmask(network, user.getNick(), true), userString);
+                Registry.authedUsers.get(network).put(IRCUtils.getHostmask(network, user.getNick(), false), userString);
                 IRCUtils.sendMessage(user, network, channel, "Identification successful", prefix);
                 IRCUtils.sendLogChanMsg(network, "[AUTH SUCCESS] " + IRCUtils.noPing(user.getNick()));
             } else {

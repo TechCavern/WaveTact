@@ -18,7 +18,7 @@ public class Logout extends IRCCommand {
 
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        Registry.authedUsers.get(network).remove(IRCUtils.getHostmask(network, user.getNick(), true));
+        Registry.authedUsers.get(network).remove(IRCUtils.getHostmask(network, user.getNick(), false));
         Registry.whoisEventCache.get(network).remove(user.getNick());
         IRCUtils.sendMessage(user, network, channel, "You are now logged out", prefix);
         IRCUtils.sendLogChanMsg(network, "[LOGOUT] " + IRCUtils.noPing(user.getNick()));
