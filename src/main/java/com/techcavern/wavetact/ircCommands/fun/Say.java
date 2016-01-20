@@ -23,7 +23,7 @@ import org.pircbotx.User;
 public class Say extends IRCCommand {
 
     public Say() {
-        super(GeneralUtils.toArray("say msg s a act do prism"), 0, "say [something]", "Makes the bot say something", false);
+        super(GeneralUtils.toArray("say msg s a act do prism echo"), 0, "say [something]", "Makes the bot say something", false);
     }
 
     @Override

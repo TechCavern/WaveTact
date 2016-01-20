@@ -11,7 +11,7 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-@IRCCMD
+//@IRCCMD MCDrama Command is busted
 public class MCDrama extends IRCCommand {
 
     public MCDrama() {

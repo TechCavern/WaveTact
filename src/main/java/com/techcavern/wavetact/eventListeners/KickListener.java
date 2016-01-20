@@ -5,7 +5,10 @@
  */
 package com.techcavern.wavetact.eventListeners;
 
+import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetactdb.tables.Channelproperty;
+import org.jooq.Record;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -21,23 +24,30 @@ import java.util.concurrent.TimeUnit;
 public class KickListener extends ListenerAdapter {
     public void onKick(KickEvent event) throws Exception {
         IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), IRCUtils.noPing(event.getRecipient().getNick()) + " was kicked by " + IRCUtils.noPing(event.getUser().getNick()) + " (" + event.getReason() + ")");
-        Channel channel = event.getChannel();
-        PircBotX network = event.getBot();
-        User user = event.getUser();
-        if (event.getRecipient().getNick().equals(network.getNick())) {
-            int tries = 0;
-            event.getBot().sendIRC().joinChannel(channel.getName());
-            while (tries < 60 && !network.getUserBot().getChannels().contains(channel)) {
+        Record rec = DatabaseUtils.getChannelProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), event.getChannel().getName(), "kickrejoin");
+        if (!(rec != null && rec.getValue(Channelproperty.CHANNELPROPERTY.VALUE).equalsIgnoreCase("false"))) {
+            Channel channel = event.getChannel();
+            PircBotX network = event.getBot();
+            User user = event.getUser();
+            if (event.getRecipient().getNick().equals(network.getNick())) {
+                int tries = 0;
                 event.getBot().sendIRC().joinChannel(channel.getName());
-                tries++;
-                TimeUnit.SECONDS.sleep(5);
-            }
-            if (network.getUserBot().getChannels().contains(channel) && !user.getNick().equals(network.getNick())) {
-                if (IRCUtils.checkIfCanKick(channel, network, user)) {
-                    IRCUtils.sendKick(network.getUserBot(), user, network, event.getChannel(), "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻");
-                } else {
-                    IRCUtils.sendAction(user, network, channel, "kicks " + user.getNick() + " (┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻)", "");
-
+                while (tries < 10 && !network.getUserBot().getChannels().contains(channel)) {
+                    event.getBot().sendIRC().joinChannel(channel.getName());
+                    tries++;
+                    TimeUnit.SECONDS.sleep(5);
+                }
+                Record rec2 = DatabaseUtils.getChannelProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), event.getChannel().getName(), "funmsg");
+                if (rec2 == null)
+                    return;
+                if (rec2.getValue(Channelproperty.CHANNELPROPERTY.VALUE).equalsIgnoreCase("true")) {
+                    if (network.getUserBot().getChannels().contains(channel) && !user.getNick().equals(network.getNick())) {
+                        if (IRCUtils.checkIfCanKick(channel, network, user)) {
+                            IRCUtils.sendKick(network.getUserBot(), user, network, event.getChannel(), "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻");
+                        } else {
+                            IRCUtils.sendAction(user, network, channel, "kicks " + user.getNick() + " (┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻)", "");
+                        }
+                    }
                 }
             }
         }
