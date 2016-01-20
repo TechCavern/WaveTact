@@ -32,6 +32,7 @@ public class LoadUtils {
     public static void initiateDatabaseConnection() throws Exception {
         Flyway flyway = new Flyway();
         flyway.setDataSource("jdbc:sqlite:./db.sqlite", null, null);
+        flyway.setValidateOnMigrate(false);
         flyway.migrate();
         System.err.println("Getting connection...");
         Class.forName("org.sqlite.JDBC");
