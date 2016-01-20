@@ -22,29 +22,13 @@ import static com.techcavern.wavetactdb.Tables.NETWORKPROPERTY;
 public class RelayMsgListener extends ListenerAdapter {
 
     @Override
-    public void onAction(ActionEvent event) {
-        if (PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel()) > -3 && IRCUtils.getPrefix(event.getBot(), event.getChannelSource()).isEmpty())
-            IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), "* " + IRCUtils.noPing(event.getUser().getNick()) + " " + event.getMessage());
-    }
-
-    @Override
     public void onNickChange(NickChangeEvent event) {
-        Record rec = DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "relaychan");
-        String chanrelay = null;
-        if (rec != null)
-            chanrelay = rec.getValue(NETWORKPROPERTY.VALUE);
-        if (chanrelay != null && event.getUser().getChannels().contains(IRCUtils.getChannelbyName(event.getBot(), chanrelay)))
-            IRCUtils.sendRelayMessage(event.getBot(), IRCUtils.getChannelbyName(event.getBot(), chanrelay), IRCUtils.noPing(event.getOldNick()) + " is now known as " + IRCUtils.noPing(event.getNewNick()));
+            IRCUtils.sendRelayMessage(event.getBot(), null, IRCUtils.noPing(event.getOldNick()) + " is now known as " + IRCUtils.noPing(event.getNewNick()), event.getUser());
     }
 
     @Override
     public void onQuit(QuitEvent event) {
-        Record rec = DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "relaychan");
-        String chanrelay = null;
-        if (rec != null)
-            chanrelay = rec.getValue(NETWORKPROPERTY.VALUE);
-        if (chanrelay != null && event.getUser().getChannels().contains(IRCUtils.getChannelbyName(event.getBot(), chanrelay)))
-            IRCUtils.sendRelayMessage(event.getBot(), IRCUtils.getChannelbyName(event.getBot(), chanrelay), IRCUtils.noPing(event.getUser().getNick()) + " quits " + " (" + event.getReason() + ")");
+            IRCUtils.sendRelayMessage(event.getBot(), null, IRCUtils.noPing(event.getUser().getNick()) + " quits " + " (" + event.getReason() + ")", event.getUser());
     }
 }
 

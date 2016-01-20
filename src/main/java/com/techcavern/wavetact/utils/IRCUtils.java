@@ -11,7 +11,7 @@ import org.pircbotx.exception.DaoException;
 import org.pircbotx.hooks.WaitForQueue;
 import org.pircbotx.hooks.events.WhoisEvent;
 
-import java.util.Iterator;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 import static com.techcavern.wavetactdb.Tables.*;
@@ -99,20 +99,37 @@ public class IRCUtils {
     }
 
     public static void sendRelayMessage(PircBotX networkObject, Channel channel, String msg) {
-        Record prerec = DatabaseUtils.getNetworkProperty(getNetworkNameByNetwork(networkObject), "relaychan");
-        if (prerec != null) {
-            String chnname = prerec.getValue(NETWORKPROPERTY.VALUE);
-            if (chnname != null && chnname.equalsIgnoreCase(channel.getName())) {
-                Iterator iterator = Registry.networks.inverse().keySet().iterator();
-                while (iterator.hasNext()) {
-                    PircBotX net = (PircBotX) iterator.next();
-                    if (net != networkObject) {
-                        Record rec = DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(net), "relaychan");
-                        if (rec != null) {
-                            String relaychan = rec.getValue(NETWORKPROPERTY.VALUE);
-                            if (relaychan != null)
-                                Registry.messageQueue.get(net).add("PRIVMSG " + relaychan + " :[" + getNetworkNameByNetwork(networkObject) + "] " + msg);
-                        }
+        sendRelayMessage(networkObject, channel, msg, null);
+    }
+    public static void sendRelayMessage(PircBotX networkObject, Channel channel, String msg, User user) {
+        List<String[]> toBeRelayed = new ArrayList<>();
+        for (Record relay : DatabaseUtils.getRelays()) {
+            String[] channels = relay.getValue(RELAYS.VALUE).split(",");
+            for (String chan : channels) {
+                String[] netchan = chan.split("\\.");
+                if (channel == null) {
+                    if (getNetworkNameByNetwork(networkObject).equalsIgnoreCase(netchan[0]) && user.getChannels().contains(IRCUtils.getChannelbyName(networkObject,netchan[1]))) {
+                        toBeRelayed.add(channels);
+                        break;
+                    }
+                } else {
+                    if (getNetworkNameByNetwork(networkObject).equalsIgnoreCase(netchan[0]) && channel.getName().equalsIgnoreCase(netchan[1])) {
+                        toBeRelayed.add(channels);
+                        break;
+                    }
+                }
+            }
+        }
+        for (String[] channels : toBeRelayed) {
+            for (String chan : channels) {
+                String[] netchan = chan.split("\\.");
+                if (channel == null) {
+                    if (!getNetworkNameByNetwork(networkObject).equalsIgnoreCase(netchan[0])) {
+                        Registry.messageQueue.get(getNetworkByNetworkName(netchan[0])).add("PRIVMSG " + netchan[1] + " :[" + getNetworkNameByNetwork(networkObject) + "] " + msg);
+                    }
+                } else {
+                    if (!(getNetworkNameByNetwork(networkObject).equalsIgnoreCase(netchan[0]) && channel.getName().equalsIgnoreCase(netchan[1]))) {
+                        Registry.messageQueue.get(getNetworkByNetworkName(netchan[0])).add("PRIVMSG " + netchan[1] + " :[" + getNetworkNameByNetwork(networkObject) + "] " + msg);
                     }
                 }
             }

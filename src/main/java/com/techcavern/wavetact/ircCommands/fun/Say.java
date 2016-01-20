@@ -44,12 +44,20 @@ public class Say extends IRCCommand {
         }
         if (chan == null || PermUtils.getPermLevel(network, user.getNick(), chan) >= 5) {
             if (command.equalsIgnoreCase("act") || command.equalsIgnoreCase("do") || command.equalsIgnoreCase("a")) {
+                if(isPrivate)
                 IRCUtils.sendAction(user, network, chan, GeneralUtils.stripHTML(StringUtils.join(args, " ")) + " [" + IRCUtils.noPing(user.getNick()) + "]", prefix);
+                else
+                    IRCUtils.sendAction(user, network, chan, GeneralUtils.stripHTML(StringUtils.join(args, " ")), prefix);
             } else if (command.equalsIgnoreCase("prism")) {
-                IRCUtils.sendMessage(user, network, chan, "[" + IRCUtils.noPing(user.getNick()) + "] " + GeneralUtils.prism(GeneralUtils.stripHTML(StringUtils.join(args, " "))), prefix);
-
+                if(isPrivate)
+                    IRCUtils.sendMessage(user, network, chan, "[" + IRCUtils.noPing(user.getNick()) + "] " + GeneralUtils.prism(GeneralUtils.stripHTML(StringUtils.join(args, " "))), prefix);
+                else
+                    IRCUtils.sendMessage(user, network, chan, GeneralUtils.prism(GeneralUtils.stripHTML(StringUtils.join(args, " "))), prefix);
             } else {
-                IRCUtils.sendMessage(user, network, chan, "[" + IRCUtils.noPing(user.getNick()) + "] " + GeneralUtils.stripHTML(StringUtils.join(args, " ")), prefix);
+                if(isPrivate)
+                    IRCUtils.sendMessage(user, network, chan, "[" + IRCUtils.noPing(user.getNick()) + "] " + GeneralUtils.stripHTML(StringUtils.join(args, " ")), prefix);
+                else
+                    IRCUtils.sendMessage(user, network, chan, GeneralUtils.stripHTML(StringUtils.join(args, " ")), prefix);
             }
         } else {
             IRCUtils.sendError(user, network, channel, "Permission denied", prefix);

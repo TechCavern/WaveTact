@@ -75,7 +75,6 @@ Global Config
 
 Network Properties
 =================
-- relaychan - Determines the channel from the network to relay
 - commandchar - Determines network command char
 - pmlog - Logs PMs to a channel
 - ignoredhosts - list of ignored hostmasks

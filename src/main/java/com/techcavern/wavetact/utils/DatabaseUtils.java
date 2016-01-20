@@ -63,6 +63,22 @@ public class DatabaseUtils {
     public static void updateConfig(Record config) {
         Registry.wavetactDB.update(CONFIG).set(config).where(CONFIG.PROPERTY.eq(config.getValue(CONFIG.PROPERTY))).execute();
     }
+    public static Record getRelay(String relay) {
+        Result<Record> relayRecord = Registry.wavetactDB.select().from(CONFIG).where(CONFIG.PROPERTY.eq(relay)).fetch();
+        return getRecord(relayRecord);
+    }
+
+    public static void removeRelay(String relay) {
+        Registry.wavetactDB.delete(RELAYS).where(RELAYS.PROPERTY.eq(relay)).execute();
+    }
+
+    public static void addRelay(String relay, String value) {
+        Registry.wavetactDB.insertInto(RELAYS).values(relay, value).execute();
+    }
+
+    public static void updateRelay(Record relay) {
+        Registry.wavetactDB.update(RELAYS).set(relay).where(CONFIG.PROPERTY.eq(relay.getValue(CONFIG.PROPERTY))).execute();
+    }
 
     public static Record getRecord(Result<Record> record) {
         if (record.size() > 0) {
@@ -203,6 +219,9 @@ public class DatabaseUtils {
         return Registry.wavetactDB.select().from(NETWORKS).fetch();
     }
 
+    public static Result<Record> getRelays() {
+        return Registry.wavetactDB.select().from(RELAYS).fetch();
+    }
     public static Record getNetwork(String name) {
         Result<Record> serverRecord = Registry.wavetactDB.select().from(NETWORKS).where(NETWORKS.NAME.eq(name)).fetch();
         return getRecord(serverRecord);

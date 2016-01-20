@@ -2,6 +2,7 @@ package com.techcavern.wavetact.ircCommands.misc;
 
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
+import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.Registry;
@@ -76,6 +77,9 @@ public class Test extends IRCCommand {
             timer1.purge();
         } else if (command.equalsIgnoreCase("refillcash")) {
             timer1.scheduleAtFixedRate(refillcash, 0, 500000);
+        }else{
+            DatabaseUtils.addRelay("tctest", "Freenode.#tctest,Esper.#tctest");
+            DatabaseUtils.addRelay("moo", "Freenode.#tcstaff,Esper.#tcmoo");
         }
     }
 }
