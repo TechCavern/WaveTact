@@ -20,7 +20,7 @@ public class Main {
         System.setProperty(SimpleLogger.SHOW_DATE_TIME_KEY, "true");
         System.setProperty(SimpleLogger.DATE_TIME_FORMAT_KEY, "[yyyy/MM/dd HH:mm:ss]");
         System.setProperty(SimpleLogger.LEVEL_IN_BRACKETS_KEY, "true");
-        if(args.length == 1 && args[0].equalsIgnoreCase("windowsdev")){
+        if(args.length == 1 && args[0].equalsIgnoreCase("--windowsdev")){
             load(true);
         }else{
             if ((args.length >= 1) && args[0].equalsIgnoreCase("--client")) {
@@ -40,7 +40,6 @@ public class Main {
         LoadUtils.registerConsoleCommands();
         LoadUtils.registerIRCCommands();
         LoadUtils.registerCharReplacements();
-        // LoadUtils.checkDuplicateIRCCommands();
         LoadUtils.registerAttacks();
         LoadUtils.registerEightball();
         LoadUtils.initializeAutoFlushWhoisCache();
