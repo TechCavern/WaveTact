@@ -34,8 +34,9 @@ public class TLDInfo extends IRCCommand {
             String sponsor = "Sponsoring Organization: "+ names.get(0).text();
             String admin =  "Administrative Contact: " + names.get(1).text()  + ", " +  GeneralUtils.stripHTML(organization[10]);
             String tech = "Technical Contact: " + names.get(5).text() + ", " + GeneralUtils.stripHTML(organization[23]);
-            IRCUtils.sendMessage(user, network, channel, sponsor + " - " + admin + " - " + tech , prefix);
-
+            IRCUtils.sendMessage(user, network, channel, sponsor, prefix);
+            IRCUtils.sendMessage(user, network, channel, admin, prefix);
+            IRCUtils.sendMessage(user, network, channel, tech, prefix);
         }catch(HttpStatusException e){
             if(e.getStatusCode() == 404){
                 IRCUtils.sendError(user, network, channel, "Invalid TLD", prefix);
