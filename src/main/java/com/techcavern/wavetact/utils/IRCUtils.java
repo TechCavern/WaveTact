@@ -393,10 +393,10 @@ public class IRCUtils {
     public static void sendError(User userObject, PircBotX networkObject, Channel channelObject, String message, String prefix) {
         if (channelObject != null) {
             Record verbose = DatabaseUtils.getChannelProperty(IRCUtils.getNetworkNameByNetwork(networkObject), channelObject.getName(), "verboseerrors");
-            if (verbose != null && verbose.getValue(CHANNELPROPERTY.VALUE).equalsIgnoreCase("true")) {
-                sendMessage(userObject, networkObject, channelObject, message, prefix);
-            } else {
+            if (verbose != null && verbose.getValue(CHANNELPROPERTY.VALUE).equalsIgnoreCase("false")) {
                 sendNotice(userObject, networkObject, null, message, prefix);
+            } else {
+                sendMessage(userObject, networkObject, channelObject, message, prefix);
             }
         } else {
             sendMessage(userObject, networkObject, channelObject, message, prefix);

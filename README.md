@@ -60,9 +60,9 @@ Channel Properties
 - topicseparator - this will determine the separator between topic parts
 - verboseerrors - send errors to channel instead of notice
 - notifymc - send mc notifications
-- funmsg - enable funmsg
-- removerejoin - enable rejoin on remove
-- kickrejoin - disable kickrejoin
+- funmsg - some.. fun.. stuff.
+- removerejoin - rejoin on remove
+- kickrejoin - kickrejoin
 
 Global Config
 =================
