@@ -27,10 +27,11 @@ import static com.techcavern.wavetactdb.Tables.NETWORKPROPERTY;
 public class FunMsgListener extends ListenerAdapter {
     @Override
     public void onMessage(MessageEvent event) throws Exception {
+        boolean funmsg = false;
         Record rec = DatabaseUtils.getChannelProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), event.getChannel().getName(), "funmsg");
-        if (rec == null)
-            return;
-        if (rec.getValue(Channelproperty.CHANNELPROPERTY.VALUE).equalsIgnoreCase("true")) {
+        if (rec != null && rec.getValue(Channelproperty.CHANNELPROPERTY.VALUE).equalsIgnoreCase("true"))
+            funmsg = true;
+        final boolean funmsg2 = funmsg;
             class process implements Runnable {
                 public void run() {
                     Record commandcharRecord = DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "commandchar");
@@ -44,7 +45,7 @@ public class FunMsgListener extends ListenerAdapter {
                         for (String arg : message) {
                             try {
                                 arg = Colors.removeFormattingAndColors(arg);
-                                if (arg.toLowerCase().replaceAll("o+", "o").replaceAll("0+", "o").contains("yolo")) {
+                                if (arg.toLowerCase().replaceAll("o+", "o").replaceAll("0+", "o").contains("yolo") && funmsg2) {
                                     if (IRCUtils.checkIfCanKick(event.getChannel(), event.getBot(), event.getUser())) {
                                         IRCUtils.sendKick(event.getBot().getUserBot(), event.getUser(), event.getBot(), event.getChannel(), "YOLO");
                                     } else {
@@ -57,7 +58,7 @@ public class FunMsgListener extends ListenerAdapter {
                                 }
                                 if (Registry.urlValidator.isValid(arg)) {
                                     Document doc = Jsoup.connect(arg).userAgent(Registry.USER_AGENT).get();
-                                    if (doc.location().contains("stop-irc-bullying.eu")) {
+                                    if (doc.location().contains("stop-irc-bullying.eu") && funmsg2) {
                                         if (IRCUtils.checkIfCanKick(event.getChannel(), event.getBot(), event.getUser())) {
                                             IRCUtils.sendKick(event.getBot().getUserBot(), event.getUser(), event.getBot(), event.getChannel(), "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻ [https://goo.gl/Tkb9dh]");
                                         } else {
@@ -89,7 +90,6 @@ public class FunMsgListener extends ListenerAdapter {
             Registry.threadPool.execute(new process());
         }
     }
-}
 
 
 
