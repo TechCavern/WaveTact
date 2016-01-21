@@ -338,10 +338,15 @@ public class IRCUtils {
                         action = action.replace(responseprefix, "");
                     }
                     if (cmd.getValue(CUSTOMCOMMANDS.ISACTION)) {
-                        IRCUtils.sendAction(user, network, channel, action, prefix);
+                        IRCUtils.sendAction(user, network, channel,  action, prefix);
                     } else {
-                        IRCUtils.sendMessage(user, network, channel, action, prefix);
+                        if(!GeneralUtils.isFirstCharLetter(action)) {
+                            IRCUtils.sendMessage(user, network, channel, "[" + IRCUtils.noPing(user.getNick()) + "] " + action, prefix);
+                        }else{
+                            IRCUtils.sendMessage(user, network, channel, action, prefix);
+                        }
                     }
+
 
                 }
             }

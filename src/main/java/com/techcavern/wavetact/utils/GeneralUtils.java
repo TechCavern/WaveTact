@@ -316,6 +316,14 @@ public class GeneralUtils {
         return htmltext.replaceAll("(?s)<[^>]*>(\\s*<[^>]*>)*", " ").replaceAll("\\[.*\\]", "").trim().replaceAll(" +", " ").replaceAll(" ,", "").replaceAll(" \\.", "").replaceAll("\n", " ").replaceAll("\r", " ");
     }
 
+    public static boolean isFirstCharLetter(String input) {
+        if(StringUtils.isAlphanumeric(input.substring(0,1))){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public static String shortenURL(String Url) {
         if (DatabaseUtils.getConfig("googleapikey") == null)
             return Url;

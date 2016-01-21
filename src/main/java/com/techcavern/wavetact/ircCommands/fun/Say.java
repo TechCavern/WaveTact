@@ -49,14 +49,14 @@ public class Say extends IRCCommand {
                 else
                     IRCUtils.sendAction(user, network, chan, GeneralUtils.stripHTML(StringUtils.join(args, " ")), prefix);
             } else if (command.equalsIgnoreCase("prism")) {
-                if(isPrivate)
+                if(isPrivate || !GeneralUtils.isFirstCharLetter(args[0]))
                     IRCUtils.sendMessage(user, network, chan, "[" + IRCUtils.noPing(user.getNick()) + "] " + GeneralUtils.prism(GeneralUtils.stripHTML(StringUtils.join(args, " "))), prefix);
                 else
                     IRCUtils.sendMessage(user, network, chan, GeneralUtils.prism(GeneralUtils.stripHTML(StringUtils.join(args, " "))), prefix);
             } else {
-                if(isPrivate)
+                if(isPrivate || !GeneralUtils.isFirstCharLetter(args[0])) {
                     IRCUtils.sendMessage(user, network, chan, "[" + IRCUtils.noPing(user.getNick()) + "] " + GeneralUtils.stripHTML(StringUtils.join(args, " ")), prefix);
-                else
+                }else
                     IRCUtils.sendMessage(user, network, chan, GeneralUtils.stripHTML(StringUtils.join(args, " ")), prefix);
             }
         } else {
