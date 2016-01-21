@@ -31,11 +31,11 @@ public class Registry {
     public static final Reflections wavetactReflection = new Reflections("com.techcavern.wavetact");
     public static final HashBiMap<String, PircBotX> networks = HashBiMap.create();
     public static final Map<PircBotX, Map<String, WhoisEvent>> whoisEventCache = new ConcurrentHashMap<>();
-    public static final int CURRENT_ITERATION = 13;
+    public static final int CURRENT_ITERATION = 14;
     public static final ConsoleServer consoleServer = new ConsoleServer();
     public static final Map<PircBotX, Queue<String>> messageQueue = new HashMap<>();
     public static final UrlValidator urlValidator = new UrlValidator();
-    public static final String VERSION = "WaveTact 1.1-dev";
+    public static final String VERSION = "WaveTact 1.1";
     public static final String USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36";
     public static Map<PircBotX, String> lastLeftChannel = new HashMap<>();
     public static DSLContext wavetactDB = null;
