@@ -13,7 +13,7 @@ import org.pircbotx.User;
 public class Pokeability extends IRCCommand {
 
     public Pokeability() {
-        super(GeneralUtils.toArray("pokeability pka"), 0, "pokeability [id]", "Displays info on a pokemon ability", false);
+        super(GeneralUtils.toArray("pokeability pka"), 1, "pokeability [id]", "Displays info on a pokemon ability", false);
     }
 
     @Override

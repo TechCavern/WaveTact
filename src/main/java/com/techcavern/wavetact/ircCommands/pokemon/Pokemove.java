@@ -13,7 +13,7 @@ import org.pircbotx.User;
 public class Pokemove extends IRCCommand {
 
     public Pokemove() {
-        super(GeneralUtils.toArray("pokemove pkmo"), 0, "pokemove [id]", "Displays info on a move", false);
+        super(GeneralUtils.toArray("pokemove pkmo"), 1, "pokemove [id]", "Displays info on a move", false);
     }
 
     @Override

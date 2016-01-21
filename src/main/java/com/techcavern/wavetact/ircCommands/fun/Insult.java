@@ -17,7 +17,7 @@ import java.util.Random;
 public class Insult extends IRCCommand {
 
     public Insult() {
-        super(GeneralUtils.toArray("insult ins burn"), 0, "insult [something]", "Insults something", false);
+        super(GeneralUtils.toArray("insult ins burn"), 1, "insult [something]", "Insults something", false);
     }
 
     @Override

@@ -19,7 +19,7 @@ import static com.techcavern.wavetactdb.Tables.CONFIG;
 public class Question extends IRCCommand {
 
     public Question() {
-        super(GeneralUtils.toArray("question q wa wolframalpha"), 0, "question (answer #) [question]", "Ask wolfram alpha a question!", false);
+        super(GeneralUtils.toArray("question q wa wolframalpha"), 1, "question (answer #) [question]", "Ask wolfram alpha a question!", false);
     }
 
     @Override

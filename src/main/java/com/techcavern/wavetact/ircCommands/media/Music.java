@@ -19,7 +19,7 @@ import static com.techcavern.wavetactdb.Tables.CONFIG;
 public class Music extends IRCCommand {
 
     public Music() {
-        super(GeneralUtils.toArray("music song artist ar al so album"), 0, "music (result #) [query]", "Searches for music - result # parameter only useful for artist/album querying ", false);
+        super(GeneralUtils.toArray("music song artist ar al so album"), 1, "music (result #) [query]", "Searches for music - result # parameter only useful for artist/album querying ", false);
     }
 
     @Override

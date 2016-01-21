@@ -23,7 +23,7 @@ import static com.techcavern.wavetactdb.Tables.CONFIG;
 public class Video extends IRCCommand {
 
     public Video() {
-        super(GeneralUtils.toArray("video vid v youtube yt"), 0, "video (result #) [query for]", "Searches youtube for videos", false);
+        super(GeneralUtils.toArray("video vid v youtube yt"), 1, "video (result #) [query for]", "Searches youtube for videos", false);
     }
 
     @Override

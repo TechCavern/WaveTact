@@ -20,7 +20,7 @@ import static com.techcavern.wavetactdb.Tables.CONFIG;
 public class NowPlaying extends IRCCommand {
 
     public NowPlaying() {
-        super(GeneralUtils.toArray("nowplaying np"), 0, "nowplaying [user]", "Gets last played song from Last.fm", false);
+        super(GeneralUtils.toArray("nowplaying np"), 1, "nowplaying [user]", "Gets last played song from Last.fm", false);
     }
 
     @Override

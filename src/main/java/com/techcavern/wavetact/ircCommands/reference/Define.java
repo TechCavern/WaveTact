@@ -22,7 +22,7 @@ import static com.techcavern.wavetactdb.Tables.CONFIG;
 public class Define extends IRCCommand {
 
     public Define() {
-        super(GeneralUtils.toArray("define d def"), 0, "define (def #) [word]", "Defines a word", false);
+        super(GeneralUtils.toArray("define d def"), 1, "define (def #) [word]", "Defines a word", false);
     }
 
     @Override

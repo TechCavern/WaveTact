@@ -16,7 +16,7 @@ import static com.techcavern.wavetactdb.Tables.NETWORKS;
 public class Admins extends IRCCommand {
 
     public Admins() {
-        super(GeneralUtils.toArray("admins admin adm netadmin netadmins"), 0, "admins", "List network administrators", false);
+        super(GeneralUtils.toArray("admins admin adm netadmin netadmins"), 1, "admins", "List network administrators", false);
     }
 
     @Override

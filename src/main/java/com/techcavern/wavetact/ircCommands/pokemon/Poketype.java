@@ -14,7 +14,7 @@ import org.pircbotx.User;
 public class Poketype extends IRCCommand {
 
     public Poketype() {
-        super(GeneralUtils.toArray("poketype pkt"), 0, "poketype [id]", "Displays info on a type", false);
+        super(GeneralUtils.toArray("poketype pkt"), 1, "poketype [id]", "Displays info on a type", false);
     }
 
     @Override

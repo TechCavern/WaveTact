@@ -13,7 +13,7 @@ import org.pircbotx.User;
 public class ShortenUrl extends IRCCommand {
 
     public ShortenUrl() {
-        super(GeneralUtils.toArray("shortenurl shorturl surl"), 0, "shortenUrl [url]", "Shortens Url", false);
+        super(GeneralUtils.toArray("shortenurl shorturl surl"), 1, "shortenUrl [url]", "Shortens Url", false);
     }
 
     @Override

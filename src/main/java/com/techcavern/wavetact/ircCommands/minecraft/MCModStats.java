@@ -17,7 +17,7 @@ import java.util.List;
 public class MCModStats extends IRCCommand {
 
     public MCModStats() {
-        super(GeneralUtils.toArray("mcmodstats mcms"), 0, "mcmodstats", "Gets mod stats, ignores MC Versions with less than 10 mods", false);
+        super(GeneralUtils.toArray("mcmodstats mcms"), 1, "mcmodstats", "Gets mod stats, ignores MC Versions with less than 10 mods", false);
     }
 
     @Override

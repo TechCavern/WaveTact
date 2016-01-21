@@ -16,7 +16,7 @@ import org.pircbotx.User;
 public class FMyLife extends IRCCommand {
 
     public FMyLife() {
-        super(GeneralUtils.toArray("fmylife fml"), 0, "fmylife", "Sends random fml", false);
+        super(GeneralUtils.toArray("fmylife fml"), 1, "fmylife", "Sends random fml", false);
     }
 
     @Override

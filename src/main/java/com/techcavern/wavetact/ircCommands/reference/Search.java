@@ -15,7 +15,7 @@ import org.pircbotx.User;
 public class Search extends IRCCommand {
 
     public Search() {
-        super(GeneralUtils.toArray("search google g goog gsearch"), 0, "search (result #) [string to google]", "Googles something", false);
+        super(GeneralUtils.toArray("search google g goog gsearch"), 1, "search (result #) [string to google]", "Googles something", false);
     }
 
     @Override

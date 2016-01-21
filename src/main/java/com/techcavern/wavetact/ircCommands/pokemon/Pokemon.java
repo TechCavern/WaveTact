@@ -18,7 +18,7 @@ import java.util.List;
 public class Pokemon extends IRCCommand {
 
     public Pokemon() {
-        super(GeneralUtils.toArray("pokemon pkm"), 0, "pokemon [name][id]", "Displays info on a pokemon", false);
+        super(GeneralUtils.toArray("pokemon pkm"), 1, "pokemon [name][id]", "Displays info on a pokemon", false);
     }
 
     @Override

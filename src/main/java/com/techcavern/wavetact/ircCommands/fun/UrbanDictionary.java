@@ -16,7 +16,7 @@ import org.pircbotx.User;
 public class UrbanDictionary extends IRCCommand {
 
     public UrbanDictionary() {
-        super(GeneralUtils.toArray("urbandictionary ub urban urb ud"), 0, "urbandictionary (def #) [what to define]", "Defines a term in the urban dictionary", false);
+        super(GeneralUtils.toArray("urbandictionary ub urban urb ud"), 1, "urbandictionary (def #) [what to define]", "Defines a term in the urban dictionary", false);
     }
 
     @Override

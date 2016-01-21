@@ -15,7 +15,7 @@ import org.pircbotx.User;
 public class MCDrama extends IRCCommand {
 
     public MCDrama() {
-        super(GeneralUtils.toArray("mcdrama mcd"), 0, null, "Displays minecraft drama", false);
+        super(GeneralUtils.toArray("mcdrama mcd"), 1, null, "Displays minecraft drama", false);
     }
 
     @Override

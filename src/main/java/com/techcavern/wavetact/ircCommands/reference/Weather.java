@@ -17,7 +17,7 @@ import static com.techcavern.wavetactdb.Tables.CONFIG;
 public class Weather extends IRCCommand {
 
     public Weather() {
-        super(GeneralUtils.toArray("weather we temperature temp humid humidity wind wunderground wunder"), 0, "weather [zipcode][city]", "Gets weather in an area from wunderground", false);
+        super(GeneralUtils.toArray("weather we temperature temp humid humidity wind wunderground wunder"), 1, "weather [zipcode][city]", "Gets weather in an area from wunderground", false);
     }
 
     @Override

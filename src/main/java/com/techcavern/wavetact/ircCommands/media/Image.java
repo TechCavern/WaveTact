@@ -15,7 +15,7 @@ import org.pircbotx.User;
 public class Image extends IRCCommand {
 
     public Image() {
-        super(GeneralUtils.toArray("image images im gimages googleimages"), 0, "image (result #) [query]", "Searches google images", false);
+        super(GeneralUtils.toArray("image images im gimages googleimages"), 1, "image (result #) [query]", "Searches google images", false);
     }
 
     @Override
