@@ -37,6 +37,13 @@ public class ISup extends IRCCommand {
         }
         Document doc = Jsoup.connect("http://www.isup.me/" + args[0]).userAgent(Registry.USER_AGENT).get();
         String c = doc.select("#container").text();
+        if(c.contains("not just you")){
+            c = "It's not just you! " + args[0] + " looks down from here too. (Please note that isup.me - the service we use - lacks IPv6 support, so this might not be entirely accurate)";
+        }else if(c.contains("just you")){
+            c = "It's just you. " + args[0] + " looks fine from here.";
+        }else{
+            c = "isup.me can't find " + args[0] + " on the interwho. This might be because isup.me lacks IPv6 support or simply because you put in an invalid url.";
+        }
         IRCUtils.sendMessage(user, network, channel, c, prefix);
 
 
