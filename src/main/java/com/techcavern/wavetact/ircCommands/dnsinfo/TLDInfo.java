@@ -18,7 +18,7 @@ import org.pircbotx.User;
 public class TLDInfo extends IRCCommand {
 
     public TLDInfo() {
-        super(GeneralUtils.toArray("tldinfo tld"), 1, "tld [tld]", "Gets information on a TLDInfo from the iana db", false);
+        super(GeneralUtils.toArray("tldinfo tld iana"), 1, "tld [tld]", "Gets information on a TLDInfo from the iana db", false);
     }
 
     @Override
