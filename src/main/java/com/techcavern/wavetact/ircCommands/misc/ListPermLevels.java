@@ -29,7 +29,7 @@ public class ListPermLevels extends IRCCommand {
         Result<Record> records = DatabaseUtils.getChannelUserProperty(IRCUtils.getNetworkNameByNetwork(network), channel.getName(), "permlevel");
         if (records.size() > 0) {
             for (Record rec :records) {
-                msg.add(rec.getValue(Channeluserproperty.CHANNELUSERPROPERTY.USER) + "[" + rec.getValue(Channeluserproperty.CHANNELUSERPROPERTY.VALUE) + "]");
+                msg.add(IRCUtils.noPing(rec.getValue(Channeluserproperty.CHANNELUSERPROPERTY.USER)) + "[" + rec.getValue(Channeluserproperty.CHANNELUSERPROPERTY.VALUE) + "]");
             }
             IRCUtils.sendMessage(user, network, channel, StringUtils.join(msg," - "), prefix);
         }else{
