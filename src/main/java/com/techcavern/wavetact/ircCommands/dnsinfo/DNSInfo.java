@@ -15,6 +15,9 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 import org.xbill.DNS.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author jztech101
  */
@@ -22,7 +25,7 @@ import org.xbill.DNS.*;
 public class DNSInfo extends IRCCommand {
 
     public DNSInfo() {
-        super(GeneralUtils.toArray("dnsinfo di dns"), 5, "dns [domain]", "Looks up a domain for information", false);
+        super(GeneralUtils.toArray("dnsinfo di dns"), 1, "dnsinfo [domain]", "Looks up a domain for information", false);
     }
 
     @Override
@@ -34,28 +37,26 @@ public class DNSInfo extends IRCCommand {
         lookup.setResolver(resolver);
         lookup.setCache(null);
         Record[] records = lookup.run();
-        boolean isSuccessful = false;
         if (lookup.getResult() == Lookup.SUCCESSFUL) {
+            List<String> results = new ArrayList<>();
             for (Record rec : records) {
                 if (rec instanceof ARecord) {
-                    IRCUtils.sendMessage(user, network, channel, "[" + Type.string(rec.getType()) + "] " + ((ARecord) rec).getAddress().toString().replace("./", "/"), prefix);
+                    results.add("[" + Type.string(rec.getType()) + "] " + ((ARecord) rec).getAddress().toString().replace("./", "/"));
                 } else if (rec instanceof NSRecord) {
-                    IRCUtils.sendMessage(user, network, channel, "[" + Type.string(rec.getType()) + "] " + ((NSRecord) rec).getTarget().toString().replace("./", "/"), prefix);
+                    results.add("[" + Type.string(rec.getType()) + "] " + ((NSRecord) rec).getTarget().toString().replace("./", "/"));
                 } else if (rec instanceof AAAARecord) {
-                    IRCUtils.sendMessage(user, network, channel, "[" + Type.string(rec.getType()) + "] " + ((AAAARecord) rec).getAddress().toString().replace("./", "/"), prefix);
+                    results.add( "[" + Type.string(rec.getType()) + "] " + ((AAAARecord) rec).getAddress().toString().replace("./", "/"));
                 } else if (rec instanceof CNAMERecord) {
-                    IRCUtils.sendMessage(user, network, channel, "[" + Type.string(rec.getType()) + "] " + ((CNAMERecord) rec).getAlias() + " - " + ((CNAMERecord) rec).getTarget(), prefix);
+                    results.add("[" + Type.string(rec.getType()) + "] " + ((CNAMERecord) rec).getAlias() + " - " + ((CNAMERecord) rec).getTarget());
                 } else if (rec instanceof TXTRecord) {
-                    IRCUtils.sendMessage(user, network, channel, "[" + Type.string(rec.getType()) + "] " + StringUtils.join(rec, " "), prefix);
+                    results.add( "[" + Type.string(rec.getType()) + "] " + StringUtils.join(rec, " "));
                 } else if (rec instanceof MXRecord) {
-                    IRCUtils.sendMessage(user, network, channel, "[" + Type.string(rec.getType()) + "] " + ((MXRecord) rec).getPriority() + " - " + ((MXRecord) rec).getTarget(), prefix);
+                    results.add("[" + Type.string(rec.getType()) + "] " + ((MXRecord) rec).getPriority() + " - " + ((MXRecord) rec).getTarget());
                 } else if (rec instanceof SRVRecord) {
-                    IRCUtils.sendMessage(user, network, channel, "[" + Type.string(rec.getType()) + "] " + ((SRVRecord) rec).getPriority() + " - " + ((SRVRecord) rec).getTarget() + " - " + ((SRVRecord) rec).getPort(), prefix);
                 }
             }
-            isSuccessful = true;
-        }
-        if (!isSuccessful) {
+            IRCUtils.sendMessage(user, network, channel,StringUtils.join(results, " - "), prefix);
+        }else{
             IRCUtils.sendError(user, network, channel, "Invalid domain", prefix);
         }
 

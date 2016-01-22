@@ -4,6 +4,7 @@ import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.conn.util.InetAddressUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -11,6 +12,8 @@ import org.pircbotx.User;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 @IRCCMD
 public class Traceroute extends IRCCommand {
@@ -38,12 +41,15 @@ public class Traceroute extends IRCCommand {
             }
             Process pinghost = Runtime.getRuntime().exec(traceCommand);
             BufferedReader buffereader = new BufferedReader(new InputStreamReader(pinghost.getInputStream()));
+            List<String> results = new ArrayList<>();
             String line;
             while ((line = buffereader.readLine()) != null) {
                 if (!line.contains("* * *"))
-                    IRCUtils.sendMessage(user, network, channel, line, prefix);
+                    results.add(line);
             }
             buffereader.close();
+            IRCUtils.sendMessage(user, network, channel, StringUtils.join(results, " - "), prefix);
+
         }
 
     }

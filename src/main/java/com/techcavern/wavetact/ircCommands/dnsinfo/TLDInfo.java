@@ -5,6 +5,7 @@ import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.Registry;
+import org.apache.commons.lang3.StringUtils;
 import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -13,6 +14,9 @@ import org.jsoup.select.Elements;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @IRCCMD
 public class TLDInfo extends IRCCommand {
@@ -31,12 +35,11 @@ public class TLDInfo extends IRCCommand {
             Elements titles = doc.select("#main_right").select("h2");
             Elements names = doc.select("#main_right").select("b");
             String[] organization = doc.select("#main_right").after("br").html().split("\n");
-            String sponsor = "Sponsoring Organization: "+ names.get(0).text();
-            String admin =  "Administrative Contact: " + names.get(1).text()  + ", " +  GeneralUtils.stripHTML(organization[10]);
-            String tech = "Technical Contact: " + names.get(5).text() + ", " + GeneralUtils.stripHTML(organization[23]);
-            IRCUtils.sendMessage(user, network, channel, sponsor, prefix);
-            IRCUtils.sendMessage(user, network, channel, admin, prefix);
-            IRCUtils.sendMessage(user, network, channel, tech, prefix);
+            List<String> results = new ArrayList<>();
+            results.add("Sponsoring Organization: "+ names.get(0).text());
+            results.add("Administrative Contact: " + names.get(1).text()  + ", " +  GeneralUtils.stripHTML(organization[10]));
+            results.add("Technical Contact: " + names.get(5).text() + ", " + GeneralUtils.stripHTML(organization[23]));
+            IRCUtils.sendMessage(user, network, channel, StringUtils.join(results, " - "), prefix);
         }catch(HttpStatusException e){
             if(e.getStatusCode() == 404){
                 IRCUtils.sendError(user, network, channel, "Invalid TLD", prefix);

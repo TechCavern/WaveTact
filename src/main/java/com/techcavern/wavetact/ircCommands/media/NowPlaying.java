@@ -7,9 +7,13 @@ import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.techcavern.wavetactdb.Tables.CONFIG;
 
@@ -40,20 +44,21 @@ public class NowPlaying extends IRCCommand {
         }
 
         JsonArray tracks = jsonObject.get("recenttracks").getAsJsonObject().get("track").getAsJsonArray();
-
+        List<String> results = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             try {
                 String trackname = tracks.get(i).getAsJsonObject().get("name").toString().replaceAll("\"", "");
                 String artist = tracks.get(i).getAsJsonObject().get("artist").getAsJsonObject().get("#text").getAsString();
                 String album = tracks.get(i).getAsJsonObject().get("album").getAsJsonObject().get("#text").getAsString();
                 if (!album.isEmpty())
-                    IRCUtils.sendMessage(user, network, channel, "[" + album + "] " + trackname + " by " + artist, prefix);
+                    results.add("[" + album + "] " + trackname + " by " + artist);
                 else
-                    IRCUtils.sendMessage(user, network, channel, trackname + " by " + artist, prefix);
+                    results.add(trackname + " by " + artist);
 
             } catch (ArrayIndexOutOfBoundsException e) {
                 return;
             }
         }
+        IRCUtils.sendMessage(user, network, channel, StringUtils.join(results, " - "),prefix);
     }
 }

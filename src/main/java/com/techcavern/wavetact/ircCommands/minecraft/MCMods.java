@@ -12,7 +12,9 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @IRCCMD
@@ -108,6 +110,7 @@ public class MCMods extends IRCCommand {
         if (mcmods.isEmpty()) {
             IRCUtils.sendError(user, network, channel, "No mods found", prefix);
         } else {
+            List<String> results = new ArrayList<>();
             for (JsonObject mod : mcmods.keySet()) {
                 boolean isNEM = true;
                 if (mod.get("version") == null) {
@@ -136,10 +139,11 @@ public class MCMods extends IRCCommand {
                     Author = StringUtils.join(mod.get("author").getAsJsonArray(), ", ").replaceAll("\"", "");
                 Author = IRCUtils.noPing(Author);
                 if (Author.isEmpty())
-                    IRCUtils.sendMessage(user, network, channel, "[" + mcmods.get(mod) + "] " + Name + ModVersion + " - " + Link, prefix);
+                    results.add("[" + mcmods.get(mod) + "] " + Name + ModVersion + " - " + Link);
                 else
-                    IRCUtils.sendMessage(user, network, channel, "[" + mcmods.get(mod) + "] " + Name + ModVersion + " by " + Author + " - " + Link, prefix);
+                    results.add("[" + mcmods.get(mod) + "] " + Name + ModVersion + " by " + Author + " - " + Link);
             }
+            IRCUtils.sendMessage(user, network, channel,StringUtils.join(results, " - "),prefix);
         }
     }
 }

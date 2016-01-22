@@ -62,13 +62,14 @@ public class BlacklistLookup extends IRCCommand {
             lookup.setCache(null);
             org.xbill.DNS.Record[] records = lookup.run();
             if (lookup.getResult() == Lookup.SUCCESSFUL) {
-                IRCUtils.sendMessage(user, network, channel, BeforeIP + " found in " + Blacklist.getValue(BLACKLISTS.URL), prefix);
+                String msg = BeforeIP + " found in " + Blacklist.getValue(BLACKLISTS.URL);
                 sent = true;
                 for (org.xbill.DNS.Record rec : records) {
                     if (rec instanceof TXTRecord) {
-                        IRCUtils.sendMessage(user, network, channel, "[" + Type.string(rec.getType()) + "] " + StringUtils.join(rec, " "), prefix);
+                        msg += " - [" + Type.string(rec.getType()) + "] " + StringUtils.join(rec, " ");
                     }
                 }
+                IRCUtils.sendMessage(user, network, channel, BeforeIP + " found in " + Blacklist.getValue(BLACKLISTS.URL), prefix);
             }
         }
         if (!sent) {

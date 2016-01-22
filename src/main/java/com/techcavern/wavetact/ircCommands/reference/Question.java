@@ -13,6 +13,9 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.techcavern.wavetactdb.Tables.CONFIG;
 
 @IRCCMD
@@ -43,17 +46,18 @@ public class Question extends IRCCommand {
         query.setInput(StringUtils.join(args, " "));
         WAQueryResult queryResult = engine.performQuery(query);
         WAPod[] result = queryResult.getPods();
+        List<String> results = new ArrayList<>();
         if (result.length > 0) {
             if (result.length - 1 >= ArrayIndex) {
                 for (WASubpod sub : result[ArrayIndex].getSubpods()) {
                     for (Visitable visitable : sub.getContents()) {
                         if (sub.getTitle().isEmpty())
-                            IRCUtils.sendMessage(user, network, channel, "[" + result[ArrayIndex].getTitle() + "] " + ((WAPlainText) sub.getContents()[0]).getText().replaceAll("\\n", " - ").replaceAll(" \\| ", ": "), prefix);
+                            results.add("[" + result[ArrayIndex].getTitle() + "] " + ((WAPlainText) sub.getContents()[0]).getText().replaceAll("\\n", " - ").replaceAll(" \\| ", ": "));
                         else
-                            IRCUtils.sendMessage(user, network, channel, "[" + result[ArrayIndex].getTitle() + " - " + sub.getTitle() + "] " + ((WAPlainText) sub.getContents()[0]).getText().replaceAll("\\n", " - ").replaceAll(" \\| ", ": "), prefix);
-
+                            results.add("[" + result[ArrayIndex].getTitle() + " - " + sub.getTitle() + "] " + ((WAPlainText) sub.getContents()[0]).getText().replaceAll("\\n", " - ").replaceAll(" \\| ", ": "));
                     }
                 }
+                IRCUtils.sendMessage(user, network, channel,StringUtils.join(result, " - "), prefix);
             } else {
                 IRCUtils.sendError(user, network, channel, "Answer #" + ArrayIndex + " does not exist", prefix);
             }
