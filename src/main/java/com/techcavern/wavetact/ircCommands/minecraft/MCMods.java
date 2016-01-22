@@ -134,6 +134,7 @@ public class MCMods extends IRCCommand {
                     Author = mod.get("author").getAsString();
                 else
                     Author = StringUtils.join(mod.get("author").getAsJsonArray(), ", ").replaceAll("\"", "");
+                Author = IRCUtils.noPing(Author);
                 if (Author.isEmpty())
                     IRCUtils.sendMessage(user, network, channel, "[" + mcmods.get(mod) + "] " + Name + ModVersion + " - " + Link, prefix);
                 else

@@ -29,6 +29,6 @@ public class Quote extends IRCCommand {
             else
                 d = d.split("\\(")[0];
         }
-        IRCUtils.sendMessage(user, network, channel, c + " -" + d, prefix);
+        IRCUtils.sendMessage(user, network, channel, c + " -" + IRCUtils.noPing(d), prefix);
     }
 }
