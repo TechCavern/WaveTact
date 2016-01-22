@@ -45,7 +45,7 @@ public class NowPlaying extends IRCCommand {
 
         JsonArray tracks = jsonObject.get("recenttracks").getAsJsonObject().get("track").getAsJsonArray();
         List<String> results = new ArrayList<>();
-        if(results.size() < 1){
+        if(tracks.size() < 1){
             IRCUtils.sendError(user, network, channel, "LastFM returned no results", prefix);
         }else{
         for (int i = 0; i < 3; i++) {
