@@ -39,7 +39,7 @@ public class MCAccountInfo extends IRCCommand {
             if (mcapi.get("legacy") != null && mcapi.get("legacy").getAsString().equalsIgnoreCase("True")) {
                 Migrated = "False";
             }
-            IRCUtils.sendMessage(user, network, channel, "[" + User + "] " + "UUID: " + UUID + " - " + "Paid: " + Premium + " - " + "Mojang Account: " + Migrated, prefix);
+            IRCUtils.sendMessage(user, network, channel, "[" + IRCUtils.noPing(User) + "] " + "UUID: " + UUID + " - " + "Paid: " + Premium + " - " + "Mojang Account: " + Migrated, prefix);
         } else {
             IRCUtils.sendError(user, network, channel, "User does not exist", prefix);
         }
