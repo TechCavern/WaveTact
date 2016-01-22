@@ -156,7 +156,6 @@ public class DatabaseUtils {
     public static Record getChannelProperty(String network, String channel, String property) {
         Result<Record> commandRecord = Registry.wavetactDB.select().from(CHANNELPROPERTY).where(CHANNELPROPERTY.PROPERTY.eq(property)).and(CHANNELPROPERTY.NETWORK.eq(network)).and(CHANNELPROPERTY.CHANNEL.eq(channel)).fetch();
         return getRecord(commandRecord);
-
     }
 
     public static void updateChannelProperty(Record channelproperty) {
@@ -192,9 +191,10 @@ public class DatabaseUtils {
     public static Record getChannelUserProperty(String network, String channel, String user, String property) {
         Result<Record> channelUserPropertyRecord = Registry.wavetactDB.select().from(CHANNELUSERPROPERTY).where(CHANNELUSERPROPERTY.PROPERTY.eq(property)).and(CHANNELUSERPROPERTY.USER.eq(user)).and(CHANNELUSERPROPERTY.NETWORK.eq(network)).and(CHANNELUSERPROPERTY.CHANNEL.eq(channel)).fetch();
         return getRecord(channelUserPropertyRecord);
-
     }
-
+    public static Result<Record> getChannelUserProperty(String network, String channel, String property) {
+        return Registry.wavetactDB.select().from(CHANNELUSERPROPERTY).where(CHANNELUSERPROPERTY.PROPERTY.eq(property)).and(CHANNELUSERPROPERTY.NETWORK.eq(network)).and(CHANNELUSERPROPERTY.CHANNEL.eq(channel)).fetch();
+    }
     public static void updateChannelUserProperty(Record channeluserproperty) {
         Registry.wavetactDB.update(CHANNELUSERPROPERTY).set(channeluserproperty).where(CHANNELUSERPROPERTY.PROPERTY.eq(channeluserproperty.getValue(CHANNELUSERPROPERTY.PROPERTY))).and(CHANNELUSERPROPERTY.USER.eq(channeluserproperty.getValue(CHANNELUSERPROPERTY.USER))).and(CHANNELUSERPROPERTY.NETWORK.eq(channeluserproperty.getValue(CHANNELUSERPROPERTY.NETWORK))).and(CHANNELUSERPROPERTY.CHANNEL.eq(channeluserproperty.getValue(CHANNELUSERPROPERTY.CHANNEL))).execute();
     }
