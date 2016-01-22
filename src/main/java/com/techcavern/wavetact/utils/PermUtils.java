@@ -93,7 +93,7 @@ public class PermUtils {
     private static int getManualPermLevel(String userObject, PircBotX network, Channel channelObject, String account) { //gets Manual Perm Level using the account name
         if (isIgnored(IRCUtils.getHostmask(network, userObject, false), IRCUtils.getNetworkNameByNetwork(network))) {
             return -2;
-        } else if (account != null && IRCUtils.getUserByNick(network,userObject).getChannels().contains(channelObject)) {
+        } else if (account != null && (channelObject == null || (channelObject != null && IRCUtils.getUserByNick(network,userObject).getChannels().contains(channelObject)))) {
             String channelName = null;
             if (channelObject != null) {
                 channelName = channelObject.getName();

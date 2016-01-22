@@ -32,8 +32,8 @@ public class PermLevel extends IRCCommand {
         } else {
             userObject = args[0];
         }
-        userObject = IRCUtils.noPing(userObject);
         userPermLevel = PermUtils.getPermLevel(network, userObject, chan);
+        userObject = IRCUtils.noPing(userObject);
         if (userObject == null) {
             IRCUtils.sendError(user, network, channel, "User does not exist", prefix);
         } else if (userPermLevel >= 20) {
