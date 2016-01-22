@@ -42,7 +42,7 @@ public class Say extends IRCCommand {
         } else {
             chan = channel;
         }
-        if (chan == null || PermUtils.getPermLevel(network, user.getNick(), chan) >= 5) {
+        if (chan == null || PermUtils.getPermLevel(network, user.getNick(), chan) >= 1) {
             if (command.equalsIgnoreCase("act") || command.equalsIgnoreCase("do") || command.equalsIgnoreCase("a")) {
                 if(isPrivate)
                 IRCUtils.sendAction(user, network, chan, GeneralUtils.stripHTML(StringUtils.join(args, " ")) + " [" + IRCUtils.noPing(user.getNick()) + "]", prefix);
