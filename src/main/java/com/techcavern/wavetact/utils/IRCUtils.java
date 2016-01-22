@@ -380,6 +380,7 @@ public class IRCUtils {
     }
 
     public static String noPing(String original) {
+        /**
         char[] originChars = original.toCharArray();
         for (int i = 0; i < originChars.length; i++) {
             if (Registry.charReplacements.get(String.valueOf(originChars[i])) != null) {
@@ -387,7 +388,8 @@ public class IRCUtils {
                 break;
             }
         }
-        return original;
+         **/
+        return original.substring(0,1)+"\u200B"+original.substring(1);
     }
 
     public static void sendError(User userObject, PircBotX networkObject, Channel channelObject, String message, String prefix) {

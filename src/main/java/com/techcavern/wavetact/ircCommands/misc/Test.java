@@ -21,7 +21,7 @@ import java.util.TimerTask;
 public class Test extends IRCCommand {
 
     public Test() {
-        super(GeneralUtils.toArray("test timer project refillcash "), 0, "test", "moooo", false);
+        super(GeneralUtils.toArray("test test5 timer project refillcash "), 0, "test", "moooo", false);
     }
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
@@ -78,8 +78,7 @@ public class Test extends IRCCommand {
         } else if (command.equalsIgnoreCase("refillcash")) {
             timer1.scheduleAtFixedRate(refillcash, 0, 500000);
         }else{
-            DatabaseUtils.addRelay("tctest", "Freenode.#tctest,Esper.#tctest");
-            DatabaseUtils.addRelay("moo", "Freenode.#tcstaff,Esper.#tcmoo");
+            IRCUtils.sendMessage(user,network,channel, "M\u200boooooo", prefix);
         }
     }
 }
