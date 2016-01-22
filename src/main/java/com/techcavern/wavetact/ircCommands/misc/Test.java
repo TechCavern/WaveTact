@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
-//@IRCCMD
+@IRCCMD
 public class Test extends IRCCommand {
 
     public Test() {
@@ -78,7 +78,7 @@ public class Test extends IRCCommand {
         } else if (command.equalsIgnoreCase("refillcash")) {
             timer1.scheduleAtFixedRate(refillcash, 0, 500000);
         }else{
-            IRCUtils.sendMessage(user,network,channel, "M\u200boooooo", prefix);
+           DatabaseUtils.addConfig("lastfmapikey","e0f62943351f8493dc759a429e694616");
         }
     }
 }

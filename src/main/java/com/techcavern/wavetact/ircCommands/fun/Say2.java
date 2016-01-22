@@ -28,7 +28,7 @@ public class Say2 extends IRCCommand {
 
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-            if (command.equalsIgnoreCase("act") || command.equalsIgnoreCase("do") || command.equalsIgnoreCase("a")) {
+            if (command.equalsIgnoreCase("act2") || command.equalsIgnoreCase("do2") || command.equalsIgnoreCase("a2")) {
                     IRCUtils.sendAction(user, network, channel, GeneralUtils.stripHTML(StringUtils.join(args, " ")), prefix);
             } else if (command.equalsIgnoreCase("prism")) {
                     IRCUtils.sendMessage(user, network, channel, "[" + IRCUtils.noPing(user.getNick()) + "] " + GeneralUtils.prism(GeneralUtils.stripHTML(StringUtils.join(args, " "))), prefix);
