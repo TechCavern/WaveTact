@@ -57,7 +57,7 @@ public class Question extends IRCCommand {
                             results.add("[" + result[ArrayIndex].getTitle() + " - " + sub.getTitle() + "] " + ((WAPlainText) sub.getContents()[0]).getText().replaceAll("\\n", " - ").replaceAll(" \\| ", ": "));
                     }
                 }
-                IRCUtils.sendMessage(user, network, channel,StringUtils.join(result, " - "), prefix);
+                IRCUtils.sendMessage(user, network, channel,StringUtils.join(results, " - "), prefix);
             } else {
                 IRCUtils.sendError(user, network, channel, "Answer #" + ArrayIndex + " does not exist", prefix);
             }
