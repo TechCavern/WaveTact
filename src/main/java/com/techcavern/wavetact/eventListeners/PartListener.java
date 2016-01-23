@@ -10,6 +10,7 @@ import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetactdb.tables.Channelproperty;
 import org.jooq.Record;
+import org.pircbotx.Colors;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.PartEvent;
 
@@ -21,7 +22,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class PartListener extends ListenerAdapter {
     public void onPart(PartEvent event) throws Exception {
-        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), IRCUtils.colorizeNick(event.getBot(), event.getUser()) + IRCUtils.noPing(event.getUser().getNick()) + " left " + event.getChannel().getName() + " (" + event.getReason() + ")");
+        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), IRCUtils.colorizeNick(event.getBot(), event.getUser()) + IRCUtils.noPing(event.getUser().getNick()) + Colors.NORMAL + " left " + event.getChannel().getName() + " (" + event.getReason() + ")");
         Record rec = DatabaseUtils.getChannelProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), event.getChannel().getName(), "removerejoin");
         if (rec == null)
             return;

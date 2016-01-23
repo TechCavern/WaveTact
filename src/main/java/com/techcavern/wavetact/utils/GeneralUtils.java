@@ -211,21 +211,21 @@ public class GeneralUtils {
         }
         return result;
     }
-    public static String randomColor() {
+    public static String randomRelayColor() {
         int number = RandomUtils.nextInt(1, 7);
         switch (number) {
             case 1:
-                return Colors.RED;
+                return Colors.BROWN;
             case 2:
-                return Colors.YELLOW;
-            case 3:
-                return Colors.DARK_GREEN;
-            case 4:
-                return Colors.CYAN;
-            case 5:
                 return Colors.BLUE;
+            case 3:
+                return Colors.DARK_BLUE;
+            case 4:
+                return Colors.DARK_GREEN;
+            case 5:
+                return Colors.OLIVE;
             default:
-                return Colors.MAGENTA;
+                return Colors.PURPLE;
         }
     }
 

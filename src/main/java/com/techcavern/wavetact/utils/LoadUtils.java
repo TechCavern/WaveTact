@@ -289,7 +289,7 @@ public class LoadUtils {
         while (iterator.hasNext()) {
             PircBotX network = (PircBotX) iterator.next();
             Registry.nickColors.put(network, new HashMap<>());
-            Registry.networkColors.put(network, GeneralUtils.randomColor());
+            Registry.networkColors.put(network, GeneralUtils.randomRelayColor());
         }
     }
 
@@ -300,7 +300,7 @@ public class LoadUtils {
         Registry.lastLeftChannel.put(network, "");
         Registry.lastWhois.put(network, "");
         Registry.nickColors.put(network, new HashMap<>());
-        Registry.networkColors.put(network, GeneralUtils.randomColor());
+        Registry.networkColors.put(network, GeneralUtils.randomRelayColor());
         class MessageQueue implements Runnable {
             @Override
             public void run() {

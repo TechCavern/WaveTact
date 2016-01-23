@@ -10,6 +10,7 @@ import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.PermUtils;
 import com.techcavern.wavetact.utils.Registry;
 import org.jooq.Record;
+import org.pircbotx.Colors;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.JoinEvent;
 
@@ -25,7 +26,7 @@ public class JoinListener extends ListenerAdapter {
     public void onJoin(JoinEvent event) throws Exception {
         class process implements Runnable {
             public void run() {
-                IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), IRCUtils.colorizeNick(event.getBot(), event.getUser()) + IRCUtils.noPing(event.getUser().getNick()) + " joined " + event.getChannel().getName());
+                IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), IRCUtils.colorizeNick(event.getBot(), event.getUser()) + IRCUtils.noPing(event.getUser().getNick()) + Colors.NORMAL + " joined " + event.getChannel().getName());
                 Record rec = DatabaseUtils.getChannelUserProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), event.getChannel().getName(), PermUtils.authUser(event.getBot(), event.getUser().getNick()), "autoop");
                 if (!event.getBot().getNick().equalsIgnoreCase(event.getUser().getNick()) && rec != null && rec.getValue(CHANNELUSERPROPERTY.VALUE).equalsIgnoreCase("true")) {
                     int permlevel = PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel());

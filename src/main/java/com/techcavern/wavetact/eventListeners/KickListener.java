@@ -10,6 +10,7 @@ import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetactdb.tables.Channelproperty;
 import org.jooq.Record;
 import org.pircbotx.Channel;
+import org.pircbotx.Colors;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 import org.pircbotx.hooks.ListenerAdapter;
@@ -23,7 +24,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class KickListener extends ListenerAdapter {
     public void onKick(KickEvent event) throws Exception {
-        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), IRCUtils.colorizeNick(event.getBot(), event.getUser()) + IRCUtils.noPing(event.getRecipient().getNick()) + " was kicked by " + IRCUtils.noPing(event.getUser().getNick()) + " (" + event.getReason() + ")");
+        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), IRCUtils.colorizeNick(event.getBot(), event.getRecipient()) + IRCUtils.noPing(event.getRecipient().getNick()) + Colors.NORMAL + " was kicked by " +IRCUtils.colorizeNick(event.getBot(), event.getUser()) + IRCUtils.noPing(event.getUser().getNick()) + Colors.NORMAL +" (" + event.getReason() + ")");
         Record rec = DatabaseUtils.getChannelProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), event.getChannel().getName(), "kickrejoin");
         if (!(rec != null && rec.getValue(Channelproperty.CHANNELPROPERTY.VALUE).equalsIgnoreCase("false"))) {
             Channel channel = event.getChannel();

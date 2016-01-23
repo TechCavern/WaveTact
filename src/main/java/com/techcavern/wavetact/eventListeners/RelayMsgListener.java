@@ -9,6 +9,7 @@ import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.PermUtils;
 import org.jooq.Record;
+import org.pircbotx.Colors;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.ActionEvent;
 import org.pircbotx.hooks.events.NickChangeEvent;
@@ -23,12 +24,12 @@ public class RelayMsgListener extends ListenerAdapter {
 
     @Override
     public void onNickChange(NickChangeEvent event) {
-            IRCUtils.sendRelayMessage(event.getBot(), null, IRCUtils.colorizeNick(event.getBot(), event.getUser()) + IRCUtils.noPing(event.getOldNick()) + " is now known as " + IRCUtils.colorizeNick(event.getBot(), event.getUser()) + IRCUtils.noPing(event.getNewNick()), event.getUser());
+            IRCUtils.sendRelayMessage(event.getBot(), null, IRCUtils.colorizeNick(event.getBot(), event.getUser()) + IRCUtils.noPing(event.getOldNick()) + Colors.NORMAL + " is now known as " + IRCUtils.colorizeNick(event.getBot(), event.getUser()) + IRCUtils.noPing(event.getNewNick()), event.getUser());
     }
 
     @Override
     public void onQuit(QuitEvent event) {
-            IRCUtils.sendRelayMessage(event.getBot(), null, IRCUtils.colorizeNick(event.getBot(), event.getUser()) + IRCUtils.noPing(event.getUser().getNick()) + " quits " + " (" + event.getReason() + ")", event.getUser());
+            IRCUtils.sendRelayMessage(event.getBot(), null, IRCUtils.colorizeNick(event.getBot(), event.getUser()) + IRCUtils.noPing(event.getUser().getNick()) + Colors.NORMAL +" quits " + " (" + event.getReason() + ")", event.getUser());
     }
 }
 
