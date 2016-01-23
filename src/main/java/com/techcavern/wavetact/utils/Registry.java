@@ -9,7 +9,6 @@ import org.jasypt.util.password.StrongPasswordEncryptor;
 import org.jooq.DSLContext;
 import org.pircbotx.MultiBotManager;
 import org.pircbotx.PircBotX;
-import org.pircbotx.User;
 import org.pircbotx.hooks.events.WhoisEvent;
 import org.reflections.Reflections;
 
@@ -36,8 +35,6 @@ public class Registry {
     public static final ConsoleServer consoleServer = new ConsoleServer();
     public static final Map<PircBotX, Queue<String>> messageQueue = new HashMap<>();
     public static final UrlValidator urlValidator = new UrlValidator();
-    public static final Map<PircBotX, Map<User, String>> nickColors = new HashMap<>();
-    public static final Map<PircBotX, String> networkColors = new HashMap<>();
     public static final String VERSION = "WaveTact 1.2-dev";
     public static final String USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36";
     public static Map<PircBotX, String> lastLeftChannel = new HashMap<>();

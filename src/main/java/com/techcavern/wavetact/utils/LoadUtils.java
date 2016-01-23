@@ -16,7 +16,10 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.util.*;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
@@ -284,23 +287,12 @@ public class LoadUtils {
 
     }
 
-    public static void initializeColoredRelay(){
-        Iterator iterator = Registry.networks.inverse().keySet().iterator();
-        while (iterator.hasNext()) {
-            PircBotX network = (PircBotX) iterator.next();
-            Registry.nickColors.put(network, new HashMap<>());
-            Registry.networkColors.put(network, GeneralUtils.randomColor());
-        }
-    }
-
-    public static void addNetwork(PircBotX network) {
+    public static void addMessageQueue(PircBotX network) {
         Registry.whoisEventCache.put(network, new ConcurrentHashMap<>());
         Registry.authedUsers.put(network, new ConcurrentHashMap<>());
         Registry.messageQueue.put(network, new LinkedList<>());
         Registry.lastLeftChannel.put(network, "");
         Registry.lastWhois.put(network, "");
-        Registry.nickColors.put(network, new HashMap<>());
-        Registry.networkColors.put(network, GeneralUtils.randomColor());
         class MessageQueue implements Runnable {
             @Override
             public void run() {
@@ -331,7 +323,7 @@ public class LoadUtils {
             @Override
             public void run() {
                 try {
-                    TimeUnit.HOURS.sleep(12);
+                    TimeUnit.HOURS.sleep(1);
                     Registry.whoisEventCache.keySet().stream().forEach(net -> {
                         Registry.whoisEventCache.get(net).clear();
                     });
@@ -339,6 +331,7 @@ public class LoadUtils {
 
                 }
             }
+
         }
         Registry.threadPool.execute(new flushWhoisCache());
     }

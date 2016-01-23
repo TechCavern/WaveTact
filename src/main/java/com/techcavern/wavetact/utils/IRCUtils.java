@@ -78,7 +78,7 @@ public class IRCUtils {
                 if (!messageToSend.isEmpty()) {
                     Registry.messageQueue.get(networkObject).add("PRIVMSG " + prefix + channelObject.getName() + " :" + messageToSend);
                     if (prefix.isEmpty())
-                        sendRelayMessage(networkObject, channelObject, IRCUtils.colorizeNick(networkObject, networkObject.getUserBot()) +noPing(networkObject.getNick()) + ": " + messageToSend);
+                        sendRelayMessage(networkObject, channelObject, noPing(networkObject.getNick()) + ": " + messageToSend);
                 }
             }
         } else {
@@ -125,29 +125,22 @@ public class IRCUtils {
                 String[] netchan = chan.split("\\.");
                 if (channel == null) {
                     if (!getNetworkNameByNetwork(networkObject).equalsIgnoreCase(netchan[0])) {
-                        Registry.messageQueue.get(getNetworkByNetworkName(netchan[0])).add("PRIVMSG " + netchan[1] + " :[" + Registry.networkColors.get(networkObject)+IRCUtils.getNetworkNameByNetwork(networkObject) + "] " + msg);
+                        Registry.messageQueue.get(getNetworkByNetworkName(netchan[0])).add("PRIVMSG " + netchan[1] + " :[" + getNetworkNameByNetwork(networkObject) + "] " + msg);
                     }
                 } else {
                     if (!(getNetworkNameByNetwork(networkObject).equalsIgnoreCase(netchan[0]) && channel.getName().equalsIgnoreCase(netchan[1]))) {
-                        Registry.messageQueue.get(getNetworkByNetworkName(netchan[0])).add("PRIVMSG " + netchan[1] + " :[" + Registry.networkColors.get(networkObject)+IRCUtils.getNetworkNameByNetwork(networkObject) + "] " + msg);
+                        Registry.messageQueue.get(getNetworkByNetworkName(netchan[0])).add("PRIVMSG " + netchan[1] + " :[" + getNetworkNameByNetwork(networkObject) + "] " + msg);
                     }
                 }
             }
         }
     }
 
-    public static String colorizeNick(PircBotX network,User user){
-        if(Registry.nickColors.get(network).get(user) == null){
-            Registry.nickColors.get(network).put(user,GeneralUtils.randomColor());
-        }
-        return Registry.nickColors.get(network).get(user);
-    }
-
     public static void sendAction(User userObject, PircBotX networkObject, Channel channelObject, String message, String prefix) {
         if (channelObject != null) {
             Registry.messageQueue.get(networkObject).add("PRIVMSG " + prefix + channelObject.getName() + " :\u0001ACTION " + message + "\u0001");
             if (prefix.isEmpty())
-                sendRelayMessage(networkObject, channelObject, "* " + IRCUtils.colorizeNick(networkObject, networkObject.getUserBot()) + noPing(networkObject.getNick()) + " " + message);
+                sendRelayMessage(networkObject, channelObject, "* " + noPing(networkObject.getNick()) + " " + message);
         } else {
             Registry.messageQueue.get(networkObject).add("PRIVMSG " + userObject.getNick() + " :\u0001ACTION " + message + "\u0001");
         }

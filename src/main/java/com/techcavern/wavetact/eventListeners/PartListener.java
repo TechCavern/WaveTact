@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class PartListener extends ListenerAdapter {
     public void onPart(PartEvent event) throws Exception {
-        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), IRCUtils.colorizeNick(event.getBot(), event.getUser()) + IRCUtils.noPing(event.getUser().getNick()) + " left " + event.getChannel().getName() + " (" + event.getReason() + ")");
+        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), IRCUtils.noPing(event.getUser().getNick()) + " left " + event.getChannel().getName() + " (" + event.getReason() + ")");
         Record rec = DatabaseUtils.getChannelProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), event.getChannel().getName(), "removerejoin");
         if (rec == null)
             return;

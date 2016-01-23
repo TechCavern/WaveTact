@@ -150,8 +150,6 @@ public class Network extends ConsoleCommand {
             Registry.whoisEventCache.remove(network);
             Registry.lastWhois.remove(network);
             Registry.lastLeftChannel.remove(network);
-            Registry.networkColors.remove(network);
-            Registry.nickColors.remove(network);
             network.stopBotReconnect();
             network.sendIRC().quitServer();
             commandIO.getPrintStream().println("network removed");
@@ -211,7 +209,7 @@ public class Network extends ConsoleCommand {
             DatabaseUtils.addNetwork(name, port, server, nick, channels, bindhost, netadminaccess, netadmins, authtype, nickservcommand, serverpass, nickservnick, SSL);
             PircBotX network = ConfigUtils.createNetwork(serverpass, nick, server, port, bindhost, name, SSL);
             Registry.networks.put(name, network);
-            LoadUtils.addNetwork(network);
+            LoadUtils.addMessageQueue(network);
             Registry.WaveTact.addNetwork(network);
         }
     }

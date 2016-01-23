@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class KickListener extends ListenerAdapter {
     public void onKick(KickEvent event) throws Exception {
-        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), IRCUtils.colorizeNick(event.getBot(), event.getUser()) + IRCUtils.noPing(event.getRecipient().getNick()) + " was kicked by " + IRCUtils.noPing(event.getUser().getNick()) + " (" + event.getReason() + ")");
+        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), IRCUtils.noPing(event.getRecipient().getNick()) + " was kicked by " + IRCUtils.noPing(event.getUser().getNick()) + " (" + event.getReason() + ")");
         Record rec = DatabaseUtils.getChannelProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), event.getChannel().getName(), "kickrejoin");
         if (!(rec != null && rec.getValue(Channelproperty.CHANNELPROPERTY.VALUE).equalsIgnoreCase("false"))) {
             Channel channel = event.getChannel();

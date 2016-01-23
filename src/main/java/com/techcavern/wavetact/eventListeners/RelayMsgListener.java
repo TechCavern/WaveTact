@@ -23,12 +23,12 @@ public class RelayMsgListener extends ListenerAdapter {
 
     @Override
     public void onNickChange(NickChangeEvent event) {
-            IRCUtils.sendRelayMessage(event.getBot(), null, IRCUtils.colorizeNick(event.getBot(), event.getUser()) + IRCUtils.noPing(event.getOldNick()) + " is now known as " + IRCUtils.colorizeNick(event.getBot(), event.getUser()) + IRCUtils.noPing(event.getNewNick()), event.getUser());
+            IRCUtils.sendRelayMessage(event.getBot(), null, IRCUtils.noPing(event.getOldNick()) + " is now known as " + IRCUtils.noPing(event.getNewNick()), event.getUser());
     }
 
     @Override
     public void onQuit(QuitEvent event) {
-            IRCUtils.sendRelayMessage(event.getBot(), null, IRCUtils.colorizeNick(event.getBot(), event.getUser()) + IRCUtils.noPing(event.getUser().getNick()) + " quits " + " (" + event.getReason() + ")", event.getUser());
+            IRCUtils.sendRelayMessage(event.getBot(), null, IRCUtils.noPing(event.getUser().getNick()) + " quits " + " (" + event.getReason() + ")", event.getUser());
     }
 }
 
