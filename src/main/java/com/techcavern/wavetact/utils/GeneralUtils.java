@@ -211,6 +211,24 @@ public class GeneralUtils {
         }
         return result;
     }
+    public static String randomColor() {
+        int number = RandomUtils.nextInt(1, 7);
+        switch (number) {
+            case 1:
+                return Colors.RED;
+            case 2:
+                return Colors.YELLOW;
+            case 3:
+                return Colors.DARK_GREEN;
+            case 4:
+                return Colors.CYAN;
+            case 5:
+                return Colors.BLUE;
+            default:
+                return Colors.MAGENTA;
+        }
+    }
+
 
     public static int readInputStream(InputStream in)
             throws Exception {

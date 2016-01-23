@@ -43,6 +43,7 @@ public class Main {
         LoadUtils.registerAttacks();
         LoadUtils.registerEightball();
         LoadUtils.initializeAutoFlushWhoisCache();
+        LoadUtils.initializeColoredRelay();
         Registry.threadPool.execute(new MCStatusListener());
         /**
       DatabaseUtils.addNetwork("Freenode", 6697, "irc.freenode.net", "WTTest", "#tctest", null, false, "JZTech101", "nickserv", , null, "nickserv", true);
