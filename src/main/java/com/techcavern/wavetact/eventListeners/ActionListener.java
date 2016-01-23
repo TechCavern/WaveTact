@@ -29,7 +29,7 @@ public class ActionListener extends ListenerAdapter {
     @Override
     public void onAction(ActionEvent event) {
         if (PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel()) > -3 && IRCUtils.getPrefix(event.getBot(), event.getChannelSource()).isEmpty())
-            IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), "* " + IRCUtils.colorizeNick(event.getBot(), event.getUser()) + IRCUtils.noPing(event.getUser().getNick()) + Colors.NORMAL +" " + event.getMessage());
+            IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), "* " + IRCUtils.colorizeNick(event.getBot(), event.getUser()) + IRCUtils.noPing(event.getUser().getNick()) + " " + event.getMessage());
     }
     }
 
