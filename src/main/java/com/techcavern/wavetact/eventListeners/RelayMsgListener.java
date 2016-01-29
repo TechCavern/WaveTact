@@ -28,7 +28,7 @@ public class RelayMsgListener extends ListenerAdapter {
 
     @Override
     public void onQuit(QuitEvent event) {
-            IRCUtils.sendRelayMessage(event.getBot(), null, IRCUtils.noPing(event.getUser().getNick()) + " quits " + " (" + event.getReason() + ")", event.getUser());
+            IRCUtils.sendRelayMessage(event.getBot(), null, IRCUtils.noPing(event.getUser().getNick()) + " (" + event.getUserHostmask().getLogin() + "@" + event.getUserHostmask().getHostname() +") quits " + " (" + event.getReason() + ")", event.getUser());
     }
 }
 
