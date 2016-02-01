@@ -63,6 +63,7 @@ Channel Properties
 - funmsg - some.. fun.. stuff.
 - removerejoin - rejoin on remove
 - kickrejoin - kickrejoin
+- mcserver - default minecraft server
 
 Global Config
 =================

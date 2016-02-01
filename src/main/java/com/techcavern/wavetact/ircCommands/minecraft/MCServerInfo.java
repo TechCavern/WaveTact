@@ -1,33 +1,50 @@
 package com.techcavern.wavetact.ircCommands.minecraft;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
+import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetactdb.tables.Channelproperty;
+import org.apache.commons.lang3.StringUtils;
+import org.jooq.*;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 import org.xbill.DNS.*;
+import org.xbill.DNS.Record;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
 @IRCCMD
 public class MCServerInfo extends IRCCommand {
 
     public MCServerInfo() {
-        super(GeneralUtils.toArray("mcserverinfo mcsi mcserver mcping"), 1, "mcserverinfo [address] (port)", "Gets info on minecraft server", false);
+        super(GeneralUtils.toArray("mcserverinfo mcsi mcserver mcping mcwho mcplayers"), 1, "mcserverinfo [address] (port)", "Gets info on minecraft server", false);
     }
 
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         int port = 25565;
         boolean isSuccessful = false;
+        if(args.length < 1){
+            org.jooq.Record rec = DatabaseUtils.getChannelProperty(IRCUtils.getNetworkNameByNetwork(network),channel.getName(), "mcserver");
+            if (rec != null){
+                args = StringUtils.split(rec.getValue(Channelproperty.CHANNELPROPERTY.VALUE),":");
+            }else{
+                IRCUtils.sendError(user, network, channel, "Default Minecraft Server Undefined", prefix);
+                return;
+            }
+        }
         if (args.length >= 2) {
             port = Integer.parseInt(args[1]);
         } else {
@@ -88,6 +105,13 @@ public class MCServerInfo extends IRCCommand {
         String gameVersion = "VERSION: " + response.get("version").getAsJsonObject().get("name").getAsString();
         String motd = "MOTD: " + response.get("description").getAsString();
         String playercount = "Players: " + response.get("players").getAsJsonObject().get("online").getAsString() + "/" + response.get("players").getAsJsonObject().get("max").getAsString();
+        List<String> players = new ArrayList<>();
+        if(response.get("players").getAsJsonObject().get("online").getAsInt() > 0){
+            for(JsonElement e:response.get("players").getAsJsonObject().get("sample").getAsJsonArray()){
+                players.add(e.getAsJsonObject().get("name").getAsString());
+            }
+            playercount += " (" + StringUtils.join(players, ", ") +")";
+        }
         IRCUtils.sendMessage(user, network, channel, "[" + address.getHostString() + ":" + port + "] " + gameVersion + " - " + motd + " - " + playercount, prefix);
     }
 
