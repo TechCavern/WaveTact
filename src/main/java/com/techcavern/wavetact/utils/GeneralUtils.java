@@ -265,9 +265,12 @@ public class GeneralUtils {
     }
 
     public static String getDateFromSeconds(long time) {
+      return getDateFromMilliSeconds(time*1000);
+    }
+    public static String getDateFromMilliSeconds(long time) {
         Calendar cal = Calendar.getInstance();
         cal.setTimeZone(TimeZone.getTimeZone("UTC"));
-        cal.setTimeInMillis(time * 1000);
+        cal.setTimeInMillis(time);
         Locale locale = Locale.ENGLISH;
         return cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, locale) + ", " + cal.getDisplayName(Calendar.MONTH, Calendar.LONG, locale) + " " + (cal.get(Calendar.DAY_OF_MONTH)) + ", " + cal.get(Calendar.YEAR) + " at " + cal.get(Calendar.HOUR_OF_DAY) + ":" + formatTime(cal.get(Calendar.MINUTE)) + ":" + formatTime(cal.get(Calendar.SECOND)) + " (UTC)";
     }

@@ -1,23 +1,28 @@
 package com.techcavern.wavetact.ircCommands.minecraft;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.fluent.Request;
 import org.apache.http.entity.ContentType;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @IRCCMD
 public class MCAccountInfo extends IRCCommand {
 
     public MCAccountInfo() {
-        super(GeneralUtils.toArray("mcaccountinfo mca mcuserinfo mcpremium mcuuid mcmigrated"), 1, "mcaccountinfo [user]", "Gets info on a minecraft account", false);
+        super(GeneralUtils.toArray("mcaccountinfo mca mcuserinfo mcwhois mcplayer mcpremium mcuuid mcmigrated mchistory"), 1, "mcaccountinfo [user]", "Gets info on a minecraft account", false);
     }
 
     @Override
@@ -39,10 +44,26 @@ public class MCAccountInfo extends IRCCommand {
             if (mcapi.get("legacy") != null && mcapi.get("legacy").getAsString().equalsIgnoreCase("True")) {
                 Migrated = "False";
             }
-            IRCUtils.sendMessage(user, network, channel, "[" + IRCUtils.noPing(User) + "] " + "UUID: " + UUID + " - " + "Paid: " + Premium + " - " + "Mojang Account: " + Migrated, prefix);
+            JsonArray mcapiuuid = GeneralUtils.getJsonArray("https://api.mojang.com/user/profiles/" + UUID +"/names");
+            List<String> history = new ArrayList<>();
+            for(int i = 0; i < mcapiuuid.size(); i++){
+                JsonObject name = mcapiuuid.get(i).getAsJsonObject();
+                String temp = name.get("name").getAsString();
+                try {
+                    name = mcapiuuid.get(i + 1).getAsJsonObject();
+                    temp += " (Up to " + GeneralUtils.getDateFromMilliSeconds(name.get("changedToAt").getAsLong()) + ")";
+                }catch(Exception e){}
+                history.add(temp);
+            }
+            if(history.size() > 1){
+                IRCUtils.sendMessage(user, network, channel, "[" + IRCUtils.noPing(User) + "] " + "UUID: " + UUID + " - " + "Paid: " + Premium + " - " + "Mojang Account: " + Migrated + " - "  + "History: " + StringUtils.join(history, ", "), prefix);
+            }else{
+                IRCUtils.sendMessage(user, network, channel, "[" + IRCUtils.noPing(User) + "] " + "UUID: " + UUID + " - " + "Paid: " + Premium + " - " + "Mojang Account: " + Migrated  + " - "  + " History: None", prefix);
+            }
         } else {
             IRCUtils.sendError(user, network, channel, "User does not exist", prefix);
         }
+
     }
 
 }
