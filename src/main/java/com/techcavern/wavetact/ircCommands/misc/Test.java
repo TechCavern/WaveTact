@@ -10,6 +10,7 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 import org.pircbotx.hooks.ListenerAdapter;
+import org.pircbotx.hooks.events.MessageEvent;
 import org.pircbotx.hooks.events.PrivateMessageEvent;
 import org.pircbotx.hooks.events.WhoisEvent;
 
@@ -27,12 +28,14 @@ public class Test extends IRCCommand {
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         class CrackbotListener extends ListenerAdapter {
             @Override
-            public void onPrivateMessage(PrivateMessageEvent event) throws Exception {
-                if (event.getUser().getNick().equalsIgnoreCase("Crackbot")) {
-                    IRCUtils.sendMessage(user, network, channel, "./start", prefix);
+            public void onMessage(MessageEvent event) throws Exception {
+                if (event.getUser().getNick().equalsIgnoreCase("JZTech1O1") && event.getChannel().getName().equals("#tctest") && event.getMessage().contains("Anna_28")) {
+                    IRCUtils.sendMessage(event.getUser(), event.getBot(), event.getChannel(), "Moo", prefix);
                 }
             }
         }
+        network.getConfiguration().getListenerManager().addListener(new CrackbotListener());
+        /**
         TimerTask buy = new TimerTask() {
             public void run() {
                 TimerTask sellall = new TimerTask() {
@@ -79,5 +82,6 @@ public class Test extends IRCCommand {
             timer1.scheduleAtFixedRate(refillcash, 0, 500000);
         }else{
         }
+         **/
     }
 }
