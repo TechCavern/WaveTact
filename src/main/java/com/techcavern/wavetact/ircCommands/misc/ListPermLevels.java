@@ -13,8 +13,8 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @IRCCMD
 public class ListPermLevels extends IRCCommand {
@@ -25,7 +25,7 @@ public class ListPermLevels extends IRCCommand {
 
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        List<String> msg = new ArrayList<>();
+        Set<String> msg = new HashSet<>();
         Result<Record> records = DatabaseUtils.getChannelUserProperty(IRCUtils.getNetworkNameByNetwork(network), channel.getName(), "permlevel");
         if (records.size() > 0) {
             for (Record rec :records) {

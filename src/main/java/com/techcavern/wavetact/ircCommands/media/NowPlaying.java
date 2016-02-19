@@ -12,8 +12,8 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import static com.techcavern.wavetactdb.Tables.CONFIG;
 
@@ -44,7 +44,7 @@ public class NowPlaying extends IRCCommand {
         }
 
         JsonArray tracks = jsonObject.get("recenttracks").getAsJsonObject().get("track").getAsJsonArray();
-        List<String> results = new ArrayList<>();
+        Set<String> results = new HashSet<>();
         if(tracks.size() < 1){
             IRCUtils.sendError(user, network, channel, "LastFM returned no results", prefix);
         }else{

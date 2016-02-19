@@ -17,9 +17,9 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Set;
 
 import static com.techcavern.wavetactdb.Tables.NETWORKS;
 
@@ -50,7 +50,7 @@ public class Part extends IRCCommand {
                 Registry.messageQueue.get(network).add("PART " + args[0]);
                 if (permanent) {
                     Record netRecord = DatabaseUtils.getNetwork(IRCUtils.getNetworkNameByNetwork(network));
-                    List<String> channels = new ArrayList<>(Arrays.asList(StringUtils.split(netRecord.getValue(NETWORKS.CHANNELS), ", ")));
+                    Set<String> channels = new HashSet<>(Arrays.asList(StringUtils.split(netRecord.getValue(NETWORKS.CHANNELS), ", ")));
                     channels.remove(args[0]);
                     netRecord.setValue(NETWORKS.CHANNELS, StringUtils.join(channels, ", "));
                     DatabaseUtils.updateNetwork(netRecord);

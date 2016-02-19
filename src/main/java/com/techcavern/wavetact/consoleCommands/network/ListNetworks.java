@@ -9,8 +9,8 @@ import com.techcavern.wavetact.utils.Registry;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.PircBotX;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @ConCMD
 public class ListNetworks extends ConsoleCommand {
@@ -21,7 +21,7 @@ public class ListNetworks extends ConsoleCommand {
 
     @Override
     public void onCommand(String command, String[] args, CommandIO commandIO) throws Exception {
-        List<String> networks = new ArrayList<>();
+        Set<String> networks = new HashSet<>();
         for (PircBotX net : Registry.networks.inverse().keySet()) {
             if (args.length < 1) {
                 networks.add(IRCUtils.getNetworkNameByNetwork(net));

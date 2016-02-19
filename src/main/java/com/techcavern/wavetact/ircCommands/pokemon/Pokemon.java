@@ -11,8 +11,8 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @IRCCMD
 public class Pokemon extends IRCCommand {
@@ -26,7 +26,7 @@ public class Pokemon extends IRCCommand {
         JsonObject pokemon = GeneralUtils.getJsonObject("http://pokeapi.co/api/v1/pokemon/" + args[0].toLowerCase());
         String name = pokemon.get("name").getAsString();
         String id = pokemon.get("national_id").getAsString();
-        List<String> response = new ArrayList<>();
+        Set<String> response = new HashSet<>();
         response.add("[" + name + " (" + id + ")]");
         String description = pokemon.get("species").getAsString();
         if (!description.isEmpty())

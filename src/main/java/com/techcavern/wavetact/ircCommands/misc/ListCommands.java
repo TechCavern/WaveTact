@@ -11,7 +11,7 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
 import java.util.Collections;
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -38,15 +38,15 @@ public class ListCommands extends IRCCommand {
         }
         if (permlevel >= 0) {
             final int fpermlevel = permlevel;
-            List<String> commands = Registry.ircCommandList.stream().filter(cmd -> cmd.getPermLevel() == fpermlevel).map(IRCCommand::getCommand).collect(Collectors.toList());
+            Set<String> commands = Registry.ircCommandList.stream().filter(cmd -> cmd.getPermLevel() == fpermlevel).map(IRCCommand::getCommand).collect(Collectors.toSet());
             if (commands.isEmpty()) {
                 IRCUtils.sendError(user, network, channel, "No commands found with that perm level", prefix);
             } else {
-                Collections.sort(commands);
+             //   Collections.sort(commands);
                 IRCUtils.sendMessage(user, network, channel, StringUtils.join(commands, ", "), prefix);
             }
         } else {
-            List<String> commands = Registry.ircCommandList.stream().map(IRCCommand::getCommand).collect(Collectors.toList());
+            Set<String> commands = Registry.ircCommandList.stream().map(IRCCommand::getCommand).collect(Collectors.toSet());
             IRCUtils.sendMessage(user, network, channel, StringUtils.join(commands, ", "), prefix);
         }
     }

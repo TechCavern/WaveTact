@@ -10,8 +10,8 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 import org.pircbotx.hooks.events.WhoisEvent;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @IRCCMD
 public class Whois extends IRCCommand {
@@ -30,7 +30,7 @@ public class Whois extends IRCCommand {
         if (event == null) {
             IRCUtils.sendError(user, network, channel, "User does not exist", prefix);
         } else {
-            List<String> results = new ArrayList<>();
+            Set<String> results = new HashSet<>();
             results.add("is "+nick + "!" + event.getLogin() + "@" + event.getHostname());
 
            results.add("signed on " + GeneralUtils.getDateFromSeconds(event.getSignOnTime()));

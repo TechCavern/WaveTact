@@ -15,6 +15,7 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
 import java.util.List;
+import java.util.Set;
 
 import static com.techcavern.wavetactdb.Tables.CONFIG;
 

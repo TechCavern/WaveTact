@@ -19,11 +19,11 @@ import java.util.concurrent.ForkJoinPool;
 public class Registry {
     public static final ForkJoinPool threadPool = new ForkJoinPool(20);
     public static final Map<String, IRCCommand> ircCommands = new HashMap<>();
-    public static final List<IRCCommand> ircCommandList = new ArrayList<>();
-    public static final List<ConsoleCommand> consoleCommandList = new ArrayList<>();
+    public static final Set<IRCCommand> ircCommandList = new HashSet<>();
+    public static final Set<ConsoleCommand> consoleCommandList = new HashSet<>();
     public static final Map<PircBotX, Map<String, String>> authedUsers = new ConcurrentHashMap<>();
-    public static final List<String> attacks = new ArrayList<>();
-    public static final List<String> eightBall = new ArrayList<>();
+    public static final Set<String> attacks = new HashSet<>();
+    public static final Set<String> eightBall = new HashSet<>();
     public static final Map<String, String> charReplacements = new HashMap<>();
     public static final MultiBotManager WaveTact = new MultiBotManager();
     public static final Map<String, ConsoleCommand> consoleCommands = new HashMap<>();

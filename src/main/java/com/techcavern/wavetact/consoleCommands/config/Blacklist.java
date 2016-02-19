@@ -13,8 +13,9 @@ import com.techcavern.wavetact.utils.GeneralUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jooq.Record;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Set;
 
 import static com.techcavern.wavetactdb.Tables.BLACKLISTS;
 
@@ -42,7 +43,7 @@ public class Blacklist extends ConsoleCommand {
                     commandIO.getPrintStream().println(args[0] + " blacklist does not exist on list");
                 }
             } else if (args[1].equalsIgnoreCase("list")) {
-                List<String> blacklists = new ArrayList<>();
+                Set<String> blacklists = new HashSet<>();
                 for (Record bl : DatabaseUtils.getBlacklists(args[0]))
                     blacklists.add(bl.getValue(BLACKLISTS.URL));
                 if (!blacklists.isEmpty()) {

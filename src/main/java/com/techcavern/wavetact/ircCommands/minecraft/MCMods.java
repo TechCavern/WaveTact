@@ -12,9 +12,9 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Set;
 import java.util.Map;
 
 @IRCCMD
@@ -110,7 +110,7 @@ public class MCMods extends IRCCommand {
         if (mcmods.isEmpty()) {
             IRCUtils.sendError(user, network, channel, "No mods found", prefix);
         } else {
-            List<String> results = new ArrayList<>();
+            Set<String> results = new HashSet<>();
             for (JsonObject mod : mcmods.keySet()) {
                 boolean isNEM = true;
                 if (mod.get("version") == null) {

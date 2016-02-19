@@ -15,8 +15,8 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @IRCCMD
 public class TLDInfo extends IRCCommand {
@@ -35,7 +35,7 @@ public class TLDInfo extends IRCCommand {
             Elements titles = doc.select("#main_right").select("h2");
             Elements names = doc.select("#main_right").select("b");
             String[] organization = doc.select("#main_right").after("br").html().split("\n");
-            List<String> results = new ArrayList<>();
+            Set<String> results = new HashSet<>();
             results.add("Sponsoring Organization: "+ names.get(0).text());
             results.add("Administrative Contact: " + names.get(1).text()  + ", " +  GeneralUtils.stripHTML(organization[10]));
             results.add("Technical Contact: " + names.get(5).text() + ", " + GeneralUtils.stripHTML(organization[23]));

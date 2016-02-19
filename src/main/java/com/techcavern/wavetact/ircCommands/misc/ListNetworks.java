@@ -10,8 +10,8 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @IRCCMD
 public class ListNetworks extends IRCCommand {
@@ -22,7 +22,7 @@ public class ListNetworks extends IRCCommand {
 
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        List<String> networks = new ArrayList<>();
+        Set<String> networks = new HashSet<>();
         for (PircBotX net : Registry.networks.inverse().keySet()) {
             if (args.length < 1) {
                 networks.add(IRCUtils.getNetworkNameByNetwork(net));

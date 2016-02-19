@@ -12,8 +12,8 @@ import org.pircbotx.User;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @IRCCMD
 public class Traceroute extends IRCCommand {
@@ -41,7 +41,7 @@ public class Traceroute extends IRCCommand {
             }
             Process pinghost = Runtime.getRuntime().exec(traceCommand);
             BufferedReader buffereader = new BufferedReader(new InputStreamReader(pinghost.getInputStream()));
-            List<String> results = new ArrayList<>();
+            Set<String> results = new HashSet<>();
             String line;
             while ((line = buffereader.readLine()) != null) {
                 if (!line.contains("* * *"))

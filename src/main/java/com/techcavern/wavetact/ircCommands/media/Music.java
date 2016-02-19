@@ -13,8 +13,8 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import static com.techcavern.wavetactdb.Tables.CONFIG;
 
@@ -45,7 +45,7 @@ public class Music extends IRCCommand {
                 JsonObject album = albumlist.get(ArrayIndex).getAsJsonObject();
                 try {
                     JsonArray albumtracks = GeneralUtils.getJsonObject("http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=" + lastfmapikey + "&artist=" + album.get("artist").getAsString().replaceAll(" ", "%20") + "&album=" + album.get("name").getAsString().replaceAll(" ", "%20") + "&format=json").get("album").getAsJsonObject().get("tracks").getAsJsonObject().get("track").getAsJsonArray();
-                    List<String> results = new ArrayList<>();
+                    Set<String> results = new HashSet<>();
                     for (int i = 0; i < 3; i++) {
                         try {
                             results.add("[" + album.get("name").getAsString() + "] " + albumtracks.get(i).getAsJsonObject().get("name").getAsString() + " by " + albumtracks.get(i).getAsJsonObject().get("artist").getAsJsonObject().get("name").getAsString());
@@ -67,7 +67,7 @@ public class Music extends IRCCommand {
             if (artistlist.size() - 1 >= ArrayIndex) {
                 JsonObject artist = artistlist.get(ArrayIndex).getAsJsonObject();
                 JsonArray toptracks = GeneralUtils.getJsonObject("http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=" + artist.get("name").getAsString().replaceAll(" ", "%20") + "&api_key=" + lastfmapikey + "&format=json").get("toptracks").getAsJsonObject().get("track").getAsJsonArray();
-                List<String> results = new ArrayList<>();
+                Set<String> results = new HashSet<>();
                 for (int i = 0; i < 3; i++) {
                     try {
                         results.add(toptracks.get(i).getAsJsonObject().get("name").getAsString() + " by " + artist.get("name").getAsString());
@@ -82,7 +82,7 @@ public class Music extends IRCCommand {
             }
         } else {
             JsonArray tracklist = GeneralUtils.getJsonObject("http://ws.audioscrobbler.com/2.0/?method=track.search&track=" + StringUtils.join(args, "%20") + "&api_key=" + lastfmapikey + "&format=json").get("results").getAsJsonObject().get("trackmatches").getAsJsonObject().get("track").getAsJsonArray();
-            List<String> results = new ArrayList<>();
+            Set<String> results = new HashSet<>();
             for (int i = 0; i < 3; i++) {
                 try {
                     results.add(tracklist.get(i).getAsJsonObject().get("name").getAsString() + " by " + tracklist.get(i).getAsJsonObject().get("artist").getAsString());

@@ -10,8 +10,8 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @IRCCMD
 public class MCModStats extends IRCCommand {
@@ -23,7 +23,7 @@ public class MCModStats extends IRCCommand {
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         JsonArray versions = GeneralUtils.getJsonArray("http://bot.notenoughmods.com/?json&count");
-        List<String> mcModStats = new ArrayList<>();
+        Set<String> mcModStats = new HashSet<>();
         for (int i = versions.size() - 1; i >= 0; i--) {
             int size = versions.get(i).getAsJsonObject().get("count").getAsInt();
             if (size > 10)

@@ -102,7 +102,7 @@ public class IRCUtils {
         sendRelayMessage(networkObject, channel, msg, null);
     }
     public static void sendRelayMessage(PircBotX networkObject, Channel channel, String msg, User user) {
-        List<String[]> toBeRelayed = new ArrayList<>();
+        Set<String[]> toBeRelayed = new HashSet<>();
         for (Record relay : DatabaseUtils.getRelays()) {
             String[] channels = relay.getValue(RELAYS.VALUE).split(",");
             for (String chan : channels) {

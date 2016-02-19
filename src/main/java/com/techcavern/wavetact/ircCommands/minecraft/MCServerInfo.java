@@ -22,8 +22,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @IRCCMD
 public class MCServerInfo extends IRCCommand {
@@ -105,7 +105,7 @@ public class MCServerInfo extends IRCCommand {
         String gameVersion = "VERSION: " + response.get("version").getAsJsonObject().get("name").getAsString();
         String motd = "MOTD: " + response.get("description").getAsString();
         String playercount = "Players: " + response.get("players").getAsJsonObject().get("online").getAsString() + "/" + response.get("players").getAsJsonObject().get("max").getAsString();
-        List<String> players = new ArrayList<>();
+        Set<String> players = new HashSet<>();
         if(response.get("players").getAsJsonObject().get("online").getAsInt() > 0){
             for(JsonElement e:response.get("players").getAsJsonObject().get("sample").getAsJsonArray()){
                 players.add(e.getAsJsonObject().get("name").getAsString());

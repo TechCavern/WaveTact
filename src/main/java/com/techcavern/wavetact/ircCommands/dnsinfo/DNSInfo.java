@@ -15,8 +15,8 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 import org.xbill.DNS.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author jztech101
@@ -38,7 +38,7 @@ public class DNSInfo extends IRCCommand {
         lookup.setCache(null);
         Record[] records = lookup.run();
         if (lookup.getResult() == Lookup.SUCCESSFUL) {
-            List<String> results = new ArrayList<>();
+            Set<String> results = new HashSet<>();
             for (Record rec : records) {
                 if (rec instanceof ARecord) {
                     results.add("[" + Type.string(rec.getType()) + "] " + ((ARecord) rec).getAddress().toString().replace("./", "/"));
