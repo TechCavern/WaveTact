@@ -1,6 +1,7 @@
 package com.techcavern.wavetact.ircCommands.media;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
@@ -11,7 +12,7 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-@IRCCMD
+//@IRCCMD
 public class Image extends IRCCommand {
 
     public Image() {
@@ -25,7 +26,8 @@ public class Image extends IRCCommand {
             ArrayIndex = Integer.parseInt(args[0]) - 1;
             args = ArrayUtils.remove(args, 0);
         }
-        JsonArray results = GeneralUtils.getJsonObject("https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + StringUtils.join(args, "%20")).getAsJsonObject("responseData").getAsJsonArray("results");
+        JsonObject moo = GeneralUtils.getJsonObject("https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + StringUtils.join(args, "%20"));
+        JsonArray results = moo.getAsJsonObject("responseData").getAsJsonArray("results");
         if (results.size() - 1 > 0) {
             if (results.size() - 1 >= ArrayIndex) {
                 String title = results.get(ArrayIndex).getAsJsonObject().get("titleNoFormatting").getAsString();

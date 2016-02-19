@@ -2,10 +2,7 @@ package com.techcavern.wavetact;
 
 import com.techcavern.wavetact.console.ConsoleClient;
 import com.techcavern.wavetact.eventListeners.MCStatusListener;
-import com.techcavern.wavetact.utils.ConfigUtils;
-import com.techcavern.wavetact.utils.DatabaseUtils;
-import com.techcavern.wavetact.utils.LoadUtils;
-import com.techcavern.wavetact.utils.Registry;
+import com.techcavern.wavetact.utils.*;
 import org.slf4j.impl.SimpleLogger;
 
 import java.io.File;
@@ -49,6 +46,7 @@ public class Main {
         DatabaseUtils.addNetwork("Freenode3", 6697, "irc.freenode.net", "WTTest2", "#tctest", null, false, "JZTech101", "nickserv", null, null, null, true);
         DatabaseUtils.addNetwork("Freenode2", 6697, "irc.freenode.net", "WTTest3", "#tctest", null, false, "JZTech101", "nickserv", null, null, null, true);
          **/
+
         if(!isWindows)
             Registry.threadPool.execute(Registry.consoleServer);
         Registry.WaveTact.start();
