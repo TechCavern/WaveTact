@@ -6,6 +6,8 @@ import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.Registry;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -26,6 +28,7 @@ public class Test extends IRCCommand {
     }
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+       /**
         class CrackbotListener extends ListenerAdapter {
             @Override
             public void onMessage(MessageEvent event) throws Exception {
@@ -35,6 +38,7 @@ public class Test extends IRCCommand {
             }
         }
         network.getConfiguration().getListenerManager().addListener(new CrackbotListener());
+        **/
         /**
         TimerTask buy = new TimerTask() {
             public void run() {
@@ -83,5 +87,10 @@ public class Test extends IRCCommand {
         }else{
         }
          **/
+        int j = Integer.valueOf(args[0]);
+        args = ArrayUtils.remove(args,0);
+        for(int i =0; i<j; i++){
+            IRCUtils.sendMessage(user, network, channel, StringUtils.join(args, " "), prefix);
+        }
     }
 }
