@@ -52,6 +52,7 @@ public class Main {
         Registry.WaveTact.start();
         LoadUtils.initializeMessageQueue();
         LoadUtils.initializeBanQueue();
+        LoadUtils.initializeVoiceQueue();
         Registry.threadPool.awaitTermination(Long.MAX_VALUE, TimeUnit.DAYS);
     }
 }

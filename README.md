@@ -43,15 +43,16 @@ PermLevels
 - 1 - Registered Access. All registered users have it (Access to all commands below Trusted on a specific channel).
 - 0 - Default Access. Everyone has it (Access to all commands below Registered on a specific channel).
 - -1 - Ignored (Access to no commands)
-- -2 - Ignored by everything except the relay
-- -3 - Ignored by everything
-- -4 - Banned
+- -2 - Ignored by everything except the auto-voice and relay
+- -3 - Ignored by everything except the relay
+- -4 - Ignored by everything and if enabled, banned
 
 Channel-User Properties
 =======================
 - permlevel - you can set a custom permlevel for a user (Must be integer)
 - relaybotsplit - you may assign a bot as a relaybot, and set the value as the character before the actual message is handled
 - autoop - determines whether or not the user is gets automatically opped/voiced/ownered/protected depending on their permlevel
+- autovoice - enables/disables autovoice per user if channel property is enabled
 
 Channel Properties
 ==================
@@ -64,6 +65,7 @@ Channel Properties
 - removerejoin - rejoin on remove
 - kickrejoin - kickrejoin
 - mcserver - default minecraft server
+- autovoice - enables/disables auto voice
 
 Global Config
 =================

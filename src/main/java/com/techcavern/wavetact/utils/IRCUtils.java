@@ -1,8 +1,10 @@
 package com.techcavern.wavetact.utils;
 
 import com.techcavern.wavetact.objects.IRCCommand;
+import com.techcavern.wavetactdb.tables.Channelproperty;
 import org.apache.commons.lang3.StringUtils;
 import org.jooq.Record;
+import org.jooq.Result;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -101,7 +103,45 @@ public class IRCUtils {
     public static void sendRelayMessage(PircBotX networkObject, Channel channel, String msg) {
         sendRelayMessage(networkObject, channel, msg, null);
     }
-    public static void sendRelayMessage(PircBotX networkObject, Channel channel, String msg, User user) {
+    public static void addVoice(PircBotX networkObject, Channel channel,User user) {
+        if((channel.getOps().contains(networkObject.getUserBot()) ||channel.getSuperOps().contains(networkObject.getUserBot()) || channel.getHalfOps().contains(networkObject.getUserBot()) || channel.getOwners().contains(networkObject.getUserBot())) && !(channel.getOps().contains(user) ||channel.getSuperOps().contains(user) || channel.getHalfOps().contains(user) || channel.getOwners().contains(user))){
+            Record rec = DatabaseUtils.getChannelProperty(IRCUtils.getNetworkNameByNetwork(networkObject), channel.getName(), "autovoice");
+            if (rec != null && rec.getValue(Channelproperty.CHANNELPROPERTY.VALUE).equalsIgnoreCase("true")) {
+                Record rec2 = DatabaseUtils.getChannelUserProperty(IRCUtils.getNetworkNameByNetwork(networkObject), channel.getName(), PermUtils.authUser(networkObject, user.getNick()), "autovoice");
+                if (rec2 != null && rec.getValue(CHANNELUSERPROPERTY.VALUE).equalsIgnoreCase("false")) {
+                    return;
+                }else {
+                    Record rec3 = DatabaseUtils.getVoice(IRCUtils.getNetworkNameByNetwork(networkObject), channel.getName(), user.getNick());
+                    if (rec3 != null) {
+                        rec3.setValue(VOICES.TIME, System.currentTimeMillis() + GeneralUtils.getMilliSeconds("1h"));
+                        DatabaseUtils.updateVoiceTime(rec3);
+                    } else {
+                        IRCUtils.setMode(channel,networkObject, "+v", user.getNick());
+                        DatabaseUtils.addVoice(IRCUtils.getNetworkNameByNetwork(networkObject), channel.getName(), user.getNick(), System.currentTimeMillis() + GeneralUtils.getMilliSeconds("1h"));
+                    }
+                }
+            }else{
+                return;
+            }
+        }else{
+            return;
+        }
+    }
+    public static void removeVoice(PircBotX networkObject, Channel channel,User user) {
+        DatabaseUtils.removeVoice(IRCUtils.getNetworkNameByNetwork(networkObject), channel.getName(), user.getNick());
+    }
+    public static void removeVoice(PircBotX networkObject,User user) {
+        DatabaseUtils.removeVoice(IRCUtils.getNetworkNameByNetwork(networkObject), user.getNick());
+    }
+    public static void updateVoice(PircBotX networkObject,String oldNick, User user) {
+        Result<Record> records = DatabaseUtils.getVoicedNicks(IRCUtils.getNetworkNameByNetwork(networkObject), oldNick);
+        for(Record rec:records){
+            rec.setValue(VOICES.NICK, user.getNick());
+            DatabaseUtils.updateVoiceNick(rec);
+        }
+    }
+
+        public static void sendRelayMessage(PircBotX networkObject, Channel channel, String msg, User user) {
         Set<String[]> toBeRelayed = new HashSet<>();
         for (Record relay : DatabaseUtils.getRelays()) {
             String[] channels = relay.getValue(RELAYS.VALUE).split(",");
@@ -287,7 +327,7 @@ public class IRCUtils {
     public static Channel getChannelbyName(PircBotX networkObject, String channelName) {
         try {
             return networkObject.getUserChannelDao().getChannel(channelName);
-        } catch (DaoException e) {
+        } catch (DaoException|NullPointerException e) {
             return null;
         }
 

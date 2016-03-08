@@ -1,5 +1,6 @@
 package com.techcavern.wavetact.utils;
 
+import com.techcavern.wavetact.ircCommands.netadmin.Nick;
 import org.jooq.Record;
 import org.jooq.Result;
 
@@ -275,6 +276,35 @@ public class DatabaseUtils {
 
     public static void removeNetworkUserPropertyByUser(String network, String user) {
         Registry.wavetactDB.delete(NETWORKUSERPROPERTY).where(NETWORKUSERPROPERTY.NETWORK.eq(network)).and(NETWORKUSERPROPERTY.USER.eq(user)).execute();
+    }
+    public static void addVoice(String network, String channel, String nick,long time) {
+        Registry.wavetactDB.insertInto(VOICES).values(nick, network, channel, time).execute();
+    }
+    public static void updateVoiceTime(Record voice) {
+        Registry.wavetactDB.update(VOICES).set(voice).where(VOICES.CHANNEL.eq(voice.getValue(VOICES.CHANNEL))).and(VOICES.NETWORK.eq(voice.getValue(VOICES.NETWORK))).and(VOICES.NICK.eq(voice.getValue(VOICES.NICK))).execute();
+    }
+    public static void updateVoiceNick(Record voice) {
+        Registry.wavetactDB.update(VOICES).set(voice).where(VOICES.CHANNEL.eq(voice.getValue(VOICES.CHANNEL))).and(VOICES.NETWORK.eq(voice.getValue(VOICES.NETWORK))).and(VOICES.TIME.eq(voice.getValue(VOICES.TIME))).execute();
+    }
+    public static void removeVoice(String network, String channel, String nick) {
+        Registry.wavetactDB.delete(VOICES).where(VOICES.CHANNEL.eq(channel)).and(VOICES.NETWORK.eq(network)).and(VOICES.NICK.eq(nick)).execute();
+    }
+    public static void removeVoice(String network, String nick) {
+        Registry.wavetactDB.delete(VOICES).where(VOICES.NETWORK.eq(network)).and(VOICES.NICK.eq(nick)).execute();
+    }
+
+    public static Record getVoice(String network, String channel, String nick) {
+        Result<Record> voiceRecord = Registry.wavetactDB.select().from(VOICES).where(VOICES.CHANNEL.eq(channel)).and(VOICES.NETWORK.eq(network)).and(VOICES.NICK.eq(nick)).fetch();
+        return getRecord(voiceRecord);
+    }
+    public static Result<Record> getVoicedNicks(String network, String nick) {
+        return Registry.wavetactDB.select().from(VOICES).where(VOICES.NICK.eq(nick)).and(VOICES.NETWORK.eq(network)).fetch();
+    }
+    public static Result<Record> getVoices(String network, String channel) {
+        return Registry.wavetactDB.select().from(VOICES).where(VOICES.CHANNEL.eq(channel)).and(VOICES.NETWORK.eq(network)).orderBy(VOICES.TIME.asc()).fetch();
+    }
+    public static Result<Record> getVoices() {
+        return Registry.wavetactDB.select().from(VOICES).orderBy(VOICES.TIME.asc()).fetch();
     }
 
 }

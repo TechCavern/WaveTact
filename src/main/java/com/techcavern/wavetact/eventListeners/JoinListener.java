@@ -25,6 +25,9 @@ public class JoinListener extends ListenerAdapter {
     public void onJoin(JoinEvent event) throws Exception {
         class process implements Runnable {
             public void run() {
+                if (PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel()) > -3){
+                    IRCUtils.addVoice(event.getBot(), event.getChannel(), event.getUser());
+                }
                 IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), IRCUtils.noPing(event.getUser().getNick()) + " (" + event.getUserHostmask().getLogin() + "@" + event.getUserHostmask().getHostname() +") joined " + event.getChannel().getName());
                 Record rec = DatabaseUtils.getChannelUserProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), event.getChannel().getName(), PermUtils.authUser(event.getBot(), event.getUser().getNick()), "autoop");
                 if (!event.getBot().getNick().equalsIgnoreCase(event.getUser().getNick()) && rec != null && rec.getValue(CHANNELUSERPROPERTY.VALUE).equalsIgnoreCase("true")) {

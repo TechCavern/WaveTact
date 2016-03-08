@@ -4,6 +4,7 @@ import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.ConsoleCommand;
 import com.techcavern.wavetact.objects.IRCCommand;
+import org.apache.commons.lang3.StringUtils;
 import org.flywaydb.core.Flyway;
 import org.jooq.Record;
 import org.jooq.SQLDialect;
@@ -16,16 +17,11 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
-import static com.techcavern.wavetactdb.Tables.BANS;
-import static com.techcavern.wavetactdb.Tables.CONFIG;
-import static com.techcavern.wavetactdb.Tables.NETWORKS;
+import static com.techcavern.wavetactdb.Tables.*;
 
 public class LoadUtils {
 
@@ -366,5 +362,56 @@ public class LoadUtils {
             }
         }
         Registry.threadPool.execute(new BanQueue());
+    }
+    public static void initializeVoiceQueue() {
+        class VoiceQueue implements Runnable {
+            @Override
+            public void run() {
+                try {
+                    TimeUnit.SECONDS.sleep(30);
+                } catch (InterruptedException c) {
+                }
+                while (true) {
+                    try {
+                        String network = "moo";
+                        String channel = "moo";
+                        HashSet<String> moo = new HashSet<>();
+                        for (Record voiceRecord : DatabaseUtils.getVoices()) {
+                            try {
+                                if (System.currentTimeMillis() >= voiceRecord.getValue(VOICES.TIME)) {
+                                    network = voiceRecord.getValue(VOICES.NETWORK);
+                                    channel = voiceRecord.getValue(VOICES.CHANNEL);
+                                    DatabaseUtils.removeVoice(voiceRecord.getValue(VOICES.NETWORK), voiceRecord.getValue(VOICES.CHANNEL), voiceRecord.getValue(VOICES.NICK));
+                                    moo.add(voiceRecord.getValue(VOICES.NICK));
+                                    break;
+                                }
+                            } catch (IllegalArgumentException | NullPointerException e) {
+                                // ignored
+                            }
+                        }
+                        for (Record voiceRecord : DatabaseUtils.getVoices(network,channel)) {
+                            try {
+                                if (System.currentTimeMillis() >= voiceRecord.getValue(VOICES.TIME)) {
+                                    if(moo.size() < 4) {
+                                        DatabaseUtils.removeVoice(voiceRecord.getValue(VOICES.NETWORK), voiceRecord.getValue(VOICES.CHANNEL), voiceRecord.getValue(VOICES.NICK));
+                                        moo.add(voiceRecord.getValue(VOICES.NICK));
+                                    }else{
+                                        break;
+                                    }
+                                }
+                            } catch (IllegalArgumentException | NullPointerException e) {
+                                // ignored
+                            }
+                        }
+                        if(IRCUtils.getChannelbyName(IRCUtils.getNetworkByNetworkName(network),channel) != null)
+                        IRCUtils.setMode(IRCUtils.getChannelbyName(IRCUtils.getNetworkByNetworkName(network),channel),IRCUtils.getNetworkByNetworkName(network),"-vvvv", StringUtils.join(moo, " "));
+                        TimeUnit.SECONDS.sleep(120);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+        Registry.threadPool.execute(new VoiceQueue());
     }
 }

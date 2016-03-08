@@ -26,8 +26,11 @@ public class ChanMsgListener extends ListenerAdapter {
         class process implements Runnable {
             public void run() {
                 //sends Relay Message
-                if (PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel()) > -3 && IRCUtils.getPrefix(event.getBot(), event.getChannelSource()).isEmpty())
+                if (PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel()) > -4 && IRCUtils.getPrefix(event.getBot(), event.getChannelSource()).isEmpty())
                     IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), IRCUtils.noPing(event.getUser().getNick()) + ": " + event.getMessage());
+                if (PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel()) > -3){
+                    IRCUtils.addVoice(event.getBot(), event.getChannel(), event.getUser());
+                }
 
                 //Begin Input Parsing
                 String[] message = StringUtils.split(Colors.removeFormatting(event.getMessage()), " ");

@@ -7,6 +7,7 @@ package com.techcavern.wavetact.eventListeners;
 
 import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.PermUtils;
 import com.techcavern.wavetact.utils.Registry;
 import com.techcavern.wavetactdb.tables.Channelproperty;
 import org.jooq.Record;
@@ -37,5 +38,9 @@ public class PartListener extends ListenerAdapter {
                 } while (tries < 10 && !event.getBot().getUserBot().getChannels().contains(event.getChannel()));
             }
         }
+        if (PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel()) > -3){
+            IRCUtils.removeVoice(event.getBot(), event.getChannel(), event.getUser());
+        }
     }
+
 }

@@ -39,7 +39,7 @@ public class BasicCommands extends IRCCommand {
                 IRCUtils.sendMessage(user, network, channel, "http://goo.gl/YP7t4N", prefix);
                 break;
             case "permissions":
-                IRCUtils.sendMessage(user, network, channel, "-4 Banned, -3 = Ignored by Everything, -2 = Ignored by Everything except Relay, -1 = Commands Ignored, 0 = Everyone, 1 = Registered, 5 = Voiced/Trusted, 7 = Channel Half-Operator, 10 = Operator, 13 = Protected Channel Operator, 15 = Senior Channel Operator, 18 = Channel Administrator, 20 = Network Administrator", prefix);
+                IRCUtils.sendMessage(user, network, channel, "-4 Banned, -3 = Ignored by Everything except Relay, -2 = Ignored by Everything except Relay & Auto-Voice, -1 = Commands Ignored, 0 = Everyone, 1 = Registered, 5 = Voiced/Trusted, 7 = Channel Half-Operator, 10 = Operator, 13 = Protected Channel Operator, 15 = Senior Channel Operator, 18 = Channel Administrator, 20 = Network Administrator", prefix);
                 break;
             default:
                 IRCUtils.sendMessage(user, network, channel, "pong", prefix);
