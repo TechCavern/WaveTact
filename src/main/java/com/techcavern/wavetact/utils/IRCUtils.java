@@ -387,10 +387,12 @@ public class IRCUtils {
                         if (g.contains("$")) {
                             char[] chars = g.toCharArray();
                             for (int v = 0; v < chars.length; v++) {
-                                if (chars[v] == ("$").charAt(0) && chars[v + 1] != ("*").charAt(0)) {
+                                if (chars[v] == ("$").charAt(0) &&
+                                        GeneralUtils.isInteger(chars[v + 1]) &&
+                                        Character.getNumericValue(chars[v+1]) <= args.length+1 && Character.getNumericValue(chars[v+1]) > 0) {
                                     action = action.replace(String.valueOf(chars[v]) + String.valueOf(chars[v + 1]), args[Integer.valueOf(String.valueOf(chars[v + 1])) - 1]);
                                     try {
-                                        if (Integer.valueOf(chars[v + 1]) > i) {
+                                        if (Character.getNumericValue(chars[v + 1]) > i) {
                                             i++;
                                         }
                                     } catch (Exception e) {

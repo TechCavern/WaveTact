@@ -91,6 +91,14 @@ public class GeneralUtils {
         }
         return true;
     }
+    public static boolean isInteger(Character s) {
+        try {
+            Character.getNumericValue(s);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
+    }
 
     public static String parseUrl(String Url) throws Exception {
         URL url1 = new URL(Url);
