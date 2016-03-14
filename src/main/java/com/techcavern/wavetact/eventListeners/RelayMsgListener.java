@@ -8,13 +8,22 @@ package com.techcavern.wavetact.eventListeners;
 import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.PermUtils;
+import com.techcavern.wavetact.utils.Registry;
 import org.jooq.Record;
+import org.pircbotx.Channel;
+import org.pircbotx.PircBotX;
+import org.pircbotx.User;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.ActionEvent;
 import org.pircbotx.hooks.events.NickChangeEvent;
 import org.pircbotx.hooks.events.QuitEvent;
+import org.pircbotx.hooks.events.TopicEvent;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import static com.techcavern.wavetactdb.Tables.NETWORKPROPERTY;
+import static com.techcavern.wavetactdb.Tables.RELAYS;
 
 /**
  * @author jztech101
@@ -32,7 +41,14 @@ public class RelayMsgListener extends ListenerAdapter {
         IRCUtils.removeVoice(event.getBot(), event.getUser());
         IRCUtils.sendRelayMessage(event.getBot(), null, IRCUtils.noPing(event.getUser().getNick()) + " (" + event.getUserHostmask().getLogin() + "@" + event.getUserHostmask().getHostname() +") quits " + " (" + event.getReason() + ")", event.getUser());
     }
-}
+
+    @Override
+    public void onTopic(TopicEvent event) {
+        if(!event.getUser().getNick().equalsIgnoreCase(event.getBot().getNick()))
+        IRCUtils.sendRelayTopic(event.getBot(), event.getChannel(), event.getTopic());
+    }
+    }
+
 
 
 

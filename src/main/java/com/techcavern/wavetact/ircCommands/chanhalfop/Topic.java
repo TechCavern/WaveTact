@@ -45,15 +45,15 @@ public class Topic extends IRCCommand {
         List<String> topic = new LinkedList(Arrays.asList(StringUtils.split(channel.getTopic(), topicseparator.getValue(CHANNELPROPERTY.VALUE))));
         List<String> newtopic = new LinkedList(Arrays.asList(StringUtils.split(channel.getTopic(), topicseparator.getValue(CHANNELPROPERTY.VALUE))));
         if (args[0].equalsIgnoreCase("a") || args[0].equalsIgnoreCase("add")) {
-            channel.send().setTopic(channel.getTopic() + " " + topicseparator.getValue(CHANNELPROPERTY.VALUE) + " " + GeneralUtils.buildMessage(1, args.length, args));
+            IRCUtils.setTopic(network,channel,channel.getTopic() + " " + topicseparator.getValue(CHANNELPROPERTY.VALUE) + " " + GeneralUtils.buildMessage(1, args.length, args));
             saveTopic(channel, network);
         } else if (args[0].startsWith("+")) {
             newtopic.set(Integer.parseInt(args[0].replaceFirst("\\+", "")) - 1, " " + GeneralUtils.buildMessage(1, args.length, args) + " ");
-            channel.send().setTopic(StringUtils.join(newtopic, topicseparator.getValue(CHANNELPROPERTY.VALUE)));
+            IRCUtils.setTopic(network,channel,StringUtils.join(newtopic, topicseparator.getValue(CHANNELPROPERTY.VALUE)));
             saveTopic(channel, network);
         } else if (args[0].startsWith("-")) {
             newtopic.remove(Integer.parseInt(args[0].replaceFirst("\\-", "")) - 1);
-            channel.send().setTopic(StringUtils.join(newtopic, topicseparator.getValue(CHANNELPROPERTY.VALUE)));
+            IRCUtils.setTopic(network,channel,StringUtils.join(newtopic, topicseparator.getValue(CHANNELPROPERTY.VALUE)));
             saveTopic(channel, network);
         } else if (args[0].equalsIgnoreCase("sw") || args[0].equalsIgnoreCase("swap") || args[0].equalsIgnoreCase("switch")) {
             newtopic.set((Integer.parseInt(args[1]) - 1), topic.get(Integer.parseInt(args[2]) - 1));
@@ -63,12 +63,12 @@ public class Topic extends IRCCommand {
         } else if (args[0].equalsIgnoreCase("r") || args[0].equalsIgnoreCase("revert")) {
             Record oldTopic = DatabaseUtils.getChannelProperty(IRCUtils.getNetworkNameByNetwork(network), channel.getName(), "topic");
             if (oldTopic != null) {
-                channel.send().setTopic(oldTopic.getValue(CHANNELPROPERTY.VALUE));
+                IRCUtils.setTopic(network,channel,oldTopic.getValue(CHANNELPROPERTY.VALUE));
             } else {
                 IRCUtils.sendError(user, network, channel, "Error: no reversal possible", prefix);
             }
         } else {
-            channel.send().setTopic(GeneralUtils.buildMessage(0, args.length, args));
+           IRCUtils.setTopic(network,channel,GeneralUtils.buildMessage(0, args.length, args));
             saveTopic(channel, network);
         }
     }

@@ -74,31 +74,58 @@ public class IRCUtils {
     }
 
     public static void sendMessage(User userObject, PircBotX networkObject, Channel channelObject, String message, String prefix) {
-        if (channelObject != null) {
-            for (int i = 0; i < message.length(); i += 350) {
-                String messageToSend = message.substring(i, Math.min(message.length(), i + 350));
+        for (int i = 0; i < message.length(); i += 350) {
+            String messageToSend = message.substring(i, Math.min(message.length(), i + 350));
+            if (channelObject != null) {
+
                 if (!messageToSend.isEmpty()) {
                     Registry.messageQueue.get(networkObject).add("PRIVMSG " + prefix + channelObject.getName() + " :" + messageToSend);
                     if (prefix.isEmpty())
                         sendRelayMessage(networkObject, channelObject, noPing(networkObject.getNick()) + ": " + messageToSend);
                 }
+            } else {
+                Registry.messageQueue.get(networkObject).add(("PRIVMSG " + userObject.getNick() + " :" + message));
             }
-        } else {
-            Registry.messageQueue.get(networkObject).add(("PRIVMSG " + userObject.getNick() + " :" + message));
+        }
+    }
+    public static void setTopic(PircBotX networkObject, Channel channelObject, String message) {
+        if (channelObject != null){
+            if (!message.isEmpty()) {
+                Registry.messageQueue.get(networkObject).add("TOPIC " + channelObject.getName() + " :" + message);
+                   sendRelayTopic(networkObject, channelObject, message);
+            }
+    }
+    }
+    public static void sendRelayTopic(PircBotX networkObject, Channel channel, String msg){
+        Set<String[]> toBeRelayed = new HashSet<>();
+        for (Record relay : DatabaseUtils.getRelays()) {
+            String[] channels = relay.getValue(RELAYS.VALUE).split(",");
+            for (String chan : channels) {
+                String[] netchan = chan.split("\\.");
+                if (IRCUtils.getNetworkNameByNetwork(networkObject).equalsIgnoreCase(netchan[0]) && channel.getName().equalsIgnoreCase(netchan[1])) {
+                    toBeRelayed.add(channels);
+                    break;
+                }
+            }
+        }
+        for (String[] channels : toBeRelayed) {
+            for (String chan : channels) {
+                String[] netchan = chan.split("\\.");
+                if (!(IRCUtils.getNetworkNameByNetwork(networkObject).equalsIgnoreCase(netchan[0]) && channel.getName().equalsIgnoreCase(netchan[1]))) {
+                    Registry.messageQueue.get(IRCUtils.getNetworkByNetworkName(netchan[0])).add("TOPIC " + netchan[1] + " :" + msg);
+                }
+            }
         }
     }
 
     public static void sendKick(User userObject, User recipientObject, PircBotX networkObject, Channel channelObject, String message) {
         if (channelObject != null) {
-            for (int i = 0; i < message.length(); i += 350) {
-                String messageToSend = message.substring(i, Math.min(message.length(), i + 350));
-                if (!messageToSend.isEmpty()) {
-                    Registry.messageQueue.get(networkObject).add("KICK " + channelObject.getName() + " " + recipientObject.getNick() + " :" + messageToSend);
+                if (!message.isEmpty()) {
+                    Registry.messageQueue.get(networkObject).add("KICK " + channelObject.getName() + " " + recipientObject.getNick() + " :" + message);
                     //       sendRelayMessage(networkObject, channelObject, "* " + userObject.getNick() + " kicks " + recipientObject.getNick() + " (" + messageToSend + ")");
                 }
             }
         }
-    }
 
     public static void sendRelayMessage(PircBotX networkObject, Channel channel, String msg) {
         sendRelayMessage(networkObject, channel, msg, null);
