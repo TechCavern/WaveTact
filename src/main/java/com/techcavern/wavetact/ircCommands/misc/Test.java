@@ -8,6 +8,7 @@ import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.Registry;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.jooq.Record;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -16,10 +17,10 @@ import org.pircbotx.hooks.events.MessageEvent;
 import org.pircbotx.hooks.events.PrivateMessageEvent;
 import org.pircbotx.hooks.events.WhoisEvent;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
+
+import static com.techcavern.wavetactdb.Tables.RELAYS;
+
 //@IRCCMD
 public class Test extends IRCCommand {
 
@@ -87,10 +88,18 @@ public class Test extends IRCCommand {
         }else{
         }
          **/
+        /**
         int j = Integer.valueOf(args[0]);
         args = ArrayUtils.remove(args,0);
         for(int i =0; i<j; i++){
             IRCUtils.sendMessage(user, network, channel, StringUtils.join(args, " "), prefix);
         }
+         **/
+        Set<String> networks = new HashSet<>();
+        for (Record e : DatabaseUtils.getRelays()) {
+            networks.add(e.getValue(RELAYS.PROPERTY) + ": " + e.getValue(RELAYS.VALUE));
+        }
+        IRCUtils.sendMessage(user, network, channel, StringUtils.join(networks, ", "), prefix);
+   //     commandIO.getPrintStream().println(StringUtils.join(networks, ", "));
     }
 }
