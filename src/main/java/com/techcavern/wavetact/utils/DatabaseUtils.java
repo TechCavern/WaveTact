@@ -65,7 +65,7 @@ public class DatabaseUtils {
         Registry.wavetactDB.update(CONFIG).set(config).where(CONFIG.PROPERTY.eq(config.getValue(CONFIG.PROPERTY))).execute();
     }
     public static Record getRelay(String relay) {
-        Result<Record> relayRecord = Registry.wavetactDB.select().from(CONFIG).where(CONFIG.PROPERTY.eq(relay)).fetch();
+        Result<Record> relayRecord = Registry.wavetactDB.select().from(RELAYS).where(RELAYS.PROPERTY.eq(relay)).fetch();
         return getRecord(relayRecord);
     }
 
