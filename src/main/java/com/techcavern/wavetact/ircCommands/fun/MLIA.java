@@ -25,7 +25,7 @@ public class MLIA extends IRCCommand {
         int x = RandomUtils.nextInt(1,3300000);
         Document doc = Jsoup.connect("http://mylifeisaverage.com/story/" + x).userAgent(Registry.USER_AGENT).get();
         Elements MLI = doc.select(".sc");
-        String mlia = GeneralUtils.stripHTML(MLI.toString().replaceAll("&.*?;", "")).trim();
+        String mlia = GeneralUtils.stripHTML(MLI.toString()).trim();
         IRCUtils.sendMessage(user, network, channel, mlia, prefix);
     }
 }
