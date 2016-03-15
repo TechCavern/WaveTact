@@ -81,6 +81,7 @@ Network Properties
 - commandchar - Determines network command char
 - pmlog - Logs PMs to a channel
 - ignoredhosts - list of ignored hostmasks
+- joinoninvite - joins on invite
 
 Network User Properties
 =================
