@@ -17,11 +17,15 @@ import java.util.Random;
 public class Reddit extends IRCCommand {
 
     public Reddit() {
-        super(GeneralUtils.toArray("reddit re subreddit"), 1, "reddit [subreddit]", "gets a random message from a subreddit", false);
+        super(GeneralUtils.toArray("reddit showerthought re subreddit"), 1, "reddit [subreddit]", "gets a random message from a subreddit", false);
     }
 
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+        if(command.equalsIgnoreCase("showerthought")){
+            args = new String[1];
+            args[0] = "showerthoughts";
+        }
         try {
             JsonArray results = GeneralUtils.getJsonObject("http://api.reddit.com/r/" + args[0] + "/?limit=25").get("data").getAsJsonObject().get("children").getAsJsonArray();
             if (results.size() < 1) {
