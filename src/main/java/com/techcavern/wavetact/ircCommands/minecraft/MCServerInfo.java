@@ -29,13 +29,12 @@ import java.util.Set;
 public class MCServerInfo extends IRCCommand {
 
     public MCServerInfo() {
-        super(GeneralUtils.toArray("mcserverinfo mcsi mcserver mcping mcwho mcplayers"), 1, "mcserverinfo [address] (port)", "Gets info on minecraft server", false);
+        super(GeneralUtils.toArray("mcserverinfo mcsi mcserver mcping mclist mcwho mcplayers"), 1, "mcserverinfo [address] (port)", "Gets info on minecraft server", false);
     }
 
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         int port = 25565;
-        boolean isSuccessful = false;
         if(args.length < 1){
             org.jooq.Record rec = DatabaseUtils.getChannelProperty(IRCUtils.getNetworkNameByNetwork(network),channel.getName(), "mcserver");
             if (rec != null){
@@ -47,29 +46,6 @@ public class MCServerInfo extends IRCCommand {
         }
         if (args.length >= 2) {
             port = Integer.parseInt(args[1]);
-        } else {
-            Resolver resolver = new SimpleResolver();
-            Lookup lookup = new Lookup(args[0], Type.ANY);
-            lookup.setResolver(resolver);
-            lookup.setCache(null);
-            Record[] records = lookup.run();
-            if (lookup.getResult() == Lookup.SUCCESSFUL) {
-                int Priority = 0;
-                for (Record rec : records) {
-                    if (rec instanceof SRVRecord) {
-                        if (isSuccessful && ((SRVRecord) rec).getPriority() < Priority) {
-                            args[0] = ((SRVRecord) rec).getTarget().toString();
-                            port = ((SRVRecord) rec).getPort();
-                            Priority = ((SRVRecord) rec).getPriority();
-                        } else {
-                            args[0] = ((SRVRecord) rec).getTarget().toString();
-                            port = ((SRVRecord) rec).getPort();
-                        }
-                        isSuccessful = true;
-
-                    }
-                }
-            }
         }
         InetSocketAddress address = new InetSocketAddress(GeneralUtils.getIP(args[0], network, false), port);
         Socket socket = new Socket();
