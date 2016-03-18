@@ -32,7 +32,7 @@ public class Reddit extends IRCCommand {
                 IRCUtils.sendError(user, network, channel, "Search returned no results", prefix);
             } else {
                 JsonObject result = results.get(new Random().nextInt(results.size() - 1)).getAsJsonObject().get("data").getAsJsonObject();
-                IRCUtils.sendMessage(user, network, channel, result.get("title").getAsString() + " by " + IRCUtils.noPing(result.get("author").getAsString()) + " - " + GeneralUtils.shortenURL(result.get("url").getAsString()), prefix);
+                IRCUtils.sendMessage(user, network, channel, result.get("title").getAsString() + " - by" + IRCUtils.noPing(result.get("author").getAsString()) + " - " + GeneralUtils.shortenURL(result.get("url").getAsString()), prefix);
             }
         }catch(HttpStatusException e){
             if(e.getStatusCode() == 403){
