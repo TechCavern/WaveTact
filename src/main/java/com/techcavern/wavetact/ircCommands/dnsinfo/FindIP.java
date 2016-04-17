@@ -9,6 +9,7 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -39,7 +40,7 @@ public class FindIP extends IRCCommand {
             return;
         }
         JsonObject objectJson = GeneralUtils.getJsonObject("http://ip-api.com/json/" + IP);
-        Set<String> results = new HashSet<>();
+        ArrayList<String> results = new ArrayList<>();
         if (objectJson.get("status").getAsString().equalsIgnoreCase("success")) {
             results.add(objectJson.get("city").getAsString());
             results.add(objectJson.get("regionName").getAsString());
