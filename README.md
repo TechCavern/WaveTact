@@ -35,7 +35,7 @@ PermLevels
 ==========
 - 20 - Network Administrator (Access to all commands on a specific network)
 - 18 - Channel Administrator (Access to all commands below Network Administrator on a specific channel and must be assigned by the Network Admin per channel)
-- 15 - Senior Channel Operator (Access to all commands below Channel Admin on a specific channel and must be assigned by the controller per channel)
+- 15 - Senior Channel Operator (Access to all commands below Channel Admin on a specific channel)
 - 13 - Protected Channel Operator (Access to all commands below Senior Channel Op on a specific channel)
 - 10 - Channel Operator (Access to all commands below Protected Channel Op on a specific channel)
 - 7 - Channel Half-Operator (Access to all commands below Channel Operator on a specific channel)
