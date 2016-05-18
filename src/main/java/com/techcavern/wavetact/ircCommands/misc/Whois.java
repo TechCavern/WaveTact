@@ -40,7 +40,7 @@ public class Whois extends IRCCommand {
             }
             if (event.getAwayMessage() != null)
                 results.add(IRCUtils.noPing(nick) + " is currently away! (" + event.getAwayMessage() + ")");
-            IRCUtils.sendMessage(user, network, channel,IRCUtils.noPing(nick) + StringUtils.join(results, ", "), prefix);
+            IRCUtils.sendMessage(user, network, channel,IRCUtils.noPing(nick) + " " + StringUtils.join(results, ", "), prefix);
         }
     }
 }
