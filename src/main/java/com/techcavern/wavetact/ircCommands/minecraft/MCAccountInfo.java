@@ -15,7 +15,9 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @IRCCMD
@@ -45,7 +47,7 @@ public class MCAccountInfo extends IRCCommand {
                 Migrated = "False";
             }
             JsonArray mcapiuuid = GeneralUtils.getJsonArray("https://api.mojang.com/user/profiles/" + UUID +"/names");
-            Set<String> history = new HashSet<>();
+            List<String> history = new ArrayList<>();
             for(int i = 0; i < mcapiuuid.size(); i++){
                 JsonObject name = mcapiuuid.get(i).getAsJsonObject();
                 String temp = name.get("name").getAsString();

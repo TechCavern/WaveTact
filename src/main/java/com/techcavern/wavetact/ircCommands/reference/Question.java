@@ -13,7 +13,9 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static com.techcavern.wavetactdb.Tables.CONFIG;
@@ -46,7 +48,7 @@ public class Question extends IRCCommand {
         query.setInput(StringUtils.join(args, " "));
         WAQueryResult queryResult = engine.performQuery(query);
         WAPod[] result = queryResult.getPods();
-        Set<String> results = new HashSet<>();
+        List<String> results = new ArrayList<>();
         if (result.length > 0) {
             if (result.length - 1 >= ArrayIndex) {
                 for (WASubpod sub : result[ArrayIndex].getSubpods()) {

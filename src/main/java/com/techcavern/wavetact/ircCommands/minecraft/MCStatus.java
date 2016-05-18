@@ -11,7 +11,9 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @IRCCMD
@@ -23,7 +25,7 @@ public class MCStatus extends IRCCommand {
 
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        Set<String> result = new HashSet<>();
+        List<String> result = new ArrayList<>();
         JsonArray mcstatus = GeneralUtils.getJsonArray("https://status.mojang.com/check");
         mcstatus.forEach(status -> {
             String name = status.getAsJsonObject().entrySet().iterator().next().getKey().toString();
