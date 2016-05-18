@@ -1,4 +1,4 @@
-package com.techcavern.wavetact.ircCommands.misc;
+package com.techcavern.wavetact.ircCommands.fun;
 
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
