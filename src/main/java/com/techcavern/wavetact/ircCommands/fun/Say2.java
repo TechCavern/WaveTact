@@ -29,12 +29,12 @@ public class Say2 extends IRCCommand {
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
             if (command.equalsIgnoreCase("act2") || command.equalsIgnoreCase("do2") || command.equalsIgnoreCase("a2")) {
-                    IRCUtils.sendAction(user, network, channel, GeneralUtils.stripHTML(StringUtils.join(args, " ")), prefix);
+                    IRCUtils.sendAction(user, network, channel, StringUtils.join(args, " "), prefix);
             } else if (command.equalsIgnoreCase("prism")) {
-                    IRCUtils.sendMessage(user, network, channel, "[" + IRCUtils.noPing(user.getNick()) + "] " + GeneralUtils.prism(GeneralUtils.stripHTML(StringUtils.join(args, " "))), prefix);
-                    IRCUtils.sendMessage(user, network, channel, GeneralUtils.prism(GeneralUtils.stripHTML(StringUtils.join(args, " "))), prefix);
+                    IRCUtils.sendMessage(user, network, channel, "[" + IRCUtils.noPing(user.getNick()) + "] " + GeneralUtils.prism(StringUtils.join(args, " ")), prefix);
+                    IRCUtils.sendMessage(user, network, channel, GeneralUtils.prism(StringUtils.join(args, " ")), prefix);
             } else {
-                    IRCUtils.sendMessage(user, network, channel, GeneralUtils.stripHTML(StringUtils.join(args, " ")), prefix);
+                    IRCUtils.sendMessage(user, network, channel, StringUtils.join(args, " "), prefix);
             }
     }
 }

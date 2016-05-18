@@ -45,19 +45,19 @@ public class Say extends IRCCommand {
         if (chan == null || PermUtils.getPermLevel(network, user.getNick(), chan) >= 1) {
             if (command.equalsIgnoreCase("act") || command.equalsIgnoreCase("do") || command.equalsIgnoreCase("a")) {
                 if(isPrivate)
-                IRCUtils.sendAction(user, network, chan, GeneralUtils.stripHTML(StringUtils.join(args, " ")) + " [" + IRCUtils.noPing(user.getNick()) + "]", prefix);
+                IRCUtils.sendAction(user, network, chan, StringUtils.join(args, " ") + " [" + IRCUtils.noPing(user.getNick()) + "]", prefix);
                 else
-                    IRCUtils.sendAction(user, network, chan, GeneralUtils.stripHTML(StringUtils.join(args, " ")), prefix);
+                    IRCUtils.sendAction(user, network, chan, StringUtils.join(args, " "), prefix);
             } else if (command.equalsIgnoreCase("prism")) {
                 if(isPrivate || !GeneralUtils.isFirstCharLetter(args[0]))
-                    IRCUtils.sendMessage(user, network, chan, "[" + IRCUtils.noPing(user.getNick()) + "] " + GeneralUtils.prism(GeneralUtils.stripHTML(StringUtils.join(args, " "))), prefix);
+                    IRCUtils.sendMessage(user, network, chan, "[" + IRCUtils.noPing(user.getNick()) + "] " + GeneralUtils.prism(StringUtils.join(args, " ")), prefix);
                 else
-                    IRCUtils.sendMessage(user, network, chan, GeneralUtils.prism(GeneralUtils.stripHTML(StringUtils.join(args, " "))), prefix);
+                    IRCUtils.sendMessage(user, network, chan, GeneralUtils.prism(StringUtils.join(args, " ")), prefix);
             } else {
                 if(isPrivate || !GeneralUtils.isFirstCharLetter(args[0])) {
-                    IRCUtils.sendMessage(user, network, chan, "[" + IRCUtils.noPing(user.getNick()) + "] " + GeneralUtils.stripHTML(StringUtils.join(args, " ")), prefix);
+                    IRCUtils.sendMessage(user, network, chan, "[" + IRCUtils.noPing(user.getNick()) + "] " +StringUtils.join(args, " "), prefix);
                 }else
-                    IRCUtils.sendMessage(user, network, chan, GeneralUtils.stripHTML(StringUtils.join(args, " ")), prefix);
+                    IRCUtils.sendMessage(user, network, chan, StringUtils.join(args, " "), prefix);
             }
         } else {
             IRCUtils.sendError(user, network, channel, "Permission denied", prefix);
