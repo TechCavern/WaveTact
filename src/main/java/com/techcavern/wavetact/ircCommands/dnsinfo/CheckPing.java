@@ -16,15 +16,14 @@ import java.io.InputStreamReader;
 public class CheckPing extends IRCCommand {
 
     public CheckPing() {
-        super(GeneralUtils.toArray("checkping cping cpi"), 1, "checkping (+)[ip][domain]", "Checks ping to a server", false);
+        super(GeneralUtils.toArray("checkping cping cpi checkping6 cping6 cpi6"), 1, "checkping (+)[ip][domain]", "Checks ping to a server", false);
     }
 
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         boolean IPv6Priority = false;
-        if (args[0].startsWith("+")) {
+        if (command.endsWith("6")) {
             IPv6Priority = true;
-            args[0] = args[0].replaceFirst("\\+", "");
         }
         String IP = GeneralUtils.getIP(args[0], network, IPv6Priority);
         if (IP == null) {
