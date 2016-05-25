@@ -18,7 +18,7 @@ import static com.techcavern.wavetactdb.Tables.CHANNELPROPERTY;
 public class Ban extends IRCCommand {
 
     public Ban() {
-        super(GeneralUtils.toArray("ban kban kickban unban mute unmute"), 7, "ban (+)[user][hostmask] (-)(+)(time)", "Bans a user for a specified period of time or 24 hours, if the first parameter is m, the ban will be a mute ban", true);
+        super(GeneralUtils.toArray("ban kban quiet unquiet kickban unban mute unmute"), 7, "ban (+)[user][hostmask] (-)(+)(time)", "Bans a user for a specified period of time or 24 hours, if the first parameter is m, the ban will be a mute ban", true);
     }
 
     @Override
@@ -26,7 +26,7 @@ public class Ban extends IRCCommand {
         String hostmask;
         boolean isMute = false;
         boolean isUser = false;
-        if (command.contains("mute")) {
+        if (command.contains("mute")||command.contains("quiet")) {
             isMute = true;
         }
         String ban = "b ";
@@ -59,7 +59,7 @@ public class Ban extends IRCCommand {
         }
         String networkname = IRCUtils.getNetworkNameByNetwork(network);
         Record BanRecord = DatabaseUtils.getBan(networkname, channel.getName(), hostmask, isMute);
-        if (command.equalsIgnoreCase("unban") || command.equalsIgnoreCase("unmute")) {
+        if (command.equalsIgnoreCase("unban") || command.equalsIgnoreCase("unmute") || command.equalsIgnoreCase("unquiet")) {
             if (BanRecord != null) {
                 DatabaseUtils.removeBan(networkname, channel.getName(), hostmask, isMute);
             }

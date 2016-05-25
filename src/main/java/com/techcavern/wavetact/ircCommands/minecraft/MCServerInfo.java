@@ -31,7 +31,7 @@ import java.util.Set;
 public class MCServerInfo extends IRCCommand {
 
     public MCServerInfo() {
-        super(GeneralUtils.toArray("mcserverinfo mcsi mcserver mcping mclist mcwho mcplayers"), 1, "mcserverinfo [address] (port)", "Gets info on minecraft server", false);
+        super(GeneralUtils.toArray("mcserverinfo mcsi mcserver mcping mclist mcwho mcplayers"), 5, "mcserverinfo [address] (port)", "Gets info on minecraft server", false);
     }
 
     @Override

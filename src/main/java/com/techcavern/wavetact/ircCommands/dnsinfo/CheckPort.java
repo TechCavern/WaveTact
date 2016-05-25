@@ -17,7 +17,7 @@ import java.net.UnknownHostException;
 public class CheckPort extends IRCCommand {
 
     public CheckPort() {
-        super(GeneralUtils.toArray("checkport cport cpo"), 1, "checkport (+)[ip][domain] (port)", " Checks if port is open on a certain ip and port", false);
+        super(GeneralUtils.toArray("checkport cport cpo"), 5, "checkport (+)[ip][domain] (port)", " Checks if port is open on a certain ip and port", false);
     }
 
     @Override
