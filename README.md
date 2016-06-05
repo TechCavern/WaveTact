@@ -11,8 +11,7 @@ Supported IRCds and Services
 Fully Supported:
 - Inspircd
 - Charybdis
-- Shalture
-- Atheme (Legacy Support)
+- Atheme
 
 Partially Supported:
 - Anope
