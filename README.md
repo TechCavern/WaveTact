@@ -8,12 +8,12 @@ An IRC bot that is based upon PircBotX and sits in #techcavern on the following 
 Supported IRCds and Services
 ============================
 
-Fully Supported:
-- Inspircd
+Full Support:
 - Charybdis
 - Atheme
 
-Partially Supported:
+Partial/Legacy Support:
+- Inspircd
 - Anope
 - Unrealircd
 
