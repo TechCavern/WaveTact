@@ -36,9 +36,9 @@ public class Traceroute extends IRCCommand {
         } else {
             String traceCommand = "";
             if (InetAddressUtils.isIPv6Address(IP)) {
-                traceCommand = "traceroute6 " + IP;
+                traceCommand = "traceroute -6 " + IP;
             } else if (InetAddressUtils.isIPv4Address(IP)) {
-                traceCommand = "traceroute " + IP;
+                traceCommand = "traceroute -4 " + IP;
             }
             Process pinghost = Runtime.getRuntime().exec(traceCommand);
             BufferedReader buffereader = new BufferedReader(new InputStreamReader(pinghost.getInputStream()));

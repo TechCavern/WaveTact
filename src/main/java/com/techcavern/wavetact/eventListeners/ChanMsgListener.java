@@ -75,7 +75,6 @@ public class ChanMsgListener extends ListenerAdapter {
                     } else {
                         return;
                     }
-                    //test
                     String[] relayedmessage = StringUtils.split(startingmessage, " ");
                     if (relayedmessage[0].startsWith(commandchar)) {
                         String relayedcommand = StringUtils.replaceOnce(relayedmessage[0], DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "commandchar").getValue(NETWORKPROPERTY.VALUE), "");

@@ -31,9 +31,9 @@ public class CheckPing extends IRCCommand {
         } else {
             String pingCommand = "";
             if (InetAddressUtils.isIPv6Address(IP)) {
-                pingCommand = "ping6 -c 1 " + IP;
+                pingCommand = "ping -6 -c 1 " + IP;
             } else if (InetAddressUtils.isIPv4Address(IP)) {
-                pingCommand = "ping -c 1 " + IP;
+                pingCommand = "ping -4 -c 1 " + IP;
             }
             Process pinghost = Runtime.getRuntime().exec(pingCommand);
             BufferedReader buffereader = new BufferedReader(new InputStreamReader(pinghost.getInputStream()));
