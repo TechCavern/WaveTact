@@ -14,6 +14,9 @@ import org.pircbotx.Colors;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.MessageEvent;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static com.techcavern.wavetactdb.Tables.CHANNELUSERPROPERTY;
 import static com.techcavern.wavetactdb.Tables.NETWORKPROPERTY;
 
@@ -65,11 +68,10 @@ public class ChanMsgListener extends ListenerAdapter {
                     String relaysplit = rec.getValue(CHANNELUSERPROPERTY.VALUE);
                     String startingmessage = event.getMessage();
                     if (relaysplit != null) {
-                        String[] midmessage = StringUtils.split(Colors.removeFormatting(startingmessage), relaysplit);
-                        if (midmessage.length > 1) {
-                            startingmessage = StringUtils.join(ArrayUtils.remove(midmessage,0),relaysplit);
-                        } else
-                            return;
+                        Pattern r = Pattern.compile(relaysplit);
+                        Matcher matcher = r.matcher(startingmessage);
+                        matcher.find();
+                        startingmessage=startingmessage.replaceFirst(matcher.group(0),"");
                     } else {
                         return;
                     }
