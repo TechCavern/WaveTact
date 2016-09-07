@@ -1,9 +1,7 @@
 WaveTact [![Build Status](https://travis-ci.org/TechCavern/WaveTact.svg?branch=master)](https://travis-ci.org/TechCavern/WaveTact) [![Packagist](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/TechCavern/WaveTact/blob/master/license.md)
 --------
 
-An IRC bot that is based upon PircBotX and sits in #techcavern on the following networks:
-- EsperNET (irc.esper.net)
-- Freenode (irc.freenode.net)
+An IRC bot that is based upon PircBotX and sits in #techcavern on Freenode (irc.freenode.net).
 
 Supported IRCds and Services
 ============================
