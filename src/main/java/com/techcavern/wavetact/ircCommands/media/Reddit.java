@@ -27,7 +27,7 @@ public class Reddit extends IRCCommand {
             args[0] = "showerthoughts";
         }
         try {
-            JsonArray results = GeneralUtils.getJsonObject("http://api.reddit.com/r/" + args[0] + "/?limit=25").get("data").getAsJsonObject().get("children").getAsJsonArray();
+            JsonArray results = GeneralUtils.getJsonObject("https://api.reddit.com/r/" + args[0] + "/?limit=25").get("data").getAsJsonObject().get("children").getAsJsonArray();
             if (results.size() < 1) {
                 IRCUtils.sendError(user, network, channel, "Search returned no results", prefix);
             } else {
