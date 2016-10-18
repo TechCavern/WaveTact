@@ -19,13 +19,21 @@ import java.util.Set;
 public class Whois extends IRCCommand {
 
     public Whois() {
-        super(GeneralUtils.toArray("whois who idletime idt idle"), 1, "whois (user)", "Gets some info on user", false);
+        super(GeneralUtils.toArray("whois who idletime idt idle"), 1, "whois (-all) (user)", "Gets some info on user", false);
     }
 
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         String nick = user.getNick();
-        if (args.length > 0) {
+        boolean showChannels = false;
+        if (args.length >= 2) {
+            if(args[0].equalsIgnoreCase("-all") && userPermLevel >= 20)
+            showChannels = true;
+            nick = args[1];
+        }else if(args.length == 1){
+            if(args[0].equalsIgnoreCase("-all") && userPermLevel >= 20)
+                showChannels = true;
+            else
             nick = args[0];
         }
         WhoisEvent event = IRCUtils.WhoisEvent(network, nick, false);
@@ -37,6 +45,9 @@ public class Whois extends IRCCommand {
 
            results.add("signed on " + GeneralUtils.getDateFromSeconds(event.getSignOnTime()));
            results.add("has been idle for " + GeneralUtils.getTimeFromSeconds((int) event.getIdleSeconds()));
+            if(showChannels && event.getChannels() != null){
+                results.add("is in " + StringUtils.join(event.getChannels(),", "));
+            }
             if(event.getRegisteredAs() != null){
                 results.add("is registered as " + event.getRegisteredAs());
             }
