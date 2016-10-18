@@ -77,14 +77,13 @@ public class IRCUtils {
         for (int i = 0; i < message.length(); i += 350) {
             String messageToSend = message.substring(i, Math.min(message.length(), i + 350));
             if (channelObject != null) {
-
                 if (!messageToSend.isEmpty()) {
                     Registry.messageQueue.get(networkObject).add("PRIVMSG " + prefix + channelObject.getName() + " :" + messageToSend);
                     if (prefix.isEmpty())
                         sendRelayMessage(networkObject, channelObject, noPing(networkObject.getNick()) + ": " + messageToSend);
                 }
             } else {
-                Registry.messageQueue.get(networkObject).add(("PRIVMSG " + userObject.getNick() + " :" + message));
+                Registry.messageQueue.get(networkObject).add(("PRIVMSG " + userObject.getNick() + " :" + messageToSend));
             }
         }
     }
