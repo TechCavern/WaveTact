@@ -31,9 +31,15 @@ public class ListPermLevels extends IRCCommand {
             for (Record rec :records) {
                 msg.add(IRCUtils.noPing(rec.getValue(Channeluserproperty.CHANNELUSERPROPERTY.USER)) + "[" + rec.getValue(Channeluserproperty.CHANNELUSERPROPERTY.VALUE) + "]");
             }
-            IRCUtils.sendMessage(user, network, channel, StringUtils.join(msg," - "), prefix);
+            if(isPrivate)
+                IRCUtils.sendMessage(user, network, null, StringUtils.join(msg," - "), prefix);
+            else
+                IRCUtils.sendMessage(user, network, channel, StringUtils.join(msg," - "), prefix);
         }else{
-            IRCUtils.sendError(user, network, channel, "No Manually Set Perm Levels Found", prefix);
+            if(isPrivate)
+                IRCUtils.sendError(user, network, null, "No Manually Set Perm Levels Found", prefix);
+            else
+                IRCUtils.sendError(user, network, channel, "No Manually Set Perm Levels Found", prefix);
         }
     }
 }
