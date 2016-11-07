@@ -23,6 +23,7 @@ public class Registry {
     public static final Set<ConsoleCommand> consoleCommandList = new HashSet<>();
     public static final Map<PircBotX, Map<String, String>> authedUsers = new ConcurrentHashMap<>();
     public static final Set<String> attacks = new HashSet<>();
+    public static final Random randNum = new Random();
     public static final Set<String> eightBall = new HashSet<>();
     public static final Map<String, String> charReplacements = new HashMap<>();
     public static final MultiBotManager WaveTact = new MultiBotManager();
@@ -31,7 +32,7 @@ public class Registry {
     public static final Reflections wavetactReflection = new Reflections("com.techcavern.wavetact");
     public static final HashBiMap<String, PircBotX> networks = HashBiMap.create();
     public static final Map<PircBotX, Map<String, WhoisEvent>> whoisEventCache = new ConcurrentHashMap<>();
-    public static final int CURRENT_ITERATION = 21;
+    public static final int CURRENT_ITERATION = 22;
     public static final ConsoleServer consoleServer = new ConsoleServer();
     public static final Map<PircBotX, Queue<String>> messageQueue = new HashMap<>();
     public static final UrlValidator urlValidator = new UrlValidator();

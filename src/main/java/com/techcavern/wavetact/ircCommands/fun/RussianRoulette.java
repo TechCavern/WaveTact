@@ -19,19 +19,24 @@ import org.pircbotx.User;
  * @author jztech101
  */
 @IRCCMD
-public class Attack extends IRCCommand {
+public class RussianRoulette extends IRCCommand {
 
-    public Attack() {
-        super(GeneralUtils.toArray("attack shoot slap at"), 0, "attacks [something]", "attacks a user", false);
+    public RussianRoulette() {
+        super(GeneralUtils.toArray("russianroulette roulette"), 0, "russianroulette", "Russian Roulette", false);
     }
 
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        String Something = GeneralUtils.buildMessage(0, args.length, args);
-        if (Something.toLowerCase().equalsIgnoreCase(network.getUserBot().getNick())) {
-            Something = user.getNick();
+       int x = Registry.randNum.nextInt(3);
+        System.out.println(x);
+        if(x == 2) {
+            if (IRCUtils.checkIfCanKick(channel, network, user)) {
+                IRCUtils.sendKick(network.getUserBot(), user, network, channel, "BANG!");
+            } else {
+                IRCUtils.sendAction(user, network, channel, "kicks " + user.getNick() + " (BANG!)", prefix);
+            }
+        }else{
+            IRCUtils.sendMessage(user, network, channel, "Click!", prefix);
         }
-        int randomint = Registry.randNum.nextInt(Registry.attacks.size());
-        IRCUtils.sendAction(user, network, channel, ((String) Registry.attacks.toArray()[randomint]).replace("$*", IRCUtils.noPing(Something)), prefix);
     }
 }

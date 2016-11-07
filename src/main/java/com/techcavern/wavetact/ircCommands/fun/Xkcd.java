@@ -5,6 +5,7 @@ import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.Registry;
 import org.apache.commons.lang3.RandomUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -32,7 +33,7 @@ public class Xkcd extends IRCCommand {
             }
         } else {
             do {
-                comicnumber = RandomUtils.nextInt(1, latest);
+                comicnumber = Registry.randNum.nextInt(latest);
             } while (comicnumber == 404);
         }
         try {

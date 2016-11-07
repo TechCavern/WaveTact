@@ -22,7 +22,7 @@ public class MLIA extends IRCCommand {
 
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        int x = RandomUtils.nextInt(1,3300000);
+        int x = Registry.randNum.nextInt(3300000);
         Document doc = Jsoup.connect("http://mylifeisaverage.com/story/" + x).userAgent(Registry.USER_AGENT).get();
         Elements MLI = doc.select(".sc");
         String mlia = GeneralUtils.stripHTML(MLI.toString()).trim();
