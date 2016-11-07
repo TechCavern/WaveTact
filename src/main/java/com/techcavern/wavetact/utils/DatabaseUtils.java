@@ -78,7 +78,7 @@ public class DatabaseUtils {
     }
 
     public static void updateRelay(Record relay) {
-        Registry.wavetactDB.update(RELAYS).set(relay).where(CONFIG.PROPERTY.eq(relay.getValue(CONFIG.PROPERTY))).execute();
+        Registry.wavetactDB.update(RELAYS).set(relay).where(RELAYS.PROPERTY.eq(relay.getValue(RELAYS.PROPERTY))).execute();
     }
 
     public static Record getRecord(Result<Record> record) {

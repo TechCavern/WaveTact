@@ -17,9 +17,7 @@ import org.pircbotx.User;
 import org.xbill.DNS.*;
 import org.xbill.DNS.Record;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -52,8 +50,10 @@ public class MCServerInfo extends IRCCommand {
         InetSocketAddress address = new InetSocketAddress(GeneralUtils.getIP(args[0], network, false), port);
         Socket socket = new Socket();
         socket.connect(address, 10000);
-        DataOutputStream out = new DataOutputStream(socket.getOutputStream());
-        DataInputStream in = new DataInputStream(socket.getInputStream());
+        OutputStream preout = socket.getOutputStream();
+        DataOutputStream out = new DataOutputStream(preout);
+        InputStream prein = socket.getInputStream();
+        InputStreamReader inreader = new InputStreamReader(prein);
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         DataOutputStream handshake = new DataOutputStream(bos);
         handshake.writeByte(0x00);
@@ -66,7 +66,8 @@ public class MCServerInfo extends IRCCommand {
         out.write(bos.toByteArray());
         out.writeByte(0x01);
         out.writeByte(0x00);
-        GeneralUtils.readInputStream(in);
+        DataInputStream in = new DataInputStream(prein);
+        int size =  GeneralUtils.readInputStream(in);
         int id = GeneralUtils.readInputStream(in);
         if (id != 0x00) {
             IRCUtils.sendError(user, network, channel, "Error parsing packet response", prefix);
@@ -79,9 +80,32 @@ public class MCServerInfo extends IRCCommand {
         }
         byte[] bits = new byte[length];
         in.readFully(bits);
-        JsonObject response = new JsonParser().parse(new String(bits)).getAsJsonObject();
+        String json = new String(bits);
+        long now = System.currentTimeMillis();
+        out.writeByte(0x09); //size of packet
+        out.writeByte(0x01); //0x01 for ping
+        out.writeLong(now); //time!?
+        size =  GeneralUtils.readInputStream(in);
+        id = GeneralUtils.readInputStream(in);
+        if (id != 0x01) {
+            IRCUtils.sendError(user, network, channel, "Error parsing packet response", prefix);
+            return;
+        }
+        long pingtime = in.readLong(); //read response
+        JsonObject response = new JsonParser().parse(json).getAsJsonObject();
+        out.close();
+        preout.close();
+        inreader.close();
+        prein.close();
+        socket.close();
+
         String gameVersion = "VERSION: " + response.get("version").getAsJsonObject().get("name").getAsString();
-        String motd = "MOTD: " + response.get("description").getAsString();
+        String motd;
+        try {
+            motd = "MOTD: " + response.get("description").getAsJsonObject().get("text").getAsString();
+        }catch(IllegalStateException e){
+            motd = "MOTD: " + response.get("description").getAsString();
+        }
         String playercount = "Players: " + response.get("players").getAsJsonObject().get("online").getAsString() + "/" + response.get("players").getAsJsonObject().get("max").getAsString();
         List<String> players = new ArrayList<>();
         if(response.get("players").getAsJsonObject().get("online").getAsInt() > 0){
