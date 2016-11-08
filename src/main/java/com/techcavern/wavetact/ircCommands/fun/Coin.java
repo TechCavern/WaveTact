@@ -17,7 +17,7 @@ import java.util.Random;
 public class Coin extends IRCCommand {
 
     public Coin() {
-        super(GeneralUtils.toArray("coin"), 1, "coin", "Flips a coin", false);
+        super(GeneralUtils.toArray("coin"), 0, "coin", "Flips a coin", false);
     }
 
     @Override
@@ -28,7 +28,7 @@ public class Coin extends IRCCommand {
         } else if (x == 2 || x == 3) {
             IRCUtils.sendMessage(user, network, channel, "The coin lands on tails!", prefix);
         } else {
-            IRCUtils.sendMessage(user, network, channel, "The coin lands on it's side!", prefix);
+            IRCUtils.sendMessage(user, network, channel, "The coin lands on its side!", prefix);
         }
     }
 }

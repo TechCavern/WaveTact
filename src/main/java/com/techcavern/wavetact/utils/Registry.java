@@ -32,7 +32,7 @@ public class Registry {
     public static final Reflections wavetactReflection = new Reflections("com.techcavern.wavetact");
     public static final HashBiMap<String, PircBotX> networks = HashBiMap.create();
     public static final Map<PircBotX, Map<String, WhoisEvent>> whoisEventCache = new ConcurrentHashMap<>();
-    public static final int CURRENT_ITERATION = 22;
+    public static final int CURRENT_ITERATION = 23;
     public static final ConsoleServer consoleServer = new ConsoleServer();
     public static final Map<PircBotX, Queue<String>> messageQueue = new HashMap<>();
     public static final UrlValidator urlValidator = new UrlValidator();
