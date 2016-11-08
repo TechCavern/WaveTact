@@ -19,7 +19,7 @@ import java.util.Set;
 public class Whois extends IRCCommand {
 
     public Whois() {
-        super(GeneralUtils.toArray("whois who idletime idt idle"), 1, "whois (-all) (user)", "Gets some info on user", false);
+        super(GeneralUtils.toArray("whois who idletime idt idle"), 1, "whois (-all) (user)", "Gets some info on user (-all shows channels)", false);
     }
 
     @Override
