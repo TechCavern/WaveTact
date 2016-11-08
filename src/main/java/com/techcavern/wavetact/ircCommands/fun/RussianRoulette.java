@@ -28,7 +28,6 @@ public class RussianRoulette extends IRCCommand {
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
        int x = Registry.randNum.nextInt(3);
-        System.out.println(x);
         if(x == 2) {
             if (IRCUtils.checkIfCanKick(channel, network, user)) {
                 IRCUtils.sendKick(network.getUserBot(), user, network, channel, "BANG!");

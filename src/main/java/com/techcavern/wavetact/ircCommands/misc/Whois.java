@@ -31,7 +31,7 @@ public class Whois extends IRCCommand {
             showChannels = true;
             nick = args[1];
         }else if(args.length == 1){
-            if(args[0].equalsIgnoreCase("-all") && userPermLevel >= 20)
+            if(args[0].equalsIgnoreCase("-all"))
                 showChannels = true;
             else
             nick = args[0];
