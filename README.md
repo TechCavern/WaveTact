@@ -63,6 +63,7 @@ Channel Properties
 - kickrejoin - kickrejoin
 - mcserver - default minecraft server
 - autovoice - enables/disables auto voice
+- ignorehttp - this will detect and print the title of urls found regardless of whether or not http(s) is found. - Requires autourl to be enabled to work (True/False)
 
 Global Config
 =================
