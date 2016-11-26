@@ -7,7 +7,6 @@ package com.techcavern.wavetact.ircCommands.netadmin;
 
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.objects.NetProperty;
 import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
@@ -17,7 +16,7 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-import static com.techcavern.wavetactdb.Tables.SERVERS;
+import static com.techcavern.wavetactdb.Tables.NETWORKS;
 
 
 /**
@@ -31,17 +30,17 @@ public class Join extends IRCCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+    public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         boolean permanent = false;
         if (args[0].startsWith("+")) {
             args[0] = args[0].replace("+", "");
             permanent = true;
         }
         if (permanent) {
-            Record server = DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(network));
-            server.setValue(SERVERS.CHANNELS, DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(network)).getValue(SERVERS.CHANNELS) + ", " + args[0]);
-            DatabaseUtils.updateServer(server);
+            Record netRecord = DatabaseUtils.getNetwork(IRCUtils.getNetworkNameByNetwork(network));
+            netRecord.setValue(NETWORKS.CHANNELS, DatabaseUtils.getNetwork(IRCUtils.getNetworkNameByNetwork(network)).getValue(NETWORKS.CHANNELS) + ", " + args[0]);
+            DatabaseUtils.updateNetwork(netRecord);
         }
-        Registry.MessageQueue.add(new NetProperty("JOIN :" + args[0], network));
+        Registry.messageQueue.get(network).add("JOIN :" + args[0]);
     }
 }

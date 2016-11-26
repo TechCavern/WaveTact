@@ -3,7 +3,6 @@ package com.techcavern.wavetact.ircCommands.netadmin;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.DatabaseUtils;
-import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.jooq.Record;
@@ -17,11 +16,11 @@ import static com.techcavern.wavetactdb.Tables.NETWORKPROPERTY;
 public class NetworkProperty extends IRCCommand {
 
     public NetworkProperty() {
-        super(GeneralUtils.toArray("networkproperty netprop"), 20, "netprop (+)(-)[property] (value)", "creates, modifies or removes network properties", false);
+        super(GeneralUtils.toArray("networkproperty npr netprop"), 20, "netprop (+)(-)[property] (value)", "creates, modifies or removes network properties", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+    public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         String networkname = IRCUtils.getNetworkNameByNetwork(network);
         String property;
         boolean isModify = false;
@@ -57,7 +56,7 @@ public class NetworkProperty extends IRCCommand {
             DatabaseUtils.addNetworkProperty(networkname, property, args[1]);
             IRCUtils.sendMessage(user, network, channel, "Property added", prefix);
         } else {
-            ErrorUtils.sendError(user, "Unknown user or unknown property");
+            IRCUtils.sendError(user, network, channel, "property already exists (If you were adding) or property does not exist", prefix);
         }
 
     }

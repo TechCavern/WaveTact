@@ -7,7 +7,8 @@ import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.Registry;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.List;
+import java.util.Collections;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @ConCMD
@@ -18,8 +19,9 @@ public class ListCommands extends ConsoleCommand {
     }
 
     @Override
-    public void onCommand(String[] args, CommandIO commandIO) throws Exception {
-        List<String> commands = Registry.ConsoleCommands.stream().map(ConsoleCommand::getCommand).collect(Collectors.toList());
+    public void onCommand(String command, String[] args, CommandIO commandIO) throws Exception {
+        Set<String> commands = Registry.consoleCommandList.stream().map(ConsoleCommand::getCommand).collect(Collectors.toSet());
+    //    Collections.sort(commands);
         commandIO.getPrintStream().println(StringUtils.join(commands, ", "));
     }
 

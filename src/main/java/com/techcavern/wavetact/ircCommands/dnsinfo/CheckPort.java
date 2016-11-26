@@ -2,28 +2,30 @@ package com.techcavern.wavetact.ircCommands.dnsinfo;
 
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
-import java.net.*;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
 
 @IRCCMD
 public class CheckPort extends IRCCommand {
 
     public CheckPort() {
-        super(GeneralUtils.toArray("checkport cport"), 0, "checkport (+)[ip][domain] (port)", " Checks if port is open on a certain ip and port", false);
+        super(GeneralUtils.toArray("checkport cport cpo"), 5, "checkport (+)[ip][domain] (port)", " Checks if port is open on a certain ip and port", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+    public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         boolean IPv6Priority = false;
-        if(args[0].startsWith("+")){
+        if (args[0].startsWith("+")) {
             IPv6Priority = true;
-            args[0] = args[0].replaceFirst("\\+","");
+            args[0] = args[0].replaceFirst("\\+", "");
         }
         int port;
         if (args.length < 2) {
@@ -41,7 +43,7 @@ public class CheckPort extends IRCCommand {
             //do nothing
         }
         if (IP == null) {
-            ErrorUtils.sendError(user, "Host Unreachable");
+            IRCUtils.sendError(user, network, channel, "Host Unreachable", prefix);
         } else {
             try {
                 Socket socket = new Socket();

@@ -6,10 +6,9 @@ import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.SearchResult;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.utils.ErrorUtils;
+import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
-import com.techcavern.wavetact.utils.Registry;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
@@ -18,17 +17,22 @@ import org.pircbotx.User;
 
 import java.util.List;
 
+import static com.techcavern.wavetactdb.Tables.CONFIG;
+
 @IRCCMD
 public class Video extends IRCCommand {
 
     public Video() {
-        super(GeneralUtils.toArray("video vid youtube yt"), 0, "video (result #) [string to search for]", "Searches youtube for videos", false);
+        super(GeneralUtils.toArray("video vid v youtube yt"), 1, "video (result #) [query for]", "Searches youtube for videos", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        if (Registry.googleapikey == null) {
-            ErrorUtils.sendError(user, "Google api key is null - contact bot controller to fix");
+    public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+        String googleapikey;
+        if (DatabaseUtils.getConfig("googleapikey") != null)
+            googleapikey = DatabaseUtils.getConfig("googleapikey").getValue(CONFIG.VALUE);
+        else {
+            IRCUtils.sendError(user, network, channel, "Google api key is null - contact bot controller to fix", prefix);
             return;
         }
         int ArrayIndex = 1;
@@ -39,7 +43,7 @@ public class Video extends IRCCommand {
         YouTube yt = new YouTube.Builder(new NetHttpTransport(), new JacksonFactory(), request -> {
         }).setApplicationName("youtubesearch").build();
         YouTube.Search.List search = yt.search().list("id,snippet");
-        search.setKey(Registry.googleapikey);
+        search.setKey(googleapikey);
         search.setQ(StringUtils.join(args, " "));
         search.setMaxResults(Integer.toUnsignedLong(ArrayIndex));
         List<SearchResult> results = search.execute().getItems();
@@ -54,14 +58,15 @@ public class Video extends IRCCommand {
                 }
                 String title = result.getSnippet().getTitle();
                 String content = result.getSnippet().getDescription();
-                IRCUtils.sendMessage(user, network, channel, title + " - " + content, prefix);
                 if (!url.isEmpty())
-                    IRCUtils.sendMessage(user, network, channel, url, prefix);
+                    IRCUtils.sendMessage(user, network, channel, title + " - " + content + " - " + GeneralUtils.shortenURL(url), prefix);
+                else
+                    IRCUtils.sendMessage(user, network, channel, title + " - " + content, prefix);
             } else {
-                ErrorUtils.sendError(user, "Search #" + ArrayIndex + " does not exist");
+                IRCUtils.sendError(user, network, channel, "Search #" + ArrayIndex + " does not exist", prefix);
             }
         } else {
-            ErrorUtils.sendError(user, "Search returned no results");
+            IRCUtils.sendError(user, network, channel, "Search returned no results", prefix);
         }
     }
 }

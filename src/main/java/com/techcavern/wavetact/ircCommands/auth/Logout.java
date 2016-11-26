@@ -1,9 +1,10 @@
 package com.techcavern.wavetact.ircCommands.auth;
 
 import com.techcavern.wavetact.annot.IRCCMD;
-import com.techcavern.wavetact.objects.AuthedUser;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.utils.*;
+import com.techcavern.wavetact.utils.GeneralUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.Registry;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
@@ -16,14 +17,10 @@ public class Logout extends IRCCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        AuthedUser authedUser = PermUtils.getAuthedUser(network, user.getNick());
-        if (authedUser == null) {
-            ErrorUtils.sendError(user, "Error, you are not logged in");
-        } else {
-            Registry.AuthedUsers.remove(authedUser);
-            IRCUtils.sendMessage(user, network, channel, "You are now logged out", prefix);
-        }
+    public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+        Registry.authedUsers.get(network).remove(IRCUtils.getHostmask(network, user.getNick(), false));
+        Registry.whoisEventCache.get(network).remove(user.getNick());
+        IRCUtils.sendMessage(user, network, channel, "You are now logged out", prefix);
+        IRCUtils.sendLogChanMsg(network, "[LOGOUT] " + IRCUtils.noPing(user.getNick()));
     }
 }
-

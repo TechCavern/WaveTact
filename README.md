@@ -1,11 +1,21 @@
-WaveTact [![Build Status](https://travis-ci.org/TechCavern/WaveTact.svg?branch=master)](https://travis-ci.org/TechCavern/WaveTact) [![Packagist](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/TechCavern/WaveTact/blob/master/license.txt) [![Join the chat at https://gitter.im/TechCavern/WaveTact](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/TechCavern/WaveTact?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+WaveTact [![Build Status](https://travis-ci.org/TechCavern/WaveTact.svg?branch=master)](https://travis-ci.org/TechCavern/WaveTact) [![Packagist](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/TechCavern/WaveTact/blob/master/license.md)
 --------
 
-An IRC bot that is based upon PircBotX and sits in #techcavern on the following networks:
-- ElectroCode (irc.electrocode.net)
-- EsperNET (irc.esper.net)
-- Synirc (irc.synirc.net)
-- Freenode (irc.freenode.net)
+An IRC bot that is based upon PircBotX and sits in #techcavern on Freenode (irc.freenode.net).
+
+Supported IRCds and Services
+============================
+
+Full Support:
+- Charybdis
+- Atheme
+
+Partial/Legacy Support:
+- Inspircd
+- Anope
+- Unrealircd
+
+Forks of the above may or may not work.
 
 Building
 ========
@@ -16,51 +26,64 @@ Building
 Permissions
 ===========
 - By default, everyone is given their permissions based on channel status. Voiced is representative of trusted
-- Authentication can be done with NickServ, WaveTact's own authentication system or Nick. NickServ authentication has been tested with Anope and Atheme. Others can work, but its not guranteed.
+- Authentication can be done with NickServ, WaveTact's own authentication system or Hostmask. NickServ authentication has been tested with Anope and Atheme. Others can work, but its not guranteed.
 
 PermLevels
 ==========
 - 20 - Network Administrator (Access to all commands on a specific network)
-- 18 - Channel Administrator (Access to all commands below Network Administrator on a specific channel and must be assigned by the controller per channel)
-- 15 - Channel Ownered Operator (Access to all commands below Founder on a specific channel and must be assigned by the controller per channel)
-- 13 - Channel Protected Operator (Access to all commands below Owner on a specific channel)
-- 10 - Channel Operator (Access to all commands below Admin on a specific channel)
-- 7 - Channel Half-Operator (Access to all commands below Operator on a specific channel)
-- 5 - Channel Trusted (Access to all commands below Half-Operator on a specific channel)
-- 0 - Default Access. Everyone has it (Access to all commands below Trusted on a specific channel).
+- 18 - Channel Administrator (Access to all commands below Network Administrator on a specific channel and must be assigned by the Network Admin per channel)
+- 15 - Senior Channel Operator (Access to all commands below Channel Admin on a specific channel)
+- 13 - Protected Channel Operator (Access to all commands below Senior Channel Op on a specific channel)
+- 10 - Channel Operator (Access to all commands below Protected Channel Op on a specific channel)
+- 7 - Channel Half-Operator (Access to all commands below Channel Operator on a specific channel)
+- 5 - Channel Trusted (Access to all commands below Channel Half-Operator on a specific channel)
+- 1 - Registered Access. All registered users have it (Access to all commands below Trusted on a specific channel).
+- 0 - Default Access. Everyone has it (Access to all commands below Registered on a specific channel).
 - -1 - Ignored (Access to no commands)
-- -2 - Ignored Completely
+- -2 - Ignored by everything except the auto-voice and relay
+- -3 - Ignored by everything except the relay
+- -4 - Ignored by everything and if enabled, banned
 
 Channel-User Properties
 =======================
 - permlevel - you can set a custom permlevel for a user (Must be integer)
 - relaybotsplit - you may assign a bot as a relaybot, and set the value as the character before the actual message is handled
-
-You are welcome to set other properties (but they will be rather useless), however do beware that you may find issues in the future if the property you set happens to coincide with a new channel-user property
+- autoop - determines whether or not the user is gets automatically opped/voiced/ownered/protected depending on their permlevel
+- autovoice - enables/disables autovoice per user if channel property is enabled
 
 Channel Properties
 ==================
 - autounban - this will detect bans and auto-unban a ban after the specified time. (s(econds)/m(inutes)/h(ours)/d(ays)/w(eeks)
 - autourl - this will detect and print the title of urls found in channel messages. (True/False)
-
-You are welcome to set other properties (but they will be rather useless), however do beware that you may find issues in the future if the property you set happens to coincide with a new channel property
+- topicseparator - this will determine the separator between topic parts
+- verboseerrors - send errors to channel instead of notice
+- notifymc - send mc notifications
+- funmsg - some.. fun.. stuff.
+- removerejoin - rejoin on remove
+- kickrejoin - kickrejoin
+- mcserver - default minecraft server
+- autovoice - enables/disables auto voice
+- ignorehttp - this will detect and print the title of urls found regardless of whether or not http(s) is found. - Requires autourl to be enabled to work (True/False)
 
 Global Config
 =================
 - wolframalphaapikey - sets the Wolfram Alpha api key
-- googleapikey - sets the Google api key
+- googleapikey - sets the Google api key (Must be set for shortened Urls to be displayed instead of the long ones)
 - wordnikapikey - sets the Wordnik api key
 - wundergroundapikey - sets the Wunderground api key
 - yandexapikey - sets the Yandex api key
-
-You are welcome to set other properties (but they will be rather useless), however do beware that you may find issues in the future if the property you set happens to coincide with a new global config
+- lastfmapikey - sets the Last.fm api key
 
 Network Properties
 =================
-- relaychan - Determines the channel from the network to relay
 - commandchar - Determines network command char
+- pmlog - Logs PMs to a channel
+- ignoredhosts - list of ignored hostmasks
+- joinoninvite - joins on invite
 
-You are welcome to set other properties (but they will be rather useless), however do beware that you may find issues in the future if the property you set happens to coincide with a new network property
+Network User Properties
+=================
+- permlevel - you can set a custom permlevel for a user (Must be integer)
 
 Developing
 ==========
@@ -70,10 +93,9 @@ Running
 =======
 - Make sure you have the WaveTact jar in your current directory.
 - Run `java -jar WaveTact.jar`
-
-If you wish to populate the custom commands database with some prechosen commands use the console command ````addbasiccommands```` ONCE.
+- Any urls provided by the bot will not be shortened until you have set google's apikey
 
 You can connect to the WaveTact console by running this:
 ````
-java -jar WaveTact.jar console
+java -jar WaveTact.jar --client
 ````

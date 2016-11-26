@@ -4,13 +4,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
-/**
- * Created by roelf on 12/27/14.
- */
 public class CommandIO {
-    private InputStream is;
-    private OutputStream os;
-    private PrintStream ps;
+    private final InputStream is;
+    private final OutputStream os;
+    private final PrintStream ps;
 
     public CommandIO(InputStream is, OutputStream os) {
         this.is = is;

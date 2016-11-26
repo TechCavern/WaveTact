@@ -14,7 +14,7 @@ public class Shutdown extends ConsoleCommand {
     }
 
     @Override
-    public void onCommand(String[] args, CommandIO commandIO) throws Exception {
+    public void onCommand(String command, String[] args, CommandIO commandIO) throws Exception {
         Registry.consoleServer.keepConsoleRunning = false;
         Registry.consoleServer.keepConnectionRunning = false;
         commandIO.getPrintStream().println("Shutting down...");

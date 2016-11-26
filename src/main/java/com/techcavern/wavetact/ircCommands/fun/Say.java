@@ -1,0 +1,69 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.techcavern.wavetact.ircCommands.fun;
+
+import com.techcavern.wavetact.annot.IRCCMD;
+import com.techcavern.wavetact.objects.IRCCommand;
+import com.techcavern.wavetact.utils.GeneralUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.PermUtils;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.pircbotx.Channel;
+import org.pircbotx.PircBotX;
+import org.pircbotx.User;
+
+/**
+ * @author jztech101
+ */
+@IRCCMD
+public class Say extends IRCCommand {
+
+    public Say() {
+        super(GeneralUtils.toArray("say msg s a act do prism echo"), 0, "say [something]", "Makes the bot say something", false);
+    }
+
+    @Override
+    public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+        Channel chan;
+        if (args.length > 1) {
+            prefix = IRCUtils.getPrefix(network, args[0]);
+            if (!prefix.isEmpty())
+                chan = IRCUtils.getChannelbyName(network, args[0].replace(prefix, ""));
+            else
+                chan = IRCUtils.getChannelbyName(network, args[0]);
+            if (chan != null)
+                args = ArrayUtils.remove(args, 0);
+            else
+                chan = channel;
+        } else {
+            chan = channel;
+        }
+        if (chan == null || PermUtils.getPermLevel(network, user.getNick(), chan) >= 1) {
+            if (command.equalsIgnoreCase("act") || command.equalsIgnoreCase("do") || command.equalsIgnoreCase("a")) {
+                if(isPrivate)
+                IRCUtils.sendAction(user, network, chan, StringUtils.join(args, " ") + " [" + IRCUtils.noPing(user.getNick()) + "]", prefix);
+                else
+                    IRCUtils.sendAction(user, network, chan, StringUtils.join(args, " "), prefix);
+            } else if (command.equalsIgnoreCase("prism")) {
+                if(isPrivate || !GeneralUtils.isFirstCharLetter(args[0]))
+                    IRCUtils.sendMessage(user, network, chan, "[" + IRCUtils.noPing(user.getNick()) + "] " + GeneralUtils.prism(StringUtils.join(args, " ")), prefix);
+                else
+                    IRCUtils.sendMessage(user, network, chan, GeneralUtils.prism(StringUtils.join(args, " ")), prefix);
+            } else {
+                if(isPrivate || !GeneralUtils.isFirstCharLetter(args[0])) {
+                    IRCUtils.sendMessage(user, network, chan, "[" + IRCUtils.noPing(user.getNick()) + "] " +StringUtils.join(args, " "), prefix);
+                }else
+                    IRCUtils.sendMessage(user, network, chan, StringUtils.join(args, " "), prefix);
+            }
+        } else {
+            IRCUtils.sendError(user, network, channel, "Permission denied", prefix);
+        }
+    }
+}
+
+
+

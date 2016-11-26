@@ -3,7 +3,6 @@ package com.techcavern.wavetact.ircCommands.media;
 import com.google.gson.JsonObject;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -15,17 +14,16 @@ import org.pircbotx.User;
 public class Movie extends IRCCommand {
 
     public Movie() {
-        super(GeneralUtils.toArray("movie imdb"), 0, "movie [string to search movies]", "Searches imdb", false);
+        super(GeneralUtils.toArray("movie mov imdb"), 1, "movie [query movies]", "Searches imdb", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+    public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         JsonObject results = GeneralUtils.getJsonObject("http://www.omdbapi.com/?t=" + StringUtils.join(args, "%20") + "&y=&plot=full&r=json");
         if (results.get("Response").getAsString().equalsIgnoreCase("false")) {
-            ErrorUtils.sendError(user, "Search returned no results");
+            IRCUtils.sendError(user, network, channel, "Search returned no results", prefix);
         } else {
-            String response = results.get("Title").getAsString();
-            ;
+            String response = "[" + results.get("Title").getAsString() + "]";
             String runtime = results.get("Runtime").getAsString();
             if (!runtime.equalsIgnoreCase("N/A")) {
                 response += " - " + runtime;

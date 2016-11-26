@@ -13,21 +13,19 @@ import java.util.concurrent.TimeUnit;
 public class Connect extends ConsoleCommand {
 
     public Connect() {
-        super(GeneralUtils.toArray("connect"), "connect (+)(-)[networkname] (reason)", "Connects, reconnects or disconnects a network from a predefined network");
+        super(GeneralUtils.toArray("connect reconnect disconnect"), "connect [networkname] (reason)", "Connects, reconnects or disconnects a network from a predefined network");
     }
 
     @Override
-    public void onCommand(String[] args, CommandIO commandIO) throws Exception {
+    public void onCommand(String command, String[] args, CommandIO commandIO) throws Exception {
         boolean reconnect = false;
         boolean disconnect = false;
-        if (args[0].startsWith("\\+")) {
+        if (command.equalsIgnoreCase("reconnect")) {
             reconnect = true;
-            args[0] = args[0].replaceFirst("\\+", "");
-        } else if (args[0].startsWith("-")) {
+        } else if (command.equalsIgnoreCase("disconnect")) {
             disconnect = true;
-            args[0] = args[0].replaceFirst("-", "");
         }
-        PircBotX workingnetwork = IRCUtils.getBotByNetworkName(args[0]);
+        PircBotX workingnetwork = IRCUtils.getNetworkByNetworkName(args[0]);
         if (workingnetwork == null) {
             commandIO.getPrintStream().println("Network does not exist");
             return;
@@ -52,8 +50,9 @@ public class Connect extends ConsoleCommand {
         if (workingnetwork.getState().equals(PircBotX.State.CONNECTED)) {
             commandIO.getPrintStream().println("Bot currently connected");
         } else {
+            commandIO.getPrintStream().println("Reconnecting...");
             workingnetwork.startBot();
+            return;
         }
-        commandIO.getPrintStream().println("Reconnecting...");
     }
 }

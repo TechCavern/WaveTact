@@ -23,18 +23,20 @@ sourceSets {
     }
 }
 
+
 dependencies {
     compile 'junit:junit:4.11'
     compile 'org.apache.commons:commons-lang3:3.3.2'
-    compile 'commons-validator:commons-validator:1.4.0'
+    compile 'commons-validator:commons-validator:1.4.1'
     compile 'net.objecthunter:exp4j:0.4.0.ALPHA-3'
     compile 'dnsjava:dnsjava:2.1.6'
     compile 'com.google.guava:guava:17.0'
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'org.slf4j:slf4j-simple:1.7.7'
-    compile 'org.apache.httpcomponents:httpclient:4.3.4'
+    compile 'org.apache.httpcomponents:httpclient:4.5'
+    compile 'org.apache.httpcomponents:fluent-hc:4.5'
     compile 'jp.freepress.repo:WolframAlpha:1.1'
-    compile 'org.pircbotx:pircbotx:2.1-SNAPSHOT'
+    compile 'org.pircbotx:pircbotx:2.1.1-SNAPSHOT'
     compile 'org.jooq:jooq:3.5.0'
     compile 'org.flywaydb:flyway-core:3.1'
     compile 'org.jasypt:jasypt:1.9.2'
@@ -43,14 +45,13 @@ dependencies {
     compile 'com.sun.jersey:jersey-bundle:1.18.1'
     compile 'org.reflections:reflections:0.9.9'
     compile 'com.google.apis:google-api-services-youtube:v3-rev120-1.19.0'
-    compile files('libs/MC-Ping.jar')
     compile 'com.kohlschutter.junixsocket:junixsocket-common:2.0.4'
     compile 'com.kohlschutter.junixsocket:junixsocket-native-common:2.0.4'
     compile 'org.xerial:sqlite-jdbc:3.8.7'
 }
+
 buildscript {
     repositories {
-        mavenLocal()
         mavenCentral()
     }
     dependencies {
@@ -99,6 +100,16 @@ compileJava.dependsOn codeGen
 project.afterEvaluate {
     flywayClean.dependsOn -= testClasses
     flywayMigrate.dependsOn = [processResources, processTestResources]
+}
+idea {
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
+task copyDeps(type: Copy) {
+    from configurations.runtime
+    into 'build/lib'
 }
 jar {
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }

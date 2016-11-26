@@ -25,17 +25,17 @@ public class LockCustomCMD extends ConsoleCommand {
     }
 
     @Override
-    public void onCommand(String[] args, CommandIO commandIO) throws Exception {
-        Record command = DatabaseUtils.getChannelCustomCommand(null, null, args[0].replaceFirst("-", ""));
-        if (command != null) {
+    public void onCommand(String command, String[] args, CommandIO commandIO) throws Exception {
+        Record customCommand = DatabaseUtils.getChannelCustomCommand(null, null, args[0].replaceFirst("-", ""));
+        if (customCommand != null) {
             if (args[0].startsWith("-")) {
-                command.setValue(CUSTOMCOMMANDS.ISLOCKED, false);
+                customCommand.setValue(CUSTOMCOMMANDS.ISLOCKED, false);
                 commandIO.getPrintStream().println("Custom command unlocked");
             } else {
-                command.setValue(CUSTOMCOMMANDS.ISLOCKED, true);
+                customCommand.setValue(CUSTOMCOMMANDS.ISLOCKED, true);
                 commandIO.getPrintStream().println("Custom command locked");
             }
-            DatabaseUtils.updateCustomCommand(command);
+            DatabaseUtils.updateCustomCommand(customCommand);
         }
     }
 }

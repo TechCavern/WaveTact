@@ -6,9 +6,13 @@
 package com.techcavern.wavetact.eventListeners;
 
 import com.techcavern.wavetact.objects.IRCCommand;
-import com.techcavern.wavetact.utils.*;
+import com.techcavern.wavetact.utils.DatabaseUtils;
+import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.PermUtils;
+import com.techcavern.wavetact.utils.Registry;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.jooq.Record;
 import org.pircbotx.Channel;
 import org.pircbotx.Colors;
 import org.pircbotx.hooks.ListenerAdapter;
@@ -25,14 +29,20 @@ public class PrivMsgListener extends ListenerAdapter {
     public void onPrivateMessage(PrivateMessageEvent event) throws Exception {
         class process implements Runnable {
             public void run() {
-                String[] message = StringUtils.split(Colors.removeFormattingAndColors(event.getMessage()), " ");
-                String command = message[0].toLowerCase();
-                IRCCommand Command = IRCUtils.getCommand(command, IRCUtils.getNetworkNameByNetwork(event.getBot()), null);
-                if (Command == null) {
-                    Command = IRCUtils.getCommand(StringUtils.replaceOnce(command, DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "commandchar").getValue(NETWORKPROPERTY.VALUE), ""), IRCUtils.getNetworkNameByNetwork(event.getBot()), null);
-                }
+                String[] message = StringUtils.split(Colors.removeFormatting(event.getMessage()), " ");
+                Record commandchar = DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "commandchar");
+                String privcommand = message[0].toLowerCase();
+                if (commandchar != null)
+                    privcommand = StringUtils.replaceOnce(privcommand, commandchar.getValue(NETWORKPROPERTY.VALUE), "");
+                IRCCommand Command = IRCUtils.getCommand(privcommand, IRCUtils.getNetworkNameByNetwork(event.getBot()), null);
                 message = ArrayUtils.remove(message, 0);
                 if (Command != null) {
+                    String logmsg = StringUtils.join(message, " ");
+                    if (!logmsg.isEmpty() && !Command.getCommand().equalsIgnoreCase("authenticate") && !Command.getCommand().equalsIgnoreCase("drop") && !Command.getCommand().equalsIgnoreCase("register") && !Command.getCommand().equalsIgnoreCase("setpassword")) {
+                        IRCUtils.sendLogChanMsg(event.getBot(), "[PM Command] " + IRCUtils.noPing(event.getUser().getNick()) + ": " + Command.getCommand() + " - " + StringUtils.join(message, " "));
+                    } else {
+                        IRCUtils.sendLogChanMsg(event.getBot(), "[PM Command] " + IRCUtils.noPing(event.getUser().getNick()) + ": " + Command.getCommand());
+                    }
                     if (Command.getChannelRequired()) {
                         Channel channel = null;
                         String prefix = null;
@@ -48,39 +58,48 @@ public class PrivMsgListener extends ListenerAdapter {
                             int userPermLevel = PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), channel);
                             if (userPermLevel >= Command.getPermLevel()) {
                                 try {
-                                    Command.onCommand(event.getUser(), event.getBot(), prefix, channel, true, userPermLevel, message);
+                                    Command.onCommand(privcommand, event.getUser(), event.getBot(), prefix, channel, true, userPermLevel, message);
                                 } catch (Exception e) {
-                                    ErrorUtils.sendError(event.getUser(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")");
+                                    IRCUtils.sendError(event.getUser(), event.getBot(), null, "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")", "");
                                     e.printStackTrace();
                                 }
                             } else {
-                                ErrorUtils.sendError(event.getUser(), "Permission denied");
+                                IRCUtils.sendError(event.getUser(), event.getBot(), null, "Permission denied", "");
                             }
                         } else {
-                            ErrorUtils.sendError(event.getUser(), "Please specify channel as argument #1 in front of all the other arguments");
+                            IRCUtils.sendError(event.getUser(), event.getBot(), null, "Please specify channel as argument #1 in front of all the other arguments", "");
                         }
                     } else {
                         int userPermLevel = PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), null);
-                        if (Command.getPermLevel() <= 5) {
+                        if (Command.getPermLevel() == 0) {
                             try {
-                                Command.onCommand(event.getUser(), event.getBot(), null, null, true, userPermLevel, message);
+                                Command.onCommand(privcommand, event.getUser(), event.getBot(), null, null, true, userPermLevel, message);
                             } catch (Exception e) {
-                                ErrorUtils.sendError(event.getUser(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")");
+                                IRCUtils.sendError(event.getUser(), event.getBot(), null, "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")", "");
+                                e.printStackTrace();
+                            }
+                        } else if (Command.getPermLevel() <= 5 && userPermLevel >= 1) {
+                            try {
+                                Command.onCommand(privcommand, event.getUser(), event.getBot(), null, null, true, userPermLevel, message);
+                            } catch (Exception e) {
+                                IRCUtils.sendError(event.getUser(), event.getBot(), null, "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")", "");
                                 e.printStackTrace();
                             }
                         } else {
                             if (userPermLevel >= Command.getPermLevel()) {
                                 try {
-                                    Command.onCommand(event.getUser(), event.getBot(), null, null, true, userPermLevel, message);
+                                    Command.onCommand(privcommand, event.getUser(), event.getBot(), null, null, true, userPermLevel, message);
                                 } catch (Exception e) {
-                                    ErrorUtils.sendError(event.getUser(), "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")");
+                                    IRCUtils.sendError(event.getUser(), event.getBot(), null, "Failed to execute command, please make sure you are using the correct syntax (" + Command.getSyntax() + ")", "");
                                     e.printStackTrace();
                                 }
                             } else {
-                                ErrorUtils.sendError(event.getUser(), "Permission denied");
+                                IRCUtils.sendError(event.getUser(), event.getBot(), null, "Permission denied", "");
                             }
                         }
                     }
+                } else {
+                    IRCUtils.sendLogChanMsg(event.getBot(), "[PM Message] " + IRCUtils.noPing(event.getUser().getNick()) + ": " + event.getMessage());
                 }
             }
 

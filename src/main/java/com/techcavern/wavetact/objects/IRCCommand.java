@@ -29,7 +29,7 @@ public abstract class IRCCommand {
         this.channelRequired = channelRequired;
     }
 
-    public abstract void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception;
+    public abstract void onCommand(String Command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception;
 
     public int getPermLevel() {
         return permLevel;

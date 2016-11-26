@@ -6,66 +6,49 @@
 package com.techcavern.wavetact.eventListeners;
 
 import com.techcavern.wavetact.utils.DatabaseUtils;
-import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import com.techcavern.wavetact.utils.PermUtils;
+import com.techcavern.wavetact.utils.Registry;
 import org.jooq.Record;
+import org.pircbotx.Channel;
+import org.pircbotx.PircBotX;
+import org.pircbotx.User;
 import org.pircbotx.hooks.ListenerAdapter;
-import org.pircbotx.hooks.events.*;
+import org.pircbotx.hooks.events.ActionEvent;
+import org.pircbotx.hooks.events.NickChangeEvent;
+import org.pircbotx.hooks.events.QuitEvent;
+import org.pircbotx.hooks.events.TopicEvent;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import static com.techcavern.wavetactdb.Tables.NETWORKPROPERTY;
+import static com.techcavern.wavetactdb.Tables.RELAYS;
 
 /**
  * @author jztech101
  */
 public class RelayMsgListener extends ListenerAdapter {
-    @Override
-    public void onMessage(MessageEvent event) throws Exception {
-        if(PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel()) > -2)
-        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), GeneralUtils.replaceVowelsWithAccents(event.getUser().getNick()) + ": " + event.getMessage());
-    }
-
-    @Override
-    public void onAction(ActionEvent event) {
-        if(PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel()) > -2)
-            IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), "* " + GeneralUtils.replaceVowelsWithAccents(event.getUser().getNick()) + " " + event.getMessage());
-    }
 
     @Override
     public void onNickChange(NickChangeEvent event) {
-        Record rec = DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "relaychan");
-        String chanrelay = null;
-        if(rec != null)
-            chanrelay = rec.getValue(NETWORKPROPERTY.VALUE);
-        if (chanrelay != null && event.getUser().getChannels().contains(IRCUtils.getChannelbyName(event.getBot(), chanrelay)))
-            IRCUtils.sendRelayMessage(event.getBot(), IRCUtils.getChannelbyName(event.getBot(), chanrelay), GeneralUtils.replaceVowelsWithAccents(event.getOldNick()) + " is now known as " + GeneralUtils.replaceVowelsWithAccents(event.getNewNick()));
-    }
-
-    @Override
-    public void onKick(KickEvent event) {
-        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(),GeneralUtils.replaceVowelsWithAccents(event.getUser().getNick()) + " kicks " + GeneralUtils.replaceVowelsWithAccents(event.getRecipient().getNick()) + " (" + event.getReason() + ")");
-    }
-
-    @Override
-    public void onPart(PartEvent event) {
-        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), GeneralUtils.replaceVowelsWithAccents(event.getUser().getNick()) + " left " + event.getChannel().getName() + " (" + event.getReason() + ")");
+        IRCUtils.sendRelayMessage(event.getBot(), null, IRCUtils.noPing(event.getOldNick()) + " is now known as " + IRCUtils.noPing(event.getNewNick()), event.getUser());
+        IRCUtils.updateVoice(event.getBot(), event.getOldNick(), event.getUser());
     }
 
     @Override
     public void onQuit(QuitEvent event) {
-        Record rec = DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "relaychan");
-        String chanrelay = null;
-        if(rec != null)
-        chanrelay = rec.getValue(NETWORKPROPERTY.VALUE);
-        if (chanrelay != null && event.getUser().getChannels().contains(IRCUtils.getChannelbyName(event.getBot(), chanrelay)))
-            IRCUtils.sendRelayMessage(event.getBot(), IRCUtils.getChannelbyName(event.getBot(), chanrelay), GeneralUtils.replaceVowelsWithAccents(event.getUser().getNick()) + " quits " + " (" + event.getReason() + ")");
+        IRCUtils.removeVoice(event.getBot(), event.getUser());
+        IRCUtils.sendRelayMessage(event.getBot(), null, IRCUtils.noPing(event.getUser().getNick()) + " (" + event.getUserHostmask().getLogin() + "@" + event.getUserHostmask().getHostname() +") quits " + " (" + event.getReason() + ")", event.getUser());
     }
 
     @Override
-    public void onJoin(JoinEvent event) {
-        IRCUtils.sendRelayMessage(event.getBot(), event.getChannel(), GeneralUtils.replaceVowelsWithAccents(event.getUser().getNick()) + " joined " + event.getChannel().getName());
+    public void onTopic(TopicEvent event) {
+        if(!event.getUser().getNick().equalsIgnoreCase(event.getBot().getNick()))
+        IRCUtils.sendRelayTopic(event.getBot(), event.getChannel(), event.getTopic());
     }
-}
+    }
+
 
 
 

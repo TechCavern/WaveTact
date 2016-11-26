@@ -1,7 +1,6 @@
 package com.techcavern.wavetact.ircCommands.auth;
 
 import com.techcavern.wavetact.annot.IRCCMD;
-import com.techcavern.wavetact.objects.AuthedUser;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.*;
 import org.jooq.Record;
@@ -10,7 +9,7 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
 import static com.techcavern.wavetactdb.Tables.ACCOUNTS;
-import static com.techcavern.wavetactdb.Tables.SERVERS;
+import static com.techcavern.wavetactdb.Tables.NETWORKS;
 
 @IRCCMD
 public class Authenticate extends IRCCommand {
@@ -20,9 +19,9 @@ public class Authenticate extends IRCCommand {
     }
 
     @Override
-    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+    public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (!PermUtils.isAccountEnabled(network)) {
-            ErrorUtils.sendError(user, "This network is set to " + DatabaseUtils.getServer(IRCUtils.getNetworkNameByNetwork(network)).getValue(SERVERS.AUTHTYPE) + " authentication");
+            IRCUtils.sendError(user, network, channel, "This network is set to " + DatabaseUtils.getNetwork(IRCUtils.getNetworkNameByNetwork(network)).getValue(NETWORKS.AUTHTYPE) + " authentication", prefix);
             return;
         }
         String userString;
@@ -35,14 +34,16 @@ public class Authenticate extends IRCCommand {
             password = args[1];
         }
         if (PermUtils.authUser(network, user.getNick()) != null) {
-            ErrorUtils.sendError(user, "Error, you are already identified");
+            IRCUtils.sendError(user, network, channel, "Error, you are already identified", prefix);
         } else {
-            Record account = DatabaseUtils.getAccount(args[0]);
+            Record account = DatabaseUtils.getAccount(userString);
             if (account != null && Registry.encryptor.checkPassword(password + account.getValue(ACCOUNTS.RANDOMSTRING), account.getValue(ACCOUNTS.PASSWORD))) {
-                Registry.AuthedUsers.add(new AuthedUser(IRCUtils.getNetworkNameByNetwork(network), userString, IRCUtils.getHostmask(network, user.getNick(), false)));
+                Registry.authedUsers.get(network).put(IRCUtils.getHostmask(network, user.getNick(), false), userString);
                 IRCUtils.sendMessage(user, network, channel, "Identification successful", prefix);
+                IRCUtils.sendLogChanMsg(network, "[AUTH SUCCESS] " + IRCUtils.noPing(user.getNick()));
             } else {
-                ErrorUtils.sendError(user, "Unable to identify (incorrect user/password combination)");
+                IRCUtils.sendError(user, network, channel, "Unable to identify (incorrect user/password combination)", prefix);
+                IRCUtils.sendLogChanMsg(network, "[AUTH FAILURE] " + IRCUtils.noPing(user.getNick()));
             }
         }
     }

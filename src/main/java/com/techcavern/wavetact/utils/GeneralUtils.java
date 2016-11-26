@@ -6,28 +6,57 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.client.fluent.Request;
 import org.apache.http.conn.util.InetAddressUtils;
+import org.apache.http.entity.ContentType;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.pircbotx.Colors;
 import org.pircbotx.PircBotX;
 
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.*;
+import java.io.OutputStream;
+import java.net.InetAddress;
+import java.net.URL;
+import java.net.URLConnection;
+import java.nio.ByteBuffer;
+import java.util.Calendar;
+import java.util.Locale;
+import java.util.TimeZone;
+
+import static com.techcavern.wavetactdb.Tables.CONFIG;
 
 public class GeneralUtils {
     public static String buildMessage(int startint, int finishint, String[] args) {
-        StringBuilder builder = new StringBuilder();
+        String message = "";
         for (int i = startint; i < finishint; i++) {
-            builder.append(args[i]);
-            builder.append(' ');
+            if (i == finishint - 1)
+                message += args[i];
+            else
+                message += args[i] + " ";
         }
-        return builder.toString().trim();
+        return message;
     }
 
     public static String prism(String toprism) {
         String prism = "";
+        int i = 0;
+        int j = RandomUtils.nextInt(1, 7);
         for (char c : toprism.replace("\n", " ").toCharArray()) {
-            prism += prism(c);
+            if (i % 2 == 0 && i != 0) {
+                j++;
+                if (j > 6) {
+                    j = j % 6;
+                    if (j == 0) {
+                        j = 1;
+                    }
+                }
+            }
+            System.out.println(j);
+            prism += prism(c, j);
+            i++;
         }
         return prism;
     }
@@ -36,10 +65,12 @@ public class GeneralUtils {
         String result = parseUrl(url);
         return new JsonParser().parse(result).getAsJsonObject();
     }
+
     public static JsonElement getJsonElement(String url) throws Exception {
         String result = parseUrl(url);
         return new JsonParser().parse(result);
     }
+
     public static String getJsonString(JsonArray array, String name) {
         String returning = "";
         for (int i = 0; i < array.size(); i++) {
@@ -60,12 +91,22 @@ public class GeneralUtils {
         }
         return true;
     }
+    public static boolean isInteger(Character s) {
+        try {
+            Character.getNumericValue(s);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
+    }
 
     public static String parseUrl(String Url) throws Exception {
         URL url1 = new URL(Url);
+        URLConnection conn = url1.openConnection();
+        conn.addRequestProperty("user-agent", Registry.USER_AGENT);
         String line;
         String result = "";
-        BufferedReader buffereader = new BufferedReader(new InputStreamReader(url1.openStream()));
+        BufferedReader buffereader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
         while ((line = buffereader.readLine()) != null) {
             result += line.replaceAll("\n", " ") + "\n";
         }
@@ -79,12 +120,12 @@ public class GeneralUtils {
         return new JsonParser().parse(result).getAsJsonArray();
     }
 
-    public static String getIP(String input, PircBotX Bot, boolean IPv6Priority) {
+    public static String getIP(String input, PircBotX network, boolean IPv6Priority) {
         String IP = "";
         if (input.contains(".") || input.contains(":")) {
             IP = input;
         } else {
-            IP = IRCUtils.getHost(Bot, input);
+            IP = IRCUtils.getHost(network, input);
         }
         if (InetAddressUtils.isIPv4Address(IP) || InetAddressUtils.isIPv6Address(IP)) {
             return IP;
@@ -93,14 +134,14 @@ public class GeneralUtils {
             try {
                 InetAddress[] addarray = InetAddress.getAllByName(IP);
                 String add = "";
-                if(IPv6Priority) {
-                    for(InetAddress add6:addarray){
-                        if(InetAddressUtils.isIPv6Address(add6.getHostAddress()))
+                if (IPv6Priority) {
+                    for (InetAddress add6 : addarray) {
+                        if (InetAddressUtils.isIPv6Address(add6.getHostAddress()))
                             add = add6.getHostAddress();
                     }
-                }else{
-                    for(InetAddress add4:addarray){
-                        if(InetAddressUtils.isIPv4Address(add4.getHostAddress()))
+                } else {
+                    for (InetAddress add4 : addarray) {
+                        if (InetAddressUtils.isIPv4Address(add4.getHostAddress()))
                             add = add4.getHostAddress();
                     }
                 }
@@ -141,97 +182,173 @@ public class GeneralUtils {
         return input;
     }
 
+    public static String[] removeFormatting(String[] input) {
+        for (int i = 0; i < input.length; i++) {
+            input[i] = Colors.removeFormatting(input[i]);
+        }
+        return input;
+    }
+
+
     public static String[] toArray(String input) {
         return StringUtils.split(input, " ");
     }
 
-    public static String prism(char c) {
-        int number = RandomUtils.nextInt(1, 15);
-        ;
+    public static String prism(char c, int number) {
         String result = null;
+        System.out.println(number);
         switch (number) {
             case 1:
-                result = Colors.BLUE + c;
+                result = Colors.RED + c;
                 break;
             case 2:
-                result = Colors.BLACK + c;
+                result = Colors.YELLOW + c;
                 break;
             case 3:
-                result = Colors.BROWN + c;
+                result = Colors.DARK_GREEN + c;
                 break;
             case 4:
                 result = Colors.CYAN + c;
                 break;
             case 5:
-                result = Colors.DARK_BLUE + c;
+                result = Colors.BLUE + c;
                 break;
             case 6:
-                result = Colors.DARK_GRAY + c;
-                break;
-            case 7:
-                result = Colors.DARK_GREEN + c;
-                break;
-            case 8:
-                result = Colors.GREEN + c;
-                break;
-            case 9:
-                result = Colors.LIGHT_GRAY + c;
-                break;
-            case 10:
                 result = Colors.MAGENTA + c;
-                break;
-            case 11:
-                result = Colors.OLIVE + c;
-                break;
-            case 12:
-                result = Colors.PURPLE + c;
-                break;
-            case 13:
-                result = Colors.RED + c;
-                break;
-            case 14:
-                result = Colors.TEAL + c;
-                break;
-            case 15:
-                result = Colors.YELLOW + c;
                 break;
         }
         return result;
     }
-    public static String replaceVowelsWithAccents(String original){
-        if(original.contains("a"))
-        original = original.replaceFirst("a", "á");
-        else if(original.contains("e"))
-        original = original.replaceFirst("e", "é");
-        else if(original.contains("i"))
-        original = original.replaceFirst("i", "í");
-        else if(original.contains("o"))
-            original = original.replaceFirst("o", "ó");
-        else if(original.contains("u"))
 
-            original = original.replaceFirst("u", "ú");
-        else if(original.contains("y"))
+    public static int readInputStream(InputStream in)
+            throws Exception {
+        int i = 0;
+        int j = 0;
+        while (true) {
+            int k = in.read();
+            i |= (k & 0x7F) << j++ * 7;
+            if (j > 5) {
+                throw new RuntimeException("VarInt too big");
+            }
+            if ((k & 0x80) != 128) {
+                break;
+            }
+        }
+        return i;
+    }
 
-            original = original.replaceFirst("y", "ý");
-        else if(original.contains("A"))
+    public static void writeOutputStream(OutputStream out, int i)
+            throws Exception {
+        while (true) {
+            if ((i & 0xFFFFFF80) == 0) {
+                out.write(i);
+                return;
+            }
 
-            original = original.replaceFirst("A", "Á");
-        else if(original.contains("E"))
+            out.write(i & 0x7F | 0x80);
+            i >>>= 7;
+        }
+    }
 
-            original = original.replaceFirst("E", "É");
-        else if(original.contains("I"))
+    public static String getTimeFromSeconds(int seconds) {
+        if (seconds > 60) {
+            int minutes = seconds / 60;
+            seconds = seconds % 60;
+            if (minutes > 60) {
+                int hours = minutes / 60;
+                minutes = minutes % 60;
+                if (hours > 24) {
+                    int days = hours / 24;
+                    hours = hours % 24;
+                    return days + " days, " + hours + " hours, " + minutes + " minutes, " + seconds + " seconds";
+                } else {
+                    return hours + " hours, " + minutes + " minutes, " + seconds + " seconds";
+                }
+            } else {
+                return minutes + " minutes, " + seconds + " seconds";
+            }
+        } else {
+            return seconds + " seconds";
+        }
+    }
 
-            original = original.replaceFirst("I", "Í");
-        else if(original.contains("O"))
+    public static String getDateFromSeconds(long time) {
+      return getDateFromMilliSeconds(time*1000);
+    }
+    public static String getDateFromMilliSeconds(long time) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeZone(TimeZone.getTimeZone("UTC"));
+        cal.setTimeInMillis(time);
+        Locale locale = Locale.ENGLISH;
+        return cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, locale) + ", " + cal.getDisplayName(Calendar.MONTH, Calendar.LONG, locale) + " " + (cal.get(Calendar.DAY_OF_MONTH)) + ", " + cal.get(Calendar.YEAR) + " at " + cal.get(Calendar.HOUR_OF_DAY) + ":" + formatTime(cal.get(Calendar.MINUTE)) + ":" + formatTime(cal.get(Calendar.SECOND)) + " (UTC)";
+    }
 
-            original = original.replaceFirst("O", "Ó");
-        else if(original.contains("U"))
+    public static String formatTime(int time) {
+        if (time < 10) {
+            return 0 + String.valueOf(time);
+        } else {
+            return String.valueOf(time);
+        }
+    }
 
-            original = original.replaceFirst("U", "Ú");
-        else if(original.contains("Y"))
+    public static String getMediaWikiTitle(String url, String query, int querynumber) {
+        try {
+            JsonObject results = getJsonObject(url + "api.php?action=query&list=search&format=json&srprop=snippet&srinterwiki=true&srsearch=" + query.replaceAll(" ", "%20")).getAsJsonObject().get("query").getAsJsonObject();
+            if (results.get("searchinfo").getAsJsonObject().get("totalhits").getAsInt() >= querynumber) {
+                return results.get("search").getAsJsonArray().get(querynumber - 1).getAsJsonObject().get("title").getAsString();
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            return null;
+        }
+    }
 
-            original = original.replaceFirst("Y","Ý");
-        return original;
+    public static String getMediaWikiContentFromTitle(String url, String title) {
+        try {
+            JsonObject results = getJsonObject(url + "api.php?action=parse&format=json&page=" + title.replaceAll(" ", "%20")).getAsJsonObject().get("parse").getAsJsonObject().get("text").getAsJsonObject();
+            Document doc = Jsoup.parse(results.get("*").getAsString());
+            doc.select(".notaninfobox").remove();
+            doc.select(".hatnote").remove();
+            doc.select(".atemplate").remove();
+            doc.select(".infobox").remove();
+            int i = 0;
+            while (stripHTML(doc.select("p").get(i).toString()).isEmpty()) {
+                i++;
+            }
+            return stripHTML(doc.select("p").get(i).toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static String stripHTML(String htmltext) {
+        return htmltext.replaceAll("(?s)<[^>]*>(\\s*<[^>]*>)*", " ").replaceAll("&.*?;", "").replaceAll("<.*?>", "").replaceAll("&.*?;", "").replaceAll("\\[.*\\]", "").trim().replaceAll(" +", " ").replaceAll(" ,", "").replaceAll(" \\.", "").replaceAll("\n", " ").replaceAll("\r", " ");
+    }
+
+    public static boolean isFirstCharLetter(String input) {
+        if(StringUtils.isAlphanumeric(input.substring(0,1))){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public static String shortenURL(String Url) {
+        if (DatabaseUtils.getConfig("googleapikey") == null)
+            return Url;
+        try {
+            String response = Request.Post("https://www.googleapis.com/urlshortener/v1/url?key=" + DatabaseUtils.getConfig("googleapikey").getValue(CONFIG.VALUE))
+                    .bodyString("{\"longUrl\": \"" + Url + "\"}", ContentType.APPLICATION_JSON)
+                    .execute()
+                    .returnContent().toString();
+            response = new JsonParser().parse(response).getAsJsonObject().get("id").getAsString();
+            return response;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Url;
+        }
     }
 }
 

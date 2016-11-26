@@ -3,16 +3,13 @@ package com.techcavern.wavetact.consoleCommands.config;
 import com.techcavern.wavetact.annot.ConCMD;
 import com.techcavern.wavetact.objects.CommandIO;
 import com.techcavern.wavetact.objects.ConsoleCommand;
-import com.techcavern.wavetact.objects.NetProperty;
 import com.techcavern.wavetact.utils.*;
-import org.apache.commons.lang3.StringUtils;
 import org.jooq.Record;
 import org.pircbotx.PircBotX;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
-import static com.techcavern.wavetactdb.Tables.SERVERS;
+import static com.techcavern.wavetactdb.Tables.NETWORKS;
 
 @ConCMD
 public class Network extends ConsoleCommand {
@@ -22,10 +19,10 @@ public class Network extends ConsoleCommand {
     }
 
     @Override
-    public void onCommand(String[] args, CommandIO commandIO) throws Exception {
+    public void onCommand(String command, String[] args, CommandIO commandIO) throws Exception {
         Scanner input = new Scanner(commandIO.getInputStream());
         if (args[0].startsWith("+")) {
-            Record network = DatabaseUtils.getServer(args[0].replaceFirst("\\+", ""));
+            Record network = DatabaseUtils.getNetwork(args[0].replaceFirst("\\+", ""));
             boolean viewonly = false;
             if (args.length < 3) {
                 viewonly = true;
@@ -35,90 +32,98 @@ public class Network extends ConsoleCommand {
                 switch (args[1].toLowerCase()) {
                     case "channels":
                         if (viewonly)
-                            commandIO.getPrintStream().println(network.getValue(SERVERS.CHANNELS));
+                            commandIO.getPrintStream().println(network.getValue(NETWORKS.CHANNELS));
                         else {
-                            network.setValue(SERVERS.CHANNELS, GeneralUtils.buildMessage(2, args.length, args));
+                            network.setValue(NETWORKS.CHANNELS, GeneralUtils.buildMessage(2, args.length, args));
                             isSuccess = true;
                         }
                         break;
                     case "server":
                         if (viewonly)
-                            commandIO.getPrintStream().println(network.getValue(SERVERS.SERVER));
+                            commandIO.getPrintStream().println(network.getValue(NETWORKS.SERVER));
                         else {
-                            network.setValue(SERVERS.SERVER, args[2]);
+                            network.setValue(NETWORKS.SERVER, args[2]);
                             isSuccess = true;
                         }
                         break;
                     case "port":
                         if (viewonly)
-                            commandIO.getPrintStream().println(network.getValue(SERVERS.PORT));
+                            commandIO.getPrintStream().println(network.getValue(NETWORKS.PORT));
                         else {
-                            network.setValue(SERVERS.PORT, Integer.parseInt(args[2]));
+                            int port = 6667;
+                            boolean SSL = false;
+                            String portinput = args[2];
+                            if (!portinput.isEmpty()) {
+                                if(portinput.startsWith("+")){
+                                    SSL = true;
+                                    portinput = portinput.replaceFirst("\\+","");
+                                }
+                                port = Integer.parseInt(portinput);
+                            }
+                            network.setValue(NETWORKS.PORT, port);
+                            network.setValue(NETWORKS.SSL, SSL);
                             isSuccess = true;
                         }
                         break;
                     case "nick":
                         if (viewonly)
-                            commandIO.getPrintStream().println(network.getValue(SERVERS.NICK));
+                            commandIO.getPrintStream().println(network.getValue(NETWORKS.NICK));
                         else {
-                            network.setValue(SERVERS.NICK, args[2]);
+                            network.setValue(NETWORKS.NICK, args[2]);
                             isSuccess = true;
                         }
                         break;
-                    case "netadmin":
+                    case "netadmins":
                         if (viewonly)
-                            commandIO.getPrintStream().println(network.getValue(SERVERS.NETWORKADMINS));
+                            commandIO.getPrintStream().println(network.getValue(NETWORKS.NETWORKADMINS));
                         else {
-                            network.setValue(SERVERS.NETWORKADMINS, GeneralUtils.buildMessage(2, args.length, args));
+                            network.setValue(NETWORKS.NETWORKADMINS, GeneralUtils.buildMessage(2, args.length, args));
                             isSuccess = true;
                         }
                         break;
                     case "bindhost":
                         if (viewonly)
-                            commandIO.getPrintStream().println(network.getValue(SERVERS.BINDHOST));
+                            commandIO.getPrintStream().println(network.getValue(NETWORKS.BINDHOST));
                         else {
-                            network.setValue(SERVERS.BINDHOST, args[2]);
+                            network.setValue(NETWORKS.BINDHOST, args[2]);
                             isSuccess = true;
                         }
                         break;
                     case "serverpass":
                         if (viewonly)
-                            commandIO.getPrintStream().println(network.getValue(SERVERS.SERVERPASS));
-                        else {
-                            network.setValue(SERVERS.SERVERPASS, args[2]);
+                            commandIO.getPrintStream().println(network.getValue(NETWORKS.SERVERPASS));
+                        else if (args[2].equalsIgnoreCase("null")) {
+                            network.setValue(NETWORKS.SERVERPASS, null);
+                            isSuccess = true;
+                        } else {
+                            network.setValue(NETWORKS.SERVERPASS, args[2]);
                             isSuccess = true;
                         }
                         break;
                     case "nickservcommand":
                         if (viewonly)
-                            commandIO.getPrintStream().println(network.getValue(SERVERS.NICKSERVCOMMAND));
-                        else {
-                            network.setValue(SERVERS.NICKSERVCOMMAND, GeneralUtils.buildMessage(2, args.length, args));
+                            commandIO.getPrintStream().println(network.getValue(NETWORKS.NICKSERVCOMMAND));
+                        else if (args[2].equalsIgnoreCase("null")) {
+                            network.setValue(NETWORKS.NICKSERVCOMMAND, null);
+                            isSuccess = true;
+                        } else {
+                            network.setValue(NETWORKS.NICKSERVCOMMAND, GeneralUtils.buildMessage(2, args.length, args));
                             isSuccess = true;
                         }
                         break;
                     case "nickservnick":
                         if (viewonly)
-                            commandIO.getPrintStream().println(network.getValue(SERVERS.NICKSERVNICK));
+                            commandIO.getPrintStream().println(network.getValue(NETWORKS.NICKSERVNICK));
                         else {
-                            network.setValue(SERVERS.NICKSERVNICK, args[2]);
-                            isSuccess = true;
-                        }
-                        break;
-                    case "authtype":
-                        if (viewonly)
-                            commandIO.getPrintStream().println(network.getValue(SERVERS.AUTHTYPE));
-                        else {
-                            network.setValue(SERVERS.AUTHTYPE, args[2]);
-                            Registry.AuthedUsers.clear();
+                            network.setValue(NETWORKS.NICKSERVNICK, args[2]);
                             isSuccess = true;
                         }
                         break;
                     case "netadminaccess":
                         if (viewonly)
-                            commandIO.getPrintStream().println(network.getValue(SERVERS.NETWORKADMINACCESS));
+                            commandIO.getPrintStream().println(network.getValue(NETWORKS.NETWORKADMINACCESS));
                         else {
-                            network.setValue(SERVERS.NETWORKADMINACCESS, Boolean.valueOf(args[2]));
+                            network.setValue(NETWORKS.NETWORKADMINACCESS, Boolean.valueOf(args[2]));
                             isSuccess = true;
                         }
                         break;
@@ -126,26 +131,30 @@ public class Network extends ConsoleCommand {
                         commandIO.getPrintStream().println("Failed to parse property");
                 }
                 if (isSuccess) {
-                    DatabaseUtils.updateServer(network);
+                    DatabaseUtils.updateNetwork(network);
                     commandIO.getPrintStream().println("Property Modified");
                 }
 
+            } else {
+                commandIO.getPrintStream().println("Network does not exist");
             }
 
         } else if (args[0].startsWith("-")) {
-            DatabaseUtils.removeServer(args[0].replaceFirst("\\-", ""));
-            PircBotX network = IRCUtils.getBotByNetworkName(args[0].replaceFirst("\\-", ""));
-            for (NetProperty e : Registry.NetworkName) {
-                if (e.getNetwork().equals(network)) {
-                    Registry.NetworkName.remove(e);
-                    network.stopBotReconnect();
-                    network.sendIRC().quitServer();
-                    commandIO.getPrintStream().println("network removed");
-                    return;
-                }
-            }
+            DatabaseUtils.removeNetwork(args[0].replaceFirst("\\-", ""));
+            DatabaseUtils.removeChannelUserPropertyByNetwork(args[0].replaceFirst("\\-", ""));
+            DatabaseUtils.removeNetworkUserPropertyByNetwork(args[0].replaceFirst("\\-", ""));
+            PircBotX network = IRCUtils.getNetworkByNetworkName(args[0].replaceFirst("\\-", ""));
+            Registry.networks.inverse().remove(network);
+            Registry.messageQueue.remove(network);
+            Registry.authedUsers.remove(network);
+            Registry.whoisEventCache.remove(network);
+            Registry.lastWhois.remove(network);
+            Registry.lastLeftChannel.remove(network);
+            network.stopBotReconnect();
+            network.sendIRC().quitServer();
+            commandIO.getPrintStream().println("network removed");
         } else {
-            if (DatabaseUtils.getServer(args[0]) != null) {
+            if (DatabaseUtils.getNetwork(args[0]) != null) {
                 commandIO.getPrintStream().println("network already exists");
                 return;
             }
@@ -153,11 +162,17 @@ public class Network extends ConsoleCommand {
             String name = args[0];
             commandIO.getPrintStream().print("Server host: ");
             String server = input.nextLine();
-            commandIO.getPrintStream().print("Server port (Press enter to use default): ");
+            commandIO.getPrintStream().print("Server port (Press enter to use default, insert + beforehand for SSL): ");
             int port = 6667;
+            boolean SSL = false;
             String portinput = input.nextLine();
-            if (!portinput.isEmpty())
+            if (!portinput.isEmpty()) {
+                if(portinput.startsWith("+")){
+                    SSL = true;
+                    portinput = portinput.replaceFirst("\\+","");
+                }
                 port = Integer.parseInt(portinput);
+            }
             commandIO.getPrintStream().print("Server nick: ");
             String nick = input.nextLine();
             commandIO.getPrintStream().print("Channels (#chan1, #chan2, etc): ");
@@ -182,7 +197,7 @@ public class Network extends ConsoleCommand {
             String bindhostinput = input.nextLine();
             if (!bindhostinput.isEmpty())
                 bindhost = bindhostinput;
-            commandIO.getPrintStream().print("AuthType (nickserv/account/nick): ");
+            commandIO.getPrintStream().print("AuthType (nickserv/account/hostmask): ");
             String authtype = input.nextLine();
             commandIO.getPrintStream().print("Auto Allow Network Operators NetAdmin Level Access? (True/False): ");
             boolean netadminaccess = Boolean.valueOf(input.nextLine());
@@ -191,11 +206,11 @@ public class Network extends ConsoleCommand {
             String netadminsinput = input.nextLine();
             if (!netadminsinput.isEmpty())
                 netadmins = netadminsinput;
-            DatabaseUtils.addServer(name, port, server, nick, channels, bindhost, netadminaccess, netadmins, authtype, nickservcommand,serverpass, nickservnick);
-            PircBotX network = ConfigUtils.createNetwork(serverpass, Arrays.asList(StringUtils.split(channels, ", ")), nick, server, port, bindhost, name);
-            Registry.WaveTact.addNetwork(network);
-            Registry.NetworkName.add(new NetProperty(name, network));
+            DatabaseUtils.addNetwork(name, port, server, nick, channels, bindhost, netadminaccess, netadmins, authtype, nickservcommand, serverpass, nickservnick, SSL);
+            PircBotX network = ConfigUtils.createNetwork(serverpass, nick, server, port, bindhost, name, SSL);
+            Registry.networks.put(name, network);
             LoadUtils.addMessageQueue(network);
+            Registry.WaveTact.addNetwork(network);
         }
     }
 }

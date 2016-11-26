@@ -32,7 +32,7 @@ public abstract class ConsoleCommand {
         }
     }
 
-    public abstract void onCommand(String[] args, CommandIO commandIO) throws Exception;
+    public abstract void onCommand(String Command, String[] args, CommandIO commandIO) throws Exception;
 
 }
 

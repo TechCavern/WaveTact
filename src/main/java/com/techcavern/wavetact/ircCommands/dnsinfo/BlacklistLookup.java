@@ -8,7 +8,6 @@ package com.techcavern.wavetact.ircCommands.dnsinfo;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.DatabaseUtils;
-import com.techcavern.wavetact.utils.ErrorUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -28,22 +27,22 @@ import static com.techcavern.wavetactdb.Tables.BLACKLISTS;
 public class BlacklistLookup extends IRCCommand {
 
     public BlacklistLookup() {
-        super(GeneralUtils.toArray("blacklistlookup sbl spambl ibl ircbl"), 5, "blacklistlookup [type] [ip/domain/user]", "Looks up a domain or ip in blacklist database", false);
+        super(GeneralUtils.toArray("blacklistlookup bll"), 1, "blacklistlookup [type] [ip/domain/user]", "Looks up a domain or ip in blacklist database", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        String BeforeIP = GeneralUtils.getIP(args[0], network, false);
+    public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+        String BeforeIP = GeneralUtils.getIP(args[1], network, false);
         if (BeforeIP == null) {
-            ErrorUtils.sendError(user, "Invalid ip/user");
+            IRCUtils.sendError(user, network, channel, "Invalid ip/user", prefix);
             return;
         } else if (BeforeIP.contains(":")) {
-            ErrorUtils.sendError(user, "IPv6 is not supported");
+            IRCUtils.sendError(user, network, channel, "IPv6 is not supported", prefix);
             return;
         }
         String[] IPString = StringUtils.split(BeforeIP, ".");
         String IP = "";
-        for (int i = IPString.length - 1; i > -1; i--) {
+        for (int i = IPString.length - 1; i >= 0; i--) {
             if (IP.isEmpty()) {
                 IP = IPString[i];
             } else {
@@ -54,7 +53,7 @@ public class BlacklistLookup extends IRCCommand {
         Resolver resolver = new SimpleResolver();
         Result<Record> blacklist = DatabaseUtils.getBlacklists(args[0]);
         if (blacklist.isEmpty()) {
-            ErrorUtils.sendError(user, "No " + args[0] + " blacklists found in database");
+            IRCUtils.sendError(user, network, channel, "No " + args[0] + " blacklists found in database", prefix);
             return;
         }
         for (org.jooq.Record Blacklist : blacklist) {
@@ -62,14 +61,15 @@ public class BlacklistLookup extends IRCCommand {
             lookup.setResolver(resolver);
             lookup.setCache(null);
             org.xbill.DNS.Record[] records = lookup.run();
-            if (lookup.getResult() == lookup.SUCCESSFUL) {
-                IRCUtils.sendMessage(user, network, channel, BeforeIP + " found in " + Blacklist.getValue(BLACKLISTS.URL), prefix);
+            if (lookup.getResult() == Lookup.SUCCESSFUL) {
+                String msg = BeforeIP + " found in " + Blacklist.getValue(BLACKLISTS.URL);
                 sent = true;
                 for (org.xbill.DNS.Record rec : records) {
                     if (rec instanceof TXTRecord) {
-                        IRCUtils.sendMessage(user, network, channel, Type.string(rec.getType()) + " - " + StringUtils.join(rec, " "), prefix);
+                        msg += " - [" + Type.string(rec.getType()) + "] " + StringUtils.join(rec, " ");
                     }
                 }
+                IRCUtils.sendMessage(user, network, channel, BeforeIP + " found in " + Blacklist.getValue(BLACKLISTS.URL), prefix);
             }
         }
         if (!sent) {

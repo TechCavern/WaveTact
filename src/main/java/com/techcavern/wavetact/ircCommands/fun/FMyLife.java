@@ -4,6 +4,7 @@ import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
+import com.techcavern.wavetact.utils.Registry;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -15,14 +16,14 @@ import org.pircbotx.User;
 public class FMyLife extends IRCCommand {
 
     public FMyLife() {
-        super(GeneralUtils.toArray("fmylife fml"), 0, "fmylife (def #)", "Sends random fml or specified fml", false);
+        super(GeneralUtils.toArray("fmylife fml"), 1, "fmylife", "Sends random fml", false);
     }
 
     @Override
-    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        Document doc = Jsoup.connect("http://m.fmylife.com/random").userAgent("Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.57 Safari/537.17").get();
-        Elements FML = doc.select(".text");
-        String fmylife = FML.get(0).toString().replaceAll("<.*?>", "").replaceAll("&.*?;", "");
+    public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+        Document doc = Jsoup.connect("http://m.fmylife.com/random").userAgent(Registry.USER_AGENT).get();
+        Elements FML = doc.select(".post");
+        String fmylife = GeneralUtils.stripHTML(FML.get(0).select(".content").toString());
         IRCUtils.sendMessage(user, network, channel, fmylife, prefix);
     }
 }

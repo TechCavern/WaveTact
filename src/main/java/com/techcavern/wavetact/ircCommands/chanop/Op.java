@@ -13,6 +13,8 @@ import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 
+import java.util.*;
+
 /**
  * @author jztech101
  */
@@ -20,22 +22,46 @@ import org.pircbotx.User;
 public class Op extends IRCCommand {
 
     public Op() {
-        super(GeneralUtils.toArray("op aop"), 10, "op (-)(user to op)", "Ops a user", true);
+        super(GeneralUtils.toArray("op aop deop"), 10, "op (-all) (user to op)", "Ops a user", true);
     }
 
     @Override
-    public void onCommand(User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+    public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+        String nick = user.getNick();
         if (args.length >= 1) {
-            if (args[0].equalsIgnoreCase("-")) {
-                channel.send().deOp(user);
-            } else if (args[0].startsWith("-")) {
-                channel.send().deOp(IRCUtils.getUserByNick(network, args[0].replaceFirst("-", "")));
-            } else {
-                channel.send().op(IRCUtils.getUserByNick(network, args[0]));
-
+            nick = args[0];
+        }
+        if(nick.equalsIgnoreCase("-all")){
+            Set<String> names = new HashSet<>();
+            List<String> nicks = new ArrayList<>(Collections.unmodifiableList(channel.getUsersNicks().asList()));
+            nicks.remove(network.getNick());
+            for(int i = 0; i<nicks.size(); i+=4){
+                String thing = "";
+                for(int j = i; j<i+4;j++){
+                    try {
+                        if (!thing.isEmpty())
+                            thing = nicks.get(j) + " " + thing;
+                        else
+                            thing = nicks.get(j);
+                    }catch (IndexOutOfBoundsException e){
+                        break;
+                    }
+                }
+                names.add(thing);
             }
-        } else {
-            channel.send().op(user);
+            for(String thing:names){
+                if (command.contains("de")) {
+                    IRCUtils.setMode(channel, network, "-oooo", thing);
+                } else {
+                    IRCUtils.setMode(channel, network, "+oooo", thing);
+                }
+            }
+        }else {
+            if (command.contains("de")) {
+                IRCUtils.setMode(channel, network, "-o", nick);
+            } else {
+                IRCUtils.setMode(channel, network, "+o", nick);
+            }
         }
     }
 }
