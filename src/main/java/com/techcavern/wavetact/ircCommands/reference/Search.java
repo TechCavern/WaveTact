@@ -9,6 +9,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
@@ -28,12 +29,13 @@ public class Search extends IRCCommand {
             ArrayIndex = Integer.parseInt(args[0]) - 1;
             args = ArrayUtils.remove(args, 0);
         }
-        Document doc = Jsoup.connect("http://www.dogpile.com/dogpilecontrol/search/web?fcoid=417&fcop=topnav&fpid=27&q=thing" + StringUtils.join(args, "%20")).get();
-        Elements results = doc.select(".searchResult");
+        Document doc = Jsoup.connect("http://www.dogpile.com/info.dogpl/search/web?ssm=true&q=" + StringUtils.join(args, "%20") + "&fcoid=1573&fcop=results-main&om_nextpage=True").get();
+        Elements results = doc.select(".resultsMainRegion").select(".searchResult");
         if (results.size() > 0) {
             if (results.size() - 1 >= ArrayIndex) {
-                String title = results.get(ArrayIndex).select(".resultTitlePane").text();
-                String url = results.get(ArrayIndex).select(".resultDisplayUrl").text();
+                IRCUtils.sendMessage(user,network,channel,results.get(ArrayIndex).text(),prefix);
+                String title = results.get(ArrayIndex).select(".resultTitlePane").select(".resultTitle").text();
+                String url = results.get(ArrayIndex).select(".resultDisplayUrlPane").select(".resultDisplayUrl").text();
                 String content = results.get(ArrayIndex).select(".resultDescription").text();
                 IRCUtils.sendMessage(user, network, channel, "[" + title + "] " + content + " - " + GeneralUtils.shortenURL(url), prefix);
             } else {
