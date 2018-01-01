@@ -61,7 +61,7 @@ public class Roll extends IRCCommand {
                 int b = 0;
                 for(int j = 0; j<Integer.parseInt(dice[0]); j++) {
                     {
-                        b += Registry.randNum.nextInt(Integer.parseInt(dice[1]+1));
+                        b += Registry.randNum.nextInt(Integer.parseInt(dice[1])+1);
                     }
                 }
                 list.add(b);

@@ -29,7 +29,7 @@ public class LoadUtils {
         Flyway flyway = new Flyway();
         flyway.setDataSource("jdbc:sqlite:./db.sqlite", null, null);
         flyway.setValidateOnMigrate(false);
-        flyway.migrate();
+       flyway.migrate();
         System.err.println("Getting connection...");
         Class.forName("org.sqlite.JDBC");
         Connection conn = DriverManager.getConnection("jdbc:sqlite:./db.sqlite");
