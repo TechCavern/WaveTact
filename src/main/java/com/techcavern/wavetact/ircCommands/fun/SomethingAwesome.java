@@ -26,7 +26,7 @@ public class SomethingAwesome extends IRCCommand {
         if (IRCUtils.checkIfCanKick(channel, network, user)) {
             IRCUtils.sendKick(network.getUserBot(), user, network, channel, "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻");
         } else {
-            IRCUtils.sendAction(user, network, channel, "kicks " + user.getNick() + " (┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻)", prefix);
+            IRCUtils.sendAction(user, network, channel, "kicks " + IRCUtils.noPing(user.getNick()) + " (┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻)", prefix);
         }
         Record rec = DatabaseUtils.getChannelProperty(IRCUtils.getNetworkNameByNetwork(network), channel.getName(), "funmsg");
         if (rec != null && rec.getValue(Channelproperty.CHANNELPROPERTY.VALUE).equalsIgnoreCase("true")) {

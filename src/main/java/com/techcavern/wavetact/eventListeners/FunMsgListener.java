@@ -49,7 +49,7 @@ public class FunMsgListener extends ListenerAdapter {
                                     if (IRCUtils.checkIfCanKick(event.getChannel(), event.getBot(), event.getUser())) {
                                         IRCUtils.sendKick(event.getBot().getUserBot(), event.getUser(), event.getBot(), event.getChannel(), "YOLO");
                                     } else {
-                                        IRCUtils.sendAction(event.getUser(), event.getBot(), event.getChannel(), "kicks " + event.getUser().getNick() + " (YOLO)", "");
+                                        IRCUtils.sendAction(event.getUser(), event.getBot(), event.getChannel(), "kicks " + IRCUtils.noPing(event.getUser().getNick()) + " (YOLO)", "");
                                     }
                                     return;
                                 }
@@ -67,7 +67,7 @@ public class FunMsgListener extends ListenerAdapter {
                                             if (IRCUtils.checkIfCanKick(event.getChannel(), event.getBot(), event.getUser())) {
                                                 IRCUtils.sendKick(event.getBot().getUserBot(), event.getUser(), event.getBot(), event.getChannel(), "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻ [https://goo.gl/Tkb9dh]");
                                             } else {
-                                                IRCUtils.sendAction(event.getUser(), event.getBot(), event.getChannel(), "kicks " + event.getUser().getNick() + " (┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻) [https://goo.gl/Tkb9dh]", "");
+                                                IRCUtils.sendAction(event.getUser(), event.getBot(), event.getChannel(), "kicks " + IRCUtils.noPing(event.getUser().getNick()) + " (┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻) [https://goo.gl/Tkb9dh]", "");
                                             }
                                             /**
                                              * My apologies to those using this site responsibly. But in my experience, this site has been linked numerous times for entertainment purposes

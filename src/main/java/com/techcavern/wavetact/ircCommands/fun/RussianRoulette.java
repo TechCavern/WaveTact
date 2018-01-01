@@ -22,7 +22,7 @@ import org.pircbotx.User;
 public class RussianRoulette extends IRCCommand {
 
     public RussianRoulette() {
-        super(GeneralUtils.toArray("russianroulette roulette"), 0, "russianroulette", "Russian Roulette", false);
+        super(GeneralUtils.toArray("russianroulette roulette rr"), 0, "russianroulette", "Russian Roulette", false);
     }
 
     @Override
@@ -32,7 +32,7 @@ public class RussianRoulette extends IRCCommand {
             if (IRCUtils.checkIfCanKick(channel, network, user)) {
                 IRCUtils.sendKick(network.getUserBot(), user, network, channel, "BANG!");
             } else {
-                IRCUtils.sendAction(user, network, channel, "kicks " + user.getNick() + " (BANG!)", prefix);
+                IRCUtils.sendAction(user, network, channel, "kicks " + IRCUtils.noPing(user.getNick()) + " (BANG!)", prefix);
             }
         }else{
             IRCUtils.sendMessage(user, network, channel, "Click!", prefix);
