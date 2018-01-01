@@ -31,20 +31,25 @@ import static com.techcavern.wavetactdb.Tables.CHANNELPROPERTY;
 public class Topic extends IRCCommand {
 
     public Topic() {
-        super(GeneralUtils.toArray("topic"), 7, "Topic [a(add)/sw(switch)/+[topic #]/-[topic #]/(insert message to replace whole topic)/ss(switch separator)/r(revert)] (messages to add)(integer to swap)(separator to change to) (integer to swap)", "Manages the topic", true);
+        super(GeneralUtils.toArray("topic"), 7, "Topic [ad(add)/sw(switch)/+[topic #]/-[topic #]/(insert message to replace whole topic)/ss(switch separator)/rev(revert)] (messages to add)(integer to swap)(separator to change to) (integer to swap)", "Manages the topic", true);
     }
 
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         Record topicseparator = DatabaseUtils.getChannelProperty(IRCUtils.getNetworkNameByNetwork(network), channel.getName(), "topicseparator");
-        if (topicseparator == null) {
+        boolean isTopicCommand = args[0].equalsIgnoreCase("ad") || args[0].equalsIgnoreCase("add")||args[0].startsWith("+")||args[0].startsWith("-")||args[0].equalsIgnoreCase("sw") || args[0].equalsIgnoreCase("swap") || args[0].equalsIgnoreCase("switch") ||args[0].equalsIgnoreCase("rev") || args[0].equalsIgnoreCase("revert");
+        if (!isTopicCommand) {
+            IRCUtils.setTopic(network,channel,GeneralUtils.buildMessage(0, args.length, args));
+            saveTopic(channel, network);
+            return;
+        } else if (topicseparator == null) {
             IRCUtils.sendError(user, network, channel, "Please set the topic separator before using this command", prefix);
             return;
         }
         StringUtils.split(channel.getTopic(), topicseparator.getValue(CHANNELPROPERTY.VALUE));
         List<String> topic = new LinkedList(Arrays.asList(StringUtils.split(channel.getTopic(), topicseparator.getValue(CHANNELPROPERTY.VALUE))));
         List<String> newtopic = new LinkedList(Arrays.asList(StringUtils.split(channel.getTopic(), topicseparator.getValue(CHANNELPROPERTY.VALUE))));
-        if (args[0].equalsIgnoreCase("a") || args[0].equalsIgnoreCase("add")) {
+        if (args[0].equalsIgnoreCase("ad") || args[0].equalsIgnoreCase("add")) {
             IRCUtils.setTopic(network,channel,channel.getTopic() + " " + topicseparator.getValue(CHANNELPROPERTY.VALUE) + " " + GeneralUtils.buildMessage(1, args.length, args));
             saveTopic(channel, network);
         } else if (args[0].startsWith("+")) {
@@ -60,7 +65,7 @@ public class Topic extends IRCCommand {
             newtopic.set((Integer.parseInt(args[2]) - 1), topic.get(Integer.parseInt(args[1]) - 1));
             channel.send().setTopic(StringUtils.join(newtopic, topicseparator.getValue(CHANNELPROPERTY.VALUE)));
             saveTopic(channel, network);
-        } else if (args[0].equalsIgnoreCase("r") || args[0].equalsIgnoreCase("revert")) {
+        } else if (args[0].equalsIgnoreCase("rev") || args[0].equalsIgnoreCase("revert")) {
             Record oldTopic = DatabaseUtils.getChannelProperty(IRCUtils.getNetworkNameByNetwork(network), channel.getName(), "topic");
             if (oldTopic != null) {
                 IRCUtils.setTopic(network,channel,oldTopic.getValue(CHANNELPROPERTY.VALUE));
