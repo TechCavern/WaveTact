@@ -55,13 +55,13 @@ public class ChannelUserProperty extends IRCCommand {
                 if (viewonly)
                     IRCUtils.sendMessage(user, network, IRCUtils.getMsgChannel(channel, isPrivate), "[" + account + "] " + args[1] + ": " + channelUserProperty.getValue(CHANNELUSERPROPERTY.VALUE), prefix);
                 else {
-                    channelUserProperty.setValue(CHANNELUSERPROPERTY.VALUE, args[2]);
+                    channelUserProperty.setValue(CHANNELUSERPROPERTY.VALUE, GeneralUtils.buildMessage(2, args.length, args));
                     DatabaseUtils.updateChannelUserProperty(channelUserProperty);
                     IRCUtils.sendMessage(user, network, IRCUtils.getMsgChannel(channel, isPrivate), "Property modified", prefix);
                 }
             }
         } else if (channelUserProperty == null && !isDelete && !isModify) {
-            DatabaseUtils.addChannelUserProperty(networkname, channel.getName(), account, args[1], args[2]);
+            DatabaseUtils.addChannelUserProperty(networkname, channel.getName(), account, args[1], GeneralUtils.buildMessage(2, args.length, args));
             IRCUtils.sendMessage(user, network, IRCUtils.getMsgChannel(channel, isPrivate), "Property added", prefix);
         } else {
             IRCUtils.sendError(user, network, channel, "property already exists (If you were adding) or property does not exist", prefix);

@@ -64,6 +64,7 @@ Channel Properties
 - mcserver - default minecraft server
 - autovoice - enables/disables auto voice
 - ignorehttp - this will detect and print the title of urls found regardless of whether or not http(s) is found. - Requires autourl to be enabled to work (True/False)
+- entrymsg - sets the entry message to be sent on user join
 
 Global Config
 =================
@@ -87,6 +88,7 @@ Network User Properties
 
 Developing
 ==========
+- You MUST let idea import the project as a gradle project before running it as an application for it to run properly.
 - You will need to run `gradle idea` each time a db migration file is added as intellij internal gradle support does not handle it properly.
 
 Running

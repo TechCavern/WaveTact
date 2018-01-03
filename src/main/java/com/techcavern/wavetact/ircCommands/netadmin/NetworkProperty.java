@@ -47,13 +47,13 @@ public class NetworkProperty extends IRCCommand {
                 if (viewonly)
                     IRCUtils.sendMessage(user, network, channel, property + ": " + networkProperty.getValue(NETWORKPROPERTY.VALUE), prefix);
                 else {
-                    networkProperty.setValue(NETWORKPROPERTY.VALUE, args[1]);
+                    networkProperty.setValue(NETWORKPROPERTY.VALUE, GeneralUtils.buildMessage(1, args.length, args));
                     DatabaseUtils.updateNetworkProperty(networkProperty);
                     IRCUtils.sendMessage(user, network, channel, "Property modified", prefix);
                 }
             }
         } else if (networkProperty == null && !isDelete && !isModify) {
-            DatabaseUtils.addNetworkProperty(networkname, property, args[1]);
+            DatabaseUtils.addNetworkProperty(networkname, property, GeneralUtils.buildMessage(1, args.length, args));
             IRCUtils.sendMessage(user, network, channel, "Property added", prefix);
         } else {
             IRCUtils.sendError(user, network, channel, "property already exists (If you were adding) or property does not exist", prefix);
