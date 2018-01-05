@@ -1,5 +1,7 @@
 package com.techcavern.wavetact.ircCommands.reference;
 
+import com.google.api.client.json.Json;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
@@ -29,17 +31,27 @@ public class Weather extends IRCCommand {
             IRCUtils.sendError(user, network, channel, "Wunderground api key is null - contact bot controller to fix", prefix);
             return;
         }
-        JsonObject weather = GeneralUtils.getJsonObject("http://api.wunderground.com/api/" + wundergroundapikey + "/conditions/q/" + StringUtils.join(args, "%20") + ".json").getAsJsonObject("current_observation");
+        JsonObject apiresponse = apiresponse(StringUtils.join(args, "%20"),wundergroundapikey);
+        JsonObject weather = apiresponse.getAsJsonObject("current_observation");
+            if(weather == null) {
+                JsonArray moreapiresponse = apiresponse.getAsJsonObject("response").getAsJsonArray("results");
+                String citylookup = "zmw:"+moreapiresponse.get(0).getAsJsonObject().get("zmw").getAsString();
+                weather = apiresponse(citylookup.replaceAll(" ","%20"),wundergroundapikey).getAsJsonObject("current_observation");
+            }
         if (weather != null) {
-            String City = weather.get("display_location").getAsJsonObject().get("full").getAsString();
-            String Weather = weather.get("weather").getAsString();
-            String Temp = weather.get("temperature_string").getAsString();
-            String Humidity = weather.get("relative_humidity").getAsString() + " humidity";
-            String Wind = weather.get("wind_string").getAsString();
+                String City = weather.get("display_location").getAsJsonObject().get("full").getAsString();
+                String Weather = weather.get("weather").getAsString();
+                String Temp = weather.get("temperature_string").getAsString();
+                String Humidity = weather.get("relative_humidity").getAsString() + " humidity";
+                String Wind = weather.get("wind_string").getAsString();
             IRCUtils.sendMessage(user, network, channel, "[" + City + "] " + Weather + " - " + Temp + " - " + Humidity + " - " + Wind, prefix);
         } else {
             IRCUtils.sendError(user, network, channel, "Requested location not found", prefix);
         }
+    }
+    public JsonObject apiresponse(String x, String apikey) throws Exception{
+        return  GeneralUtils.getJsonObject("http://api.wunderground.com/api/" + apikey + "/geolookup/conditions/q/" + x + ".json");
+
     }
 
 }
