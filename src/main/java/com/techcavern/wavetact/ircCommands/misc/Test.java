@@ -21,7 +21,7 @@ import java.util.*;
 
 import static com.techcavern.wavetactdb.Tables.RELAYS;
 
-@IRCCMD
+//@IRCCMD
 public class Test extends IRCCommand {
 
     public Test() {
