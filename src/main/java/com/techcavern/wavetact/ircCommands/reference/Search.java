@@ -33,7 +33,6 @@ public class Search extends IRCCommand {
         Elements results = doc.select(".resultsMainRegion").select(".searchResult");
         if (results.size() > 0) {
             if (results.size() - 1 >= ArrayIndex) {
-                IRCUtils.sendMessage(user,network,channel,results.get(ArrayIndex).text(),prefix);
                 String title = results.get(ArrayIndex).select(".resultTitlePane").select(".resultTitle").text();
                 String url = results.get(ArrayIndex).select(".resultDisplayUrlPane").select(".resultDisplayUrl").text();
                 String content = results.get(ArrayIndex).select(".resultDescription").text();
