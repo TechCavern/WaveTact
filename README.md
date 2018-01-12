@@ -78,7 +78,7 @@ Global Config
 Network Properties
 =================
 - commandchar - Determines network command char
-- pmlog - Logs PMs to a channel
+- pmlog - Logs various messages to a channel
 - ignoredhosts - list of ignored hostmasks
 - joinoninvite - joins on invite
 
