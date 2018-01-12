@@ -35,7 +35,7 @@ public class NoticeListener extends ListenerAdapter {
                 }else if(event.getUser() != null){
                     IRCUtils.sendLogChanMsg(event.getBot(), "[Notice] " + IRCUtils.noPing(event.getUser().getNick()) + ": " + event.getNotice());
                 }else {
-                    IRCUtils.sendLogChanMsg(event.getBot(), "[Notice] Unknown: " + event.getNotice());
+                    IRCUtils.sendLogChanMsg(event.getBot(), "[Notice] " + IRCUtils.noPing(event.getUserHostmask().getNick()) + ": " + event.getNotice());
                 }
             }
 
