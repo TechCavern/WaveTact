@@ -35,7 +35,7 @@ public class PermUtils {
     public static String getNickServAccountName(PircBotX network, String userObject, String hostmask) { //calls getAccoutName() IF its not already found in get AuthedUser
         String userString = getAuthedUser(network, hostmask);
         if (userString == null) {
-            userString = getAccountName(network, userObject);
+            userString = getAccountName(network, hostmask,userObject);
             if (userString != null)
                 Registry.authedUsers.get(network).put(hostmask, userString);
         }
@@ -53,20 +53,29 @@ public class PermUtils {
     }
 
     @SuppressWarnings("unchecked")
-    public static String getAccountName(PircBotX network, String userObject) { //gets the actual NickServ ACcount Name
+    public static String getAccountName(PircBotX network, String hostmask, String userObject) { //gets the actual NickServ ACcount Name
         WhoisEvent whois = IRCUtils.WhoisEvent(network, userObject, true);
         String userString;
         if (whois != null) {
-            userString = whois.getRegisteredAs();
-            if (userString != null) {
-                userString = userString.toLowerCase();
-                if (userString.isEmpty()) {
-                    userString = userObject.toLowerCase();
+            String hostmask2 = IRCUtils.getLoginmask(whois.getHostname(), whois.getLogin());
+            boolean HostmaskMatch = hostmask2.equals(hostmask);
+            if (!HostmaskMatch) {
+                whois = IRCUtils.WhoisEvent(network, userObject, false);
+            }
+            if (whois != null) {
+                userString = whois.getRegisteredAs();
+                if (userString != null) {
+                    userString = userString.toLowerCase();
+                    if (userString.isEmpty()) {
+                        userString = userObject.toLowerCase();
+                    }
+                } else {
+                    userString = null;
                 }
             } else {
                 userString = null;
             }
-        } else {
+        }else{
             userString = null;
         }
         return userString;
