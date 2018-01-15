@@ -74,6 +74,7 @@ Global Config
 - wundergroundapikey - sets the Wunderground api key
 - yandexapikey - sets the Yandex api key
 - lastfmapikey - sets the Last.fm api key
+- omdbapikey - sets the OMDb api key
 
 Network Properties
 =================

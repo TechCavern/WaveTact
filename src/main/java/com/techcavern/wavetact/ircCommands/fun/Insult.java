@@ -22,13 +22,13 @@ public class Insult extends IRCCommand {
 
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        Document doc = Jsoup.connect("http://www.insultgenerator.org/").userAgent(Registry.USER_AGENT).get();
-        String c = doc.select(".wrap").text();
+        Document doc = Jsoup.connect("http://www.pangloss.com/seidel/Shaker/").userAgent(Registry.USER_AGENT).get();
+        String c = doc.select("p").get(0).text().replaceAll("\\[","").replaceAll("]","");
         int chance = new Random().nextInt(10);
         if (args.length < 1 || args[0].equalsIgnoreCase(network.getNick()))
             IRCUtils.sendMessage(user, network, channel, IRCUtils.noPing(user.getNick()) + ": " + c, prefix);
         else if (userPermLevel >= 20 || chance != 1)
-            IRCUtils.sendMessage(user, network, channel, args[0] + ": " + c, prefix);
+            IRCUtils.sendMessage(user, network,  channel, args[0] + ": " + c, prefix);
         else
             IRCUtils.sendMessage(user, network, channel, IRCUtils.noPing(user.getNick()) + ": " + c, prefix);
     }

@@ -57,7 +57,11 @@ public class DNSInfo extends IRCCommand {
                 } else if (rec instanceof SRVRecord) {
                 }
             }
-            IRCUtils.sendMessage(user, network, channel,StringUtils.join(results, " - "), prefix);
+            if(results.size() != 0) {
+                IRCUtils.sendMessage(user, network, channel, StringUtils.join(results, " - "), prefix);
+            }else{
+                IRCUtils.sendError(user, network, channel, "No records found", prefix);
+            }
         }else{
             IRCUtils.sendError(user, network, channel, "Invalid domain", prefix);
         }

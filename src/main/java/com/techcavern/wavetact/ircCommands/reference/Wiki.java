@@ -14,7 +14,7 @@ import org.pircbotx.User;
 public class Wiki extends IRCCommand {
 
     public Wiki() {
-        super(GeneralUtils.toArray("wiki wi mcwiki mcw mcmodwiki mcmw"), 1, "wiki (result #) [query wiki]", "Searches wikis for something", false);
+        super(GeneralUtils.toArray("wiki wi mcwiki mcw mcmodwiki mcmw mcmwiki"), 1, "wiki (result #) [query wiki]", "Searches wikis for something", false);
     }
 
     @Override
@@ -29,7 +29,7 @@ public class Wiki extends IRCCommand {
         String title = GeneralUtils.getMediaWikiTitle(url, StringUtils.join(args, "%20"), ArrayIndex);
         String content = GeneralUtils.getMediaWikiContentFromTitle(url, title);
         String urljoin = "%20";
-        if (command.equalsIgnoreCase("mcmodwiki") || command.equalsIgnoreCase("mcmw")) {
+        if (command.equalsIgnoreCase("mcmodwiki") || command.equalsIgnoreCase("mcmw") || command.equalsIgnoreCase("mcmwiki")) {
             url = "http://ftb.gamepedia.com/";
             userurl = url;
             title = GeneralUtils.getMediaWikiTitle(url, StringUtils.join(args, "%20"), ArrayIndex);

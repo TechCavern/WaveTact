@@ -29,15 +29,18 @@ import java.util.TimeZone;
 import static com.techcavern.wavetactdb.Tables.CONFIG;
 
 public class GeneralUtils {
-    public static String buildMessage(int startint, int finishint, String[] args) {
+    public static String buildMessage(int startint, int finishint, String[] args, String joinchar) {
         String message = "";
         for (int i = startint; i < finishint; i++) {
             if (i == finishint - 1)
                 message += args[i];
             else
-                message += args[i] + " ";
+                message += args[i] + joinchar;
         }
         return message;
+    }
+    public static String buildMessage(int startint, int finishint, String[] args) {
+        return buildMessage(startint,finishint,args, " ");
     }
 
     public static String prism(String toprism) {
@@ -349,6 +352,9 @@ public class GeneralUtils {
             e.printStackTrace();
             return Url;
         }
+    }
+    public static String capitalizeFirstLetter(String word) {
+        return word.substring(0, 1).toUpperCase() + word.substring(1);
     }
 }
 

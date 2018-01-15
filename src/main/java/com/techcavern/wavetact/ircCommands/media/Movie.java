@@ -3,12 +3,15 @@ package com.techcavern.wavetact.ircCommands.media;
 import com.google.gson.JsonObject;
 import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
+import com.techcavern.wavetact.utils.DatabaseUtils;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
+
+import static com.techcavern.wavetactdb.Tables.CONFIG;
 
 @IRCCMD
 public class Movie extends IRCCommand {
@@ -19,7 +22,14 @@ public class Movie extends IRCCommand {
 
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        JsonObject results = GeneralUtils.getJsonObject("http://www.omdbapi.com/?t=" + StringUtils.join(args, "%20") + "&y=&plot=full&r=json");
+        String omdbapikey;
+        if (DatabaseUtils.getConfig("omdbapikey") != null)
+            omdbapikey = DatabaseUtils.getConfig("omdbapikey").getValue(CONFIG.VALUE);
+        else {
+            IRCUtils.sendError(user, network, channel, "OMDb api key is null - contact bot controller to fix", prefix);
+            return;
+        }
+        JsonObject results = GeneralUtils.getJsonObject("http://www.omdbapi.com/?t=" + StringUtils.join(args, "%20") + "&apikey=" + omdbapikey +"&y=&plot=short&r=json");
         if (results.get("Response").getAsString().equalsIgnoreCase("false")) {
             IRCUtils.sendError(user, network, channel, "Search returned no results", prefix);
         } else {

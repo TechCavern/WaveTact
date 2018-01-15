@@ -25,6 +25,7 @@ public class Registry {
     public static final Set<String> attacks = new HashSet<>();
     public static final Random randNum = new Random();
     public static final Set<String> eightBall = new HashSet<>();
+    public static final Set<String> quotetopics = new HashSet<>();
     public static final Map<String, String> charReplacements = new HashMap<>();
     public static final MultiBotManager WaveTact = new MultiBotManager();
     public static final Map<String, ConsoleCommand> consoleCommands = new HashMap<>();

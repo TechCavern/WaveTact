@@ -39,11 +39,10 @@ public class Main {
         LoadUtils.registerCharReplacements();
         LoadUtils.registerAttacks();
         LoadUtils.registerEightball();
+        LoadUtils.registerQuoteTopics();
+        //LoadUtils.loadTestNetworks();
         LoadUtils.initializeAutoFlushWhoisCache();
         Registry.threadPool.execute(new MCStatusListener());
-    //  DatabaseUtils.addNetwork("Freenode", 6697, "irc.freenode.net", "WTTest", "#techcavern-test", null, false, "JZTech101", "nickserv", null, null, "nickserv", true);
-    //    DatabaseUtils.addNetwork("Freenode3", 6697, "irc.freenode.net", "WTTest2", "#techcavern-test", null, false, "JZTech101", "nickserv", null, null, null, true);
-    //    DatabaseUtils.addNetwork("Freenode2", 6697, "irc.freenode.net", "WTTest3", "#techcavern-test", null, false, "JZTech101", "nickserv", null, null, null, true);
 
         if(!isWindows)
             Registry.threadPool.execute(Registry.consoleServer);

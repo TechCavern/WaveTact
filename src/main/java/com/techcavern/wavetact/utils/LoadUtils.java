@@ -179,6 +179,43 @@ public class LoadUtils {
         Registry.eightBall.add("Don't count on it");
     }
 
+    public static void loadTestNetworks(){
+         DatabaseUtils.addNetwork("Freenode", 6697, "irc.freenode.net", "WTTest", "#techcavern-test", null, false, "JZTech101", "nickserv", null, null, "nickserv", true);
+         DatabaseUtils.addNetwork("Freenode3", 6697, "irc.freenode.net", "WTTest2", "#techcavern-test", null, false, "JZTech101", "nickserv", null, null, null, true);
+         DatabaseUtils.addNetwork("Freenode2", 6697, "irc.freenode.net", "WTTest3", "#techcavern-test", null, false, "JZTech101", "nickserv", null, null, null, true);
+
+    }
+
+    public static void registerQuoteTopics(){
+        Registry.quotetopics.add("love");
+        Registry.quotetopics.add("life");
+        Registry.quotetopics.add("inspirational");
+        Registry.quotetopics.add("humor");
+        Registry.quotetopics.add("philosophy");
+        Registry.quotetopics.add("truth");
+        Registry.quotetopics.add("religion");
+        Registry.quotetopics.add("wisdom");
+        Registry.quotetopics.add("inspiration");
+        Registry.quotetopics.add("happiness");
+        Registry.quotetopics.add("romance");
+        Registry.quotetopics.add("hope");
+        Registry.quotetopics.add("death");
+        Registry.quotetopics.add("poetry");
+        Registry.quotetopics.add("faith");
+        Registry.quotetopics.add("writing");
+        Registry.quotetopics.add("success");
+        Registry.quotetopics.add("knowledge");
+        Registry.quotetopics.add("relationships");
+        Registry.quotetopics.add("education");
+        Registry.quotetopics.add("motivation");
+        Registry.quotetopics.add("life-lessons");
+        Registry.quotetopics.add("time");
+        Registry.quotetopics.add("science");
+        Registry.quotetopics.add("funny");
+        Registry.quotetopics.add("books");
+        Registry.quotetopics.add("spirituality");
+    }
+
     public static void addDir(String s) throws IOException {
         try {
             Field field = ClassLoader.class.getDeclaredField("usr_paths");
