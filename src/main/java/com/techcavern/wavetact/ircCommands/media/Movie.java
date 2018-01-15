@@ -17,7 +17,7 @@ import static com.techcavern.wavetactdb.Tables.CONFIG;
 public class Movie extends IRCCommand {
 
     public Movie() {
-        super(GeneralUtils.toArray("movie mov imdb"), 1, "movie [query movies]", "Searches imdb", false);
+        super(GeneralUtils.toArray("movie mov imdb"), 1, "movie [query movies]", "Searches omdb", false);
     }
 
     @Override

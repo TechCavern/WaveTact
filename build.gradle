@@ -29,7 +29,7 @@ dependencies {
     compile 'org.apache.commons:commons-lang3:3.3.2'
     compile 'commons-validator:commons-validator:1.4.1'
     compile 'net.objecthunter:exp4j:0.4.0.ALPHA-3'
-    compile 'dnsjava:dnsjava:2.1.6'
+    compile 'dnsjava:dnsjava:2.1.7'
     compile 'com.google.guava:guava:17.0'
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'org.slf4j:slf4j-simple:1.7.7'
