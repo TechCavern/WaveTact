@@ -34,12 +34,10 @@ public class FunMsgListener extends ListenerAdapter {
         final boolean funmsg2 = funmsg;
             class process implements Runnable {
                 public void run() {
-                    Record commandcharRecord = DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "commandchar");
-                    String commandchar;
-                    if (commandcharRecord == null) {
+                    String commandchar = IRCUtils.getCommandChar(event.getBot(), event.getChannel());
+                    if(commandchar == null){
                         return;
                     }
-                    commandchar = commandcharRecord.getValue(NETWORKPROPERTY.VALUE);
                     if (PermUtils.getPermLevel(event.getBot(), event.getUser().getNick(), event.getChannel()) > -2 && !event.getMessage().startsWith(commandchar)) {
                         String[] message = StringUtils.split(event.getMessage(), " ");
                         for (String arg : message) {

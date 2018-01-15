@@ -30,10 +30,10 @@ public class PrivMsgListener extends ListenerAdapter {
         class process implements Runnable {
             public void run() {
                 String[] message = StringUtils.split(Colors.removeFormatting(event.getMessage()), " ");
-                Record commandchar = DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "commandchar");
+                String commandchar = IRCUtils.getCommandChar(event.getBot(), null);
                 String privcommand = message[0].toLowerCase();
                 if (commandchar != null)
-                    privcommand = StringUtils.replaceOnce(privcommand, commandchar.getValue(NETWORKPROPERTY.VALUE), "");
+                    privcommand = StringUtils.replaceOnce(privcommand, commandchar, "");
                 IRCCommand Command = IRCUtils.getCommand(privcommand, IRCUtils.getNetworkNameByNetwork(event.getBot()), null);
                 message = ArrayUtils.remove(message, 0);
                 if (Command != null) {

@@ -65,6 +65,7 @@ Channel Properties
 - autovoice - enables/disables auto voice
 - ignorehttp - this will detect and print the title of urls found regardless of whether or not http(s) is found. - Requires autourl to be enabled to work (True/False)
 - entrymsg - sets the entry message to be sent on user join
+- commandchar - sets a channel custom commandchar
 
 Global Config
 =================

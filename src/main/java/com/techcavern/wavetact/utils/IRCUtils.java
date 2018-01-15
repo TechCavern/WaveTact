@@ -117,6 +117,21 @@ public class IRCUtils {
         }
     }
 
+    public static String getCommandChar(PircBotX network,Channel channel) {
+        Record commandcharRecord;
+        String commandchar = null;
+        if (channel != null) {
+            commandcharRecord = DatabaseUtils.getChannelProperty(IRCUtils.getNetworkNameByNetwork(network), channel.getName(), "commandchar");
+            if (commandcharRecord != null) {
+                return commandcharRecord.getValue(CHANNELPROPERTY.VALUE);
+            }
+        }
+            commandcharRecord = DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(network), "commandchar");
+            if (commandcharRecord != null) {
+                return commandcharRecord.getValue(NETWORKPROPERTY.VALUE);
+            }
+        return null;
+    }
     public static void sendKick(User userObject, User recipientObject, PircBotX networkObject, Channel channelObject, String message) {
         if (channelObject != null) {
                 if (!message.isEmpty()) {

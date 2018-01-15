@@ -17,6 +17,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.techcavern.wavetactdb.Tables.CHANNELPROPERTY;
 import static com.techcavern.wavetactdb.Tables.CHANNELUSERPROPERTY;
 import static com.techcavern.wavetactdb.Tables.NETWORKPROPERTY;
 
@@ -37,15 +38,12 @@ public class ChanMsgListener extends ListenerAdapter {
 
                 //Begin Input Parsing
                 String[] message = StringUtils.split(Colors.removeFormatting(event.getMessage()), " ");
-                Record commandcharRecord = DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "commandchar");
-                String commandchar;
-                if (commandcharRecord == null) {
+                String commandchar = IRCUtils.getCommandChar(event.getBot(), event.getChannel());
+                if(commandchar == null){
                     return;
                 }
-                commandchar = commandcharRecord.getValue(NETWORKPROPERTY.VALUE);
-
                 if (event.getMessage().startsWith(commandchar)) {
-                    String chancommand = StringUtils.replaceOnce(message[0].toLowerCase(), DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "commandchar").getValue(NETWORKPROPERTY.VALUE), "");
+                    String chancommand = StringUtils.replaceOnce(message[0].toLowerCase(), commandchar, "");
                     message = ArrayUtils.remove(message, 0);
                     IRCCommand Command = IRCUtils.getCommand(chancommand, IRCUtils.getNetworkNameByNetwork(event.getBot()), event.getChannel().getName());
                     if (Command != null) {
@@ -77,7 +75,7 @@ public class ChanMsgListener extends ListenerAdapter {
                     }
                     String[] relayedmessage = StringUtils.split(startingmessage, " ");
                     if (relayedmessage[0].startsWith(commandchar)) {
-                        String relayedcommand = StringUtils.replaceOnce(relayedmessage[0], DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "commandchar").getValue(NETWORKPROPERTY.VALUE), "");
+                        String relayedcommand = StringUtils.replaceOnce(relayedmessage[0], commandchar, "");
                         relayedmessage = ArrayUtils.remove(relayedmessage, 0);
                         IRCCommand Command = IRCUtils.getCommand(relayedcommand, IRCUtils.getNetworkNameByNetwork(event.getBot()), event.getChannel().getName());
                         if (Command != null && Command.getPermLevel() == 0) {
