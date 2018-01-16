@@ -24,7 +24,7 @@ import static com.techcavern.wavetactdb.Tables.CONFIG;
 public class Question extends IRCCommand {
 
     public Question() {
-        super(GeneralUtils.toArray("question q wa wolframalpha"), 1, "question (answer #) [question]", "Ask wolfram alpha a question!", false);
+        super(GeneralUtils.toArray("question q wa wolframalpha"), 1, "question [question]", "Ask wolfram alpha a question!", false);
     }
 
     @Override
@@ -36,11 +36,6 @@ public class Question extends IRCCommand {
             IRCUtils.sendError(user, network, channel, "Wolfram Alpha api key is null - contact bot controller to fix", prefix);
             return;
         }
-        int ArrayIndex = 1;
-        if (GeneralUtils.isInteger(args[0])) {
-            ArrayIndex = Integer.parseInt(args[0]);
-            args = ArrayUtils.remove(args, 0);
-        }
         WAEngine engine = new WAEngine();
         engine.setAppID(wolframalphaapikey);
         engine.addFormat("plaintext");
@@ -50,19 +45,21 @@ public class Question extends IRCCommand {
         WAPod[] result = queryResult.getPods();
         List<String> results = new ArrayList<>();
         if (result.length > 0) {
-            if (result.length - 1 >= ArrayIndex) {
-                for (WASubpod sub : result[ArrayIndex].getSubpods()) {
-                    for (Visitable visitable : sub.getContents()) {
+                for (WASubpod sub : result[0].getSubpods()) {
                         if (sub.getTitle().isEmpty())
-                            results.add("[" + result[ArrayIndex].getTitle() + "] " + ((WAPlainText) sub.getContents()[0]).getText().replaceAll("\\n", " - ").replaceAll(" \\| ", ": "));
+                            results.add("[" + result[0].getTitle() + "] " + ((WAPlainText) sub.getContents()[0]).getText().replaceAll("\\n", " - ").replaceAll(" \\| ", ": "));
                         else
-                            results.add("[" + result[ArrayIndex].getTitle() + " - " + sub.getTitle() + "] " + ((WAPlainText) sub.getContents()[0]).getText().replaceAll("\\n", " - ").replaceAll(" \\| ", ": "));
+                            results.add("[" + result[0].getTitle() + " - " + sub.getTitle() + "] " + ((WAPlainText) sub.getContents()[0]).getText().replaceAll("\\n", " - ").replaceAll(" \\| ", ": "));
                     }
+
+            for (WASubpod sub : result[1].getSubpods()) {
+                    if (sub.getTitle().isEmpty())
+                        results.add("[" + result[1].getTitle() + "] " + ((WAPlainText) sub.getContents()[0]).getText().replaceAll("\\n", " - ").replaceAll(" \\| ", ": "));
+                    else
+                        results.add("[" + result[1].getTitle() + " - " + sub.getTitle() + "] " + ((WAPlainText) sub.getContents()[0]).getText().replaceAll("\\n", " - ").replaceAll(" \\| ", ": "));
                 }
+
                 IRCUtils.sendMessage(user, network, channel,StringUtils.join(results, " - "), prefix);
-            } else {
-                IRCUtils.sendError(user, network, channel, "Answer #" + ArrayIndex + " does not exist", prefix);
-            }
         } else {
             IRCUtils.sendError(user, network, channel, "Question returned no answers", prefix);
         }
