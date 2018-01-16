@@ -45,20 +45,8 @@ public class Question extends IRCCommand {
         WAPod[] result = queryResult.getPods();
         List<String> results = new ArrayList<>();
         if (result.length > 0) {
-                for (WASubpod sub : result[0].getSubpods()) {
-                        if (sub.getTitle().isEmpty())
-                            results.add("[" + result[0].getTitle() + "] " + ((WAPlainText) sub.getContents()[0]).getText().replaceAll("\\n", " - ").replaceAll(" \\| ", ": "));
-                        else
-                            results.add("[" + result[0].getTitle() + " - " + sub.getTitle() + "] " + ((WAPlainText) sub.getContents()[0]).getText().replaceAll("\\n", " - ").replaceAll(" \\| ", ": "));
-                    }
-
-            for (WASubpod sub : result[1].getSubpods()) {
-                    if (sub.getTitle().isEmpty())
-                        results.add("[" + result[1].getTitle() + "] " + ((WAPlainText) sub.getContents()[0]).getText().replaceAll("\\n", " - ").replaceAll(" \\| ", ": "));
-                    else
-                        results.add("[" + result[1].getTitle() + " - " + sub.getTitle() + "] " + ((WAPlainText) sub.getContents()[0]).getText().replaceAll("\\n", " - ").replaceAll(" \\| ", ": "));
-                }
-
+                results.add(GeneralUtils.getWAResult(0, result));
+                results.add(GeneralUtils.getWAResult(1, result));
                 IRCUtils.sendMessage(user, network, channel,StringUtils.join(results, " - "), prefix);
         } else {
             IRCUtils.sendError(user, network, channel, "Question returned no answers", prefix);
