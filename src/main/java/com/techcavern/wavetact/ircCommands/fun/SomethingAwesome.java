@@ -24,9 +24,9 @@ public class SomethingAwesome extends IRCCommand {
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         if (IRCUtils.checkIfCanKick(channel, network, user)) {
-            IRCUtils.sendKick(network.getUserBot(), user, network, channel, "┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻");
+            IRCUtils.sendKick(network.getUserBot(), user, network, channel, "┻━┻ ︵ ¯\\_(ツ)_/¯ ︵ ┻━┻");
         } else {
-            IRCUtils.sendAction(user, network, channel, "kicks " + IRCUtils.noPing(user.getNick()) + " (┻━┻ ︵ ¯\\ (ツ)/¯ ︵ ┻━┻)", prefix);
+            IRCUtils.sendAction(user, network, channel, "kicks " + IRCUtils.noPing(user.getNick()) + " (┻━┻ ︵ ¯\\_(ツ)_/¯ ︵ ┻━┻)", prefix);
         }
         Record rec = DatabaseUtils.getChannelProperty(IRCUtils.getNetworkNameByNetwork(network), channel.getName(), "funmsg");
         if (rec != null && rec.getValue(Channelproperty.CHANNELPROPERTY.VALUE).equalsIgnoreCase("true")) {
