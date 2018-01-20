@@ -25,3 +25,4 @@ workingdirectory/
 *.iws
 pimp/
 src/main/java/com/techcavern/wavetactdb/
+*.log

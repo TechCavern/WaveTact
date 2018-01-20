@@ -31,11 +31,11 @@ public class NoticeListener extends ListenerAdapter {
         class process implements Runnable {
             public void run() {
                 if(event.getChannel() != null){
-                    IRCUtils.sendLogChanMsg(event.getBot(), "[Notice] " +IRCUtils.noPing(event.getUser().getNick())  + ": (" + event.getChannel().getName() + ") " + event.getNotice());
+                    IRCUtils.sendLogChanMsg(event.getBot(), "[Notice] " +IRCUtils.noPing(event.getUser().getNick()) +"!" + event.getUser().getLogin()+ "@" + event.getUser().getHostname()  + ": (" + event.getChannel().getName() + ") " + event.getNotice());
                 }else if(event.getUser() != null){
-                    IRCUtils.sendLogChanMsg(event.getBot(), "[Notice] " + IRCUtils.noPing(event.getUser().getNick()) + ": " + event.getNotice());
+                    IRCUtils.sendLogChanMsg(event.getBot(), "[Notice] " + IRCUtils.noPing(event.getUser().getNick())+"!" + event.getUser().getLogin()+ "@" + event.getUser().getHostname() + ": " + event.getNotice());
                 }else {
-                    IRCUtils.sendLogChanMsg(event.getBot(), "[Notice] " + IRCUtils.noPing(event.getUserHostmask().getNick()) + ": " + event.getNotice());
+                    IRCUtils.sendLogChanMsg(event.getBot(), "[Notice] " + IRCUtils.noPing(event.getUserHostmask().getNick()) +"!" + event.getUserHostmask().getLogin()+ "@" + event.getUserHostmask().getHostname()+ ": " + event.getNotice());
                 }
             }
 

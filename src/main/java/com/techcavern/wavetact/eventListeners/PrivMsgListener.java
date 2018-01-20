@@ -39,9 +39,9 @@ public class PrivMsgListener extends ListenerAdapter {
                 if (Command != null) {
                     String logmsg = StringUtils.join(message, " ");
                     if (!logmsg.isEmpty() && !Command.getCommand().equalsIgnoreCase("authenticate") && !Command.getCommand().equalsIgnoreCase("drop") && !Command.getCommand().equalsIgnoreCase("register") && !Command.getCommand().equalsIgnoreCase("setpassword")) {
-                        IRCUtils.sendLogChanMsg(event.getBot(), "[PM Command] " + IRCUtils.noPing(event.getUser().getNick()) + ": " + Command.getCommand() + " - " + StringUtils.join(message, " "));
+                        IRCUtils.sendLogChanMsg(event.getBot(), "[PM Command] " + IRCUtils.noPing(event.getUser().getNick())+"!" + event.getUser().getLogin()+ "@" + event.getUser().getHostname() + ": " + Command.getCommand() + " - " + StringUtils.join(message, " "));
                     } else {
-                        IRCUtils.sendLogChanMsg(event.getBot(), "[PM Command] " + IRCUtils.noPing(event.getUser().getNick()) + ": " + Command.getCommand());
+                        IRCUtils.sendLogChanMsg(event.getBot(), "[PM Command] " + IRCUtils.noPing(event.getUser().getNick())+"!" + event.getUser().getLogin()+ "@" + event.getUser().getHostname() + ": " + Command.getCommand());
                     }
                     if (Command.getChannelRequired()) {
                         Channel channel = null;
@@ -99,7 +99,7 @@ public class PrivMsgListener extends ListenerAdapter {
                         }
                     }
                 } else {
-                    IRCUtils.sendLogChanMsg(event.getBot(), "[PM Message] " + IRCUtils.noPing(event.getUser().getNick()) + ": " + event.getMessage());
+                    IRCUtils.sendLogChanMsg(event.getBot(), "[PM Message] " + IRCUtils.noPing(event.getUser().getNick())+"!" + event.getUser().getLogin()+ "@" + event.getUser().getHostname() + ": " + event.getMessage());
                 }
             }
 
