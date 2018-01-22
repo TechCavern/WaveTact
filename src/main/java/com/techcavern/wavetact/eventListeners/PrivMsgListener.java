@@ -32,17 +32,13 @@ public class PrivMsgListener extends ListenerAdapter {
                 String[] message = StringUtils.split(Colors.removeFormatting(event.getMessage()), " ");
                 String commandchar = IRCUtils.getCommandChar(event.getBot(), null);
                 String privcommand = message[0].toLowerCase();
+                IRCUtils.sendLogChanMsg(event.getBot(), "[PM] " + IRCUtils.noPing(event.getUser().getNick())+"!" + event.getUser().getLogin()+ "@" + event.getUser().getHostname() + ": " + event.getMessage());
                 if (commandchar != null)
                     privcommand = StringUtils.replaceOnce(privcommand, commandchar, "");
                 IRCCommand Command = IRCUtils.getCommand(privcommand, IRCUtils.getNetworkNameByNetwork(event.getBot()), null);
                 message = ArrayUtils.remove(message, 0);
                 if (Command != null) {
                     String logmsg = StringUtils.join(message, " ");
-                    if (!logmsg.isEmpty() && !Command.getCommand().equalsIgnoreCase("authenticate") && !Command.getCommand().equalsIgnoreCase("drop") && !Command.getCommand().equalsIgnoreCase("register") && !Command.getCommand().equalsIgnoreCase("setpassword")) {
-                        IRCUtils.sendLogChanMsg(event.getBot(), "[PM Command] " + IRCUtils.noPing(event.getUser().getNick())+"!" + event.getUser().getLogin()+ "@" + event.getUser().getHostname() + ": " + Command.getCommand() + " - " + StringUtils.join(message, " "));
-                    } else {
-                        IRCUtils.sendLogChanMsg(event.getBot(), "[PM Command] " + IRCUtils.noPing(event.getUser().getNick())+"!" + event.getUser().getLogin()+ "@" + event.getUser().getHostname() + ": " + Command.getCommand());
-                    }
                     if (Command.getChannelRequired()) {
                         Channel channel = null;
                         String prefix = null;
@@ -98,8 +94,6 @@ public class PrivMsgListener extends ListenerAdapter {
                             }
                         }
                     }
-                } else {
-                    IRCUtils.sendLogChanMsg(event.getBot(), "[PM Message] " + IRCUtils.noPing(event.getUser().getNick())+"!" + event.getUser().getLogin()+ "@" + event.getUser().getHostname() + ": " + event.getMessage());
                 }
             }
 
