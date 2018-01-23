@@ -108,7 +108,7 @@ public class MCServerInfo extends IRCCommand {
         }
         String playercount = "Players: " + response.get("players").getAsJsonObject().get("online").getAsString() + "/" + response.get("players").getAsJsonObject().get("max").getAsString();
         List<String> players = new ArrayList<>();
-        if(response.get("players").getAsJsonObject().get("online").getAsInt() > 0){
+        if(response.get("players").getAsJsonObject().get("online").getAsInt() > 0 && response.get("players").getAsJsonObject().get("sample") != null){
             for(JsonElement e:response.get("players").getAsJsonObject().get("sample").getAsJsonArray()){
                 players.add(e.getAsJsonObject().get("name").getAsString());
             }
