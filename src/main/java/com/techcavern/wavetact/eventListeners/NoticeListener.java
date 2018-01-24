@@ -31,7 +31,7 @@ public class NoticeListener extends ListenerAdapter {
         class process implements Runnable {
             public void run() {
                 if(event.getChannel() != null){
-                    IRCUtils.sendLogChanMsg(event.getBot(), "[Notice] " +IRCUtils.noPing(event.getUser().getNick()) +"!" + event.getUser().getLogin()+ "@" + event.getUser().getHostname()  + ": (" + event.getChannel().getName() + ") " + event.getNotice());
+                    IRCUtils.sendLogChanMsg(event.getBot(), "[Notice] " +IRCUtils.noPing(event.getUser().getNick()) +"!" + event.getUser().getLogin()+ "@" + event.getUser().getHostname()  + ": (" + event.getChannelSource() + ") " + event.getNotice());
                 }else if(event.getUser() != null){
                     IRCUtils.sendLogChanMsg(event.getBot(), "[Notice] " + IRCUtils.noPing(event.getUser().getNick())+"!" + event.getUser().getLogin()+ "@" + event.getUser().getHostname() + ": " + event.getNotice());
                 }else {
