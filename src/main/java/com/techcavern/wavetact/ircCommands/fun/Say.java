@@ -15,7 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
-
+import com.techcavern.wavetact.utils.*;
 /**
  * @author jztech101
  */
@@ -23,45 +23,24 @@ import org.pircbotx.User;
 public class Say extends IRCCommand {
 
     public Say() {
-        super(GeneralUtils.toArray("say msg s a act do prism echo"), 0, "say [something]", "Makes the bot say something", false);
+        super(GeneralUtils.toArray("say msg s a act do prism echo"), 20, "say [something]", "Makes the bot say something", false);
     }
 
     @Override
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
-        Channel chan;
-        if (args.length > 1) {
-            prefix = IRCUtils.getPrefix(network, args[0]);
-            if (!prefix.isEmpty())
-                chan = IRCUtils.getChannelbyName(network, args[0].replace(prefix, ""));
-            else
-                chan = IRCUtils.getChannelbyName(network, args[0]);
-            if (chan != null)
-                args = ArrayUtils.remove(args, 0);
-            else
-                chan = channel;
-        } else {
-            chan = channel;
-        }
-        if (chan == null || PermUtils.getPermLevel(network, user.getNick(), chan) >= 1) {
-            if (command.equalsIgnoreCase("act") || command.equalsIgnoreCase("do") || command.equalsIgnoreCase("a")) {
-                if(isPrivate)
-                IRCUtils.sendAction(user, network, chan, StringUtils.join(args, " ") + " [" + IRCUtils.noPing(user.getNick()) + "]", prefix);
-                else
-                    IRCUtils.sendAction(user, network, chan, StringUtils.join(args, " "), prefix);
+            String channelname = null;
+	if(!isPrivate){ channelname = prefix + channel.getName(); } else { channelname = user.getNick(); }
+	if(args.length > 1 && args[0].startsWith("#")){channelname = args[0];  args=ArrayUtils.remove(args,0); }
+	    if (command.equalsIgnoreCase("act") || command.equalsIgnoreCase("do") || command.equalsIgnoreCase("a")) {
+                Registry.messageQueue.get(network).add("PRIVMSG " + channelname + " :\u0001ACTION " + StringUtils.join(args," ") + "\u0001");    
             } else if (command.equalsIgnoreCase("prism")) {
-                if(isPrivate || !GeneralUtils.isFirstCharLetter(args[0]))
-                    IRCUtils.sendMessage(user, network, chan, "[" + IRCUtils.noPing(user.getNick()) + "] " + GeneralUtils.prism(StringUtils.join(args, " ")), prefix);
-                else
-                    IRCUtils.sendMessage(user, network, chan, GeneralUtils.prism(StringUtils.join(args, " ")), prefix);
+                Registry.messageQueue.get(network).add("PRIVMSG " + channelname + " :" + GeneralUtils.prism(StringUtils.join(args," ")));
             } else {
-                if(isPrivate || !GeneralUtils.isFirstCharLetter(args[0])) {
-                    IRCUtils.sendMessage(user, network, chan, "[" + IRCUtils.noPing(user.getNick()) + "] " +StringUtils.join(args, " "), prefix);
-                }else
-                    IRCUtils.sendMessage(user, network, chan, StringUtils.join(args, " "), prefix);
+               if(args.length > 1 && !Character.isLetterOrDigit(args[0].charAt(0)) && args[0].charAt(1) == "#".charAt(0)){
+		channelname = args[0]; args = ArrayUtils.remove(args,0);
+		}
+		Registry.messageQueue.get(network).add("PRIVMSG " + channelname + " :" + StringUtils.join(args," "));
             }
-        } else {
-            IRCUtils.sendError(user, network, channel, "Permission denied", prefix);
-        }
     }
 }
 
