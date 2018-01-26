@@ -34,7 +34,7 @@ public class BasicCommands extends IRCCommand {
                 break;
             case "cookie":
                 nick = user.nick()
-                if(args.length >=1){nick=args[0]}
+                if(args.length >=1){nick=args[0];}
                 IRCUtils.sendAction(user, network, channel, "gives " + nick + " a cookie", prefix);
                 break;
             case "license":
