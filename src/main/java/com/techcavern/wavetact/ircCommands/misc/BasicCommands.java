@@ -32,8 +32,9 @@ public class BasicCommands extends IRCCommand {
             case "releases":
                 IRCUtils.sendMessage(user, network, channel, "https://goo.gl/4bNo6a", prefix);
                 break;
-            case "cookie"
+            case "cookie":
                 IRCUtils.sendAction(user, network, channel, "gives " + user.getNick() + " a cookie", prefix);
+                break;
             case "license":
                 IRCUtils.sendMessage(user, network, channel, "MIT License - https://goo.gl/KIiJeF", prefix);
                 break;
