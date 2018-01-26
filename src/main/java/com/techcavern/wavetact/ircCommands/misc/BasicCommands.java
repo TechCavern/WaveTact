@@ -8,7 +8,7 @@ import com.techcavern.wavetact.utils.Registry;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
-
+import org.apache.commons.lang3.StringUtils;
 @IRCCMD
 public class BasicCommands extends IRCCommand {
 
@@ -34,7 +34,7 @@ public class BasicCommands extends IRCCommand {
                 break;
             case "cookie":
                 String nick = user.getNick();
-                if(args.length >=1){nick=args[0];}
+                if(args.length >=1){nick=StringUtils.join(args, " ");}
                 IRCUtils.sendAction(user, network, channel, "gives " + nick + " a cookie", prefix);
                 break;
             case "license":
