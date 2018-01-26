@@ -33,7 +33,7 @@ public class BasicCommands extends IRCCommand {
                 IRCUtils.sendMessage(user, network, channel, "https://goo.gl/4bNo6a", prefix);
                 break;
             case "cookie":
-                nick = user.nick();
+                String nick = user.nick();
                 if(args.length >=1){nick=args[0];}
                 IRCUtils.sendAction(user, network, channel, "gives " + nick + " a cookie", prefix);
                 break;
