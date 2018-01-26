@@ -13,7 +13,7 @@ import org.pircbotx.User;
 public class BasicCommands extends IRCCommand {
 
     public BasicCommands() {
-        super(GeneralUtils.toArray("version ping pong permissions releases license source"), 0, "ping", "some basic commands", false);
+        super(GeneralUtils.toArray("version ping pong cookie permissions releases license source"), 0, "ping", "some basic commands", false);
     }
 
     @Override
@@ -32,6 +32,8 @@ public class BasicCommands extends IRCCommand {
             case "releases":
                 IRCUtils.sendMessage(user, network, channel, "https://goo.gl/4bNo6a", prefix);
                 break;
+            case "cookie"
+                IRCUtils.sendAction(user, network, channel, "gives " + user.getNick() + " a cookie", prefix);
             case "license":
                 IRCUtils.sendMessage(user, network, channel, "MIT License - https://goo.gl/KIiJeF", prefix);
                 break;
