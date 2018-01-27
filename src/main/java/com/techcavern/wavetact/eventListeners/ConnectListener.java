@@ -54,6 +54,7 @@ public class ConnectListener extends ListenerAdapter {
             listenerManager.addListener(new TellMsgListener());
             listenerManager.addListener(new NoticeListener());
             listenerManager.addListener(new ActionListener());
+	    listenerManager.addListener(new CTCPListener());
         IRCUtils.sendLogChanMsg(event.getBot(), "[Connection Successful]");
     }
 

@@ -30,7 +30,7 @@ public class CTCPListener extends ListenerAdapter {
         class process implements Runnable {
             public void run() {
                 if(event.getChannel() == null){
-                    IRCUtils.sendLogChanMsg(event.getBot(), "[PM] " +IRCUtils.noPing(event.getUserHostmask().getNick()) +"!" + event.getUserHostmask().getLogin()+ "@" + event.getUserHostmask().getHostname() +":PING ");
+                    IRCUtils.sendLogChanMsg(event.getBot(), "[PM] " +IRCUtils.noPing(event.getUserHostmask().getNick()) +"!" + event.getUserHostmask().getLogin()+ "@" + event.getUserHostmask().getHostname() +": PING " + event.getPingValue());
                 }
             }
 
@@ -42,7 +42,7 @@ public class CTCPListener extends ListenerAdapter {
         class process implements Runnable {
             public void run() {
                 if(event.getChannel() == null){
-                    IRCUtils.sendLogChanMsg(event.getBot(), "[PM] " +IRCUtils.noPing(event.getUserHostmask().getNick()) +"!" + event.getUserHostmask().getLogin()+ "@" + event.getUserHostmask().getHostname() +":TIME ");
+                    IRCUtils.sendLogChanMsg(event.getBot(), "[PM] " +IRCUtils.noPing(event.getUserHostmask().getNick()) +"!" + event.getUserHostmask().getLogin()+ "@" + event.getUserHostmask().getHostname() +": TIME ");
                 }
             }
 
@@ -53,7 +53,7 @@ public class CTCPListener extends ListenerAdapter {
         class process implements Runnable {
             public void run() {
                 if(event.getChannel() == null){
-                    IRCUtils.sendLogChanMsg(event.getBot(), "[PM] " +IRCUtils.noPing(event.getUserHostmask().getNick()) +"!" + event.getUserHostmask().getLogin()+ "@" + event.getUserHostmask().getHostname() +":FINGER ");
+                    IRCUtils.sendLogChanMsg(event.getBot(), "[PM] " +IRCUtils.noPing(event.getUserHostmask().getNick()) +"!" + event.getUserHostmask().getLogin()+ "@" + event.getUserHostmask().getHostname() +": FINGER ");
                 }
             }
 
@@ -64,7 +64,7 @@ public class CTCPListener extends ListenerAdapter {
         class process implements Runnable {
             public void run() {
                 if(event.getChannel() == null){
-                    IRCUtils.sendLogChanMsg(event.getBot(), "[PM] " +IRCUtils.noPing(event.getUserHostmask().getNick()) +"!" + event.getUserHostmask().getLogin()+ "@" + event.getUserHostmask().getHostname() +":ACTION ");
+                    IRCUtils.sendLogChanMsg(event.getBot(), "[PM] " +IRCUtils.noPing(event.getUserHostmask().getNick()) +"!" + event.getUserHostmask().getLogin()+ "@" + event.getUserHostmask().getHostname() +": ACTION " + event.getMessage());
                 }
             }
 
@@ -75,7 +75,7 @@ public class CTCPListener extends ListenerAdapter {
         class process implements Runnable {
             public void run() {
                 if(event.getChannel() == null){
-                    IRCUtils.sendLogChanMsg(event.getBot(), "[PM] " +IRCUtils.noPing(event.getUserHostmask().getNick()) +"!" + event.getUserHostmask().getLogin()+ "@" + event.getUserHostmask().getHostname() +":VERSION ");
+                    IRCUtils.sendLogChanMsg(event.getBot(), "[PM] " +IRCUtils.noPing(event.getUserHostmask().getNick()) +"!" + event.getUserHostmask().getLogin()+ "@" + event.getUserHostmask().getHostname() +": VERSION ");
                 }
             }
 
@@ -83,14 +83,15 @@ public class CTCPListener extends ListenerAdapter {
         Registry.threadPool.execute(new process());
     }
         @Override
-    public void onUnknownEvent(UnknownEvent event) throws Exception {
+    public void onUnknown(UnknownEvent event) throws Exception {
+	System.out.println(event.getLine());
         class process implements Runnable {
-            public void run() {
-                if(event.getChannel() == null){
-                    IRCUtils.sendLogChanMsg(event.getBot(), "[PM] " +IRCUtils.noPing(event.getUserHostmask().getNick()) +"!" + event.getUserHostmask().getLogin()+ "@" + event.getUserHostmask().getHostname() +":PING ");
-                }
-            }
-
+            public void run(){
+		String[] message = StringUtils.split(event.getLine(), " ");
+		if(message[1] == "PRIVMSG" && StringUtils.isAlphanumeric(message[2]) && message[3].startsWith(":\u0001") && message[3].endsWith("\u0001")){
+                    IRCUtils.sendLogChanMsg(event.getBot(), "[PM] " + IRCUtils.noPing(message[0]).replace(":","") +": " +message[3].replace("\u0001",""));
+		}
+           }
         }
         Registry.threadPool.execute(new process());
     }
