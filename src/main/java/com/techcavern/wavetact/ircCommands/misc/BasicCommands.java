@@ -13,7 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 public class BasicCommands extends IRCCommand {
 
     public BasicCommands() {
-        super(GeneralUtils.toArray("version ping pong cookie permissions releases license source"), 0, "ping", "some basic commands", false);
+        super(GeneralUtils.toArray("version shrug  ping pong cookie permissions releases license source"), 0, "ping", "some basic commands", false);
     }
 
     @Override
@@ -39,6 +39,9 @@ public class BasicCommands extends IRCCommand {
                 break;
             case "license":
                 IRCUtils.sendMessage(user, network, channel, "MIT License - https://goo.gl/KIiJeF", prefix);
+                break;
+	    case "shrug":
+     	        IRCUtils.sendMessage(user, network, channel, "┻━┻ ︵ ¯\\_(ツ)_/¯ ︵ ┻━┻", prefix);
                 break;
             case "source":
                 IRCUtils.sendMessage(user, network, channel, "http://goo.gl/YP7t4N", prefix);
