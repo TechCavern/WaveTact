@@ -84,12 +84,11 @@ public class CTCPListener extends ListenerAdapter {
     }
         @Override
     public void onUnknown(UnknownEvent event) throws Exception {
-	System.out.println(event.getLine());
         class process implements Runnable {
             public void run(){
 		String[] message = StringUtils.split(event.getLine(), " ");
-		if(message[1] == "PRIVMSG" && StringUtils.isAlphanumeric(message[2]) && message[3].startsWith(":\u0001") && message[3].endsWith("\u0001")){
-                    IRCUtils.sendLogChanMsg(event.getBot(), "[PM] " + IRCUtils.noPing(message[0]).replace(":","") +": " +message[3].replace("\u0001",""));
+		if(message[1].equals("PRIVMSG") && StringUtils.isAlphanumeric(message[2]) && message[3].startsWith(":\u0001") && event.getLine().endsWith("\u0001")){
+                    IRCUtils.sendLogChanMsg(event.getBot(), "[PM] " + IRCUtils.noPing(message[0]).replace(":","") +": " +StringUtils.join(message, " ",3, message.length).replace(":",""));
 		}
            }
         }
