@@ -40,7 +40,7 @@ public class Main {
         LoadUtils.registerAttacks();
         LoadUtils.registerEightball();
         LoadUtils.registerQuoteTopics();
-        //LoadUtils.loadTestNetworks();
+     //   LoadUtils.loadTestNetworks();
         LoadUtils.initializeAutoFlushWhoisCache();
         Registry.threadPool.execute(new MCStatusListener());
 

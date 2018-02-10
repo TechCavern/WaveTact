@@ -73,7 +73,7 @@ public class IRCUtils {
         return WhoisEvent;
     }
 
-    public static void sendMessage(User userObject, PircBotX networkObject, Channel channelObject, String message, String prefix) {
+    public static void sendMessage(String userObject, PircBotX networkObject, Channel channelObject, String message, String prefix) {
         for (int i = 0; i < message.length(); i += 350) {
             String messageToSend = message.substring(i, Math.min(message.length(), i + 350));
             if (channelObject != null) {
@@ -83,9 +83,18 @@ public class IRCUtils {
                         sendRelayMessage(networkObject, channelObject, noPing(networkObject.getNick()) + ": " + messageToSend);
                 }
             } else {
-                Registry.messageQueue.get(networkObject).add(("PRIVMSG " + userObject.getNick() + " :" + messageToSend));
+                Registry.messageQueue.get(networkObject).add(("PRIVMSG " + userObject + " :" + messageToSend));
             }
         }
+    }
+    public static void sendMessage(User userObject, PircBotX networkObject, Channel channelObject, String message, String prefix) {
+        sendMessage(userObject.getNick(), networkObject, channelObject, message, prefix);
+    }
+    public static void sendMessage(User userObject, PircBotX networkObject, String message, String prefix) {
+        sendMessage(userObject.getNick(), networkObject, null, message, prefix);
+    }
+    public static void sendMessage(String userObject, PircBotX networkObject, String message, String prefix) {
+        sendMessage(userObject, networkObject, null, message, prefix);
     }
     public static void setTopic(PircBotX networkObject, Channel channelObject, String message) {
         if (channelObject != null){
@@ -232,7 +241,7 @@ public class IRCUtils {
     }
 
     public static void sendMessage(PircBotX networkObject, Channel channelObject, String message, String prefix) {
-        sendMessage(null, networkObject, channelObject, message, prefix);
+        sendMessage((String) null, networkObject, channelObject, message, prefix);
 
     }
 
@@ -458,8 +467,8 @@ public class IRCUtils {
 
     public static void sendLogChanMsg(PircBotX network, String message) {
         Record pmlog = DatabaseUtils.getNetworkProperty(getNetworkNameByNetwork(network), "pmlog");
-        if (pmlog != null && getChannelbyName(network, pmlog.getValue(NETWORKPROPERTY.VALUE)) != null)
-            sendMessage(network, getChannelbyName(network, pmlog.getValue(NETWORKPROPERTY.VALUE)), message, "");
+        if (pmlog != null)
+            sendMessage(pmlog.getValue(NETWORKPROPERTY.VALUE), network, message, "");
     }
 
     public static String noPing(String original) {

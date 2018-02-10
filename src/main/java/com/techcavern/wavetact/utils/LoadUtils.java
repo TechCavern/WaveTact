@@ -180,9 +180,9 @@ public class LoadUtils {
     }
 
     public static void loadTestNetworks(){
-         DatabaseUtils.addNetwork("Freenode", 6697, "irc.freenode.net", "WTTest", "#techcavern-test", null, false, "JZTech101", "nickserv", null, null, "nickserv", true);
-         DatabaseUtils.addNetwork("Freenode3", 6697, "irc.freenode.net", "WTTest2", "#techcavern-test", null, false, "JZTech101", "nickserv", null, null, null, true);
-         DatabaseUtils.addNetwork("Freenode2", 6697, "irc.freenode.net", "WTTest3", "#techcavern-test", null, false, "JZTech101", "nickserv", null, null, null, true);
+         DatabaseUtils.addNetwork("Test", 3434214, "something.someone.xyz", "WTTest", "#bots", null, false, "JZTech101", "nickserv", null, null, "nickserv", true);
+        // DatabaseUtils.addNetwork("Freenode3", 6697, "irc.freenode.net", "WTTest2", "#techcavern-test", null, false, "JZTech101", "nickserv", null, null, null, true);
+        // DatabaseUtils.addNetwork("Freenode2", 6697, "irc.freenode.net", "WTTest3", "#techcavern-test", null, false, "JZTech101", "nickserv", null, null, null, true);
 
     }
 
