@@ -8,12 +8,12 @@ import com.techcavern.wavetact.utils.Registry;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
-
+import org.apache.commons.lang3.StringUtils;
 @IRCCMD
 public class BasicCommands extends IRCCommand {
 
     public BasicCommands() {
-        super(GeneralUtils.toArray("version ping pong permissions releases license source"), 0, "ping", "some basic commands", false);
+        super(GeneralUtils.toArray("version shrug  ping pong cookie permissions releases license source"), 0, "ping", "some basic commands", false);
     }
 
     @Override
@@ -32,8 +32,16 @@ public class BasicCommands extends IRCCommand {
             case "releases":
                 IRCUtils.sendMessage(user, network, channel, "https://goo.gl/4bNo6a", prefix);
                 break;
+            case "cookie":
+                String nick = user.getNick();
+                if(args.length >=1){nick=StringUtils.join(args, " ");}
+                IRCUtils.sendAction(user, network, channel, "gives " + nick + " a cookie", prefix);
+                break;
             case "license":
                 IRCUtils.sendMessage(user, network, channel, "MIT License - https://goo.gl/KIiJeF", prefix);
+                break;
+	    case "shrug":
+     	        IRCUtils.sendMessage(user, network, channel, "┻━┻ ︵ ¯\\_(ツ)_/¯ ︵ ┻━┻", prefix);
                 break;
             case "source":
                 IRCUtils.sendMessage(user, network, channel, "http://goo.gl/YP7t4N", prefix);
