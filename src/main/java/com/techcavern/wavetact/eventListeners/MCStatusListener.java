@@ -13,7 +13,7 @@ import org.jooq.Record;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
+import static com.techcavern.wavetactdb.Tables.CONFIG;
 import static com.techcavern.wavetactdb.Tables.CHANNELPROPERTY;
 
 /**
@@ -25,7 +25,10 @@ public class MCStatusListener implements Runnable {
     public void run() {
         while (true){
             try {
-                JsonArray mcstatus = GeneralUtils.getJsonArray("https://status.mojang.com/check");
+		//System.out.print("hi");
+		if(DatabaseUtils.getConfig("notifymc") != null && DatabaseUtils.getConfig("notifymc").getValue(CONFIG.VALUE).equalsIgnoreCase("true")){
+                //System.out.print("works");
+		JsonArray mcstatus = GeneralUtils.getJsonArray("https://status.mojang.com/check");
                 mcstatus.forEach(status -> {
                     String name = status.getAsJsonObject().entrySet().iterator().next().getKey().toString();
                     if (name.equalsIgnoreCase("minecraft.net")) {
@@ -61,6 +64,7 @@ public class MCStatusListener implements Runnable {
                     }
                     MCStatus.put(name, value);
                 });
+		}
             } catch (Exception e) {
 
             }

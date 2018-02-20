@@ -76,6 +76,7 @@ Global Config
 - yandexapikey - sets the Yandex api key
 - lastfmapikey - sets the Last.fm api key
 - omdbapikey - sets the OMDb api key
+- notifymc - globally enables or disables the notifymc service
 
 Network Properties
 =================
