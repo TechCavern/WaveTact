@@ -9,9 +9,12 @@ import com.techcavern.wavetact.annot.IRCCMD;
 import com.techcavern.wavetact.objects.IRCCommand;
 import com.techcavern.wavetact.utils.GeneralUtils;
 import com.techcavern.wavetact.utils.IRCUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
+
+import java.util.List;
 
 /**
  * @author jztech101
@@ -30,10 +33,22 @@ public class Kick extends IRCCommand {
         if (args.length > 1) {
             message += " " + GeneralUtils.buildMessage(1, args.length, args);
         }
-        if (args[0].equalsIgnoreCase(network.getNick()))
+        if (args[0].contains(",")){
+            String[] nicks = StringUtils.split(args[0], ",");
+            for(String nick:nicks){
+                kick(network, user, channel, message, nick);
+            }
+        }else{
+            kick(network, user, channel, message, args[0]);
+        }
+    }
+    static void kick(PircBotX network, User user, Channel channel, String message, String nick){
+        if (nick.equalsIgnoreCase(network.getNick()))
             IRCUtils.sendKick(network.getUserBot(), user, network, channel, message);
         else
-            IRCUtils.sendKick(network.getUserBot(), IRCUtils.getUserByNick(network, args[0]), network, channel, message);
+            IRCUtils.sendKick(network.getUserBot(), IRCUtils.getUserByNick(network, nick), network, channel, message);
+    }
     }
 
-}
+
+
