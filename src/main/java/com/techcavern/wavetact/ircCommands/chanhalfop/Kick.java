@@ -33,7 +33,7 @@ public class Kick extends IRCCommand {
         if (args.length > 1) {
             message += " " + GeneralUtils.buildMessage(1, args.length, args);
         }else{
-            message += " Your behavior is not conducive to the desired environment";
+            message += " Your behavior is not conductive to the desired environment";
         }
         if (args[0].contains(",")){
             String[] nicks = StringUtils.split(args[0], ",");
