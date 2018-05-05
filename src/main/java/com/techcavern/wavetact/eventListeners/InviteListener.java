@@ -27,7 +27,7 @@ public class InviteListener extends ListenerAdapter {
 
     @Override
     public void onInvite(InviteEvent event) throws Exception {
-        IRCUtils.sendLogChanMsg(event.getBot(), "[INVITE] " + event.getChannel() + " by " + IRCUtils.noPing(event.getUserHostmask().getNick()));
+        IRCUtils.sendLogChanMsg(event.getBot(), "[Invite] " + IRCUtils.noPing(event.getUserHostmask().getNick()) +"!" + event.getUserHostmask().getLogin()+ "@" + event.getUserHostmask().getHostname() + ": " + event.getChannel());
         Record rec = DatabaseUtils.getNetworkProperty(IRCUtils.getNetworkNameByNetwork(event.getBot()), "joinoninvite");
         if (rec != null && rec.getValue(NETWORKPROPERTY.VALUE).equalsIgnoreCase("true")){
             Record netRecord = DatabaseUtils.getNetwork(IRCUtils.getNetworkNameByNetwork(event.getBot()));
