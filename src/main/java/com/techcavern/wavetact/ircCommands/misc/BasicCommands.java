@@ -29,22 +29,15 @@ public class BasicCommands extends IRCCommand {
             case "pong":
                 IRCUtils.sendMessage(user, network, channel, "ping", prefix);
                 break;
-            case "releases":
-                IRCUtils.sendMessage(user, network, channel, "https://goo.gl/4bNo6a", prefix);
-                break;
             case "cookie":
                 String nick = user.getNick();
                 if(args.length >=1){nick=StringUtils.join(args, " ");}
                 IRCUtils.sendAction(user, network, channel, "gives " + nick + " a cookie", prefix);
-                break;
-            case "license":
-                IRCUtils.sendMessage(user, network, channel, "MIT License - https://goo.gl/KIiJeF", prefix);
-                break;
 	    case "shrug":
      	        IRCUtils.sendMessage(user, network, channel, "┻━┻ ︵ ¯\\_(ツ)_/¯ ︵ ┻━┻", prefix);
                 break;
             case "source":
-                IRCUtils.sendMessage(user, network, channel, "http://goo.gl/YP7t4N", prefix);
+                IRCUtils.sendMessage(user, network, channel, "https://github.com/TechCavern/WaveTact", prefix);
                 break;
             case "permissions":
                 IRCUtils.sendMessage(user, network, channel, "-4 Banned, -3 = Ignored by Everything except Relay, -2 = Ignored by Everything except Relay & Auto-Voice, -1 = Commands Ignored, 0 = Everyone, 1 = Registered, 5 = Voiced/Trusted, 7 = Channel Half-Operator, 10 = Operator, 13 = Protected Channel Operator, 15 = Senior Channel Operator, 18 = Channel Administrator, 20 = Network Administrator", prefix);
