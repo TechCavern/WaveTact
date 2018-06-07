@@ -13,7 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 public class BasicCommands extends IRCCommand {
 
     public BasicCommands() {
-        super(GeneralUtils.toArray("version shrug  ping pong cookie permissions releases license source"), 0, "ping", "some basic commands", false);
+        super(GeneralUtils.toArray("version shrug  ping pong cookie permissions source"), 0, "ping", "some basic commands", false);
     }
 
     @Override
