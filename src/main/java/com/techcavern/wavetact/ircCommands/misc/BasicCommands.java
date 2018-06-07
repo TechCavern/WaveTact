@@ -37,7 +37,7 @@ public class BasicCommands extends IRCCommand {
      	        IRCUtils.sendMessage(user, network, channel, "┻━┻ ︵ ¯\\_(ツ)_/¯ ︵ ┻━┻", prefix);
                 break;
             case "source":
-                IRCUtils.sendMessage(user, network, channel, "https://github.com/TechCavern/WaveTact", prefix);
+                IRCUtils.sendMessage(user, network, channel, "WaveTact: https://github.com/TechCavern/WaveTact", prefix);
                 break;
             case "permissions":
                 IRCUtils.sendMessage(user, network, channel, "-4 Banned, -3 = Ignored by Everything except Relay, -2 = Ignored by Everything except Relay & Auto-Voice, -1 = Commands Ignored, 0 = Everyone, 1 = Registered, 5 = Voiced/Trusted, 7 = Channel Half-Operator, 10 = Operator, 13 = Protected Channel Operator, 15 = Senior Channel Operator, 18 = Channel Administrator, 20 = Network Administrator", prefix);
