@@ -342,19 +342,8 @@ public class GeneralUtils {
     }
 
     public static String shortenURL(String Url) {
-        if (DatabaseUtils.getConfig("googleapikey") == null)
-            return Url;
-        try {
-            String response = Request.Post("https://www.googleapis.com/urlshortener/v1/url?key=" + DatabaseUtils.getConfig("googleapikey").getValue(CONFIG.VALUE))
-                    .bodyString("{\"longUrl\": \"" + Url + "\"}", ContentType.APPLICATION_JSON)
-                    .execute()
-                    .returnContent().toString();
-            response = new JsonParser().parse(response).getAsJsonObject().get("id").getAsString();
-            return response;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return Url;
-        }
+        //goo.gl retiring
+        return Url;
     }
     public static String capitalizeFirstLetter(String word) {
         return word.substring(0, 1).toUpperCase() + word.substring(1);
