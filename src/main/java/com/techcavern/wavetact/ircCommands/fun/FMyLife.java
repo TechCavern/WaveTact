@@ -23,7 +23,7 @@ public class FMyLife extends IRCCommand {
     public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
         Document doc = Jsoup.connect("http://fmylife.com/random").userAgent(Registry.USER_AGENT).get();
         Elements FML = doc.select(".art-panel");
-        String fmylife = GeneralUtils.stripHTML(FML.get(0).select(".panel-content").select("a").toString());
+        String fmylife = GeneralUtils.stripHTML(FML.get(0).select(".panel-content").select(".block").select("a").toString());
         IRCUtils.sendMessage(user, network, channel, fmylife, prefix);
     }
 }
