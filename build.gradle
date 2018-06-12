@@ -80,7 +80,7 @@ task codeGen << {
             generate() {
             }
             target() {
-                packageName('com.techcavern.wavetactdb')
+                packageName('info.techcavern.wavetactdb')
                 directory('src/main/java')
             }
         }
@@ -114,6 +114,6 @@ task copyDeps(type: Copy) {
 jar {
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     manifest {
-        attributes('Main-class': 'com.techcavern.wavetact.Main')
+        attributes('Main-class': 'info.techcavern.wavetact.Main')
     }
 }

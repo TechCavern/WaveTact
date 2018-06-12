@@ -1,0 +1,54 @@
+package info.techcavern.wavetact.ircCommands.misc;
+
+import info.techcavern.wavetact.annot.IRCCMD;
+import info.techcavern.wavetact.objects.IRCCommand;
+import info.techcavern.wavetact.utils.GeneralUtils;
+import info.techcavern.wavetact.utils.IRCUtils;
+import info.techcavern.wavetact.utils.Registry;
+import org.pircbotx.Channel;
+import org.pircbotx.PircBotX;
+import org.pircbotx.User;
+import org.apache.commons.lang3.StringUtils;
+@IRCCMD
+public class BasicCommands extends IRCCommand {
+
+    public BasicCommands() {
+        super(GeneralUtils.toArray("version shrug potato moo ping pong cookie permissions source"), 0, "ping", "some basic commands", false);
+    }
+
+    @Override
+    public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+        command = command.toLowerCase();
+        switch (command) {
+            case "version":
+                IRCUtils.sendMessage(user, network, channel, Registry.VERSION, prefix);
+                break;
+            case "potato":
+                IRCUtils.sendAction(user, network, channel, "is a potato", prefix);
+                break;
+            case "pong":
+                IRCUtils.sendMessage(user, network, channel, "ping", prefix);
+                break;
+	    case "moo":
+                IRCUtils.sendMessage(user, network, channel, "Mooo000ooo0000ooo", prefix);
+                break;
+            case "cookie":
+                String nick = user.getNick();
+                if(args.length >=1){nick=StringUtils.join(args, " ");}
+                IRCUtils.sendAction(user, network, channel, "gives " + nick + " a cookie", prefix);
+	    case "shrug":
+     	        IRCUtils.sendMessage(user, network, channel, "┻━┻ ︵ ¯\\_(ツ)_/¯ ︵ ┻━┻", prefix);
+                break;
+            case "source":
+                IRCUtils.sendMessage(user, network, channel, "WaveTact: https://github.com/TechCavern/WaveTact", prefix);
+                break;
+            case "permissions":
+                IRCUtils.sendMessage(user, network, channel, "-4 Banned, -3 = Ignored by Everything except Relay, -2 = Ignored by Everything except Relay & Auto-Voice, -1 = Commands Ignored, 0 = Everyone, 1 = Registered, 5 = Voiced/Trusted, 7 = Channel Half-Operator, 10 = Operator, 13 = Protected Channel Operator, 15 = Senior Channel Operator, 18 = Channel Administrator, 20 = Network Administrator", prefix);
+                break;
+            default:
+                IRCUtils.sendMessage(user, network, channel, "pong", prefix);
+
+
+        }
+    }
+}

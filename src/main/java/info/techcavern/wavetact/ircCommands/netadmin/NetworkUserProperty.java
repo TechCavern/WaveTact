@@ -1,0 +1,71 @@
+package info.techcavern.wavetact.ircCommands.netadmin;
+
+import info.techcavern.wavetact.annot.IRCCMD;
+import info.techcavern.wavetact.objects.IRCCommand;
+import info.techcavern.wavetact.utils.DatabaseUtils;
+import info.techcavern.wavetact.utils.GeneralUtils;
+import info.techcavern.wavetact.utils.IRCUtils;
+import info.techcavern.wavetact.utils.PermUtils;
+import org.jooq.Record;
+import org.pircbotx.Channel;
+import org.pircbotx.PircBotX;
+import org.pircbotx.User;
+
+import static info.techcavern.wavetactdb.Tables.NETWORKUSERPROPERTY;
+
+@IRCCMD
+public class NetworkUserProperty extends IRCCommand {
+
+    public NetworkUserProperty() {
+        super(GeneralUtils.toArray("networkuserproperty netuserprop nup"), 18, "networkuserproperty (+)(-)[user] [property] (value)", "creates, modifies or removes network-user properties", false);
+    }
+
+    @Override
+    public void onCommand(String command, User user, PircBotX network, String prefix, Channel channel, boolean isPrivate, int userPermLevel, String... args) throws Exception {
+        String networkname = IRCUtils.getNetworkNameByNetwork(network);
+        String account;
+        boolean isModify = false;
+        boolean isDelete = false;
+        boolean viewonly = false;
+        if (args.length < 3) {
+            viewonly = true;
+        }
+        if (args[0].startsWith("-")) {
+            account = args[0].replaceFirst("-", "");
+            isDelete = true;
+        } else if (args[0].startsWith("+")) {
+            account = args[0].replaceFirst("\\+", "");
+            isModify = true;
+        } else {
+            account = args[0];
+        }
+        String auth = PermUtils.authUser(network, account);
+        if (auth != null) {
+            account = auth;
+        } else {
+            IRCUtils.sendError(user, network, channel, "User must be identified", prefix);
+            return;
+        }
+        Record networkUserProperty = DatabaseUtils.getNetworkUserProperty(networkname, account, args[1]);
+        if (networkUserProperty != null && (isDelete || isModify)) {
+            if (isDelete) {
+                DatabaseUtils.removeNetworkUserProperty(networkname, account, args[1]);
+                IRCUtils.sendMessage(user, network, IRCUtils.getMsgChannel(channel, isPrivate), "Property deleted", prefix);
+            } else if (isModify) {
+                if (viewonly)
+                    IRCUtils.sendMessage(user, network, IRCUtils.getMsgChannel(channel, isPrivate), "[" + account + "] " + args[1] + ": " + networkUserProperty.getValue(NETWORKUSERPROPERTY.VALUE), prefix);
+                else {
+                    networkUserProperty.setValue(NETWORKUSERPROPERTY.VALUE, GeneralUtils.buildMessage(2, args.length, args));
+                    DatabaseUtils.updateNetworkUserProperty(networkUserProperty);
+                    IRCUtils.sendMessage(user, network, IRCUtils.getMsgChannel(channel, isPrivate), "Property modified", prefix);
+                }
+            }
+        } else if (networkUserProperty == null && !isDelete && !isModify) {
+            DatabaseUtils.addNetworkUserProperty(networkname, account, args[1], GeneralUtils.buildMessage(2, args.length, args));
+            IRCUtils.sendMessage(user, network, IRCUtils.getMsgChannel(channel, isPrivate), "Property added", prefix);
+        } else {
+            IRCUtils.sendError(user, network, channel, "property already exists (If you were adding) or property does not exist", prefix);
+        }
+
+    }
+}

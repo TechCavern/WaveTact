@@ -1,0 +1,59 @@
+package info.techcavern.wavetact;
+
+import info.techcavern.wavetact.console.ConsoleClient;
+import info.techcavern.wavetact.eventListeners.MCStatusListener;
+import info.techcavern.wavetact.utils.*;
+import info.techcavern.wavetact.console.ConsoleClient;
+import info.techcavern.wavetact.utils.ConfigUtils;
+import info.techcavern.wavetact.utils.LoadUtils;
+import info.techcavern.wavetact.utils.Registry;
+import org.slf4j.impl.SimpleLogger;
+
+import java.io.File;
+import java.util.concurrent.TimeUnit;
+
+@SuppressWarnings("ConstantConditions")
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        System.err.println("\nWelcome to WaveTact!\n");
+
+        System.setProperty(SimpleLogger.SHOW_DATE_TIME_KEY, "true");
+        System.setProperty(SimpleLogger.DATE_TIME_FORMAT_KEY, "[yyyy/MM/dd HH:mm:ss]");
+        System.setProperty(SimpleLogger.LEVEL_IN_BRACKETS_KEY, "true");
+        if(args.length == 1 && args[0].equalsIgnoreCase("--windowsdev")){
+            load(true);
+        }else{
+            if ((args.length >= 1) && args[0].equalsIgnoreCase("--client")) {
+                ConsoleClient.go();
+            } else if (new File("./console.unixsocket").exists()) {
+                System.err.println("Instance already started");
+                System.exit(0);
+            } else {
+                load(false);
+            }
+        }
+    }
+    public static void load(boolean isWindows) throws Exception{
+        LoadUtils.initiateDatabaseConnection();
+        LoadUtils.migrate();
+        ConfigUtils.registerNetworks();
+        LoadUtils.registerConsoleCommands();
+        LoadUtils.registerIRCCommands();
+        LoadUtils.registerCharReplacements();
+        LoadUtils.registerAttacks();
+        LoadUtils.registerEightball();
+        LoadUtils.registerQuoteTopics();
+     //   LoadUtils.loadTestNetworks();
+        LoadUtils.initializeAutoFlushWhoisCache();
+        Registry.threadPool.execute(new MCStatusListener());
+
+        if(!isWindows)
+            Registry.threadPool.execute(Registry.consoleServer);
+        Registry.WaveTact.start();
+        LoadUtils.initializeMessageQueue();
+        LoadUtils.initializeBanQueue();
+        LoadUtils.initializeVoiceQueue();
+        Registry.threadPool.awaitTermination(Long.MAX_VALUE, TimeUnit.DAYS);
+    }
+}
